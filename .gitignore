@@ -1,0 +1,11 @@
+# Xcode user-specific settings
+xcuserdata/
+
+# per-project workspace data (so far, nothing significant and will be recreated)
+project.xcworkspace/
+
+# Xcode generated files
+#build/
+
+# OS X noise
+.DS_Store
