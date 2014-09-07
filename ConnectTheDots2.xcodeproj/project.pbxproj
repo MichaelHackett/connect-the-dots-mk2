@@ -271,9 +271,9 @@
 		4CEBCA1119BB564600D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */,
 				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
 				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
-				4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

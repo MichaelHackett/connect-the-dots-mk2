@@ -6,8 +6,6 @@
 //
 //
 
-#import <XCTest/XCTest.h>
-
 @interface CTDPresentationTests : XCTestCase
 
 @end
