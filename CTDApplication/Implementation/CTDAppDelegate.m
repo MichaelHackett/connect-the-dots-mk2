@@ -1,16 +1,30 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
 #import "CTDAppDelegate.h"
+#import "CTDConnectSceneViewController.h"
+
+
+static NSString* const kCTDConnectSceneViewControllerNibName =
+          @"CTDConnectSceneViewController";
+
+
 
 @implementation CTDAppDelegate
+{
+    UIWindow* _window;
+}
 
-- (BOOL)application:(__unused UIApplication*)application
+// Override point for customization after application launch.
+- (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    application.statusBarHidden = YES;
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _window.backgroundColor = [UIColor whiteColor];
+    _window.rootViewController = [[CTDConnectSceneViewController alloc]
+                                  initWithNibName:kCTDConnectSceneViewControllerNibName
+                                           bundle:nil];
+    [_window makeKeyAndVisible];
     return YES;
 }
 
