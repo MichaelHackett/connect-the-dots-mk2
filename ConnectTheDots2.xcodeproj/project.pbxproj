@@ -18,7 +18,27 @@
 		4CEBCA2519BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA2619BB564600D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
 		4CEBCA2E19BB564600D2B498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCA2C19BB564600D2B498 /* InfoPlist.strings */; };
-		4CEBCA3019BB564600D2B498 /* ConnectTheDots2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA2F19BB564600D2B498 /* ConnectTheDots2Tests.m */; };
+		4CEBCA3019BB564600D2B498 /* CTDApplicationSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA2F19BB564600D2B498 /* CTDApplicationSpecs.m */; };
+		4CEBCA5819BB77C400D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CEBCA5D19BB77C400D2B498 /* CTDModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CEBCA5C19BB77C400D2B498 /* CTDModel.h */; };
+		4CEBCA5F19BB77C400D2B498 /* CTDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA5E19BB77C400D2B498 /* CTDModel.m */; };
+		4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
+		4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CEBCA6719BB77C400D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
+		4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CEBCA7019BB77C400D2B498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCA6E19BB77C400D2B498 /* InfoPlist.strings */; };
+		4CEBCA7219BB77C400D2B498 /* CTDModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA7119BB77C400D2B498 /* CTDModelTests.m */; };
+		4CEBCA7E19BB77D300D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CEBCA8319BB77D300D2B498 /* CTDPresentation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CEBCA8219BB77D300D2B498 /* CTDPresentation.h */; };
+		4CEBCA8519BB77D300D2B498 /* CTDPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA8419BB77D300D2B498 /* CTDPresentation.m */; };
+		4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
+		4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CEBCA8D19BB77D300D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
+		4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
+		4CEBCA9619BB77D300D2B498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */; };
+		4CEBCA9819BB77D300D2B498 /* CTDPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */; };
+		4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,25 +49,109 @@
 			remoteGlobalIDString = 4CEBCA0619BB564600D2B498;
 			remoteInfo = ConnectTheDots2;
 		};
+		4CEBCA6819BB77C400D2B498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CEBCA5619BB77C400D2B498;
+			remoteInfo = CTDModel;
+		};
+		4CEBCA8E19BB77D300D2B498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
+			remoteInfo = CTDPresentation;
+		};
+		4CEBCAAB19BB928400D2B498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CEBCA5619BB77C400D2B498;
+			remoteInfo = CTDModel;
+		};
+		4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
+			remoteInfo = CTDPresentation;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4CEBCA5519BB77C400D2B498 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				4CEBCA5D19BB77C400D2B498 /* CTDModel.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA7B19BB77D200D2B498 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				4CEBCA8319BB77D300D2B498 /* CTDPresentation.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEBCA0E19BB564600D2B498 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		4CEBCA1219BB564600D2B498 /* ConnectTheDots2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ConnectTheDots2-Info.plist"; sourceTree = "<group>"; };
+		4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTDApplication-Info.plist"; sourceTree = "<group>"; };
 		4CEBCA1419BB564600D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4CEBCA1619BB564600D2B498 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4CEBCA1819BB564600D2B498 /* ConnectTheDots2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ConnectTheDots2-Prefix.pch"; sourceTree = "<group>"; };
+		4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDApplication-Prefix.pch"; sourceTree = "<group>"; };
 		4CEBCA1919BB564600D2B498 /* CTDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDAppDelegate.h; sourceTree = "<group>"; };
 		4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDAppDelegate.m; sourceTree = "<group>"; };
 		4CEBCA1C19BB564600D2B498 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4CEBCA2219BB564600D2B498 /* ConnectTheDots2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConnectTheDots2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEBCA2219BB564600D2B498 /* CTDApplicationSpecs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDApplicationSpecs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA2319BB564600D2B498 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4CEBCA2B19BB564600D2B498 /* ConnectTheDots2Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ConnectTheDots2Tests-Info.plist"; sourceTree = "<group>"; };
+		4CEBCA2B19BB564600D2B498 /* CTDApplicationSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTDApplicationSpecs-Info.plist"; sourceTree = "<group>"; };
 		4CEBCA2D19BB564600D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4CEBCA2F19BB564600D2B498 /* ConnectTheDots2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectTheDots2Tests.m; sourceTree = "<group>"; };
+		4CEBCA2F19BB564600D2B498 /* CTDApplicationSpecs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDApplicationSpecs.m; sourceTree = "<group>"; };
+		4CEBCA4919BB601300D2B498 /* ConnectTheDots-AllSpecs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "ConnectTheDots-AllSpecs.xcconfig"; path = "BuildConfiguration/ConnectTheDots-AllSpecs.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA4A19BB601300D2B498 /* ConnectTheDots-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "ConnectTheDots-Common.xcconfig"; path = "BuildConfiguration/ConnectTheDots-Common.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA4B19BB601300D2B498 /* ConnectTheDots-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "ConnectTheDots-Debug.xcconfig"; path = "BuildConfiguration/ConnectTheDots-Debug.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA4C19BB601300D2B498 /* ConnectTheDots-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "ConnectTheDots-Release.xcconfig"; path = "BuildConfiguration/ConnectTheDots-Release.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA4D19BB601300D2B498 /* CTDApplication.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDApplication.xcconfig; path = BuildConfiguration/CTDApplication.xcconfig; sourceTree = "<group>"; };
+		4CEBCA4E19BB601300D2B498 /* General-Common-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Common-StaticLibrary.xcconfig"; path = "BuildConfiguration/General-Common-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA4F19BB601300D2B498 /* General-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Common.xcconfig"; path = "BuildConfiguration/General-Common.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA5019BB601300D2B498 /* General-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Debug.xcconfig"; path = "BuildConfiguration/General-Debug.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA5119BB601300D2B498 /* General-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Release.xcconfig"; path = "BuildConfiguration/General-Release.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA5219BB601300D2B498 /* General-Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Tests.xcconfig"; path = "BuildConfiguration/General-Tests.xcconfig"; sourceTree = "<group>"; };
+		4CEBCA5719BB77C400D2B498 /* libCTDModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEBCA5B19BB77C400D2B498 /* CTDModel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDModel-Prefix.pch"; sourceTree = "<group>"; };
+		4CEBCA5C19BB77C400D2B498 /* CTDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDModel.h; sourceTree = "<group>"; };
+		4CEBCA5E19BB77C400D2B498 /* CTDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDModel.m; sourceTree = "<group>"; };
+		4CEBCA6419BB77C400D2B498 /* CTDModelSpecs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDModelSpecs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEBCA6D19BB77C400D2B498 /* CTDModelSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CTDModelSpecs-Info.plist"; sourceTree = "<group>"; };
+		4CEBCA6F19BB77C400D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4CEBCA7119BB77C400D2B498 /* CTDModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDModelTests.m; sourceTree = "<group>"; };
+		4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDPresentation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEBCA8119BB77D300D2B498 /* CTDPresentation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDPresentation-Prefix.pch"; sourceTree = "<group>"; };
+		4CEBCA8219BB77D300D2B498 /* CTDPresentation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDPresentation.h; sourceTree = "<group>"; };
+		4CEBCA8419BB77D300D2B498 /* CTDPresentation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDPresentation.m; sourceTree = "<group>"; };
+		4CEBCA8A19BB77D300D2B498 /* CTDPresentationSpecs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDPresentationSpecs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEBCA9319BB77D300D2B498 /* CTDPresentationSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CTDPresentationSpecs-Info.plist"; sourceTree = "<group>"; };
+		4CEBCA9519BB77D300D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDPresentationTests.m; sourceTree = "<group>"; };
+		4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModel.xcconfig; path = BuildConfiguration/CTDModel.xcconfig; sourceTree = "<group>"; };
+		4CEBCAA019BB784800D2B498 /* CTDModelSpecs.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModelSpecs.xcconfig; path = BuildConfiguration/CTDModelSpecs.xcconfig; sourceTree = "<group>"; };
+		4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDPresentation.xcconfig; path = BuildConfiguration/CTDPresentation.xcconfig; sourceTree = "<group>"; };
+		4CEBCAA219BB784800D2B498 /* CTDPresentationSpecs.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDPresentationSpecs.xcconfig; path = BuildConfiguration/CTDPresentationSpecs.xcconfig; sourceTree = "<group>"; };
+		4CEBCAB119BB954900D2B498 /* CTDModelSpecs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CTDModelSpecs-Prefix.pch"; path = "CTDModel/Specs/CTDModelSpecs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CEBCAB219BB955700D2B498 /* CTDPresentationSpecs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CTDPresentationSpecs-Prefix.pch"; path = "CTDPresentation/Specs/CTDPresentationSpecs-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CEBCAB319BB964300D2B498 /* CTDApplicationSpecs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDApplicationSpecs.xcconfig; path = BuildConfiguration/CTDApplicationSpecs.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +159,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */,
+				4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */,
 				4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */,
 				4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */,
 				4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */,
@@ -71,14 +177,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CEBCA5419BB77C400D2B498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA5819BB77C400D2B498 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA6119BB77C400D2B498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
+				4CEBCA6719BB77C400D2B498 /* UIKit.framework in Frameworks */,
+				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
+				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA7A19BB77D200D2B498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA7E19BB77D300D2B498 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA8719BB77D300D2B498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
+				4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */,
+				4CEBCA8D19BB77D300D2B498 /* UIKit.framework in Frameworks */,
+				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		4CEBC9FE19BB564600D2B498 = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA1019BB564600D2B498 /* ConnectTheDots2 */,
-				4CEBCA2919BB564600D2B498 /* ConnectTheDots2Tests */,
+				4CEBCA1019BB564600D2B498 /* CTDApplication */,
+				4CEBCA7F19BB77D300D2B498 /* CTDPresentation */,
+				4CEBCA5919BB77C400D2B498 /* CTDModel */,
+				4CEBCA4819BB5FD900D2B498 /* BuildConfiguration */,
 				4CEBCA0919BB564600D2B498 /* Frameworks */,
 				4CEBCA0819BB564600D2B498 /* Products */,
 			);
@@ -88,7 +234,11 @@
 			isa = PBXGroup;
 			children = (
 				4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */,
-				4CEBCA2219BB564600D2B498 /* ConnectTheDots2Tests.xctest */,
+				4CEBCA2219BB564600D2B498 /* CTDApplicationSpecs.xctest */,
+				4CEBCA5719BB77C400D2B498 /* libCTDModel.a */,
+				4CEBCA6419BB77C400D2B498 /* CTDModelSpecs.xctest */,
+				4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */,
+				4CEBCA8A19BB77D300D2B498 /* CTDPresentationSpecs.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,52 +254,174 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4CEBCA1019BB564600D2B498 /* ConnectTheDots2 */ = {
+		4CEBCA1019BB564600D2B498 /* CTDApplication */ = {
 			isa = PBXGroup;
 			children = (
+				4CEBCA1619BB564600D2B498 /* main.m */,
 				4CEBCA1919BB564600D2B498 /* CTDAppDelegate.h */,
 				4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */,
 				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
+				4CEBCA2919BB564600D2B498 /* Specs */,
 			);
-			path = ConnectTheDots2;
+			name = CTDApplication;
+			path = CTDApplication/Implementation;
 			sourceTree = "<group>";
 		};
 		4CEBCA1119BB564600D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA1219BB564600D2B498 /* ConnectTheDots2-Info.plist */,
+				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
 				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
-				4CEBCA1619BB564600D2B498 /* main.m */,
-				4CEBCA1819BB564600D2B498 /* ConnectTheDots2-Prefix.pch */,
+				4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4CEBCA2919BB564600D2B498 /* ConnectTheDots2Tests */ = {
+		4CEBCA2919BB564600D2B498 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA2F19BB564600D2B498 /* ConnectTheDots2Tests.m */,
+				4CEBCA2F19BB564600D2B498 /* CTDApplicationSpecs.m */,
 				4CEBCA2A19BB564600D2B498 /* Supporting Files */,
 			);
-			path = ConnectTheDots2Tests;
+			name = Specs;
+			path = ../Specs;
 			sourceTree = "<group>";
 		};
 		4CEBCA2A19BB564600D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA2B19BB564600D2B498 /* ConnectTheDots2Tests-Info.plist */,
+				4CEBCA2B19BB564600D2B498 /* CTDApplicationSpecs-Info.plist */,
 				4CEBCA2C19BB564600D2B498 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4CEBCA4819BB5FD900D2B498 /* BuildConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA4F19BB601300D2B498 /* General-Common.xcconfig */,
+				4CEBCA4E19BB601300D2B498 /* General-Common-StaticLibrary.xcconfig */,
+				4CEBCA5019BB601300D2B498 /* General-Debug.xcconfig */,
+				4CEBCA5119BB601300D2B498 /* General-Release.xcconfig */,
+				4CEBCA5219BB601300D2B498 /* General-Tests.xcconfig */,
+				4CEBCA4A19BB601300D2B498 /* ConnectTheDots-Common.xcconfig */,
+				4CEBCA4B19BB601300D2B498 /* ConnectTheDots-Debug.xcconfig */,
+				4CEBCA4C19BB601300D2B498 /* ConnectTheDots-Release.xcconfig */,
+				4CEBCA4919BB601300D2B498 /* ConnectTheDots-AllSpecs.xcconfig */,
+				4CEBCA4D19BB601300D2B498 /* CTDApplication.xcconfig */,
+				4CEBCAB319BB964300D2B498 /* CTDApplicationSpecs.xcconfig */,
+				4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */,
+				4CEBCAA019BB784800D2B498 /* CTDModelSpecs.xcconfig */,
+				4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */,
+				4CEBCAA219BB784800D2B498 /* CTDPresentationSpecs.xcconfig */,
+			);
+			name = BuildConfiguration;
+			sourceTree = "<group>";
+		};
+		4CEBCA5919BB77C400D2B498 /* CTDModel */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCAA919BB8E9500D2B498 /* Interface */,
+				4CEBCAAA19BB8E9B00D2B498 /* Implementation */,
+				4CEBCA6B19BB77C400D2B498 /* Specs */,
+			);
+			path = CTDModel;
+			sourceTree = "<group>";
+		};
+		4CEBCA6B19BB77C400D2B498 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA7119BB77C400D2B498 /* CTDModelTests.m */,
+				4CEBCA6C19BB77C400D2B498 /* Supporting Files */,
+			);
+			name = Specs;
+			path = CTDModel/Specs;
+			sourceTree = SOURCE_ROOT;
+		};
+		4CEBCA6C19BB77C400D2B498 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCAB119BB954900D2B498 /* CTDModelSpecs-Prefix.pch */,
+				4CEBCA6D19BB77C400D2B498 /* CTDModelSpecs-Info.plist */,
+				4CEBCA6E19BB77C400D2B498 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CEBCA7F19BB77D300D2B498 /* CTDPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCAA719BB8DAB00D2B498 /* Interface */,
+				4CEBCAA819BB8DBF00D2B498 /* Implementation */,
+				4CEBCA9119BB77D300D2B498 /* Specs */,
+			);
+			name = CTDPresentation;
+			path = CTDPresentation/Implementation;
+			sourceTree = "<group>";
+		};
+		4CEBCA9119BB77D300D2B498 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */,
+				4CEBCA9219BB77D300D2B498 /* Supporting Files */,
+			);
+			name = Specs;
+			path = CTDPresentation/Specs;
+			sourceTree = SOURCE_ROOT;
+		};
+		4CEBCA9219BB77D300D2B498 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCAB219BB955700D2B498 /* CTDPresentationSpecs-Prefix.pch */,
+				4CEBCA9319BB77D300D2B498 /* CTDPresentationSpecs-Info.plist */,
+				4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CEBCAA719BB8DAB00D2B498 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA8219BB77D300D2B498 /* CTDPresentation.h */,
+			);
+			name = Interface;
+			path = ../Interface/CTDPresentation;
+			sourceTree = "<group>";
+		};
+		4CEBCAA819BB8DBF00D2B498 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA8119BB77D300D2B498 /* CTDPresentation-Prefix.pch */,
+				4CEBCA8419BB77D300D2B498 /* CTDPresentation.m */,
+			);
+			name = Implementation;
+			sourceTree = "<group>";
+		};
+		4CEBCAA919BB8E9500D2B498 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA5C19BB77C400D2B498 /* CTDModel.h */,
+			);
+			name = Interface;
+			path = Interface/CTDModel;
+			sourceTree = "<group>";
+		};
+		4CEBCAAA19BB8E9B00D2B498 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA5B19BB77C400D2B498 /* CTDModel-Prefix.pch */,
+				4CEBCA5E19BB77C400D2B498 /* CTDModel.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4CEBCA0619BB564600D2B498 /* ConnectTheDots2 */ = {
+		4CEBCA0619BB564600D2B498 /* CTDApplication */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CEBCA3319BB564600D2B498 /* Build configuration list for PBXNativeTarget "ConnectTheDots2" */;
+			buildConfigurationList = 4CEBCA3319BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplication" */;
 			buildPhases = (
 				4CEBCA0319BB564600D2B498 /* Sources */,
 				4CEBCA0419BB564600D2B498 /* Frameworks */,
@@ -158,15 +430,17 @@
 			buildRules = (
 			);
 			dependencies = (
+				4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */,
+				4CEBCAAE19BB928400D2B498 /* PBXTargetDependency */,
 			);
-			name = ConnectTheDots2;
+			name = CTDApplication;
 			productName = ConnectTheDots2;
 			productReference = 4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4CEBCA2119BB564600D2B498 /* ConnectTheDots2Tests */ = {
+		4CEBCA2119BB564600D2B498 /* CTDApplicationSpecs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CEBCA3619BB564600D2B498 /* Build configuration list for PBXNativeTarget "ConnectTheDots2Tests" */;
+			buildConfigurationList = 4CEBCA3619BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplicationSpecs" */;
 			buildPhases = (
 				4CEBCA1E19BB564600D2B498 /* Sources */,
 				4CEBCA1F19BB564600D2B498 /* Frameworks */,
@@ -177,9 +451,79 @@
 			dependencies = (
 				4CEBCA2819BB564600D2B498 /* PBXTargetDependency */,
 			);
-			name = ConnectTheDots2Tests;
+			name = CTDApplicationSpecs;
 			productName = ConnectTheDots2Tests;
-			productReference = 4CEBCA2219BB564600D2B498 /* ConnectTheDots2Tests.xctest */;
+			productReference = 4CEBCA2219BB564600D2B498 /* CTDApplicationSpecs.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4CEBCA5619BB77C400D2B498 /* CTDModel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CEBCA7319BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModel" */;
+			buildPhases = (
+				4CEBCA5319BB77C400D2B498 /* Sources */,
+				4CEBCA5419BB77C400D2B498 /* Frameworks */,
+				4CEBCA5519BB77C400D2B498 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTDModel;
+			productName = CTDModel;
+			productReference = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4CEBCA6319BB77C400D2B498 /* CTDModelSpecs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CEBCA7619BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModelSpecs" */;
+			buildPhases = (
+				4CEBCA6019BB77C400D2B498 /* Sources */,
+				4CEBCA6119BB77C400D2B498 /* Frameworks */,
+				4CEBCA6219BB77C400D2B498 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */,
+			);
+			name = CTDModelSpecs;
+			productName = CTDModelTests;
+			productReference = 4CEBCA6419BB77C400D2B498 /* CTDModelSpecs.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4CEBCA7C19BB77D200D2B498 /* CTDPresentation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CEBCA9919BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentation" */;
+			buildPhases = (
+				4CEBCA7919BB77D200D2B498 /* Sources */,
+				4CEBCA7A19BB77D200D2B498 /* Frameworks */,
+				4CEBCA7B19BB77D200D2B498 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTDPresentation;
+			productName = CTDPresentation;
+			productReference = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4CEBCA8919BB77D300D2B498 /* CTDPresentationSpecs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CEBCA9C19BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentationSpecs" */;
+			buildPhases = (
+				4CEBCA8619BB77D300D2B498 /* Sources */,
+				4CEBCA8719BB77D300D2B498 /* Frameworks */,
+				4CEBCA8819BB77D300D2B498 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */,
+			);
+			name = CTDPresentationSpecs;
+			productName = CTDPresentationTests;
+			productReference = 4CEBCA8A19BB77D300D2B498 /* CTDPresentationSpecs.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -192,6 +536,12 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					4CEBCA2119BB564600D2B498 = {
+						TestTargetID = 4CEBCA0619BB564600D2B498;
+					};
+					4CEBCA6319BB77C400D2B498 = {
+						TestTargetID = 4CEBCA0619BB564600D2B498;
+					};
+					4CEBCA8919BB77D300D2B498 = {
 						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 				};
@@ -208,8 +558,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4CEBCA0619BB564600D2B498 /* ConnectTheDots2 */,
-				4CEBCA2119BB564600D2B498 /* ConnectTheDots2Tests */,
+				4CEBCA0619BB564600D2B498 /* CTDApplication */,
+				4CEBCA2119BB564600D2B498 /* CTDApplicationSpecs */,
+				4CEBCA5619BB77C400D2B498 /* CTDModel */,
+				4CEBCA6319BB77C400D2B498 /* CTDModelSpecs */,
+				4CEBCA7C19BB77D200D2B498 /* CTDPresentation */,
+				4CEBCA8919BB77D300D2B498 /* CTDPresentationSpecs */,
 			);
 		};
 /* End PBXProject section */
@@ -232,6 +586,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CEBCA6219BB77C400D2B498 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA7019BB77C400D2B498 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA8819BB77D300D2B498 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA9619BB77D300D2B498 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -248,7 +618,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEBCA3019BB564600D2B498 /* ConnectTheDots2Tests.m in Sources */,
+				4CEBCA3019BB564600D2B498 /* CTDApplicationSpecs.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA5319BB77C400D2B498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA5F19BB77C400D2B498 /* CTDModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA6019BB77C400D2B498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA7219BB77C400D2B498 /* CTDModelTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA7919BB77D200D2B498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA8519BB77D300D2B498 /* CTDPresentation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CEBCA8619BB77D300D2B498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBCA9819BB77D300D2B498 /* CTDPresentationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +659,28 @@
 /* Begin PBXTargetDependency section */
 		4CEBCA2819BB564600D2B498 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4CEBCA0619BB564600D2B498 /* ConnectTheDots2 */;
+			target = 4CEBCA0619BB564600D2B498 /* CTDApplication */;
 			targetProxy = 4CEBCA2719BB564600D2B498 /* PBXContainerItemProxy */;
+		};
+		4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CEBCA5619BB77C400D2B498 /* CTDModel */;
+			targetProxy = 4CEBCA6819BB77C400D2B498 /* PBXContainerItemProxy */;
+		};
+		4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
+			targetProxy = 4CEBCA8E19BB77D300D2B498 /* PBXContainerItemProxy */;
+		};
+		4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CEBCA5619BB77C400D2B498 /* CTDModel */;
+			targetProxy = 4CEBCAAB19BB928400D2B498 /* PBXContainerItemProxy */;
+		};
+		4CEBCAAE19BB928400D2B498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
+			targetProxy = 4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -279,148 +701,124 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		4CEBCA6E19BB77C400D2B498 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CEBCA6F19BB77C400D2B498 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CEBCA9519BB77D300D2B498 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4CEBCA3119BB564600D2B498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA4B19BB601300D2B498 /* ConnectTheDots-Debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		4CEBCA3219BB564600D2B498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA4C19BB601300D2B498 /* ConnectTheDots-Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		4CEBCA3419BB564600D2B498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA4D19BB601300D2B498 /* CTDApplication.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ConnectTheDots2/ConnectTheDots2-Prefix.pch";
-				INFOPLIST_FILE = "ConnectTheDots2/ConnectTheDots2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		4CEBCA3519BB564600D2B498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA4D19BB601300D2B498 /* CTDApplication.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ConnectTheDots2/ConnectTheDots2-Prefix.pch";
-				INFOPLIST_FILE = "ConnectTheDots2/ConnectTheDots2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		4CEBCA3719BB564600D2B498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAB319BB964300D2B498 /* CTDApplicationSpecs.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ConnectTheDots2.app/ConnectTheDots2";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ConnectTheDots2/ConnectTheDots2-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "ConnectTheDots2Tests/ConnectTheDots2Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		4CEBCA3819BB564600D2B498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAB319BB964300D2B498 /* CTDApplicationSpecs.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ConnectTheDots2.app/ConnectTheDots2";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ConnectTheDots2/ConnectTheDots2-Prefix.pch";
-				INFOPLIST_FILE = "ConnectTheDots2Tests/ConnectTheDots2Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		4CEBCA7419BB77C500D2B498 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CEBCA7519BB77C500D2B498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4CEBCA7719BB77C500D2B498 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA019BB784800D2B498 /* CTDModelSpecs.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CEBCA7819BB77C500D2B498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA019BB784800D2B498 /* CTDModelSpecs.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4CEBCA9A19BB77D300D2B498 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CEBCA9B19BB77D300D2B498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4CEBCA9D19BB77D300D2B498 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA219BB784800D2B498 /* CTDPresentationSpecs.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CEBCA9E19BB77D300D2B498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CEBCAA219BB784800D2B498 /* CTDPresentationSpecs.xcconfig */;
+			buildSettings = {
 			};
 			name = Release;
 		};
@@ -436,19 +834,53 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CEBCA3319BB564600D2B498 /* Build configuration list for PBXNativeTarget "ConnectTheDots2" */ = {
+		4CEBCA3319BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CEBCA3419BB564600D2B498 /* Debug */,
 				4CEBCA3519BB564600D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		4CEBCA3619BB564600D2B498 /* Build configuration list for PBXNativeTarget "ConnectTheDots2Tests" */ = {
+		4CEBCA3619BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplicationSpecs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CEBCA3719BB564600D2B498 /* Debug */,
 				4CEBCA3819BB564600D2B498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CEBCA7319BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CEBCA7419BB77C500D2B498 /* Debug */,
+				4CEBCA7519BB77C500D2B498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4CEBCA7619BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModelSpecs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CEBCA7719BB77C500D2B498 /* Debug */,
+				4CEBCA7819BB77C500D2B498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4CEBCA9919BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CEBCA9A19BB77D300D2B498 /* Debug */,
+				4CEBCA9B19BB77D300D2B498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4CEBCA9C19BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentationSpecs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CEBCA9D19BB77D300D2B498 /* Debug */,
+				4CEBCA9E19BB77D300D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

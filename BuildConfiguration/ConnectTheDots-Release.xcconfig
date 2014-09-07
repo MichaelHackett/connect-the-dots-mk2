@@ -1,0 +1,13 @@
+// Main release configuration for the project. Combines the common project
+// settings with the general release-target alterations, and may include any
+// additional release settings for the specific project.
+
+#include "ConnectTheDots-Common.xcconfig"
+#include "General-Release.xcconfig"
+
+// Disable NSAssert failures.
+//OTHER_CFLAGS = -DNS_BLOCK_ASSERTIONS=1
+//ENABLE_NS_ASSERTIONS = NO
+
+// Enable NSAssert failures.
+ENABLE_NS_ASSERTIONS = YES

@@ -1,0 +1,27 @@
+// Common build settings specific to release builds. A release build is the
+// final version of the application for performance and QA testing and is
+// a "fat" or universal binary that may include versions for multiple
+// architectures.
+//
+// There may still be another configuration for App Store submission, which
+// would use the company's signing identity, if different from the developer's.
+//
+// #include from a project-specific release configuration file, *after*
+// including the your project-specific Common config. (That is, the release
+// configuration should include *only* the settings specific to release builds
+// and should *not* reference the Common config file.)
+
+// Build universal binary for all supported architectures.
+ONLY_ACTIVE_ARCH = NO
+
+// Validate final product.
+VALIDATE_PRODUCT = YES
+
+// Strip debug symbols during copy.
+COPY_PHASE_STRIP = YES
+
+// Turn on compiler optimizations.
+GCC_OPTIMIZATION_LEVEL = s
+
+// Disable NSAssert failures.
+//OTHER_CFLAGS = -DNS_BLOCK_ASSERTIONS=1

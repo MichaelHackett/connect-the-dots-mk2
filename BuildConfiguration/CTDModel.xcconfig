@@ -1,0 +1,3 @@
+// Common configuration for CTDModel target.
+
+#include "General-Common-StaticLibrary.xcconfig"

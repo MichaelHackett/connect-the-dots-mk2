@@ -1,6 +1,6 @@
 //
-//  ConnectTheDots2Tests.m
-//  ConnectTheDots2Tests
+//  CTDModelTests.m
+//  CTDModelTests
 //
 //  Created by Michael on 2014-09-06.
 //
@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface ConnectTheDots2Tests : XCTestCase
+@interface CTDModelTests : XCTestCase
 
 @end
 
-@implementation ConnectTheDots2Tests
+@implementation CTDModelTests
 
 - (void)setUp
 {
@@ -28,7 +28,7 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 @end

@@ -1,0 +1,61 @@
+// Main Xcode configuration for the project. Each module may have its own
+// configuration that overrides some values here, but wherever possible, put
+// settings here.
+//
+// Note: Custom settings should use a prefix (CTD, here) to avoid conflicts
+// with current or future Xcode settings.
+//
+// All relative paths (except the #include statement(s)) are relative to the
+// main project directory, where the xcodeproj bundle resides.
+
+#include "General-Common.xcconfig"
+
+// Project is divided into modules, in separate directories. Directory names
+// generally match the target name; override where this is not the case.
+CTD_MODULE_NAME = $(TARGET_NAME)
+SOURCE_ROOT = $(CTD_MODULE_NAME)
+
+// Project-specific paths:
+CTD_PROJECT_LIBRARY_DIR = External/Libraries
+CTD_PROJECT_SHARED_HEADERS = Shared
+
+// Module public interface directory paths (when referenced by other modules):
+CTD_MODEL_HEADERS = CTDModel/Interface
+CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
+
+// Test targets need the application bundle for to run the tests inside.
+CTD_APP_TARGET = ConnectTheDots2
+CTD_APP_BUNDLE = $(BUILT_PRODUCTS_DIR)/$(CTD_APP_TARGET).app/$(CTD_APP_TARGET)
+
+
+
+//
+// Xcode build settings
+//
+
+// Build for 1st-gen iPad (iOS 5.1, armv7)
+SDKROOT = iphoneos5.1
+ARCHS = armv7 armv7s
+
+// Code signing identity
+//CODE_SIGN_IDENTITY[sdk=iphoneos*] = iPhone Developer
+
+// Deployment
+TARGETED_DEVICE_FAMILY = 2   // iPad-only
+IPHONEOS_DEPLOYMENT_TARGET = 5.1
+
+// Packaging
+INFOPLIST_FILE = $(SOURCE_ROOT)/Implementation/$(TARGET_NAME)-Info.plist
+
+// Prefix header and pre-compilation
+GCC_PREFIX_HEADER = $(SOURCE_ROOT)/Implementation/$(TARGET_NAME)-Prefix.pch
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+
+// Include the current module's public interface directory at same level as
+// the code directory for header includes.
+USER_HEADER_SEARCH_PATHS = $(CTD_PROJECT_SHARED_HEADERS) $(SOURCE_ROOT)/Interface/$(CTD_MODULE_NAME) $(inherited)
+
+// Xcode 5+ compiler settings
+// (I've never seen these qualified YES ("YES_AGGRESSIVE", "YES_ERROR")
+// options in Xcode 4 so I'm assuming they are 5+, until I can verify it.)
+GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE

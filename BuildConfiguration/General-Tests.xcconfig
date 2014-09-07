@@ -1,0 +1,25 @@
+// Additional common configuration for unit-testing targets.
+//
+// ** Define RXC_PROJECT_TEST_FRAMEWORKS to add project-specific frameworks
+//    to the frameworks search path.
+
+// Build a OCUnit test bundle.
+WRAPPER_EXTENSION = octest
+MACH_O_TYPE = mh_bundle
+
+// Tests are just for developer feedback; they should not be installed
+// anywhere outside the build tree. (Not sure if that's what SKIP_INSTALL
+// is for, but it seems so.)
+SKIP_INSTALL = YES
+
+// Disable static analysis for specs (not useful).
+RUN_CLANG_STATIC_ANALYZER = NO
+
+// Add testing frameworks to framework search paths.
+FRAMEWORK_SEARCH_PATHS = $(RXC_PROJECT_TEST_FRAMEWORKS) "$(SDKROOT)/Developer/Library/Frameworks" "$(DEVELOPER_LIBRARY_DIR)/Frameworks" $(inherited)
+
+// Unit Testing settings
+OTHER_TEST_FLAGS =
+TEST_AFTER_BUILD = NO   // executing tests as part of build no longer supported in Xcode 5
+TEST_HOST =
+TEST_RIG =

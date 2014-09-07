@@ -1,0 +1,10 @@
+// Additional common configuration for static library targets.
+
+// Apple says to skip "installation" of static library targets as the files
+// end up in mixed in with the archived application, causing the submitted
+// app to be rejected. (Unfortunately, the documentation for this setting
+// really isn't clear about its effect. For now, just follow Apple's advise.)
+SKIP_INSTALL = YES
+
+// Link product
+MACH_O_TYPE = staticlib

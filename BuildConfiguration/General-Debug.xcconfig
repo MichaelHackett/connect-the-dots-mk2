@@ -1,0 +1,24 @@
+// Common build settings specific to debug builds. A debug build is expected
+// only to be used by the developer who creates it, so it is configured to
+// build only the architecture selected in the current scheme, and will be
+// signed with the developer's identity.
+//
+// #include from a project-specific debug configuration file, *after*
+// including the your project-specific Common config. (That is, the debug
+// configuration should include *only* the settings specific to debug builds
+// and should *not* reference the Common config file.)
+//
+// TODO: Create another profile for "beta" builds that are distributed to
+// other testers.
+
+// Only build active architecture; no need to build universal.
+ONLY_ACTIVE_ARCH = YES
+
+// Do not strip debug symbols during copy
+COPY_PHASE_STRIP = NO
+
+// Turn off compiler optimizations, to make stepping through code easier.
+GCC_OPTIMIZATION_LEVEL = 0
+
+// Set a DEBUG variable for C pre-processor.
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 $(inherited)

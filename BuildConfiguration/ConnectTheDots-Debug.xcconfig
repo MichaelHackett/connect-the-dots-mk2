@@ -1,0 +1,6 @@
+// Main debug configuration for the project. Combines the common project
+// settings with the general debug-target alterations, and may include any
+// additional debug settings for the specific project.
+
+#include "ConnectTheDots-Common.xcconfig"
+#include "General-Debug.xcconfig"
