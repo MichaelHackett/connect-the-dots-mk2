@@ -1,6 +1,8 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
 #import "CTDConnectSceneViewController.h"
+#import "CTDUIKitTargetView.h"
+
 
 @interface CTDConnectSceneViewController ()
 
@@ -18,11 +20,12 @@
 //    return self;
 //}
 
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//    // Do any additional setup after loading the view from its nib.
-//}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.view addSubview:[[CTDUIKitTargetView alloc]
+                           initWithFrame:CGRectMake(400, 250, 75, 75)]];
+}
 
 //- (void)didReceiveMemoryWarning
 //{

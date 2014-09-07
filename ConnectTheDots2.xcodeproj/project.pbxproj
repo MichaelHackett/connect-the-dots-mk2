@@ -41,6 +41,8 @@
 		4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
 		4CEBCAB719BC97ED00D2B498 /* CTDConnectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB519BC97ED00D2B498 /* CTDConnectSceneViewController.m */; };
 		4CEBCAB819BC97ED00D2B498 /* CTDConnectSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB619BC97ED00D2B498 /* CTDConnectSceneViewController.xib */; };
+		4CEBCAC219BCD54D00D2B498 /* CTDUIKitTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAC119BCD54D00D2B498 /* CTDUIKitTargetView.m */; };
+		4CEBCAC619BCFD3A00D2B498 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +159,9 @@
 		4CEBCAB419BC97ED00D2B498 /* CTDConnectSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectSceneViewController.h; sourceTree = "<group>"; };
 		4CEBCAB519BC97ED00D2B498 /* CTDConnectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDConnectSceneViewController.m; sourceTree = "<group>"; };
 		4CEBCAB619BC97ED00D2B498 /* CTDConnectSceneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTDConnectSceneViewController.xib; sourceTree = "<group>"; };
+		4CEBCAC019BCD54D00D2B498 /* CTDUIKitTargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitTargetView.h; sourceTree = "<group>"; };
+		4CEBCAC119BCD54D00D2B498 /* CTDUIKitTargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitTargetView.m; sourceTree = "<group>"; };
+		4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +172,9 @@
 				4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */,
 				4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */,
 				4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */,
-				4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */,
 				4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */,
+				4CEBCAC619BCFD3A00D2B498 /* QuartzCore.framework in Frameworks */,
+				4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +257,7 @@
 		4CEBCA0919BB564600D2B498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */,
 				4CEBCA0A19BB564600D2B498 /* Foundation.framework */,
 				4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */,
 				4CEBCA0E19BB564600D2B498 /* UIKit.framework */,
@@ -267,6 +274,8 @@
 				4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */,
 				4CEBCAB419BC97ED00D2B498 /* CTDConnectSceneViewController.h */,
 				4CEBCAB519BC97ED00D2B498 /* CTDConnectSceneViewController.m */,
+				4CEBCAC019BCD54D00D2B498 /* CTDUIKitTargetView.h */,
+				4CEBCAC119BCD54D00D2B498 /* CTDUIKitTargetView.m */,
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
 				4CEBCAB919BC980300D2B498 /* Resources */,
 				4CEBCA2919BB564600D2B498 /* Specs */,
@@ -631,6 +640,7 @@
 			files = (
 				4CEBCAB719BC97ED00D2B498 /* CTDConnectSceneViewController.m in Sources */,
 				4CEBCA1B19BB564600D2B498 /* CTDAppDelegate.m in Sources */,
+				4CEBCAC219BCD54D00D2B498 /* CTDUIKitTargetView.m in Sources */,
 				4CEBCA1719BB564600D2B498 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
