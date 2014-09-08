@@ -2,6 +2,7 @@
 
 #import "CTDConnectSceneViewController.h"
 #import "CTDUIKitTargetView.h"
+#import "CTDUIKitToolbar.h"
 
 
 @interface CTDConnectSceneViewController ()
@@ -23,6 +24,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
+                                initWithFrame:CGRectMake(200, 50, 400, 60)];
+    UIView* greenToolbarCell = [[UIView alloc]
+                                initWithFrame:CGRectMake(0, 0, 100, 0)];
+    greenToolbarCell.backgroundColor = [UIColor greenColor];
+    UIView* redToolbarCell = [[UIView alloc]
+                              initWithFrame:CGRectMake(0, 0, 100, 0)];
+    redToolbarCell.backgroundColor = [UIColor redColor];
+    [toolbar addSubview:greenToolbarCell];
+    [toolbar addSubview:redToolbarCell];
+
+    [self.view addSubview:toolbar];
     [self.view addSubview:[[CTDUIKitTargetView alloc]
                            initWithFrame:CGRectMake(400, 250, 75, 75)]];
 }
