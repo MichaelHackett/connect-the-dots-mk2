@@ -218,6 +218,7 @@
 		4CFDEED919C689500041B910 /* CTDUtilityTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDUtilityTests.xcconfig; path = BuildConfiguration/CTDUtilityTests.xcconfig; sourceTree = "<group>"; };
 		4CFDEEDC19C68B070041B910 /* CTDPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDPoint.h; sourceTree = "<group>"; };
 		4CFDEEDD19C68B070041B910 /* CTDPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDPoint.m; sourceTree = "<group>"; };
+		4CFDEEE019C694C90041B910 /* CTDTargetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetView.h; sourceTree = "<group>"; };
 		4CFDEEE119C698520041B910 /* CTDTargetSetPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTargetSetPresenter.h; sourceTree = "<group>"; };
 		4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTargetSetPresenter.m; sourceTree = "<group>"; };
 		4CFDEEED19C720710041B910 /* CTDApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDApplication.h; sourceTree = "<group>"; };
