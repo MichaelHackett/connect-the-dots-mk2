@@ -1,0 +1,3 @@
+// Common configuration for CTDUtility target.
+
+#include "General-Common-StaticLibrary.xcconfig"

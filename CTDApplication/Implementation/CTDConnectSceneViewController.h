@@ -3,7 +3,10 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDPresentation/CTDTargetView.h"
 
-@interface CTDConnectSceneViewController : UIViewController
+
+@interface CTDConnectSceneViewController
+    : UIViewController <CTDTargetViewRenderer>
 
 @end

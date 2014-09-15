@@ -39,12 +39,22 @@
     return self;
 }
 
-- (void)showActivationIndicator
+
+
+#pragma mark - CTDTargetView protocol
+
+
+//- (void)discardView
+//{
+//    [self removeFromSuperview];
+//}
+
+- (void)showSelectionIndicator
 {
     [_selectionIndicatorController showIndicator];
 }
 
-- (void)hideActivationIndicator
+- (void)hideSelectionIndicator
 {
     [_selectionIndicatorController hideIndicator];
 }

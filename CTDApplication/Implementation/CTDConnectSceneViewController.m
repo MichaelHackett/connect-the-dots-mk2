@@ -1,8 +1,25 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
 #import "CTDConnectSceneViewController.h"
+
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
+#import "CTDUtility/CTDPoint.h"
+
+
+
+static CGFloat const kTargetDiameter = 75;
+
+
+static CGRect frameForTargetCenteredAt(CGPoint center)
+{
+    CGFloat radius = kTargetDiameter / (CGFloat)2.0;
+    CGFloat left = center.x - radius;
+    CGFloat top = center.y - radius;
+    return CGRectMake(left, top, kTargetDiameter, kTargetDiameter);
+}
+
+
 
 
 @interface CTDConnectSceneViewController ()
@@ -11,7 +28,7 @@
 
 @implementation CTDConnectSceneViewController
 {
-    CTDUIKitTargetView* _targetView;
+    NSMutableArray* _targetViews;
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -27,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _targetViews = [[NSMutableArray alloc] init];
+
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
     UIView* greenToolbarCell = [[UIView alloc]
@@ -39,9 +58,6 @@
     [toolbar addSubview:redToolbarCell];
 
     [self.view addSubview:toolbar];
-    _targetView = [[CTDUIKitTargetView alloc]
-                   initWithFrame:CGRectMake(400, 250, 75, 75)];
-    [self.view addSubview:_targetView];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -50,15 +66,40 @@
 //    // Dispose of any resources that can be recreated.
 //}
 
-// TEMP for target indicator testing
+
+
+#pragma mark - CTDTargetViewRenderer protocol
+
+
+- (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+{
+    CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
+    CTDUIKitTargetView* newTargetView =
+        [[CTDUIKitTargetView alloc]
+         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)];
+    [self.view addSubview:newTargetView];
+    [_targetViews addObject:newTargetView];
+    return newTargetView;
+}
+
+
+
+
+#pragma mark - TEMP for target indicator testing
+
+
 - (IBAction)showIndicator
 {
-    [_targetView showActivationIndicator];
+    if ([_targetViews count] >= 1) {
+        [_targetViews[0] showSelectionIndicator];
+    }
 }
 
 - (IBAction)hideIndicator
 {
-    [_targetView hideActivationIndicator];
+    if ([_targetViews count] >= 1) {
+        [_targetViews[0] hideSelectionIndicator];
+    }
 }
 
 @end

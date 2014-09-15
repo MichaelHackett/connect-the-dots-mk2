@@ -22,6 +22,7 @@ CTD_PROJECT_SHARED_HEADERS = Common
 // Module public interface directory paths (when referenced by other modules):
 CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
+CTD_UTILITY_HEADERS = CTDUtility/Interface
 
 // Test targets need the application bundle for to run the tests inside.
 CTD_APP_TARGET = ConnectTheDots2

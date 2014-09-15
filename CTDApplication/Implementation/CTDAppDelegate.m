@@ -1,7 +1,9 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
 #import "CTDAppDelegate.h"
+
 #import "CTDConnectSceneViewController.h"
+#import "CTDPresentation/CTDApplication.h"
 
 
 static NSString* const kCTDConnectSceneViewControllerNibName =
@@ -12,19 +14,35 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 @implementation CTDAppDelegate
 {
     UIWindow* _window;
+    CTDApplication* _applicationController;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _applicationController = [[CTDApplication alloc] init];
+    }
+    return self;
 }
 
 // Override point for customization after application launch.
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
+    CTDConnectSceneViewController* initialViewController =
+        [[CTDConnectSceneViewController alloc]
+         initWithNibName:kCTDConnectSceneViewControllerNibName
+                  bundle:nil];
+
     application.statusBarHidden = YES;
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _window.backgroundColor = [UIColor whiteColor];
-    _window.rootViewController = [[CTDConnectSceneViewController alloc]
-                                  initWithNibName:kCTDConnectSceneViewControllerNibName
-                                           bundle:nil];
+    _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
+
+    [_applicationController showTargetSetInRenderer:initialViewController];
+
     return YES;
 }
 

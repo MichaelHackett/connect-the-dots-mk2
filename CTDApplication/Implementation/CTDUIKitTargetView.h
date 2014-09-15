@@ -4,10 +4,9 @@
 //
 // Copyright 2013-4 Michael Hackett. All rights reserved.
 
+#import "CTDPresentation/CTDTargetView.h"
 
-@interface CTDUIKitTargetView : UIView
 
-- (void)showActivationIndicator;
-- (void)hideActivationIndicator;
+@interface CTDUIKitTargetView : UIView <CTDTargetView>
 
 @end
