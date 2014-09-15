@@ -10,6 +10,9 @@
 @end
 
 @implementation CTDConnectSceneViewController
+{
+    CTDUIKitTargetView* _targetView;
+}
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
 //               bundle:(NSBundle*)nibBundleOrNil
@@ -36,8 +39,9 @@
     [toolbar addSubview:redToolbarCell];
 
     [self.view addSubview:toolbar];
-    [self.view addSubview:[[CTDUIKitTargetView alloc]
-                           initWithFrame:CGRectMake(400, 250, 75, 75)]];
+    _targetView = [[CTDUIKitTargetView alloc]
+                   initWithFrame:CGRectMake(400, 250, 75, 75)];
+    [self.view addSubview:_targetView];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -45,5 +49,16 @@
 //    [super didReceiveMemoryWarning];
 //    // Dispose of any resources that can be recreated.
 //}
+
+// TEMP for target indicator testing
+- (IBAction)showIndicator
+{
+    [_targetView showActivationIndicator];
+}
+
+- (IBAction)hideIndicator
+{
+    [_targetView hideActivationIndicator];
+}
 
 @end

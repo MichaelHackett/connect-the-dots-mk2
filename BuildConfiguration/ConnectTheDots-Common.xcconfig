@@ -17,7 +17,7 @@ SOURCE_ROOT = $(CTD_MODULE_NAME)
 
 // Project-specific paths:
 CTD_PROJECT_LIBRARY_DIR = External/Libraries
-CTD_PROJECT_SHARED_HEADERS = Shared
+CTD_PROJECT_SHARED_HEADERS = Common
 
 // Module public interface directory paths (when referenced by other modules):
 CTD_MODEL_HEADERS = CTDModel/Interface

@@ -7,4 +7,7 @@
 
 @interface CTDUIKitTargetView : UIView
 
+- (void)showActivationIndicator;
+- (void)hideActivationIndicator;
+
 @end

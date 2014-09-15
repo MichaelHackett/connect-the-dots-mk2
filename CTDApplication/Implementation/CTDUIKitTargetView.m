@@ -2,11 +2,15 @@
 
 #import "CTDUIKitTargetView.h"
 
+#import "CTDUIKitTargetSelectionIndicatorController.h"
 #import <QuartzCore/CAShapeLayer.h>
 
 
 
 @implementation CTDUIKitTargetView
+{
+    CTDUIKitTargetSelectionIndicatorController* _selectionIndicatorController;
+}
 
 + (Class)layerClass
 {
@@ -20,15 +24,29 @@
         CAShapeLayer* targetLayer = (CAShapeLayer*)self.layer;
         targetLayer.lineWidth = 0;
         targetLayer.opaque = NO;
-        targetLayer.fillColor = [[UIColor redColor] CGColor];
+        targetLayer.fillColor = [[UIColor whiteColor] CGColor];
 
         CGPathRef targetPath = CGPathCreateWithEllipseInRect(self.bounds, NULL);
         targetLayer.path = targetPath;
         CGPathRelease(targetPath);
 
+        _selectionIndicatorController =
+            [[CTDUIKitTargetSelectionIndicatorController alloc] init];
+        [_selectionIndicatorController attachIndicatorToLayer:targetLayer];
+
         [targetLayer setNeedsDisplay];
     }
     return self;
+}
+
+- (void)showActivationIndicator
+{
+    [_selectionIndicatorController showIndicator];
+}
+
+- (void)hideActivationIndicator
+{
+    [_selectionIndicatorController hideIndicator];
 }
 
 @end
