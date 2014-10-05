@@ -3,6 +3,8 @@
 #import "CTDApplication.h"
 
 #import "CTDTargetSetPresenter.h"
+#import "CTDTargetTouchDetector.h"
+#import "CTDTouchResponder.h"
 
 
 
@@ -12,9 +14,12 @@
 }
 
 - (void)showTargetSetInRenderer:(id<CTDTargetViewRenderer>)targetViewRenderer
+           withTouchInputSource:(id<CTDTouchInputSource>)touchInputSource
 {
     _currentPresenter = [[CTDTargetSetPresenter alloc]
                          initWithTargetViewRenderer:targetViewRenderer];
+    [touchInputSource addTouchResponder:[[CTDTargetTouchDetector alloc]
+                                         initWithTargetSpace:_currentPresenter]];
 }
 
 @end

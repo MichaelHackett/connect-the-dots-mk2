@@ -3,6 +3,8 @@
 #import "CTDUIKitTargetView.h"
 
 #import "CTDUIKitTargetSelectionIndicatorController.h"
+#import "CTDUtility/CTDPoint.h"
+#import "CTDPoint+CGConversion.h"
 #import <QuartzCore/CAShapeLayer.h>
 
 
@@ -57,6 +59,13 @@
 - (void)hideSelectionIndicator
 {
     [_selectionIndicatorController hideIndicator];
+}
+
+- (BOOL)containsPoint:(CTDPoint*)point
+{
+    CGPoint localPoint = [self convertPoint:[point asCGPoint] fromView:self.superview];
+    CGPathRef targetPath = ((CAShapeLayer*)self.layer).path;
+    return (BOOL)CGPathContainsPoint(targetPath, NULL, localPoint, false);
 }
 
 @end
