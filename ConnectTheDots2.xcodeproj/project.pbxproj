@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C5A569019E1C37A00E994CB /* CTDActivateOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */; };
 		4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */; };
 		4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
@@ -145,6 +146,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C5A568E19E1C37A00E994CB /* CTDActivateOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDActivateOnTouchInteraction.h; sourceTree = "<group>"; };
+		4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDActivateOnTouchInteraction.m; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -524,6 +527,8 @@
 				4CFDEEE519C699000041B910 /* CTDTargetSpace.h */,
 				4CFDEEAC19C683450041B910 /* CTDTargetTouchDetector.h */,
 				4CFDEEAD19C683450041B910 /* CTDTargetTouchDetector.m */,
+				4C5A568E19E1C37A00E994CB /* CTDActivateOnTouchInteraction.h */,
+				4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */,
 				4CFDEEE119C698520041B910 /* CTDTargetSetPresenter.h */,
 				4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */,
 			);
@@ -900,6 +905,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C5A569019E1C37A00E994CB /* CTDActivateOnTouchInteraction.m in Sources */,
 				4CFDEEEF19C720710041B910 /* CTDApplication.m in Sources */,
 				4CFDEEF119C750B40041B910 /* CTDTargetTouchDetector.m in Sources */,
 				4CFDEEE319C698520041B910 /* CTDTargetSetPresenter.m in Sources */,
