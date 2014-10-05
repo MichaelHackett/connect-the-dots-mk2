@@ -10,4 +10,9 @@
     return [self x:cgPoint.x y:cgPoint.y];
 }
 
+- (CGPoint)asCGPoint
+{
+    return CGPointMake((CGFloat)self.x, (CGFloat)self.y);
+}
+
 @end

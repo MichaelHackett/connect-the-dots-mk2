@@ -10,5 +10,6 @@
 @interface CTDPoint (CGConversion)
 
 + (instancetype)fromCGPoint:(CGPoint)cgPoint;
+- (CGPoint)asCGPoint;
 
 @end

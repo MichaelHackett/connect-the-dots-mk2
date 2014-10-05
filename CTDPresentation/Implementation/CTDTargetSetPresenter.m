@@ -36,4 +36,14 @@
 
 - (id)init CTD_BLOCK_PARENT_METHOD
 
+- (id<CTDTargetView>)targetAtLocation:(CTDPoint*)location;
+{
+    for (id<CTDTargetView> targetView in _targetViews) {
+        if ([targetView containsPoint:location]) {
+            return targetView;
+        }
+    }
+    return nil;
+}
+
 @end
