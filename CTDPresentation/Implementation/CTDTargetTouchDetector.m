@@ -91,7 +91,7 @@ CTD_NO_DEFAULT_INIT
 
 #pragma mark - CTDTouchResponder protocol
 
-- (id<CTDTouchTracker>)trackerForTouchStartingAt:(__unused CTDPoint*)initialPosition
+- (id<CTDTouchTracker>)trackerForTouchStartingAt:(CTDPoint*)initialPosition
 {
     return [[CTDActivateOnTouchInteractor alloc]
             initWithTargetSpace:_targetSpace
