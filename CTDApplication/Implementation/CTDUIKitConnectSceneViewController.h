@@ -3,11 +3,11 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDTargetView.h"
+#import "CTDPresentation/CTDTargetContainerView.h"
 #import "CTDPresentation/CTDTouchResponder.h"
 
 
 @interface CTDUIKitConnectSceneViewController
-    : UIViewController <CTDTargetViewRenderer, CTDTouchInputSource>
+    : UIViewController <CTDTargetContainerView, CTDTouchInputSource>
 
 @end

@@ -81,7 +81,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark - CTDTargetViewRenderer protocol
+#pragma mark - CTDTargetContainerView protocol
 
 
 - (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition

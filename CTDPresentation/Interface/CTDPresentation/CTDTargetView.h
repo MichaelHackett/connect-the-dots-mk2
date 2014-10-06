@@ -1,13 +1,7 @@
 // CTDTargetView:
-//     Visual representation of a target.
+//     The visual representation of a target.
 //
-// This might not be implemented by a UIView directly (or whatever platform-
-// specific equivalent); it might be something that creates and configures the
-// platform view class. This may be particularly useful where the platform
-// view class cannot be selected or fully configured until its container (where
-// it will be rendered) is known.
-//
-// Copyright (c) 2014 Michael Hackett. All rights reserved.
+// Copyright 2014 Michael Hackett. All rights reserved.
 
 @class CTDPoint;
 
@@ -40,13 +34,3 @@
 //- (id<CTDTargetView>)newTargetView;
 //
 //@end
-
-
-@protocol CTDTargetViewRenderer <NSObject>
-
-- (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
-//- (void)addTargetView:(id<CTDTargetView>)targetView
-//           centeredAt:(CTDPoint*)centerPosition;
-//- (void)removeTargetView:(id<CTDTargetView>)targetView;
-
-@end

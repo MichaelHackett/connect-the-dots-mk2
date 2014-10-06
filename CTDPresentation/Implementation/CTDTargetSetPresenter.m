@@ -2,6 +2,7 @@
 
 #import "CTDTargetSetPresenter.h"
 
+#import "CTDTargetContainerView.h"
 #import "CTDTargetView.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -13,18 +14,18 @@
     NSArray* _targetViews;
 }
 
-- (instancetype)
-      initWithTargetViewRenderer:(id<CTDTargetViewRenderer>)targetViewRenderer
+- (instancetype)initWithTargetContainerView:
+                        (id<CTDTargetContainerView>)targetContainerView;
 {
     self = [super init];
     if (self) {
         NSMutableArray* targetViews = [[NSMutableArray alloc] init];
         id<CTDTargetView> target1 =
-            [targetViewRenderer newTargetViewCenteredAt:[CTDPoint x:100 y:400]];
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:100 y:400]];
         id<CTDTargetView> target2 =
-            [targetViewRenderer newTargetViewCenteredAt:[CTDPoint x:600 y:150]];
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:600 y:150]];
         id<CTDTargetView> target3 =
-            [targetViewRenderer newTargetViewCenteredAt:[CTDPoint x:400 y:550]];
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:400 y:550]];
         [targetViews addObject:target1];
         [targetViews addObject:target2];
         [targetViews addObject:target3];

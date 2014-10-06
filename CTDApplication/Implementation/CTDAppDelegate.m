@@ -41,8 +41,8 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
     _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
 
-    [_applicationController showTargetSetInRenderer:initialViewController
-                               withTouchInputSource:initialViewController];
+    [_applicationController showTargetSetInContainerView:initialViewController
+                                    withTouchInputSource:initialViewController];
 
     return YES;
 }

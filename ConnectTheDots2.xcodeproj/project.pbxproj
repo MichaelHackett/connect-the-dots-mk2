@@ -148,6 +148,7 @@
 /* Begin PBXFileReference section */
 		4C5A568E19E1C37A00E994CB /* CTDActivateOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDActivateOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDActivateOnTouchInteraction.m; sourceTree = "<group>"; };
+		4C5A56A619E1EEF200E994CB /* CTDTargetContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetContainerView.h; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -513,6 +514,7 @@
 			children = (
 				4CFDEEED19C720710041B910 /* CTDApplication.h */,
 				4CFDEEE019C694C90041B910 /* CTDTargetView.h */,
+				4C5A56A619E1EEF200E994CB /* CTDTargetContainerView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,
 			);
 			name = Interface;
