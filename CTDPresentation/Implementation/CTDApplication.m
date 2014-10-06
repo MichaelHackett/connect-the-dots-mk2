@@ -19,7 +19,8 @@
     _currentPresenter = [[CTDTargetSetPresenter alloc]
                          initWithTargetContainerView:targetContainerView];
     [touchInputSource addTouchResponder:[[CTDTargetTouchDetector alloc]
-                                         initWithTargetSpace:_currentPresenter]];
+                                         initWithTargetContainerView:targetContainerView
+                                                         targetSpace:_currentPresenter]];
 }
 
 @end

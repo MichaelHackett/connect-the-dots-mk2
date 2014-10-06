@@ -14,6 +14,9 @@
 // Point is in local coordinates of target container view (aka, target view renderer).
 - (BOOL)containsPoint:(CTDPoint*)point;
 
+// As above, the point is relative to the bounds of the target container view.
+- (CTDPoint*)connectionPoint;
+
 // This is part of the child interface only because it avoids the situation
 // where, if the container was asked to remove the target view, it would only
 // work with implementations that the container itself created, and it would

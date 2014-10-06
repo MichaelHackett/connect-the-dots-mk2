@@ -2,6 +2,7 @@
 
 #import "CTDUIKitTargetView.h"
 
+#import "CTDCoreGraphicsUtils.h"
 #import "CTDUIKitTargetSelectionIndicatorController.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDPoint+CGConversion.h"
@@ -66,6 +67,11 @@
     CGPoint localPoint = [self convertPoint:[point asCGPoint] fromView:self.superview];
     CGPathRef targetPath = ((CAShapeLayer*)self.layer).path;
     return (BOOL)CGPathContainsPoint(targetPath, NULL, localPoint, false);
+}
+
+- (CTDPoint*)connectionPoint
+{
+    return [CTDPoint fromCGPoint:ctdCGRectCenter(self.frame)];
 }
 
 @end

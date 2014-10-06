@@ -2,21 +2,24 @@
 
 #import "CTDTargetTouchDetector.h"
 
-#import "CTDActivateOnTouchInteraction.h"
+#import "CTDConnectionTouchInteraction.h"
 
 
 
 @implementation CTDTargetTouchDetector
 {
+    __weak id<CTDTargetContainerView> _targetContainerView;
     id<CTDTargetSpace> _targetSpace;
 }
 
 #pragma mark - Initialization
 
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace
+- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
+                                targetSpace:(id<CTDTargetSpace>)targetSpace
 {
     self = [super init];
     if (self) {
+        _targetContainerView = targetContainerView;
         _targetSpace = targetSpace;
     }
     return self;
@@ -30,9 +33,10 @@
 
 - (id<CTDTouchTracker>)trackerForTouchStartingAt:(CTDPoint*)initialPosition
 {
-    return [[CTDActivateOnTouchInteraction alloc]
-            initWithTargetSpace:_targetSpace
-            initialTouchPosition:initialPosition];
+    return [[CTDConnectionTouchInteraction alloc]
+            initWithTargetContainerView:_targetContainerView
+                            targetSpace:_targetSpace
+                   initialTouchPosition:initialPosition];
 }
 
 @end
