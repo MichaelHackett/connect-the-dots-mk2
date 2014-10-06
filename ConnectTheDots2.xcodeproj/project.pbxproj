@@ -413,13 +413,13 @@
 		4CEBCA1119BB564600D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */,
+				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
+				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
 				4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */,
 				4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */,
 				4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */,
 				4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */,
-				4CEBCA1819BB564600D2B498 /* CTDApplication-Prefix.pch */,
-				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
-				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
 				4CFDEEA619C631880041B910 /* CAAnimation+CTDAnimationConstruction.h */,
 				4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */,
 				4CFDEEA919C63C670041B910 /* CALayer+CTDAnimationSupport.h */,
