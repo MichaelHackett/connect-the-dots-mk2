@@ -8,7 +8,14 @@
 
 #import "CTDPresentation/CTDTargetConnectionView.h"
 
+@class CTDUIKitDrawingConfig;
+
+
 
 @interface CTDUIKitConnectionView : UIView <CTDTargetConnectionView>
+
+- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)config;
+
+CTD_NO_DEFAULT_INIT
 
 @end

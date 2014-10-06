@@ -4,6 +4,7 @@
 
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDPoint+CGConversion.h"
+#import "CTDUIKitDrawingConfig.h"
 
 
 
@@ -35,7 +36,7 @@
 
 // layer's anchor point is (0,1)? (top-left)
 
-- (instancetype)init
+- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)config
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
@@ -44,12 +45,14 @@
         CTDUIKitLineLayer* viewLayer = (CTDUIKitLineLayer*)self.layer;
 //        viewLayer.anchorPoint = CGPointMake(0.0, 0.0);
         viewLayer.lineCap = kCALineCapRound;
-        viewLayer.lineWidth = 5.0;
+        viewLayer.lineWidth = config.connectionLineWidth;
         viewLayer.opaque = NO;
-        viewLayer.strokeColor = [[UIColor yellowColor] CGColor];
+        viewLayer.strokeColor = config.connectionLineColor;
     }
     return self;
 }
+
+- (id)init CTD_BLOCK_PARENT_METHOD
 
 // Automatically resize to match the parent view's bounds.
 - (void)willMoveToSuperview:(UIView*)newSuperview

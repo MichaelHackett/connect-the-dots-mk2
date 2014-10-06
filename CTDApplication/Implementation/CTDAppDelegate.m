@@ -3,6 +3,7 @@
 #import "CTDAppDelegate.h"
 
 #import "CTDUIKitConnectSceneViewController.h"
+#import "CTDUIKitDrawingConfig.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
@@ -15,6 +16,7 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 {
     UIWindow* _window;
     CTDApplication* _applicationController;
+    CTDUIKitDrawingConfig* _drawingConfig;
 }
 
 - (instancetype)init
@@ -30,10 +32,12 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
+    _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
     CTDUIKitConnectSceneViewController* initialViewController =
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDConnectSceneViewControllerNibName
                   bundle:nil];
+    initialViewController.drawingConfig = _drawingConfig;
 
     application.statusBarHidden = YES;
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

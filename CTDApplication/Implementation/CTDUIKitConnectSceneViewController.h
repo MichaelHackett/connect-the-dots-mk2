@@ -6,8 +6,12 @@
 #import "CTDPresentation/CTDTargetContainerView.h"
 #import "CTDPresentation/CTDTouchResponder.h"
 
+@class CTDUIKitDrawingConfig;
+
 
 @interface CTDUIKitConnectSceneViewController
     : UIViewController <CTDTargetContainerView, CTDTouchInputSource>
+
+@property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
 
 @end
