@@ -3,6 +3,7 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDPoint+CGConversion.h"
+#import "CTDUIKitConnectionView.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDUtility/CTDPoint.h"
@@ -94,6 +95,18 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     [_targetViews addObject:newTargetView];
     return newTargetView;
 }
+
+- (id<CTDTargetConnectionView>)
+      newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                secondEndPointPosition:(CTDPoint*)secondEndPointPosition
+{
+    CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc] init];
+    [connectionView setFirstEndpointPosition:firstEndpointPosition];
+    [connectionView setSecondEndpointPosition:secondEndPointPosition];
+    [self.view addSubview:connectionView];
+    return connectionView;
+}
+
 
 
 
