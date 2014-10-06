@@ -1,6 +1,6 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDConnectSceneViewController.h"
+#import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitTargetView.h"
@@ -29,11 +29,11 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-@interface CTDConnectSceneViewController ()
+@interface CTDUIKitConnectSceneViewController ()
 
 @end
 
-@implementation CTDConnectSceneViewController
+@implementation CTDUIKitConnectSceneViewController
 {
     NSMutableArray* _targetViews;
     NSMutableArray* _touchResponders;

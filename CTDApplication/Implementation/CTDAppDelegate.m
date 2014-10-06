@@ -2,7 +2,7 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDConnectSceneViewController.h"
+#import "CTDUIKitConnectSceneViewController.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
@@ -30,8 +30,8 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
-    CTDConnectSceneViewController* initialViewController =
-        [[CTDConnectSceneViewController alloc]
+    CTDUIKitConnectSceneViewController* initialViewController =
+        [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDConnectSceneViewControllerNibName
                   bundle:nil];
 
