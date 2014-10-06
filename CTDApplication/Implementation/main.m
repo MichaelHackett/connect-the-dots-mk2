@@ -1,14 +1,11 @@
+// main.m
 //
-//  main.m
-//  ConnectTheDots2
-//
-//  Created by Michael on 2014-09-06.
-//
-//
+// Copyright 2014 Michael Hackett. All rights reserved.
 
 #import <UIKit/UIKit.h>
 
 #import "CTDAppDelegate.h"
+
 
 int main(int argc, char * argv[])
 {

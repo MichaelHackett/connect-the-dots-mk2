@@ -1,13 +1,7 @@
 // CTDTargetView:
-//     Visual representation of a target.
+//     The visual representation of a target.
 //
-// This might not be implemented by a UIView directly (or whatever platform-
-// specific equivalent); it might be something that creates and configures the
-// platform view class. This may be particularly useful where the platform
-// view class cannot be selected or fully configured until its container (where
-// it will be rendered) is known.
-//
-// Copyright (c) 2014 Michael Hackett. All rights reserved.
+// Copyright 2014 Michael Hackett. All rights reserved.
 
 @class CTDPoint;
 
@@ -19,6 +13,9 @@
 
 // Point is in local coordinates of target container view (aka, target view renderer).
 - (BOOL)containsPoint:(CTDPoint*)point;
+
+// As above, the point is relative to the bounds of the target container view.
+- (CTDPoint*)connectionPoint;
 
 // This is part of the child interface only because it avoids the situation
 // where, if the container was asked to remove the target view, it would only
@@ -40,13 +37,3 @@
 //- (id<CTDTargetView>)newTargetView;
 //
 //@end
-
-
-@protocol CTDTargetViewRenderer <NSObject>
-
-- (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
-//- (void)addTargetView:(id<CTDTargetView>)targetView
-//           centeredAt:(CTDPoint*)centerPosition;
-//- (void)removeTargetView:(id<CTDTargetView>)targetView;
-
-@end

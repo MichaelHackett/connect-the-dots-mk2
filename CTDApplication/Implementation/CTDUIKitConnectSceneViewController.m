@@ -1,8 +1,9 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDConnectSceneViewController.h"
+#import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDPoint+CGConversion.h"
+#import "CTDUIKitConnectionView.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDUtility/CTDPoint.h"
@@ -29,11 +30,11 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-@interface CTDConnectSceneViewController ()
+@interface CTDUIKitConnectSceneViewController ()
 
 @end
 
-@implementation CTDConnectSceneViewController
+@implementation CTDUIKitConnectSceneViewController
 {
     NSMutableArray* _targetViews;
     NSMutableArray* _touchResponders;
@@ -81,7 +82,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark - CTDTargetViewRenderer protocol
+#pragma mark - CTDTargetContainerView protocol
 
 
 - (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
@@ -94,6 +95,19 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     [_targetViews addObject:newTargetView];
     return newTargetView;
 }
+
+- (id<CTDTargetConnectionView>)
+      newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                secondEndPointPosition:(CTDPoint*)secondEndPointPosition
+{
+    CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
+                                              initWithDrawingConfig:_drawingConfig];
+    [connectionView setFirstEndpointPosition:firstEndpointPosition];
+    [connectionView setSecondEndpointPosition:secondEndPointPosition];
+    [self.view addSubview:connectionView];
+    return connectionView;
+}
+
 
 
 

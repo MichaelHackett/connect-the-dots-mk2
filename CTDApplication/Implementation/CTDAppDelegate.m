@@ -2,7 +2,8 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDConnectSceneViewController.h"
+#import "CTDUIKitConnectSceneViewController.h"
+#import "CTDUIKitDrawingConfig.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
@@ -15,6 +16,7 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 {
     UIWindow* _window;
     CTDApplication* _applicationController;
+    CTDUIKitDrawingConfig* _drawingConfig;
 }
 
 - (instancetype)init
@@ -30,10 +32,12 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
-    CTDConnectSceneViewController* initialViewController =
-        [[CTDConnectSceneViewController alloc]
+    _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
+    CTDUIKitConnectSceneViewController* initialViewController =
+        [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDConnectSceneViewControllerNibName
                   bundle:nil];
+    initialViewController.drawingConfig = _drawingConfig;
 
     application.statusBarHidden = YES;
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -41,8 +45,8 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
     _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
 
-    [_applicationController showTargetSetInRenderer:initialViewController
-                               withTouchInputSource:initialViewController];
+    [_applicationController showTargetSetInContainerView:initialViewController
+                                    withTouchInputSource:initialViewController];
 
     return YES;
 }

@@ -2,84 +2,24 @@
 
 #import "CTDTargetTouchDetector.h"
 
-#import "CTDTargetSpace.h"
-#import "CTDTargetView.h"
-#import "CTDUtility/CTDPoint.h"
-
-
-
-@interface CTDActivateOnTouchInteractor : NSObject <CTDTouchTracker>
-CTD_NO_DEFAULT_INIT
-@end
-
-@implementation CTDActivateOnTouchInteractor
-{
-    id<CTDTargetSpace> _targetSpace;
-    id<CTDTargetView> _selectedTarget;
-}
-
-#pragma mark - Initialization
-
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace
-               initialTouchPosition:(CTDPoint*)initialPosition
-{
-    self = [super init];
-    if (self) {
-        _targetSpace = targetSpace;
-        _selectedTarget = [targetSpace targetAtLocation:initialPosition];
-        if (_selectedTarget) {
-            [_selectedTarget showSelectionIndicator];
-        }
-    }
-    return self;
-}
-
-- (instancetype)init CTD_BLOCK_PARENT_METHOD
-
-
-#pragma mark - CTDTouchTracker protocol
-
-- (void)touchDidMoveTo:(CTDPoint*)newPosition
-{
-    id<CTDTargetView> hitTarget = [_targetSpace targetAtLocation:newPosition];
-    if (hitTarget != _selectedTarget) {
-        if (_selectedTarget) {
-            [_selectedTarget hideSelectionIndicator];
-        }
-        _selectedTarget = hitTarget;
-        [hitTarget showSelectionIndicator];
-    }
-}
-
-- (void)touchDidEnd
-{
-    if (_selectedTarget) {
-        [_selectedTarget hideSelectionIndicator];
-    }
-}
-
-- (void)touchWasCancelled
-{
-    if (_selectedTarget) {
-        [_selectedTarget hideSelectionIndicator];
-    }
-}
-
-@end
+#import "CTDConnectionTouchInteraction.h"
 
 
 
 @implementation CTDTargetTouchDetector
 {
+    __weak id<CTDTargetContainerView> _targetContainerView;
     id<CTDTargetSpace> _targetSpace;
 }
 
 #pragma mark - Initialization
 
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace
+- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
+                                targetSpace:(id<CTDTargetSpace>)targetSpace
 {
     self = [super init];
     if (self) {
+        _targetContainerView = targetContainerView;
         _targetSpace = targetSpace;
     }
     return self;
@@ -93,9 +33,10 @@ CTD_NO_DEFAULT_INIT
 
 - (id<CTDTouchTracker>)trackerForTouchStartingAt:(CTDPoint*)initialPosition
 {
-    return [[CTDActivateOnTouchInteractor alloc]
-            initWithTargetSpace:_targetSpace
-            initialTouchPosition:initialPosition];
+    return [[CTDConnectionTouchInteraction alloc]
+            initWithTargetContainerView:_targetContainerView
+                            targetSpace:_targetSpace
+                   initialTouchPosition:initialPosition];
 }
 
 @end

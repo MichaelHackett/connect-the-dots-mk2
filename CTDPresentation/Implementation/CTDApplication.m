@@ -13,13 +13,14 @@
     CTDTargetSetPresenter* _currentPresenter;
 }
 
-- (void)showTargetSetInRenderer:(id<CTDTargetViewRenderer>)targetViewRenderer
-           withTouchInputSource:(id<CTDTouchInputSource>)touchInputSource
+- (void)showTargetSetInContainerView:(id<CTDTargetContainerView>)targetContainerView
+                withTouchInputSource:(id<CTDTouchInputSource>)touchInputSource
 {
     _currentPresenter = [[CTDTargetSetPresenter alloc]
-                         initWithTargetViewRenderer:targetViewRenderer];
+                         initWithTargetContainerView:targetContainerView];
     [touchInputSource addTouchResponder:[[CTDTargetTouchDetector alloc]
-                                         initWithTargetSpace:_currentPresenter]];
+                                         initWithTargetContainerView:targetContainerView
+                                                         targetSpace:_currentPresenter]];
 }
 
 @end

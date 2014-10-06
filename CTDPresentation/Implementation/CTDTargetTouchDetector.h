@@ -5,13 +5,15 @@
 
 #import "CTDTouchResponder.h"
 
+@protocol CTDTargetContainerView;
 @protocol CTDTargetSpace;
 
 
 
 @interface CTDTargetTouchDetector : NSObject <CTDTouchResponder>
 
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace;
+- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
+                                targetSpace:(id<CTDTargetSpace>)targetSpace;
 CTD_NO_DEFAULT_INIT
 
 @end

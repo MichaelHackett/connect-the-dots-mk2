@@ -5,14 +5,14 @@
 
 #import "CTDTargetSpace.h"
 
-@protocol CTDTargetViewRenderer;
+@protocol CTDTargetContainerView;
 
 
 
 @interface CTDTargetSetPresenter : NSObject <CTDTargetSpace>
 
-- (instancetype)
-      initWithTargetViewRenderer:(id<CTDTargetViewRenderer>)targetViewRenderer;
+- (instancetype)initWithTargetContainerView:
+                        (id<CTDTargetContainerView>)targetContainerView;
 
 CTD_NO_DEFAULT_INIT
 
