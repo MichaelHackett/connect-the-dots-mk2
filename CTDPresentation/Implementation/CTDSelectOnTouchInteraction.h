@@ -1,4 +1,4 @@
-// CTDActivateOnTouchInteractor:
+// CTDSelectOnTouchInteraction:
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
@@ -8,7 +8,11 @@
 @protocol CTDTouchMapper;
 
 
-@interface CTDActivateOnTouchInteraction : NSObject <CTDTouchTracker>
+
+// TODO: Make this work against a generic "Selectable" protocol, instead of
+// just TargetViews.
+
+@interface CTDSelectOnTouchInteraction : NSObject <CTDTouchTracker>
 
 - (instancetype)initWithTargetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
                      initialTouchPosition:(CTDPoint*)initialPosition;

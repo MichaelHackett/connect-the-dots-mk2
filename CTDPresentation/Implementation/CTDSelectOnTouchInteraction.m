@@ -1,6 +1,6 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDActivateOnTouchInteraction.h"
+#import "CTDSelectOnTouchInteraction.h"
 
 #import "CTDTargetView.h"
 #import "CTDTouchMapper.h"
@@ -8,13 +8,16 @@
 
 
 
-@implementation CTDActivateOnTouchInteraction
+@implementation CTDSelectOnTouchInteraction
 {
     id<CTDTouchMapper> _targetTouchMapper;
     id<CTDTargetView> _selectedTarget;
 }
 
+
+
 #pragma mark - Initialization
+
 
 - (instancetype)initWithTargetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
                      initialTouchPosition:(CTDPoint*)initialPosition
@@ -22,7 +25,7 @@
     self = [super init];
     if (self) {
         _targetTouchMapper = targetTouchMapper;
-        _selectedTarget = [targetTouchMapper elementAtTouchLocation:initialPosition];
+        _selectedTarget = [_targetTouchMapper elementAtTouchLocation:initialPosition];
         if (_selectedTarget) {
             [_selectedTarget showSelectionIndicator];
         }
@@ -33,7 +36,9 @@
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
 
+
 #pragma mark - CTDTouchTracker protocol
+
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
