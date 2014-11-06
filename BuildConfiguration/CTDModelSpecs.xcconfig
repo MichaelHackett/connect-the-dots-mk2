@@ -1,6 +1,0 @@
-// Configuration for CTDModelSpecs target.
-
-#include "ConnectTheDots-AllSpecs.xcconfig"
-
-// Specs are part of a parent module.
-CTD_MODULE_NAME = CTDModel

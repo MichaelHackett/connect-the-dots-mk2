@@ -1,8 +1,8 @@
-// Configuration for CTDApplicationSpecs target.
+// Configuration for CTDApplicationTests target.
 
-#include "ConnectTheDots-AllSpecs.xcconfig"
+#include "ConnectTheDots-AllTests.xcconfig"
 
-// Specs are part of a parent module.
+// Tests are part of a parent module.
 CTD_MODULE_NAME = CTDApplication
 
 // Project module source dependencies:

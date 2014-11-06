@@ -1,0 +1,17 @@
+// Additional common configuration for specification targets.
+
+// NOTE: Redefine CTD_MODULE_NAME in the xcconfig file for each specific
+// spec target. (Unfortunately, I have found no way to automatically strip
+// the "Tests" part of the target name; it seems that Xcode 4-5 doesn't support
+// any of the common variable expansion operations found in shells.)
+
+#include "General-Tests.xcconfig"
+
+// No separate Resources dir for tests and all files in the Tests subdir for the module.
+CTD_TESTS_DIR = $(SOURCE_ROOT)/Tests
+INFOPLIST_FILE = $(CTD_TESTS_DIR)/$(TARGET_NAME)-Info.plist
+GCC_PREFIX_HEADER = $(CTD_TESTS_DIR)/$(TARGET_NAME)-Prefix.pch
+CTD_TEST_HELPERS = TestHelpers
+
+// Project headers used by tests, with a place for customization in per-module config.
+USER_HEADER_SEARCH_PATHS = $(SOURCE_ROOT)/Implementation $(CTD_TEST_HELPERS) $(RXC_MODULE_DEPENDENCIES) $(inherited)
