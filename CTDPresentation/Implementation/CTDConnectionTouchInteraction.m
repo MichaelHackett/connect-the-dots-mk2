@@ -165,7 +165,7 @@
         CTDPoint* anchorPosition = [_anchorTargetView connectionPoint];
         _connectionView = [targetContainerView
                            newTargetConnectionViewWithFirstEndpointPosition:anchorPosition
-                           secondEndPointPosition:freeEndPosition];
+                           secondEndpointPosition:freeEndPosition];
     } else {
         [_connectionView setSecondEndpointPosition:freeEndPosition];
     }

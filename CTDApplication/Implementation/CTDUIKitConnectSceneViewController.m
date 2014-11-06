@@ -98,12 +98,12 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 - (id<CTDTargetConnectionView>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                secondEndPointPosition:(CTDPoint*)secondEndPointPosition
+                                secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
                                               initWithDrawingConfig:_drawingConfig];
     [connectionView setFirstEndpointPosition:firstEndpointPosition];
-    [connectionView setSecondEndpointPosition:secondEndPointPosition];
+    [connectionView setSecondEndpointPosition:secondEndpointPosition];
     [self.view addSubview:connectionView];
     return connectionView;
 }

@@ -16,6 +16,6 @@
 - (id<CTDTargetView, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
 - (id<CTDTargetConnectionView>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                secondEndPointPosition:(CTDPoint*)secondEndPointPosition;
+                                secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 @end
