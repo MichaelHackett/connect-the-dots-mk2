@@ -6,13 +6,14 @@
 
 @protocol CTDTargetView;
 @protocol CTDTargetConnectionView;
+@protocol CTDTouchable;
 @class CTDPoint;
 
 
 
 @protocol CTDTargetContainerView <NSObject>
 
-- (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
+- (id<CTDTargetView, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
 - (id<CTDTargetConnectionView>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                                 secondEndPointPosition:(CTDPoint*)secondEndPointPosition;

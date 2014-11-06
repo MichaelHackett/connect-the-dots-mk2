@@ -20,7 +20,7 @@
                          initWithTargetContainerView:targetContainerView];
     [touchInputSource addTouchResponder:[[CTDTargetTouchDetector alloc]
                                          initWithTargetContainerView:targetContainerView
-                                                         targetSpace:_currentPresenter]];
+                                         targetTouchMapper:[_currentPresenter targetsTouchMapper]]];
 }
 
 @end

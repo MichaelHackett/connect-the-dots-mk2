@@ -2,9 +2,12 @@
 
 #import "CTDTargetSetPresenter.h"
 
+#import "CTDListOrderTouchMapper.h"
 #import "CTDTargetContainerView.h"
 #import "CTDTargetView.h"
+#import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
+
 
 
 // ExerciseRunner (eventually), but just TargetSetPresenter for now?
@@ -12,39 +15,35 @@
 @implementation CTDTargetSetPresenter
 {
     NSArray* _targetViews;
+    CTDListOrderTouchMapper* _targetsTouchMapper;
 }
 
 - (instancetype)initWithTargetContainerView:
-                        (id<CTDTargetContainerView>)targetContainerView;
+                    (id<CTDTargetContainerView>)targetContainerView;
 {
     self = [super init];
     if (self) {
         NSMutableArray* targetViews = [[NSMutableArray alloc] init];
-        id<CTDTargetView> target1 =
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:100 y:400]];
-        id<CTDTargetView> target2 =
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:600 y:150]];
-        id<CTDTargetView> target3 =
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:400 y:550]];
-        [targetViews addObject:target1];
-        [targetViews addObject:target2];
-        [targetViews addObject:target3];
-
+        [targetViews addObject:
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:100 y:400]]];
+        [targetViews addObject:
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:600 y:150]]];
+        [targetViews addObject:
+            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:400 y:550]]];
         _targetViews = [targetViews copy];
+        _targetsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
+        for (id<CTDTouchable> targetView in targetViews) {
+            [_targetsTouchMapper appendTouchable:targetView];
+        }
     }
     return self;
 }
 
 - (id)init CTD_BLOCK_PARENT_METHOD
 
-- (id<CTDTargetView>)targetAtLocation:(CTDPoint*)location;
+- (id<CTDTouchMapper>)targetsTouchMapper
 {
-    for (id<CTDTargetView> targetView in _targetViews) {
-        if ([targetView containsPoint:location]) {
-            return targetView;
-        }
-    }
-    return nil;
+    return _targetsTouchMapper;
 }
 
 @end

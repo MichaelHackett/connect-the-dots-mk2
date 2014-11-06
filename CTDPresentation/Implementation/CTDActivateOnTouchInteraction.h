@@ -5,13 +5,13 @@
 #import "CTDTouchResponder.h"
 
 @class CTDPoint;
-@protocol CTDTargetSpace;
+@protocol CTDTouchMapper;
 
 
 @interface CTDActivateOnTouchInteraction : NSObject <CTDTouchTracker>
 
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace
-               initialTouchPosition:(CTDPoint*)initialPosition;
+- (instancetype)initWithTargetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+                     initialTouchPosition:(CTDPoint*)initialPosition;
 CTD_NO_DEFAULT_INIT
 
 @end

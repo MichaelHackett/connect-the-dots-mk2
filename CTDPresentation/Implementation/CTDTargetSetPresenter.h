@@ -3,17 +3,19 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTargetSpace.h"
-
 @protocol CTDTargetContainerView;
+@protocol CTDTouchMapper;
 
 
 
-@interface CTDTargetSetPresenter : NSObject <CTDTargetSpace>
+@interface CTDTargetSetPresenter : NSObject
 
 - (instancetype)initWithTargetContainerView:
-                        (id<CTDTargetContainerView>)targetContainerView;
+                    (id<CTDTargetContainerView>)targetContainerView;
+// TODO: pass target-set argument
 
 CTD_NO_DEFAULT_INIT
+
+- (id<CTDTouchMapper>)targetsTouchMapper;
 
 @end

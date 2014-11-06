@@ -3,6 +3,8 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDTouchable.h"
+
 @class CTDPoint;
 
 
@@ -11,10 +13,7 @@
 - (void)showSelectionIndicator;
 - (void)hideSelectionIndicator;
 
-// Point is in local coordinates of target container view (aka, target view renderer).
-- (BOOL)containsPoint:(CTDPoint*)point;
-
-// As above, the point is relative to the bounds of the target container view.
+// This point is relative to the bounds of the target container view.
 - (CTDPoint*)connectionPoint;
 
 // This is part of the child interface only because it avoids the situation

@@ -4,8 +4,8 @@
 
 #import "CTDTargetConnectionView.h"
 #import "CTDTargetContainerView.h"
-#import "CTDTargetSpace.h"
 #import "CTDTargetView.h"
+#import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -34,7 +34,7 @@
 
 @implementation CTDConnectionTouchInteraction
 {
-    id<CTDTargetSpace> _targetSpace;
+    id<CTDTouchMapper> _targetTouchMapper;
     CTDConnectionPresenter* _presenter;
     id<CTDTargetView> _anchorTargetView;
 }
@@ -46,16 +46,16 @@
 
 - (instancetype)
       initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
-                      targetSpace:(id<CTDTargetSpace>)targetSpace
+                targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
              initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self) {
-        _targetSpace = targetSpace;
+        _targetTouchMapper = targetTouchMapper;
         _presenter = [[CTDConnectionPresenter alloc]
                       initWithTargetContainerView:targetContainerView];
 
-        _anchorTargetView = [targetSpace targetAtLocation:initialPosition];
+        _anchorTargetView = [targetTouchMapper elementAtTouchLocation:initialPosition];
         if (_anchorTargetView) {
             [_presenter anchorOnTargetView:_anchorTargetView];
         }
@@ -72,16 +72,19 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetView> hitTargetView = [_targetSpace targetAtLocation:newPosition];
-    if (!_anchorTargetView && hitTargetView) {
-        _anchorTargetView = hitTargetView;
+    id hitElement = [_targetTouchMapper elementAtTouchLocation:newPosition];
+    if (!_anchorTargetView &&
+        hitElement &&
+        [hitElement conformsToProtocol:@protocol(CTDTargetView)])
+    {
+        _anchorTargetView = hitElement;
         [_presenter anchorOnTargetView:_anchorTargetView];
     }
     if (_anchorTargetView) {
-        if (hitTargetView == _anchorTargetView) {
-            hitTargetView = nil; // cannot connect back to same target
+        if (hitElement == _anchorTargetView) {
+            hitElement = nil; // cannot connect back to same target
         }
-        [_presenter connectFreeEndToTargetView:hitTargetView
+        [_presenter connectFreeEndToTargetView:hitElement
                               orMoveToPosition:newPosition];
     }
 }

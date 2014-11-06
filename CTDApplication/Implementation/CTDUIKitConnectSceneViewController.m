@@ -85,7 +85,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 #pragma mark - CTDTargetContainerView protocol
 
 
-- (id<CTDTargetView>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+- (id<CTDTargetView, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
 {
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
     CTDUIKitTargetView* newTargetView =

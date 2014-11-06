@@ -5,8 +5,9 @@
 // Copyright 2013-4 Michael Hackett. All rights reserved.
 
 #import "CTDPresentation/CTDTargetView.h"
+#import "CTDPresentation/CTDTouchable.h"
 
 
-@interface CTDUIKitTargetView : UIView <CTDTargetView>
+@interface CTDUIKitTargetView : UIView <CTDTargetView, CTDTouchable>
 
 @end

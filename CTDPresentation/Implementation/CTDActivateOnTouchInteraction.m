@@ -2,27 +2,27 @@
 
 #import "CTDActivateOnTouchInteraction.h"
 
-#import "CTDTargetSpace.h"
 #import "CTDTargetView.h"
+#import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
 @implementation CTDActivateOnTouchInteraction
 {
-    id<CTDTargetSpace> _targetSpace;
+    id<CTDTouchMapper> _targetTouchMapper;
     id<CTDTargetView> _selectedTarget;
 }
 
 #pragma mark - Initialization
 
-- (instancetype)initWithTargetSpace:(id<CTDTargetSpace>)targetSpace
-               initialTouchPosition:(CTDPoint*)initialPosition
+- (instancetype)initWithTargetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+                     initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self) {
-        _targetSpace = targetSpace;
-        _selectedTarget = [targetSpace targetAtLocation:initialPosition];
+        _targetTouchMapper = targetTouchMapper;
+        _selectedTarget = [targetTouchMapper elementAtTouchLocation:initialPosition];
         if (_selectedTarget) {
             [_selectedTarget showSelectionIndicator];
         }
@@ -37,7 +37,7 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetView> hitTarget = [_targetSpace targetAtLocation:newPosition];
+    id<CTDTargetView> hitTarget = [_targetTouchMapper elementAtTouchLocation:newPosition];
     if (hitTarget != _selectedTarget) {
         if (_selectedTarget) {
             [_selectedTarget hideSelectionIndicator];
