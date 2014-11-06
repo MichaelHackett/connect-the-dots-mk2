@@ -3,7 +3,7 @@
 #import "CTDApplication.h"
 
 #import "CTDTargetSetPresenter.h"
-#import "CTDTargetTouchDetector.h"
+#import "CTDExerciseSceneTouchRouter.h"
 #import "CTDTouchResponder.h"
 
 
@@ -18,9 +18,12 @@
 {
     _currentPresenter = [[CTDTargetSetPresenter alloc]
                          initWithTargetContainerView:targetContainerView];
-    [touchInputSource addTouchResponder:[[CTDTargetTouchDetector alloc]
-                                         initWithTargetContainerView:targetContainerView
-                                         targetTouchMapper:[_currentPresenter targetsTouchMapper]]];
+
+    // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
+    [touchInputSource addTouchResponder:
+        [[CTDExerciseSceneTouchRouter alloc]
+         initWithTargetContainerView:targetContainerView
+                  targetsTouchMapper:[_currentPresenter targetsTouchMapper]]];
 }
 
 @end

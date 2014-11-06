@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		4C5A569019E1C37A00E994CB /* CTDActivateOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */; };
 		4C1F86461A094C6E001A3F0F /* CTDUtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E29A1A094A8C006A244D /* CTDUtilityTests.m */; };
+		4C1F86481A094D2A001A3F0F /* CTDExerciseSceneTouchRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F86471A094D2A001A3F0F /* CTDExerciseSceneTouchRouterTests.m */; };
+		4C1F86511A0B2AD1001A3F0F /* CTDExerciseSceneTouchRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAD19C683450041B910 /* CTDExerciseSceneTouchRouter.m */; };
 		4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C5A56A919E20A2A00E994CB /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
 		4C5A56AC19E20CC200E994CB /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
 		4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */; };
+		4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
 		4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -40,7 +43,6 @@
 		4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
 		4CEBCA9619BB77D300D2B498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */; };
-		4CEBCA9819BB77D300D2B498 /* CTDPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */; };
 		4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
 		4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
 		4CEBCAB719BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */; };
@@ -62,7 +64,6 @@
 		4CFDEEE319C698520041B910 /* CTDTargetSetPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */; };
 		4CFDEEE819C69F4A0041B910 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFDEEEF19C720710041B910 /* CTDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEEE19C720710041B910 /* CTDApplication.m */; };
-		4CFDEEF119C750B40041B910 /* CTDTargetTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAD19C683450041B910 /* CTDTargetTouchDetector.m */; };
 		4CFDEEF419C762580041B910 /* CTDPoint+CGConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEF319C762580041B910 /* CTDPoint+CGConversion.m */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +167,7 @@
 /* Begin PBXFileReference section */
 		4C5A568E19E1C37A00E994CB /* CTDActivateOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDActivateOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDActivateOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDActivateOnTouchInteraction.m; sourceTree = "<group>"; };
+		4C1F86471A094D2A001A3F0F /* CTDExerciseSceneTouchRouterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDExerciseSceneTouchRouterTests.m; path = CTDPresentation/Tests/CTDExerciseSceneTouchRouterTests.m; sourceTree = SOURCE_ROOT; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDConnectionTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetConnectionView.h; sourceTree = "<group>"; };
@@ -178,6 +180,8 @@
 		4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25A1A080D61006A244D /* CTDListOrderTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDListOrderTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDListOrderTouchMapper.m; sourceTree = "<group>"; };
+		4CD4E25D1A084676006A244D /* CTDDelegatingTouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDDelegatingTouchTracker.h; sourceTree = "<group>"; };
+		4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDDelegatingTouchTracker.m; sourceTree = "<group>"; };
 		4CD4E2601A0940B9006A244D /* CTDModelTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDModelTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E2991A0949A6006A244D /* CTDApplicationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E29A1A094A8C006A244D /* CTDUtilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDUtilityTests.m; path = CTDUtility/Tests/CTDUtilityTests.m; sourceTree = SOURCE_ROOT; };
@@ -221,7 +225,6 @@
 		4CEBCA8A19BB77D300D2B498 /* CTDPresentationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDPresentationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA9319BB77D300D2B498 /* CTDPresentationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CTDPresentationTests-Info.plist"; sourceTree = "<group>"; };
 		4CEBCA9519BB77D300D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDPresentationTests.m; sourceTree = "<group>"; };
 		4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModel.xcconfig; path = BuildConfiguration/CTDModel.xcconfig; sourceTree = "<group>"; };
 		4CEBCAA019BB784800D2B498 /* CTDModelTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModelTests.xcconfig; path = BuildConfiguration/CTDModelTests.xcconfig; sourceTree = "<group>"; };
 		4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDPresentation.xcconfig; path = BuildConfiguration/CTDPresentation.xcconfig; sourceTree = "<group>"; };
@@ -247,8 +250,8 @@
 		4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+CTDAnimationConstruction.m"; sourceTree = "<group>"; };
 		4CFDEEA919C63C670041B910 /* CALayer+CTDAnimationSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+CTDAnimationSupport.h"; sourceTree = "<group>"; };
 		4CFDEEAA19C63C670041B910 /* CALayer+CTDAnimationSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+CTDAnimationSupport.m"; sourceTree = "<group>"; };
-		4CFDEEAC19C683450041B910 /* CTDTargetTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTargetTouchDetector.h; sourceTree = "<group>"; };
-		4CFDEEAD19C683450041B910 /* CTDTargetTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTargetTouchDetector.m; sourceTree = "<group>"; };
+		4CFDEEAC19C683450041B910 /* CTDExerciseSceneTouchRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDExerciseSceneTouchRouter.h; sourceTree = "<group>"; };
+		4CFDEEAD19C683450041B910 /* CTDExerciseSceneTouchRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDExerciseSceneTouchRouter.m; sourceTree = "<group>"; };
 		4CFDEEB619C688CF0041B910 /* libCTDUtility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDUtility.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CFDEEBA19C688D00041B910 /* CTDUtility-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDUtility-Prefix.pch"; sourceTree = "<group>"; };
 		4CFDEEC319C688D00041B910 /* CTDUtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDUtilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,6 +363,8 @@
 				4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */,
 				4CD4E25A1A080D61006A244D /* CTDListOrderTouchMapper.h */,
 				4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */,
+				4CD4E25D1A084676006A244D /* CTDDelegatingTouchTracker.h */,
+				4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */,
 				4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */,
 				4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */,
 			);
@@ -541,7 +546,7 @@
 		4CEBCA9119BB77D300D2B498 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA9719BB77D300D2B498 /* CTDPresentationTests.m */,
+				4C1F86471A094D2A001A3F0F /* CTDExerciseSceneTouchRouterTests.m */,
 				4CEBCA9219BB77D300D2B498 /* Supporting Files */,
 			);
 			name = Tests;
@@ -577,10 +582,10 @@
 			children = (
 				4CEBCA8119BB77D300D2B498 /* CTDPresentation-Prefix.pch */,
 				4CFDEEEE19C720710041B910 /* CTDApplication.m */,
-				4CFDEEAC19C683450041B910 /* CTDTargetTouchDetector.h */,
-				4CFDEEAD19C683450041B910 /* CTDTargetTouchDetector.m */,
 				4CFDEEE119C698520041B910 /* CTDTargetSetPresenter.h */,
 				4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */,
+				4CFDEEAC19C683450041B910 /* CTDExerciseSceneTouchRouter.h */,
+				4CFDEEAD19C683450041B910 /* CTDExerciseSceneTouchRouter.m */,
 				4C5A56A319E1C66700E994CB /* Interactions (Touch) */,
 			);
 			name = Implementation;
@@ -962,10 +967,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C1F86511A0B2AD1001A3F0F /* CTDExerciseSceneTouchRouter.m in Sources */,
+				4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */,
 				4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */,
 				4C5A569019E1C37A00E994CB /* CTDActivateOnTouchInteraction.m in Sources */,
 				4CFDEEEF19C720710041B910 /* CTDApplication.m in Sources */,
-				4CFDEEF119C750B40041B910 /* CTDTargetTouchDetector.m in Sources */,
 				4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */,
 				4CFDEEE319C698520041B910 /* CTDTargetSetPresenter.m in Sources */,
 			);
@@ -975,7 +981,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEBCA9819BB77D300D2B498 /* CTDPresentationTests.m in Sources */,
+				4C1F86481A094D2A001A3F0F /* CTDExerciseSceneTouchRouterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

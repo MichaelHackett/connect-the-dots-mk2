@@ -8,6 +8,7 @@
 @class CTDPoint;
 @protocol CTDTargetContainerView;
 @protocol CTDTouchMapper;
+@protocol CTDTargetView;
 
 
 
@@ -26,7 +27,8 @@
 - (instancetype)
       initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
                 targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-             initialTouchPosition:(CTDPoint*)initialPosition;
+                 anchorTargetView:(id<CTDTargetView>)anchorTargetView
+           initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition;
 CTD_NO_DEFAULT_INIT
 
 @end

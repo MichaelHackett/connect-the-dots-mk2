@@ -47,18 +47,23 @@
 - (instancetype)
       initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
                 targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-             initialTouchPosition:(CTDPoint*)initialPosition
+                 anchorTargetView:(id<CTDTargetView>)anchorTargetView
+           initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
     self = [super init];
     if (self) {
+        if (!anchorTargetView) {
+            [NSException raise:NSInvalidArgumentException
+                        format:@"Anchor target view must not be nil"];
+        }
         _targetTouchMapper = targetTouchMapper;
         _presenter = [[CTDConnectionPresenter alloc]
                       initWithTargetContainerView:targetContainerView];
 
-        _anchorTargetView = [targetTouchMapper elementAtTouchLocation:initialPosition];
-        if (_anchorTargetView) {
-            [_presenter anchorOnTargetView:_anchorTargetView];
-        }
+        _anchorTargetView = anchorTargetView;
+        [_presenter anchorOnTargetView:_anchorTargetView];
+        [_presenter connectFreeEndToTargetView:nil
+                              orMoveToPosition:initialFreeEndPosition];
     }
     return self;
 }
@@ -72,21 +77,17 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
+    id<CTDTargetView> connectedTargetView = nil;
     id hitElement = [_targetTouchMapper elementAtTouchLocation:newPosition];
-    if (!_anchorTargetView &&
-        hitElement &&
+    if (hitElement &&
+        hitElement != _anchorTargetView &&
         [hitElement conformsToProtocol:@protocol(CTDTargetView)])
     {
-        _anchorTargetView = hitElement;
-        [_presenter anchorOnTargetView:_anchorTargetView];
+        connectedTargetView = (id<CTDTargetView>)hitElement;
     }
-    if (_anchorTargetView) {
-        if (hitElement == _anchorTargetView) {
-            hitElement = nil; // cannot connect back to same target
-        }
-        [_presenter connectFreeEndToTargetView:hitElement
-                              orMoveToPosition:newPosition];
-    }
+
+    [_presenter connectFreeEndToTargetView:connectedTargetView
+                          orMoveToPosition:newPosition];
 }
 
 - (void)touchDidEnd
