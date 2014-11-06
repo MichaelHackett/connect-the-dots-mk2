@@ -50,7 +50,7 @@ static CTDPoint* ORIGIN = nil;
 
 - (id)copyWithZone:(__unused NSZone*)zone
 {
-    // ORCPoints are immutable, so just use the same instance and bump the
+    // CTDPoints are immutable, so just use the same instance and bump the
     // retain count (done automatically by ARC).
     if ([self isMemberOfClass:[CTDPoint class]]) {
         return self;
