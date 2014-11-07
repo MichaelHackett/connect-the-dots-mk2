@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		4C1F86461A094C6E001A3F0F /* CTDUtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E29A1A094A8C006A244D /* CTDUtilityTests.m */; };
 		4C1F86511A0B2AD1001A3F0F /* CTDTrialSceneTouchRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAD19C683450041B910 /* CTDTrialSceneTouchRouter.m */; };
+		4C25B96F1A0D696700275138 /* CTDTrialSceneTouchRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */; };
 		4C5A569019E1C37A00E994CB /* CTDSelectOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */; };
 		4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C5A56A919E20A2A00E994CB /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
 		4C5A56AC19E20CC200E994CB /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
-		4C7B5B851A0D62AC0040EC64 /* CTDTrialSceneTouchRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */; };
 		4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */; };
 		4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
@@ -983,7 +983,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C7B5B851A0D62AC0040EC64 /* CTDTrialSceneTouchRouterTests.m in Sources */,
+				4C25B96F1A0D696700275138 /* CTDTrialSceneTouchRouterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
