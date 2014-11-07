@@ -1,11 +1,12 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDExerciseSceneTouchRouter.h"
+#import "CTDTrialSceneTouchRouter.h"
+
 #import "CTDTargetConnectionView.h"
-#import "CTDTargetContainerView.h"
 #import "CTDTargetView.h"
 #import "CTDTouchable.h"
 #import "CTDTouchMapper.h"
+#import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 #import <XCTest/XCTest.h>
 
@@ -100,14 +101,14 @@
 
 
 
-@interface CTDRecordingTargetContainerView : NSObject <CTDTargetContainerView>
+@interface CTDRecordingTrialRenderer : NSObject <CTDTrialRenderer>
 
 @property (strong, readonly, nonatomic) NSArray* targetViewsCreated;
 @property (strong, readonly, nonatomic) NSArray* targetConnectionViewsCreated;
 
 @end
 
-@implementation CTDRecordingTargetContainerView
+@implementation CTDRecordingTrialRenderer
 {
     NSMutableArray* _targetViewsCreated;
     NSMutableArray* _targetConnectionViewsCreated;
@@ -181,13 +182,13 @@ static CTDFakeTargetView* target1;
 
 
 
-@interface CTDExerciseSceneTouchRouterBaseTestCase : XCTestCase
-@property (strong, readonly, nonatomic) CTDExerciseSceneTouchRouter* subject;
-@property (strong, readonly, nonatomic) CTDRecordingTargetContainerView* targetContainerView;
+@interface CTDTrialSceneTouchRouterBaseTestCase : XCTestCase
+@property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* subject;
+@property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
 @property (strong, readonly, nonatomic) CTDFakeTouchMapper* touchMapper;
 @end
 
-@implementation CTDExerciseSceneTouchRouterBaseTestCase
+@implementation CTDTrialSceneTouchRouterBaseTestCase
 
 - (void)setUp
 {
@@ -195,10 +196,10 @@ static CTDFakeTargetView* target1;
 
     target1 = [[CTDFakeTargetView alloc] initWithCenterPosition:TARGET_1_CENTER];
 
-    _targetContainerView = [[CTDRecordingTargetContainerView alloc] init];
+    _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
     _touchMapper = [[CTDFakeTouchMapper alloc] init];
-    _subject = [[CTDExerciseSceneTouchRouter alloc]
-                initWithTargetContainerView:_targetContainerView
+    _subject = [[CTDTrialSceneTouchRouter alloc]
+                initWithTrialRenderer:_trialRenderer
                  targetsTouchMapper:_touchMapper];
 }
 
@@ -206,7 +207,7 @@ static CTDFakeTargetView* target1;
 {
     _subject = nil;
     _touchMapper = nil;
-    _targetContainerView = nil;
+    _trialRenderer = nil;
 
     target1 = nil;
 
@@ -224,13 +225,13 @@ static CTDFakeTargetView* target1;
 
 
 
-@interface CTDExerciseSceneTouchTrackerBaseTestCase
-    : CTDExerciseSceneTouchRouterBaseTestCase
+@interface CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchRouterBaseTestCase
 
 @property (strong, nonatomic) id<CTDTouchTracker> touchTracker;
 @end
 
-@implementation CTDExerciseSceneTouchTrackerBaseTestCase
+@implementation CTDTrialSceneTouchTrackerBaseTestCase
 
 - (void)tearDown
 {
@@ -241,11 +242,11 @@ static CTDFakeTargetView* target1;
 @end
 
 
-@interface CTDExerciseSceneTouchTrackerStartingOutsideAnyTargetTestCase
-    : CTDExerciseSceneTouchTrackerBaseTestCase
+@interface CTDTrialSceneTouchTrackerStartingOutsideAnyTargetTestCase
+    : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 
-@implementation CTDExerciseSceneTouchTrackerStartingOutsideAnyTargetTestCase
+@implementation CTDTrialSceneTouchTrackerStartingOutsideAnyTargetTestCase
 
 - (void)setUp
 {
@@ -261,7 +262,7 @@ static CTDFakeTargetView* target1;
 
 - (void)testThatNoConnectionsAreStartedInitially
 {
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 0u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
                    @"expected connection count to be 0");
 }
 
@@ -275,7 +276,7 @@ static CTDFakeTargetView* target1;
 - (void)testThatNoConnectionIsStartedWhenTheTouchMovesWithoutEnteringAnyTarget
 {
     [self.touchTracker touchDidMoveTo:ANOTHER_POINT_OUTSIDE_TARGETS];
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 0u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
                    @"expected connection count to be 0");
 }
 
@@ -295,7 +296,7 @@ static CTDFakeTargetView* target1;
 - (void)testThatAConnectionIsStartedWhenTheTouchMovesOntoATarget
 {
     [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 1u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
@@ -317,11 +318,11 @@ static CTDFakeTargetView* target1;
 
 
 
-@interface CTDExerciseSceneTouchTrackerStartingInsideATargetTestCase
-    : CTDExerciseSceneTouchTrackerBaseTestCase
+@interface CTDTrialSceneTouchTrackerStartingInsideATargetTestCase
+    : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 
-@implementation CTDExerciseSceneTouchTrackerStartingInsideATargetTestCase
+@implementation CTDTrialSceneTouchTrackerStartingInsideATargetTestCase
 
 - (void)setUp
 {
@@ -331,7 +332,7 @@ static CTDFakeTargetView* target1;
 
 - (CTDRecordingTargetConnectionView*)activeConnection
 {
-    return [self.targetContainerView.targetConnectionViewsCreated firstObject];
+    return [self.trialRenderer.targetConnectionViewsCreated firstObject];
 }
 
 
@@ -351,7 +352,7 @@ static CTDFakeTargetView* target1;
 
 - (void)testThatAConnectionIsStartedImmediately
 {
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 1u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
@@ -405,7 +406,7 @@ static CTDFakeTargetView* target1;
 - (void)testThatNoNewConnectionIsStartedWhenTheTouchMovesWithoutLeavingTheInitialTarget
 {
     [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 1u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
@@ -445,7 +446,7 @@ static CTDFakeTargetView* target1;
 - (void)testThatNoNewConnectionIsStartedWhenTheTouchMovesOffTheInitialTarget
 {
     [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_TARGETS];
-    XCTAssertEqual([self.targetContainerView.targetConnectionViewsCreated count], 1u,
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be exactly 1");
 }
 
@@ -484,4 +485,4 @@ static CTDFakeTargetView* target1;
 @end
 
 
-// TODO: ExerciseSceneTouchTrackerTrackingFromATarget
+// TODO: CTDTrialSceneTouchTrackerTrackingFromATarget

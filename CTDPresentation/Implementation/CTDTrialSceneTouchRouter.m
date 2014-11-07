@@ -1,11 +1,12 @@
 // Copyright 2013-4 Michael Hackett. All rights reserved.
 
-#import "CTDExerciseSceneTouchRouter.h"
+#import "CTDTrialSceneTouchRouter.h"
 
 #import "CTDConnectionTouchInteraction.h"
 #import "CTDDelegatingTouchTracker.h"
 #import "CTDTargetView.h"
 #import "CTDTouchMapper.h"
+#import "CTDTrialRenderer.h"
 
 
 
@@ -66,21 +67,20 @@ CTD_NO_DEFAULT_INIT
 #pragma mark - Main class
 
 
-@implementation CTDExerciseSceneTouchRouter
+@implementation CTDTrialSceneTouchRouter
 {
-    __weak id<CTDTargetContainerView> _targetContainerView;
+    __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTouchMapper> _targetsTouchMapper;
 }
 
 #pragma mark - Initialization
 
-- (instancetype)initWithTargetContainerView:
-                    (id<CTDTargetContainerView>)targetContainerView
-                targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                   targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
 {
     self = [super init];
     if (self) {
-        _targetContainerView = targetContainerView;
+        _trialRenderer = trialRenderer;
         _targetsTouchMapper = targetsTouchMapper;
     }
     return self;
@@ -126,7 +126,7 @@ CTD_NO_DEFAULT_INIT
          initWithInitialDelegate:initialTracker];
 
     // local copies for the block's use
-    __weak id<CTDTargetContainerView> targetContainerView = _targetContainerView;
+    __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
     id<CTDTouchMapper> targetsTouchMapper = _targetsTouchMapper;
 
     id<CTDTouchTracker> actionDiscriminator =
@@ -137,10 +137,10 @@ CTD_NO_DEFAULT_INIT
     {
         [delegatingTracker changeDelegateTo:
             [[CTDConnectionTouchInteraction alloc]
-             initWithTargetContainerView:targetContainerView
-                       targetTouchMapper:targetsTouchMapper
-                        anchorTargetView:hitTargetView
-                  initialFreeEndPosition:initialPosition]];
+             initWithTrialRenderer:trialRenderer
+                 targetTouchMapper:targetsTouchMapper
+                  anchorTargetView:hitTargetView
+            initialFreeEndPosition:initialPosition]];
     }];
 
     [initialTracker changeDelegateTo:actionDiscriminator];

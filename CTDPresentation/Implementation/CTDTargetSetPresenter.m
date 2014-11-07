@@ -3,9 +3,9 @@
 #import "CTDTargetSetPresenter.h"
 
 #import "CTDListOrderTouchMapper.h"
-#import "CTDTargetContainerView.h"
 #import "CTDTargetView.h"
 #import "CTDTouchMapper.h"
+#import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -18,18 +18,17 @@
     CTDListOrderTouchMapper* _targetsTouchMapper;
 }
 
-- (instancetype)initWithTargetContainerView:
-                    (id<CTDTargetContainerView>)targetContainerView;
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
 {
     self = [super init];
     if (self) {
         NSMutableArray* targetViews = [[NSMutableArray alloc] init];
         [targetViews addObject:
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:100 y:400]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:100 y:400]]];
         [targetViews addObject:
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:600 y:150]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:600 y:150]]];
         [targetViews addObject:
-            [targetContainerView newTargetViewCenteredAt:[CTDPoint x:400 y:550]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:400 y:550]]];
         _targetViews = [targetViews copy];
         _targetsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
         for (id<CTDTouchable> targetView in targetViews) {

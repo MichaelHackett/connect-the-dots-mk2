@@ -3,9 +3,9 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "CTDTargetConnectionView.h"
-#import "CTDTargetContainerView.h"
 #import "CTDTargetView.h"
 #import "CTDTouchMapper.h"
+#import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -20,7 +20,7 @@
 
 @interface CTDConnectionPresenter : NSObject
 
-- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView;
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
 - (void)anchorOnTargetView:(id<CTDTargetView>)targetView;
 - (void)connectFreeEndToTargetView:(id<CTDTargetView>)targetView
                   orMoveToPosition:(CTDPoint*)freeEndPosition;
@@ -45,10 +45,10 @@
 
 
 - (instancetype)
-      initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
-                targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-                 anchorTargetView:(id<CTDTargetView>)anchorTargetView
-           initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
+      initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
+          targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+           anchorTargetView:(id<CTDTargetView>)anchorTargetView
+     initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
     self = [super init];
     if (self) {
@@ -58,7 +58,7 @@
         }
         _targetTouchMapper = targetTouchMapper;
         _presenter = [[CTDConnectionPresenter alloc]
-                      initWithTargetContainerView:targetContainerView];
+                      initWithTrialRenderer:trialRenderer];
 
         _anchorTargetView = anchorTargetView;
         [_presenter anchorOnTargetView:_anchorTargetView];
@@ -108,17 +108,17 @@
 
 @implementation CTDConnectionPresenter
 {
-    __weak id<CTDTargetContainerView> _targetContainerView;
+    __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTargetView> _anchorTargetView;
     id<CTDTargetView> _freeEndTargetView;
     id<CTDTargetConnectionView> _connectionView;
 }
 
-- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     self = [super init];
     if (self) {
-        _targetContainerView = targetContainerView;
+        _trialRenderer = trialRenderer;
         _anchorTargetView = nil;
         _connectionView = nil;
     }
@@ -162,9 +162,9 @@
     }
 
     if (!_connectionView) {
-        id<CTDTargetContainerView> targetContainerView = _targetContainerView;
+        id<CTDTrialRenderer> trialRenderer = _trialRenderer;
         CTDPoint* anchorPosition = [_anchorTargetView connectionPoint];
-        _connectionView = [targetContainerView
+        _connectionView = [trialRenderer
                            newTargetConnectionViewWithFirstEndpointPosition:anchorPosition
                            secondEndpointPosition:freeEndPosition];
     } else {

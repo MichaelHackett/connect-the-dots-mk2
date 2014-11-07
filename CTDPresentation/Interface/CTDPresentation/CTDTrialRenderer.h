@@ -1,6 +1,6 @@
-// CTDTargetContainerView:
-//     The visual representation of a set of targets and connections between
-//     them.
+// CTDTrialRenderer:
+//     The visual representation of a connect-the-dots trial, containing a set
+//     of targets and connections between them, plus the color selection tool.
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
@@ -11,7 +11,7 @@
 
 
 
-@protocol CTDTargetContainerView <NSObject>
+@protocol CTDTrialRenderer <NSObject>
 
 - (id<CTDTargetView, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
 - (id<CTDTargetConnectionView>)

@@ -45,8 +45,8 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
     _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
 
-    [_applicationController showTargetSetInContainerView:initialViewController
-                                    withTouchInputSource:initialViewController];
+    [_applicationController runTrialWithRenderer:initialViewController
+                                touchInputSource:initialViewController];
 
     return YES;
 }

@@ -3,12 +3,12 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-@protocol CTDTargetContainerView, CTDTouchInputSource;
+@protocol CTDTouchInputSource, CTDTrialRenderer;
 
 
 @interface CTDApplication : NSObject
 
-- (void)showTargetSetInContainerView:(id<CTDTargetContainerView>)targetContainerView
-                withTouchInputSource:(id<CTDTouchInputSource>)touchInputSource;
+- (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
+            touchInputSource:(id<CTDTouchInputSource>)touchInputSource;
 
 @end
