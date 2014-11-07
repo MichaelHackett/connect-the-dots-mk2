@@ -177,6 +177,7 @@
 		4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitDrawingConfig.h; sourceTree = "<group>"; };
 		4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitDrawingConfig.m; sourceTree = "<group>"; };
 		4C5A56AD19E32B4600E994CB /* CTDTouchable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CTDTouchable.h; path = CTDPresentation/Interface/CTDPresentation/CTDTouchable.h; sourceTree = SOURCE_ROOT; };
+		4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionRenderer.h; sourceTree = "<group>"; };
 		4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25A1A080D61006A244D /* CTDListOrderTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDListOrderTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDListOrderTouchMapper.m; sourceTree = "<group>"; };
@@ -567,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFDEEED19C720710041B910 /* CTDApplication.h */,
+				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
 				4CFDEEE019C694C90041B910 /* CTDTargetView.h */,
 				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,

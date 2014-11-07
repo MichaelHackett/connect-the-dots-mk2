@@ -3,15 +3,12 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTouchable.h"
+#import "CTDSelectionRenderer.h"
 
 @class CTDPoint;
 
 
-@protocol CTDTargetView <NSObject>
-
-- (void)showSelectionIndicator;
-- (void)hideSelectionIndicator;
+@protocol CTDTargetView <CTDSelectionRenderer>
 
 // This point is relative to the bounds of the target container view.
 - (CTDPoint*)connectionPoint;
@@ -25,9 +22,6 @@
 //- (void)discardView; // don't even need this at the moment
 
 @end
-
-// TODO: Split above interface into a parent View interface and perhaps a
-// "Selectable" interface, if it makes sense (or just keep the CTDTargetView type).
 
 
 
