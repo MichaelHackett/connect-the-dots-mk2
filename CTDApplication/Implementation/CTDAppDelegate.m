@@ -7,8 +7,8 @@
 #import "CTDPresentation/CTDApplication.h"
 
 
-static NSString* const kCTDConnectSceneViewControllerNibName =
-          @"CTDConnectSceneViewController";
+static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
+          @"CTDUIKitConnectSceneViewController";
 
 
 
@@ -35,7 +35,7 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
     _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
     CTDUIKitConnectSceneViewController* initialViewController =
         [[CTDUIKitConnectSceneViewController alloc]
-         initWithNibName:kCTDConnectSceneViewControllerNibName
+         initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
     initialViewController.drawingConfig = _drawingConfig;
 
