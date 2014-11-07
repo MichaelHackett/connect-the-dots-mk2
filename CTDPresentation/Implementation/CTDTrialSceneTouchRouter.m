@@ -4,7 +4,7 @@
 
 #import "CTDConnectionTouchInteraction.h"
 #import "CTDDelegatingTouchTracker.h"
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 
@@ -12,7 +12,7 @@
 
 #pragma mark - Initial delegate touch tracker (private)
 
-typedef void (^CTDTargetHitHandler)(id<CTDTargetView> hitTargetView);
+typedef void (^CTDTargetHitHandler)(id<CTDTargetRenderer> hitTargetView);
 
 
 @interface CTDTargetDetectionTracker : NSObject <CTDTouchTracker>
@@ -32,7 +32,7 @@ CTD_NO_DEFAULT_INIT
 
 - (instancetype)initWithTargetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
                      initialTouchLocation:(CTDPoint*)initialTouchLocation
-                         targetHitHandler:(void(^)(id<CTDTargetView> hitTargetView))targetHitHandler
+                         targetHitHandler:(void(^)(id<CTDTargetRenderer> hitTargetView))targetHitHandler
 {
     self = [super init];
     if (self) {
@@ -54,8 +54,8 @@ CTD_NO_DEFAULT_INIT
 - (void)CTDTargetDetectionTracker_hitTestWithLocation:(CTDPoint*)touchLocation
 {
     id hitElement = [_targetsTouchMapper elementAtTouchLocation:touchLocation];
-    if (hitElement && [hitElement conformsToProtocol:@protocol(CTDTargetView)]) {
-        _targetHitHandler((id<CTDTargetView>)hitElement);
+    if (hitElement && [hitElement conformsToProtocol:@protocol(CTDTargetRenderer)]) {
+        _targetHitHandler((id<CTDTargetRenderer>)hitElement);
     }
 }
 
@@ -133,7 +133,7 @@ CTD_NO_DEFAULT_INIT
         [[CTDTargetDetectionTracker alloc]
          initWithTargetsTouchMapper:_targetsTouchMapper
                initialTouchLocation:initialPosition
-                   targetHitHandler:^(id<CTDTargetView> hitTargetView)
+                   targetHitHandler:^(id<CTDTargetRenderer> hitTargetView)
     {
         [delegatingTracker changeDelegateTo:
             [[CTDConnectionTouchInteraction alloc]

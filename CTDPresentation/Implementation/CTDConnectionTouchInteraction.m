@@ -3,7 +3,7 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "CTDTargetConnectionView.h"
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
@@ -21,8 +21,8 @@
 @interface CTDConnectionPresenter : NSObject
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
-- (void)anchorOnTargetView:(id<CTDTargetView>)targetView;
-- (void)connectFreeEndToTargetView:(id<CTDTargetView>)targetView
+- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView;
+- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
                   orMoveToPosition:(CTDPoint*)freeEndPosition;
 - (void)cancelConnection;
 
@@ -36,7 +36,7 @@
 {
     id<CTDTouchMapper> _targetTouchMapper;
     CTDConnectionPresenter* _presenter;
-    id<CTDTargetView> _anchorTargetView;
+    id<CTDTargetRenderer> _anchorTargetView;
 }
 
 
@@ -47,7 +47,7 @@
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
           targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-           anchorTargetView:(id<CTDTargetView>)anchorTargetView
+           anchorTargetView:(id<CTDTargetRenderer>)anchorTargetView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
     self = [super init];
@@ -77,13 +77,13 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetView> connectedTargetView = nil;
+    id<CTDTargetRenderer> connectedTargetView = nil;
     id hitElement = [_targetTouchMapper elementAtTouchLocation:newPosition];
     if (hitElement &&
         hitElement != _anchorTargetView &&
-        [hitElement conformsToProtocol:@protocol(CTDTargetView)])
+        [hitElement conformsToProtocol:@protocol(CTDTargetRenderer)])
     {
-        connectedTargetView = (id<CTDTargetView>)hitElement;
+        connectedTargetView = (id<CTDTargetRenderer>)hitElement;
     }
 
     [_presenter connectFreeEndToTargetView:connectedTargetView
@@ -109,8 +109,8 @@
 @implementation CTDConnectionPresenter
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
-    id<CTDTargetView> _anchorTargetView;
-    id<CTDTargetView> _freeEndTargetView;
+    id<CTDTargetRenderer> _anchorTargetView;
+    id<CTDTargetRenderer> _freeEndTargetView;
     id<CTDTargetConnectionView> _connectionView;
 }
 
@@ -125,7 +125,7 @@
     return self;
 }
 
-- (void)anchorOnTargetView:(id<CTDTargetView>)targetView
+- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView
 {
     if (_anchorTargetView != targetView) {
         if (_anchorTargetView) {
@@ -141,7 +141,7 @@
     }
 }
 
-- (void)connectFreeEndToTargetView:(id<CTDTargetView>)targetView
+- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
                   orMoveToPosition:(CTDPoint*)freeEndPosition
 {
     NSAssert(_anchorTargetView,

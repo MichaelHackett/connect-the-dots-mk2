@@ -3,7 +3,7 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "CTDTargetConnectionView.h"
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
 #import "CTDTouchable.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
@@ -31,14 +31,14 @@
 // of the status and reasoning, should the question ever come up.
 //
 
-@interface CTDFakeTargetView : NSObject <CTDTargetView, CTDTouchable>
+@interface CTDFakeTargetRenderer : NSObject <CTDTargetRenderer, CTDTouchable>
 
 @property (copy, readonly, nonatomic) CTDPoint* centerPosition;
 @property (assign, readonly, nonatomic, getter=isSelected) BOOL selected;
 
 @end
 
-@implementation CTDFakeTargetView
+@implementation CTDFakeTargetRenderer
 
 - (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
 {
@@ -134,9 +134,9 @@
     return [_targetConnectionViewsCreated copy];
 }
 
-- (id<CTDTargetView, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
 {
-    id newTargetView = [[CTDFakeTargetView alloc]
+    id newTargetView = [[CTDFakeTargetRenderer alloc]
                         initWithCenterPosition:centerPosition];
     [_targetViewsCreated addObject:newTargetView];
     return newTargetView;
@@ -159,7 +159,7 @@
 
 
 
-static CTDFakeTargetView* target1;
+static CTDFakeTargetRenderer* target1;
 
 
 @interface CTDFakeTouchMapper : NSObject <CTDTouchMapper>
@@ -194,7 +194,7 @@ static CTDFakeTargetView* target1;
 {
     [super setUp];
 
-    target1 = [[CTDFakeTargetView alloc] initWithCenterPosition:TARGET_1_CENTER];
+    target1 = [[CTDFakeTargetRenderer alloc] initWithCenterPosition:TARGET_1_CENTER];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
     _touchMapper = [[CTDFakeTouchMapper alloc] init];

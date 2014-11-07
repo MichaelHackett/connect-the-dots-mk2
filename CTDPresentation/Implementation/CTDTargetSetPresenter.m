@@ -3,7 +3,7 @@
 #import "CTDTargetSetPresenter.h"
 
 #import "CTDListOrderTouchMapper.h"
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"

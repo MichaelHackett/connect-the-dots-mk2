@@ -2,7 +2,7 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -11,7 +11,7 @@
 @implementation CTDSelectOnTouchInteraction
 {
     id<CTDTouchMapper> _targetTouchMapper;
-    id<CTDTargetView> _selectedTarget;
+    id<CTDTargetRenderer> _selectedTarget;
 }
 
 
@@ -42,7 +42,7 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetView> hitTarget = [_targetTouchMapper elementAtTouchLocation:newPosition];
+    id<CTDTargetRenderer> hitTarget = [_targetTouchMapper elementAtTouchLocation:newPosition];
     if (hitTarget != _selectedTarget) {
         if (_selectedTarget) {
             [_selectedTarget hideSelectionIndicator];

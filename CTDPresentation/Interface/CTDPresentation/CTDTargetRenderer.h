@@ -1,5 +1,5 @@
-// CTDTargetView:
-//     The visual representation of a target.
+// CTDTargetRenderer:
+//     An entity that renders a target into another form (typically visual).
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
@@ -8,7 +8,8 @@
 @class CTDPoint;
 
 
-@protocol CTDTargetView <CTDSelectionRenderer>
+
+@protocol CTDTargetRenderer <CTDSelectionRenderer>
 
 // This point is relative to the bounds of the target container view.
 - (CTDPoint*)connectionPoint;

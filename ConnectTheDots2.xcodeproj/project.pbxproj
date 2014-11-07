@@ -263,7 +263,7 @@
 		4CFDEEDC19C68B070041B910 /* CTDPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDPoint.h; sourceTree = "<group>"; };
 		4CFDEEDD19C68B070041B910 /* CTDPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDPoint.m; sourceTree = "<group>"; };
 		4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTouchResponder.h; sourceTree = "<group>"; };
-		4CFDEEE019C694C90041B910 /* CTDTargetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetView.h; sourceTree = "<group>"; };
+		4CFDEEE019C694C90041B910 /* CTDTargetRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetRenderer.h; sourceTree = "<group>"; };
 		4CFDEEE119C698520041B910 /* CTDTargetSetPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTargetSetPresenter.h; sourceTree = "<group>"; };
 		4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTargetSetPresenter.m; sourceTree = "<group>"; };
 		4CFDEEED19C720710041B910 /* CTDApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDApplication.h; sourceTree = "<group>"; };
@@ -569,7 +569,7 @@
 			children = (
 				4CFDEEED19C720710041B910 /* CTDApplication.h */,
 				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
-				4CFDEEE019C694C90041B910 /* CTDTargetView.h */,
+				4CFDEEE019C694C90041B910 /* CTDTargetRenderer.h */,
 				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,
 				4C5A56AD19E32B4600E994CB /* CTDTouchable.h */,
