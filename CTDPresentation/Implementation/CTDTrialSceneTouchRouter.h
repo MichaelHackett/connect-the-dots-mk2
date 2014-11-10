@@ -13,7 +13,8 @@
 @interface CTDTrialSceneTouchRouter : NSObject <CTDTouchResponder>
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                   targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper;
+                   targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
+              colorButtonsTouchMapper:(id<CTDTouchMapper>)colorButtonsTouchMapper;
 CTD_NO_DEFAULT_INIT
 
 @end

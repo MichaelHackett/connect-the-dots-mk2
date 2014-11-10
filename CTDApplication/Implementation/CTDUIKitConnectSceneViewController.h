@@ -13,5 +13,6 @@
     : UIViewController <CTDTrialRenderer, CTDTouchInputSource>
 
 @property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
+@property (strong, readonly, nonatomic) NSDictionary* colorCellMap; // UIColor -> CTDKUIKitColorCell
 
 @end

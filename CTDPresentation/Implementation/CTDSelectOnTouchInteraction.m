@@ -10,8 +10,8 @@
 
 @implementation CTDSelectOnTouchInteraction
 {
-    id<CTDTouchMapper> _targetTouchMapper;
-    id<CTDTargetRenderer> _selectedTarget;
+    id<CTDTouchMapper> _touchMapper;
+    id<CTDSelectionRenderer> _selectedElement;
 }
 
 
@@ -19,15 +19,17 @@
 #pragma mark - Initialization
 
 
-- (instancetype)initWithTargetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-                     initialTouchPosition:(CTDPoint*)initialPosition
+- (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)touchMapper
+                initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self) {
-        _targetTouchMapper = targetTouchMapper;
-        _selectedTarget = [_targetTouchMapper elementAtTouchLocation:initialPosition];
-        if (_selectedTarget) {
-            [_selectedTarget showSelectionIndicator];
+        _touchMapper = touchMapper;
+        _selectedElement = nil;
+        id hitElement = [_touchMapper elementAtTouchLocation:initialPosition];
+        if ([hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]) {
+            _selectedElement = (id<CTDSelectionRenderer>)hitElement;
+            [_selectedElement showSelectionIndicator];
         }
     }
     return self;
@@ -42,27 +44,30 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetRenderer> hitTarget = [_targetTouchMapper elementAtTouchLocation:newPosition];
-    if (hitTarget != _selectedTarget) {
-        if (_selectedTarget) {
-            [_selectedTarget hideSelectionIndicator];
+    id hitElement = [_touchMapper elementAtTouchLocation:newPosition];
+    if (hitElement != _selectedElement &&
+        (!hitElement ||
+         [hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]))
+    {
+        if (_selectedElement) {
+            [_selectedElement hideSelectionIndicator];
         }
-        _selectedTarget = hitTarget;
-        [hitTarget showSelectionIndicator];
+        _selectedElement = (id<CTDSelectionRenderer>)hitElement;
+        [_selectedElement showSelectionIndicator];
     }
 }
 
 - (void)touchDidEnd
 {
-    if (_selectedTarget) {
-        [_selectedTarget hideSelectionIndicator];
+    if (_selectedElement) {
+        [_selectedElement hideSelectionIndicator];
     }
 }
 
 - (void)touchWasCancelled
 {
-    if (_selectedTarget) {
-        [_selectedTarget hideSelectionIndicator];
+    if (_selectedElement) {
+        [_selectedElement hideSelectionIndicator];
     }
 }
 

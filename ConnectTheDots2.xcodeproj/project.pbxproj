@@ -21,10 +21,12 @@
 		4C2619471A105784005E87A9 /* CTDRecordingTargetConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619461A105784005E87A9 /* CTDRecordingTargetConnectionView.m */; };
 		4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */; };
 		4C26194F1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */; };
+		4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */; };
 		4C5A569019E1C37A00E994CB /* CTDSelectOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */; };
 		4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C5A56A919E20A2A00E994CB /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
 		4C5A56AC19E20CC200E994CB /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
+		4C7B5B841A0C1F750040EC64 /* CTDUIKitColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */; };
 		4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */; };
 		4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
@@ -202,8 +204,11 @@
 		4C2619461A105784005E87A9 /* CTDRecordingTargetConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingTargetConnectionView.m; path = CTDPresentation/Tests/CTDRecordingTargetConnectionView.m; sourceTree = SOURCE_ROOT; };
 		4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingTrialRenderer.h; path = CTDPresentation/Tests/CTDRecordingTrialRenderer.h; sourceTree = SOURCE_ROOT; };
 		4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingTrialRenderer.m; path = CTDPresentation/Tests/CTDRecordingTrialRenderer.m; sourceTree = SOURCE_ROOT; };
+		4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorCellRenderer.h; sourceTree = "<group>"; };
+		4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingColorCellRenderer.h; path = CTDPresentation/Tests/CTDRecordingColorCellRenderer.h; sourceTree = SOURCE_ROOT; };
 		4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingSelectionRenderer.h; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.h; sourceTree = SOURCE_ROOT; };
 		4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingSelectionRenderer.m; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.m; sourceTree = SOURCE_ROOT; };
+		4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingColorCellRenderer.m; path = CTDPresentation/Tests/CTDRecordingColorCellRenderer.m; sourceTree = SOURCE_ROOT; };
 		4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
@@ -216,6 +221,8 @@
 		4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitDrawingConfig.m; sourceTree = "<group>"; };
 		4C5A56AD19E32B4600E994CB /* CTDTouchable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CTDTouchable.h; path = CTDPresentation/Interface/CTDPresentation/CTDTouchable.h; sourceTree = SOURCE_ROOT; };
 		4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionRenderer.h; sourceTree = "<group>"; };
+		4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitColorCell.h; sourceTree = "<group>"; };
+		4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitColorCell.m; sourceTree = "<group>"; };
 		4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25A1A080D61006A244D /* CTDListOrderTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDListOrderTouchMapper.h; sourceTree = "<group>"; };
 		4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDListOrderTouchMapper.m; sourceTree = "<group>"; };
@@ -470,6 +477,8 @@
 				4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */,
 				4CEBCACD19BD26D600D2B498 /* CTDUIKitToolbar.h */,
 				4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */,
+				4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */,
+				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
 				4CEBCAB919BC980300D2B498 /* Resources */,
 				4CEBCA2919BB564600D2B498 /* Tests */,
@@ -603,6 +612,8 @@
 				4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */,
 				4C2619421A105656005E87A9 /* CTDFakeTargetRenderer.h */,
 				4C2619431A105656005E87A9 /* CTDFakeTargetRenderer.m */,
+				4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */,
+				4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */,
 				4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */,
 				4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */,
 				4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */,
@@ -622,6 +633,7 @@
 				4CFDEEED19C720710041B910 /* CTDApplication.h */,
 				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
 				4CFDEEE019C694C90041B910 /* CTDTargetRenderer.h */,
+				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
 				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,
 				4C5A56AD19E32B4600E994CB /* CTDTouchable.h */,
@@ -995,6 +1007,7 @@
 				4CFDEEAB19C63C670041B910 /* CALayer+CTDAnimationSupport.m in Sources */,
 				4CFDEE9519C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m in Sources */,
 				4CEBCAC219BCD54D00D2B498 /* CTDUIKitTargetView.m in Sources */,
+				4C7B5B841A0C1F750040EC64 /* CTDUIKitColorCell.m in Sources */,
 				4CEBCA1719BB564600D2B498 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1048,6 +1061,7 @@
 				4C25B96F1A0D696700275138 /* CTDTrialSceneTouchRouterTests.m in Sources */,
 				4C25B9791A0E90E800275138 /* CTDRecordingTouchTracker.m in Sources */,
 				4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */,
+				4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */,
 				4C25B9711A0E6AA100275138 /* CTDTouchTrackingGroupTests.m in Sources */,
 				4C26194F1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m in Sources */,
 			);

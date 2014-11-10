@@ -3,6 +3,7 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDPoint+CGConversion.h"
+#import "CTDUIKitColorCell.h"
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
@@ -38,6 +39,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 {
     NSMutableArray* _targetViews;
     NSMutableArray* _touchResponders;
+    NSMutableDictionary* _colorCellMap;
 
     // maps UITouch to a NSSet of CTDTouchTrackers
     NSMutableDictionary* _touchTrackersMap;
@@ -58,20 +60,25 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     [super viewDidLoad];
     _targetViews = [[NSMutableArray alloc] init];
     _touchResponders = [[NSMutableArray alloc] init];
+    _colorCellMap = [[NSMutableDictionary alloc] init];
     _touchTrackersMap = [[NSMutableDictionary alloc] init];
 
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
-    UIView* greenToolbarCell = [[UIView alloc]
-                                initWithFrame:CGRectMake(0, 0, 100, 0)];
-    greenToolbarCell.backgroundColor = [UIColor greenColor];
-    UIView* redToolbarCell = [[UIView alloc]
-                              initWithFrame:CGRectMake(0, 0, 100, 0)];
-    redToolbarCell.backgroundColor = [UIColor redColor];
-    [toolbar addSubview:greenToolbarCell];
-    [toolbar addSubview:redToolbarCell];
-
+    CTDUIKitColorCell* redCell =
+        [[CTDUIKitColorCell alloc] initWithColor:[UIColor redColor]];
+    CTDUIKitColorCell* greenCell =
+        [[CTDUIKitColorCell alloc] initWithColor:[UIColor greenColor]];
+    CTDUIKitColorCell* blueCell =
+        [[CTDUIKitColorCell alloc] initWithColor:[UIColor blueColor]];
+    [toolbar addCell:redCell];
+    [toolbar addCell:greenCell];
+    [toolbar addCell:blueCell];
     [self.view addSubview:toolbar];
+
+    [_colorCellMap setObject:redCell forKey:[UIColor redColor]];
+    [_colorCellMap setObject:greenCell forKey:[UIColor greenColor]];
+    [_colorCellMap setObject:blueCell forKey:[UIColor blueColor]];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -79,6 +86,11 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 //    [super didReceiveMemoryWarning];
 //    // Dispose of any resources that can be recreated.
 //}
+
+- (NSDictionary*)colorCellMap
+{
+    return [_colorCellMap copy];
+}
 
 
 

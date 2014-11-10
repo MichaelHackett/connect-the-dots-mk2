@@ -4,8 +4,10 @@
 
 #import "CTDConnectionTouchInteraction.h"
 #import "CTDDelegatingTouchTracker.h"
+#import "CTDSelectOnTouchInteraction.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
+#import "CTDTouchTrackingGroup.h"
 #import "CTDTrialRenderer.h"
 
 
@@ -71,17 +73,20 @@ CTD_NO_DEFAULT_INIT
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTouchMapper> _targetsTouchMapper;
+    id<CTDTouchMapper> _colorButtonsTouchMapper;
 }
 
 #pragma mark - Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
+              colorButtonsTouchMapper:(id<CTDTouchMapper>)colorButtonsTouchMapper
 {
     self = [super init];
     if (self) {
         _trialRenderer = trialRenderer;
         _targetsTouchMapper = targetsTouchMapper;
+        _colorButtonsTouchMapper = colorButtonsTouchMapper;
     }
     return self;
 }
@@ -119,11 +124,15 @@ CTD_NO_DEFAULT_INIT
     // it would actually be a pretty short block of code (7 statements plus 1
     // in the block).
 
-    CTDDelegatingTouchTracker* initialTracker =
-        [[CTDDelegatingTouchTracker alloc] init];
+    CTDTouchTrackingGroup* initialTrackingGroup =
+        [[CTDTouchTrackingGroup alloc] init];
+    [initialTrackingGroup addTracker:[[CTDSelectOnTouchInteraction alloc]
+                                      initWithTouchMapper:_colorButtonsTouchMapper
+                                      initialTouchPosition:initialPosition]];
+
     CTDDelegatingTouchTracker* delegatingTracker =
         [[CTDDelegatingTouchTracker alloc]
-         initWithInitialDelegate:initialTracker];
+         initWithInitialDelegate:initialTrackingGroup];
 
     // local copies for the block's use
     __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
@@ -143,7 +152,8 @@ CTD_NO_DEFAULT_INIT
             initialFreeEndPosition:initialPosition]];
     }];
 
-    [initialTracker changeDelegateTo:actionDiscriminator];
+    [initialTrackingGroup addTracker:actionDiscriminator];
+
     return delegatingTracker;
 }
 

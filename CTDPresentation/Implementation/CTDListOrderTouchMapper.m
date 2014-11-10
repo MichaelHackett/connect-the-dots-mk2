@@ -11,6 +11,19 @@
     NSMutableArray* _touchables;
 }
 
++ (instancetype)mapperWithTouchables:(NSArray*)touchableElements
+{
+    CTDListOrderTouchMapper* newMapper = [[CTDListOrderTouchMapper alloc] init];
+    for (id element in touchableElements) {
+        if (![element conformsToProtocol:@protocol(CTDTouchable)]) {
+            [NSException raise:NSInvalidArgumentException
+                        format:@"Element in supplied list does not conform to CTDTouchable"];
+        }
+        [newMapper appendTouchable:element];
+    }
+    return newMapper;
+}
+
 - (instancetype)init
 {
     self = [super init];

@@ -36,21 +36,27 @@
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     for (id<CTDTouchTracker> tracker in _touchTrackers) {
-        [tracker touchDidMoveTo:newPosition];
+        if ([tracker respondsToSelector:@selector(touchDidMoveTo:)]) {
+            [tracker touchDidMoveTo:newPosition];
+        }
     }
 }
 
 - (void)touchDidEnd
 {
     for (id<CTDTouchTracker> tracker in _touchTrackers) {
-        [tracker touchDidEnd];
+        if ([tracker respondsToSelector:@selector(touchDidEnd)]) {
+            [tracker touchDidEnd];
+        }
     }
 }
 
 - (void)touchWasCancelled
 {
     for (id<CTDTouchTracker> tracker in _touchTrackers) {
-        [tracker touchWasCancelled];
+        if ([tracker respondsToSelector:@selector(touchWasCancelled)]) {
+            [tracker touchWasCancelled];
+        }
     }
 }
 

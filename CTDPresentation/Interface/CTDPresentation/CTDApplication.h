@@ -9,6 +9,7 @@
 @interface CTDApplication : NSObject
 
 - (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
+                colorCellMap:(NSDictionary*)colorCellMap
             touchInputSource:(id<CTDTouchInputSource>)touchInputSource;
 
 @end
