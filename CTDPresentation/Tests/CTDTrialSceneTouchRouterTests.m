@@ -2,170 +2,34 @@
 
 #import "CTDTrialSceneTouchRouter.h"
 
+#import "CTDFakeTargetRenderer.h"
+#import "CTDRecordingTargetConnectionView.h"
+#import "CTDRecordingTrialRenderer.h"
 #import "CTDTargetConnectionView.h"
 #import "CTDTargetRenderer.h"
-#import "CTDTouchable.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 #import <XCTest/XCTest.h>
 
 
+#define point(XCOORD,YCOORD) [[CTDPoint alloc] initWithX:XCOORD y:YCOORD]
 
-#define TARGET_1_CENTER [[CTDPoint alloc] initWithX:40 y:96]
-#define POINT_INSIDE_TARGET_1 [[CTDPoint alloc] initWithX:45 y:99]
-#define ANOTHER_POINT_INSIDE_TARGET_1 [[CTDPoint alloc] initWithX:47 y:95]
-#define POINT_OUTSIDE_TARGETS [[CTDPoint alloc] initWithX:22 y:70]
-#define ANOTHER_POINT_OUTSIDE_TARGETS [[CTDPoint alloc] initWithX:140 y:250]
-
-
-
-//
-// Note: No attempt has been made to make any of these test-support classes
-// KVO-compliant. The properties exposed are usually read-only from the
-// outside, but the values do change; there just isn't any KVO notification
-// when those changes occur. Tests usually read the property values just
-// once and have no need to follow changes. (They don't care what happens
-// before or after the check.) So adding KVO support would be a waste of
-// time, and probably never missed. Nonetheless, this serves as a reminder
-// of the status and reasoning, should the question ever come up.
-//
-
-@interface CTDFakeTargetRenderer : NSObject <CTDTargetRenderer, CTDTouchable>
-
-@property (copy, readonly, nonatomic) CTDPoint* centerPosition;
-@property (assign, readonly, nonatomic, getter=isSelected) BOOL selected;
-
-@end
-
-@implementation CTDFakeTargetRenderer
-
-- (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
-{
-    self = [super init];
-    if (self) {
-        _centerPosition = [centerPosition copy];
-        _selected = NO;
-    }
-    return self;
-}
-
-- (void)showSelectionIndicator { _selected = YES; }
-- (void)hideSelectionIndicator { _selected = NO; }
-- (CTDPoint*)connectionPoint { return self.centerPosition; }
-- (BOOL)containsTouchLocation:(__unused CTDPoint*)touchLocation { return NO; }
-
-@end
-
-
-
-
-
-@interface CTDRecordingTargetConnectionView : NSObject <CTDTargetConnectionView>
-
-@property (copy, readonly, nonatomic) CTDPoint* firstEndpointPosition;
-@property (copy, readonly, nonatomic) CTDPoint* secondEndpointPosition;
-@property (assign, readonly, nonatomic, getter=wasInvalidated) BOOL invalidated;
-
-- (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                       secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
-@end
-
-@implementation CTDRecordingTargetConnectionView
-- (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                       secondEndpointPosition:(CTDPoint*)secondEndpointPosition
-{
-    self = [super init];
-    if (self) {
-        _firstEndpointPosition = [firstEndpointPosition copy];
-        _secondEndpointPosition = [secondEndpointPosition copy];
-    }
-    return self;
-}
-
-- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition {
-    _firstEndpointPosition = [firstEndpointPosition copy];
-}
-
-- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition {
-    _secondEndpointPosition = [secondEndpointPosition copy];
-}
-
-- (void)invalidate {
-    _invalidated = YES;
-}
-
-@end
-
-
-
-
-
-@interface CTDRecordingTrialRenderer : NSObject <CTDTrialRenderer>
-
-@property (strong, readonly, nonatomic) NSArray* targetViewsCreated;
-@property (strong, readonly, nonatomic) NSArray* targetConnectionViewsCreated;
-
-@end
-
-@implementation CTDRecordingTrialRenderer
-{
-    NSMutableArray* _targetViewsCreated;
-    NSMutableArray* _targetConnectionViewsCreated;
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _targetViewsCreated = [[NSMutableArray alloc] init];
-        _targetConnectionViewsCreated = [[NSMutableArray alloc] init];
-    }
-    return self;
-}
-
-- (NSArray*)targetViewsCreated
-{
-    return [_targetViewsCreated copy];
-}
-
-- (NSArray*)targetConnectionViewsCreated
-{
-    return [_targetConnectionViewsCreated copy];
-}
-
-- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
-{
-    id newTargetView = [[CTDFakeTargetRenderer alloc]
-                        initWithCenterPosition:centerPosition];
-    [_targetViewsCreated addObject:newTargetView];
-    return newTargetView;
-}
-
-- (id<CTDTargetConnectionView>)
-      newTargetConnectionViewWithFirstEndpointPosition:
-          (CTDPoint*)firstEndpointPosition
-      secondEndpointPosition:(CTDPoint*)secondEndpointPosition
-{
-    id newTargetConnectionView = [[CTDRecordingTargetConnectionView alloc]
-                                  initWithFirstEndpointPosition:firstEndpointPosition
-                                  secondEndpointPosition:secondEndpointPosition];
-    [_targetConnectionViewsCreated addObject:newTargetConnectionView];
-    return newTargetConnectionView;
-}
-
-@end
-
-
+#define TARGET_1_CENTER point(40,96)
+#define POINT_INSIDE_TARGET_1 point(45,99)
+#define ANOTHER_POINT_INSIDE_TARGET_1 point(47,95)
+#define POINT_OUTSIDE_TARGETS point(22,70)
+#define ANOTHER_POINT_OUTSIDE_TARGETS point(140,250)
 
 
 static CTDFakeTargetRenderer* target1;
 
 
-@interface CTDFakeTouchMapper : NSObject <CTDTouchMapper>
+
+@interface CTDFakeTargetTouchMapper : NSObject <CTDTouchMapper>
 @end
 
-@implementation CTDFakeTouchMapper
+@implementation CTDFakeTargetTouchMapper
 
 - (id)elementAtTouchLocation:(CTDPoint*)touchLocation
 {
@@ -185,7 +49,6 @@ static CTDFakeTargetRenderer* target1;
 @interface CTDTrialSceneTouchRouterBaseTestCase : XCTestCase
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* subject;
 @property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
-@property (strong, readonly, nonatomic) CTDFakeTouchMapper* touchMapper;
 @end
 
 @implementation CTDTrialSceneTouchRouterBaseTestCase
@@ -197,16 +60,14 @@ static CTDFakeTargetRenderer* target1;
     target1 = [[CTDFakeTargetRenderer alloc] initWithCenterPosition:TARGET_1_CENTER];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
-    _touchMapper = [[CTDFakeTouchMapper alloc] init];
     _subject = [[CTDTrialSceneTouchRouter alloc]
                 initWithTrialRenderer:_trialRenderer
-                 targetsTouchMapper:_touchMapper];
+                   targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]];
 }
 
 - (void)tearDown
 {
     _subject = nil;
-    _touchMapper = nil;
     _trialRenderer = nil;
 
     target1 = nil;
