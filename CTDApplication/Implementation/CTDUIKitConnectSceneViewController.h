@@ -3,15 +3,16 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDTargetContainerView.h"
 #import "CTDPresentation/CTDTouchResponder.h"
+#import "CTDPresentation/CTDTrialRenderer.h"
 
 @class CTDUIKitDrawingConfig;
 
 
 @interface CTDUIKitConnectSceneViewController
-    : UIViewController <CTDTargetContainerView, CTDTouchInputSource>
+    : UIViewController <CTDTrialRenderer, CTDTouchInputSource>
 
 @property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
+@property (strong, readonly, nonatomic) NSDictionary* colorCellMap; // UIColor -> CTDKUIKitColorCell
 
 @end

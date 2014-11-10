@@ -62,16 +62,22 @@
     [_selectionIndicatorController hideIndicator];
 }
 
-- (BOOL)containsPoint:(CTDPoint*)point
-{
-    CGPoint localPoint = [self convertPoint:[point asCGPoint] fromView:self.superview];
-    CGPathRef targetPath = ((CAShapeLayer*)self.layer).path;
-    return (BOOL)CGPathContainsPoint(targetPath, NULL, localPoint, false);
-}
-
 - (CTDPoint*)connectionPoint
 {
     return [CTDPoint fromCGPoint:ctdCGRectCenter(self.frame)];
+}
+
+
+
+#pragma mark - CTDTouchable protocol
+
+
+- (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
+{
+    CGPoint localPoint = [self convertPoint:[touchLocation asCGPoint]
+                                   fromView:self.superview];
+    CGPathRef targetPath = ((CAShapeLayer*)self.layer).path;
+    return (BOOL)CGPathContainsPoint(targetPath, NULL, localPoint, false);
 }
 
 @end

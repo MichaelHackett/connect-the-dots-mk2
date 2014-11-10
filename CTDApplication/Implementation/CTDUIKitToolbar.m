@@ -13,16 +13,26 @@ static CGFloat const kToolbarFrameThickness = 4;
 
 
 @implementation CTDUIKitToolbar
+{
+    NSMutableArray* _toolbarCells;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _toolbarCells = [[NSMutableArray alloc] init];
         CALayer* rootLayer = self.layer;
         rootLayer.backgroundColor = [[UIColor grayColor] CGColor];
         [self setNeedsLayout];
     }
     return self;
+}
+
+- (void)addCell:(id<CTDUIKitToolbarCell>)cell
+{
+    [_toolbarCells addObject:cell];
+    [self addSubview:[cell toolbarCellContentView]];
 }
 
 - (void)layoutSubviews

@@ -65,16 +65,16 @@
 #pragma mark - CTDTargetConnectionView protocol
 
 
-- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpoint
+- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
 {
     [(CTDUIKitLineLayer*)self.layer
-            changeStartingPointTo:[firstEndpoint asCGPoint]];
+            changeStartingPointTo:[firstEndpointPosition asCGPoint]];
 }
 
-- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpoint
+- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     [(CTDUIKitLineLayer*)self.layer
-            changeEndingPointTo:[secondEndpoint asCGPoint]];
+            changeEndingPointTo:[secondEndpointPosition asCGPoint]];
 }
 
 - (void)invalidate

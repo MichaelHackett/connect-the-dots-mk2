@@ -11,8 +11,8 @@
 
 // Adjust the positions of the ends of the connection (point coordinates are
 // relative to the container view).
-- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpoint;
-- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpoint;
+- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition;
+- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 // Remove the view from the display and do not allow its reuse.
 - (void)invalidate;

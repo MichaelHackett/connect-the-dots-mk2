@@ -7,8 +7,8 @@
 #import "CTDPresentation/CTDApplication.h"
 
 
-static NSString* const kCTDConnectSceneViewControllerNibName =
-          @"CTDConnectSceneViewController";
+static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
+          @"CTDUIKitConnectSceneViewController";
 
 
 
@@ -35,7 +35,7 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
     _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
     CTDUIKitConnectSceneViewController* initialViewController =
         [[CTDUIKitConnectSceneViewController alloc]
-         initWithNibName:kCTDConnectSceneViewControllerNibName
+         initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
     initialViewController.drawingConfig = _drawingConfig;
 
@@ -45,8 +45,11 @@ static NSString* const kCTDConnectSceneViewControllerNibName =
     _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
 
-    [_applicationController showTargetSetInContainerView:initialViewController
-                                    withTouchInputSource:initialViewController];
+// TODO: make new map with UIColor keys converted to app-domain color type
+
+    [_applicationController runTrialWithRenderer:initialViewController
+                                    colorCellMap:initialViewController.colorCellMap
+                                touchInputSource:initialViewController];
 
     return YES;
 }

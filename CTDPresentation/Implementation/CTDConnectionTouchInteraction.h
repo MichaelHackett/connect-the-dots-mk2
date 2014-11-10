@@ -1,4 +1,4 @@
-// CTDConnectionInteractor:
+// CTDConnectionTouchInteraction:
 //     Handles dragging between elements to connect them.
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
@@ -6,9 +6,9 @@
 #import "CTDTouchResponder.h"
 
 @class CTDPoint;
-@protocol CTDTargetSpace;
-@protocol CTDTargetContainerView;
-
+@protocol CTDTargetRenderer;
+@protocol CTDTouchMapper;
+@protocol CTDTrialRenderer;
 
 
 
@@ -25,9 +25,10 @@
 
 // Designated initializer
 - (instancetype)
-      initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
-                      targetSpace:(id<CTDTargetSpace>)targetSpace
-             initialTouchPosition:(CTDPoint*)initialPosition;
+      initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
+          targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+           anchorTargetView:(id<CTDTargetRenderer>)anchorTargetView
+     initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition;
 CTD_NO_DEFAULT_INIT
 
 @end

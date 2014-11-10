@@ -1,20 +1,17 @@
-// CTDTargetView:
-//     The visual representation of a target.
+// CTDTargetRenderer:
+//     An entity that renders a target into another form (typically visual).
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
+
+#import "CTDSelectionRenderer.h"
 
 @class CTDPoint;
 
 
-@protocol CTDTargetView <NSObject>
 
-- (void)showSelectionIndicator;
-- (void)hideSelectionIndicator;
+@protocol CTDTargetRenderer <CTDSelectionRenderer>
 
-// Point is in local coordinates of target container view (aka, target view renderer).
-- (BOOL)containsPoint:(CTDPoint*)point;
-
-// As above, the point is relative to the bounds of the target container view.
+// This point is relative to the bounds of the target container view.
 - (CTDPoint*)connectionPoint;
 
 // This is part of the child interface only because it avoids the situation
@@ -26,9 +23,6 @@
 //- (void)discardView; // don't even need this at the moment
 
 @end
-
-// TODO: Split above interface into a parent View interface and perhaps a
-// "Selectable" interface, if it makes sense (or just keep the CTDTargetView type).
 
 
 

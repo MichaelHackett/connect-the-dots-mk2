@@ -3,9 +3,9 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "CTDTargetConnectionView.h"
-#import "CTDTargetContainerView.h"
-#import "CTDTargetSpace.h"
-#import "CTDTargetView.h"
+#import "CTDTargetRenderer.h"
+#import "CTDTouchMapper.h"
+#import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -20,9 +20,9 @@
 
 @interface CTDConnectionPresenter : NSObject
 
-- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView;
-- (void)anchorOnTargetView:(id<CTDTargetView>)targetView;
-- (void)connectFreeEndToTargetView:(id<CTDTargetView>)targetView
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
+- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView;
+- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
                   orMoveToPosition:(CTDPoint*)freeEndPosition;
 - (void)cancelConnection;
 
@@ -34,9 +34,9 @@
 
 @implementation CTDConnectionTouchInteraction
 {
-    id<CTDTargetSpace> _targetSpace;
+    id<CTDTouchMapper> _targetTouchMapper;
     CTDConnectionPresenter* _presenter;
-    id<CTDTargetView> _anchorTargetView;
+    id<CTDTargetRenderer> _anchorTargetView;
 }
 
 
@@ -45,20 +45,25 @@
 
 
 - (instancetype)
-      initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
-                      targetSpace:(id<CTDTargetSpace>)targetSpace
-             initialTouchPosition:(CTDPoint*)initialPosition
+      initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
+          targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+           anchorTargetView:(id<CTDTargetRenderer>)anchorTargetView
+     initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
     self = [super init];
     if (self) {
-        _targetSpace = targetSpace;
-        _presenter = [[CTDConnectionPresenter alloc]
-                      initWithTargetContainerView:targetContainerView];
-
-        _anchorTargetView = [targetSpace targetAtLocation:initialPosition];
-        if (_anchorTargetView) {
-            [_presenter anchorOnTargetView:_anchorTargetView];
+        if (!anchorTargetView) {
+            [NSException raise:NSInvalidArgumentException
+                        format:@"Anchor target view must not be nil"];
         }
+        _targetTouchMapper = targetTouchMapper;
+        _presenter = [[CTDConnectionPresenter alloc]
+                      initWithTrialRenderer:trialRenderer];
+
+        _anchorTargetView = anchorTargetView;
+        [_presenter anchorOnTargetView:_anchorTargetView];
+        [_presenter connectFreeEndToTargetView:nil
+                              orMoveToPosition:initialFreeEndPosition];
     }
     return self;
 }
@@ -72,18 +77,17 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetView> hitTargetView = [_targetSpace targetAtLocation:newPosition];
-    if (!_anchorTargetView && hitTargetView) {
-        _anchorTargetView = hitTargetView;
-        [_presenter anchorOnTargetView:_anchorTargetView];
+    id<CTDTargetRenderer> connectedTargetView = nil;
+    id hitElement = [_targetTouchMapper elementAtTouchLocation:newPosition];
+    if (hitElement &&
+        hitElement != _anchorTargetView &&
+        [hitElement conformsToProtocol:@protocol(CTDTargetRenderer)])
+    {
+        connectedTargetView = (id<CTDTargetRenderer>)hitElement;
     }
-    if (_anchorTargetView) {
-        if (hitTargetView == _anchorTargetView) {
-            hitTargetView = nil; // cannot connect back to same target
-        }
-        [_presenter connectFreeEndToTargetView:hitTargetView
-                              orMoveToPosition:newPosition];
-    }
+
+    [_presenter connectFreeEndToTargetView:connectedTargetView
+                          orMoveToPosition:newPosition];
 }
 
 - (void)touchDidEnd
@@ -104,24 +108,24 @@
 
 @implementation CTDConnectionPresenter
 {
-    __weak id<CTDTargetContainerView> _targetContainerView;
-    id<CTDTargetView> _anchorTargetView;
-    id<CTDTargetView> _freeEndTargetView;
+    __weak id<CTDTrialRenderer> _trialRenderer;
+    id<CTDTargetRenderer> _anchorTargetView;
+    id<CTDTargetRenderer> _freeEndTargetView;
     id<CTDTargetConnectionView> _connectionView;
 }
 
-- (instancetype)initWithTargetContainerView:(id<CTDTargetContainerView>)targetContainerView
+- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     self = [super init];
     if (self) {
-        _targetContainerView = targetContainerView;
+        _trialRenderer = trialRenderer;
         _anchorTargetView = nil;
         _connectionView = nil;
     }
     return self;
 }
 
-- (void)anchorOnTargetView:(id<CTDTargetView>)targetView
+- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView
 {
     if (_anchorTargetView != targetView) {
         if (_anchorTargetView) {
@@ -137,7 +141,7 @@
     }
 }
 
-- (void)connectFreeEndToTargetView:(id<CTDTargetView>)targetView
+- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
                   orMoveToPosition:(CTDPoint*)freeEndPosition
 {
     NSAssert(_anchorTargetView,
@@ -158,11 +162,11 @@
     }
 
     if (!_connectionView) {
-        id<CTDTargetContainerView> targetContainerView = _targetContainerView;
+        id<CTDTrialRenderer> trialRenderer = _trialRenderer;
         CTDPoint* anchorPosition = [_anchorTargetView connectionPoint];
-        _connectionView = [targetContainerView
+        _connectionView = [trialRenderer
                            newTargetConnectionViewWithFirstEndpointPosition:anchorPosition
-                           secondEndPointPosition:freeEndPosition];
+                           secondEndpointPosition:freeEndPosition];
     } else {
         [_connectionView setSecondEndpointPosition:freeEndPosition];
     }
