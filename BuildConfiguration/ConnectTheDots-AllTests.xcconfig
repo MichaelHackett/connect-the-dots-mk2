@@ -7,6 +7,10 @@
 
 #include "General-Tests.xcconfig"
 
+// XCTest first appeared in the iOS 7 SDK, so we must build against it for tests.
+SDKROOT = iphoneos7.1
+IPHONEOS_DEPLOYMENT_TARGET = 7.1
+
 // No separate Resources dir for tests and all files in the Tests subdir for the module.
 CTD_TESTS_DIR = $(SOURCE_ROOT)/Tests
 INFOPLIST_FILE = $(CTD_TESTS_DIR)/$(TARGET_NAME)-Info.plist
