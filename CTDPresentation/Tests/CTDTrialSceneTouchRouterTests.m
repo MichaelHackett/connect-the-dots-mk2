@@ -76,12 +76,17 @@ static CTDRecordingColorCellRenderer* colorCell2;
 
 
 
-@interface CTDTrialSceneTouchRouterBaseTestCase : XCTestCase
-@property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* subject;
+@interface CTDTrialSceneTouchTrackerBaseTestCase : XCTestCase
+
+// The tracker instantiated by the router (created in subclass test cases)
+@property (strong, nonatomic) id<CTDTouchTracker> subject;
+
+@property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
 @property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
+
 @end
 
-@implementation CTDTrialSceneTouchRouterBaseTestCase
+@implementation CTDTrialSceneTouchTrackerBaseTestCase
 
 - (void)setUp
 {
@@ -92,19 +97,15 @@ static CTDRecordingColorCellRenderer* colorCell2;
     colorCell2 = [[CTDRecordingColorCellRenderer alloc] init];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
-    _subject = [[CTDTrialSceneTouchRouter alloc]
-                initWithTrialRenderer:_trialRenderer
-                   targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
-              colorButtonsTouchMapper:[[CTDFakeColorButtonsTouchMapper alloc] init]];
+    _router = [[CTDTrialSceneTouchRouter alloc]
+               initWithTrialRenderer:_trialRenderer
+                  targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
+             colorButtonsTouchMapper:[[CTDFakeColorButtonsTouchMapper alloc] init]];
 }
 
 - (void)tearDown
 {
-    _subject = nil;
-    _trialRenderer = nil;
-
     target1 = nil;
-
     [super tearDown];
 }
 
@@ -115,314 +116,357 @@ static CTDRecordingColorCellRenderer* colorCell2;
     return selectedTargets;
 }
 
-@end
-
-
-
-@interface CTDTrialSceneTouchTrackerBaseTestCase
-    : CTDTrialSceneTouchRouterBaseTestCase
-
-@property (strong, nonatomic) id<CTDTouchTracker> touchTracker;
-@end
-
-@implementation CTDTrialSceneTouchTrackerBaseTestCase
-
-- (void)tearDown
-{
-    self.touchTracker = nil;
-    [super tearDown];
-}
-
-@end
-
-
-// TODO: Split this case into one for each move
-
-@interface CTDTrialSceneTouchTrackerStartingOutsideAnyElementTestCase
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-
-@implementation CTDTrialSceneTouchTrackerStartingOutsideAnyElementTestCase
-
-- (void)setUp
-{
-    [super setUp];
-    self.touchTracker = [self.subject trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
-}
-
-- (void)testThatNoTargetBecomesSelectedImmediately
-{
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoConnectionsAreStartedInitially
-{
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
-}
-
-- (void)testThatNoColorCellsAreSelectedImmediately
-{
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
-}
-
-- (void)testThatNoTargetBecomesSelectedWhenTheTouchMovesWithoutEnteringAnyElement
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_OUTSIDE_ELEMENTS];
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoConnectionIsStartedWhenTheTouchMovesWithoutEnteringAnyElement
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_OUTSIDE_ELEMENTS];
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
-}
-
-- (void)testThatNoColorCellsAreSelectedWhenTheTouchMovesWithoutEnteringAnyElement
-{
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
-}
-
-- (void)testThatTheTargetBecomesSelectedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertTrue([target1 isSelected], @"expected target to be selected");
-}
-
-- (void)testThatNoOtherTargetBecomesSelectedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
-}
-
-- (void)testThatAConnectionIsStartedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be 1");
-}
-
-- (void)testThatNoTargetBecomesSelectedWhenTheTouchEnds
-{
-    [self.touchTracker touchDidEnd];
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoTargetBecomesSelectedWhenTheTouchIsCancelled
-{
-    [self.touchTracker touchWasCancelled];
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatAColorCellBecomesSelectedWhenTheTouchMovesOntoIt
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertTrue(colorCell1.selected, @"expected color cell 1 to be selected");
-}
-
-- (void)testThatOtherColorCellsDoNotBecomeSelectedWhenTheTouchMovesOntoADifferentCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
-}
-
-- (void)testThatNoTargetBecomesSelectedWhenTheTouchMovesOntoAColorCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoConnectionIsStartedWhenTheTouchMovesOntoAColorCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
-}
-
-@end
-
-
-
-@interface CTDTrialSceneTouchTrackerStartingInsideATargetTestCase
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-
-@implementation CTDTrialSceneTouchTrackerStartingInsideATargetTestCase
-
-- (void)setUp
-{
-    [super setUp];
-    self.touchTracker = [self.subject trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
-}
-
-- (CTDRecordingTargetConnectionView*)activeConnection
-{
+- (CTDRecordingTargetConnectionView*)activeConnection {
     return [self.trialRenderer.targetConnectionViewsCreated firstObject];
 }
 
+@end
 
 
-// --- Initial conditions ---
 
-- (void)testThatTheTargetBecomesSelectedImmediately
-{
-    XCTAssertTrue([target1 isSelected], @"expected target to be selected");
+
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
 }
 
-- (void)testThatNoOtherTargetsBecomeSelectedImmediately
-{
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
+}
+
+- (void)testThatNoConnectionsAreStarted {
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
+                   @"expected connection count to be 0");
+}
+
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:ANOTHER_POINT_OUTSIDE_ELEMENTS];
+}
+
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
+}
+
+- (void)testThatNoConnectionsAreStarted {
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
+                   @"expected connection count to be 0");
+}
+
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:POINT_INSIDE_TARGET_1];
+}
+
+- (void)testThatTheTargetIsSelected {
+    XCTAssertTrue([target1 isSelected]);
+}
+
+- (void)testThatNoOtherTargetsAreSelected {
     XCTAssertEqual([[self selectedTargets] count], 1u,
                    @"expected number of selected targets to be exactly 1");
 }
 
-- (void)testThatAConnectionIsStartedImmediately
-{
+- (void)testThatAConnectionIsStarted {
     XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheTargetConnectionPoint
-{
-    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint],
-                          @"expected connection's second endpoint to equal the target's connection point");
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
 }
 
-- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition
-{
-    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                          POINT_INSIDE_TARGET_1,
-                          @"expected connection's second endpoint to equal the touch position");
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchEndsOutsideOfAnyElement
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchEndsOutsideOfAnyElement
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidEnd];
 }
 
-- (void)testThatNoColorCellsAreSelected
-{
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
 }
 
+@end
 
 
-// --- Touch moves without leaving initial target ---
 
-- (void)testThatTheInitialTargetRemainsSelectedWhenTheTouchMovesWithoutLeavingTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
-    XCTAssertTrue([target1 isSelected], @"expected target to be selected");
+
+@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledOutsideOfAnyElement
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledOutsideOfAnyElement
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchWasCancelled];
 }
 
-- (void)testThatNoOtherTargetBecomesSelectedWhenTheTouchMovesWithoutLeavingTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoAColorCell
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoAColorCell
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
+}
+
+- (void)testThatTheColorCellUnderTheTouchIsSelected {
+    XCTAssertTrue(colorCell1.selected);
+}
+
+- (void)testThatOtherColorCellsAreNotSelected {
+    XCTAssertFalse(colorCell2.selected);
+}
+
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
+}
+
+- (void)testThatNoConnectionsAreStarted {
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
+                   @"expected connection count to be 0");
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideATarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideATarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+}
+
+- (void)testThatTheTargetIsSelected {
+    XCTAssertTrue([target1 isSelected]);
+}
+
+- (void)testThatNoOtherTargetsAreSelected {
     XCTAssertEqual([[self selectedTargets] count], 1u,
                    @"expected number of selected targets to be exactly 1");
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPointWhenTheTouchMovesWithoutLeavingTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
-    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint],
-                          @"expected connection's second endpoint to equal the target's connection point");
-}
-
-- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPositionWhenTheTouchMovesWithoutLeavingTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
-    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                           ANOTHER_POINT_INSIDE_TARGET_1,
-                           @"expected connection's second endpoint to equal the touch position");
-}
-
-- (void)testThatNoNewConnectionIsStartedWhenTheTouchMovesWithoutLeavingTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
+- (void)testThatAConnectionIsStarted {
     XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
-
-
-// --- Touch moves off initial target ---
-
-- (void)testThatTheInitialTargetRemainsSelectedWhenTheTouchMovesOff
-{
-    [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
-    XCTAssertTrue([target1 isSelected], @"expected target to be selected");
+- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheTargetConnectionPoint {
+    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
+                          [target1 connectionPoint]);
 }
 
-- (void)testThatNoOtherTargetBecomesSelectedWhenTheTouchMovesOffTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
+    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
+                          POINT_INSIDE_TARGET_1);
+}
+
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialTarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialTarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
+}
+
+- (void)testThatTheInitialTargetRemainsSelected {
+    XCTAssertTrue([target1 isSelected]);
+}
+
+- (void)testThatNoOtherTargetBecomesSelected {
     XCTAssertEqual([[self selectedTargets] count], 1u,
                    @"expected number of selected targets to be exactly 1");
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPointWhenTheTouchMovesOffTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
+- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
     XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint],
-                          @"expected connection's second endpoint to equal the target's connection point");
+                          [target1 connectionPoint]);
 }
 
-- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPositionWhenTheTouchMovesOffTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
     XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                          POINT_OUTSIDE_ELEMENTS,
-                          @"expected connection's second endpoint to equal the touch position");
+                           ANOTHER_POINT_INSIDE_TARGET_1);
 }
 
-- (void)testThatNoNewConnectionIsStartedWhenTheTouchMovesOffTheInitialTarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+- (void)testThatNoNewConnectionsAreStarted {
+    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
+                   @"expected connection count to be 1");
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialTarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialTarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+}
+
+- (void)testThatTheInitialTargetRemainsSelected {
+    XCTAssertTrue([target1 isSelected]);
+}
+
+- (void)testThatNoOtherTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 1u,
+                   @"expected number of selected targets to be exactly 1");
+}
+
+- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
+    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
+                          [target1 connectionPoint]);
+}
+
+- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
+    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
+                          POINT_OUTSIDE_ELEMENTS);
+}
+
+- (void)testThatNoNewConnectionsAreStarted {
     XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be exactly 1");
 }
 
+@end
 
 
-// --- Touch ends ---
 
-- (void)testThatTheInitialTargetBecomesUnselectedIfTheTouchEndsWhileWithinTheTarget
-{
-    [self.touchTracker touchDidEnd];
-    XCTAssertFalse([target1 isSelected], @"expected target to be unselected");
+
+@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinATarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinATarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.subject touchDidEnd];
 }
 
-//- (void)testThatTheConnectionIsDiscardedIfTheTouchEndsWhileWithinTheTarget
-//{
-//    [self.touchTracker touchDidEnd];
-//    // TODO
-//}
-
-
-
-// --- Touch is cancelled ---
-
-- (void)testThatTheInitialTargetBecomesUnselectedIfTheTouchIsCancelledWhileWithinTheTarget
-{
-    [self.touchTracker touchWasCancelled];
-    XCTAssertFalse([target1 isSelected], @"expected target to be unselected");
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
 }
 
-//- (void)testThatTheConnectionIsDiscardedIfTheTouchIsCancelledWhileWithinTheTarget
-//{
-//    [self.touchTracker touchWasCancelled];
+//- (void)testThatTheConnectionIsDiscarded {
 //    // TODO
 //}
 
 @end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinATarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinATarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.subject touchWasCancelled];
+}
+
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
+}
+
+//- (void)testThatTheConnectionIsDiscarded {
+//    // TODO
+//}
+
+@end
+
+
 
 
 // TODO: CTDTrialSceneTouchTrackerTrackingFromATarget
@@ -430,136 +474,185 @@ static CTDRecordingColorCellRenderer* colorCell2;
 
 
 
-@interface CTDTrialSceneTouchTrackerStartingInsideAColorCell
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideAColorCell
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 
-@implementation CTDTrialSceneTouchTrackerStartingInsideAColorCell
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideAColorCell
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    self.touchTracker = [self.subject trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
 }
 
-- (void)testThatTheCorrespondingColorCellIsSelected
-{
-    XCTAssertTrue(colorCell1.selected, @"expected color cell 1 to be selected");
+- (void)testThatTheCorrespondingColorCellIsSelected {
+    XCTAssertTrue(colorCell1.selected);
 }
 
-- (void)testThatOtherColorCellsAreNotSelected
-{
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+- (void)testThatOtherColorCellsAreNotSelected {
+    XCTAssertFalse(colorCell2.selected);
 }
 
-- (void)testThatNoTargetIsSelected
-{
+- (void)testThatNoTargetsAreSelected {
     XCTAssertEqual([[self selectedTargets] count], 0u,
                    @"expected number of selected targets to be 0");
 }
 
-- (void)testThatNoConnectionsHaveBeenStarted
-{
+- (void)testThatNoConnectionsHaveBeenStarted {
     XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
                    @"expected connection count to be 0");
 }
 
+@end
 
 
-// --- When the touch moves within the cell ---
 
-- (void)testThatTheTargetedColorCellRemainsSelectedWhenTheTouchMovesWithoutLeavingTheCell
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertTrue(colorCell1.selected, @"expected color cell 1 to be selected");
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialColorCell
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialColorCell
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_COLOR_CELL_1];
 }
 
-- (void)testThatOtherColorCellsAreNotSelectedWhenTheTouchMovesWithoutLeavingTheCell
-{
-    [self.touchTracker touchDidMoveTo:ANOTHER_POINT_INSIDE_COLOR_CELL_1];
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+- (void)testThatTheTargetedColorCellRemainsSelected {
+    XCTAssertTrue(colorCell1.selected);
 }
 
-
-
-
-// --- When the touch leaves the cell ---
-
-- (void)testThatAllColorCellsBecomeUnselectedWhenTheTouchLeavesTheInitialCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+- (void)testThatOtherColorCellsAreNotSelected {
+    XCTAssertFalse(colorCell2.selected);
 }
 
-
-
-// --- When the touch leaves the cell and immediately enters another cell ---
-
-- (void)testThatTheNewlyTargetedColorCellBecomesSelectedWhenTheTouchMovesDirectlyToThatCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_2];
-    XCTAssertTrue(colorCell2.selected, @"expected color cell 2 to be selected");
+- (void)testThatNoTargetsAreSelected {
+    XCTAssertEqual([[self selectedTargets] count], 0u,
+                   @"expected number of selected targets to be 0");
 }
 
-- (void)testThatOtherColorCellsAreNotSelectedWhenTheTouchMovesDirectlyToAnotherCell
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_COLOR_CELL_2];
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialColorCell
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialColorCell
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
 }
+
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromOneColorCellToAnother
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromOneColorCellToAnother
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_2];
+}
+
+- (void)testThatTheNewlyTargetedColorCellIsSelected {
+    XCTAssertTrue(colorCell2.selected);
+}
+
+- (void)testThatTheFirstColorCellIsNoLongerSelected {
+    XCTAssertFalse(colorCell1.selected);
+}
+
+@end
+
 
 
 
 // --- When the touch moves to a target ---
 
-- (void)testThatAllColorCellsBecomeUnselectedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromAColorCellToATarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromAColorCellToATarget
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchDidMoveTo:POINT_INSIDE_TARGET_1];
 }
 
-- (void)testThatTheTargetBecomesSelectedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
-    XCTAssertTrue([target1 isSelected], @"expected target to be selected");
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
 }
 
-- (void)testThatNoOtherTargetBecomesSelectedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
+- (void)testThatTheTargetUnderTheNewTouchPositionIsSelected {
+    XCTAssertTrue([target1 isSelected]);
+}
+
+- (void)testThatNoOtherTargetsAreSelected {
     XCTAssertEqual([[self selectedTargets] count], 1u,
                    @"expected number of selected targets to be exactly 1");
 }
 
-- (void)testThatAConnectionIsStartedWhenTheTouchMovesOntoATarget
-{
-    [self.touchTracker touchDidMoveTo:POINT_INSIDE_TARGET_1];
+- (void)testThatAConnectionIsStarted {
     XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
                    @"expected connection count to be 1");
 }
 
+@end
 
 
 
-// --- When the touch ends while within a color cell ---
 
-- (void)testThatAllColorCellsBecomesUnselectedIfTheTouchEndsWhileWithinACell
-{
-    [self.touchTracker touchDidEnd];
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinAColorCell
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinAColorCell
+
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchDidEnd];
 }
 
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
+}
+
+@end
 
 
-// --- Touch is cancelled ---
 
-- (void)testThatTheInitialTargetBecomesUnselectedIfTheTouchIsCancelledWhileWithinTheTarget
-{
-    [self.touchTracker touchWasCancelled];
-    XCTAssertFalse(colorCell1.selected, @"expected color cell 1 to not be selected");
-    XCTAssertFalse(colorCell2.selected, @"expected color cell 2 to not be selected");
+
+@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinAColorCell
+    : CTDTrialSceneTouchTrackerBaseTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinAColorCell
+- (void)setUp {
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
+    [self.subject touchWasCancelled];
+}
+
+- (void)testThatNoColorCellsAreSelected {
+    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(colorCell2.selected);
 }
 
 @end
