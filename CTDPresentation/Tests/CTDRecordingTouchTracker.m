@@ -27,6 +27,11 @@
     return [_messagesReceived copy];
 }
 
+- (void)reset
+{
+    _lastTouchPosition = nil;
+    [_messagesReceived removeAllObjects];
+}
 
 
 #pragma mark - CTDTouchTracker protocol

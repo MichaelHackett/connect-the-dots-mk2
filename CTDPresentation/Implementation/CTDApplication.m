@@ -3,9 +3,11 @@
 #import "CTDApplication.h"
 
 #import "CTDListOrderTouchMapper.h"
+#import "CTDSelectOnTouchInteraction.h"
 #import "CTDTargetSetPresenter.h"
 #import "CTDTrialSceneTouchRouter.h"
 #import "CTDTouchResponder.h"
+#import "CTDTouchTrackerFactory.h"
 
 
 
@@ -23,13 +25,27 @@
 
     id<CTDTouchMapper> colorButtonsTouchMapper =
         [CTDListOrderTouchMapper mapperWithTouchables:[colorCellMap allValues]];
+    id<CTDTouchResponder> colorButtonsTouchResponder =
+        [[CTDTouchTrackerFactory alloc]
+         initWithTouchTrackerFactoryBlock:
+             ^id<CTDTouchTracker>(CTDPoint* initialPosition)
+             {
+                 return [[CTDSelectOnTouchInteraction alloc]
+                         initWithTouchMapper:colorButtonsTouchMapper
+                         initialTouchPosition:initialPosition];
+             }];
+
+    // I don't really like the splitting of input handling between here and the
+    // TouchRouter class. The use of things like CTDSelectOnTouchInteraction
+    // should be specified in the same place as the delegation/redirection
+    // laid out in the touch router.
 
     // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
     [touchInputSource addTouchResponder:
         [[CTDTrialSceneTouchRouter alloc]
          initWithTrialRenderer:trialRenderer
          targetsTouchMapper:[_currentPresenter targetsTouchMapper]
-         colorButtonsTouchMapper:colorButtonsTouchMapper]];
+         colorButtonsTouchResponder:colorButtonsTouchResponder]];
 }
 
 @end

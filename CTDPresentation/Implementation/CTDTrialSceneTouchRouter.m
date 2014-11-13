@@ -7,6 +7,7 @@
 #import "CTDSelectOnTouchInteraction.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
+#import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
 #import "CTDTrialRenderer.h"
 
@@ -73,20 +74,20 @@ CTD_NO_DEFAULT_INIT
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTouchMapper> _targetsTouchMapper;
-    id<CTDTouchMapper> _colorButtonsTouchMapper;
+    id<CTDTouchResponder> _colorButtonsTouchResponder;
 }
 
 #pragma mark - Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
-              colorButtonsTouchMapper:(id<CTDTouchMapper>)colorButtonsTouchMapper
+           colorButtonsTouchResponder:(id<CTDTouchResponder>)colorButtonsTouchResponder
 {
     self = [super init];
     if (self) {
         _trialRenderer = trialRenderer;
         _targetsTouchMapper = targetsTouchMapper;
-        _colorButtonsTouchMapper = colorButtonsTouchMapper;
+        _colorButtonsTouchResponder = colorButtonsTouchResponder;
     }
     return self;
 }
@@ -126,9 +127,9 @@ CTD_NO_DEFAULT_INIT
 
     CTDTouchTrackingGroup* initialTrackingGroup =
         [[CTDTouchTrackingGroup alloc] init];
-    [initialTrackingGroup addTracker:[[CTDSelectOnTouchInteraction alloc]
-                                      initWithTouchMapper:_colorButtonsTouchMapper
-                                      initialTouchPosition:initialPosition]];
+    id<CTDTouchTracker> colorButtonsTouchTracker =
+        [_colorButtonsTouchResponder trackerForTouchStartingAt:initialPosition];
+    [initialTrackingGroup addTracker:colorButtonsTouchTracker];
 
     CTDDelegatingTouchTracker* delegatingTracker =
         [[CTDDelegatingTouchTracker alloc]
@@ -150,6 +151,7 @@ CTD_NO_DEFAULT_INIT
                  targetTouchMapper:targetsTouchMapper
                   anchorTargetView:hitTargetView
             initialFreeEndPosition:initialPosition]];
+        [colorButtonsTouchTracker touchWasCancelled];
     }];
 
     [initialTrackingGroup addTracker:actionDiscriminator];

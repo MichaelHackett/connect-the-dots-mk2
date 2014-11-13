@@ -22,6 +22,9 @@
 		4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */; };
 		4C26194F1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */; };
 		4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */; };
+		4C32363B1A141955005C25D7 /* CTDFakeTouchResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */; };
+		4C32363F1A145081005C25D7 /* CTDTouchTrackerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */; };
+		4C3236411A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */; };
 		4C5A569019E1C37A00E994CB /* CTDSelectOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */; };
 		4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C5A56A919E20A2A00E994CB /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
@@ -209,6 +212,11 @@
 		4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingSelectionRenderer.h; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.h; sourceTree = SOURCE_ROOT; };
 		4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingSelectionRenderer.m; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.m; sourceTree = SOURCE_ROOT; };
 		4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingColorCellRenderer.m; path = CTDPresentation/Tests/CTDRecordingColorCellRenderer.m; sourceTree = SOURCE_ROOT; };
+		4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchResponder.h; path = CTDPresentation/Tests/CTDFakeTouchResponder.h; sourceTree = SOURCE_ROOT; };
+		4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchResponder.m; path = CTDPresentation/Tests/CTDFakeTouchResponder.m; sourceTree = SOURCE_ROOT; };
+		4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchTrackerFactory.h; sourceTree = "<group>"; };
+		4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTouchTrackerFactory.m; sourceTree = "<group>"; };
+		4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectOnTouchInteractionTests.m; path = CTDPresentation/Tests/CTDSelectOnTouchInteractionTests.m; sourceTree = SOURCE_ROOT; };
 		4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
@@ -595,9 +603,10 @@
 		4CEBCA9119BB77D300D2B498 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */,
+				4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */,
 				4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */,
 				4C25B9701A0E6AA100275138 /* CTDTouchTrackingGroupTests.m */,
-				4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */,
 				4CEBCA9219BB77D300D2B498 /* Supporting Files */,
 			);
 			name = Tests;
@@ -612,6 +621,8 @@
 				4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */,
 				4C2619421A105656005E87A9 /* CTDFakeTargetRenderer.h */,
 				4C2619431A105656005E87A9 /* CTDFakeTargetRenderer.m */,
+				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
+				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
 				4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */,
 				4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */,
 				4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */,
@@ -652,6 +663,8 @@
 				4CFDEEE219C698520041B910 /* CTDTargetSetPresenter.m */,
 				4CFDEEAC19C683450041B910 /* CTDTrialSceneTouchRouter.h */,
 				4CFDEEAD19C683450041B910 /* CTDTrialSceneTouchRouter.m */,
+				4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */,
+				4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */,
 				4C5A56A319E1C66700E994CB /* Interactions (Touch) */,
 			);
 			name = Implementation;
@@ -1046,6 +1059,7 @@
 				4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */,
 				4C5A569019E1C37A00E994CB /* CTDSelectOnTouchInteraction.m in Sources */,
 				4CFDEEEF19C720710041B910 /* CTDApplication.m in Sources */,
+				4C32363F1A145081005C25D7 /* CTDTouchTrackerFactory.m in Sources */,
 				4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */,
 				4CFDEEE319C698520041B910 /* CTDTargetSetPresenter.m in Sources */,
 			);
@@ -1058,8 +1072,10 @@
 				4C25B9901A0EC21300275138 /* CTDRecordingTouchTrackerTests.m in Sources */,
 				4C2619471A105784005E87A9 /* CTDRecordingTargetConnectionView.m in Sources */,
 				4C2619441A105656005E87A9 /* CTDFakeTargetRenderer.m in Sources */,
+				4C3236411A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m in Sources */,
 				4C25B96F1A0D696700275138 /* CTDTrialSceneTouchRouterTests.m in Sources */,
 				4C25B9791A0E90E800275138 /* CTDRecordingTouchTracker.m in Sources */,
+				4C32363B1A141955005C25D7 /* CTDFakeTouchResponder.m in Sources */,
 				4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */,
 				4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */,
 				4C25B9711A0E6AA100275138 /* CTDTouchTrackingGroupTests.m in Sources */,

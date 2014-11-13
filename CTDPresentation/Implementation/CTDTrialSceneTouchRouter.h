@@ -6,6 +6,7 @@
 #import "CTDTouchResponder.h"
 
 @protocol CTDTouchMapper;
+@protocol CTDTouchResponder;
 @protocol CTDTrialRenderer;
 
 
@@ -14,7 +15,7 @@
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
-              colorButtonsTouchMapper:(id<CTDTouchMapper>)colorButtonsTouchMapper;
+           colorButtonsTouchResponder:(id<CTDTouchResponder>)colorButtonsTouchResponder;
 CTD_NO_DEFAULT_INIT
 
 @end

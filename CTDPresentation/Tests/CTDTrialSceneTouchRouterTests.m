@@ -3,13 +3,15 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "CTDFakeTargetRenderer.h"
-#import "CTDRecordingColorCellRenderer.h"
+#import "CTDFakeTouchResponder.h"
 #import "CTDRecordingTargetConnectionView.h"
+#import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
 #import "CTDTargetConnectionView.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
+#import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 #import <XCTest/XCTest.h>
 
@@ -19,24 +21,17 @@
 #define TARGET_1_CENTER point(40,96)
 #define POINT_INSIDE_TARGET_1 point(45,99)
 #define ANOTHER_POINT_INSIDE_TARGET_1 point(47,95)
-#define POINT_INSIDE_COLOR_CELL_1 point(300,40)
-#define ANOTHER_POINT_INSIDE_COLOR_CELL_1 point(310,35)
-#define POINT_INSIDE_COLOR_CELL_2 point(430,40)
 #define POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,250)
 
 
 static CTDFakeTargetRenderer* target1;
 
-static CTDRecordingColorCellRenderer* colorCell1;
-static CTDRecordingColorCellRenderer* colorCell2;
-
 
 
 
 @interface CTDFakeTargetTouchMapper : NSObject <CTDTouchMapper>
 @end
-
 @implementation CTDFakeTargetTouchMapper
 
 - (id)elementAtTouchLocation:(CTDPoint*)touchLocation
@@ -45,28 +40,6 @@ static CTDRecordingColorCellRenderer* colorCell2;
         [touchLocation isEqual:ANOTHER_POINT_INSIDE_TARGET_1])
     {
         return target1;
-    }
-    return nil;
-}
-
-@end
-
-
-@interface CTDFakeColorButtonsTouchMapper : NSObject <CTDTouchMapper>
-@end
-
-@implementation CTDFakeColorButtonsTouchMapper
-
-- (id)elementAtTouchLocation:(CTDPoint*)touchLocation
-{
-    if ([touchLocation isEqual:POINT_INSIDE_COLOR_CELL_1] ||
-        [touchLocation isEqual:ANOTHER_POINT_INSIDE_COLOR_CELL_1])
-    {
-        return colorCell1;
-    }
-    else if ([touchLocation isEqual:POINT_INSIDE_COLOR_CELL_2])
-    {
-        return colorCell2;
     }
     return nil;
 }
@@ -83,7 +56,8 @@ static CTDRecordingColorCellRenderer* colorCell2;
 
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
 @property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
-
+@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorButtonsTouchResponder;
+@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorButtonsTouchTracker;
 @end
 
 @implementation CTDTrialSceneTouchTrackerBaseTestCase
@@ -93,14 +67,22 @@ static CTDRecordingColorCellRenderer* colorCell2;
     [super setUp];
 
     target1 = [[CTDFakeTargetRenderer alloc] initWithCenterPosition:TARGET_1_CENTER];
-    colorCell1 = [[CTDRecordingColorCellRenderer alloc] init];
-    colorCell2 = [[CTDRecordingColorCellRenderer alloc] init];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
+    CTDRecordingTouchTracker* colorButtonsTouchTracker =
+            [[CTDRecordingTouchTracker alloc] init];
+    _colorButtonsTouchTracker = colorButtonsTouchTracker;
+    _colorButtonsTouchResponder = [[CTDFakeTouchResponder alloc]
+                                   initWithTouchTrackerFactoryBlock:
+        ^(__unused CTDPoint* initialPosition)
+        {
+            return colorButtonsTouchTracker;
+        }];
+
     _router = [[CTDTrialSceneTouchRouter alloc]
                initWithTrialRenderer:_trialRenderer
-                  targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
-             colorButtonsTouchMapper:[[CTDFakeColorButtonsTouchMapper alloc] init]];
+               targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
+               colorButtonsTouchResponder:_colorButtonsTouchResponder];
 }
 
 - (void)tearDown
@@ -118,6 +100,18 @@ static CTDRecordingColorCellRenderer* colorCell2;
 
 - (CTDRecordingTargetConnectionView*)activeConnection {
     return [self.trialRenderer.targetConnectionViewsCreated firstObject];
+}
+
+- (BOOL)colorButtonTrackerWasEnded {
+    return [[self.colorButtonsTouchTracker.messagesReceived lastObject]
+            isEqual:[[CTDMethodSelector alloc]
+                     initWithRawSelector:@selector(touchDidEnd)]];
+}
+
+- (BOOL)colorButtonTrackerWasCancelled {
+    return [[self.colorButtonsTouchTracker.messagesReceived lastObject]
+            isEqual:[[CTDMethodSelector alloc]
+                     initWithRawSelector:@selector(touchWasCancelled)]];
 }
 
 @end
@@ -144,9 +138,14 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected connection count to be 0");
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
+- (void)testThatColorButtonResponderIsAskedForATracker {
+    XCTAssertNotEqual([self.colorButtonsTouchResponder.touchStartingPositions count],
+                      0u, @"expected message count to be greater than 0");
+}
+
+- (void)testThatColorButtonResponderIsPassedTheInitialTouchPosition {
+    XCTAssertEqualObjects(self.colorButtonsTouchResponder.touchStartingPositions[0],
+                          POINT_OUTSIDE_ELEMENTS);
 }
 
 @end
@@ -174,9 +173,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected connection count to be 0");
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
+- (void)testThatColorButtonTrackerReceivedNewPosition {
+    XCTAssertTrue([self.colorButtonsTouchTracker.messagesReceived containsObject:
+                          [[CTDMethodSelector alloc]
+                           initWithRawSelector:@selector(touchDidMoveTo:)]]);
 }
 
 @end
@@ -208,9 +208,8 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected connection count to be 1");
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
+- (void)testThatColorButtonTrackerWasCancelled {
+    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
 }
 
 @end
@@ -234,6 +233,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected number of selected targets to be 0");
 }
 
+- (void)testThatColorButtonTrackerIsNotifedThatTouchEnded {
+    XCTAssertTrue([self colorButtonTrackerWasEnded]);
+}
+
 @end
 
 
@@ -255,38 +258,8 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected number of selected targets to be 0");
 }
 
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoAColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoAColorCell
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
-    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
-}
-
-- (void)testThatTheColorCellUnderTheTouchIsSelected {
-    XCTAssertTrue(colorCell1.selected);
-}
-
-- (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell2.selected);
-}
-
-- (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoConnectionsAreStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
+- (void)testThatColorButtonTrackerWasCancelled {
+    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
 }
 
 @end
@@ -329,9 +302,8 @@ static CTDRecordingColorCellRenderer* colorCell2;
                           POINT_INSIDE_TARGET_1);
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
+- (void)testThatColorButtonTrackerWasCancelled {
+    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
 }
 
 @end
@@ -347,6 +319,7 @@ static CTDRecordingColorCellRenderer* colorCell2;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.colorButtonsTouchTracker reset];
     [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
 }
 
@@ -374,6 +347,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected connection count to be 1");
 }
 
+- (void)testThatColorButtonTrackerReceivedNoUpdates {
+    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+}
+
 @end
 
 
@@ -387,6 +364,7 @@ static CTDRecordingColorCellRenderer* colorCell2;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.colorButtonsTouchTracker reset];
     [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
 }
 
@@ -414,6 +392,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
                    @"expected connection count to be exactly 1");
 }
 
+- (void)testThatColorButtonTrackerReceivedNoUpdates {
+    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+}
+
 @end
 
 
@@ -427,6 +409,7 @@ static CTDRecordingColorCellRenderer* colorCell2;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.colorButtonsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
@@ -438,6 +421,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
 //- (void)testThatTheConnectionIsDiscarded {
 //    // TODO
 //}
+
+- (void)testThatColorButtonTrackerReceivedNoUpdates {
+    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+}
 
 @end
 
@@ -452,6 +439,7 @@ static CTDRecordingColorCellRenderer* colorCell2;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    [self.colorButtonsTouchTracker reset];
     [self.subject touchWasCancelled];
 }
 
@@ -464,6 +452,10 @@ static CTDRecordingColorCellRenderer* colorCell2;
 //    // TODO
 //}
 
+- (void)testThatColorButtonTrackerReceivedNoUpdates {
+    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+}
+
 @end
 
 
@@ -471,188 +463,3 @@ static CTDRecordingColorCellRenderer* colorCell2;
 
 // TODO: CTDTrialSceneTouchTrackerTrackingFromATarget
 
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideAColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-
-@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideAColorCell
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-}
-
-- (void)testThatTheCorrespondingColorCellIsSelected {
-    XCTAssertTrue(colorCell1.selected);
-}
-
-- (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell2.selected);
-}
-
-- (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-- (void)testThatNoConnectionsHaveBeenStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
-}
-
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialColorCell
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_COLOR_CELL_1];
-}
-
-- (void)testThatTheTargetedColorCellRemainsSelected {
-    XCTAssertTrue(colorCell1.selected);
-}
-
-- (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell2.selected);
-}
-
-- (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
-}
-
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialColorCell
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
-}
-
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-}
-
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromOneColorCellToAnother
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromOneColorCellToAnother
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_2];
-}
-
-- (void)testThatTheNewlyTargetedColorCellIsSelected {
-    XCTAssertTrue(colorCell2.selected);
-}
-
-- (void)testThatTheFirstColorCellIsNoLongerSelected {
-    XCTAssertFalse(colorCell1.selected);
-}
-
-@end
-
-
-
-
-// --- When the touch moves to a target ---
-
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromAColorCellToATarget
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesDirectlyFromAColorCellToATarget
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:POINT_INSIDE_TARGET_1];
-}
-
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-}
-
-- (void)testThatTheTargetUnderTheNewTouchPositionIsSelected {
-    XCTAssertTrue([target1 isSelected]);
-}
-
-- (void)testThatNoOtherTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
-}
-
-- (void)testThatAConnectionIsStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be 1");
-}
-
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinAColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinAColorCell
-
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidEnd];
-}
-
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-}
-
-@end
-
-
-
-
-@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinAColorCell
-    : CTDTrialSceneTouchTrackerBaseTestCase
-@end
-@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinAColorCell
-- (void)setUp {
-    [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchWasCancelled];
-}
-
-- (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-}
-
-@end

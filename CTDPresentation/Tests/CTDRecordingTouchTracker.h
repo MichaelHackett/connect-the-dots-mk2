@@ -14,4 +14,6 @@
 @property (copy, readonly, nonatomic) CTDPoint* lastTouchPosition;
 @property (copy, readonly, nonatomic) NSArray* messagesReceived;
 
+- (void)reset;
+
 @end
