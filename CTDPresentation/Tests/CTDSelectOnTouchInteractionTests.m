@@ -2,55 +2,17 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "CTDRecordingColorCellRenderer.h"
+#import "CTDColorCellsTestFixture.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 #import <XCTest/XCTest.h>
 
 
 
-#define point(XCOORD,YCOORD) [[CTDPoint alloc] initWithX:XCOORD y:YCOORD]
-
-#define POINT_INSIDE_COLOR_CELL_1 point(300,40)
-#define ANOTHER_POINT_INSIDE_COLOR_CELL_1 point(310,35)
-#define POINT_INSIDE_COLOR_CELL_2 point(430,40)
-#define POINT_OUTSIDE_ELEMENTS point(900,420)
-#define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,650)
-
-
-
-static CTDRecordingColorCellRenderer* colorCell1;
-static CTDRecordingColorCellRenderer* colorCell2;
-static CTDRecordingColorCellRenderer* colorCell3;
-
-
-
-@interface CTDFakeColorButtonsTouchMapper : NSObject <CTDTouchMapper>
-@end
-@implementation CTDFakeColorButtonsTouchMapper
-
-- (id)elementAtTouchLocation:(CTDPoint*)touchLocation
-{
-    if ([touchLocation isEqual:POINT_INSIDE_COLOR_CELL_1] ||
-        [touchLocation isEqual:ANOTHER_POINT_INSIDE_COLOR_CELL_1])
-    {
-        return colorCell1;
-    }
-    else if ([touchLocation isEqual:POINT_INSIDE_COLOR_CELL_2])
-    {
-        return colorCell2;
-    }
-    return nil;
-}
-
-@end
-
-
-
 
 @interface CTDSelectOnTouchInteractionBaseTestCase : XCTestCase
 @property (strong, nonatomic) CTDSelectOnTouchInteraction* subject;
-@property (strong, nonatomic) id<CTDTouchMapper> colorCellTouchMapper;
+@property (strong, nonatomic) CTDColorCellsTestFixture* fixture;
 @end
 
 @implementation CTDSelectOnTouchInteractionBaseTestCase
@@ -58,27 +20,13 @@ static CTDRecordingColorCellRenderer* colorCell3;
 - (void)setUp
 {
     [super setUp];
-
-    colorCell1 = [[CTDRecordingColorCellRenderer alloc] init];
-    colorCell2 = [[CTDRecordingColorCellRenderer alloc] init];
-    colorCell3 = [[CTDRecordingColorCellRenderer alloc] init];
-
-    self.colorCellTouchMapper = [[CTDFakeColorButtonsTouchMapper alloc] init];
-}
-
-- (void)tearDown
-{
-    colorCell1 = nil;
-    colorCell2 = nil;
-    colorCell3 = nil;
-
-    [super tearDown];
+    self.fixture = [[CTDColorCellsTestFixture alloc] init];
 }
 
 - (CTDSelectOnTouchInteraction*)subjectWithInitialPosition:(CTDPoint*)initialTouchPosition
 {
     return [[CTDSelectOnTouchInteraction alloc]
-            initWithTouchMapper:self.colorCellTouchMapper
+            initWithTouchMapper:self.fixture.colorCellTouchMapper
             initialTouchPosition:initialTouchPosition];
 }
 
@@ -93,13 +41,13 @@ static CTDRecordingColorCellRenderer* colorCell3;
 @implementation CTDSelectOnTouchInteractionWhenInitialPositionIsOutsideOfAllElements
 
 - (void)setUp {
-    self.subject = [self subjectWithInitialPosition:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -113,13 +61,13 @@ static CTDRecordingColorCellRenderer* colorCell3;
 @implementation CTDSelectOnTouchInteractionWhenTouchMovesWithoutEnteringAnyElement
 
 - (void)setUp {
-    self.subject = [self subjectWithInitialPosition:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -134,17 +82,17 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_OUTSIDE_ELEMENTS];
-    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_1];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
+    [self.subject touchDidMoveTo:self.fixture.pointsInsideCell1[0]];
 }
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected {
-    XCTAssertTrue(colorCell1.selected);
+    XCTAssertTrue(self.fixture.colorCell1.selected);
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -160,16 +108,16 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_INSIDE_COLOR_CELL_2];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[1]];
 }
 
 - (void)testThatTheCorrespondingColorCellIsSelected {
-    XCTAssertTrue(colorCell2.selected);
+    XCTAssertTrue(self.fixture.colorCell2.selected);
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -184,17 +132,17 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_COLOR_CELL_1];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[2]];
+    [self.subject touchDidMoveTo:self.fixture.pointsInsideCell2[1]];
 }
 
 - (void)testThatTheTargetedColorCellRemainsSelected {
-    XCTAssertTrue(colorCell1.selected);
+    XCTAssertTrue(self.fixture.colorCell2.selected);
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -209,14 +157,14 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[2]];
+    [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[2]];
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -231,16 +179,16 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_INSIDE_COLOR_CELL_1];
-    [self.subject touchDidMoveTo:POINT_INSIDE_COLOR_CELL_2];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
+    [self.subject touchDidMoveTo:self.fixture.pointsInsideCell2[1]];
 }
 
 - (void)testThatTheNewlyTargetedColorCellIsSelected {
-    XCTAssertTrue(colorCell2.selected);
+    XCTAssertTrue(self.fixture.colorCell2.selected);
 }
 
 - (void)testThatTheFirstColorCellIsNoLongerSelected {
-    XCTAssertFalse(colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
 }
 
 @end
@@ -255,14 +203,14 @@ static CTDRecordingColorCellRenderer* colorCell3;
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
     [self.subject touchDidEnd];
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
@@ -276,14 +224,14 @@ static CTDRecordingColorCellRenderer* colorCell3;
 @implementation CTDSelectOnTouchInteractionWhenTouchIsCancelledWhileWithinAColorCell
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[0]];
     [self.subject touchWasCancelled];
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(colorCell1.selected);
-    XCTAssertFalse(colorCell2.selected);
-    XCTAssertFalse(colorCell3.selected);
+    XCTAssertFalse(self.fixture.colorCell1.selected);
+    XCTAssertFalse(self.fixture.colorCell2.selected);
+    XCTAssertFalse(self.fixture.colorCell3.selected);
 }
 
 @end
