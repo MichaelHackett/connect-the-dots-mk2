@@ -3,6 +3,7 @@
 #import "CTDApplication.h"
 
 #import "CTDListOrderTouchMapper.h"
+#import "CTDSelectOnTapInteraction.h"
 #import "CTDSelectOnTouchInteraction.h"
 #import "CTDTargetSetPresenter.h"
 #import "CTDTrialSceneTouchRouter.h"
@@ -30,7 +31,8 @@
          initWithTouchTrackerFactoryBlock:
              ^id<CTDTouchTracker>(CTDPoint* initialPosition)
              {
-                 return [[CTDSelectOnTouchInteraction alloc]
+//                 return [[CTDSelectOnTouchInteraction alloc]
+                 return [[CTDSelectOnTapInteraction alloc]
                          initWithTouchMapper:colorButtonsTouchMapper
                          initialTouchPosition:initialPosition];
              }];

@@ -8,4 +8,5 @@
     #import <Foundation/Foundation.h>
     #import <XCTest/XCTest.h>
     #import "CTDMethodAnnotations.h"
+    #import "CTDTestDataHelpers.h"
 #endif

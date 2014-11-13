@@ -16,13 +16,19 @@
 #import <XCTest/XCTest.h>
 
 
-#define point(XCOORD,YCOORD) [[CTDPoint alloc] initWithX:XCOORD y:YCOORD]
 
+//
+// Test data
+//
+
+// Note: These coordinate values are arbitrary, but CTDPoint comparisons are
+// done by value, so the coordinates all must be unique.
 #define TARGET_1_CENTER point(40,96)
 #define POINT_INSIDE_TARGET_1 point(45,99)
 #define ANOTHER_POINT_INSIDE_TARGET_1 point(47,95)
 #define POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,250)
+
 
 
 static CTDFakeTargetRenderer* target1;

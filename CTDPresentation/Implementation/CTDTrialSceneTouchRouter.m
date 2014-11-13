@@ -151,7 +151,9 @@ CTD_NO_DEFAULT_INIT
                  targetTouchMapper:targetsTouchMapper
                   anchorTargetView:hitTargetView
             initialFreeEndPosition:initialPosition]];
-        [colorButtonsTouchTracker touchWasCancelled];
+        if ([colorButtonsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
+            [colorButtonsTouchTracker touchWasCancelled];
+        }
     }];
 
     [initialTrackingGroup addTracker:actionDiscriminator];
