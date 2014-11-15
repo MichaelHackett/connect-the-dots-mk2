@@ -24,16 +24,16 @@
     _currentPresenter = [[CTDTargetSetPresenter alloc]
                          initWithTrialRenderer:trialRenderer];
 
-    id<CTDTouchMapper> colorButtonsTouchMapper =
+    id<CTDTouchMapper> colorCellsTouchMapper =
         [CTDListOrderTouchMapper mapperWithTouchables:[colorCellMap allValues]];
-    id<CTDTouchResponder> colorButtonsTouchResponder =
+    id<CTDTouchResponder> colorCellsTouchResponder =
         [[CTDTouchTrackerFactory alloc]
          initWithTouchTrackerFactoryBlock:
              ^id<CTDTouchTracker>(CTDPoint* initialPosition)
              {
 //                 return [[CTDSelectOnTouchInteraction alloc]
                  return [[CTDSelectOnTapInteraction alloc]
-                         initWithTouchMapper:colorButtonsTouchMapper
+                         initWithTouchMapper:colorCellsTouchMapper
                          initialTouchPosition:initialPosition];
              }];
 
@@ -47,7 +47,7 @@
         [[CTDTrialSceneTouchRouter alloc]
          initWithTrialRenderer:trialRenderer
          targetsTouchMapper:[_currentPresenter targetsTouchMapper]
-         colorButtonsTouchResponder:colorButtonsTouchResponder]];
+         colorCellsTouchResponder:colorCellsTouchResponder]];
 }
 
 @end

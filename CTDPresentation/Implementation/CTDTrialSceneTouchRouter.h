@@ -15,7 +15,7 @@
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
-           colorButtonsTouchResponder:(id<CTDTouchResponder>)colorButtonsTouchResponder;
+             colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder;
 CTD_NO_DEFAULT_INIT
 
 @end

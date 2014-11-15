@@ -74,20 +74,20 @@ CTD_NO_DEFAULT_INIT
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTouchMapper> _targetsTouchMapper;
-    id<CTDTouchResponder> _colorButtonsTouchResponder;
+    id<CTDTouchResponder> _colorCellsTouchResponder;
 }
 
 #pragma mark - Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
-           colorButtonsTouchResponder:(id<CTDTouchResponder>)colorButtonsTouchResponder
+             colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder
 {
     self = [super init];
     if (self) {
         _trialRenderer = trialRenderer;
         _targetsTouchMapper = targetsTouchMapper;
-        _colorButtonsTouchResponder = colorButtonsTouchResponder;
+        _colorCellsTouchResponder = colorCellsTouchResponder;
     }
     return self;
 }
@@ -127,9 +127,9 @@ CTD_NO_DEFAULT_INIT
 
     CTDTouchTrackingGroup* initialTrackingGroup =
         [[CTDTouchTrackingGroup alloc] init];
-    id<CTDTouchTracker> colorButtonsTouchTracker =
-        [_colorButtonsTouchResponder trackerForTouchStartingAt:initialPosition];
-    [initialTrackingGroup addTracker:colorButtonsTouchTracker];
+    id<CTDTouchTracker> colorCellsTouchTracker =
+        [_colorCellsTouchResponder trackerForTouchStartingAt:initialPosition];
+    [initialTrackingGroup addTracker:colorCellsTouchTracker];
 
     CTDDelegatingTouchTracker* delegatingTracker =
         [[CTDDelegatingTouchTracker alloc]
@@ -151,8 +151,8 @@ CTD_NO_DEFAULT_INIT
                  targetTouchMapper:targetsTouchMapper
                   anchorTargetView:hitTargetView
             initialFreeEndPosition:initialPosition]];
-        if ([colorButtonsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
-            [colorButtonsTouchTracker touchWasCancelled];
+        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
+            [colorCellsTouchTracker touchWasCancelled];
         }
     }];
 

@@ -61,8 +61,8 @@ static CTDFakeTargetRenderer* target1;
 
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
 @property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
-@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorButtonsTouchResponder;
-@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorButtonsTouchTracker;
+@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
+@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorCellsTouchTracker;
 @end
 
 @implementation CTDTrialSceneTouchTrackerBaseTestCase
@@ -74,20 +74,20 @@ static CTDFakeTargetRenderer* target1;
     target1 = [[CTDFakeTargetRenderer alloc] initWithCenterPosition:TARGET_1_CENTER];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
-    CTDRecordingTouchTracker* colorButtonsTouchTracker =
+    CTDRecordingTouchTracker* colorCellsTouchTracker =
             [[CTDRecordingTouchTracker alloc] init];
-    _colorButtonsTouchTracker = colorButtonsTouchTracker;
-    _colorButtonsTouchResponder = [[CTDFakeTouchResponder alloc]
-                                   initWithTouchTrackerFactoryBlock:
+    _colorCellsTouchTracker = colorCellsTouchTracker;
+    _colorCellsTouchResponder = [[CTDFakeTouchResponder alloc]
+                                 initWithTouchTrackerFactoryBlock:
         ^(__unused CTDPoint* initialPosition)
         {
-            return colorButtonsTouchTracker;
+            return colorCellsTouchTracker;
         }];
 
     _router = [[CTDTrialSceneTouchRouter alloc]
                initWithTrialRenderer:_trialRenderer
                targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
-               colorButtonsTouchResponder:_colorButtonsTouchResponder];
+               colorCellsTouchResponder:_colorCellsTouchResponder];
 }
 
 - (void)tearDown
@@ -107,14 +107,14 @@ static CTDFakeTargetRenderer* target1;
     return [self.trialRenderer.targetConnectionViewsCreated firstObject];
 }
 
-- (BOOL)colorButtonTrackerWasEnded {
-    return [[self.colorButtonsTouchTracker.messagesReceived lastObject]
+- (BOOL)colorCellTrackerWasEnded {
+    return [[self.colorCellsTouchTracker.messagesReceived lastObject]
             isEqual:[[CTDMethodSelector alloc]
                      initWithRawSelector:@selector(touchDidEnd)]];
 }
 
-- (BOOL)colorButtonTrackerWasCancelled {
-    return [[self.colorButtonsTouchTracker.messagesReceived lastObject]
+- (BOOL)colorCellTrackerWasCancelled {
+    return [[self.colorCellsTouchTracker.messagesReceived lastObject]
             isEqual:[[CTDMethodSelector alloc]
                      initWithRawSelector:@selector(touchWasCancelled)]];
 }
@@ -142,12 +142,12 @@ static CTDFakeTargetRenderer* target1;
     assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
 }
 
-- (void)testThatColorButtonResponderIsAskedForATracker {
-    assertThat(self.colorButtonsTouchResponder.touchStartingPositions, isNot(isEmpty()));
+- (void)testThatColorCellResponderIsAskedForATracker {
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
 }
 
-- (void)testThatColorButtonResponderIsPassedTheInitialTouchPosition {
-    assertThat(self.colorButtonsTouchResponder.touchStartingPositions[0],
+- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition {
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
                is(equalTo(POINT_OUTSIDE_ELEMENTS)));
 }
 
@@ -175,8 +175,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
 }
 
-- (void)testThatColorButtonTrackerReceivedNewPosition {
-    assertThat(self.colorButtonsTouchTracker.messagesReceived,
+- (void)testThatColorCellTrackerReceivedNewPosition {
+    assertThat(self.colorCellsTouchTracker.messagesReceived,
                hasItem([[CTDMethodSelector alloc]
                         initWithRawSelector:@selector(touchDidMoveTo:)]));
 }
@@ -209,8 +209,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
-- (void)testThatColorButtonTrackerWasCancelled {
-    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
+- (void)testThatColorCellTrackerWasCancelled {
+    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -233,8 +233,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat([self selectedTargets], isEmpty());
 }
 
-- (void)testThatColorButtonTrackerIsNotifedThatTouchEnded {
-    assertThatBool([self colorButtonTrackerWasEnded], is(equalToBool(YES)));
+- (void)testThatColorCellTrackerIsNotifedThatTouchEnded {
+    assertThatBool([self colorCellTrackerWasEnded], is(equalToBool(YES)));
 }
 
 @end
@@ -257,8 +257,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat([self selectedTargets], isEmpty());
 }
 
-- (void)testThatColorButtonTrackerWasCancelled {
-    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
+- (void)testThatColorCellTrackerWasCancelled {
+    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -299,8 +299,8 @@ static CTDFakeTargetRenderer* target1;
                is(equalTo(POINT_INSIDE_TARGET_1)));
 }
 
-- (void)testThatColorButtonTrackerWasCancelled {
-    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
+- (void)testThatColorCellTrackerWasCancelled {
+    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -316,7 +316,7 @@ static CTDFakeTargetRenderer* target1;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
-    [self.colorButtonsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
 }
 
@@ -342,8 +342,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
-- (void)testThatColorButtonTrackerReceivedNoUpdates {
-    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
+- (void)testThatColorCellTrackerReceivedNoUpdates {
+    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -359,7 +359,7 @@ static CTDFakeTargetRenderer* target1;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
-    [self.colorButtonsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
 }
 
@@ -385,8 +385,8 @@ static CTDFakeTargetRenderer* target1;
     assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
-- (void)testThatColorButtonTrackerReceivedNoUpdates {
-    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
+- (void)testThatColorCellTrackerReceivedNoUpdates {
+    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -402,7 +402,7 @@ static CTDFakeTargetRenderer* target1;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
-    [self.colorButtonsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
@@ -414,8 +414,8 @@ static CTDFakeTargetRenderer* target1;
 //    // TODO
 //}
 
-- (void)testThatColorButtonTrackerReceivedNoUpdates {
-    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
+- (void)testThatColorCellTrackerReceivedNoUpdates {
+    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -431,7 +431,7 @@ static CTDFakeTargetRenderer* target1;
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
-    [self.colorButtonsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchWasCancelled];
 }
 
@@ -443,8 +443,8 @@ static CTDFakeTargetRenderer* target1;
 //    // TODO
 //}
 
-- (void)testThatColorButtonTrackerReceivedNoUpdates {
-    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
+- (void)testThatColorCellTrackerReceivedNoUpdates {
+    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
