@@ -74,6 +74,10 @@
 		4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
 		4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
 		4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
+		4CF705D21A17F36900C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
+		4CF705E11A17F4DF00C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
+		4CF705E21A17F4E900C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
+		4CF705E71A17F50300C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
 		4CFDEE9519C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */; };
 		4CFDEE9919C61B740041B910 /* CTDAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */; };
 		4CFDEEA819C631880041B910 /* CAAnimation+CTDAnimationConstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */; };
@@ -202,6 +206,62 @@
 			proxyType = 1;
 			remoteGlobalIDString = 081BEE611345979F003F846A;
 			remoteInfo = libochamcrest;
+		};
+		4CF705CA1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 08BDD5A91350C59C00E5A443;
+			remoteInfo = OCMockito;
+		};
+		4CF705CC1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 74A3BD8219F765E2006591C9;
+			remoteInfo = OCMockitoTests;
+		};
+		4CF705CE1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 085D2FF51351254000EBBE91;
+			remoteInfo = libocmockito;
+		};
+		4CF705D01A17F34F00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 74A3BDB319F76C5F006591C9;
+			remoteInfo = libocmockitoTests;
+		};
+		4CF705D31A17F37600C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 085D2FF41351254000EBBE91;
+			remoteInfo = libocmockito;
+		};
+		4CF705DF1A17F4D900C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 085D2FF41351254000EBBE91;
+			remoteInfo = libocmockito;
+		};
+		4CF705E31A17F4F400C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 085D2FF41351254000EBBE91;
+			remoteInfo = libocmockito;
+		};
+		4CF705E51A17F4FC00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 085D2FF41351254000EBBE91;
+			remoteInfo = libocmockito;
 		};
 		4CFDEEC719C688D00041B910 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -364,6 +424,7 @@
 		4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CTDCoreGraphicsUtils.c; sourceTree = "<group>"; };
 		4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCoreGraphicsUtils.h; sourceTree = "<group>"; };
 		4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = External/OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
+		4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMockito.xcodeproj; path = External/OCMockito/Source/OCMockito.xcodeproj; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9319C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitTargetSelectionIndicatorController.h; sourceTree = "<group>"; };
 		4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitTargetSelectionIndicatorController.m; sourceTree = "<group>"; };
@@ -413,6 +474,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CF705E71A17F50300C187A2 /* libocmockito.a in Frameworks */,
 				4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA2419BB564600D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA2619BB564600D2B498 /* UIKit.framework in Frameworks */,
@@ -433,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
+				4CF705E11A17F4DF00C187A2 /* libocmockito.a in Frameworks */,
 				4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
@@ -454,6 +517,7 @@
 				4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */,
 				4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */,
 				4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */,
+				4CF705E21A17F4E900C187A2 /* libocmockito.a in Frameworks */,
 				4CF7053E1A17CBDE00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
@@ -473,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFDEEC919C688D00041B910 /* libCTDUtility.a in Frameworks */,
+				4CF705D21A17F36900C187A2 /* libocmockito.a in Frameworks */,
 				4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */,
 				4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */,
 				4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */,
@@ -782,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */,
+				4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -793,6 +859,17 @@
 				4CF705391A17CB5700C187A2 /* OCHamcrestTests.octest */,
 				4CF7053B1A17CB5700C187A2 /* libochamcrest.a */,
 				4CF7053D1A17CB5700C187A2 /* libochamcrestTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4CF705BF1A17F34F00C187A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CF705CB1A17F34F00C187A2 /* OCMockito.framework */,
+				4CF705CD1A17F34F00C187A2 /* OCMockitoTests.octest */,
+				4CF705CF1A17F34F00C187A2 /* libocmockito.a */,
+				4CF705D11A17F34F00C187A2 /* libocmockitoTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -892,6 +969,7 @@
 			);
 			dependencies = (
 				4CEBCA2819BB564600D2B498 /* PBXTargetDependency */,
+				4CF705E61A17F4FC00C187A2 /* PBXTargetDependency */,
 				4CF705B51A17DEF500C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDApplicationTests;
@@ -928,6 +1006,7 @@
 			);
 			dependencies = (
 				4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */,
+				4CF705E01A17F4D900C187A2 /* PBXTargetDependency */,
 				4CF705B81A17DF0700C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDModelTests;
@@ -967,6 +1046,7 @@
 				4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */,
 				4CD4E2981A09468C006A244D /* PBXTargetDependency */,
 				4CD4E2941A094662006A244D /* PBXTargetDependency */,
+				4CF705E41A17F4F400C187A2 /* PBXTargetDependency */,
 				4CF705401A17CBEB00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDPresentationTests;
@@ -1003,6 +1083,7 @@
 			);
 			dependencies = (
 				4CFDEEC819C688D00041B910 /* PBXTargetDependency */,
+				4CF705D41A17F37600C187A2 /* PBXTargetDependency */,
 				4CF705BC1A17DF1E00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDUtilityTests;
@@ -1052,6 +1133,10 @@
 					ProductGroup = 4CF7052F1A17CB5700C187A2 /* Products */;
 					ProjectRef = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
 				},
+				{
+					ProductGroup = 4CF705BF1A17F34F00C187A2 /* Products */;
+					ProjectRef = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1094,6 +1179,34 @@
 			fileType = wrapper.cfbundle;
 			path = libochamcrestTests.octest;
 			remoteRef = 4CF7053C1A17CB5700C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF705CB1A17F34F00C187A2 /* OCMockito.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMockito.framework;
+			remoteRef = 4CF705CA1A17F34F00C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF705CD1A17F34F00C187A2 /* OCMockitoTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockitoTests.octest;
+			remoteRef = 4CF705CC1A17F34F00C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF705CF1A17F34F00C187A2 /* libocmockito.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libocmockito.a;
+			remoteRef = 4CF705CE1A17F34F00C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF705D11A17F34F00C187A2 /* libocmockitoTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = libocmockitoTests.octest;
+			remoteRef = 4CF705D01A17F34F00C187A2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1307,6 +1420,26 @@
 			isa = PBXTargetDependency;
 			name = libochamcrest;
 			targetProxy = 4CF705BB1A17DF1E00C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705D41A17F37600C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libocmockito;
+			targetProxy = 4CF705D31A17F37600C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705E01A17F4D900C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libocmockito;
+			targetProxy = 4CF705DF1A17F4D900C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705E41A17F4F400C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libocmockito;
+			targetProxy = 4CF705E31A17F4F400C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705E61A17F4FC00C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libocmockito;
+			targetProxy = 4CF705E51A17F4FC00C187A2 /* PBXContainerItemProxy */;
 		};
 		4CFDEEC819C688D00041B910 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

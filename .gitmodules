@@ -2,3 +2,7 @@
 	path = External/OCHamcrest
 	url = https://github.com/MichaelHackett/OCHamcrest.git
 	branch = version-connect-the-dots
+[submodule "OCMockito"]
+	path = External/OCMockito
+	url = git@github.com:MichaelHackett/OCMockito.git
+	branch = version-connect-the-dots
