@@ -2,8 +2,6 @@
 
 #import "CTDMethodSelector.h"
 
-#import <XCTest/XCTest.h>
-
 
 
 @interface CTDMethodSelectorTests : XCTestCase
@@ -38,15 +36,10 @@
 
 - (void)testThatDescriptionIsMethodName
 {
-    XCTAssertEqualObjects([self.aDescriptionSelector description],
-                          @"description",
-                          @"expected object description to equal selector name");
-    XCTAssertEqualObjects([self.aCopyWithZoneSelector description],
-                          @"copyWithZone:",
-                          @"expected object description to equal selector name");
-    XCTAssertEqualObjects([self.aGetObjectValueSelector description],
-                          @"getObjectValue:forString:range:error:",
-                          @"expected object description to equal selector name");
+    assertThat(self.aDescriptionSelector, hasDescription(@"description"));
+    assertThat(self.aCopyWithZoneSelector, hasDescription(@"copyWithZone:"));
+    assertThat(self.aGetObjectValueSelector,
+               hasDescription(@"getObjectValue:forString:range:error:"));
 }
 
 - (void)testThatComparisonWithEquivalentRawSelectorReturnsYes
@@ -70,28 +63,27 @@
 
 - (void)testThatItEqualsAnotherInstanceWithSameRawSelector
 {
-    XCTAssertTrue([self.aDescriptionSelector isEqual:
-                   [[CTDMethodSelector alloc] initWithRawSelector:@selector(description)]], @"");
-    XCTAssertTrue([self.aGetObjectValueSelector isEqual:
-                   [[CTDMethodSelector alloc] initWithRawSelector:
-                       @selector(getObjectValue:forString:range:error:)]],
-                  @"");
+    assertThat(self.aDescriptionSelector, equalTo(
+               [[CTDMethodSelector alloc] initWithRawSelector:@selector(description)]));
+    assertThat(self.aGetObjectValueSelector, equalTo(
+               [[CTDMethodSelector alloc] initWithRawSelector:
+                     @selector(getObjectValue:forString:range:error:)]));
 }
 
 - (void)testThatItDoesNotEqualAnotherInstanceWithADifferentRawSelector
 {
-    XCTAssertFalse([self.aDescriptionSelector isEqual:
-                    [[CTDMethodSelector alloc] initWithRawSelector:@selector(copyWithZone:)]], @"");
-    XCTAssertFalse([self.aCopyWithZoneSelector isEqual:
-                    [[CTDMethodSelector alloc] initWithRawSelector:@selector(description)]], @"");
+    assertThat(self.aDescriptionSelector, isNot(equalTo(
+               [[CTDMethodSelector alloc] initWithRawSelector:@selector(copyWithZone:)])));
+    assertThat(self.aCopyWithZoneSelector, isNot(equalTo(
+               [[CTDMethodSelector alloc] initWithRawSelector:@selector(description)])));
 }
 
 - (void)testThatItDoesNotEqualTheSelectorNameAsAString
 {
-    XCTAssertFalse([self.aDescriptionSelector isEqual:@"description"], @"");
-    XCTAssertFalse([self.aCopyWithZoneSelector isEqual:@"copyWithZone:"], @"");
-    XCTAssertFalse([self.aGetObjectValueSelector
-                    isEqual:@"getObjectValue:forString:range:error:"], @"");
+    assertThat(self.aDescriptionSelector, isNot(equalTo(@"description")));
+    assertThat(self.aCopyWithZoneSelector, isNot(equalTo(@"copyWithZone:")));
+    assertThat(self.aGetObjectValueSelector,
+               isNot(equalTo(@"getObjectValue:forString:range:error:")));
 }
 
 @end

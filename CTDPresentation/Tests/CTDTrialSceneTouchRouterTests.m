@@ -13,7 +13,6 @@
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
-#import <XCTest/XCTest.h>
 
 
 
@@ -125,7 +124,8 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement : CTDTrialSceneTouchTrackerBaseTestCase
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
+    : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
 
@@ -135,23 +135,20 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
 }
 
 - (void)testThatColorButtonResponderIsAskedForATracker {
-    XCTAssertNotEqual([self.colorButtonsTouchResponder.touchStartingPositions count],
-                      0u, @"expected message count to be greater than 0");
+    assertThat(self.colorButtonsTouchResponder.touchStartingPositions, isNot(isEmpty()));
 }
 
 - (void)testThatColorButtonResponderIsPassedTheInitialTouchPosition {
-    XCTAssertEqualObjects(self.colorButtonsTouchResponder.touchStartingPositions[0],
-                          POINT_OUTSIDE_ELEMENTS);
+    assertThat(self.colorButtonsTouchResponder.touchStartingPositions[0],
+               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
 }
 
 @end
@@ -159,7 +156,8 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement : CTDTrialSceneTouchTrackerBaseTestCase
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
+    : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
 
@@ -170,19 +168,17 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 0u,
-                   @"expected connection count to be 0");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
 }
 
 - (void)testThatColorButtonTrackerReceivedNewPosition {
-    XCTAssertTrue([self.colorButtonsTouchTracker.messagesReceived containsObject:
-                          [[CTDMethodSelector alloc]
-                           initWithRawSelector:@selector(touchDidMoveTo:)]]);
+    assertThat(self.colorButtonsTouchTracker.messagesReceived,
+               hasItem([[CTDMethodSelector alloc]
+                        initWithRawSelector:@selector(touchDidMoveTo:)]));
 }
 
 @end
@@ -190,7 +186,8 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget : CTDTrialSceneTouchTrackerBaseTestCase
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget
+    : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget
 
@@ -201,21 +198,19 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatTheTargetIsSelected {
-    XCTAssertTrue([target1 isSelected]);
+    assertThatBool([target1 isSelected], is(equalToBool(YES)));
 }
 
 - (void)testThatNoOtherTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
+    assertThat([self selectedTargets], hasCountOf(1));
 }
 
 - (void)testThatAConnectionIsStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be 1");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorButtonTrackerWasCancelled {
-    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
+    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -235,12 +230,11 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 - (void)testThatColorButtonTrackerIsNotifedThatTouchEnded {
-    XCTAssertTrue([self colorButtonTrackerWasEnded]);
+    assertThatBool([self colorButtonTrackerWasEnded], is(equalToBool(YES)));
 }
 
 @end
@@ -260,12 +254,11 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 - (void)testThatColorButtonTrackerWasCancelled {
-    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
+    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -285,31 +278,29 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatTheTargetIsSelected {
-    XCTAssertTrue([target1 isSelected]);
+    assertThatBool([target1 isSelected], is(equalToBool(YES)));
 }
 
 - (void)testThatNoOtherTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
+    assertThat([self selectedTargets], hasCountOf(1));
 }
 
 - (void)testThatAConnectionIsStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be 1");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheTargetConnectionPoint {
-    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint]);
+    assertThat([self activeConnection].firstEndpointPosition,
+               is(equalTo([target1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                          POINT_INSIDE_TARGET_1);
+    assertThat([self activeConnection].secondEndpointPosition,
+               is(equalTo(POINT_INSIDE_TARGET_1)));
 }
 
 - (void)testThatColorButtonTrackerWasCancelled {
-    XCTAssertTrue([self colorButtonTrackerWasCancelled]);
+    assertThatBool([self colorButtonTrackerWasCancelled], is(equalToBool(YES)));
 }
 
 @end
@@ -330,31 +321,29 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatTheInitialTargetRemainsSelected {
-    XCTAssertTrue([target1 isSelected]);
+    assertThatBool([target1 isSelected], is(equalToBool(YES)));
 }
 
 - (void)testThatNoOtherTargetBecomesSelected {
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
+    assertThat([self selectedTargets], hasCountOf(1));
 }
 
 - (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
-    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint]);
+    assertThat([self activeConnection].firstEndpointPosition,
+               is(equalTo([target1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                           ANOTHER_POINT_INSIDE_TARGET_1);
+    assertThat([self activeConnection].secondEndpointPosition,
+               is(equalTo(ANOTHER_POINT_INSIDE_TARGET_1)));
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be 1");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorButtonTrackerReceivedNoUpdates {
-    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -375,31 +364,29 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatTheInitialTargetRemainsSelected {
-    XCTAssertTrue([target1 isSelected]);
+    assertThatBool([target1 isSelected], is(equalToBool(YES)));
 }
 
 - (void)testThatNoOtherTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 1u,
-                   @"expected number of selected targets to be exactly 1");
+    assertThat([self selectedTargets], hasCountOf(1));
 }
 
 - (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
-    XCTAssertEqualObjects([self activeConnection].firstEndpointPosition,
-                          [target1 connectionPoint]);
+    assertThat([self activeConnection].firstEndpointPosition,
+               is(equalTo([target1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-    XCTAssertEqualObjects([self activeConnection].secondEndpointPosition,
-                          POINT_OUTSIDE_ELEMENTS);
+    assertThat([self activeConnection].secondEndpointPosition,
+               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    XCTAssertEqual([self.trialRenderer.targetConnectionViewsCreated count], 1u,
-                   @"expected connection count to be exactly 1");
+    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorButtonTrackerReceivedNoUpdates {
-    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -420,8 +407,7 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -429,7 +415,7 @@ static CTDFakeTargetRenderer* target1;
 //}
 
 - (void)testThatColorButtonTrackerReceivedNoUpdates {
-    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end
@@ -450,8 +436,7 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoTargetsAreSelected {
-    XCTAssertEqual([[self selectedTargets] count], 0u,
-                   @"expected number of selected targets to be 0");
+    assertThat([self selectedTargets], isEmpty());
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -459,7 +444,7 @@ static CTDFakeTargetRenderer* target1;
 //}
 
 - (void)testThatColorButtonTrackerReceivedNoUpdates {
-    XCTAssertEqual([self.colorButtonsTouchTracker.messagesReceived count], 0u);
+    assertThat(self.colorButtonsTouchTracker.messagesReceived, isEmpty());
 }
 
 @end

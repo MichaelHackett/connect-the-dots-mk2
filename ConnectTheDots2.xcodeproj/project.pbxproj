@@ -70,6 +70,10 @@
 		4CEBCAC619BCFD3A00D2B498 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */; };
 		4CEBCACF19BD26D600D2B498 /* CTDUIKitToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */; };
 		4CEBCAD219BD2F8000D2B498 /* CTDCoreGraphicsUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */; };
+		4CF7053E1A17CBDE00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
+		4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
+		4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
+		4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
 		4CFDEE9519C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */; };
 		4CFDEE9919C61B740041B910 /* CTDAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */; };
 		4CFDEEA819C631880041B910 /* CAAnimation+CTDAnimationConstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */; };
@@ -142,6 +146,62 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
 			remoteInfo = CTDPresentation;
+		};
+		4CF705361A17CB5700C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 087601E213440806001B439B;
+			remoteInfo = OCHamcrest;
+		};
+		4CF705381A17CB5700C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 087601F713440807001B439B;
+			remoteInfo = OCHamcrestTests;
+		};
+		4CF7053A1A17CB5700C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 081BEE621345979F003F846A;
+			remoteInfo = libochamcrest;
+		};
+		4CF7053C1A17CB5700C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 081BEE6C1345979F003F846A;
+			remoteInfo = libochamcrestTests;
+		};
+		4CF7053F1A17CBEB00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 081BEE611345979F003F846A;
+			remoteInfo = libochamcrest;
+		};
+		4CF705B41A17DEF500C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 081BEE611345979F003F846A;
+			remoteInfo = libochamcrest;
+		};
+		4CF705B71A17DF0700C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 081BEE611345979F003F846A;
+			remoteInfo = libochamcrest;
+		};
+		4CF705BB1A17DF1E00C187A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 081BEE611345979F003F846A;
+			remoteInfo = libochamcrest;
 		};
 		4CFDEEC719C688D00041B910 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -303,6 +363,7 @@
 		4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitToolbar.m; sourceTree = "<group>"; };
 		4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CTDCoreGraphicsUtils.c; sourceTree = "<group>"; };
 		4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCoreGraphicsUtils.h; sourceTree = "<group>"; };
+		4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = External/OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9319C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitTargetSelectionIndicatorController.h; sourceTree = "<group>"; };
 		4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitTargetSelectionIndicatorController.m; sourceTree = "<group>"; };
@@ -352,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA2419BB564600D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA2619BB564600D2B498 /* UIKit.framework in Frameworks */,
 				4CEBCA2519BB564600D2B498 /* Foundation.framework in Frameworks */,
@@ -371,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
+				4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -391,6 +454,7 @@
 				4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */,
 				4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */,
 				4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */,
+				4CF7053E1A17CBDE00C187A2 /* libochamcrest.a in Frameworks */,
 				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -409,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFDEEC919C688D00041B910 /* libCTDUtility.a in Frameworks */,
+				4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */,
 				4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */,
 				4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */,
 			);
@@ -446,6 +511,7 @@
 				4CFDEEB819C688D00041B910 /* CTDUtility */,
 				4CFDEE8E19C609440041B910 /* Common */,
 				4CEBCA4819BB5FD900D2B498 /* BuildConfiguration */,
+				4CF7052D1A17C9F900C187A2 /* Libraries */,
 				4CEBCA0919BB564600D2B498 /* Frameworks */,
 				4CEBCA0819BB564600D2B498 /* Products */,
 			);
@@ -712,6 +778,25 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		4CF7052D1A17C9F900C187A2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		4CF7052F1A17CB5700C187A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CF705371A17CB5700C187A2 /* OCHamcrest.framework */,
+				4CF705391A17CB5700C187A2 /* OCHamcrestTests.octest */,
+				4CF7053B1A17CB5700C187A2 /* libochamcrest.a */,
+				4CF7053D1A17CB5700C187A2 /* libochamcrestTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4CFDEE8E19C609440041B910 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +892,7 @@
 			);
 			dependencies = (
 				4CEBCA2819BB564600D2B498 /* PBXTargetDependency */,
+				4CF705B51A17DEF500C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDApplicationTests;
 			productName = ConnectTheDots2Tests;
@@ -842,6 +928,7 @@
 			);
 			dependencies = (
 				4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */,
+				4CF705B81A17DF0700C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDModelTests;
 			productName = CTDModelTests;
@@ -880,6 +967,7 @@
 				4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */,
 				4CD4E2981A09468C006A244D /* PBXTargetDependency */,
 				4CD4E2941A094662006A244D /* PBXTargetDependency */,
+				4CF705401A17CBEB00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDPresentationTests;
 			productName = CTDPresentationTests;
@@ -915,6 +1003,7 @@
 			);
 			dependencies = (
 				4CFDEEC819C688D00041B910 /* PBXTargetDependency */,
+				4CF705BC1A17DF1E00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDUtilityTests;
 			productName = CTDUtilityTests;
@@ -958,6 +1047,12 @@
 			mainGroup = 4CEBC9FE19BB564600D2B498;
 			productRefGroup = 4CEBCA0819BB564600D2B498 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4CF7052F1A17CB5700C187A2 /* Products */;
+					ProjectRef = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4CEBCA0619BB564600D2B498 /* CTDApplication */,
@@ -971,6 +1066,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4CF705371A17CB5700C187A2 /* OCHamcrest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCHamcrest.framework;
+			remoteRef = 4CF705361A17CB5700C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF705391A17CB5700C187A2 /* OCHamcrestTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCHamcrestTests.octest;
+			remoteRef = 4CF705381A17CB5700C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF7053B1A17CB5700C187A2 /* libochamcrest.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libochamcrest.a;
+			remoteRef = 4CF7053A1A17CB5700C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF7053D1A17CB5700C187A2 /* libochamcrestTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = libochamcrestTests.octest;
+			remoteRef = 4CF7053C1A17CB5700C187A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4CEBCA0519BB564600D2B498 /* Resources */ = {
@@ -1161,6 +1287,26 @@
 			isa = PBXTargetDependency;
 			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
 			targetProxy = 4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */;
+		};
+		4CF705401A17CBEB00C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libochamcrest;
+			targetProxy = 4CF7053F1A17CBEB00C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705B51A17DEF500C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libochamcrest;
+			targetProxy = 4CF705B41A17DEF500C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705B81A17DF0700C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libochamcrest;
+			targetProxy = 4CF705B71A17DF0700C187A2 /* PBXContainerItemProxy */;
+		};
+		4CF705BC1A17DF1E00C187A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libochamcrest;
+			targetProxy = 4CF705BB1A17DF1E00C187A2 /* PBXContainerItemProxy */;
 		};
 		4CFDEEC819C688D00041B910 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

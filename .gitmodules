@@ -1,0 +1,4 @@
+[submodule "OCHamcrest"]
+	path = External/OCHamcrest
+	url = https://github.com/MichaelHackett/OCHamcrest.git
+	branch = version-connect-the-dots

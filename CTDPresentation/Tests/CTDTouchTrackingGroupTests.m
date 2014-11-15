@@ -5,7 +5,6 @@
 #import "CTDRecordingTouchTracker.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
-#import <XCTest/XCTest.h>
 
 
 
@@ -88,7 +87,7 @@
     return [lastMessageList copy];
 }
 
-- (NSArray*)countCopies:(NSUInteger)count ofSelector:(SEL)selector
+- (NSArray*)arrayWithCount:(NSUInteger)count copiesOfSelector:(SEL)selector
 {
     CTDMethodSelector* original = [[CTDMethodSelector alloc]
                                    initWithRawSelector:selector];
@@ -103,28 +102,25 @@
 {
     CTDPoint* touchPosition = [[CTDPoint alloc] initWithX:300 y:175];
     [self.subject touchDidMoveTo:touchPosition];
-    XCTAssertEqualObjects([self trackerMostRecentMessages],
-                          [self countCopies:[self.trackers count]
-                                ofSelector:@selector(touchDidMoveTo:)],
-                          @"");
+    assertThat([self trackerMostRecentMessages],
+               is(equalTo([self arrayWithCount:[self.trackers count]
+                                copiesOfSelector:@selector(touchDidMoveTo:)])));
 }
 
 - (void)testForwardsTouchEndedMessagesToGroupMembers
 {
     [self.subject touchDidEnd];
-    XCTAssertEqualObjects([self trackerMostRecentMessages],
-                          [self countCopies:[self.trackers count]
-                                 ofSelector:@selector(touchDidEnd)],
-                          @"");
+    assertThat([self trackerMostRecentMessages],
+               is(equalTo([self arrayWithCount:[self.trackers count]
+                                copiesOfSelector:@selector(touchDidEnd)])));
 }
 
 - (void)testForwardsTouchCancelledMessagesToGroupMembers
 {
     [self.subject touchWasCancelled];
-    XCTAssertEqualObjects([self trackerMostRecentMessages],
-                          [self countCopies:[self.trackers count]
-                                 ofSelector:@selector(touchWasCancelled)],
-                          @"");
+    assertThat([self trackerMostRecentMessages],
+               is(equalTo([self arrayWithCount:[self.trackers count]
+                                copiesOfSelector:@selector(touchWasCancelled)])));
 }
 
 @end
