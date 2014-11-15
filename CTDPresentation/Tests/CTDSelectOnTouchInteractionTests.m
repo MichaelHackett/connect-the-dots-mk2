@@ -5,7 +5,6 @@
 #import "CTDColorCellsTestFixture.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
-#import <XCTest/XCTest.h>
 
 
 
@@ -45,9 +44,9 @@
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -65,9 +64,9 @@
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -87,12 +86,12 @@
 }
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected {
-    XCTAssertTrue(self.fixture.colorCell1.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(YES));
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -112,12 +111,12 @@
 }
 
 - (void)testThatTheCorrespondingColorCellIsSelected {
-    XCTAssertTrue(self.fixture.colorCell2.selected);
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -137,12 +136,12 @@
 }
 
 - (void)testThatTheTargetedColorCellRemainsSelected {
-    XCTAssertTrue(self.fixture.colorCell2.selected);
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
 }
 
 - (void)testThatOtherColorCellsAreNotSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -162,9 +161,9 @@
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -184,11 +183,11 @@
 }
 
 - (void)testThatTheNewlyTargetedColorCellIsSelected {
-    XCTAssertTrue(self.fixture.colorCell2.selected);
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
 }
 
 - (void)testThatTheFirstColorCellIsNoLongerSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
 }
 
 @end
@@ -208,9 +207,9 @@
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end
@@ -229,9 +228,9 @@
 }
 
 - (void)testThatNoColorCellsAreSelected {
-    XCTAssertFalse(self.fixture.colorCell1.selected);
-    XCTAssertFalse(self.fixture.colorCell2.selected);
-    XCTAssertFalse(self.fixture.colorCell3.selected);
+    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
+    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
 }
 
 @end

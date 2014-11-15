@@ -5,7 +5,6 @@
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDUtility/NSArray+CTDBlockBasedFiltering.h"
-#import <XCTest/XCTest.h>
 
 
 
@@ -48,18 +47,17 @@
 
 - (void)testThatInitialTouchPositionIsNil
 {
-    XCTAssertNil(self.subject.lastTouchPosition, @"");
+    assertThat(self.subject.lastTouchPosition, is(nilValue()));
 }
 
 - (void)testThatMessagesReceivedListIsNotNil
 {
-    XCTAssertNotNil(self.subject.messagesReceived, @"");
+    assertThat(self.subject.messagesReceived, isNot(nilValue()));
 }
 
 - (void)testThatMessagesReceivedListIsEmpty
 {
-    XCTAssertEqual([self.subject.messagesReceived count], 0u,
-                   @"count of elements should be 0");
+    assertThat(self.subject.messagesReceived, isEmpty());
 }
 
 @end
@@ -88,20 +86,19 @@
 
 - (void)testThatTouchPositionEqualsOneInPositionChangeMessage
 {
-    XCTAssertEqualObjects(self.subject.lastTouchPosition, self.touchPosition, @"");
+    assertThat(self.subject.lastTouchPosition, is(equalTo(self.touchPosition)));
 }
 
 - (void)testThatMessagesReceivedListContainsSingleElement
 {
-    XCTAssertEqual([self.subject.messagesReceived count], 1u, @"");
+    assertThat(self.subject.messagesReceived, hasCountOf(1));
 }
 
 - (void)testThatMessagesReceivedListContainsExpectedSelector
 {
-    XCTAssertTrue([self.subject.messagesReceived
-                   containsObject:[[CTDMethodSelector alloc]
-                                   initWithRawSelector:@selector(touchDidMoveTo:)]],
-                  @"");
+    assertThat(self.subject.messagesReceived,
+               hasItem([[CTDMethodSelector alloc]
+                        initWithRawSelector:@selector(touchDidMoveTo:)]));
 }
 
 @end
@@ -138,12 +135,12 @@
 
 - (void)testThatTouchPositionIsLastPositionReceived
 {
-    XCTAssertEqualObjects(self.subject.lastTouchPosition, self.finalTouchPosition, @"");
+    assertThat(self.subject.lastTouchPosition, is(equalTo(self.finalTouchPosition)));
 }
 
 - (void)testThatMessagesReceivedContainsAnEntryForEachPositionReceived
 {
-    XCTAssertEqual([self.subject.messagesReceived count], 5u, @"");
+    assertThat(self.subject.messagesReceived, hasCountOf(5));
 }
 
 - (void)testThatMessagesReceivedAreAllTouchMovedMessages
@@ -154,7 +151,7 @@
         {
             return ((CTDMethodSelector*)obj).rawSelector != @selector(touchDidMoveTo:);
         }];
-    XCTAssertEqualObjects(nonTouchMovedMessages, @[], @"expected empty array");
+    assertThat(nonTouchMovedMessages, isEmpty());
 }
 
 @end
@@ -182,23 +179,20 @@
 
 - (void)testDidRecordAllTouchMovedMessages
 {
-    XCTAssertEqual([self countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)],
-                   3u,
-                   @"sent 3 touchDidMoveTo: messages");
+    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)],
+                          is(equalToUnsignedInt(3)));
 }
 
 - (void)testDidRecordAllTouchEndedMessages
 {
-    XCTAssertEqual([self countOfMessagesReceivedWithSelector:@selector(touchDidEnd)],
-                   3u,
-                   @"sent 3 touchDidEnd messages");
+    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchDidEnd)],
+                          is(equalToUnsignedInt(3)));
 }
 
 - (void)testDidRecordAllTouchCancelledMessages
 {
-    XCTAssertEqual([self countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)],
-                   1u,
-                   @"sent 1 touchWasCancelled messages");
+    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)],
+                          is(equalToUnsignedInt(1)));
 }
 
 @end
