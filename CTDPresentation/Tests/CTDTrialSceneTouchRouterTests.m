@@ -14,6 +14,7 @@
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
+#define message CTDMakeMethodSelector
 #define point CTDMakePoint
 
 
@@ -109,18 +110,6 @@ static CTDFakeTargetRenderer* target1;
     return [self.trialRenderer.targetConnectionViewsCreated firstObject];
 }
 
-- (BOOL)colorCellTrackerWasEnded {
-    return [[self.colorCellsTouchTracker.messagesReceived lastObject]
-            isEqual:[[CTDMethodSelector alloc]
-                     initWithRawSelector:@selector(touchDidEnd)]];
-}
-
-- (BOOL)colorCellTrackerWasCancelled {
-    return [[self.colorCellsTouchTracker.messagesReceived lastObject]
-            isEqual:[[CTDMethodSelector alloc]
-                     initWithRawSelector:@selector(touchWasCancelled)]];
-}
-
 @end
 
 
@@ -178,9 +167,8 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerReceivedNewPosition {
-    assertThat(self.colorCellsTouchTracker.messagesReceived,
-               hasItem([[CTDMethodSelector alloc]
-                        initWithRawSelector:@selector(touchDidMoveTo:)]));
+    assertThatBool([self.colorCellsTouchTracker hasReceivedMessage:@selector(touchDidMoveTo:)],
+                   is(equalToBool(YES)));
 }
 
 @end
@@ -212,7 +200,8 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
+    assertThat([self.colorCellsTouchTracker lastMessage],
+               is(equalTo(message(touchWasCancelled))));
 }
 
 @end
@@ -236,8 +225,11 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerIsNotifedThatTouchEnded {
-    assertThatBool([self colorCellTrackerWasEnded], is(equalToBool(YES)));
+    assertThat([self.colorCellsTouchTracker lastMessage],
+               is(equalTo(message(touchDidEnd))));
 }
+
+// TODO: separate tests for receiving `touchDidEnd` and that nothing came after?
 
 @end
 
@@ -260,7 +252,8 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
+    assertThat([self.colorCellsTouchTracker lastMessage],
+               is(equalTo(message(touchWasCancelled))));
 }
 
 @end
@@ -302,7 +295,8 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThatBool([self colorCellTrackerWasCancelled], is(equalToBool(YES)));
+    assertThat([self.colorCellsTouchTracker lastMessage],
+               is(equalTo(message(touchWasCancelled))));
 }
 
 @end
@@ -345,7 +339,7 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
+    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
 }
 
 @end
@@ -388,7 +382,7 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
+    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
 }
 
 @end
@@ -417,7 +411,7 @@ static CTDFakeTargetRenderer* target1;
 //}
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
+    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
 }
 
 @end
@@ -446,7 +440,7 @@ static CTDFakeTargetRenderer* target1;
 //}
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat(self.colorCellsTouchTracker.messagesReceived, isEmpty());
+    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
 }
 
 @end

@@ -20,13 +20,8 @@
     self.subject = [[CTDTouchTrackingGroup alloc] init];
 }
 
-- (void)tearDown
-{
-    self.subject = nil;
-    [super tearDown];
-}
-
 @end
+
 
 
 
@@ -35,7 +30,7 @@
 
 @implementation CTDEmptyTouchTrackingGroupTestCase
 
-- (void)testThatAnEmptyGroupHandlesAllTrackingMessagesWithoutError
+- (void)testThatItHandlesAllTrackingMessagesWithoutError
 {
     XCTAssertNoThrow([self.subject touchDidMoveTo:[CTDPoint origin]],
                      @"expected no exception");
@@ -44,6 +39,7 @@
 }
 
 @end
+
 
 
 
@@ -67,18 +63,12 @@
     }
 }
 
-- (void)tearDown
-{
-    self.trackers = nil;
-    [super tearDown];
-}
-
 - (NSArray*)trackerMostRecentMessages
 {
     NSMutableArray* lastMessageList =
         [NSMutableArray arrayWithCapacity:[self.trackers count]];
     for (CTDRecordingTouchTracker* tracker in self.trackers) {
-        id lastMessage = [tracker.messagesReceived lastObject];
+        id lastMessage = [tracker lastMessage];
         if (!lastMessage) {
             lastMessage = [NSNull null];
         }

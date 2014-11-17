@@ -2,6 +2,7 @@
 
 #import "CTDRecordingTouchTracker.h"
 
+#import "CTDMessageRecorder.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -9,7 +10,7 @@
 
 @implementation CTDRecordingTouchTracker
 {
-    NSMutableArray* _messagesReceived; // CTDMethodSelectors
+    CTDMessageRecorder* _messageRecorder;
 }
 
 - (instancetype)init
@@ -17,43 +18,54 @@
     self = [super init];
     if (self) {
         _lastTouchPosition = nil;
-        _messagesReceived = [[NSMutableArray alloc] init];
+        _messageRecorder = [[CTDMessageRecorder alloc] init];
     }
     return self;
-}
-
-- (NSArray*)messagesReceived
-{
-    return [_messagesReceived copy];
 }
 
 - (void)reset
 {
     _lastTouchPosition = nil;
-    [_messagesReceived removeAllObjects];
+    [_messageRecorder reset];
+}
+
+- (CTDMethodSelector*)lastMessage
+{
+    return [_messageRecorder lastMessage];
+}
+
+- (BOOL)hasReceivedMessage:(SEL)selector
+{
+    return [_messageRecorder hasReceivedMessageWithSelector:selector];
+
+}
+
+- (NSUInteger)countOfTrackerMessagesReceived
+{
+    return [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)]
+         + [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchDidEnd)]
+         + [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)];
 }
 
 
-#pragma mark - CTDTouchTracker protocol
+
+#pragma mark CTDTouchTracker protocol
 
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     _lastTouchPosition = [newPosition copy];
-    [_messagesReceived addObject:[[CTDMethodSelector alloc]
-                                  initWithRawSelector:@selector(touchDidMoveTo:)]];
+    [_messageRecorder addMessageWithSelector:@selector(touchDidMoveTo:)];
 }
 
 - (void)touchDidEnd
 {
-    [_messagesReceived addObject:[[CTDMethodSelector alloc]
-                                  initWithRawSelector:@selector(touchDidEnd)]];
+    [_messageRecorder addMessageWithSelector:@selector(touchDidEnd)];
 }
 
 - (void)touchWasCancelled
 {
-    [_messagesReceived addObject:[[CTDMethodSelector alloc]
-                                  initWithRawSelector:@selector(touchWasCancelled)]];
+    [_messageRecorder addMessageWithSelector:@selector(touchWasCancelled)];
 }
 
 @end

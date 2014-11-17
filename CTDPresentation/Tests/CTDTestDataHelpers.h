@@ -9,6 +9,12 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDUtility/CTDMethodSelector.h"
+
+
 
 // CTDPoint constants
 #define CTDMakePoint(XCOORD,YCOORD) [[CTDPoint alloc] initWithX:XCOORD y:YCOORD]
+
+// CTDMethodSelector values
+#define CTDMakeMethodSelector(SELECTOR) [[CTDMethodSelector alloc] initWithRawSelector:@selector(SELECTOR)]
