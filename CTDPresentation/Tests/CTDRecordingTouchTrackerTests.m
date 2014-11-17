@@ -168,12 +168,12 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:400 y:169]];
+    [self.subject touchDidMoveTo:CTDMakePoint(400,169)];
     [self.subject touchDidEnd];
     [self.subject touchDidEnd];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:880 y:215]];
+    [self.subject touchDidMoveTo:CTDMakePoint(880,215)];
     [self.subject touchWasCancelled];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:0 y:999]];
+    [self.subject touchDidMoveTo:CTDMakePoint(0,999)];
     [self.subject touchDidEnd];
 }
 

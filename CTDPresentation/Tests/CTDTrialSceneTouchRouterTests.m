@@ -14,6 +14,8 @@
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
+#define point CTDMakePoint
+
 
 
 //
