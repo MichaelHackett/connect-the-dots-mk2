@@ -118,6 +118,34 @@
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "081BEE611345979F003F846A"
+               BuildableName = "libochamcrest.a"
+               BlueprintName = "libochamcrest"
+               ReferencedContainer = "container:External/OCHamcrest/Source/OCHamcrest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "085D2FF41351254000EBBE91"
+               BuildableName = "libocmockito.a"
+               BlueprintName = "libocmockito"
+               ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

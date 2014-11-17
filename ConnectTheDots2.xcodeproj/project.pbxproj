@@ -37,6 +37,10 @@
 		4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CD5BF751A19771D003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF731A19771D003A6321 /* libocmockito.a */; };
+		4CD5BF791A197822003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF781A197822003A6321 /* libocmockito.a */; };
+		4CD5BF7D1A19784C003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7C1A19784C003A6321 /* libocmockito.a */; };
+		4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7E1A197B65003A6321 /* libocmockito.a */; };
 		4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */; };
 		4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
@@ -70,14 +74,6 @@
 		4CEBCAC619BCFD3A00D2B498 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */; };
 		4CEBCACF19BD26D600D2B498 /* CTDUIKitToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */; };
 		4CEBCAD219BD2F8000D2B498 /* CTDCoreGraphicsUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */; };
-		4CF7053E1A17CBDE00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
-		4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
-		4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
-		4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7053B1A17CB5700C187A2 /* libochamcrest.a */; };
-		4CF705D21A17F36900C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
-		4CF705E11A17F4DF00C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
-		4CF705E21A17F4E900C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
-		4CF705E71A17F50300C187A2 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF705CF1A17F34F00C187A2 /* libocmockito.a */; };
 		4CFDEE9519C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */; };
 		4CFDEE9919C61B740041B910 /* CTDAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */; };
 		4CFDEEA819C631880041B910 /* CAAnimation+CTDAnimationConstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */; };
@@ -102,40 +98,12 @@
 			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
 			remoteInfo = CTDUtility;
 		};
-		4CD4E2931A094662006A244D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
-			remoteInfo = CTDUtility;
-		};
-		4CD4E2971A09468C006A244D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CEBCA5619BB77C400D2B498;
-			remoteInfo = CTDModel;
-		};
-		4CEBCA2719BB564600D2B498 /* PBXContainerItemProxy */ = {
+		4CD5BF7A1A197843003A6321 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4CEBCA0619BB564600D2B498;
-			remoteInfo = ConnectTheDots2;
-		};
-		4CEBCA6819BB77C400D2B498 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CEBCA5619BB77C400D2B498;
-			remoteInfo = CTDModel;
-		};
-		4CEBCA8E19BB77D300D2B498 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
-			remoteInfo = CTDPresentation;
+			remoteInfo = CTDApplication;
 		};
 		4CEBCAAB19BB928400D2B498 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -150,125 +118,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
 			remoteInfo = CTDPresentation;
-		};
-		4CF705361A17CB5700C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 087601E213440806001B439B;
-			remoteInfo = OCHamcrest;
-		};
-		4CF705381A17CB5700C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 087601F713440807001B439B;
-			remoteInfo = OCHamcrestTests;
-		};
-		4CF7053A1A17CB5700C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 081BEE621345979F003F846A;
-			remoteInfo = libochamcrest;
-		};
-		4CF7053C1A17CB5700C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 081BEE6C1345979F003F846A;
-			remoteInfo = libochamcrestTests;
-		};
-		4CF7053F1A17CBEB00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 081BEE611345979F003F846A;
-			remoteInfo = libochamcrest;
-		};
-		4CF705B41A17DEF500C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 081BEE611345979F003F846A;
-			remoteInfo = libochamcrest;
-		};
-		4CF705B71A17DF0700C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 081BEE611345979F003F846A;
-			remoteInfo = libochamcrest;
-		};
-		4CF705BB1A17DF1E00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 081BEE611345979F003F846A;
-			remoteInfo = libochamcrest;
-		};
-		4CF705CA1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 08BDD5A91350C59C00E5A443;
-			remoteInfo = OCMockito;
-		};
-		4CF705CC1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 74A3BD8219F765E2006591C9;
-			remoteInfo = OCMockitoTests;
-		};
-		4CF705CE1A17F34F00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 085D2FF51351254000EBBE91;
-			remoteInfo = libocmockito;
-		};
-		4CF705D01A17F34F00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 74A3BDB319F76C5F006591C9;
-			remoteInfo = libocmockitoTests;
-		};
-		4CF705D31A17F37600C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 085D2FF41351254000EBBE91;
-			remoteInfo = libocmockito;
-		};
-		4CF705DF1A17F4D900C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 085D2FF41351254000EBBE91;
-			remoteInfo = libocmockito;
-		};
-		4CF705E31A17F4F400C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 085D2FF41351254000EBBE91;
-			remoteInfo = libocmockito;
-		};
-		4CF705E51A17F4FC00C187A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 085D2FF41351254000EBBE91;
-			remoteInfo = libocmockito;
-		};
-		4CFDEEC719C688D00041B910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
-			remoteInfo = CTDUtility;
 		};
 		4CFDEEE619C69F3C0041B910 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -368,6 +217,13 @@
 		4CD4E2601A0940B9006A244D /* CTDModelTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDModelTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E2991A0949A6006A244D /* CTDApplicationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E29C1A094B7D006A244D /* CTDUtilityTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CTDUtilityTests-Prefix.pch"; path = "CTDUtility/Tests/CTDUtilityTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CD5BF6E1A1976E8003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
+		4CD5BF6F1A1976E8003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
+		4CD5BF721A19771D003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
+		4CD5BF731A19771D003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
+		4CD5BF781A197822003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
+		4CD5BF7C1A19784C003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
+		4CD5BF7E1A197B65003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -423,8 +279,6 @@
 		4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitToolbar.m; sourceTree = "<group>"; };
 		4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CTDCoreGraphicsUtils.c; sourceTree = "<group>"; };
 		4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCoreGraphicsUtils.h; sourceTree = "<group>"; };
-		4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = External/OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
-		4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMockito.xcodeproj; path = External/OCMockito/Source/OCMockito.xcodeproj; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9319C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitTargetSelectionIndicatorController.h; sourceTree = "<group>"; };
 		4CFDEE9419C619560041B910 /* CTDUIKitTargetSelectionIndicatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitTargetSelectionIndicatorController.m; sourceTree = "<group>"; };
@@ -474,8 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CF705E71A17F50300C187A2 /* libocmockito.a in Frameworks */,
-				4CF705B61A17DEFB00C187A2 /* libochamcrest.a in Frameworks */,
+				4CD5BF7D1A19784C003A6321 /* libocmockito.a in Frameworks */,
 				4CEBCA2419BB564600D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA2619BB564600D2B498 /* UIKit.framework in Frameworks */,
 				4CEBCA2519BB564600D2B498 /* Foundation.framework in Frameworks */,
@@ -495,8 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
-				4CF705E11A17F4DF00C187A2 /* libocmockito.a in Frameworks */,
-				4CF705B91A17DF0F00C187A2 /* libochamcrest.a in Frameworks */,
+				4CD5BF751A19771D003A6321 /* libocmockito.a in Frameworks */,
 				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -517,8 +369,7 @@
 				4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */,
 				4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */,
 				4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */,
-				4CF705E21A17F4E900C187A2 /* libocmockito.a in Frameworks */,
-				4CF7053E1A17CBDE00C187A2 /* libochamcrest.a in Frameworks */,
+				4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */,
 				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -537,8 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFDEEC919C688D00041B910 /* libCTDUtility.a in Frameworks */,
-				4CF705D21A17F36900C187A2 /* libocmockito.a in Frameworks */,
-				4CF705BA1A17DF1600C187A2 /* libochamcrest.a in Frameworks */,
+				4CD5BF791A197822003A6321 /* libocmockito.a in Frameworks */,
 				4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */,
 				4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */,
 			);
@@ -576,7 +426,6 @@
 				4CFDEEB819C688D00041B910 /* CTDUtility */,
 				4CFDEE8E19C609440041B910 /* Common */,
 				4CEBCA4819BB5FD900D2B498 /* BuildConfiguration */,
-				4CF7052D1A17C9F900C187A2 /* Libraries */,
 				4CEBCA0919BB564600D2B498 /* Frameworks */,
 				4CEBCA0819BB564600D2B498 /* Products */,
 			);
@@ -600,6 +449,13 @@
 		4CEBCA0919BB564600D2B498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CD5BF7E1A197B65003A6321 /* libocmockito.a */,
+				4CD5BF7C1A19784C003A6321 /* libocmockito.a */,
+				4CD5BF781A197822003A6321 /* libocmockito.a */,
+				4CD5BF721A19771D003A6321 /* libochamcrest.a */,
+				4CD5BF731A19771D003A6321 /* libocmockito.a */,
+				4CD5BF6E1A1976E8003A6321 /* libochamcrest.a */,
+				4CD5BF6F1A1976E8003A6321 /* libocmockito.a */,
 				4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */,
 				4CEBCA0A19BB564600D2B498 /* Foundation.framework */,
 				4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */,
@@ -843,37 +699,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		4CF7052D1A17C9F900C187A2 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */,
-				4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		4CF7052F1A17CB5700C187A2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4CF705371A17CB5700C187A2 /* OCHamcrest.framework */,
-				4CF705391A17CB5700C187A2 /* OCHamcrestTests.octest */,
-				4CF7053B1A17CB5700C187A2 /* libochamcrest.a */,
-				4CF7053D1A17CB5700C187A2 /* libochamcrestTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4CF705BF1A17F34F00C187A2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4CF705CB1A17F34F00C187A2 /* OCMockito.framework */,
-				4CF705CD1A17F34F00C187A2 /* OCMockitoTests.octest */,
-				4CF705CF1A17F34F00C187A2 /* libocmockito.a */,
-				4CF705D11A17F34F00C187A2 /* libocmockitoTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4CFDEE8E19C609440041B910 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -968,9 +793,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4CEBCA2819BB564600D2B498 /* PBXTargetDependency */,
-				4CF705E61A17F4FC00C187A2 /* PBXTargetDependency */,
-				4CF705B51A17DEF500C187A2 /* PBXTargetDependency */,
+				4CD5BF7B1A197843003A6321 /* PBXTargetDependency */,
 			);
 			name = CTDApplicationTests;
 			productName = ConnectTheDots2Tests;
@@ -1005,9 +828,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */,
-				4CF705E01A17F4D900C187A2 /* PBXTargetDependency */,
-				4CF705B81A17DF0700C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDModelTests;
 			productName = CTDModelTests;
@@ -1043,11 +863,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */,
-				4CD4E2981A09468C006A244D /* PBXTargetDependency */,
-				4CD4E2941A094662006A244D /* PBXTargetDependency */,
-				4CF705E41A17F4F400C187A2 /* PBXTargetDependency */,
-				4CF705401A17CBEB00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDPresentationTests;
 			productName = CTDPresentationTests;
@@ -1082,9 +897,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4CFDEEC819C688D00041B910 /* PBXTargetDependency */,
-				4CF705D41A17F37600C187A2 /* PBXTargetDependency */,
-				4CF705BC1A17DF1E00C187A2 /* PBXTargetDependency */,
 			);
 			name = CTDUtilityTests;
 			productName = CTDUtilityTests;
@@ -1108,13 +920,13 @@
 						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CEBCA6319BB77C400D2B498 = {
-						TestTargetID = 4CEBCA0619BB564600D2B498;
+						TestTargetID = 4CEBCA5619BB77C400D2B498;
 					};
 					4CEBCA8919BB77D300D2B498 = {
-						TestTargetID = 4CEBCA0619BB564600D2B498;
+						TestTargetID = 4CEBCA7C19BB77D200D2B498;
 					};
 					4CFDEEC219C688D00041B910 = {
-						TestTargetID = 4CEBCA0619BB564600D2B498;
+						TestTargetID = 4CFDEEB519C688CF0041B910;
 					};
 				};
 			};
@@ -1128,16 +940,6 @@
 			mainGroup = 4CEBC9FE19BB564600D2B498;
 			productRefGroup = 4CEBCA0819BB564600D2B498 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4CF7052F1A17CB5700C187A2 /* Products */;
-					ProjectRef = 4CF7052E1A17CB5700C187A2 /* OCHamcrest.xcodeproj */;
-				},
-				{
-					ProductGroup = 4CF705BF1A17F34F00C187A2 /* Products */;
-					ProjectRef = 4CF705BE1A17F34F00C187A2 /* OCMockito.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4CEBCA0619BB564600D2B498 /* CTDApplication */,
@@ -1151,65 +953,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4CF705371A17CB5700C187A2 /* OCHamcrest.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCHamcrest.framework;
-			remoteRef = 4CF705361A17CB5700C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF705391A17CB5700C187A2 /* OCHamcrestTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCHamcrestTests.octest;
-			remoteRef = 4CF705381A17CB5700C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF7053B1A17CB5700C187A2 /* libochamcrest.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libochamcrest.a;
-			remoteRef = 4CF7053A1A17CB5700C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF7053D1A17CB5700C187A2 /* libochamcrestTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = libochamcrestTests.octest;
-			remoteRef = 4CF7053C1A17CB5700C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF705CB1A17F34F00C187A2 /* OCMockito.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMockito.framework;
-			remoteRef = 4CF705CA1A17F34F00C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF705CD1A17F34F00C187A2 /* OCMockitoTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockitoTests.octest;
-			remoteRef = 4CF705CC1A17F34F00C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF705CF1A17F34F00C187A2 /* libocmockito.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libocmockito.a;
-			remoteRef = 4CF705CE1A17F34F00C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4CF705D11A17F34F00C187A2 /* libocmockitoTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = libocmockitoTests.octest;
-			remoteRef = 4CF705D01A17F34F00C187A2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4CEBCA0519BB564600D2B498 /* Resources */ = {
@@ -1366,30 +1109,10 @@
 			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
 			targetProxy = 4C25B9751A0E844400275138 /* PBXContainerItemProxy */;
 		};
-		4CD4E2941A094662006A244D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
-			targetProxy = 4CD4E2931A094662006A244D /* PBXContainerItemProxy */;
-		};
-		4CD4E2981A09468C006A244D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CEBCA5619BB77C400D2B498 /* CTDModel */;
-			targetProxy = 4CD4E2971A09468C006A244D /* PBXContainerItemProxy */;
-		};
-		4CEBCA2819BB564600D2B498 /* PBXTargetDependency */ = {
+		4CD5BF7B1A197843003A6321 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4CEBCA0619BB564600D2B498 /* CTDApplication */;
-			targetProxy = 4CEBCA2719BB564600D2B498 /* PBXContainerItemProxy */;
-		};
-		4CEBCA6919BB77C400D2B498 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CEBCA5619BB77C400D2B498 /* CTDModel */;
-			targetProxy = 4CEBCA6819BB77C400D2B498 /* PBXContainerItemProxy */;
-		};
-		4CEBCA8F19BB77D300D2B498 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
-			targetProxy = 4CEBCA8E19BB77D300D2B498 /* PBXContainerItemProxy */;
+			targetProxy = 4CD5BF7A1A197843003A6321 /* PBXContainerItemProxy */;
 		};
 		4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1400,51 +1123,6 @@
 			isa = PBXTargetDependency;
 			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
 			targetProxy = 4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */;
-		};
-		4CF705401A17CBEB00C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libochamcrest;
-			targetProxy = 4CF7053F1A17CBEB00C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705B51A17DEF500C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libochamcrest;
-			targetProxy = 4CF705B41A17DEF500C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705B81A17DF0700C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libochamcrest;
-			targetProxy = 4CF705B71A17DF0700C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705BC1A17DF1E00C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libochamcrest;
-			targetProxy = 4CF705BB1A17DF1E00C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705D41A17F37600C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libocmockito;
-			targetProxy = 4CF705D31A17F37600C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705E01A17F4D900C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libocmockito;
-			targetProxy = 4CF705DF1A17F4D900C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705E41A17F4F400C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libocmockito;
-			targetProxy = 4CF705E31A17F4F400C187A2 /* PBXContainerItemProxy */;
-		};
-		4CF705E61A17F4FC00C187A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libocmockito;
-			targetProxy = 4CF705E51A17F4FC00C187A2 /* PBXContainerItemProxy */;
-		};
-		4CFDEEC819C688D00041B910 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
-			targetProxy = 4CFDEEC719C688D00041B910 /* PBXContainerItemProxy */;
 		};
 		4CFDEEE719C69F3C0041B910 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
