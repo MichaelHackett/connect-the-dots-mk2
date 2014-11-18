@@ -8,6 +8,8 @@
 
 @interface CTDApplication : NSObject
 
+// The colorCellMap maps CTDPaletteColors (wrapped in NSNumbers) to objects
+// that implement both CTDSelectionRenderer and CTDTouchable.
 - (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellMap:(NSDictionary*)colorCellMap
             touchInputSource:(id<CTDTouchInputSource>)touchInputSource;

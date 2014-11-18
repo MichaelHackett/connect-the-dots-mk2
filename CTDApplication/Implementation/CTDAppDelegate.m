@@ -45,8 +45,6 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
     _window.rootViewController = initialViewController;
     [_window makeKeyAndVisible];
 
-// TODO: make new map with UIColor keys converted to app-domain color type
-
     [_applicationController runTrialWithRenderer:initialViewController
                                     colorCellMap:initialViewController.colorCellMap
                                 touchInputSource:initialViewController];

@@ -240,6 +240,7 @@
 		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDMessageRecorderTests.m; path = CTDPresentation/Tests/CTDMessageRecorderTests.m; sourceTree = SOURCE_ROOT; };
 		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDSelectionChangeRecorder.h; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectionChangeRecorder.m; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.m; sourceTree = SOURCE_ROOT; };
+		4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorPalette.h; sourceTree = "<group>"; };
 		4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchMapper.h; path = CTDPresentation/Tests/CTDFakeTouchMapper.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchMapper.m; path = CTDPresentation/Tests/CTDFakeTouchMapper.m; sourceTree = SOURCE_ROOT; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -670,9 +671,10 @@
 			isa = PBXGroup;
 			children = (
 				4CFDEEED19C720710041B910 /* CTDApplication.h */,
+				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
+				4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */,
 				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
 				4CFDEEE019C694C90041B910 /* CTDTargetRenderer.h */,
-				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
 				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,
 				4C5A56AD19E32B4600E994CB /* CTDTouchable.h */,
