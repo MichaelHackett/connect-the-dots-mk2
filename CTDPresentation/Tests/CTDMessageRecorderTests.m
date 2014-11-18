@@ -15,8 +15,7 @@
 
 @implementation CTDMessageRecorderBaseTestCase
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     self.subject = [[CTDMessageRecorder alloc] init];
 }
@@ -30,18 +29,15 @@
 
 @implementation CTDMessageRecorderWhenFreshlyCreated
 
-- (void)testThatMessagesReceivedListIsNotNil
-{
+- (void)testThatMessagesReceivedListIsNotNil {
     assertThat(self.subject.messagesReceived, isNot(nilValue()));
 }
 
-- (void)testThatMessagesReceivedListIsEmpty
-{
+- (void)testThatMessagesReceivedListIsEmpty {
     assertThat(self.subject.messagesReceived, isEmpty());
 }
 
-- (void)testThatLastMessageIsNil
-{
+- (void)testThatLastMessageIsNil {
     assertThat([self.subject lastMessage], is(nilValue()));
 }
 
@@ -54,36 +50,30 @@
 
 @implementation CTDMessageRecorderAfterASingleMessageIsAdded
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     [self.subject addMessageWithSelector:@selector(description)];
 }
 
-- (void)testThatMessagesReceivedListContainsSingleElement
-{
+- (void)testThatMessagesReceivedListContainsSingleElement {
     assertThat(self.subject.messagesReceived, hasCountOf(1));
 }
 
-- (void)testThatMessagesReceivedListContainsExpectedSelector
-{
+- (void)testThatMessagesReceivedListContainsExpectedSelector {
     assertThat(self.subject.messagesReceived, hasItem(message(description)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsTrueForTheMessageSent
-{
+- (void)testThatHasReceivedMessageMethodReturnsTrueForTheMessageSent {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(description)],
                    is(equalToBool(YES)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsFalseForADifferentMessage
-{
+- (void)testThatHasReceivedMessageMethodReturnsFalseForADifferentMessage {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(copy)],
                    is(equalToBool(NO)));
 }
 
-- (void)testThatLastMessageReceivedMatchesSelectorOfSingleMessage
-{
+- (void)testThatLastMessageReceivedMatchesSelectorOfSingleMessage {
     assertThat([self.subject lastMessage], is(equalTo(message(description))));
 }
 
@@ -95,8 +85,7 @@
 
 @implementation CTDMessageRecorderAfterSeveralMessages
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     [self.subject addMessageWithSelector:@selector(performSelector:)];
     [self.subject addMessageWithSelector:@selector(hash)];
@@ -104,20 +93,17 @@
     [self.subject addMessageWithSelector:@selector(hash)];
 }
 
-- (void)testThatMessagesReceivedIncludesAnEntryForEachMessageReceived
-{
+- (void)testThatMessagesReceivedIncludesAnEntryForEachMessageReceived {
     assertThat(self.subject.messagesReceived, hasCountOf(4));
 }
 
-- (void)testThatMessagesReceivedListContainsAllSentSelectors
-{
+- (void)testThatMessagesReceivedListContainsAllSentSelectors {
     assertThat(self.subject.messagesReceived, hasItem(message(performSelector:)));
     assertThat(self.subject.messagesReceived, hasItem(message(hash)));
     assertThat(self.subject.messagesReceived, hasItem(message(isKindOfClass:)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsTrueForAllMessagesSent
-{
+- (void)testThatHasReceivedMessageMethodReturnsTrueForAllMessagesSent {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(hash)],
                    is(equalToBool(YES)));
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(isKindOfClass:)],
@@ -126,14 +112,12 @@
                    is(equalToBool(YES)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsFalseForADifferentMessage
-{
+- (void)testThatHasReceivedMessageMethodReturnsFalseForADifferentMessage {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(description)],
                    is(equalToBool(NO)));
 }
 
-- (void)testThatLastMessageReceivedMatchesSelectorOfFinalMessageSent
-{
+- (void)testThatLastMessageReceivedMatchesSelectorOfFinalMessageSent {
     assertThat([self.subject lastMessage], is(equalTo(message(hash))));
 }
 
@@ -146,26 +130,22 @@
 @end
 @implementation CTDMessageRecorderAfterReset
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     [self.subject addMessageWithSelector:@selector(copy)];
     [self.subject addMessageWithSelector:@selector(performSelector:withObject:)];
     [self.subject reset];
 }
 
-- (void)testThatMessagesReceivedListIsEmpty
-{
+- (void)testThatMessagesReceivedListIsEmpty {
     assertThat(self.subject.messagesReceived, isEmpty());
 }
 
-- (void)testThatLastMessageReturnsNil
-{
+- (void)testThatLastMessageReturnsNil {
     assertThat([self.subject lastMessage], is(nilValue()));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsFalseForAllMessagesSent
-{
+- (void)testThatHasReceivedMessageMethodReturnsFalseForAllMessagesSent {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(copy)],
                    is(equalToBool(NO)));
     assertThatBool([self.subject hasReceivedMessageWithSelector:
@@ -183,8 +163,7 @@
 @end
 @implementation CTDMessageRecorderWhenNewMessagesAreSentAfterAReset
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     [self.subject addMessageWithSelector:@selector(copy)];
     [self.subject addMessageWithSelector:@selector(performSelector:withObject:)];
@@ -193,27 +172,23 @@
     [self.subject addMessageWithSelector:@selector(performSelector:)];
 }
 
-- (void)testThatMessagesReceivedIncludesAnEntryForEachMessageReceivedAfterTheReset
-{
+- (void)testThatMessagesReceivedIncludesAnEntryForEachMessageReceivedAfterTheReset {
     assertThat(self.subject.messagesReceived, hasCountOf(2));
 }
 
-- (void)testThatMessagesReceivedListContainsAllSentSelectorsSentAfterTheReset
-{
+- (void)testThatMessagesReceivedListContainsAllSentSelectorsSentAfterTheReset {
     assertThat(self.subject.messagesReceived, hasItem(message(performSelector:)));
     assertThat(self.subject.messagesReceived, hasItem(message(description)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsTrueForAllMessagesSentAfterTheReset
-{
+- (void)testThatHasReceivedMessageMethodReturnsTrueForAllMessagesSentAfterTheReset {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(description)],
                    is(equalToBool(YES)));
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(performSelector:)],
                    is(equalToBool(YES)));
 }
 
-- (void)testThatHasReceivedMessageMethodReturnsFalseForAllMessagesSentBeforeTheReset
-{
+- (void)testThatHasReceivedMessageMethodReturnsFalseForAllMessagesSentBeforeTheReset {
     assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(copy)],
                    is(equalToBool(NO)));
     assertThatBool([self.subject hasReceivedMessageWithSelector:
