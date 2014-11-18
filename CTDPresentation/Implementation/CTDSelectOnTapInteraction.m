@@ -2,7 +2,7 @@
 
 #import "CTDSelectOnTapInteraction.h"
 
-#import "CTDTargetRenderer.h"
+#import "CTDSelectable.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -11,7 +11,7 @@
 @implementation CTDSelectOnTapInteraction
 {
     id<CTDTouchMapper> _touchMapper;
-    id<CTDSelectionRenderer> _touchedElement;
+    id<CTDSelectable> _touchedElement;
 }
 
 
@@ -20,15 +20,15 @@
 
 
 - (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)touchMapper
-               initialTouchPosition:(__unused CTDPoint*)initialPosition
+               initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self) {
         _touchMapper = touchMapper;
         _touchedElement = nil;
         id hitElement = [_touchMapper elementAtTouchLocation:initialPosition];
-        if ([hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]) {
-            _touchedElement = (id<CTDSelectionRenderer>)hitElement;
+        if ([hitElement conformsToProtocol:@protocol(CTDSelectable)]) {
+            _touchedElement = (id<CTDSelectable>)hitElement;
         }
     }
     return self;
@@ -41,18 +41,18 @@
 #pragma mark - CTDTouchTracker protocol
 
 
-- (void)touchDidMoveTo:(__unused CTDPoint*)newPosition
+- (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     id hitElement = [_touchMapper elementAtTouchLocation:newPosition];
-    if (!hitElement || [hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]) {
-        _touchedElement = (id<CTDSelectionRenderer>)hitElement;
+    if (!hitElement || [hitElement conformsToProtocol:@protocol(CTDSelectable)]) {
+        _touchedElement = (id<CTDSelectable>)hitElement;
     }
 }
 
 - (void)touchDidEnd
 {
     if (_touchedElement) {
-        [_touchedElement showSelectionIndicator];
+        [_touchedElement select];
     }
 }
 

@@ -2,7 +2,7 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "CTDTargetRenderer.h"
+#import "CTDSelectable.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -11,7 +11,7 @@
 @implementation CTDSelectOnTouchInteraction
 {
     id<CTDTouchMapper> _touchMapper;
-    id<CTDSelectionRenderer> _selectedElement;
+    id<CTDSelectable> _selectedElement;
 }
 
 
@@ -27,9 +27,9 @@
         _touchMapper = touchMapper;
         _selectedElement = nil;
         id hitElement = [_touchMapper elementAtTouchLocation:initialPosition];
-        if ([hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]) {
-            _selectedElement = (id<CTDSelectionRenderer>)hitElement;
-            [_selectedElement showSelectionIndicator];
+        if ([hitElement conformsToProtocol:@protocol(CTDSelectable)]) {
+            _selectedElement = (id<CTDSelectable>)hitElement;
+            [_selectedElement select];
         }
     }
     return self;
@@ -47,27 +47,27 @@
     id hitElement = [_touchMapper elementAtTouchLocation:newPosition];
     if (hitElement != _selectedElement &&
         (!hitElement ||
-         [hitElement conformsToProtocol:@protocol(CTDSelectionRenderer)]))
+         [hitElement conformsToProtocol:@protocol(CTDSelectable)]))
     {
         if (_selectedElement) {
-            [_selectedElement hideSelectionIndicator];
+            [_selectedElement deselect];
         }
-        _selectedElement = (id<CTDSelectionRenderer>)hitElement;
-        [_selectedElement showSelectionIndicator];
+        _selectedElement = (id<CTDSelectable>)hitElement;
+        [_selectedElement select];
     }
 }
 
 - (void)touchDidEnd
 {
     if (_selectedElement) {
-        [_selectedElement hideSelectionIndicator];
+        [_selectedElement deselect];
     }
 }
 
 - (void)touchWasCancelled
 {
     if (_selectedElement) {
-        [_selectedElement hideSelectionIndicator];
+        [_selectedElement deselect];
     }
 }
 
