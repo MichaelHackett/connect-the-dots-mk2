@@ -3,6 +3,7 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "CTDFakeTargetRenderer.h"
+#import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
 #import "CTDRecordingTargetConnectionView.h"
 #import "CTDRecordingTouchTracker.h"
@@ -38,25 +39,6 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDFakeTargetTouchMapper : NSObject <CTDTouchMapper>
-@end
-@implementation CTDFakeTargetTouchMapper
-
-- (id)elementAtTouchLocation:(CTDPoint*)touchLocation
-{
-    if ([touchLocation isEqual:POINT_INSIDE_TARGET_1] ||
-        [touchLocation isEqual:ANOTHER_POINT_INSIDE_TARGET_1])
-    {
-        return target1;
-    }
-    return nil;
-}
-
-@end
-
-
-
-
 @interface CTDTrialSceneTouchTrackerBaseTestCase : XCTestCase
 
 // The tracker instantiated by the router (created in subclass test cases)
@@ -87,9 +69,14 @@ static CTDFakeTargetRenderer* target1;
             return colorCellsTouchTracker;
         }];
 
+    id<CTDTouchMapper> targetTouchMapper =
+        [[CTDFakeTouchMapper alloc]
+         initWithPointMap:@{ POINT_INSIDE_TARGET_1: target1,
+                             ANOTHER_POINT_INSIDE_TARGET_1: target1 }];
+
     _router = [[CTDTrialSceneTouchRouter alloc]
                initWithTrialRenderer:_trialRenderer
-               targetsTouchMapper:[[CTDFakeTargetTouchMapper alloc] init]
+               targetsTouchMapper:targetTouchMapper
                colorCellsTouchResponder:_colorCellsTouchResponder];
 }
 

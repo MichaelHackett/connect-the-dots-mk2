@@ -46,6 +46,7 @@
 		4CD5BF921A199FA2003A6321 /* CTDMessageRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */; };
 		4CD5BF941A199FCA003A6321 /* CTDMessageRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */; };
 		4CD5BF971A19A8C1003A6321 /* CTDSelectionChangeRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */; };
+		4CD5BF9D1A1A6C74003A6321 /* CTDFakeTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */; };
 		4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */; };
 		4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
@@ -239,6 +240,8 @@
 		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDMessageRecorderTests.m; path = CTDPresentation/Tests/CTDMessageRecorderTests.m; sourceTree = SOURCE_ROOT; };
 		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDSelectionChangeRecorder.h; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectionChangeRecorder.m; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.m; sourceTree = SOURCE_ROOT; };
+		4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchMapper.h; path = CTDPresentation/Tests/CTDFakeTouchMapper.h; sourceTree = SOURCE_ROOT; };
+		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchMapper.m; path = CTDPresentation/Tests/CTDFakeTouchMapper.m; sourceTree = SOURCE_ROOT; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -640,6 +643,8 @@
 				4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */,
 				4C2619421A105656005E87A9 /* CTDFakeTargetRenderer.h */,
 				4C2619431A105656005E87A9 /* CTDFakeTargetRenderer.m */,
+				4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */,
+				4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */,
 				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
 				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
 				4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */,
@@ -1094,6 +1099,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CD5BF921A199FA2003A6321 /* CTDMessageRecorder.m in Sources */,
+				4CD5BF9D1A1A6C74003A6321 /* CTDFakeTouchMapper.m in Sources */,
 				4C25B9901A0EC21300275138 /* CTDRecordingTouchTrackerTests.m in Sources */,
 				4C2619471A105784005E87A9 /* CTDRecordingTargetConnectionView.m in Sources */,
 				4C2619441A105656005E87A9 /* CTDFakeTargetRenderer.m in Sources */,
