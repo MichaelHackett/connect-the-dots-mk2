@@ -145,7 +145,7 @@
 @implementation CTDColorCellGroup
 {
     CTDColorCellGroup_MutexFilter* _mutex;
-    NSMutableArray* _cells;
+//    NSMutableArray* _cells; // not required until cell removal needs to be supported
 }
 
 - (instancetype)initWithDefaultColor:(CTDTargetColor)defaultColor
@@ -156,7 +156,7 @@
         _mutex = [[CTDColorCellGroup_MutexFilter alloc]
                   initWithDefaultColor:defaultColor
                      selectedColorSink:selectedColorSink];
-        _cells = [[NSMutableArray alloc] init];
+//        _cells = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -168,7 +168,7 @@
     CTDColorCellGroup_CellProxy* cellProxy = [[CTDColorCellGroup_CellProxy alloc]
                                               initWithCellColor:cellColor
                                               groupSelectionFilter:_mutex];
-    [_cells addObject:cellProxy];
+//    [_cells addObject:cellProxy];
     return cellProxy;
 }
 
