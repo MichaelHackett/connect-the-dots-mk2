@@ -3,6 +3,7 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDColorPalette.h"
 #import "CTDSelectionRenderer.h"
 
 @class CTDPoint;
@@ -13,6 +14,8 @@
 
 // This point is relative to the bounds of the target container view.
 - (CTDPoint*)connectionPoint;
+
+- (void)changeTargetColorTo:(CTDPaletteColor)newTargetColor;
 
 // This is part of the child interface only because it avoids the situation
 // where, if the container was asked to remove the target view, it would only

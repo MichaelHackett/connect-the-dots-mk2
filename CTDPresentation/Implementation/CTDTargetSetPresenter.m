@@ -2,6 +2,7 @@
 
 #import "CTDTargetSetPresenter.h"
 
+#import "CTDColorPalette.h"
 #import "CTDListOrderTouchMapper.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
@@ -24,11 +25,15 @@
     if (self) {
         NSMutableArray* targetViews = [[NSMutableArray alloc] init];
         [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:100 y:400]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:100 y:400]
+                                  withInitialColor:CTDPALETTE_GREEN_TARGET]];
         [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:600 y:150]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:600 y:150]
+                                  withInitialColor:CTDPALETTE_RED_TARGET]];
         [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:400 y:550]]];
+            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:400 y:550]
+                                  withInitialColor:CTDPALETTE_BLUE_TARGET]];
+
         _targetViews = [targetViews copy];
         _targetsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
         for (id<CTDTouchable> targetView in targetViews) {

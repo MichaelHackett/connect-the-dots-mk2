@@ -2,6 +2,7 @@
 
 #import "CTDRecordingTrialRenderer.h"
 
+#import "CTDColorPalette.h"
 #import "CTDFakeTargetRenderer.h"
 #import "CTDRecordingTargetConnectionView.h"
 #import "CTDTargetConnectionView.h"
@@ -38,9 +39,11 @@
 }
 
 - (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+                                              withInitialColor:(CTDPaletteColor)targetColor
 {
     id newTargetView = [[CTDFakeTargetRenderer alloc]
-                        initWithCenterPosition:centerPosition];
+                        initWithCenterPosition:centerPosition
+                                   targetColor:targetColor];
     [_targetViewsCreated addObject:newTargetView];
     return newTargetView;
 }

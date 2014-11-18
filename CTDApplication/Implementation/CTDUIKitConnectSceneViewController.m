@@ -75,7 +75,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
          initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
     CTDUIKitColorCell* blueCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_BLUE_TARGET]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
@@ -103,11 +103,14 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 - (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+                                              withInitialColor:(CTDPaletteColor)targetColor
 {
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
     CTDUIKitTargetView* newTargetView =
         [[CTDUIKitTargetView alloc]
-         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)];
+         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)
+         targetColor:[self.drawingConfig colorFor:targetColor]];
+    newTargetView.drawingConfig = self.drawingConfig;
     [self.view addSubview:newTargetView];
     [_targetViews addObject:newTargetView];
     return newTargetView;
