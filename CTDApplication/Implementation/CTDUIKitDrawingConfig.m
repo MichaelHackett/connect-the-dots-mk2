@@ -4,17 +4,35 @@
 
 
 
+
 @implementation CTDUIKitDrawingConfig
+{
+    NSDictionary* _colorPalette;
+}
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        // TODO: Load these values from a plist or XML file.
+        //
         _connectionLineWidth = 5.0;
         _connectionLineColor = [[UIColor yellowColor] CGColor];
+        _colorPalette = @{
+            @(CTDPALETTE_WHITE_TARGET):   [UIColor whiteColor],
+            @(CTDPALETTE_RED_TARGET):     [UIColor redColor],
+            @(CTDPALETTE_GREEN_TARGET):   [UIColor greenColor],
+            @(CTDPALETTE_BLUE_TARGET):    [UIColor blueColor]
+        };
     }
     return self;
 }
+
+- (UIColor*)colorFor:(CTDPaletteColor)paletteColor
+{
+    return [_colorPalette objectForKey:@(paletteColor)];
+}
+
 
 
 #pragma mark NSCopying protocol
@@ -30,6 +48,7 @@
     // Else, make a fresh instance with the same values.
     return [[[self class] alloc] init];
 }
+
 
 
 #pragma mark Equality and hashing

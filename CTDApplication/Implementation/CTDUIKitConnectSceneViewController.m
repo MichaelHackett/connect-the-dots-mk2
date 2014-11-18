@@ -5,6 +5,7 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitConnectionView.h"
+#import "CTDUIKitDrawingConfig.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
@@ -67,11 +68,14 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
     CTDUIKitColorCell* redCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor redColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_RED_TARGET]];
     CTDUIKitColorCell* greenCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor greenColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
     CTDUIKitColorCell* blueCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor blueColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
