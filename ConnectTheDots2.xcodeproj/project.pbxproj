@@ -248,6 +248,8 @@
 		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchMapper.m; path = CTDPresentation/Tests/CTDFakeTouchMapper.m; sourceTree = SOURCE_ROOT; };
 		4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchable.h; path = CTDPresentation/Tests/CTDFakeTouchable.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchable.m; path = CTDPresentation/Tests/CTDFakeTouchable.m; sourceTree = SOURCE_ROOT; };
+		4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
+		4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -794,6 +796,8 @@
 				4C25B97B1A0E95E300275138 /* CTDMethodSelector.h */,
 				4CFDEEDC19C68B070041B910 /* CTDPoint.h */,
 				4C25B9911A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.h */,
+				4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */,
+				4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */,
 			);
 			name = Interface;
 			path = Interface/CTDUtility;
