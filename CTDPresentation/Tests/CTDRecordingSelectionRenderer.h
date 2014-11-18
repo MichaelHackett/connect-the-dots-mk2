@@ -10,5 +10,8 @@
 @interface CTDRecordingSelectionRenderer : NSObject <CTDSelectionRenderer>
 
 @property (assign, readonly, nonatomic, getter=isSelected) BOOL selected;
+@property (copy, readonly, nonatomic) NSArray* messagesReceived;
+
+- (void)reset;
 
 @end

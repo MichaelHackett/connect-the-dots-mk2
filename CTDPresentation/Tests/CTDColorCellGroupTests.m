@@ -7,45 +7,47 @@
 #import "CTDModel/CTDTargetColor.h"
 #import <XCTest/XCTest.h>
 
+#define message CTDMakeMethodSelector
 
 
 
-// Used as a CTDTargetColorSink, a CTDColorCatcher retains the most recent
-// value sent to the sink, so that it can later be checked by a test assertion.
-// When nothing has been received by the sink, the last value will be nil.
+
+// Used as a CTDTargetColorSink, a CTDColorCatcher retains all values sent to
+// the sink, for checking in test assertions. When nothing has been received
+// by the sink, the list will be empty.
 
 @interface CTDColorCatcher : NSObject <CTDTargetColorSink>
-// Reset value to nil, as if no value had been received.
+// Clear list of colors received.
 - (void)reset;
 @end
 
 @implementation CTDColorCatcher
 {
-    NSNumber* _lastColorReceived;
+    NSMutableArray* _colorsReceived;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _lastColorReceived = nil;
+        _colorsReceived = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)reset
 {
-    _lastColorReceived = nil;
+    [_colorsReceived removeAllObjects];
 }
 
 - (void)colorChangedTo:(CTDTargetColor)newColor
 {
-    _lastColorReceived = @(newColor);
+    [_colorsReceived addObject:@(newColor)];
 }
 
-- (NSNumber*)value
+- (NSArray*)colorsReceived
 {
-    return _lastColorReceived;
+    return [_colorsReceived copy];
 }
 
 @end
@@ -80,7 +82,8 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 
 @implementation CTDColorCellGroupBaseTestCase
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.redCellRenderer = [[CTDRecordingColorCellRenderer alloc] init];
     self.greenCellRenderer = [[CTDRecordingColorCellRenderer alloc] init];
@@ -99,6 +102,14 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
                                      withRenderer:self.blueCellRenderer];
 }
 
+- (void)resetMessageRecording
+{
+    [self.redCellRenderer reset];
+    [self.greenCellRenderer reset];
+    [self.blueCellRenderer reset];
+    [self.selectedColor reset];
+}
+
 @end
 
 
@@ -108,14 +119,16 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 @end
 @implementation CTDColorCellGroupInitialStateTestCase
 
-- (void)testThatSelectedColorSinkLastReceivesTheGroupDefaultColor {
-    assertThat([self.selectedColor value], is(equalTo(@(DEFAULT_COLOR))));
+- (void)testThatSelectedColorSinkIsSentTheGroupDefaultColor
+{
+    assertThat([self.selectedColor colorsReceived],
+               is(equalTo(@[@(DEFAULT_COLOR)])));
 }
 
-- (void)testThatAllCellsAreRenderedAsUnselected {
-    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
+- (void)testThatNoneOfTheCellRenderersReceiveAnyUpdates {
+    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
 }
 
 @end
@@ -129,20 +142,23 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 
 - (void)setUp {
     [super setUp];
+    [self resetMessageRecording];
     [self.redCell select];
 }
 
-- (void)testThatSelectedColorSinkLastReceivesTheSelectedCellColor {
-    assertThat([self.selectedColor value], is(equalTo(@(CTDTARGETCOLOR_RED))));
+- (void)testThatSelectedColorSinkIsSentTheSelectedCellColor {
+    assertThat([self.selectedColor colorsReceived],
+               is(equalTo(@[@(CTDTARGETCOLOR_RED)])));
 }
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
-    assertThatBool(self.redCellRenderer.selected, is(equalToBool(YES)));
+    assertThat(self.redCellRenderer.messagesReceived,
+               is(equalTo(@[message(showSelectionIndicator)])));
 }
 
-- (void)testThatOtherCellAreRenderedAsUnselected {
-    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
+- (void)testThatOtherCellsAreNotRerendered {
+    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
 }
 
 @end
@@ -157,20 +173,27 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 - (void)setUp {
     [super setUp];
     [self.redCell select];
+    [self resetMessageRecording];
     [self.blueCell select];
 }
 
-- (void)testThatSelectedColorSinkLastReceivesTheColorOfTheLastCellSelected {
-    assertThat([self.selectedColor value], is(equalTo(@(CTDTARGETCOLOR_BLUE))));
+- (void)testThatSelectedColorSinkIsSentTheColorOfTheLastCellSelected {
+    assertThat([self.selectedColor colorsReceived],
+               is(equalTo(@[@(CTDTARGETCOLOR_BLUE)])));
 }
 
-- (void)testThatBlueCellIsRenderedAsSelected {
-    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(YES)));
+- (void)testThatTheNewlySelectedCellIsRenderedAsSelected {
+    assertThat(self.blueCellRenderer.messagesReceived,
+               is(equalTo(@[message(showSelectionIndicator)])));
 }
 
-- (void)testThatOtherCellsAreRenderedAsUnselected {
-    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
+- (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
+    assertThat(self.redCellRenderer.messagesReceived,
+               is(equalTo(@[message(hideSelectionIndicator)])));
+}
+
+- (void)testThatOtherCellsAreNotRerendered {
+    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
 }
 
 @end
@@ -185,17 +208,23 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 - (void)setUp {
     [super setUp];
     [self.blueCell select];
+    [self resetMessageRecording];
     [self.blueCell deselect];
 }
 
-- (void)testThatSelectedColorSinkLastReceivesTheGroupDefaultColor {
-    assertThat([self.selectedColor value], is(equalTo(@(DEFAULT_COLOR))));
+- (void)testThatSelectedColorSinkIsSentTheGroupDefaultColor {
+    assertThat([self.selectedColor colorsReceived],
+               is(equalTo(@[@(DEFAULT_COLOR)])));
 }
 
-- (void)testThatAllCellsAreRenderedAsUnselected {
-    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
+- (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
+    assertThat(self.blueCellRenderer.messagesReceived,
+               is(equalTo(@[message(hideSelectionIndicator)])));
+}
+
+- (void)testThatOtherCellsAreNotRerendered {
+    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
 }
 
 @end
@@ -210,21 +239,18 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 - (void)setUp {
     [super setUp];
     [self.greenCell select];
-    [self.selectedColor reset];
+    [self resetMessageRecording];
     [self.blueCell deselect];
 }
 
 - (void)testThatSelectedColorSinkIsSentNoUpdates {
-    assertThat([self.selectedColor value], is(nilValue()));
+    assertThat([self.selectedColor colorsReceived], isEmpty());
 }
 
-- (void)testThatPreviouslySelectedCellIsStillRenderedAsSelected {
-    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(YES)));
-}
-
-- (void)testThatOtherCellsAreStillRenderedAsUnselected {
-    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
-    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
+- (void)testThatNoneOfTheCellRenderersReceiveAnyUpdates {
+    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
 }
 
 @end
