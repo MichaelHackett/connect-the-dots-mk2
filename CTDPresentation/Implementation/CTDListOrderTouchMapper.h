@@ -12,9 +12,8 @@
 
 @interface CTDListOrderTouchMapper : NSObject <CTDTouchMapper>
 
-+ (instancetype)mapperWithTouchables:(NSArray*)touchableElements;
-
-- (void)appendTouchable:(id<CTDTouchable>)touchableElement;
-- (void)removeTouchable:(id<CTDTouchable>)touchableElement;
+- (void)mapTouchable:(id<CTDTouchable>)touchableElement
+          toActuator:(id)actuator;
+- (void)unmapTouchable:(id<CTDTouchable>)touchableElement;
 
 @end

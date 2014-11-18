@@ -32,7 +32,8 @@
         _targetViews = [targetViews copy];
         _targetsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
         for (id<CTDTouchable> targetView in targetViews) {
-            [_targetsTouchMapper appendTouchable:targetView];
+            [_targetsTouchMapper mapTouchable:targetView
+                                   toActuator:targetView]; // TODO: Change to some PM obj
         }
     }
     return self;
