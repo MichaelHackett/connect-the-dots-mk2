@@ -10,7 +10,11 @@
 // for such requests, cascading changes to other cells in the group as
 // necessary.
 //
-// TODO: Extract a base MutexSelectionGroup class the implements the mutex,
+// In the current implementation, it is not necessary to retain the
+// CTDColorCellGroup after adding all of the cells; as long as the returned
+// cell proxies are retained, the mutex control will be retained.
+//
+// TODO: Extract a base MutexSelectionGroup class that implements the mutex,
 // having the ColorButtonSet extend this and convert the selection identifier
 // into a CTDTargetColor.
 //
