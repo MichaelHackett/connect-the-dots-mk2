@@ -99,11 +99,6 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
                                      withRenderer:self.blueCellRenderer];
 }
 
-//- (void)tearDown
-//{
-//    [super tearDown];
-//}
-
 @end
 
 
@@ -114,14 +109,13 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 @implementation CTDColorCellGroupInitialStateTestCase
 
 - (void)testThatSelectedColorSinkLastReceivesTheGroupDefaultColor {
-    XCTAssertTrue(![self.selectedColor value] ||
-                  [[self.selectedColor value] isEqualToNumber:@(DEFAULT_COLOR)]);
+    assertThat([self.selectedColor value], is(equalTo(@(DEFAULT_COLOR))));
 }
 
 - (void)testThatAllCellsAreRenderedAsUnselected {
-    XCTAssertFalse(self.redCellRenderer.selected);
-    XCTAssertFalse(self.greenCellRenderer.selected);
-    XCTAssertFalse(self.blueCellRenderer.selected);
+    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
 }
 
 @end
@@ -139,16 +133,16 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 }
 
 - (void)testThatSelectedColorSinkLastReceivesTheSelectedCellColor {
-    XCTAssertEqualObjects([self.selectedColor value], @(CTDTARGETCOLOR_RED));
+    assertThat([self.selectedColor value], is(equalTo(@(CTDTARGETCOLOR_RED))));
 }
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
-    XCTAssertTrue(self.redCellRenderer.selected);
+    assertThatBool(self.redCellRenderer.selected, is(equalToBool(YES)));
 }
 
 - (void)testThatOtherCellAreRenderedAsUnselected {
-    XCTAssertFalse(self.greenCellRenderer.selected);
-    XCTAssertFalse(self.blueCellRenderer.selected);
+    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
 }
 
 @end
@@ -167,16 +161,16 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 }
 
 - (void)testThatSelectedColorSinkLastReceivesTheColorOfTheLastCellSelected {
-    XCTAssertEqualObjects([self.selectedColor value], @(CTDTARGETCOLOR_BLUE));
+    assertThat([self.selectedColor value], is(equalTo(@(CTDTARGETCOLOR_BLUE))));
 }
 
 - (void)testThatBlueCellIsRenderedAsSelected {
-    XCTAssertTrue(self.blueCellRenderer.selected);
+    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(YES)));
 }
 
 - (void)testThatOtherCellsAreRenderedAsUnselected {
-    XCTAssertFalse(self.redCellRenderer.selected);
-    XCTAssertFalse(self.greenCellRenderer.selected);
+    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
 }
 
 @end
@@ -195,14 +189,13 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 }
 
 - (void)testThatSelectedColorSinkLastReceivesTheGroupDefaultColor {
-    XCTAssertTrue(![self.selectedColor value] ||
-                  [[self.selectedColor value] isEqualToNumber:@(DEFAULT_COLOR)]);
+    assertThat([self.selectedColor value], is(equalTo(@(DEFAULT_COLOR))));
 }
 
 - (void)testThatAllCellsAreRenderedAsUnselected {
-    XCTAssertFalse(self.redCellRenderer.selected);
-    XCTAssertFalse(self.greenCellRenderer.selected);
-    XCTAssertFalse(self.blueCellRenderer.selected);
+    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
 }
 
 @end
@@ -222,17 +215,16 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 }
 
 - (void)testThatSelectedColorSinkIsSentNoUpdates {
-    XCTAssertNil([self.selectedColor value],
-                 @"received update: %u", [[self.selectedColor value] unsignedIntValue]);
+    assertThat([self.selectedColor value], is(nilValue()));
 }
 
 - (void)testThatPreviouslySelectedCellIsStillRenderedAsSelected {
-    XCTAssertTrue(self.greenCellRenderer.selected);
+    assertThatBool(self.greenCellRenderer.selected, is(equalToBool(YES)));
 }
 
 - (void)testThatOtherCellsAreStillRenderedAsUnselected {
-    XCTAssertFalse(self.redCellRenderer.selected);
-    XCTAssertFalse(self.blueCellRenderer.selected);
+    assertThatBool(self.redCellRenderer.selected, is(equalToBool(NO)));
+    assertThatBool(self.blueCellRenderer.selected, is(equalToBool(NO)));
 }
 
 @end
