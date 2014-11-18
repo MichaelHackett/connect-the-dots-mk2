@@ -17,7 +17,7 @@
 }
 
 
-#pragma mark - NSCopying protocol
+#pragma mark NSCopying protocol
 
 
 - (id)copyWithZone:(__unused NSZone*)zone
@@ -32,7 +32,7 @@
 }
 
 
-#pragma mark - Equality and hashing
+#pragma mark Equality and hashing
 
 
 - (BOOL)isEqual:(id)object

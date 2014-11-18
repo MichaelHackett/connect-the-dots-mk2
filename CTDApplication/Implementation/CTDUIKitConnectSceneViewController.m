@@ -95,7 +95,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark - CTDTargetContainerView protocol
+#pragma mark CTDTargetContainerView protocol
 
 
 - (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
@@ -124,7 +124,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark - CTDTouchInputSource protocol
+#pragma mark CTDTouchInputSource protocol
 
 
 // TODO: Move distribution to presentation layer, if possible.
@@ -141,7 +141,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark - Touch distribution
+#pragma mark Touch distribution
 
 
 - (void)touchesBegan:(NSSet*)touches

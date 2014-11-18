@@ -77,7 +77,7 @@ CTD_NO_DEFAULT_INIT
     id<CTDTouchResponder> _colorCellsTouchResponder;
 }
 
-#pragma mark - Initialization
+#pragma mark Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                    targetsTouchMapper:(id<CTDTouchMapper>)targetsTouchMapper
@@ -96,7 +96,7 @@ CTD_NO_DEFAULT_INIT
 
 
 
-#pragma mark - CTDTouchResponder protocol
+#pragma mark CTDTouchResponder protocol
 
 - (id<CTDTouchTracker>)trackerForTouchStartingAt:(CTDPoint*)initialPosition
 {

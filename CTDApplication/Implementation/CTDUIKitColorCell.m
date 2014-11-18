@@ -50,7 +50,7 @@
 
 
 
-#pragma mark - CTDSelectionRenderer protocol
+#pragma mark CTDSelectionRenderer protocol
 
 
 - (void)showSelectionIndicator
@@ -66,7 +66,7 @@
 
 
 
-#pragma mark - CTDTouchable protocol
+#pragma mark CTDTouchable protocol
 
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation

@@ -29,7 +29,7 @@
 
 
 
-#pragma mark - CTDTouchTracker protocol
+#pragma mark CTDTouchTracker protocol
 
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition

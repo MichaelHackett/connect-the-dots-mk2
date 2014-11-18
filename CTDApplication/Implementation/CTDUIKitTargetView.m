@@ -44,7 +44,7 @@
 
 
 
-#pragma mark - CTDTargetView protocol
+#pragma mark CTDTargetView protocol
 
 
 //- (void)discardView
@@ -69,7 +69,7 @@
 
 
 
-#pragma mark - CTDTouchable protocol
+#pragma mark CTDTouchable protocol
 
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation

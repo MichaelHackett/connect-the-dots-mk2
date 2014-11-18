@@ -8,7 +8,7 @@ static CTDPoint* ORIGIN = nil;
 
 @implementation CTDPoint
 
-#pragma mark - Creation and initialization
+#pragma mark Creation and initialization
 
 + (void)initialize
 {
@@ -46,7 +46,7 @@ static CTDPoint* ORIGIN = nil;
 }
 
 
-#pragma mark - NSCopying
+#pragma mark NSCopying
 
 - (id)copyWithZone:(__unused NSZone*)zone
 {
@@ -60,7 +60,7 @@ static CTDPoint* ORIGIN = nil;
 }
 
 
-#pragma mark - Equality and hashing
+#pragma mark Equality and hashing
 
 - (BOOL)isEqual:(id)object
 {
@@ -89,7 +89,7 @@ static CTDPoint* ORIGIN = nil;
 }
 
 
-#pragma mark - String representations
+#pragma mark String representations
 
 - (NSString*)description
 {

@@ -16,7 +16,7 @@
 
 
 
-#pragma mark - Initialization
+#pragma mark Initialization
 
 
 - (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)touchMapper
@@ -38,7 +38,7 @@
 
 
 
-#pragma mark - CTDTouchTracker protocol
+#pragma mark CTDTouchTracker protocol
 
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition

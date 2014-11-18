@@ -21,7 +21,7 @@
 
 
 
-#pragma mark - NSCopying
+#pragma mark NSCopying
 
 - (id)copyWithZone:(__unused NSZone*)zone
 {
@@ -35,7 +35,7 @@
 }
 
 
-#pragma mark - Equality and hashing
+#pragma mark Equality and hashing
 
 - (BOOL)isEqual:(id)object
 {
@@ -60,7 +60,7 @@
 }
 
 
-#pragma mark - String representations
+#pragma mark String representations
 
 - (NSString*)description
 {
