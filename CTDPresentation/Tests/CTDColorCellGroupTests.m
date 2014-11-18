@@ -125,10 +125,14 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
                is(equalTo(@[@(DEFAULT_COLOR)])));
 }
 
-- (void)testThatNoneOfTheCellRenderersReceiveAnyUpdates {
-    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
+- (void)testThatAllCellRenderersAreSyncedToCellInitialState
+{
+    assertThat(self.redCellRenderer.messagesReceived,
+               is(equalTo(@[message(hideSelectionIndicator)])));
+    assertThat(self.greenCellRenderer.messagesReceived,
+               is(equalTo(@[message(hideSelectionIndicator)])));
+    assertThat(self.blueCellRenderer.messagesReceived,
+               is(equalTo(@[message(hideSelectionIndicator)])));
 }
 
 @end

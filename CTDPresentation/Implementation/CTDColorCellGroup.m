@@ -164,6 +164,7 @@
 - (id<CTDSelectable>)addCellForColor:(CTDTargetColor)cellColor
                         withRenderer:(id<CTDColorCellRenderer>)cellRenderer;
 {
+    [cellRenderer hideSelectionIndicator]; // sync renderer to new cell's state
     [_mutex addRenderer:cellRenderer forCellWithColor:cellColor];
     CTDColorCellGroup_CellProxy* cellProxy = [[CTDColorCellGroup_CellProxy alloc]
                                               initWithCellColor:cellColor
