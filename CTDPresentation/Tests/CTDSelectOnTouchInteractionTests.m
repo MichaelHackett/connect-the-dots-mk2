@@ -3,8 +3,11 @@
 #import "CTDSelectOnTouchInteraction.h"
 
 #import "CTDColorCellsTestFixture.h"
+#import "CTDSelectionChangeRecorder.h"
 #import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
+
+#define message CTDMakeMethodSelector
 
 
 
@@ -40,13 +43,14 @@
 @implementation CTDSelectOnTouchInteractionWhenInitialPositionIsOutsideOfAllElements
 
 - (void)setUp {
+    [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -60,13 +64,14 @@
 @implementation CTDSelectOnTouchInteractionWhenTouchMovesWithoutEnteringAnyElement
 
 - (void)setUp {
+    [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -82,16 +87,18 @@
 - (void)setUp {
     [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchDidMoveTo:self.fixture.pointsInsideCell1[0]];
 }
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(YES));
+    assertThat([self.fixture.colorCell1 messagesReceived],
+               hasItem(message(select)));
 }
 
-- (void)testThatOtherColorCellsAreNotSelected {
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -110,13 +117,14 @@
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[1]];
 }
 
-- (void)testThatTheCorrespondingColorCellIsSelected {
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
+- (void)testThatTheColorCellUnderTheTouchIsSelected {
+    assertThat([self.fixture.colorCell2 messagesReceived],
+               hasItem(message(select)));
 }
 
-- (void)testThatOtherColorCellsAreNotSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -132,16 +140,14 @@
 - (void)setUp {
     [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[2]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchDidMoveTo:self.fixture.pointsInsideCell2[1]];
 }
 
-- (void)testThatTheTargetedColorCellRemainsSelected {
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
-}
-
-- (void)testThatOtherColorCellsAreNotSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -157,13 +163,18 @@
 - (void)setUp {
     [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[2]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[2]];
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
+    assertThat([self.fixture.colorCell1 messagesReceived],
+               hasItem(message(deselect)));
+}
+
+- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
 }
 
 @end
@@ -179,15 +190,18 @@
 - (void)setUp {
     [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchDidMoveTo:self.fixture.pointsInsideCell2[1]];
 }
 
-- (void)testThatTheNewlyTargetedColorCellIsSelected {
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(YES));
+- (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
+    assertThat([self.fixture.colorCell1 messagesReceived],
+               hasItem(message(deselect)));
 }
 
-- (void)testThatTheFirstColorCellIsNoLongerSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
+- (void)testThatTheColorCellNowUnderTheTouchIsSelected {
+    assertThat([self.fixture.colorCell2 messagesReceived],
+               hasItem(message(select)));
 }
 
 @end
@@ -202,14 +216,19 @@
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
+    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell3[1]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchDidEnd];
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
+    assertThat([self.fixture.colorCell3 messagesReceived],
+               hasItem(message(deselect)));
+}
+
+- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
 }
 
 @end
@@ -224,13 +243,19 @@
 - (void)setUp {
     [super setUp];
     self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell2[0]];
+    [self.fixture resetCellSelectionRecording];
     [self.subject touchWasCancelled];
 }
 
-- (void)testThatNoColorCellsAreSelected {
-    assertThatBool(self.fixture.colorCell1.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell2.selected, equalToBool(NO));
-    assertThatBool(self.fixture.colorCell3.selected, equalToBool(NO));
+- (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
+    assertThat([self.fixture.colorCell2 messagesReceived],
+               hasItem(message(deselect)));
 }
+
+- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
+    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+}
+
 
 @end

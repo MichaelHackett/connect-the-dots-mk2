@@ -4,7 +4,6 @@
 
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDUtility/NSArray+CTDBlockBasedFiltering.h"
 
 
 
@@ -21,55 +20,38 @@
     self.subject = [[CTDRecordingTouchTracker alloc] init];
 }
 
-- (void)tearDown
-{
-    self.subject = nil;
-    [super tearDown];
-}
-
-- (NSUInteger)countOfMessagesReceivedWithSelector:(SEL)selector
-{
-    return [[self.subject.messagesReceived indexesOfObjectsPassingTest:
-        ^BOOL(id obj, __unused NSUInteger index, __unused BOOL* stop)
-    {
-        return ((CTDMethodSelector*)obj).rawSelector == selector;
-    }] count];
-}
-
 @end
 
 
 
-@interface CTDFreshRecordingTouchTrackerTestCase : CTDRecordingTouchTrackerBaseTestCase
+
+@interface CTDRecordingTouchTrackerInitialState
+    : CTDRecordingTouchTrackerBaseTestCase
 @end
 
-@implementation CTDFreshRecordingTouchTrackerTestCase
+@implementation CTDRecordingTouchTrackerInitialState
 
-- (void)testThatInitialTouchPositionIsNil
+- (void)testThatTouchPositionIsNil
 {
     assertThat(self.subject.lastTouchPosition, is(nilValue()));
 }
 
-- (void)testThatMessagesReceivedListIsNotNil
+- (void)testThatLastMessageReceivedIsNil
 {
-    assertThat(self.subject.messagesReceived, isNot(nilValue()));
-}
-
-- (void)testThatMessagesReceivedListIsEmpty
-{
-    assertThat(self.subject.messagesReceived, isEmpty());
+    assertThat([self.subject lastMessage], is(nilValue()));
 }
 
 @end
 
 
 
-@interface CTDRecordingTouchTrackerAfterASinglePositionChangeMessageTestCase
+
+@interface CTDRecordingTouchTrackerAfterASinglePositionChangeMessage
     : CTDRecordingTouchTrackerBaseTestCase
 @property (copy, nonatomic) CTDPoint* touchPosition;
 @end
 
-@implementation CTDRecordingTouchTrackerAfterASinglePositionChangeMessageTestCase
+@implementation CTDRecordingTouchTrackerAfterASinglePositionChangeMessage
 
 - (void)setUp
 {
@@ -78,38 +60,42 @@
     [self.subject touchDidMoveTo:self.touchPosition];
 }
 
-- (void)tearDown
-{
-    self.touchPosition = nil;
-    [super tearDown];
-}
-
-- (void)testThatTouchPositionEqualsOneInPositionChangeMessage
+- (void)testThatTouchPositionEqualsTheOneInPositionChangeMessage
 {
     assertThat(self.subject.lastTouchPosition, is(equalTo(self.touchPosition)));
 }
 
-- (void)testThatMessagesReceivedListContainsSingleElement
+- (void)testThatItHasRecordedReceivingASingleProtocolMessage
 {
-    assertThat(self.subject.messagesReceived, hasCountOf(1));
+    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
+                              is(equalToUnsignedInteger(1)));
 }
 
-- (void)testThatMessagesReceivedListContainsExpectedSelector
+- (void)testThatItHasRecordedReceivingTheSentMessage
 {
-    assertThat(self.subject.messagesReceived,
-               hasItem([[CTDMethodSelector alloc]
-                        initWithRawSelector:@selector(touchDidMoveTo:)]));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidMoveTo:)],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatItDoesNotReportReceivingUnsentProtocolMessages
+{
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidEnd)],
+                   is(equalToBool(NO)));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchWasCancelled)],
+                   is(equalToBool(NO)));
 }
 
 @end
 
 
-@interface CTDRecordingTouchTrackerAfterSeveralPositionChangeMessagesTestCase
+
+
+@interface CTDRecordingTouchTrackerAfterSeveralPositionChangeMessages
     : CTDRecordingTouchTrackerBaseTestCase
 @property (copy, nonatomic) CTDPoint* finalTouchPosition;
 @end
 
-@implementation CTDRecordingTouchTrackerAfterSeveralPositionChangeMessagesTestCase
+@implementation CTDRecordingTouchTrackerAfterSeveralPositionChangeMessages
 
 - (void)setUp
 {
@@ -127,31 +113,29 @@
     self.finalTouchPosition = touchPositions[1];
 }
 
-- (void)tearDown
-{
-    self.finalTouchPosition = nil;
-    [super tearDown];
-}
-
 - (void)testThatTouchPositionIsLastPositionReceived
 {
     assertThat(self.subject.lastTouchPosition, is(equalTo(self.finalTouchPosition)));
 }
 
-- (void)testThatMessagesReceivedContainsAnEntryForEachPositionReceived
+- (void)testThatItHasRecordedReceivingAllProtocolMessages
 {
-    assertThat(self.subject.messagesReceived, hasCountOf(5));
+    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
+                              is(equalToUnsignedInteger(5)));
 }
 
-- (void)testThatMessagesReceivedAreAllTouchMovedMessages
+- (void)testThatItHasRecordedReceivingTheSentMessage
 {
-    NSArray* nonTouchMovedMessages =
-        [self.subject.messagesReceived filteredArrayUsingTest:
-            ^BOOL(id obj, __unused NSUInteger index, __unused BOOL* stop)
-        {
-            return ((CTDMethodSelector*)obj).rawSelector != @selector(touchDidMoveTo:);
-        }];
-    assertThat(nonTouchMovedMessages, isEmpty());
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidMoveTo:)],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatItDoesNotReportReceivingUnsentProtocolMessages
+{
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidEnd)],
+                   is(equalToBool(NO)));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchWasCancelled)],
+                   is(equalToBool(NO)));
 }
 
 @end
@@ -159,40 +143,38 @@
 
 
 
-@interface CTDRecordingTouchTrackerAllMessagesTestCase
+@interface CTDRecordingTouchTrackerHavingReceivedAllProtocolMessages
     : CTDRecordingTouchTrackerBaseTestCase
 @end
 
-@implementation CTDRecordingTouchTrackerAllMessagesTestCase
+@implementation CTDRecordingTouchTrackerHavingReceivedAllProtocolMessages
 
 - (void)setUp
 {
     [super setUp];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:400 y:169]];
+    [self.subject touchDidMoveTo:CTDMakePoint(400,169)];
     [self.subject touchDidEnd];
     [self.subject touchDidEnd];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:880 y:215]];
+    [self.subject touchDidMoveTo:CTDMakePoint(880,215)];
     [self.subject touchWasCancelled];
-    [self.subject touchDidMoveTo:[[CTDPoint alloc] initWithX:0 y:999]];
+    [self.subject touchDidMoveTo:CTDMakePoint(0,999)];
     [self.subject touchDidEnd];
 }
 
-- (void)testDidRecordAllTouchMovedMessages
+- (void)testThatItHasRecordedReceivingAllProtocolMessages
 {
-    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)],
-                          is(equalToUnsignedInt(3)));
+    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
+                              is(equalToUnsignedInteger(7)));
 }
 
-- (void)testDidRecordAllTouchEndedMessages
+- (void)testThatItHasRecordedReceivingAllSentMessages
 {
-    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchDidEnd)],
-                          is(equalToUnsignedInt(3)));
-}
-
-- (void)testDidRecordAllTouchCancelledMessages
-{
-    assertThatUnsignedInt([self countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)],
-                          is(equalToUnsignedInt(1)));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidMoveTo:)],
+                   is(equalToBool(YES)));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchDidEnd)],
+                   is(equalToBool(YES)));
+    assertThatBool([self.subject hasReceivedMessage:@selector(touchWasCancelled)],
+                   is(equalToBool(YES)));
 }
 
 @end

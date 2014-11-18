@@ -7,6 +7,7 @@
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
+#import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -76,9 +77,9 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     [toolbar addCell:blueCell];
     [self.view addSubview:toolbar];
 
-    [_colorCellMap setObject:redCell forKey:[UIColor redColor]];
-    [_colorCellMap setObject:greenCell forKey:[UIColor greenColor]];
-    [_colorCellMap setObject:blueCell forKey:[UIColor blueColor]];
+    [_colorCellMap setObject:redCell forKey:@(CTDPALETTE_RED_TARGET)];
+    [_colorCellMap setObject:greenCell forKey:@(CTDPALETTE_GREEN_TARGET)];
+    [_colorCellMap setObject:blueCell forKey:@(CTDPALETTE_BLUE_TARGET)];
 }
 
 //- (void)didReceiveMemoryWarning

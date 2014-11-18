@@ -3,9 +3,9 @@
 //     active.
 //
 //     Uses the given CTDTouchMapper to map the touch position to UI elements;
-//     these element should conform to the CTDSelectionRenderer protocol in
-//     order for the tracker to trigger selection and deselection. If there
-//     is a potential overlap in targets, the touch mapper is responsible for
+//     these elements should conform to the CTDSelectable protocol in order
+//     for the tracker to trigger selection and deselection. If there is a
+//     potential overlap in targets, the touch mapper is responsible for
 //     deciding which element "wins" and is chosen for selection.
 //
 // TODO: This interaction should operate on a model element, not directly

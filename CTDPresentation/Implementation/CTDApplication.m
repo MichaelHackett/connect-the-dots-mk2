@@ -2,6 +2,8 @@
 
 #import "CTDApplication.h"
 
+#import "CTDColorCellGroup.h"
+#import "CTDColorPalette.h"
 #import "CTDListOrderTouchMapper.h"
 #import "CTDSelectOnTapInteraction.h"
 #import "CTDSelectOnTouchInteraction.h"
@@ -24,8 +26,33 @@
     _currentPresenter = [[CTDTargetSetPresenter alloc]
                          initWithTrialRenderer:trialRenderer];
 
-    id<CTDTouchMapper> colorCellsTouchMapper =
-        [CTDListOrderTouchMapper mapperWithTouchables:[colorCellMap allValues]];
+    CTDColorCellGroup* colorCellGroup =
+        [[CTDColorCellGroup alloc]
+         initWithDefaultColor:CTDTARGETCOLOR_WHITE
+            selectedColorSink:nil];
+
+    CTDListOrderTouchMapper* colorCellsTouchMapper =
+        [[CTDListOrderTouchMapper alloc] init];
+
+    // TODO: reduce repetition in this section
+
+    id<CTDColorCellRenderer, CTDTouchable> redColorCellRenderer =
+        [colorCellMap objectForKey:@(CTDPALETTE_RED_TARGET)];
+    id<CTDColorCellRenderer, CTDTouchable> greenColorCellRenderer =
+        [colorCellMap objectForKey:@(CTDPALETTE_GREEN_TARGET)];
+    id<CTDColorCellRenderer, CTDTouchable> blueColorCellRenderer =
+        [colorCellMap objectForKey:@(CTDPALETTE_BLUE_TARGET)];
+
+    [colorCellsTouchMapper mapTouchable:redColorCellRenderer
+                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_RED
+                                                         withRenderer:redColorCellRenderer]];
+    [colorCellsTouchMapper mapTouchable:greenColorCellRenderer
+                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_GREEN
+                                                         withRenderer:greenColorCellRenderer]];
+    [colorCellsTouchMapper mapTouchable:blueColorCellRenderer
+                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_BLUE
+                                                         withRenderer:blueColorCellRenderer]];
+
     id<CTDTouchResponder> colorCellsTouchResponder =
         [[CTDTouchTrackerFactory alloc]
          initWithTouchTrackerFactoryBlock:
