@@ -10,8 +10,8 @@
 
 @interface CTDTargetSetPresenter : NSObject
 
-- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
-// TODO: pass target-set argument
+- (instancetype)initWithTargetList:(NSArray*)targetList
+                     trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
 
 CTD_NO_DEFAULT_INIT
 

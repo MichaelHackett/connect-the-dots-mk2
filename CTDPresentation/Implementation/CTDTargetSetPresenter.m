@@ -7,7 +7,12 @@
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
+#import "CTDModel/CTDTarget.h"
 #import "CTDUtility/CTDPoint.h"
+
+
+
+static NSDictionary const* targetPaletteColorMap;
 
 
 
@@ -19,20 +24,28 @@
     CTDListOrderTouchMapper* _targetsTouchMapper;
 }
 
-- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
++ (void)initialize
+{
+    targetPaletteColorMap = @{
+        @(CTDTARGETCOLOR_RED): @(CTDPALETTE_RED_TARGET),
+        @(CTDTARGETCOLOR_GREEN): @(CTDPALETTE_GREEN_TARGET),
+        @(CTDTARGETCOLOR_BLUE): @(CTDPALETTE_BLUE_TARGET),
+    };
+}
+
+- (instancetype)initWithTargetList:(NSArray*)targetList
+                     trialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     self = [super init];
     if (self) {
         NSMutableArray* targetViews = [[NSMutableArray alloc] init];
-        [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:100 y:400]
-                                  withInitialColor:CTDPALETTE_GREEN_TARGET]];
-        [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:600 y:150]
-                                  withInitialColor:CTDPALETTE_RED_TARGET]];
-        [targetViews addObject:
-            [trialRenderer newTargetViewCenteredAt:[CTDPoint x:400 y:550]
-                                  withInitialColor:CTDPALETTE_BLUE_TARGET]];
+        for (CTDTarget* target in targetList) {
+            CTDPaletteColor targetColor =
+                [targetPaletteColorMap[@(target.color)] unsignedIntegerValue];
+            [targetViews addObject:
+                [trialRenderer newTargetViewCenteredAt:target.position
+                                      withInitialColor:targetColor]];
+        }
 
         _targetViews = [targetViews copy];
         _targetsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
