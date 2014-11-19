@@ -13,9 +13,9 @@
 
 typedef enum {
 
-    CTDPALETTE_WHITE_TARGET,
-    CTDPALETTE_RED_TARGET,
-    CTDPALETTE_GREEN_TARGET,
-    CTDPALETTE_BLUE_TARGET
+    CTDPaletteColor_WhiteTarget,
+    CTDPaletteColor_RedTarget,
+    CTDPaletteColor_GreenTarget,
+    CTDPaletteColor_BlueTarget
 
 } CTDPaletteColor;

@@ -6,11 +6,11 @@
 
 
 typedef enum {
-    CTDTARGETCOLOR_NONE,
-    CTDTARGETCOLOR_WHITE,
-    CTDTARGETCOLOR_RED,
-    CTDTARGETCOLOR_GREEN,
-    CTDTARGETCOLOR_BLUE
+    CTDTargetColor_None,
+    CTDTargetColor_White,
+    CTDTargetColor_Red,
+    CTDTargetColor_Green,
+    CTDTargetColor_Blue
 } CTDTargetColor;
 
 

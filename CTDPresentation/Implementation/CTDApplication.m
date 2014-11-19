@@ -34,9 +34,9 @@
     if (self) {
         _currentPresenter = nil;
         _targetList = @[
-            target(CTDTARGETCOLOR_GREEN, 100, 170),
-            target(CTDTARGETCOLOR_RED, 600, 400),
-            target(CTDTARGETCOLOR_BLUE, 250, 650)
+            target(CTDTargetColor_Green, 100, 170),
+            target(CTDTargetColor_Red, 600, 400),
+            target(CTDTargetColor_Blue, 250, 650)
         ];
     }
     return self;
@@ -52,7 +52,7 @@
 
     CTDColorCellGroup* colorCellGroup =
         [[CTDColorCellGroup alloc]
-         initWithDefaultColor:CTDTARGETCOLOR_WHITE
+         initWithDefaultColor:CTDTargetColor_White
             selectedColorSink:nil];
 
     CTDListOrderTouchMapper* colorCellsTouchMapper =
@@ -61,20 +61,20 @@
     // TODO: reduce repetition in this section
 
     id<CTDColorCellRenderer, CTDTouchable> redColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPALETTE_RED_TARGET)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_RedTarget)];
     id<CTDColorCellRenderer, CTDTouchable> greenColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPALETTE_GREEN_TARGET)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_GreenTarget)];
     id<CTDColorCellRenderer, CTDTouchable> blueColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPALETTE_BLUE_TARGET)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_BlueTarget)];
 
     [colorCellsTouchMapper mapTouchable:redColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_RED
+                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Red
                                                          withRenderer:redColorCellRenderer]];
     [colorCellsTouchMapper mapTouchable:greenColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_GREEN
+                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Green
                                                          withRenderer:greenColorCellRenderer]];
     [colorCellsTouchMapper mapTouchable:blueColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTARGETCOLOR_BLUE
+                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Blue
                                                          withRenderer:blueColorCellRenderer]];
 
     id<CTDTouchResponder> colorCellsTouchResponder =

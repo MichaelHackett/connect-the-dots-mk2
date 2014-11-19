@@ -19,10 +19,10 @@
         _connectionLineWidth = 5.0;
         _connectionLineColor = [[UIColor yellowColor] CGColor];
         _colorPalette = @{
-            @(CTDPALETTE_WHITE_TARGET):   [UIColor whiteColor],
-            @(CTDPALETTE_RED_TARGET):     [UIColor redColor],
-            @(CTDPALETTE_GREEN_TARGET):   [UIColor greenColor],
-            @(CTDPALETTE_BLUE_TARGET):    [UIColor blueColor]
+            @(CTDPaletteColor_WhiteTarget):   [UIColor whiteColor],
+            @(CTDPaletteColor_RedTarget):     [UIColor redColor],
+            @(CTDPaletteColor_GreenTarget):   [UIColor greenColor],
+            @(CTDPaletteColor_BlueTarget):    [UIColor blueColor]
         };
     }
     return self;

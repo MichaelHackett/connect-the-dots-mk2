@@ -27,9 +27,9 @@ static NSDictionary const* targetPaletteColorMap;
 + (void)initialize
 {
     targetPaletteColorMap = @{
-        @(CTDTARGETCOLOR_RED): @(CTDPALETTE_RED_TARGET),
-        @(CTDTARGETCOLOR_GREEN): @(CTDPALETTE_GREEN_TARGET),
-        @(CTDTARGETCOLOR_BLUE): @(CTDPALETTE_BLUE_TARGET),
+        @(CTDTargetColor_Red): @(CTDPaletteColor_RedTarget),
+        @(CTDTargetColor_Green): @(CTDPaletteColor_GreenTarget),
+        @(CTDTargetColor_Blue): @(CTDPaletteColor_BlueTarget),
     };
 }
 

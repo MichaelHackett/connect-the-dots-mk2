@@ -59,7 +59,7 @@
 // TODO: Could be generalized to just be about a selection mutex / single-selection
 // set, dropping the irrelevant "cells" aspect.
 
-static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
+static CTDTargetColor const DEFAULT_COLOR = CTDTargetColor_None;
 
 
 @interface CTDColorCellGroupBaseTestCase : XCTestCase
@@ -94,11 +94,11 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
                     initWithDefaultColor:DEFAULT_COLOR
                        selectedColorSink:self.selectedColor];
 
-    self.redCell = [self.subject addCellForColor:CTDTARGETCOLOR_RED
+    self.redCell = [self.subject addCellForColor:CTDTargetColor_Red
                                     withRenderer:self.redCellRenderer];
-    self.greenCell = [self.subject addCellForColor:CTDTARGETCOLOR_GREEN
+    self.greenCell = [self.subject addCellForColor:CTDTargetColor_Green
                                       withRenderer:self.greenCellRenderer];
-    self.blueCell = [self.subject addCellForColor:CTDTARGETCOLOR_BLUE
+    self.blueCell = [self.subject addCellForColor:CTDTargetColor_Blue
                                      withRenderer:self.blueCellRenderer];
 }
 
@@ -152,7 +152,7 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 
 - (void)testThatSelectedColorSinkIsSentTheSelectedCellColor {
     assertThat([self.selectedColor colorsReceived],
-               is(equalTo(@[@(CTDTARGETCOLOR_RED)])));
+               is(equalTo(@[@(CTDTargetColor_Red)])));
 }
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
@@ -183,7 +183,7 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTARGETCOLOR_NONE;
 
 - (void)testThatSelectedColorSinkIsSentTheColorOfTheLastCellSelected {
     assertThat([self.selectedColor colorsReceived],
-               is(equalTo(@[@(CTDTARGETCOLOR_BLUE)])));
+               is(equalTo(@[@(CTDTargetColor_Blue)])));
 }
 
 - (void)testThatTheNewlySelectedCellIsRenderedAsSelected {

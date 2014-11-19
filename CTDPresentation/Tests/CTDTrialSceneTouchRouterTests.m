@@ -58,7 +58,7 @@ static CTDFakeTargetRenderer* target1;
 
     target1 = [[CTDFakeTargetRenderer alloc]
                initWithCenterPosition:TARGET_1_CENTER
-                          targetColor:CTDPALETTE_WHITE_TARGET];
+                          targetColor:CTDPaletteColor_WhiteTarget];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
     CTDRecordingTouchTracker* colorCellsTouchTracker =

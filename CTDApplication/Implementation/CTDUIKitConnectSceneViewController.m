@@ -69,21 +69,21 @@ static id<NSCopying> keyForTouch(UITouch* touch)
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
     CTDUIKitColorCell* redCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_RED_TARGET]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_RedTarget]];
     CTDUIKitColorCell* greenCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_GreenTarget]];
     CTDUIKitColorCell* blueCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_BLUE_TARGET]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_BlueTarget]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
     [self.view addSubview:toolbar];
 
-    [_colorCellMap setObject:redCell forKey:@(CTDPALETTE_RED_TARGET)];
-    [_colorCellMap setObject:greenCell forKey:@(CTDPALETTE_GREEN_TARGET)];
-    [_colorCellMap setObject:blueCell forKey:@(CTDPALETTE_BLUE_TARGET)];
+    [_colorCellMap setObject:redCell forKey:@(CTDPaletteColor_RedTarget)];
+    [_colorCellMap setObject:greenCell forKey:@(CTDPaletteColor_GreenTarget)];
+    [_colorCellMap setObject:blueCell forKey:@(CTDPaletteColor_BlueTarget)];
 }
 
 //- (void)didReceiveMemoryWarning
