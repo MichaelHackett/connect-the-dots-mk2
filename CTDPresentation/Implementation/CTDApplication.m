@@ -11,12 +11,35 @@
 #import "CTDTrialSceneTouchRouter.h"
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackerFactory.h"
+#import "CTDModel/CTDTarget.h"
+#import "CTDModel/CTDTargetColor.h"
+#import "CTDUtility/CTDPoint.h"
+
+
+
+// Macro for defining sample data
+#define target(COLOR,X,Y) [[CTDTarget alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
 @implementation CTDApplication
 {
     CTDTargetSetPresenter* _currentPresenter;
+    NSArray* _targetList;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _currentPresenter = nil;
+        _targetList = @[
+            target(CTDTARGETCOLOR_GREEN, 100, 170),
+            target(CTDTARGETCOLOR_RED, 600, 400),
+            target(CTDTARGETCOLOR_BLUE, 250, 650)
+        ];
+    }
+    return self;
 }
 
 - (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
@@ -24,7 +47,8 @@
             touchInputSource:(id<CTDTouchInputSource>)touchInputSource
 {
     _currentPresenter = [[CTDTargetSetPresenter alloc]
-                         initWithTrialRenderer:trialRenderer];
+                         initWithTargetList:_targetList
+                              trialRenderer:trialRenderer];
 
     CTDColorCellGroup* colorCellGroup =
         [[CTDColorCellGroup alloc]

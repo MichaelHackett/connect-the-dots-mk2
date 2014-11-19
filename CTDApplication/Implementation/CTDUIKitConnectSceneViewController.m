@@ -5,6 +5,7 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitConnectionView.h"
+#import "CTDUIKitDrawingConfig.h"
 #import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
@@ -67,11 +68,14 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
     CTDUIKitColorCell* redCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor redColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_RED_TARGET]];
     CTDUIKitColorCell* greenCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor greenColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_GREEN_TARGET]];
     CTDUIKitColorCell* blueCell =
-        [[CTDUIKitColorCell alloc] initWithColor:[UIColor blueColor]];
+        [[CTDUIKitColorCell alloc]
+         initWithColor:[self.drawingConfig colorFor:CTDPALETTE_BLUE_TARGET]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
@@ -99,11 +103,14 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 - (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+                                              withInitialColor:(CTDPaletteColor)targetColor
 {
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
     CTDUIKitTargetView* newTargetView =
         [[CTDUIKitTargetView alloc]
-         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)];
+         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)
+         targetColor:[self.drawingConfig colorFor:targetColor]];
+    newTargetView.drawingConfig = self.drawingConfig;
     [self.view addSubview:newTargetView];
     [_targetViews addObject:newTargetView];
     return newTargetView;

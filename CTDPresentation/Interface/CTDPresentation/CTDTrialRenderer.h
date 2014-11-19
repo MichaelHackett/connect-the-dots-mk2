@@ -4,6 +4,8 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDColorPalette.h"
+
 @protocol CTDTargetRenderer;
 @protocol CTDTargetConnectionView;
 @protocol CTDTouchable;
@@ -13,7 +15,9 @@
 
 @protocol CTDTrialRenderer <NSObject>
 
-- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition;
+- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
+                                              withInitialColor:(CTDPaletteColor)targetColor;
+
 - (id<CTDTargetConnectionView>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                                 secondEndpointPosition:(CTDPoint*)secondEndpointPosition;

@@ -34,6 +34,7 @@
 		4C5A56A219E1C65600E994CB /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C5A56A919E20A2A00E994CB /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
 		4C5A56AC19E20CC200E994CB /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
+		4C60BB501A1C33CF0067A72F /* CTDTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C60BB4F1A1C33CF0067A72F /* CTDTarget.m */; };
 		4C7B5B841A0C1F750040EC64 /* CTDUIKitColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */; };
 		4CD4E25C1A080D61006A244D /* CTDListOrderTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */; };
 		4CD4E25F1A084676006A244D /* CTDDelegatingTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */; };
@@ -62,8 +63,6 @@
 		4CEBCA2E19BB564600D2B498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCA2C19BB564600D2B498 /* InfoPlist.strings */; };
 		4CEBCA3019BB564600D2B498 /* CTDApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA2F19BB564600D2B498 /* CTDApplicationTests.m */; };
 		4CEBCA5819BB77C400D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
-		4CEBCA5D19BB77C400D2B498 /* CTDModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CEBCA5C19BB77C400D2B498 /* CTDModel.h */; };
-		4CEBCA5F19BB77C400D2B498 /* CTDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCA5E19BB77C400D2B498 /* CTDModel.m */; };
 		4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
 		4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
@@ -143,7 +142,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				4CEBCA5D19BB77C400D2B498 /* CTDModel.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +217,8 @@
 		4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitDrawingConfig.h; sourceTree = "<group>"; };
 		4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitDrawingConfig.m; sourceTree = "<group>"; };
 		4C5A56AD19E32B4600E994CB /* CTDTouchable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CTDTouchable.h; path = CTDPresentation/Interface/CTDPresentation/CTDTouchable.h; sourceTree = SOURCE_ROOT; };
+		4C60BB4F1A1C33CF0067A72F /* CTDTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTarget.m; sourceTree = "<group>"; };
+		4C60BB511A1C34B80067A72F /* CTDTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTarget.h; sourceTree = "<group>"; };
 		4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionRenderer.h; sourceTree = "<group>"; };
 		4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitColorCell.h; sourceTree = "<group>"; };
 		4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitColorCell.m; sourceTree = "<group>"; };
@@ -248,6 +248,8 @@
 		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchMapper.m; path = CTDPresentation/Tests/CTDFakeTouchMapper.m; sourceTree = SOURCE_ROOT; };
 		4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchable.h; path = CTDPresentation/Tests/CTDFakeTouchable.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchable.m; path = CTDPresentation/Tests/CTDFakeTouchable.m; sourceTree = SOURCE_ROOT; };
+		4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
+		4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -276,8 +278,6 @@
 		4CEBCA5219BB601300D2B498 /* General-Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "General-Tests.xcconfig"; path = "BuildConfiguration/General-Tests.xcconfig"; sourceTree = "<group>"; };
 		4CEBCA5719BB77C400D2B498 /* libCTDModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA5B19BB77C400D2B498 /* CTDModel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDModel-Prefix.pch"; sourceTree = "<group>"; };
-		4CEBCA5C19BB77C400D2B498 /* CTDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDModel.h; sourceTree = "<group>"; };
-		4CEBCA5E19BB77C400D2B498 /* CTDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDModel.m; sourceTree = "<group>"; };
 		4CEBCA6419BB77C400D2B498 /* CTDModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA6D19BB77C400D2B498 /* CTDModelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CTDModelTests-Info.plist"; sourceTree = "<group>"; };
 		4CEBCA6F19BB77C400D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -714,7 +714,7 @@
 		4CEBCAA919BB8E9500D2B498 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA5C19BB77C400D2B498 /* CTDModel.h */,
+				4C60BB511A1C34B80067A72F /* CTDTarget.h */,
 				4C3236501A1641CC005C25D7 /* CTDTargetColor.h */,
 			);
 			name = Interface;
@@ -725,7 +725,7 @@
 			isa = PBXGroup;
 			children = (
 				4CEBCA5B19BB77C400D2B498 /* CTDModel-Prefix.pch */,
-				4CEBCA5E19BB77C400D2B498 /* CTDModel.m */,
+				4C60BB4F1A1C33CF0067A72F /* CTDTarget.m */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -794,6 +794,8 @@
 				4C25B97B1A0E95E300275138 /* CTDMethodSelector.h */,
 				4CFDEEDC19C68B070041B910 /* CTDPoint.h */,
 				4C25B9911A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.h */,
+				4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */,
+				4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */,
 			);
 			name = Interface;
 			path = Interface/CTDUtility;
@@ -1074,7 +1076,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEBCA5F19BB77C400D2B498 /* CTDModel.m in Sources */,
+				4C60BB501A1C33CF0067A72F /* CTDTarget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

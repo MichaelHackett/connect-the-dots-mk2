@@ -7,7 +7,16 @@
 #import "CTDPresentation/CTDTargetRenderer.h"
 #import "CTDPresentation/CTDTouchable.h"
 
+@class CTDUIKitDrawingConfig;
+
+
 
 @interface CTDUIKitTargetView : UIView <CTDTargetRenderer, CTDTouchable>
+
+@property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
+
+
+- (id)initWithFrame:(CGRect)frameRect
+        targetColor:(UIColor*)targetColor;
 
 @end
