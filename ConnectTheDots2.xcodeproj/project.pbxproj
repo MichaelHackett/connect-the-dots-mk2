@@ -210,7 +210,7 @@
 		4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDConnectionTouchInteraction.m; sourceTree = "<group>"; };
-		4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetConnectionView.h; sourceTree = "<group>"; };
+		4C5A56A419E1E2F800E994CB /* CTDTargetConnectionRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTargetConnectionRenderer.h; sourceTree = "<group>"; };
 		4C5A56A619E1EEF200E994CB /* CTDTrialRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialRenderer.h; sourceTree = "<group>"; };
 		4C5A56A719E20A2A00E994CB /* CTDUIKitConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitConnectionView.h; sourceTree = "<group>"; };
 		4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitConnectionView.m; sourceTree = "<group>"; };
@@ -682,8 +682,8 @@
 				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
 				4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */,
 				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
+				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionRenderer.h */,
 				4CFDEEE019C694C90041B910 /* CTDTargetRenderer.h */,
-				4C5A56A419E1E2F800E994CB /* CTDTargetConnectionView.h */,
 				4CFDEEDF19C68D640041B910 /* CTDTouchResponder.h */,
 				4C5A56AD19E32B4600E994CB /* CTDTouchable.h */,
 				4C5A56A619E1EEF200E994CB /* CTDTrialRenderer.h */,

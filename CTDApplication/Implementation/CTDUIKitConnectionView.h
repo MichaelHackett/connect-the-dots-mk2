@@ -6,13 +6,13 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDTargetConnectionView.h"
+#import "CTDPresentation/CTDTargetConnectionRenderer.h"
 
 @class CTDUIKitDrawingConfig;
 
 
 
-@interface CTDUIKitConnectionView : UIView <CTDTargetConnectionView>
+@interface CTDUIKitConnectionView : UIView <CTDTargetConnectionRenderer>
 
 - (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)config;
 

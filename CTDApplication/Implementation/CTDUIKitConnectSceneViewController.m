@@ -116,7 +116,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     return newTargetView;
 }
 
-- (id<CTDTargetConnectionView>)
+- (id<CTDTargetConnectionRenderer>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                                 secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {

@@ -1,5 +1,6 @@
-// CTDTargetConnectionView:
-//     Visual representation of a connection between two targets.
+// CTDTargetConnectionRenderer:
+//     An entity that renders a target connection into another form (typically
+//     visual).
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
@@ -7,7 +8,7 @@
 
 
 
-@protocol CTDTargetConnectionView <NSObject>
+@protocol CTDTargetConnectionRenderer <NSObject>
 
 // Adjust the positions of the ends of the connection (point coordinates are
 // relative to the container view).

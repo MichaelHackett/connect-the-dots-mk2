@@ -62,7 +62,7 @@
 
 
 
-#pragma mark CTDTargetConnectionView protocol
+#pragma mark CTDTargetConnectionRenderer protocol
 
 
 - (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition

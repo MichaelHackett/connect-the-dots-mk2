@@ -7,7 +7,7 @@
 #import "CTDColorPalette.h"
 
 @protocol CTDTargetRenderer;
-@protocol CTDTargetConnectionView;
+@protocol CTDTargetConnectionRenderer;
 @protocol CTDTouchable;
 @class CTDPoint;
 
@@ -18,7 +18,7 @@
 - (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
                                               withInitialColor:(CTDPaletteColor)targetColor;
 
-- (id<CTDTargetConnectionView>)
+- (id<CTDTargetConnectionRenderer>)
       newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                                 secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 

@@ -3,13 +3,13 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTargetConnectionView.h"
+#import "CTDTargetConnectionRenderer.h"
 
 @class CTDPoint;
 
 
 
-@interface CTDRecordingTargetConnectionView : NSObject <CTDTargetConnectionView>
+@interface CTDRecordingTargetConnectionView : NSObject <CTDTargetConnectionRenderer>
 
 @property (copy, readonly, nonatomic) CTDPoint* firstEndpointPosition;
 @property (copy, readonly, nonatomic) CTDPoint* secondEndpointPosition;

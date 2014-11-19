@@ -5,7 +5,7 @@
 #import "CTDColorPalette.h"
 #import "CTDFakeTargetRenderer.h"
 #import "CTDRecordingTargetConnectionView.h"
-#import "CTDTargetConnectionView.h"
+#import "CTDTargetConnectionRenderer.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchable.h"
 #import "CTDUtility/CTDPoint.h"
@@ -48,7 +48,7 @@
     return newTargetView;
 }
 
-- (id<CTDTargetConnectionView>)
+- (id<CTDTargetConnectionRenderer>)
       newTargetConnectionViewWithFirstEndpointPosition:
           (CTDPoint*)firstEndpointPosition
       secondEndpointPosition:(CTDPoint*)secondEndpointPosition

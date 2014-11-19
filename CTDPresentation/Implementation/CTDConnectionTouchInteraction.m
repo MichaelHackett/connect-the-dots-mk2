@@ -2,7 +2,7 @@
 
 #import "CTDConnectionTouchInteraction.h"
 
-#import "CTDTargetConnectionView.h"
+#import "CTDTargetConnectionRenderer.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
@@ -111,7 +111,7 @@
     __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTargetRenderer> _anchorTargetView;
     id<CTDTargetRenderer> _freeEndTargetView;
-    id<CTDTargetConnectionView> _connectionView;
+    id<CTDTargetConnectionRenderer> _connectionView;
 }
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer

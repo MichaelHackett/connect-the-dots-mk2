@@ -8,7 +8,7 @@
 #import "CTDRecordingTargetConnectionView.h"
 #import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
-#import "CTDTargetConnectionView.h"
+#import "CTDTargetConnectionRenderer.h"
 #import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
