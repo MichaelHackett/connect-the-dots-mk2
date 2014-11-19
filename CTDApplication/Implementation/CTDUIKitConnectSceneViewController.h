@@ -9,10 +9,13 @@
 @class CTDUIKitDrawingConfig;
 
 
+
 @interface CTDUIKitConnectSceneViewController
     : UIViewController <CTDTrialRenderer, CTDTouchInputSource>
 
 @property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
-@property (strong, readonly, nonatomic) NSDictionary* colorCellMap; // UIColor -> CTDKUIKitColorCell
+
+// maps NSNumber(CTDPaletteColor) -> CTDKUIKitColorCell
+@property (strong, readonly, nonatomic) NSDictionary* colorCellMap;
 
 @end
