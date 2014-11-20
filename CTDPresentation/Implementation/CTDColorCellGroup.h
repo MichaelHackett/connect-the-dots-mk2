@@ -16,11 +16,11 @@
 //
 // TODO: Extract a base MutexSelectionGroup class that implements the mutex,
 // having the ColorButtonSet extend this and convert the selection identifier
-// into a CTDTargetColor.
+// into a CTDDotColor.
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDModel/CTDTargetColor.h"
+#import "CTDModel/CTDDotColor.h"
 
 @protocol CTDColorCellRenderer;
 @protocol CTDSelectable;
@@ -30,11 +30,11 @@
 
 @interface CTDColorCellGroup : NSObject
 
-- (instancetype)initWithDefaultColor:(CTDTargetColor)defaultColor
-                   selectedColorSink:(id<CTDTargetColorSink>)selectedColorSink;
+- (instancetype)initWithDefaultColor:(CTDDotColor)defaultColor
+                   selectedColorSink:(id<CTDDotColorSink>)selectedColorSink;
 CTD_NO_DEFAULT_INIT
 
-- (id<CTDSelectable>)addCellForColor:(CTDTargetColor)cellColor
+- (id<CTDSelectable>)addCellForColor:(CTDDotColor)cellColor
                         withRenderer:(id<CTDColorCellRenderer>)cellRenderer;
 
 @end

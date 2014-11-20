@@ -5,23 +5,23 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitConnectionView.h"
+#import "CTDUIKitDotView.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDUIKitTargetView.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
-static CGFloat const kTargetDiameter = 75;
+static CGFloat const kDotDiameter = 75;
 
 
-static CGRect frameForTargetCenteredAt(CGPoint center)
+static CGRect frameForDotCenteredAt(CGPoint center)
 {
-    CGFloat radius = kTargetDiameter / (CGFloat)2.0;
+    CGFloat radius = kDotDiameter / (CGFloat)2.0;
     CGFloat left = center.x - radius;
     CGFloat top = center.y - radius;
-    return CGRectMake(left, top, kTargetDiameter, kTargetDiameter);
+    return CGRectMake(left, top, kDotDiameter, kDotDiameter);
 }
 
 static id<NSCopying> keyForTouch(UITouch* touch)
@@ -39,7 +39,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 @implementation CTDUIKitConnectSceneViewController
 {
-    NSMutableArray* _targetViews;
+    NSMutableArray* _dotViews;
     NSMutableArray* _touchResponders;
     NSMutableDictionary* _colorCellMap;
 
@@ -60,7 +60,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _targetViews = [[NSMutableArray alloc] init];
+    _dotViews = [[NSMutableArray alloc] init];
     _touchResponders = [[NSMutableArray alloc] init];
     _colorCellMap = [[NSMutableDictionary alloc] init];
     _touchTrackersMap = [[NSMutableDictionary alloc] init];
@@ -69,21 +69,21 @@ static id<NSCopying> keyForTouch(UITouch* touch)
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
     CTDUIKitColorCell* redCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_RedTarget]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_RedDot]];
     CTDUIKitColorCell* greenCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_GreenTarget]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_GreenDot]];
     CTDUIKitColorCell* blueCell =
         [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_BlueTarget]];
+         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_BlueDot]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
     [self.view addSubview:toolbar];
 
-    [_colorCellMap setObject:redCell forKey:@(CTDPaletteColor_RedTarget)];
-    [_colorCellMap setObject:greenCell forKey:@(CTDPaletteColor_GreenTarget)];
-    [_colorCellMap setObject:blueCell forKey:@(CTDPaletteColor_BlueTarget)];
+    [_colorCellMap setObject:redCell forKey:@(CTDPaletteColor_RedDot)];
+    [_colorCellMap setObject:greenCell forKey:@(CTDPaletteColor_GreenDot)];
+    [_colorCellMap setObject:blueCell forKey:@(CTDPaletteColor_BlueDot)];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -99,26 +99,26 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark CTDTargetContainerView protocol
+#pragma mark CTDTrialRenderer protocol
 
 
-- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
-                                              withInitialColor:(CTDPaletteColor)targetColor
+- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
+                                        withInitialColor:(CTDPaletteColor)dotColor
 {
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
-    CTDUIKitTargetView* newTargetView =
-        [[CTDUIKitTargetView alloc]
-         initWithFrame:frameForTargetCenteredAt(cgCenterPosition)
-         targetColor:[self.drawingConfig colorFor:targetColor]];
-    newTargetView.drawingConfig = self.drawingConfig;
-    [self.view addSubview:newTargetView];
-    [_targetViews addObject:newTargetView];
-    return newTargetView;
+    CTDUIKitDotView* newDotView =
+        [[CTDUIKitDotView alloc]
+         initWithFrame:frameForDotCenteredAt(cgCenterPosition)
+         dotColor:[self.drawingConfig colorFor:dotColor]];
+    newDotView.drawingConfig = self.drawingConfig;
+    [self.view addSubview:newDotView];
+    [_dotViews addObject:newDotView];
+    return newDotView;
 }
 
-- (id<CTDTargetConnectionRenderer>)
-      newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (id<CTDDotConnectionRenderer>)
+      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                             secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
                                               initWithDrawingConfig:_drawingConfig];

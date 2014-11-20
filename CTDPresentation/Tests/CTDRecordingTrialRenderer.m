@@ -3,10 +3,10 @@
 #import "CTDRecordingTrialRenderer.h"
 
 #import "CTDColorPalette.h"
-#import "CTDFakeTargetRenderer.h"
-#import "CTDRecordingTargetConnectionView.h"
-#import "CTDTargetConnectionRenderer.h"
-#import "CTDTargetRenderer.h"
+#import "CTDDotConnectionRenderer.h"
+#import "CTDDotRenderer.h"
+#import "CTDFakeDotRenderer.h"
+#import "CTDRecordingDotConnectionView.h"
 #import "CTDTouchable.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -14,50 +14,49 @@
 
 @implementation CTDRecordingTrialRenderer
 {
-    NSMutableArray* _targetViewsCreated;
-    NSMutableArray* _targetConnectionViewsCreated;
+    NSMutableArray* _dotViewsCreated;
+    NSMutableArray* _connectionViewsCreated;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _targetViewsCreated = [[NSMutableArray alloc] init];
-        _targetConnectionViewsCreated = [[NSMutableArray alloc] init];
+        _dotViewsCreated = [[NSMutableArray alloc] init];
+        _connectionViewsCreated = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (NSArray*)targetViewsCreated
+- (NSArray*)dotViewsCreated
 {
-    return [_targetViewsCreated copy];
+    return [_dotViewsCreated copy];
 }
 
-- (NSArray*)targetConnectionViewsCreated
+- (NSArray*)connectionViewsCreated
 {
-    return [_targetConnectionViewsCreated copy];
+    return [_connectionViewsCreated copy];
 }
 
-- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
-                                              withInitialColor:(CTDPaletteColor)targetColor
+- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
+                                        withInitialColor:(CTDPaletteColor)dotColor
 {
-    id newTargetView = [[CTDFakeTargetRenderer alloc]
-                        initWithCenterPosition:centerPosition
-                                   targetColor:targetColor];
-    [_targetViewsCreated addObject:newTargetView];
-    return newTargetView;
+    id newDotView = [[CTDFakeDotRenderer alloc]
+                     initWithCenterPosition:centerPosition
+                                   dotColor:dotColor];
+    [_dotViewsCreated addObject:newDotView];
+    return newDotView;
 }
 
-- (id<CTDTargetConnectionRenderer>)
-      newTargetConnectionViewWithFirstEndpointPosition:
-          (CTDPoint*)firstEndpointPosition
+- (id<CTDDotConnectionRenderer>)
+      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
       secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    id newTargetConnectionView = [[CTDRecordingTargetConnectionView alloc]
+    id newConnectionView = [[CTDRecordingDotConnectionView alloc]
                                   initWithFirstEndpointPosition:firstEndpointPosition
                                   secondEndpointPosition:secondEndpointPosition];
-    [_targetConnectionViewsCreated addObject:newTargetConnectionView];
-    return newTargetConnectionView;
+    [_connectionViewsCreated addObject:newConnectionView];
+    return newConnectionView;
 }
 
 @end

@@ -1,15 +1,15 @@
-// CTDRecordingTargetConnectionView:
-//     A test spy to stand in for a target-connection renderer.
+// CTDRecordingDotConnectionView:
+//     A test spy to stand in for a dot-connection renderer.
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTargetConnectionRenderer.h"
+#import "CTDDotConnectionRenderer.h"
 
 @class CTDPoint;
 
 
 
-@interface CTDRecordingTargetConnectionView : NSObject <CTDTargetConnectionRenderer>
+@interface CTDRecordingDotConnectionView : NSObject <CTDDotConnectionRenderer>
 
 @property (copy, readonly, nonatomic) CTDPoint* firstEndpointPosition;
 @property (copy, readonly, nonatomic) CTDPoint* secondEndpointPosition;

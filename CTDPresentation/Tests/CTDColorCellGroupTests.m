@@ -4,7 +4,7 @@
 
 #import "CTDRecordingColorCellRenderer.h"
 #import "CTDSelectable.h"
-#import "CTDModel/CTDTargetColor.h"
+#import "CTDModel/CTDDotColor.h"
 #import <XCTest/XCTest.h>
 
 #define message CTDMakeMethodSelector
@@ -12,11 +12,11 @@
 
 
 
-// Used as a CTDTargetColorSink, a CTDColorCatcher retains all values sent to
+// Used as a CTDDotColorSink, a CTDColorCatcher retains all values sent to
 // the sink, for checking in test assertions. When nothing has been received
 // by the sink, the list will be empty.
 
-@interface CTDColorCatcher : NSObject <CTDTargetColorSink>
+@interface CTDColorCatcher : NSObject <CTDDotColorSink>
 // Clear list of colors received.
 - (void)reset;
 @end
@@ -40,7 +40,7 @@
     [_colorsReceived removeAllObjects];
 }
 
-- (void)colorChangedTo:(CTDTargetColor)newColor
+- (void)colorChangedTo:(CTDDotColor)newColor
 {
     [_colorsReceived addObject:@(newColor)];
 }
@@ -59,7 +59,7 @@
 // TODO: Could be generalized to just be about a selection mutex / single-selection
 // set, dropping the irrelevant "cells" aspect.
 
-static CTDTargetColor const DEFAULT_COLOR = CTDTargetColor_None;
+static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 
 @interface CTDColorCellGroupBaseTestCase : XCTestCase
@@ -94,11 +94,11 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTargetColor_None;
                     initWithDefaultColor:DEFAULT_COLOR
                        selectedColorSink:self.selectedColor];
 
-    self.redCell = [self.subject addCellForColor:CTDTargetColor_Red
+    self.redCell = [self.subject addCellForColor:CTDDotColor_Red
                                     withRenderer:self.redCellRenderer];
-    self.greenCell = [self.subject addCellForColor:CTDTargetColor_Green
+    self.greenCell = [self.subject addCellForColor:CTDDotColor_Green
                                       withRenderer:self.greenCellRenderer];
-    self.blueCell = [self.subject addCellForColor:CTDTargetColor_Blue
+    self.blueCell = [self.subject addCellForColor:CTDDotColor_Blue
                                      withRenderer:self.blueCellRenderer];
 }
 
@@ -152,7 +152,7 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTargetColor_None;
 
 - (void)testThatSelectedColorSinkIsSentTheSelectedCellColor {
     assertThat([self.selectedColor colorsReceived],
-               is(equalTo(@[@(CTDTargetColor_Red)])));
+               is(equalTo(@[@(CTDDotColor_Red)])));
 }
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
@@ -183,7 +183,7 @@ static CTDTargetColor const DEFAULT_COLOR = CTDTargetColor_None;
 
 - (void)testThatSelectedColorSinkIsSentTheColorOfTheLastCellSelected {
     assertThat([self.selectedColor colorsReceived],
-               is(equalTo(@[@(CTDTargetColor_Blue)])));
+               is(equalTo(@[@(CTDDotColor_Blue)])));
 }
 
 - (void)testThatTheNewlySelectedCellIsRenderedAsSelected {

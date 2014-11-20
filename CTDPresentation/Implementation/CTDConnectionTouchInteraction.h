@@ -6,7 +6,7 @@
 #import "CTDTouchResponder.h"
 
 @class CTDPoint;
-@protocol CTDTargetRenderer;
+@protocol CTDDotRenderer;
 @protocol CTDTouchMapper;
 @protocol CTDTrialRenderer;
 
@@ -26,8 +26,8 @@
 // Designated initializer
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-          targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-           anchorTargetView:(id<CTDTargetRenderer>)anchorTargetView
+             dotTouchMapper:(id<CTDTouchMapper>)dotTouchMapper
+              anchorDotView:(id<CTDDotRenderer>)anchorDotView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition;
 CTD_NO_DEFAULT_INIT
 

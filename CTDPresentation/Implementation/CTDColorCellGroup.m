@@ -9,8 +9,8 @@
 
 
 @protocol CTDColorCellGroupSelectionFilter <NSObject>
-- (void)selectCellWithColor:(CTDTargetColor)color;
-- (void)deselectIfSelectedCellWithColor:(CTDTargetColor)color;
+- (void)selectCellWithColor:(CTDDotColor)color;
+- (void)deselectIfSelectedCellWithColor:(CTDDotColor)color;
 @end
 
 
@@ -20,18 +20,18 @@
 //     all selection change requests through the group.
 
 @interface CTDColorCellGroup_CellProxy : NSObject <CTDSelectable>
-- (instancetype)initWithCellColor:(CTDTargetColor)cellColor
+- (instancetype)initWithCellColor:(CTDDotColor)cellColor
              groupSelectionFilter:
                  (id<CTDColorCellGroupSelectionFilter>)groupSelectionFilter;
 @end
 
 @implementation CTDColorCellGroup_CellProxy
 {
-    CTDTargetColor _cellColor;
+    CTDDotColor _cellColor;
     id<CTDColorCellGroupSelectionFilter> _groupSelectionFilter;
 }
 
-- (instancetype)initWithCellColor:(CTDTargetColor)cellColor
+- (instancetype)initWithCellColor:(CTDDotColor)cellColor
              groupSelectionFilter:
                  (id<CTDColorCellGroupSelectionFilter>)groupSelectionFilter
 {
@@ -66,24 +66,24 @@
 
 @interface CTDColorCellGroup_MutexFilter : NSObject <CTDColorCellGroupSelectionFilter>
 
-- (instancetype)initWithDefaultColor:(CTDTargetColor)defaultColor
-                   selectedColorSink:(id<CTDTargetColorSink>)selectedColorSink;
+- (instancetype)initWithDefaultColor:(CTDDotColor)defaultColor
+                   selectedColorSink:(id<CTDDotColorSink>)selectedColorSink;
 
 - (void)addRenderer:(id<CTDColorCellRenderer>)cellRenderer
-   forCellWithColor:(CTDTargetColor)cellColor;
+   forCellWithColor:(CTDDotColor)cellColor;
 
 @end
 
 @implementation CTDColorCellGroup_MutexFilter
 {
-    CTDTargetColor _defaultColor;
-    id<CTDTargetColorSink> _selectedColorSink;
-    CTDTargetColor _selectedColor;
+    CTDDotColor _defaultColor;
+    id<CTDDotColorSink> _selectedColorSink;
+    CTDDotColor _selectedColor;
     NSMutableDictionary* _colorToCellRendererMap;
 }
 
-- (instancetype)initWithDefaultColor:(CTDTargetColor)defaultColor
-                   selectedColorSink:(id<CTDTargetColorSink>)selectedColorSink;
+- (instancetype)initWithDefaultColor:(CTDDotColor)defaultColor
+                   selectedColorSink:(id<CTDDotColorSink>)selectedColorSink;
 {
     self = [super init];
     if (self) {
@@ -98,12 +98,12 @@
 }
 
 - (void)addRenderer:(id<CTDColorCellRenderer>)cellRenderer
-   forCellWithColor:(CTDTargetColor)cellColor
+   forCellWithColor:(CTDDotColor)cellColor
 {
     [_colorToCellRendererMap setObject:cellRenderer forKey:@(cellColor)];
 }
 
-- (void)selectCellWithColor:(CTDTargetColor)color
+- (void)selectCellWithColor:(CTDDotColor)color
 {
     // TODO: filter requests that don't change the state of the element
     // (doesn't change defined behaviour, so no tests required?)
@@ -123,7 +123,7 @@
     [selectedCellRenderer showSelectionIndicator];
 }
 
-- (void)deselectIfSelectedCellWithColor:(CTDTargetColor)color
+- (void)deselectIfSelectedCellWithColor:(CTDDotColor)color
 {
     // Only deselect cell if it was currently selected.
     if (color == _selectedColor) {
@@ -148,8 +148,8 @@
 //    NSMutableArray* _cells; // not required until cell removal needs to be supported
 }
 
-- (instancetype)initWithDefaultColor:(CTDTargetColor)defaultColor
-                   selectedColorSink:(id<CTDTargetColorSink>)selectedColorSink
+- (instancetype)initWithDefaultColor:(CTDDotColor)defaultColor
+                   selectedColorSink:(id<CTDDotColorSink>)selectedColorSink
 {
     self = [super init];
     if (self) {
@@ -161,7 +161,7 @@
     return self;
 }
 
-- (id<CTDSelectable>)addCellForColor:(CTDTargetColor)cellColor
+- (id<CTDSelectable>)addCellForColor:(CTDDotColor)cellColor
                         withRenderer:(id<CTDColorCellRenderer>)cellRenderer;
 {
     [cellRenderer hideSelectionIndicator]; // sync renderer to new cell's state

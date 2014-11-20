@@ -8,8 +8,8 @@
 
 @interface CTDRecordingTrialRenderer : NSObject <CTDTrialRenderer>
 
-@property (strong, readonly, nonatomic) NSArray* targetViewsCreated;
-@property (strong, readonly, nonatomic) NSArray* targetConnectionViewsCreated;
+@property (strong, readonly, nonatomic) NSArray* dotViewsCreated;
+@property (strong, readonly, nonatomic) NSArray* connectionViewsCreated;
 
 @end
 

@@ -1,19 +1,19 @@
 // Copyright 2013-4 Michael Hackett. All rights reserved.
 
-#import "CTDUIKitTargetView.h"
+#import "CTDUIKitDotView.h"
 
 #import "CTDCoreGraphicsUtils.h"
+#import "CTDUIKitDotSelectionIndicatorController.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDUIKitTargetSelectionIndicatorController.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDPoint+CGConversion.h"
 #import <QuartzCore/CAShapeLayer.h>
 
 
 
-@implementation CTDUIKitTargetView
+@implementation CTDUIKitDotView
 {
-    CTDUIKitTargetSelectionIndicatorController* _selectionIndicatorController;
+    CTDUIKitDotSelectionIndicatorController* _selectionIndicatorController;
 }
 
 
@@ -27,37 +27,37 @@
 }
 
 - (id)initWithFrame:(CGRect)frameRect
-        targetColor:(UIColor*)targetColor
+           dotColor:(UIColor*)dotColor
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        CAShapeLayer* targetLayer = (CAShapeLayer*)self.layer;
-        targetLayer.lineWidth = 0;
-        targetLayer.opaque = NO;
-        targetLayer.fillColor = [targetColor CGColor];
+        CAShapeLayer* dotLayer = (CAShapeLayer*)self.layer;
+        dotLayer.lineWidth = 0;
+        dotLayer.opaque = NO;
+        dotLayer.fillColor = [dotColor CGColor];
 
-        CGPathRef targetPath = CGPathCreateWithEllipseInRect(self.bounds, NULL);
-        targetLayer.path = targetPath;
-        CGPathRelease(targetPath);
+        CGPathRef dotPath = CGPathCreateWithEllipseInRect(self.bounds, NULL);
+        dotLayer.path = dotPath;
+        CGPathRelease(dotPath);
 
         _selectionIndicatorController =
-            [[CTDUIKitTargetSelectionIndicatorController alloc] init];
-        [_selectionIndicatorController attachIndicatorToLayer:targetLayer];
+            [[CTDUIKitDotSelectionIndicatorController alloc] init];
+        [_selectionIndicatorController attachIndicatorToLayer:dotLayer];
 
-        [targetLayer setNeedsDisplay];
+        [dotLayer setNeedsDisplay];
     }
     return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame targetColor:[UIColor whiteColor]];
+    return [self initWithFrame:frame dotColor:[UIColor whiteColor]];
 }
 
 
 
 
-#pragma mark CTDTargetRenderer protocol
+#pragma mark CTDDotRenderer protocol
 
 
 //- (void)discardView
@@ -70,10 +70,10 @@
     return [CTDPoint fromCGPoint:ctdCGRectCenter(self.frame)];
 }
 
-- (void)changeTargetColorTo:(CTDPaletteColor)newTargetColor
+- (void)changeDotColorTo:(CTDPaletteColor)newDotColor
 {
     ((CAShapeLayer*)self.layer).fillColor =
-        [[self.drawingConfig colorFor:newTargetColor] CGColor];
+        [[self.drawingConfig colorFor:newDotColor] CGColor];
 }
 
 - (void)showSelectionIndicator
@@ -95,8 +95,8 @@
 {
     CGPoint localPoint = [self convertPoint:[touchLocation asCGPoint]
                                    fromView:self.superview];
-    CGPathRef targetPath = ((CAShapeLayer*)self.layer).path;
-    return (BOOL)CGPathContainsPoint(targetPath, NULL, localPoint, false);
+    CGPathRef dotPath = ((CAShapeLayer*)self.layer).path;
+    return (BOOL)CGPathContainsPoint(dotPath, NULL, localPoint, false);
 }
 
 @end

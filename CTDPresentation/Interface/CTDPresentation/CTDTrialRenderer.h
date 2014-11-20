@@ -1,13 +1,13 @@
 // CTDTrialRenderer:
 //     The visual representation of a connect-the-dots trial, containing a set
-//     of targets and connections between them, plus the color selection tool.
+//     of dots and connections between them, plus the color selection tool.
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
 #import "CTDColorPalette.h"
 
-@protocol CTDTargetRenderer;
-@protocol CTDTargetConnectionRenderer;
+@protocol CTDDotRenderer;
+@protocol CTDDotConnectionRenderer;
 @protocol CTDTouchable;
 @class CTDPoint;
 
@@ -15,11 +15,11 @@
 
 @protocol CTDTrialRenderer <NSObject>
 
-- (id<CTDTargetRenderer, CTDTouchable>)newTargetViewCenteredAt:(CTDPoint*)centerPosition
-                                              withInitialColor:(CTDPaletteColor)targetColor;
+- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
+                                        withInitialColor:(CTDPaletteColor)dotColor;
 
-- (id<CTDTargetConnectionRenderer>)
-      newTargetConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
+- (id<CTDDotConnectionRenderer>)
+      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                             secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 @end

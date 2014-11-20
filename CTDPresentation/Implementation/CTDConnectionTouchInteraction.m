@@ -2,8 +2,8 @@
 
 #import "CTDConnectionTouchInteraction.h"
 
-#import "CTDTargetConnectionRenderer.h"
-#import "CTDTargetRenderer.h"
+#import "CTDDotConnectionRenderer.h"
+#import "CTDDotRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
@@ -21,9 +21,9 @@
 @interface CTDConnectionPresenter : NSObject
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer;
-- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView;
-- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
-                  orMoveToPosition:(CTDPoint*)freeEndPosition;
+- (void)anchorOnDotView:(id<CTDDotRenderer>)dotView;
+- (void)connectFreeEndToDotView:(id<CTDDotRenderer>)dotView
+               orMoveToPosition:(CTDPoint*)freeEndPosition;
 - (void)cancelConnection;
 
 @end
@@ -34,9 +34,9 @@
 
 @implementation CTDConnectionTouchInteraction
 {
-    id<CTDTouchMapper> _targetTouchMapper;
+    id<CTDTouchMapper> _dotTouchMapper;
     CTDConnectionPresenter* _presenter;
-    id<CTDTargetRenderer> _anchorTargetView;
+    id<CTDDotRenderer> _anchorDotView;
 }
 
 
@@ -46,24 +46,24 @@
 
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-          targetTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
-           anchorTargetView:(id<CTDTargetRenderer>)anchorTargetView
+             dotTouchMapper:(id<CTDTouchMapper>)dotTouchMapper
+              anchorDotView:(id<CTDDotRenderer>)anchorDotView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
     self = [super init];
     if (self) {
-        if (!anchorTargetView) {
+        if (!anchorDotView) {
             [NSException raise:NSInvalidArgumentException
-                        format:@"Anchor target view must not be nil"];
+                        format:@"Anchor dot view must not be nil"];
         }
-        _targetTouchMapper = targetTouchMapper;
+        _dotTouchMapper = dotTouchMapper;
         _presenter = [[CTDConnectionPresenter alloc]
                       initWithTrialRenderer:trialRenderer];
 
-        _anchorTargetView = anchorTargetView;
-        [_presenter anchorOnTargetView:_anchorTargetView];
-        [_presenter connectFreeEndToTargetView:nil
-                              orMoveToPosition:initialFreeEndPosition];
+        _anchorDotView = anchorDotView;
+        [_presenter anchorOnDotView:_anchorDotView];
+        [_presenter connectFreeEndToDotView:nil
+                           orMoveToPosition:initialFreeEndPosition];
     }
     return self;
 }
@@ -77,17 +77,17 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id<CTDTargetRenderer> connectedTargetView = nil;
-    id hitElement = [_targetTouchMapper elementAtTouchLocation:newPosition];
+    id<CTDDotRenderer> connectedDotView = nil;
+    id hitElement = [_dotTouchMapper elementAtTouchLocation:newPosition];
     if (hitElement &&
-        hitElement != _anchorTargetView &&
-        [hitElement conformsToProtocol:@protocol(CTDTargetRenderer)])
+        hitElement != _anchorDotView &&
+        [hitElement conformsToProtocol:@protocol(CTDDotRenderer)])
     {
-        connectedTargetView = (id<CTDTargetRenderer>)hitElement;
+        connectedDotView = (id<CTDDotRenderer>)hitElement;
     }
 
-    [_presenter connectFreeEndToTargetView:connectedTargetView
-                          orMoveToPosition:newPosition];
+    [_presenter connectFreeEndToDotView:connectedDotView
+                       orMoveToPosition:newPosition];
 }
 
 - (void)touchDidEnd
@@ -109,9 +109,9 @@
 @implementation CTDConnectionPresenter
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
-    id<CTDTargetRenderer> _anchorTargetView;
-    id<CTDTargetRenderer> _freeEndTargetView;
-    id<CTDTargetConnectionRenderer> _connectionView;
+    id<CTDDotRenderer> _anchorDotView;
+    id<CTDDotRenderer> _freeEndDotView;
+    id<CTDDotConnectionRenderer> _connectionView;
 }
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
@@ -119,53 +119,54 @@
     self = [super init];
     if (self) {
         _trialRenderer = trialRenderer;
-        _anchorTargetView = nil;
+        _anchorDotView = nil;
+        _freeEndDotView = nil;
         _connectionView = nil;
     }
     return self;
 }
 
-- (void)anchorOnTargetView:(id<CTDTargetRenderer>)targetView
+- (void)anchorOnDotView:(id<CTDDotRenderer>)dotView
 {
-    if (_anchorTargetView != targetView) {
-        if (_anchorTargetView) {
-            [_anchorTargetView hideSelectionIndicator];
+    if (_anchorDotView != dotView) {
+        if (_anchorDotView) {
+            [_anchorDotView hideSelectionIndicator];
         }
-        _anchorTargetView = targetView;
-        [targetView showSelectionIndicator];
+        _anchorDotView = dotView;
+        [dotView showSelectionIndicator];
         if (_connectionView) {
             // Anchor must always be set before free end, so we never need to
             // *create* the connection view here; just update it if it exists.
-            [_connectionView setFirstEndpointPosition:[targetView connectionPoint]];
+            [_connectionView setFirstEndpointPosition:[dotView connectionPoint]];
         }
     }
 }
 
-- (void)connectFreeEndToTargetView:(id<CTDTargetRenderer>)targetView
-                  orMoveToPosition:(CTDPoint*)freeEndPosition
+- (void)connectFreeEndToDotView:(id<CTDDotRenderer>)dotView
+               orMoveToPosition:(CTDPoint*)freeEndPosition
 {
-    NSAssert(_anchorTargetView,
+    NSAssert(_anchorDotView,
              @"Connection must be anchored before free end can be moved.");
 
-    if (_freeEndTargetView && (_freeEndTargetView == targetView)) {
+    if (_freeEndDotView && (_freeEndDotView == dotView)) {
         return;
     }
 
-    if (_freeEndTargetView) {
-        [_freeEndTargetView hideSelectionIndicator];
+    if (_freeEndDotView) {
+        [_freeEndDotView hideSelectionIndicator];
     }
-    _freeEndTargetView = targetView;
-    if (targetView) {
-        [targetView showSelectionIndicator];
-        // snap end of connection to target's connection point
-        freeEndPosition = [targetView connectionPoint];
+    _freeEndDotView = dotView;
+    if (dotView) {
+        [dotView showSelectionIndicator];
+        // snap end of connection to dot's connection point
+        freeEndPosition = [dotView connectionPoint];
     }
 
     if (!_connectionView) {
         id<CTDTrialRenderer> trialRenderer = _trialRenderer;
-        CTDPoint* anchorPosition = [_anchorTargetView connectionPoint];
+        CTDPoint* anchorPosition = [_anchorDotView connectionPoint];
         _connectionView = [trialRenderer
-                           newTargetConnectionViewWithFirstEndpointPosition:anchorPosition
+                           newDotConnectionViewWithFirstEndpointPosition:anchorPosition
                            secondEndpointPosition:freeEndPosition];
     } else {
         [_connectionView setSecondEndpointPosition:freeEndPosition];
@@ -176,8 +177,8 @@
 {
     [_connectionView invalidate];
     _connectionView = nil;
-    [_anchorTargetView hideSelectionIndicator];
-    [_freeEndTargetView hideSelectionIndicator];
+    [_anchorDotView hideSelectionIndicator];
+    [_freeEndDotView hideSelectionIndicator];
 }
 
 @end

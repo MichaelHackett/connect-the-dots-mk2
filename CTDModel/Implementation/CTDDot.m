@@ -1,15 +1,15 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTarget.h"
+#import "CTDDot.h"
 
 #import "CTDUtility/CTDPoint.h"
 
 
 
 
-@implementation CTDTarget
+@implementation CTDDot
 
-- (instancetype)initWithColor:(CTDTargetColor)color
+- (instancetype)initWithColor:(CTDDotColor)color
        position:(CTDPoint*)position;
 {
     self = [super init];

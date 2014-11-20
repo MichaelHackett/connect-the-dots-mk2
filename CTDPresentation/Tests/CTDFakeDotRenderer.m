@@ -1,24 +1,24 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDFakeTargetRenderer.h"
+#import "CTDFakeDotRenderer.h"
 
 #import "CTDUtility/CTDPoint.h"
 
 
 
-@implementation CTDFakeTargetRenderer
+@implementation CTDFakeDotRenderer
 {
     NSMutableArray* _colorChanges;
 }
 
 - (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
-                           targetColor:(CTDPaletteColor)targetColor
+                              dotColor:(CTDPaletteColor)dotColor
 {
     self = [super init];
     if (self) {
         _centerPosition = [centerPosition copy];
         _colorChanges = [[NSMutableArray alloc] init];
-        [_colorChanges addObject:@(targetColor)];
+        [_colorChanges addObject:@(dotColor)];
     }
     return self;
 }
@@ -32,7 +32,7 @@
 
 
 
-#pragma mark CTDTargetRenderer protocol
+#pragma mark CTDDotRenderer protocol
 
 
 - (CTDPoint*)connectionPoint
@@ -40,9 +40,9 @@
     return self.centerPosition;
 }
 
-- (void)changeTargetColorTo:(CTDPaletteColor)newTargetColor
+- (void)changeDotColorTo:(CTDPaletteColor)newDotColor
 {
-    [_colorChanges addObject:@(newTargetColor)];
+    [_colorChanges addObject:@(newDotColor)];
 }
 
 

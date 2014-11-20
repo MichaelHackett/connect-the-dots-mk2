@@ -2,14 +2,14 @@
 
 #import "CTDTrialSceneTouchRouter.h"
 
-#import "CTDFakeTargetRenderer.h"
+#import "CTDDotConnectionRenderer.h"
+#import "CTDDotRenderer.h"
+#import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
-#import "CTDRecordingTargetConnectionView.h"
+#import "CTDRecordingDotConnectionView.h"
 #import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
-#import "CTDTargetConnectionRenderer.h"
-#import "CTDTargetRenderer.h"
 #import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
@@ -26,15 +26,15 @@
 
 // Note: These coordinate values are arbitrary, but CTDPoint comparisons are
 // done by value, so the coordinates all must be unique.
-#define TARGET_1_CENTER point(40,96)
-#define POINT_INSIDE_TARGET_1 point(45,99)
-#define ANOTHER_POINT_INSIDE_TARGET_1 point(47,95)
+#define DOT_1_CENTER point(40,96)
+#define POINT_INSIDE_DOT_1 point(45,99)
+#define ANOTHER_POINT_INSIDE_DOT_1 point(47,95)
 #define POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,250)
 
 
 
-static CTDFakeTargetRenderer* target1;
+static CTDFakeDotRenderer* dot1;
 
 
 
@@ -56,9 +56,9 @@ static CTDFakeTargetRenderer* target1;
 {
     [super setUp];
 
-    target1 = [[CTDFakeTargetRenderer alloc]
-               initWithCenterPosition:TARGET_1_CENTER
-                          targetColor:CTDPaletteColor_WhiteTarget];
+    dot1 = [[CTDFakeDotRenderer alloc]
+            initWithCenterPosition:DOT_1_CENTER
+                          dotColor:CTDPaletteColor_WhiteDot];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
     CTDRecordingTouchTracker* colorCellsTouchTracker =
@@ -71,32 +71,32 @@ static CTDFakeTargetRenderer* target1;
             return colorCellsTouchTracker;
         }];
 
-    id<CTDTouchMapper> targetTouchMapper =
+    id<CTDTouchMapper> dotTouchMapper =
         [[CTDFakeTouchMapper alloc]
-         initWithPointMap:@{ POINT_INSIDE_TARGET_1: target1,
-                             ANOTHER_POINT_INSIDE_TARGET_1: target1 }];
+         initWithPointMap:@{ POINT_INSIDE_DOT_1: dot1,
+                             ANOTHER_POINT_INSIDE_DOT_1: dot1 }];
 
     _router = [[CTDTrialSceneTouchRouter alloc]
                initWithTrialRenderer:_trialRenderer
-               targetsTouchMapper:targetTouchMapper
+               dotsTouchMapper:dotTouchMapper
                colorCellsTouchResponder:_colorCellsTouchResponder];
 }
 
 - (void)tearDown
 {
-    target1 = nil;
+    dot1 = nil;
     [super tearDown];
 }
 
-- (NSArray*)selectedTargets
+- (NSArray*)selectedDots
 {
-    NSMutableArray* selectedTargets = [[NSMutableArray alloc] init];
-    if ([target1 isSelected]) { [selectedTargets addObject:target1]; }
-    return selectedTargets;
+    NSMutableArray* selectedDots = [[NSMutableArray alloc] init];
+    if ([dot1 isSelected]) { [selectedDots addObject:dot1]; }
+    return selectedDots;
 }
 
-- (CTDRecordingTargetConnectionView*)activeConnection {
-    return [self.trialRenderer.targetConnectionViewsCreated firstObject];
+- (CTDRecordingDotConnectionView*)activeConnection {
+    return [self.trialRenderer.connectionViewsCreated firstObject];
 }
 
 @end
@@ -114,12 +114,12 @@ static CTDFakeTargetRenderer* target1;
     self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
+    assertThat(self.trialRenderer.connectionViewsCreated, isEmpty());
 }
 
 - (void)testThatColorCellResponderIsAskedForATracker {
@@ -147,12 +147,12 @@ static CTDFakeTargetRenderer* target1;
     [self.subject touchDidMoveTo:ANOTHER_POINT_OUTSIDE_ELEMENTS];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, isEmpty());
+    assertThat(self.trialRenderer.connectionViewsCreated, isEmpty());
 }
 
 - (void)testThatColorCellTrackerReceivedNewPosition {
@@ -165,27 +165,27 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoATarget
+@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
 
 - (void)setUp {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
-    [self.subject touchDidMoveTo:POINT_INSIDE_TARGET_1];
+    [self.subject touchDidMoveTo:POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatTheTargetIsSelected {
-    assertThatBool([target1 isSelected], is(equalToBool(YES)));
+- (void)testThatTheDotIsSelected {
+    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
 }
 
-- (void)testThatNoOtherTargetsAreSelected {
-    assertThat([self selectedTargets], hasCountOf(1));
+- (void)testThatNoOtherDotsAreSelected {
+    assertThat([self selectedDots], hasCountOf(1));
 }
 
 - (void)testThatAConnectionIsStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
@@ -209,8 +209,8 @@ static CTDFakeTargetRenderer* target1;
     [self.subject touchDidEnd];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 - (void)testThatColorCellTrackerIsNotifedThatTouchEnded {
@@ -236,8 +236,8 @@ static CTDFakeTargetRenderer* target1;
     [self.subject touchWasCancelled];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
@@ -250,37 +250,37 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideATarget
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
 
-@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideATarget
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatTheTargetIsSelected {
-    assertThatBool([target1 isSelected], is(equalToBool(YES)));
+- (void)testThatTheDotIsSelected {
+    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
 }
 
-- (void)testThatNoOtherTargetsAreSelected {
-    assertThat([self selectedTargets], hasCountOf(1));
+- (void)testThatNoOtherDotsAreSelected {
+    assertThat([self selectedDots], hasCountOf(1));
 }
 
 - (void)testThatAConnectionIsStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheTargetConnectionPoint {
+- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheDotConnectionPoint {
     assertThat([self activeConnection].firstEndpointPosition,
-               is(equalTo([target1 connectionPoint])));
+               is(equalTo([dot1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
     assertThat([self activeConnection].secondEndpointPosition,
-               is(equalTo(POINT_INSIDE_TARGET_1)));
+               is(equalTo(POINT_INSIDE_DOT_1)));
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
@@ -293,38 +293,38 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialTarget
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialTarget
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
     [self.colorCellsTouchTracker reset];
-    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_TARGET_1];
+    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatTheInitialTargetRemainsSelected {
-    assertThatBool([target1 isSelected], is(equalToBool(YES)));
+- (void)testThatTheInitialDotRemainsSelected {
+    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
 }
 
-- (void)testThatNoOtherTargetBecomesSelected {
-    assertThat([self selectedTargets], hasCountOf(1));
+- (void)testThatNoOtherDotBecomesSelected {
+    assertThat([self selectedDots], hasCountOf(1));
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
+- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialDotConnectionPoint {
     assertThat([self activeConnection].firstEndpointPosition,
-               is(equalTo([target1 connectionPoint])));
+               is(equalTo([dot1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
     assertThat([self activeConnection].secondEndpointPosition,
-               is(equalTo(ANOTHER_POINT_INSIDE_TARGET_1)));
+               is(equalTo(ANOTHER_POINT_INSIDE_DOT_1)));
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -336,29 +336,29 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialTarget
+@interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialTarget
+@implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
     [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
 }
 
-- (void)testThatTheInitialTargetRemainsSelected {
-    assertThatBool([target1 isSelected], is(equalToBool(YES)));
+- (void)testThatTheInitialDotRemainsSelected {
+    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
 }
 
-- (void)testThatNoOtherTargetsAreSelected {
-    assertThat([self selectedTargets], hasCountOf(1));
+- (void)testThatNoOtherDotsAreSelected {
+    assertThat([self selectedDots], hasCountOf(1));
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialTargetConnectionPoint {
+- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialDotConnectionPoint {
     assertThat([self activeConnection].firstEndpointPosition,
-               is(equalTo([target1 connectionPoint])));
+               is(equalTo([dot1 connectionPoint])));
 }
 
 - (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
@@ -367,7 +367,7 @@ static CTDFakeTargetRenderer* target1;
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    assertThat(self.trialRenderer.targetConnectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -379,20 +379,19 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinATarget
+@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinATarget
-
+@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
 - (void)setUp {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
     [self.colorCellsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -408,20 +407,20 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinATarget
+@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
     : CTDTrialSceneTouchTrackerBaseTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinATarget
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_TARGET_1];
+    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
     [self.colorCellsTouchTracker reset];
     [self.subject touchWasCancelled];
 }
 
-- (void)testThatNoTargetsAreSelected {
-    assertThat([self selectedTargets], isEmpty());
+- (void)testThatNoDotsAreSelected {
+    assertThat([self selectedDots], isEmpty());
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -437,5 +436,5 @@ static CTDFakeTargetRenderer* target1;
 
 
 
-// TODO: CTDTrialSceneTouchTrackerTrackingFromATarget
+// TODO: CTDTrialSceneTouchTrackerTrackingFromADot
 

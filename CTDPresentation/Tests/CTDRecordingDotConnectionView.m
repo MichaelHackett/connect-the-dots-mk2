@@ -1,12 +1,12 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDRecordingTargetConnectionView.h"
+#import "CTDRecordingDotConnectionView.h"
 
 #import "CTDUtility/CTDPoint.h"
 
 
 
-@implementation CTDRecordingTargetConnectionView
+@implementation CTDRecordingDotConnectionView
 
 - (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                        secondEndpointPosition:(CTDPoint*)secondEndpointPosition

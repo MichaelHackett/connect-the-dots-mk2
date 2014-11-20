@@ -1,6 +1,6 @@
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDUIKitTargetSelectionIndicatorController.h"
+#import "CTDUIKitDotSelectionIndicatorController.h"
 
 #import "CTDAnimationUtils.h"
 #import "CTDCoreGraphicsUtils.h"
@@ -10,7 +10,7 @@
 
 // TODO: Move to CTDUIKitDrawingConfig
 
-// Target selection ring display parameters:
+// Dot selection ring display parameters:
 static CGColorRef kSelectionIndicatorColor;
 static CGFloat const kSelectionIndicatorThickness = 3.0;
 static CGFloat const kSelectionIndicatorPadding = 12.0;
@@ -98,7 +98,7 @@ CTD_NO_DEFAULT_INIT
 
 
 
-@implementation CTDUIKitTargetSelectionIndicatorController
+@implementation CTDUIKitDotSelectionIndicatorController
 {
     CAShapeLayer* _indicatorLayer;
     CTDUIKitSelectionAnimationController* _animationController;
@@ -106,7 +106,7 @@ CTD_NO_DEFAULT_INIT
 
 + (void)initialize
 {
-    if (self == [CTDUIKitTargetSelectionIndicatorController class]) {
+    if (self == [CTDUIKitDotSelectionIndicatorController class]) {
         kSelectionIndicatorColor = [[UIColor purpleColor] CGColor];
     }
 }

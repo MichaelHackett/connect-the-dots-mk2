@@ -4,28 +4,28 @@
 
 #import "CTDColorCellGroup.h"
 #import "CTDColorPalette.h"
+#import "CTDDotSetPresenter.h"
 #import "CTDListOrderTouchMapper.h"
 #import "CTDSelectOnTapInteraction.h"
 #import "CTDSelectOnTouchInteraction.h"
-#import "CTDTargetSetPresenter.h"
 #import "CTDTrialSceneTouchRouter.h"
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackerFactory.h"
-#import "CTDModel/CTDTarget.h"
-#import "CTDModel/CTDTargetColor.h"
+#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotColor.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
 // Macro for defining sample data
-#define target(COLOR,X,Y) [[CTDTarget alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
+#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
 @implementation CTDApplication
 {
-    CTDTargetSetPresenter* _currentPresenter;
-    NSArray* _targetList;
+    CTDDotSetPresenter* _currentPresenter;
+    NSArray* _dotList;
 }
 
 - (instancetype)init
@@ -33,10 +33,10 @@
     self = [super init];
     if (self) {
         _currentPresenter = nil;
-        _targetList = @[
-            target(CTDTargetColor_Green, 100, 170),
-            target(CTDTargetColor_Red, 600, 400),
-            target(CTDTargetColor_Blue, 250, 650)
+        _dotList = @[
+            dot(CTDDotColor_Green, 100, 170),
+            dot(CTDDotColor_Red, 600, 400),
+            dot(CTDDotColor_Blue, 250, 650)
         ];
     }
     return self;
@@ -46,13 +46,13 @@
                 colorCellMap:(NSDictionary*)colorCellMap
             touchInputSource:(id<CTDTouchInputSource>)touchInputSource
 {
-    _currentPresenter = [[CTDTargetSetPresenter alloc]
-                         initWithTargetList:_targetList
-                              trialRenderer:trialRenderer];
+    _currentPresenter = [[CTDDotSetPresenter alloc]
+                         initWithDotList:_dotList
+                           trialRenderer:trialRenderer];
 
     CTDColorCellGroup* colorCellGroup =
         [[CTDColorCellGroup alloc]
-         initWithDefaultColor:CTDTargetColor_White
+         initWithDefaultColor:CTDDotColor_White
             selectedColorSink:nil];
 
     CTDListOrderTouchMapper* colorCellsTouchMapper =
@@ -61,20 +61,20 @@
     // TODO: reduce repetition in this section
 
     id<CTDColorCellRenderer, CTDTouchable> redColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_RedTarget)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_RedDot)];
     id<CTDColorCellRenderer, CTDTouchable> greenColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_GreenTarget)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_GreenDot)];
     id<CTDColorCellRenderer, CTDTouchable> blueColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_BlueTarget)];
+        [colorCellMap objectForKey:@(CTDPaletteColor_BlueDot)];
 
     [colorCellsTouchMapper mapTouchable:redColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Red
+                           toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red
                                                          withRenderer:redColorCellRenderer]];
     [colorCellsTouchMapper mapTouchable:greenColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Green
+                           toActuator:[colorCellGroup addCellForColor:CTDDotColor_Green
                                                          withRenderer:greenColorCellRenderer]];
     [colorCellsTouchMapper mapTouchable:blueColorCellRenderer
-                           toActuator:[colorCellGroup addCellForColor:CTDTargetColor_Blue
+                           toActuator:[colorCellGroup addCellForColor:CTDDotColor_Blue
                                                          withRenderer:blueColorCellRenderer]];
 
     id<CTDTouchResponder> colorCellsTouchResponder =
@@ -97,7 +97,7 @@
     [touchInputSource addTouchResponder:
         [[CTDTrialSceneTouchRouter alloc]
          initWithTrialRenderer:trialRenderer
-         targetsTouchMapper:[_currentPresenter targetsTouchMapper]
+         dotsTouchMapper:[_currentPresenter dotsTouchMapper]
          colorCellsTouchResponder:colorCellsTouchResponder]];
 }
 

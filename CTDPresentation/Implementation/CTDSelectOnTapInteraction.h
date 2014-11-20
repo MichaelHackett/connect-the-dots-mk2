@@ -22,7 +22,7 @@
 
 @interface CTDSelectOnTapInteraction : NSObject <CTDTouchTracker>
 
-- (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)targetTouchMapper
+- (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)touchMapper
                 initialTouchPosition:(CTDPoint*)initialPosition;
 CTD_NO_DEFAULT_INIT
 
