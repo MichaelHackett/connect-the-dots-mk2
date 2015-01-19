@@ -618,8 +618,7 @@
 				4CEBCAA819BB8DBF00D2B498 /* Implementation */,
 				4CEBCA9119BB77D300D2B498 /* Tests */,
 			);
-			name = CTDPresentation;
-			path = CTDPresentation/Implementation;
+			path = CTDPresentation;
 			sourceTree = "<group>";
 		};
 		4CEBCA9119BB77D300D2B498 /* Tests */ = {
@@ -689,7 +688,7 @@
 				4C5A56A619E1EEF200E994CB /* CTDTrialRenderer.h */,
 			);
 			name = Interface;
-			path = ../Interface/CTDPresentation;
+			path = Interface/CTDPresentation;
 			sourceTree = "<group>";
 		};
 		4CEBCAA819BB8DBF00D2B498 /* Implementation */ = {
@@ -708,7 +707,7 @@
 				4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */,
 				4C5A56A319E1C66700E994CB /* Interactions (Touch) */,
 			);
-			name = Implementation;
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		4CEBCAA919BB8E9500D2B498 /* Interface */ = {
