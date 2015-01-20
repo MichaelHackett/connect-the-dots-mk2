@@ -14,6 +14,8 @@
     : UIViewController <CTDTrialRenderer, CTDTouchInputSource>
 
 @property (copy, nonatomic) CTDUIKitDrawingConfig* drawingConfig;
+//@property (strong, nonatomic) id<CTDConnectionInteractionFactory> connectionInteractionFactory;
+//@property (strong, nonatomic) id<CTDTrialSceneEventHandler>
 
 // maps NSNumber(CTDPaletteColor) -> CTDKUIKitColorCell
 @property (strong, readonly, nonatomic) NSDictionary* colorCellMap;

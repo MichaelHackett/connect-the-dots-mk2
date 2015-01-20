@@ -2,8 +2,8 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDUIKitConnectSceneViewController.h"
-#import "CTDUIKitDrawingConfig.h"
+#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
+#import "CTDUIBridge/CTDUIKitDrawingConfig.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
