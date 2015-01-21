@@ -1623,10 +1623,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CEBCAA219BB784800D2B498 /* CTDPresentationTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
 			};
 			name = Debug;
 		};
@@ -1634,10 +1630,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CEBCAA219BB784800D2B498 /* CTDPresentationTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
 			};
 			name = Release;
 		};
