@@ -22,7 +22,7 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -50,7 +50,7 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -78,7 +78,7 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -106,7 +106,7 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -126,10 +126,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "081BEE611345979F003F846A"
-               BuildableName = "libochamcrest.a"
-               BlueprintName = "libochamcrest"
-               ReferencedContainer = "container:External/OCHamcrest/Source/OCHamcrest.xcodeproj">
+               BlueprintIdentifier = "4CFEF3491A6EB63F0086C37B"
+               BuildableName = "libCTDUIBridge.a"
+               BlueprintName = "CTDUIBridge"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -140,15 +140,15 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "085D2FF41351254000EBBE91"
-               BuildableName = "libocmockito.a"
-               BlueprintName = "libocmockito"
-               ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
+               BlueprintIdentifier = "4CFEF3891A6FF89A0086C37B"
+               BuildableName = "libCTDUIPlugins.a"
+               BlueprintName = "CTDUIPlugins"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -158,6 +158,34 @@
                BuildableName = "CTDUIPluginsTests.xctest"
                BlueprintName = "CTDUIPluginsTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "081BEE611345979F003F846A"
+               BuildableName = "libochamcrest.a"
+               BlueprintName = "libochamcrest"
+               ReferencedContainer = "container:External/OCHamcrest/Source/OCHamcrest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "085D2FF41351254000EBBE91"
+               BuildableName = "libocmockito.a"
+               BlueprintName = "libocmockito"
+               ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
