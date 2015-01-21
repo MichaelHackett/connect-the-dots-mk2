@@ -1725,7 +1725,7 @@
 				4CEBCA3219BB564600D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA3319BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplication" */ = {
 			isa = XCConfigurationList;
@@ -1734,7 +1734,7 @@
 				4CEBCA3519BB564600D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA3619BB564600D2B498 /* Build configuration list for PBXNativeTarget "CTDApplicationTests" */ = {
 			isa = XCConfigurationList;
@@ -1743,7 +1743,7 @@
 				4CEBCA3819BB564600D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA7319BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModel" */ = {
 			isa = XCConfigurationList;
@@ -1752,7 +1752,7 @@
 				4CEBCA7519BB77C500D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA7619BB77C500D2B498 /* Build configuration list for PBXNativeTarget "CTDModelTests" */ = {
 			isa = XCConfigurationList;
@@ -1761,7 +1761,7 @@
 				4CEBCA7819BB77C500D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA9919BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentation" */ = {
 			isa = XCConfigurationList;
@@ -1770,7 +1770,7 @@
 				4CEBCA9B19BB77D300D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CEBCA9C19BB77D300D2B498 /* Build configuration list for PBXNativeTarget "CTDPresentationTests" */ = {
 			isa = XCConfigurationList;
@@ -1779,7 +1779,7 @@
 				4CEBCA9E19BB77D300D2B498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CFDEED219C688D00041B910 /* Build configuration list for PBXNativeTarget "CTDUtility" */ = {
 			isa = XCConfigurationList;
@@ -1788,7 +1788,7 @@
 				4CFDEED419C688D00041B910 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CFDEED519C688D00041B910 /* Build configuration list for PBXNativeTarget "CTDUtilityTests" */ = {
 			isa = XCConfigurationList;
@@ -1797,7 +1797,7 @@
 				4CFDEED719C688D00041B910 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4CFEF3661A6EB6400086C37B /* Build configuration list for PBXNativeTarget "CTDUIBridge" */ = {
 			isa = XCConfigurationList;
@@ -1806,6 +1806,7 @@
 				4CFEF3681A6EB6400086C37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		4CFEF3A61A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPlugins" */ = {
 			isa = XCConfigurationList;
