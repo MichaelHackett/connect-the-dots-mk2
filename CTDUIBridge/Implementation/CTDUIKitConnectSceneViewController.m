@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitConnectSceneViewController.h"
 
@@ -6,7 +6,6 @@
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitDotView.h"
-#import "CTDUIKitDrawingConfig.h"
 #import "CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
@@ -67,15 +66,12 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
-    CTDUIKitColorCell* redCell =
-        [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_RedDot]];
-    CTDUIKitColorCell* greenCell =
-        [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_GreenDot]];
-    CTDUIKitColorCell* blueCell =
-        [[CTDUIKitColorCell alloc]
-         initWithColor:[self.drawingConfig colorFor:CTDPaletteColor_BlueDot]];
+    CTDUIKitColorCell* redCell = [[CTDUIKitColorCell alloc]
+                                  initWithColor:self.dotColorMap[@(CTDPaletteColor_RedDot)]];
+    CTDUIKitColorCell* greenCell = [[CTDUIKitColorCell alloc]
+                                    initWithColor:self.dotColorMap[@(CTDPaletteColor_GreenDot)]];
+    CTDUIKitColorCell* blueCell = [[CTDUIKitColorCell alloc]
+                                   initWithColor:self.dotColorMap[@(CTDPaletteColor_BlueDot)]];
     [toolbar addCell:redCell];
     [toolbar addCell:greenCell];
     [toolbar addCell:blueCell];
@@ -109,8 +105,8 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
          initWithFrame:frameForDotCenteredAt(cgCenterPosition)
-         dotColor:[self.drawingConfig colorFor:dotColor]];
-    newDotView.drawingConfig = self.drawingConfig;
+         dotColor:self.dotColorMap[@(dotColor)]];
+    newDotView.dotColorMap = [self.dotColorMap copy];
     [self.view addSubview:newDotView];
     [_dotViews addObject:newDotView];
     return newDotView;
@@ -120,8 +116,10 @@ static id<NSCopying> keyForTouch(UITouch* touch)
       newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                              secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
-                                              initWithDrawingConfig:_drawingConfig];
+    CTDUIKitConnectionView* connectionView =
+        [[CTDUIKitConnectionView alloc]
+         initWithLineWidth:self.connectionLineWidth
+                 lineColor:self.connectionLineColor];
     [connectionView setFirstEndpointPosition:firstEndpointPosition];
     [connectionView setSecondEndpointPosition:secondEndpointPosition];
     [self.view addSubview:connectionView];

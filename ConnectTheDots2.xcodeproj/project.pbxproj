@@ -829,6 +829,8 @@
 				4CEBCA1619BB564600D2B498 /* main.m */,
 				4CEBCA1919BB564600D2B498 /* CTDAppDelegate.h */,
 				4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */,
+				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
+				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
 				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
 			);
 			path = Implementation;
@@ -837,7 +839,6 @@
 		4CFEF3821A6EC0B70086C37B /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
 				4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */,
 			);
 			name = Interface;
@@ -847,7 +848,6 @@
 		4CFEF3841A6EC0DD0086C37B /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
 				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
 				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */,
 				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,

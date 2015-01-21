@@ -1,10 +1,9 @@
-// Copyright 2013-4 Michael Hackett. All rights reserved.
+// Copyright 2013-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitDotView.h"
 
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDUIKitDotSelectionIndicatorController.h"
-#import "CTDUIKitDrawingConfig.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDPoint+CGConversion.h"
 #import <QuartzCore/CAShapeLayer.h>
@@ -73,7 +72,7 @@
 - (void)changeDotColorTo:(CTDPaletteColor)newDotColor
 {
     ((CAShapeLayer*)self.layer).fillColor =
-        [[self.drawingConfig colorFor:newDotColor] CGColor];
+        [self.dotColorMap[@(newDotColor)] CGColor];
 }
 
 - (void)showSelectionIndicator

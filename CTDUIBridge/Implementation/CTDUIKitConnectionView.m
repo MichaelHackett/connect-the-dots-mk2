@@ -1,10 +1,9 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitConnectionView.h"
 
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDPoint+CGConversion.h"
-#import "CTDUIKitDrawingConfig.h"
 
 
 
@@ -36,7 +35,8 @@
 
 // layer's anchor point is (0,1)? (top-left)
 
-- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)config
+- (instancetype)initWithLineWidth:(CGFloat)lineWidth
+                        lineColor:(CGColorRef)lineColor
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
@@ -45,9 +45,9 @@
         CTDUIKitLineLayer* viewLayer = (CTDUIKitLineLayer*)self.layer;
 //        viewLayer.anchorPoint = CGPointMake(0.0, 0.0);
         viewLayer.lineCap = kCALineCapRound;
-        viewLayer.lineWidth = config.connectionLineWidth;
+        viewLayer.lineWidth = lineWidth;
         viewLayer.opaque = NO;
-        viewLayer.strokeColor = config.connectionLineColor;
+        viewLayer.strokeColor = lineColor;
     }
     return self;
 }
