@@ -16,7 +16,6 @@
 		4C25B97F1A0EB08F00275138 /* CTDMethodSelectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B97E1A0EB08F00275138 /* CTDMethodSelectorTests.m */; };
 		4C25B9901A0EC21300275138 /* CTDRecordingTouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */; };
 		4C25B9931A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B9921A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m */; };
-		4C2619411A1054D5005E87A9 /* TestHelpers-README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */; };
 		4C2619441A105656005E87A9 /* CTDFakeDotRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619431A105656005E87A9 /* CTDFakeDotRenderer.m */; };
 		4C2619471A105784005E87A9 /* CTDRecordingDotConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619461A105784005E87A9 /* CTDRecordingDotConnectionView.m */; };
 		4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */; };
@@ -83,7 +82,6 @@
 		4CFDEEE819C69F4A0041B910 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFDEEEF19C720710041B910 /* CTDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEEE19C720710041B910 /* CTDApplication.m */; };
 		4CFEF34B1A6EB63F0086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
-		4CFEF3701A6EB8B10086C37B /* CTDUIBridge.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */; };
 		4CFEF3711A6EBB0C0086C37B /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
 		4CFEF3721A6EBB0F0086C37B /* CTDUIKitConnectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */; };
 		4CFEF3731A6EBB190086C37B /* CTDUIKitDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */; };
@@ -1245,9 +1243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CFEF3701A6EB8B10086C37B /* CTDUIBridge.xcconfig in Resources */,
 				4CEBCA1519BB564600D2B498 /* InfoPlist.strings in Resources */,
-				4C2619411A1054D5005E87A9 /* TestHelpers-README.txt in Resources */,
 				4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectSceneViewController.xib in Resources */,
 				4CEBCA1D19BB564600D2B498 /* Images.xcassets in Resources */,
 			);
