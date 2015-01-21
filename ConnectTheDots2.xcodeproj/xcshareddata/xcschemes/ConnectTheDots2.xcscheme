@@ -146,6 +146,20 @@
                ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CFEF3961A6FF89A0086C37B"
+               BuildableName = "CTDUIPluginsTests.xctest"
+               BlueprintName = "CTDUIPluginsTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -168,9 +182,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA6319BB77C400D2B498"
-               BuildableName = "CTDModelTests.xctest"
-               BlueprintName = "CTDModelTests"
+               BlueprintIdentifier = "4CFEF3961A6FF89A0086C37B"
+               BuildableName = "CTDUIPluginsTests.xctest"
+               BlueprintName = "CTDUIPluginsTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -181,6 +195,16 @@
                BlueprintIdentifier = "4CEBCA8919BB77D300D2B498"
                BuildableName = "CTDPresentationTests.xctest"
                BlueprintName = "CTDPresentationTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CEBCA6319BB77C400D2B498"
+               BuildableName = "CTDModelTests.xctest"
+               BlueprintName = "CTDModelTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>

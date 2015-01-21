@@ -98,6 +98,15 @@
 		4CFEF37C1A6EBB250086C37B /* CTDPoint+CGConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEF319C762580041B910 /* CTDPoint+CGConversion.m */; };
 		4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */; };
 		4CFEF37E1A6EBB7D0086C37B /* libCTDUIBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */; };
+		4CFEF38B1A6FF89A0086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CFEF3921A6FF89A0086C37B /* CTDUIPlugins.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF3911A6FF89A0086C37B /* CTDUIPlugins.m */; };
+		4CFEF3981A6FF89A0086C37B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
+		4CFEF3991A6FF89A0086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CFEF39D1A6FF89A0086C37B /* libCTDUIPlugins.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */; };
+		4CFEF3A31A6FF89A0086C37B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CFEF3A11A6FF89A0086C37B /* InfoPlist.strings */; };
+		4CFEF3A51A6FF89A0086C37B /* CTDUIPluginsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF3A41A6FF89A0086C37B /* CTDUIPluginsTests.m */; };
+		4CFEF3B51A70022C0086C37B /* libCTDUIPlugins.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */; };
+		4CFEF3B71A70025B0086C37B /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +159,20 @@
 			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
 			remoteInfo = CTDUtility;
 		};
+		4CFEF39B1A6FF89A0086C37B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CFEF3891A6FF89A0086C37B;
+			remoteInfo = CTDUIPlugins;
+		};
+		4CFEF3B31A70021E0086C37B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CFEF3891A6FF89A0086C37B;
+			remoteInfo = CTDUIPlugins;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,6 +204,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4CFEF3481A6EB63F0086C37B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3881A6FF89A0086C37B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -360,6 +392,18 @@
 		4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDUIBridge.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIBridge.xcconfig; path = BuildConfiguration/CTDUIBridge.xcconfig; sourceTree = "<group>"; };
 		4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDUIKitConnectSceneViewController.h; sourceTree = "<group>"; };
+		4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDUIPlugins.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CFEF38E1A6FF89A0086C37B /* CTDUIPlugins-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDUIPlugins-Prefix.pch"; sourceTree = "<group>"; };
+		4CFEF38F1A6FF89A0086C37B /* CTDUIPlugins.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDUIPlugins.h; sourceTree = "<group>"; };
+		4CFEF3911A6FF89A0086C37B /* CTDUIPlugins.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDUIPlugins.m; sourceTree = "<group>"; };
+		4CFEF3971A6FF89A0086C37B /* CTDUIPluginsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDUIPluginsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CFEF3A01A6FF89A0086C37B /* CTDUIPluginsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTDUIPluginsTests-Info.plist"; sourceTree = "<group>"; };
+		4CFEF3A21A6FF89A0086C37B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4CFEF3A41A6FF89A0086C37B /* CTDUIPluginsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDUIPluginsTests.m; sourceTree = "<group>"; };
+		4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIPlugins.xcconfig; path = BuildConfiguration/CTDUIPlugins.xcconfig; sourceTree = "<group>"; };
+		4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIPluginsTests.xcconfig; path = BuildConfiguration/CTDUIPluginsTests.xcconfig; sourceTree = "<group>"; };
+		4CFEF3B21A7000C40086C37B /* CTDUIPluginsTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CTDUIPluginsTests-Prefix.pch"; path = "CTDUIPlugins/Tests/CTDUIPluginsTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CFEF3B61A70025B0086C37B /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +415,7 @@
 				4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */,
 				4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */,
 				4CFEF37E1A6EBB7D0086C37B /* libCTDUIBridge.a in Frameworks */,
+				4CFEF3B51A70022C0086C37B /* libCTDUIPlugins.a in Frameworks */,
 				4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */,
 				4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */,
 				4CEBCAC619BCFD3A00D2B498 /* QuartzCore.framework in Frameworks */,
@@ -456,6 +501,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CFEF3871A6FF89A0086C37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF38B1A6FF89A0086C37B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3941A6FF89A0086C37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF39D1A6FF89A0086C37B /* libCTDUIPlugins.a in Frameworks */,
+				4CFEF3B71A70025B0086C37B /* libocmockito.a in Frameworks */,
+				4CFEF3981A6FF89A0086C37B /* XCTest.framework in Frameworks */,
+				4CFEF3991A6FF89A0086C37B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -484,6 +548,7 @@
 			children = (
 				4CFEF3431A6EB2480086C37B /* CTDApplication */,
 				4CEBCA1019BB564600D2B498 /* UI Bridge */,
+				4CFEF38C1A6FF89A0086C37B /* UI Plugins */,
 				4CEBCA7F19BB77D300D2B498 /* CTDPresentation */,
 				4CEBCA5919BB77C400D2B498 /* CTDModel */,
 				4CFDEEB819C688D00041B910 /* CTDUtility */,
@@ -506,6 +571,8 @@
 				4CFDEEB619C688CF0041B910 /* libCTDUtility.a */,
 				4CFDEEC319C688D00041B910 /* CTDUtilityTests.xctest */,
 				4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */,
+				4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */,
+				4CFEF3971A6FF89A0086C37B /* CTDUIPluginsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -513,6 +580,7 @@
 		4CEBCA0919BB564600D2B498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CFEF3B61A70025B0086C37B /* libocmockito.a */,
 				4CD5BF7E1A197B65003A6321 /* libocmockito.a */,
 				4CD5BF7C1A19784C003A6321 /* libocmockito.a */,
 				4CD5BF781A197822003A6321 /* libocmockito.a */,
@@ -590,11 +658,13 @@
 				4CEBCA4919BB601300D2B498 /* ConnectTheDots-AllTests.xcconfig */,
 				4CEBCA4D19BB601300D2B498 /* CTDApplication.xcconfig */,
 				4CEBCAB319BB964300D2B498 /* CTDApplicationTests.xcconfig */,
-				4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */,
 				4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */,
 				4CEBCAA019BB784800D2B498 /* CTDModelTests.xcconfig */,
 				4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */,
 				4CEBCAA219BB784800D2B498 /* CTDPresentationTests.xcconfig */,
+				4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */,
+				4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */,
+				4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */,
 				4CFDEED819C689260041B910 /* CTDUtility.xcconfig */,
 				4CFDEED919C689500041B910 /* CTDUtilityTests.xcconfig */,
 			);
@@ -865,6 +935,55 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
+		4CFEF38C1A6FF89A0086C37B /* UI Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF3AD1A6FF9F30086C37B /* Interface */,
+				4CFEF3AC1A6FF9EA0086C37B /* Implementation */,
+				4CFEF39E1A6FF89A0086C37B /* Tests */,
+			);
+			name = "UI Plugins";
+			path = CTDUIPlugins;
+			sourceTree = "<group>";
+		};
+		4CFEF39E1A6FF89A0086C37B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF3A41A6FF89A0086C37B /* CTDUIPluginsTests.m */,
+				4CFEF39F1A6FF89A0086C37B /* Supporting Files */,
+			);
+			name = Tests;
+			path = CTDUIPlugins/Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		4CFEF39F1A6FF89A0086C37B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF3B21A7000C40086C37B /* CTDUIPluginsTests-Prefix.pch */,
+				4CFEF3A01A6FF89A0086C37B /* CTDUIPluginsTests-Info.plist */,
+				4CFEF3A11A6FF89A0086C37B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CFEF3AC1A6FF9EA0086C37B /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF38E1A6FF89A0086C37B /* CTDUIPlugins-Prefix.pch */,
+				4CFEF38F1A6FF89A0086C37B /* CTDUIPlugins.h */,
+				4CFEF3911A6FF89A0086C37B /* CTDUIPlugins.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		4CFEF3AD1A6FF9F30086C37B /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Interface;
+			path = Interface/CTDUIPlugins;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -883,6 +1002,7 @@
 				4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */,
 				4CEBCAAE19BB928400D2B498 /* PBXTargetDependency */,
 				4CFEF36D1A6EB6D20086C37B /* PBXTargetDependency */,
+				4CFEF3B41A70021E0086C37B /* PBXTargetDependency */,
 			);
 			name = CTDApplication;
 			productName = ConnectTheDots2;
@@ -1028,6 +1148,41 @@
 			productReference = 4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CFEF3A61A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPlugins" */;
+			buildPhases = (
+				4CFEF3861A6FF89A0086C37B /* Sources */,
+				4CFEF3871A6FF89A0086C37B /* Frameworks */,
+				4CFEF3881A6FF89A0086C37B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTDUIPlugins;
+			productName = CTDUIPlugins;
+			productReference = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4CFEF3961A6FF89A0086C37B /* CTDUIPluginsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CFEF3A91A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPluginsTests" */;
+			buildPhases = (
+				4CFEF3931A6FF89A0086C37B /* Sources */,
+				4CFEF3941A6FF89A0086C37B /* Frameworks */,
+				4CFEF3951A6FF89A0086C37B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CFEF39C1A6FF89A0086C37B /* PBXTargetDependency */,
+			);
+			name = CTDUIPluginsTests;
+			productName = CTDUIPluginsTests;
+			productReference = 4CFEF3971A6FF89A0086C37B /* CTDUIPluginsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1053,6 +1208,9 @@
 					4CFDEEC219C688D00041B910 = {
 						TestTargetID = 4CFDEEB519C688CF0041B910;
 					};
+					4CFEF3961A6FF89A0086C37B = {
+						TestTargetID = 4CFEF3891A6FF89A0086C37B;
+					};
 				};
 			};
 			buildConfigurationList = 4CEBCA0219BB564600D2B498 /* Build configuration list for PBXProject "ConnectTheDots2" */;
@@ -1070,6 +1228,8 @@
 				4CEBCA0619BB564600D2B498 /* CTDApplication */,
 				4CEBCA2119BB564600D2B498 /* CTDApplicationTests */,
 				4CFEF3491A6EB63F0086C37B /* CTDUIBridge */,
+				4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */,
+				4CFEF3961A6FF89A0086C37B /* CTDUIPluginsTests */,
 				4CEBCA7C19BB77D200D2B498 /* CTDPresentation */,
 				4CEBCA8919BB77D300D2B498 /* CTDPresentationTests */,
 				4CEBCA5619BB77C400D2B498 /* CTDModel */,
@@ -1122,6 +1282,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFDEECF19C688D00041B910 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3951A6FF89A0086C37B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF3A31A6FF89A0086C37B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1411,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CFEF3861A6FF89A0086C37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF3921A6FF89A0086C37B /* CTDUIPlugins.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3931A6FF89A0086C37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF3A51A6FF89A0086C37B /* CTDUIPluginsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1280,6 +1464,16 @@
 			isa = PBXTargetDependency;
 			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
 			targetProxy = 4CFEF37F1A6EBC760086C37B /* PBXContainerItemProxy */;
+		};
+		4CFEF39C1A6FF89A0086C37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */;
+			targetProxy = 4CFEF39B1A6FF89A0086C37B /* PBXContainerItemProxy */;
+		};
+		4CFEF3B41A70021E0086C37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */;
+			targetProxy = 4CFEF3B31A70021E0086C37B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1320,6 +1514,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				4CFDEECE19C688D00041B910 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4CFEF3A11A6FF89A0086C37B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CFEF3A21A6FF89A0086C37B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1485,6 +1687,34 @@
 			};
 			name = Release;
 		};
+		4CFEF3A71A6FF89B0086C37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CFEF3A81A6FF89B0086C37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4CFEF3AA1A6FF89B0086C37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CFEF3AB1A6FF89B0086C37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1576,6 +1806,24 @@
 				4CFEF3681A6EB6400086C37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+		};
+		4CFEF3A61A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPlugins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CFEF3A71A6FF89B0086C37B /* Debug */,
+				4CFEF3A81A6FF89B0086C37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4CFEF3A91A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPluginsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CFEF3AA1A6FF89B0086C37B /* Debug */,
+				4CFEF3AB1A6FF89B0086C37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
