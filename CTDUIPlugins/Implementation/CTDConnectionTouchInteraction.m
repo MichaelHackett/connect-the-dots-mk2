@@ -1,11 +1,11 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDConnectionTouchInteraction.h"
 
-#import "CTDDotConnectionRenderer.h"
-#import "CTDDotRenderer.h"
 #import "CTDTouchMapper.h"
-#import "CTDTrialRenderer.h"
+#import "CTDPresentation/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 

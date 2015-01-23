@@ -4,10 +4,10 @@
 
 #import "CTDColorPalette.h"
 #import "CTDDotRenderer.h"
-#import "CTDListOrderTouchMapper.h"
-#import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDModel/CTDDot.h"
+#import "CTDUIPlugins/CTDListOrderTouchMapper.h"
+#import "CTDUIPlugins/CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 

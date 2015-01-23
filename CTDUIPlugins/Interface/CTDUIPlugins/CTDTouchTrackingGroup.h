@@ -6,9 +6,10 @@
 //     what other handlers are doing, they will need an outside channel for
 //     communicating directly with each other.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDTouchResponder.h"
+//#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
 
 
 

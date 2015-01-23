@@ -1,9 +1,9 @@
 // CTDApplication:
 //     The main application controller.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-@protocol CTDTouchInputSource, CTDTrialRenderer;
+@protocol CTDTouchInputRouter, CTDTrialRenderer;
 
 
 @interface CTDApplication : NSObject
@@ -12,6 +12,6 @@
 // that implement both CTDSelectionRenderer and CTDTouchable.
 - (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellMap:(NSDictionary*)colorCellMap
-            touchInputSource:(id<CTDTouchInputSource>)touchInputSource;
+            touchInputRouter:(id<CTDTouchInputRouter>)touchInputRouter;
 
 @end

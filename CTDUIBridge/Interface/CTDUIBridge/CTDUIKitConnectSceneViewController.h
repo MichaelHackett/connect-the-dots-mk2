@@ -3,13 +3,13 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDTouchResponder.h"
+#import "CTDTouchInputRouter.h"
 #import "CTDPresentation/CTDTrialRenderer.h"
 
 
 
 @interface CTDUIKitConnectSceneViewController
-    : UIViewController <CTDTrialRenderer, CTDTouchInputSource>
+    : UIViewController <CTDTrialRenderer, CTDTouchInputRouter>
 
 // VC configuration (must be set before the container view is loaded, and
 // changed made after view is loaded will usually have no effect)

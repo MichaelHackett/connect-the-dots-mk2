@@ -7,6 +7,7 @@
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitDotView.h"
 #import "CTDUIKitToolbar.h"
+#import "ExtensionPoints/CTDTouchResponder.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 

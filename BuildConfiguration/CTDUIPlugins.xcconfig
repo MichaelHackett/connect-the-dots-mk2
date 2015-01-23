@@ -3,4 +3,5 @@
 #include "General-Common-StaticLibrary.xcconfig"
 
 // Project module source dependencies:
-USER_HEADER_SEARCH_PATHS = $(CTD_UTILITY_HEADERS) $(inherited)
+TEMP_USER_HEADER_SEARCH_PATHS = $(CTD_PRESENTATION_HEADERS) $(CTD_UI_BRIDGE_HEADERS)/CTDUIBridge/ExtensionPoints
+USER_HEADER_SEARCH_PATHS = $(TEMP_USER_HEADER_SEARCH_PATHS) $(CTD_UI_BRIDGE_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)

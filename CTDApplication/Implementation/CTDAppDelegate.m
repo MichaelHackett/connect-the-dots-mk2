@@ -55,7 +55,7 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
     [_applicationController runTrialWithRenderer:initialViewController
                                     colorCellMap:initialViewController.colorCellMap
-                                touchInputSource:initialViewController];
+                                touchInputRouter:initialViewController];
 
     return YES;
 }

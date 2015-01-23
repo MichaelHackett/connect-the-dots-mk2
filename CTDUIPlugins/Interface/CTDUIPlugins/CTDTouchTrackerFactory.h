@@ -2,9 +2,9 @@
 //     A CTDTouchResponder that creates CTDTouchTrackers on demand, for each
 //     new touch to be tracked.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchResponder.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
 
 @protocol CTDTouchTracker;
 

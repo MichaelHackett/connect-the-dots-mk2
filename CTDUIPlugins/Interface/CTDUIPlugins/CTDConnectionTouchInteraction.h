@@ -1,9 +1,9 @@
 // CTDConnectionTouchInteraction:
 //     Handles dragging between elements to connect them.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchResponder.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
 
 @class CTDPoint;
 @protocol CTDDotRenderer;

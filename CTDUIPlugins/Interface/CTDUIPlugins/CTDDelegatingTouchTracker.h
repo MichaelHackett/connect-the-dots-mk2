@@ -9,9 +9,10 @@
 //     delegating tracker can be registered and the initial delegate can later
 //     change the delegate to another tracker, if conditions warrant.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchResponder.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
+
 
 
 @interface CTDDelegatingTouchTracker : NSObject <CTDTouchTracker>

@@ -4,12 +4,14 @@
 
 #import "CTDConnectionTouchInteraction.h"
 #import "CTDDelegatingTouchTracker.h"
-#import "CTDDotRenderer.h"
 #import "CTDSelectOnTouchInteraction.h"
 #import "CTDTouchMapper.h"
-#import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
-#import "CTDTrialRenderer.h"
+//#import "CTDTrialRenderer.h"
+#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
+
+@protocol CTDTrialRenderer; // TEMP!
 
 
 

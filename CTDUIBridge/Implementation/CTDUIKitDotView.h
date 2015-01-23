@@ -5,7 +5,7 @@
 // Copyright 2013-5 Michael Hackett. All rights reserved.
 
 #import "CTDPresentation/CTDDotRenderer.h"
-#import "CTDPresentation/CTDTouchable.h"
+#import "CTDUIPlugins/CTDTouchable.h"
 
 
 
