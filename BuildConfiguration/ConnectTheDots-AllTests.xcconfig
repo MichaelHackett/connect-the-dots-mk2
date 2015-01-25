@@ -15,7 +15,7 @@ IPHONEOS_DEPLOYMENT_TARGET = 7.1
 CTD_TESTS_DIR = $(SOURCE_ROOT)/Tests
 INFOPLIST_FILE = $(CTD_TESTS_DIR)/$(TARGET_NAME)-Info.plist
 GCC_PREFIX_HEADER = $(CTD_TESTS_DIR)/$(TARGET_NAME)-Prefix.pch
-CTD_TEST_HELPERS = TestHelpers
+CTD_TEST_HELPERS = CTDTestHelpers/Interface
 
 // Project headers used by tests, with a place for customization in per-module config.
 USER_HEADER_SEARCH_PATHS = $(SOURCE_ROOT)/Implementation $(CTD_TEST_HELPERS) $(RXC_MODULE_DEPENDENCIES) $(inherited)

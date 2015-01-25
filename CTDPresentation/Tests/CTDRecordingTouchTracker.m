@@ -2,7 +2,7 @@
 
 #import "CTDRecordingTouchTracker.h"
 
-#import "CTDMessageRecorder.h"
+#import "CTDTestHelpers/CTDMessageRecorder.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 

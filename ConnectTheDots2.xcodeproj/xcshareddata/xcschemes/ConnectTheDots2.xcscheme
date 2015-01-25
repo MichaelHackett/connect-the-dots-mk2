@@ -168,6 +168,20 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CFEF3E81A72F1B70086C37B"
+               BuildableName = "libCTDTestHelpers.a"
+               BlueprintName = "CTDTestHelpers"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "081BEE611345979F003F846A"
                BuildableName = "libochamcrest.a"
                BlueprintName = "libochamcrest"
@@ -243,6 +257,16 @@
                BlueprintIdentifier = "4CFDEEC219C688D00041B910"
                BuildableName = "CTDUtilityTests.xctest"
                BlueprintName = "CTDUtilityTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CFEF3F51A72F1B70086C37B"
+               BuildableName = "CTDTestHelpersTests.xctest"
+               BlueprintName = "CTDTestHelpersTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>

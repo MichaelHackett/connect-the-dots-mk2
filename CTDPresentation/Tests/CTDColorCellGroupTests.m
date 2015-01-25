@@ -7,6 +7,8 @@
 #import "CTDModel/CTDDotColor.h"
 #import <XCTest/XCTest.h>
 
+#import "CTDUtility/CTDMethodSelector.h"
+
 #define message CTDMakeMethodSelector
 
 

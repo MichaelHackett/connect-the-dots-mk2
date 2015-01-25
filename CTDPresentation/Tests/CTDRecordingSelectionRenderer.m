@@ -2,7 +2,7 @@
 
 #import "CTDRecordingSelectionRenderer.h"
 
-#import "CTDMessageRecorder.h"
+#import "CTDTestHelpers/CTDMessageRecorder.h"
 
 
 

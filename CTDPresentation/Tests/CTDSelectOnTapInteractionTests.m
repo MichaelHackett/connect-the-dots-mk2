@@ -4,6 +4,7 @@
 
 #import "CTDColorCellsTestFixture.h"
 #import "CTDSelectionChangeRecorder.h"
+#import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
 #define message CTDMakeMethodSelector

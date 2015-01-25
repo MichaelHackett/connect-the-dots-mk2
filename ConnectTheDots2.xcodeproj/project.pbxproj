@@ -32,8 +32,6 @@
 		4CD5BF791A197822003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF781A197822003A6321 /* libocmockito.a */; };
 		4CD5BF7D1A19784C003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7C1A19784C003A6321 /* libocmockito.a */; };
 		4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7E1A197B65003A6321 /* libocmockito.a */; };
-		4CD5BF921A199FA2003A6321 /* CTDMessageRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */; };
-		4CD5BF941A199FCA003A6321 /* CTDMessageRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */; };
 		4CD5BF971A19A8C1003A6321 /* CTDSelectionChangeRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */; };
 		4CD5BF9A1A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */; };
 		4CD5BF9D1A1A6C74003A6321 /* CTDFakeTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */; };
@@ -104,6 +102,16 @@
 		4CFEF3C41A7193EE0086C37B /* CTDSelectOnTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */; };
 		4CFEF3C51A7193F10086C37B /* CTDSelectOnTapInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3236451A150AE7005C25D7 /* CTDSelectOnTapInteraction.m */; };
 		4CFEF3C61A7193F80086C37B /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
+		4CFEF3EA1A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CFEF3F71A72F1B70086C37B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
+		4CFEF3F81A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4CFEF3FC1A72F1B70086C37B /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
+		4CFEF4021A72F1B70086C37B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CFEF4001A72F1B70086C37B /* InfoPlist.strings */; };
+		4CFEF40D1A743B5D0086C37B /* CTDMessageRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */; };
+		4CFEF40E1A743B670086C37B /* CTDMessageRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */; };
+		4CFEF4121A743D7D0086C37B /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
+		4CFEF4411A75710B0086C37B /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF4401A75710B0086C37B /* libochamcrest.a */; };
+		4CFEF4431A7582D00086C37B /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
 		4CFEF4551A75CA670086C37B /* libCTDUIPlugins.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +179,13 @@
 			remoteGlobalIDString = 4CFEF3891A6FF89A0086C37B;
 			remoteInfo = CTDUIPlugins;
 		};
+		4CFEF43F1A756A210086C37B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
+			remoteInfo = CTDUtility;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,6 +226,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4CFEF3881A6FF89A0086C37B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3E71A72F1B70086C37B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -291,9 +315,9 @@
 		4CD5BF781A197822003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF7C1A19784C003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF7E1A197B65003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDMessageRecorder.h; path = CTDPresentation/Tests/CTDMessageRecorder.h; sourceTree = SOURCE_ROOT; };
-		4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDMessageRecorder.m; path = CTDPresentation/Tests/CTDMessageRecorder.m; sourceTree = SOURCE_ROOT; };
-		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDMessageRecorderTests.m; path = CTDPresentation/Tests/CTDMessageRecorderTests.m; sourceTree = SOURCE_ROOT; };
+		4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMessageRecorder.h; sourceTree = "<group>"; };
+		4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorder.m; sourceTree = "<group>"; };
+		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorderTests.m; sourceTree = "<group>"; };
 		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDSelectionChangeRecorder.h; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.h; sourceTree = SOURCE_ROOT; };
 		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectionChangeRecorder.m; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.m; sourceTree = SOURCE_ROOT; };
 		4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorPalette.h; sourceTree = "<group>"; };
@@ -400,6 +424,15 @@
 		4CFEF3BD1A7183570086C37B /* CTDTouchInputRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchInputRouter.h; sourceTree = "<group>"; };
 		4CFEF3C01A7193710086C37B /* CTDTrialSceneTouchRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTrialSceneTouchRouter.h; sourceTree = "<group>"; };
 		4CFEF3C71A719C6D0086C37B /* CTDTouchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchable.h; sourceTree = "<group>"; };
+		4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDTestHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CFEF3ED1A72F1B70086C37B /* CTDTestHelpers-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDTestHelpers-Prefix.pch"; sourceTree = "<group>"; };
+		4CFEF3F61A72F1B70086C37B /* CTDTestHelpersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDTestHelpersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CFEF3FF1A72F1B70086C37B /* CTDTestHelpersTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTDTestHelpersTests-Info.plist"; sourceTree = "<group>"; };
+		4CFEF4011A72F1B70086C37B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDTestHelpers.xcconfig; path = BuildConfiguration/CTDTestHelpers.xcconfig; sourceTree = "<group>"; };
+		4CFEF40C1A7404B00086C37B /* CTDTestHelpersTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDTestHelpersTests.xcconfig; path = BuildConfiguration/CTDTestHelpersTests.xcconfig; sourceTree = "<group>"; };
+		4CFEF4131A743EF40086C37B /* CTDTestHelpersTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDTestHelpersTests-Prefix.pch"; sourceTree = "<group>"; };
+		4CFEF4401A75710B0086C37B /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +498,7 @@
 				4CEBCA9019BB77D300D2B498 /* libCTDPresentation.a in Frameworks */,
 				4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */,
 				4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */,
+				4CFEF4431A7582D00086C37B /* libCTDTestHelpers.a in Frameworks */,
 				4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */,
 				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
@@ -517,6 +551,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CFEF3E61A72F1B70086C37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF3EA1A72F1B70086C37B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3F31A72F1B70086C37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF3FC1A72F1B70086C37B /* libCTDTestHelpers.a in Frameworks */,
+				4CFEF4121A743D7D0086C37B /* libCTDUtility.a in Frameworks */,
+				4CFEF4411A75710B0086C37B /* libochamcrest.a in Frameworks */,
+				4CFEF3F71A72F1B70086C37B /* XCTest.framework in Frameworks */,
+				4CFEF3F81A72F1B70086C37B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -529,6 +583,7 @@
 				4CEBCA7F19BB77D300D2B498 /* CTDPresentation */,
 				4CEBCA5919BB77C400D2B498 /* CTDModel */,
 				4CFDEEB819C688D00041B910 /* CTDUtility */,
+				4CFEF3E11A72F0160086C37B /* CTDTestHelpers */,
 				4CFDEE8E19C609440041B910 /* Common */,
 				4CEBCA4819BB5FD900D2B498 /* BuildConfiguration */,
 				4CEBCA0919BB564600D2B498 /* Frameworks */,
@@ -550,6 +605,8 @@
 				4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */,
 				4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */,
 				4CFEF3971A6FF89A0086C37B /* CTDUIPluginsTests.xctest */,
+				4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */,
+				4CFEF3F61A72F1B70086C37B /* CTDTestHelpersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -557,6 +614,7 @@
 		4CEBCA0919BB564600D2B498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CFEF4401A75710B0086C37B /* libochamcrest.a */,
 				4CFEF3B61A70025B0086C37B /* libocmockito.a */,
 				4CD5BF7E1A197B65003A6321 /* libocmockito.a */,
 				4CD5BF7C1A19784C003A6321 /* libocmockito.a */,
@@ -644,6 +702,8 @@
 				4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */,
 				4CFDEED819C689260041B910 /* CTDUtility.xcconfig */,
 				4CFDEED919C689500041B910 /* CTDUtilityTests.xcconfig */,
+				4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */,
+				4CFEF40C1A7404B00086C37B /* CTDTestHelpersTests.xcconfig */,
 			);
 			name = BuildConfiguration;
 			sourceTree = "<group>";
@@ -693,7 +753,6 @@
 			children = (
 				4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */,
 				4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */,
-				4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */,
 				4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */,
 				4C3236421A150A98005C25D7 /* CTDSelectOnTapInteractionTests.m */,
 				4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */,
@@ -721,8 +780,6 @@
 				4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */,
 				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
 				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
-				4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */,
-				4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */,
 				4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */,
 				4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */,
 				4C2619451A105784005E87A9 /* CTDRecordingDotConnectionView.h */,
@@ -979,6 +1036,53 @@
 			path = ExtensionPoints;
 			sourceTree = "<group>";
 		};
+		4CFEF3E11A72F0160086C37B /* CTDTestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF3E21A72F0B50086C37B /* Interface */,
+				4CFEF3E31A72F13F0086C37B /* Implementation */,
+				4CFEF3E41A72F1490086C37B /* Tests */,
+			);
+			path = CTDTestHelpers;
+			sourceTree = "<group>";
+		};
+		4CFEF3E21A72F0B50086C37B /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */,
+			);
+			name = Interface;
+			path = Interface/CTDTestHelpers;
+			sourceTree = "<group>";
+		};
+		4CFEF3E31A72F13F0086C37B /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF3ED1A72F1B70086C37B /* CTDTestHelpers-Prefix.pch */,
+				4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		4CFEF3E41A72F1490086C37B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */,
+				4CFEF3FE1A72F1B70086C37B /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4CFEF3FE1A72F1B70086C37B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEF4131A743EF40086C37B /* CTDTestHelpersTests-Prefix.pch */,
+				4CFEF3FF1A72F1B70086C37B /* CTDTestHelpersTests-Info.plist */,
+				4CFEF4001A72F1B70086C37B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1178,6 +1282,41 @@
 			productReference = 4CFEF3971A6FF89A0086C37B /* CTDUIPluginsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4CFEF3E81A72F1B70086C37B /* CTDTestHelpers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CFEF4051A72F1B80086C37B /* Build configuration list for PBXNativeTarget "CTDTestHelpers" */;
+			buildPhases = (
+				4CFEF3E51A72F1B70086C37B /* Sources */,
+				4CFEF3E61A72F1B70086C37B /* Frameworks */,
+				4CFEF3E71A72F1B70086C37B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CFEF4201A7564080086C37B /* PBXTargetDependency */,
+			);
+			name = CTDTestHelpers;
+			productName = CTDTestHelpers;
+			productReference = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4CFEF3F51A72F1B70086C37B /* CTDTestHelpersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CFEF4081A72F1B80086C37B /* Build configuration list for PBXNativeTarget "CTDTestHelpersTests" */;
+			buildPhases = (
+				4CFEF3F21A72F1B70086C37B /* Sources */,
+				4CFEF3F31A72F1B70086C37B /* Frameworks */,
+				4CFEF3F41A72F1B70086C37B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTDTestHelpersTests;
+			productName = CTDTestHelpersTests;
+			productReference = 4CFEF3F61A72F1B70086C37B /* CTDTestHelpersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1206,6 +1345,9 @@
 					4CFEF3961A6FF89A0086C37B = {
 						TestTargetID = 4CFEF3891A6FF89A0086C37B;
 					};
+					4CFEF3F51A72F1B70086C37B = {
+						TestTargetID = 4CFEF3E81A72F1B70086C37B;
+					};
 				};
 			};
 			buildConfigurationList = 4CEBCA0219BB564600D2B498 /* Build configuration list for PBXProject "ConnectTheDots2" */;
@@ -1231,6 +1373,8 @@
 				4CEBCA6319BB77C400D2B498 /* CTDModelTests */,
 				4CFDEEB519C688CF0041B910 /* CTDUtility */,
 				4CFDEEC219C688D00041B910 /* CTDUtilityTests */,
+				4CFEF3E81A72F1B70086C37B /* CTDTestHelpers */,
+				4CFEF3F51A72F1B70086C37B /* CTDTestHelpersTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1286,6 +1430,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CFEF3F41A72F1B70086C37B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF4021A72F1B70086C37B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1336,7 +1488,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CD5BF921A199FA2003A6321 /* CTDMessageRecorder.m in Sources */,
 				4CD5BF9D1A1A6C74003A6321 /* CTDFakeTouchMapper.m in Sources */,
 				4C25B9901A0EC21300275138 /* CTDRecordingTouchTrackerTests.m in Sources */,
 				4C2619471A105784005E87A9 /* CTDRecordingDotConnectionView.m in Sources */,
@@ -1353,7 +1504,6 @@
 				4C26194A1A1058B5005E87A9 /* CTDRecordingTrialRenderer.m in Sources */,
 				4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */,
 				4C25B9711A0E6AA100275138 /* CTDTouchTrackingGroupTests.m in Sources */,
-				4CD5BF941A199FCA003A6321 /* CTDMessageRecorderTests.m in Sources */,
 				4C32364C1A153B04005C25D7 /* CTDColorCellGroupTests.m in Sources */,
 				4C26194F1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m in Sources */,
 			);
@@ -1419,6 +1569,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CFEF3E51A72F1B70086C37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF40D1A743B5D0086C37B /* CTDMessageRecorder.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEF3F21A72F1B70086C37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFEF40E1A743B670086C37B /* CTDMessageRecorderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1467,6 +1633,11 @@
 			target = 4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */;
 			targetProxy = 4CFEF3B31A70021E0086C37B /* PBXContainerItemProxy */;
 		};
+		4CFEF4201A7564080086C37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
+			targetProxy = 4CFEF43F1A756A210086C37B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1514,6 +1685,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				4CFEF3A21A6FF89A0086C37B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4CFEF4001A72F1B70086C37B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CFEF4011A72F1B70086C37B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1699,6 +1878,34 @@
 			};
 			name = Release;
 		};
+		4CFEF4061A72F1B80086C37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CFEF4071A72F1B80086C37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4CFEF4091A72F1B80086C37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF40C1A7404B00086C37B /* CTDTestHelpersTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4CFEF40A1A72F1B80086C37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CFEF40C1A7404B00086C37B /* CTDTestHelpersTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1806,6 +2013,24 @@
 			buildConfigurations = (
 				4CFEF3AA1A6FF89B0086C37B /* Debug */,
 				4CFEF3AB1A6FF89B0086C37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4CFEF4051A72F1B80086C37B /* Build configuration list for PBXNativeTarget "CTDTestHelpers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CFEF4061A72F1B80086C37B /* Debug */,
+				4CFEF4071A72F1B80086C37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4CFEF4081A72F1B80086C37B /* Build configuration list for PBXNativeTarget "CTDTestHelpersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CFEF4091A72F1B80086C37B /* Debug */,
+				4CFEF40A1A72F1B80086C37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
