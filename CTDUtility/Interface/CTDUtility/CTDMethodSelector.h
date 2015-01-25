@@ -5,7 +5,7 @@
 //     names, but these will not be automatically updated during refactorings
 //     the way @selector() arguments will be.)
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 
 @interface CTDMethodSelector : NSObject <NSCopying>
@@ -21,3 +21,8 @@ CTD_NO_DEFAULT_INIT
 // Note: -description returns the selector as a string
 
 @end
+
+
+// Convenience macro for creating instances of CTDMethodSelector:
+#define CTDMakeMethodSelector(SELECTOR) \
+    [[CTDMethodSelector alloc] initWithRawSelector:@selector(SELECTOR)]

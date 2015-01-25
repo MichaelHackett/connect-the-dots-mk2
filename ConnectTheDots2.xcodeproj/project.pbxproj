@@ -254,7 +254,6 @@
 		4C3236421A150A98005C25D7 /* CTDSelectOnTapInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectOnTapInteractionTests.m; path = CTDPresentation/Tests/CTDSelectOnTapInteractionTests.m; sourceTree = SOURCE_ROOT; };
 		4C3236441A150AE6005C25D7 /* CTDSelectOnTapInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTapInteraction.h; sourceTree = "<group>"; };
 		4C3236451A150AE7005C25D7 /* CTDSelectOnTapInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTapInteraction.m; sourceTree = "<group>"; };
-		4C3236471A150E7F005C25D7 /* CTDTestDataHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CTDTestDataHelpers.h; path = CTDPresentation/Tests/CTDTestDataHelpers.h; sourceTree = SOURCE_ROOT; };
 		4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDColorCellsTestFixture.h; path = CTDPresentation/Tests/CTDColorCellsTestFixture.h; sourceTree = SOURCE_ROOT; };
 		4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDColorCellsTestFixture.m; path = CTDPresentation/Tests/CTDColorCellsTestFixture.m; sourceTree = SOURCE_ROOT; };
 		4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDColorCellGroupTests.m; path = CTDPresentation/Tests/CTDColorCellGroupTests.m; sourceTree = SOURCE_ROOT; };
@@ -712,7 +711,6 @@
 				4CEBCAB219BB955700D2B498 /* CTDPresentationTests-Prefix.pch */,
 				4CEBCA9319BB77D300D2B498 /* CTDPresentationTests-Info.plist */,
 				4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */,
-				4C3236471A150E7F005C25D7 /* CTDTestDataHelpers.h */,
 				4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */,
 				4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */,
 				4C2619421A105656005E87A9 /* CTDFakeDotRenderer.h */,
