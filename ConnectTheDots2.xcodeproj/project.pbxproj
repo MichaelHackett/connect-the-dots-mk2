@@ -246,41 +246,41 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDTrialSceneTouchRouterTests.m; path = CTDPresentation/Tests/CTDTrialSceneTouchRouterTests.m; sourceTree = SOURCE_ROOT; };
-		4C25B9701A0E6AA100275138 /* CTDTouchTrackingGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDTouchTrackingGroupTests.m; path = CTDPresentation/Tests/CTDTouchTrackingGroupTests.m; sourceTree = SOURCE_ROOT; };
+		4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTrialSceneTouchRouterTests.m; sourceTree = "<group>"; };
+		4C25B9701A0E6AA100275138 /* CTDTouchTrackingGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTouchTrackingGroupTests.m; sourceTree = "<group>"; };
 		4C25B9721A0E7F0000275138 /* CTDTouchTrackingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchTrackingGroup.h; sourceTree = "<group>"; };
 		4C25B9731A0E7F0000275138 /* CTDTouchTrackingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTouchTrackingGroup.m; sourceTree = "<group>"; };
-		4C25B9771A0E90E800275138 /* CTDRecordingTouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingTouchTracker.h; path = CTDPresentation/Tests/CTDRecordingTouchTracker.h; sourceTree = SOURCE_ROOT; };
-		4C25B9781A0E90E800275138 /* CTDRecordingTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingTouchTracker.m; path = CTDPresentation/Tests/CTDRecordingTouchTracker.m; sourceTree = SOURCE_ROOT; };
+		4C25B9771A0E90E800275138 /* CTDRecordingTouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingTouchTracker.h; sourceTree = "<group>"; };
+		4C25B9781A0E90E800275138 /* CTDRecordingTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingTouchTracker.m; sourceTree = "<group>"; };
 		4C25B97B1A0E95E300275138 /* CTDMethodSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodSelector.h; sourceTree = "<group>"; };
 		4C25B97C1A0E95E300275138 /* CTDMethodSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMethodSelector.m; sourceTree = "<group>"; };
-		4C25B97E1A0EB08F00275138 /* CTDMethodSelectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDMethodSelectorTests.m; path = CTDUtility/Tests/CTDMethodSelectorTests.m; sourceTree = SOURCE_ROOT; };
-		4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingTouchTrackerTests.m; path = CTDPresentation/Tests/CTDRecordingTouchTrackerTests.m; sourceTree = SOURCE_ROOT; };
+		4C25B97E1A0EB08F00275138 /* CTDMethodSelectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMethodSelectorTests.m; sourceTree = "<group>"; };
+		4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingTouchTrackerTests.m; sourceTree = "<group>"; };
 		4C25B9911A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CTDBlockBasedFiltering.h"; sourceTree = "<group>"; };
 		4C25B9921A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CTDBlockBasedFiltering.m"; sourceTree = "<group>"; };
-		4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "TestHelpers-README.txt"; path = "CTDPresentation/Tests/TestHelpers-README.txt"; sourceTree = SOURCE_ROOT; };
-		4C2619421A105656005E87A9 /* CTDFakeDotRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeDotRenderer.h; path = CTDPresentation/Tests/CTDFakeDotRenderer.h; sourceTree = SOURCE_ROOT; };
-		4C2619431A105656005E87A9 /* CTDFakeDotRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeDotRenderer.m; path = CTDPresentation/Tests/CTDFakeDotRenderer.m; sourceTree = SOURCE_ROOT; };
-		4C2619451A105784005E87A9 /* CTDRecordingDotConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingDotConnectionView.h; path = CTDPresentation/Tests/CTDRecordingDotConnectionView.h; sourceTree = SOURCE_ROOT; };
-		4C2619461A105784005E87A9 /* CTDRecordingDotConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingDotConnectionView.m; path = CTDPresentation/Tests/CTDRecordingDotConnectionView.m; sourceTree = SOURCE_ROOT; };
-		4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingTrialRenderer.h; path = CTDPresentation/Tests/CTDRecordingTrialRenderer.h; sourceTree = SOURCE_ROOT; };
-		4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingTrialRenderer.m; path = CTDPresentation/Tests/CTDRecordingTrialRenderer.m; sourceTree = SOURCE_ROOT; };
+		4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TestHelpers-README.txt"; sourceTree = "<group>"; };
+		4C2619421A105656005E87A9 /* CTDFakeDotRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeDotRenderer.h; sourceTree = "<group>"; };
+		4C2619431A105656005E87A9 /* CTDFakeDotRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeDotRenderer.m; sourceTree = "<group>"; };
+		4C2619451A105784005E87A9 /* CTDRecordingDotConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingDotConnectionView.h; sourceTree = "<group>"; };
+		4C2619461A105784005E87A9 /* CTDRecordingDotConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingDotConnectionView.m; sourceTree = "<group>"; };
+		4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingTrialRenderer.h; sourceTree = "<group>"; };
+		4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingTrialRenderer.m; sourceTree = "<group>"; };
 		4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorCellRenderer.h; sourceTree = "<group>"; };
-		4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingColorCellRenderer.h; path = CTDPresentation/Tests/CTDRecordingColorCellRenderer.h; sourceTree = SOURCE_ROOT; };
-		4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDRecordingSelectionRenderer.h; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.h; sourceTree = SOURCE_ROOT; };
-		4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingSelectionRenderer.m; path = CTDPresentation/Tests/CTDRecordingSelectionRenderer.m; sourceTree = SOURCE_ROOT; };
-		4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDRecordingColorCellRenderer.m; path = CTDPresentation/Tests/CTDRecordingColorCellRenderer.m; sourceTree = SOURCE_ROOT; };
-		4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchResponder.h; path = CTDPresentation/Tests/CTDFakeTouchResponder.h; sourceTree = SOURCE_ROOT; };
-		4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchResponder.m; path = CTDPresentation/Tests/CTDFakeTouchResponder.m; sourceTree = SOURCE_ROOT; };
+		4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingColorCellRenderer.h; sourceTree = "<group>"; };
+		4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingSelectionRenderer.h; sourceTree = "<group>"; };
+		4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingSelectionRenderer.m; sourceTree = "<group>"; };
+		4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRecordingColorCellRenderer.m; sourceTree = "<group>"; };
+		4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchResponder.h; sourceTree = "<group>"; };
+		4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchResponder.m; sourceTree = "<group>"; };
 		4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchTrackerFactory.h; sourceTree = "<group>"; };
 		4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTouchTrackerFactory.m; sourceTree = "<group>"; };
-		4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectOnTouchInteractionTests.m; path = CTDPresentation/Tests/CTDSelectOnTouchInteractionTests.m; sourceTree = SOURCE_ROOT; };
-		4C3236421A150A98005C25D7 /* CTDSelectOnTapInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectOnTapInteractionTests.m; path = CTDPresentation/Tests/CTDSelectOnTapInteractionTests.m; sourceTree = SOURCE_ROOT; };
+		4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteractionTests.m; sourceTree = "<group>"; };
+		4C3236421A150A98005C25D7 /* CTDSelectOnTapInteractionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTapInteractionTests.m; sourceTree = "<group>"; };
 		4C3236441A150AE6005C25D7 /* CTDSelectOnTapInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTapInteraction.h; sourceTree = "<group>"; };
 		4C3236451A150AE7005C25D7 /* CTDSelectOnTapInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTapInteraction.m; sourceTree = "<group>"; };
-		4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDColorCellsTestFixture.h; path = CTDPresentation/Tests/CTDColorCellsTestFixture.h; sourceTree = SOURCE_ROOT; };
-		4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDColorCellsTestFixture.m; path = CTDPresentation/Tests/CTDColorCellsTestFixture.m; sourceTree = SOURCE_ROOT; };
-		4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDColorCellGroupTests.m; path = CTDPresentation/Tests/CTDColorCellGroupTests.m; sourceTree = SOURCE_ROOT; };
+		4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDColorCellsTestFixture.h; sourceTree = "<group>"; };
+		4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorCellsTestFixture.m; sourceTree = "<group>"; };
+		4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorCellGroupTests.m; sourceTree = "<group>"; };
 		4C32364D1A16415E005C25D7 /* CTDColorCellGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDColorCellGroup.h; sourceTree = "<group>"; };
 		4C32364E1A16415E005C25D7 /* CTDColorCellGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorCellGroup.m; sourceTree = "<group>"; };
 		4C3236501A1641CC005C25D7 /* CTDDotColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDDotColor.h; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 		4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDDelegatingTouchTracker.m; sourceTree = "<group>"; };
 		4CD4E2601A0940B9006A244D /* CTDModelTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDModelTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E2991A0949A6006A244D /* CTDApplicationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
-		4CD4E29C1A094B7D006A244D /* CTDUtilityTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CTDUtilityTests-Prefix.pch"; path = "CTDUtility/Tests/CTDUtilityTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CD4E29C1A094B7D006A244D /* CTDUtilityTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDUtilityTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD5BF6E1A1976E8003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
 		4CD5BF6F1A1976E8003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF721A19771D003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
@@ -318,14 +318,14 @@
 		4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMessageRecorder.h; sourceTree = "<group>"; };
 		4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorder.m; sourceTree = "<group>"; };
 		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorderTests.m; sourceTree = "<group>"; };
-		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDSelectionChangeRecorder.h; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.h; sourceTree = SOURCE_ROOT; };
-		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDSelectionChangeRecorder.m; path = CTDPresentation/Tests/CTDSelectionChangeRecorder.m; sourceTree = SOURCE_ROOT; };
+		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectionChangeRecorder.h; sourceTree = "<group>"; };
+		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectionChangeRecorder.m; sourceTree = "<group>"; };
 		4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorPalette.h; sourceTree = "<group>"; };
-		4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDListOrderTouchMapperTests.m; path = CTDPresentation/Tests/CTDListOrderTouchMapperTests.m; sourceTree = SOURCE_ROOT; };
-		4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchMapper.h; path = CTDPresentation/Tests/CTDFakeTouchMapper.h; sourceTree = SOURCE_ROOT; };
-		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchMapper.m; path = CTDPresentation/Tests/CTDFakeTouchMapper.m; sourceTree = SOURCE_ROOT; };
-		4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTDFakeTouchable.h; path = CTDPresentation/Tests/CTDFakeTouchable.h; sourceTree = SOURCE_ROOT; };
-		4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTDFakeTouchable.m; path = CTDPresentation/Tests/CTDFakeTouchable.m; sourceTree = SOURCE_ROOT; };
+		4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDListOrderTouchMapperTests.m; sourceTree = "<group>"; };
+		4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchMapper.h; sourceTree = "<group>"; };
+		4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchMapper.m; sourceTree = "<group>"; };
+		4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchable.h; sourceTree = "<group>"; };
+		4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchable.m; sourceTree = "<group>"; };
 		4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -418,7 +418,7 @@
 		4CFEF3A41A6FF89A0086C37B /* CTDUIPluginsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDUIPluginsTests.m; sourceTree = "<group>"; };
 		4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIPlugins.xcconfig; path = BuildConfiguration/CTDUIPlugins.xcconfig; sourceTree = "<group>"; };
 		4CFEF3B01A6FFD2F0086C37B /* CTDUIPluginsTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIPluginsTests.xcconfig; path = BuildConfiguration/CTDUIPluginsTests.xcconfig; sourceTree = "<group>"; };
-		4CFEF3B21A7000C40086C37B /* CTDUIPluginsTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CTDUIPluginsTests-Prefix.pch"; path = "CTDUIPlugins/Tests/CTDUIPluginsTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		4CFEF3B21A7000C40086C37B /* CTDUIPluginsTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDUIPluginsTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CFEF3B61A70025B0086C37B /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CFEF3BC1A7182AF0086C37B /* CTDTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchResponder.h; sourceTree = "<group>"; };
 		4CFEF3BD1A7183570086C37B /* CTDTouchInputRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchInputRouter.h; sourceTree = "<group>"; };
@@ -724,9 +724,8 @@
 				4CEBCA7119BB77C400D2B498 /* CTDModelTests.m */,
 				4CEBCA6C19BB77C400D2B498 /* Supporting Files */,
 			);
-			name = Tests;
-			path = CTDModel/Tests;
-			sourceTree = SOURCE_ROOT;
+			path = Tests;
+			sourceTree = "<group>";
 		};
 		4CEBCA6C19BB77C400D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -760,9 +759,8 @@
 				4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */,
 				4CEBCA9219BB77D300D2B498 /* Supporting Files */,
 			);
-			name = Tests;
-			path = CTDPresentation/Tests;
-			sourceTree = SOURCE_ROOT;
+			path = Tests;
+			sourceTree = "<group>";
 		};
 		4CEBCA9219BB77D300D2B498 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -868,9 +866,8 @@
 				4C25B97E1A0EB08F00275138 /* CTDMethodSelectorTests.m */,
 				4CFDEECB19C688D00041B910 /* Supporting Files */,
 			);
-			name = Tests;
-			path = CTDUtility/Tests;
-			sourceTree = SOURCE_ROOT;
+			path = Tests;
+			sourceTree = "<group>";
 		};
 		4CFDEECB19C688D00041B910 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -979,9 +976,8 @@
 				4CFEF3A41A6FF89A0086C37B /* CTDUIPluginsTests.m */,
 				4CFEF39F1A6FF89A0086C37B /* Supporting Files */,
 			);
-			name = Tests;
-			path = CTDUIPlugins/Tests;
-			sourceTree = SOURCE_ROOT;
+			path = Tests;
+			sourceTree = "<group>";
 		};
 		4CFEF39F1A6FF89A0086C37B /* Supporting Files */ = {
 			isa = PBXGroup;
