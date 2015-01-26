@@ -130,34 +130,6 @@
 			remoteGlobalIDString = 4CEBCA0619BB564600D2B498;
 			remoteInfo = CTDApplication;
 		};
-		4CEBCAAB19BB928400D2B498 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CEBCA5619BB77C400D2B498;
-			remoteInfo = CTDModel;
-		};
-		4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CEBCA7C19BB77D200D2B498;
-			remoteInfo = CTDPresentation;
-		};
-		4CFDEEE619C69F3C0041B910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CFDEEB519C688CF0041B910;
-			remoteInfo = CTDUtility;
-		};
-		4CFEF36C1A6EB6D20086C37B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CFEF3491A6EB63F0086C37B;
-			remoteInfo = "UI Bridge";
-		};
 		4CFEF37F1A6EBC760086C37B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
@@ -166,13 +138,6 @@
 			remoteInfo = CTDUtility;
 		};
 		4CFEF39B1A6FF89A0086C37B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CFEF3891A6FF89A0086C37B;
-			remoteInfo = CTDUIPlugins;
-		};
-		4CFEF3B31A70021E0086C37B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
 			proxyType = 1;
@@ -1093,11 +1058,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4CFDEEE719C69F3C0041B910 /* PBXTargetDependency */,
-				4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */,
-				4CEBCAAE19BB928400D2B498 /* PBXTargetDependency */,
-				4CFEF36D1A6EB6D20086C37B /* PBXTargetDependency */,
-				4CFEF3B41A70021E0086C37B /* PBXTargetDependency */,
 			);
 			name = CTDApplication;
 			productName = ConnectTheDots2;
@@ -1594,26 +1554,6 @@
 			target = 4CEBCA0619BB564600D2B498 /* CTDApplication */;
 			targetProxy = 4CD5BF7A1A197843003A6321 /* PBXContainerItemProxy */;
 		};
-		4CEBCAAC19BB928400D2B498 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CEBCA5619BB77C400D2B498 /* CTDModel */;
-			targetProxy = 4CEBCAAB19BB928400D2B498 /* PBXContainerItemProxy */;
-		};
-		4CEBCAAE19BB928400D2B498 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CEBCA7C19BB77D200D2B498 /* CTDPresentation */;
-			targetProxy = 4CEBCAAD19BB928400D2B498 /* PBXContainerItemProxy */;
-		};
-		4CFDEEE719C69F3C0041B910 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
-			targetProxy = 4CFDEEE619C69F3C0041B910 /* PBXContainerItemProxy */;
-		};
-		4CFEF36D1A6EB6D20086C37B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CFEF3491A6EB63F0086C37B /* CTDUIBridge */;
-			targetProxy = 4CFEF36C1A6EB6D20086C37B /* PBXContainerItemProxy */;
-		};
 		4CFEF3801A6EBC760086C37B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
@@ -1623,11 +1563,6 @@
 			isa = PBXTargetDependency;
 			target = 4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */;
 			targetProxy = 4CFEF39B1A6FF89A0086C37B /* PBXContainerItemProxy */;
-		};
-		4CFEF3B41A70021E0086C37B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */;
-			targetProxy = 4CFEF3B31A70021E0086C37B /* PBXContainerItemProxy */;
 		};
 		4CFEF4201A7564080086C37B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
