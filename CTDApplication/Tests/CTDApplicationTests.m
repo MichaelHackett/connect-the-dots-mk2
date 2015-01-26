@@ -1,12 +1,4 @@
-//
-//  ConnectTheDots2Tests.m
-//  ConnectTheDots2Tests
-//
-//  Created by Michael on 2014-09-06.
-//
-//
-
-#import <XCTest/XCTest.h>
+// Copyright 2014 Michael Hackett. All rights reserved.
 
 @interface ConnectTheDots2Tests : XCTestCase
 

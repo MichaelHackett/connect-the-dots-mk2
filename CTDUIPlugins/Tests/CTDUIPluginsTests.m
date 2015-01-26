@@ -1,7 +1,5 @@
 // Dummy unit test for new module.
 
-#import <XCTest/XCTest.h>
-
 @interface CTDUIPluginsTests : XCTestCase
 
 @end
