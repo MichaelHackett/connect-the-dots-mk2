@@ -2,20 +2,20 @@
 
 #import "CTDTestSpy.h"
 
-#import "CTDMessageRecorder.h"
+#import "CTDMessageList.h"
 
 
 
 @implementation CTDTestSpy
 {
-    CTDMessageRecorder* _receivedMessages;
+    CTDMessageList* _receivedMessages;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _receivedMessages = [[CTDMessageRecorder alloc] init];
+        _receivedMessages = [[CTDMessageList alloc] init];
     }
     return self;
 }
@@ -38,7 +38,7 @@
 
 - (NSUInteger)countOfMessagesReceivedThatMatch:(SEL)selector
 {
-    return [_receivedMessages countOfMessagesReceivedWithSelector:selector];
+    return [[_receivedMessages indexesOfMessagesWithSelector:selector] count];
 }
 
 @end

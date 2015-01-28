@@ -107,8 +107,8 @@
 		4CFEF3F81A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFEF3FC1A72F1B70086C37B /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
 		4CFEF4021A72F1B70086C37B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CFEF4001A72F1B70086C37B /* InfoPlist.strings */; };
-		4CFEF40D1A743B5D0086C37B /* CTDMessageRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */; };
-		4CFEF40E1A743B670086C37B /* CTDMessageRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */; };
+		4CFEF40D1A743B5D0086C37B /* CTDMessageList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF911A199FA2003A6321 /* CTDMessageList.m */; };
+		4CFEF40E1A743B670086C37B /* CTDMessageListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF931A199FCA003A6321 /* CTDMessageListTests.m */; };
 		4CFEF4121A743D7D0086C37B /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFEF4411A75710B0086C37B /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF4401A75710B0086C37B /* libochamcrest.a */; };
 		4CFEF4431A7582D00086C37B /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
@@ -285,9 +285,9 @@
 		4CD5BF781A197822003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF7C1A19784C003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF7E1A197B65003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMessageRecorder.h; sourceTree = "<group>"; };
-		4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorder.m; sourceTree = "<group>"; };
-		4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageRecorderTests.m; sourceTree = "<group>"; };
+		4CD5BF901A199FA2003A6321 /* CTDMessageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMessageList.h; sourceTree = "<group>"; };
+		4CD5BF911A199FA2003A6321 /* CTDMessageList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageList.m; sourceTree = "<group>"; };
+		4CD5BF931A199FCA003A6321 /* CTDMessageListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageListTests.m; sourceTree = "<group>"; };
 		4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectionChangeRecorder.h; sourceTree = "<group>"; };
 		4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectionChangeRecorder.m; sourceTree = "<group>"; };
 		4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorPalette.h; sourceTree = "<group>"; };
@@ -1023,7 +1023,7 @@
 		4CFEF3E21A72F0B50086C37B /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */,
+				4CD5BF901A199FA2003A6321 /* CTDMessageList.h */,
 				4CFEF45B1A7699130086C37B /* CTDTestSpy.h */,
 				4CFEF45E1A76B5970086C37B /* CTDDidReceiveMessageMatcher.h */,
 			);
@@ -1035,7 +1035,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFEF3ED1A72F1B70086C37B /* CTDTestHelpers-Prefix.pch */,
-				4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */,
+				4CD5BF911A199FA2003A6321 /* CTDMessageList.m */,
 				4CFEF4591A7699060086C37B /* CTDTestSpy.m */,
 				4CFEF45F1A76B5970086C37B /* CTDDidReceiveMessageMatcher.m */,
 				4CFEF4611A782A640086C37B /* CTDIntegerQuantity.h */,
@@ -1048,7 +1048,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFEF4641A782B4D0086C37B /* CTDIntegerQuantityTests.m */,
-				4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */,
+				4CD5BF931A199FCA003A6321 /* CTDMessageListTests.m */,
 				4CFEF45C1A76993C0086C37B /* CTDTestSpyTests.m */,
 				4CFEF3FE1A72F1B70086C37B /* Supporting Files */,
 			);
@@ -1552,7 +1552,7 @@
 			files = (
 				4CFEF45A1A7699060086C37B /* CTDTestSpy.m in Sources */,
 				4CFEF4601A76B5970086C37B /* CTDDidReceiveMessageMatcher.m in Sources */,
-				4CFEF40D1A743B5D0086C37B /* CTDMessageRecorder.m in Sources */,
+				4CFEF40D1A743B5D0086C37B /* CTDMessageList.m in Sources */,
 				4CFEF4631A782A640086C37B /* CTDIntegerQuantity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1563,7 +1563,7 @@
 			files = (
 				4CFEF4651A782B4D0086C37B /* CTDIntegerQuantityTests.m in Sources */,
 				4CFEF45D1A76993C0086C37B /* CTDTestSpyTests.m in Sources */,
-				4CFEF40E1A743B670086C37B /* CTDMessageRecorderTests.m in Sources */,
+				4CFEF40E1A743B670086C37B /* CTDMessageListTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

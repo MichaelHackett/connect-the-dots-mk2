@@ -2,7 +2,7 @@
 
 #import "CTDRecordingTouchTracker.h"
 
-#import "CTDTestHelpers/CTDMessageRecorder.h"
+#import "CTDTestHelpers/CTDMessageList.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -10,7 +10,7 @@
 
 @implementation CTDRecordingTouchTracker
 {
-    CTDMessageRecorder* _messageRecorder;
+    CTDMessageList* _messagesReceived;
 }
 
 - (instancetype)init
@@ -18,7 +18,7 @@
     self = [super init];
     if (self) {
         _lastTouchPosition = nil;
-        _messageRecorder = [[CTDMessageRecorder alloc] init];
+        _messagesReceived = [[CTDMessageList alloc] init];
     }
     return self;
 }
@@ -26,25 +26,25 @@
 - (void)reset
 {
     _lastTouchPosition = nil;
-    [_messageRecorder reset];
+    [_messagesReceived reset];
 }
 
 - (CTDMethodSelector*)lastMessage
 {
-    return [_messageRecorder lastMessage];
+    return [_messagesReceived lastMessage];
 }
 
 - (BOOL)hasReceivedMessage:(SEL)selector
 {
-    return [_messageRecorder hasReceivedMessageWithSelector:selector];
+    return [_messagesReceived includesMessageWithSelector:selector];
 
 }
 
 - (NSUInteger)countOfTrackerMessagesReceived
 {
-    return [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)]
-         + [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchDidEnd)]
-         + [_messageRecorder countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)];
+    return [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchDidMoveTo:)] count]
+         + [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchDidEnd)] count]
+         + [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchWasCancelled)] count];
 }
 
 
@@ -55,17 +55,17 @@
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     _lastTouchPosition = [newPosition copy];
-    [_messageRecorder addMessageWithSelector:@selector(touchDidMoveTo:)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 - (void)touchDidEnd
 {
-    [_messageRecorder addMessageWithSelector:@selector(touchDidEnd)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 - (void)touchWasCancelled
 {
-    [_messageRecorder addMessageWithSelector:@selector(touchWasCancelled)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 @end

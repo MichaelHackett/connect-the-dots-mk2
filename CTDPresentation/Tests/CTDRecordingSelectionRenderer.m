@@ -2,13 +2,13 @@
 
 #import "CTDRecordingSelectionRenderer.h"
 
-#import "CTDTestHelpers/CTDMessageRecorder.h"
+#import "CTDTestHelpers/CTDMessageList.h"
 
 
 
 @implementation CTDRecordingSelectionRenderer
 {
-    CTDMessageRecorder* _messageRecorder;
+    CTDMessageList* _messagesReceived;
 }
 
 - (instancetype)init
@@ -16,19 +16,19 @@
     self = [super init];
     if (self) {
         _selected = NO;
-        _messageRecorder = [[CTDMessageRecorder alloc] init];
+        _messagesReceived = [[CTDMessageList alloc] init];
     }
     return self;
 }
 
 - (void)reset
 {
-    [_messageRecorder reset];
+    [_messagesReceived reset];
 }
 
 - (NSArray*)messagesReceived
 {
-    return [_messageRecorder messagesReceived];
+    return [_messagesReceived messageSelectors];
 }
 
 
@@ -39,13 +39,13 @@
 - (void)showSelectionIndicator
 {
     _selected = YES;
-    [_messageRecorder addMessageWithSelector:@selector(showSelectionIndicator)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 - (void)hideSelectionIndicator
 {
     _selected = NO;
-    [_messageRecorder addMessageWithSelector:@selector(hideSelectionIndicator)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 @end

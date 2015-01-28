@@ -2,7 +2,7 @@
 
 #import "CTDSelectionChangeRecorder.h"
 
-#import "CTDTestHelpers/CTDMessageRecorder.h"
+#import "CTDTestHelpers/CTDMessageList.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -10,7 +10,7 @@
 
 @implementation CTDSelectionChangeRecorder
 {
-    CTDMessageRecorder* _messageRecorder;
+    CTDMessageList* _messagesReceived;
 }
 
 - (instancetype)init
@@ -18,19 +18,19 @@
     self = [super init];
     if (self) {
         _selected = NO;
-        _messageRecorder = [[CTDMessageRecorder alloc] init];
+        _messagesReceived = [[CTDMessageList alloc] init];
     }
     return self;
 }
 
 - (void)reset
 {
-    [_messageRecorder reset];
+    [_messagesReceived reset];
 }
 
 - (NSArray*)messagesReceived
 {
-    return [_messageRecorder messagesReceived];
+    return [_messagesReceived messageSelectors];
 }
 
 
@@ -41,13 +41,13 @@
 - (void)select
 {
     _selected = YES;
-    [_messageRecorder addMessageWithSelector:@selector(select)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 - (void)deselect
 {
     _selected = NO;
-    [_messageRecorder addMessageWithSelector:@selector(deselect)];
+    [_messagesReceived addMessageWithSelector:_cmd];
 }
 
 @end
