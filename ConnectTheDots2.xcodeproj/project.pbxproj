@@ -113,6 +113,11 @@
 		4CFEF4411A75710B0086C37B /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF4401A75710B0086C37B /* libochamcrest.a */; };
 		4CFEF4431A7582D00086C37B /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
 		4CFEF4551A75CA670086C37B /* libCTDUIPlugins.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */; };
+		4CFEF45A1A7699060086C37B /* CTDTestSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF4591A7699060086C37B /* CTDTestSpy.m */; };
+		4CFEF45D1A76993C0086C37B /* CTDTestSpyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF45C1A76993C0086C37B /* CTDTestSpyTests.m */; };
+		4CFEF4601A76B5970086C37B /* CTDDidReceiveMessageMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF45F1A76B5970086C37B /* CTDDidReceiveMessageMatcher.m */; };
+		4CFEF4631A782A640086C37B /* CTDIntegerQuantity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF4621A782A640086C37B /* CTDIntegerQuantity.m */; };
+		4CFEF4651A782B4D0086C37B /* CTDIntegerQuantityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEF4641A782B4D0086C37B /* CTDIntegerQuantityTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,6 +403,14 @@
 		4CFEF40C1A7404B00086C37B /* CTDTestHelpersTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDTestHelpersTests.xcconfig; path = BuildConfiguration/CTDTestHelpersTests.xcconfig; sourceTree = "<group>"; };
 		4CFEF4131A743EF40086C37B /* CTDTestHelpersTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDTestHelpersTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CFEF4401A75710B0086C37B /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
+		4CFEF4591A7699060086C37B /* CTDTestSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTestSpy.m; sourceTree = "<group>"; };
+		4CFEF45B1A7699130086C37B /* CTDTestSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTestSpy.h; sourceTree = "<group>"; };
+		4CFEF45C1A76993C0086C37B /* CTDTestSpyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTestSpyTests.m; sourceTree = "<group>"; };
+		4CFEF45E1A76B5970086C37B /* CTDDidReceiveMessageMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDDidReceiveMessageMatcher.h; sourceTree = "<group>"; };
+		4CFEF45F1A76B5970086C37B /* CTDDidReceiveMessageMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDDidReceiveMessageMatcher.m; sourceTree = "<group>"; };
+		4CFEF4611A782A640086C37B /* CTDIntegerQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDIntegerQuantity.h; sourceTree = "<group>"; };
+		4CFEF4621A782A640086C37B /* CTDIntegerQuantity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDIntegerQuantity.m; sourceTree = "<group>"; };
+		4CFEF4641A782B4D0086C37B /* CTDIntegerQuantityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDIntegerQuantityTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1011,6 +1024,8 @@
 			isa = PBXGroup;
 			children = (
 				4CD5BF901A199FA2003A6321 /* CTDMessageRecorder.h */,
+				4CFEF45B1A7699130086C37B /* CTDTestSpy.h */,
+				4CFEF45E1A76B5970086C37B /* CTDDidReceiveMessageMatcher.h */,
 			);
 			name = Interface;
 			path = Interface/CTDTestHelpers;
@@ -1021,6 +1036,10 @@
 			children = (
 				4CFEF3ED1A72F1B70086C37B /* CTDTestHelpers-Prefix.pch */,
 				4CD5BF911A199FA2003A6321 /* CTDMessageRecorder.m */,
+				4CFEF4591A7699060086C37B /* CTDTestSpy.m */,
+				4CFEF45F1A76B5970086C37B /* CTDDidReceiveMessageMatcher.m */,
+				4CFEF4611A782A640086C37B /* CTDIntegerQuantity.h */,
+				4CFEF4621A782A640086C37B /* CTDIntegerQuantity.m */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -1028,7 +1047,9 @@
 		4CFEF3E41A72F1490086C37B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4CFEF4641A782B4D0086C37B /* CTDIntegerQuantityTests.m */,
 				4CD5BF931A199FCA003A6321 /* CTDMessageRecorderTests.m */,
+				4CFEF45C1A76993C0086C37B /* CTDTestSpyTests.m */,
 				4CFEF3FE1A72F1B70086C37B /* Supporting Files */,
 			);
 			path = Tests;
@@ -1529,7 +1550,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CFEF45A1A7699060086C37B /* CTDTestSpy.m in Sources */,
+				4CFEF4601A76B5970086C37B /* CTDDidReceiveMessageMatcher.m in Sources */,
 				4CFEF40D1A743B5D0086C37B /* CTDMessageRecorder.m in Sources */,
+				4CFEF4631A782A640086C37B /* CTDIntegerQuantity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1537,6 +1561,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CFEF4651A782B4D0086C37B /* CTDIntegerQuantityTests.m in Sources */,
+				4CFEF45D1A76993C0086C37B /* CTDTestSpyTests.m in Sources */,
 				4CFEF40E1A743B670086C37B /* CTDMessageRecorderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
