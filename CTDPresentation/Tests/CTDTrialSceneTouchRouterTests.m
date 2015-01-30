@@ -156,7 +156,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerReceivedNewPosition {
-    assertThatBool([self.colorCellsTouchTracker hasReceivedMessage:@selector(touchDidMoveTo:)],
+    assertThatBool([self.colorCellsTouchTracker hasReceivedMessageWithSelector:@selector(touchDidMoveTo:)],
                    is(equalToBool(YES)));
 }
 
@@ -189,7 +189,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThat([self.colorCellsTouchTracker lastMessage],
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage],
                is(equalTo(message(touchWasCancelled))));
 }
 
@@ -214,7 +214,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerIsNotifedThatTouchEnded {
-    assertThat([self.colorCellsTouchTracker lastMessage],
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage],
                is(equalTo(message(touchDidEnd))));
 }
 
@@ -241,7 +241,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThat([self.colorCellsTouchTracker lastMessage],
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage],
                is(equalTo(message(touchWasCancelled))));
 }
 
@@ -284,7 +284,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
-    assertThat([self.colorCellsTouchTracker lastMessage],
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage],
                is(equalTo(message(touchWasCancelled))));
 }
 
@@ -328,7 +328,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage], is(nilValue()));
 }
 
 @end
@@ -371,7 +371,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage], is(nilValue()));
 }
 
 @end
@@ -399,7 +399,7 @@ static CTDFakeDotRenderer* dot1;
 //}
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage], is(nilValue()));
 }
 
 @end
@@ -428,7 +428,7 @@ static CTDFakeDotRenderer* dot1;
 //}
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
-    assertThat([self.colorCellsTouchTracker lastMessage], is(nilValue()));
+    assertThat([self.colorCellsTouchTracker lastTrackerMessage], is(nilValue()));
 }
 
 @end

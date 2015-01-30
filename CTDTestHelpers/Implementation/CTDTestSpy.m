@@ -36,9 +36,14 @@
 //    return nil;
 //}
 
-- (NSUInteger)countOfMessagesReceivedThatMatch:(SEL)selector
+- (NSUInteger)countOfMessagesReceivedWithSelector:(SEL)selector
 {
     return [[_receivedMessages indexesOfMessagesWithSelector:selector] count];
+}
+
+- (BOOL)hasReceivedMessageWithSelector:(SEL)selector
+{
+    return [_receivedMessages includesMessageWithSelector:selector];
 }
 
 @end

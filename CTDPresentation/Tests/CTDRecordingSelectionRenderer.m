@@ -7,28 +7,14 @@
 
 
 @implementation CTDRecordingSelectionRenderer
-{
-    CTDMessageList* _messagesReceived;
-}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _selected = NO;
-        _messagesReceived = [[CTDMessageList alloc] init];
     }
     return self;
-}
-
-- (void)reset
-{
-    [_messagesReceived reset];
-}
-
-- (NSArray*)messagesReceived
-{
-    return [_messagesReceived messageSelectors];
 }
 
 
@@ -39,13 +25,13 @@
 - (void)showSelectionIndicator
 {
     _selected = YES;
-    [_messagesReceived addMessageWithSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 - (void)hideSelectionIndicator
 {
     _selected = NO;
-    [_messagesReceived addMessageWithSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 @end

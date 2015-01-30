@@ -50,21 +50,36 @@
     [self.subject recordMessageWithSelector:@selector(open)];
 }
 
-- (void)testThatRecordedMessageWasReceivedOneTime
+- (void)testThatRecordedMessageIsReportedAsBeingReceivedOneTime
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(open)],
-                          equalToUnsignedInt(1));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(open)],
+                          is(equalToUnsignedInt(1)));
 }
 
-- (void)testThatOtherMessagesWereReceivedZeroTimes
+- (void)testThatOtherMessagesAreReportedAsBeingReceivedZeroTimes
 { // obviously, we cannot test against *all* other messages; just work with others in the protocol
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(close)],
-                          equalToUnsignedInt(0));
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(readDataInto:)],
-                          equalToUnsignedInt(0));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(close)],
+                          is(equalToUnsignedInt(0)));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(readDataInto:)],
+                          is(equalToUnsignedInt(0)));
+}
+
+- (void)testThatRecordedMessageIsReportedAsHavingBeenReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(open)],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatOtherMessagesAreReportedAsNotBeingReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(close)],
+                   is(equalToBool(NO)));
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(readDataInto:)],
+                   is(equalToBool(NO)));
 }
 
 @end
+
 
 
 
@@ -78,18 +93,32 @@
     [self.subject recordMessageWithSelector:@selector(close)];
 }
 
-- (void)testThatRecordedMessageWasReceivedOneTime
+- (void)testThatRecordedMessageIsReportedAsBeingReceivedTwoTimes
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(close)],
-                          equalToUnsignedInt(2));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(close)],
+                          is(equalToUnsignedInt(2)));
 }
 
-- (void)testThatOtherMessagesWereReceivedZeroTimes
+- (void)testThatOtherMessagesAreReportedAsBeingReceivedZeroTimes
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(open)],
-                          equalToUnsignedInt(0));
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(readDataInto:)],
-                          equalToUnsignedInt(0));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(open)],
+                          is(equalToUnsignedInt(0)));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(readDataInto:)],
+                          is(equalToUnsignedInt(0)));
+}
+
+- (void)testThatRecordedMessageIsReportedAsHavingBeenReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(close)],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatOtherMessagesAreReportedAsNotBeingReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(open)],
+                   is(equalToBool(NO)));
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(readDataInto:)],
+                   is(equalToBool(NO)));
 }
 
 @end
@@ -107,18 +136,32 @@
     [self.subject recordMessageWithSelector:@selector(close)];
 }
 
-- (void)testThatEachRecordedMessageWasReceivedOneTime
+- (void)testThatEachRecordedMessageIsReportedAsBeingReceivedOneTime
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(open)],
-                          equalToUnsignedInt(1));
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(close)],
-                          equalToUnsignedInt(1));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(open)],
+                          is(equalToUnsignedInt(1)));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(close)],
+                          is(equalToUnsignedInt(1)));
 }
 
-- (void)testThatOtherMessagesWereReceivedZeroTimes
+- (void)testThatOtherMessagesAreReportedAsBeingReceivedZeroTimes
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(readDataInto:)],
-                          equalToUnsignedInt(0));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(readDataInto:)],
+                          is(equalToUnsignedInt(0)));
+}
+
+- (void)testThatRecordedMessageIsReportedAsHavingBeenReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(open)],
+                   is(equalToBool(YES)));
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(close)],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatOtherMessagesAreReportedAsNotBeingReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(readDataInto:)],
+                   is(equalToBool(NO)));
 }
 
 @end
@@ -136,10 +179,18 @@
 
 - (void)testThatMessagesSentPriorToResetAreNoLongerCounted
 {
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(open)],
-                          equalToUnsignedInt(0));
-    assertThatUnsignedInt([self.subject countOfMessagesReceivedThatMatch:@selector(close)],
-                          equalToUnsignedInt(0));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(open)],
+                          is(equalToUnsignedInt(0)));
+    assertThatUnsignedInt([self.subject countOfMessagesReceivedWithSelector:@selector(close)],
+                          is(equalToUnsignedInt(0)));
+}
+
+- (void)testThatMessagesSentPriorToResetAreReportedAsNotBeingReceived
+{
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(close)],
+                   is(equalToBool(NO)));
+    assertThatBool([self.subject hasReceivedMessageWithSelector:@selector(open)],
+                   is(equalToBool(NO)));
 }
 
 @end

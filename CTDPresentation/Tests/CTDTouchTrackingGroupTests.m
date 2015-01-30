@@ -68,7 +68,7 @@
     NSMutableArray* lastMessageList =
         [NSMutableArray arrayWithCapacity:[self.trackers count]];
     for (CTDRecordingTouchTracker* tracker in self.trackers) {
-        id lastMessage = [tracker lastMessage];
+        id lastMessage = [tracker lastTrackerMessage];
         if (!lastMessage) {
             lastMessage = [NSNull null];
         }

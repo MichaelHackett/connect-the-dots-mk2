@@ -100,7 +100,7 @@ CTD_NO_DEFAULT_INIT
     }
     id<CTDTestSpy> spy = (id<CTDTestSpy>)item;
     return ([_receptionCountMatcher matches:
-             [spy countOfMessagesReceivedThatMatch:_selectorToMatch]]);
+             [spy countOfMessagesReceivedWithSelector:_selectorToMatch]]);
 }
 
 - (void)describeTo:(id<HCDescription>)description
@@ -117,7 +117,7 @@ CTD_NO_DEFAULT_INIT
         [mismatchDescription appendText:@"object was not a test spy"];
     } else {
         id<CTDTestSpy> spy = (id<CTDTestSpy>)item;
-        NSUInteger matchingCount = [spy countOfMessagesReceivedThatMatch:_selectorToMatch];
+        NSUInteger matchingCount = [spy countOfMessagesReceivedWithSelector:_selectorToMatch];
         if (![_receptionCountMatcher matches:matchingCount]) {
             [mismatchDescription appendText:
              [NSString stringWithFormat:@"it received the message %u times",
@@ -137,6 +137,13 @@ id didReceive(SEL selector, id<CTDMessageCountMatcher> countMatcher)
     return [[CTDDidReceiveMessageMatcher alloc]
             initWithMessageSelector:selector
                        countMatcher:countMatcher];
+}
+
+id didNotReceive(SEL selector)
+{
+    return [[CTDDidReceiveMessageMatcher alloc]
+            initWithMessageSelector:selector
+            countMatcher:CTDMessageCountMatcher_never()];
 }
 
 id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactly(NSUInteger expectedCount)

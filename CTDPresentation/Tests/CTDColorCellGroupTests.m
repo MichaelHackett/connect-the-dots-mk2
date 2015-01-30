@@ -6,6 +6,7 @@
 #import "CTDSelectable.h"
 #import "CTDModel/CTDDotColor.h"
 
+#import "CTDTestHelpers/CTDDidReceiveMessageMatcher.h"
 #import "CTDUtility/CTDMethodSelector.h"
 
 #define message CTDMakeMethodSelector
@@ -128,12 +129,12 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 - (void)testThatAllCellRenderersAreSyncedToCellInitialState
 {
-    assertThat(self.redCellRenderer.messagesReceived,
-               is(equalTo(@[message(hideSelectionIndicator)])));
-    assertThat(self.greenCellRenderer.messagesReceived,
-               is(equalTo(@[message(hideSelectionIndicator)])));
-    assertThat(self.blueCellRenderer.messagesReceived,
-               is(equalTo(@[message(hideSelectionIndicator)])));
+    assertThat(self.redCellRenderer,
+               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
+    assertThat(self.greenCellRenderer,
+               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
+    assertThat(self.blueCellRenderer,
+               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
 }
 
 @end
@@ -157,13 +158,21 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 }
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
-    assertThat(self.redCellRenderer.messagesReceived,
-               is(equalTo(@[message(showSelectionIndicator)])));
+    assertThat(self.redCellRenderer,
+               didReceive(@selector(showSelectionIndicator), exactlyOnce()));
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 @end
@@ -188,17 +197,24 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 }
 
 - (void)testThatTheNewlySelectedCellIsRenderedAsSelected {
-    assertThat(self.blueCellRenderer.messagesReceived,
-               is(equalTo(@[message(showSelectionIndicator)])));
+    assertThat(self.blueCellRenderer,
+               didReceive(@selector(showSelectionIndicator), exactlyOnce()));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 - (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
-    assertThat(self.redCellRenderer.messagesReceived,
-               is(equalTo(@[message(hideSelectionIndicator)])));
+    assertThat(self.redCellRenderer,
+               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 @end
@@ -223,13 +239,21 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 }
 
 - (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
-    assertThat(self.blueCellRenderer.messagesReceived,
-               is(equalTo(@[message(hideSelectionIndicator)])));
+    assertThat(self.blueCellRenderer,
+               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 @end
@@ -253,9 +277,18 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 }
 
 - (void)testThatNoneOfTheCellRenderersReceiveAnyUpdates {
-    assertThat(self.redCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.greenCellRenderer.messagesReceived, isEmpty());
-    assertThat(self.blueCellRenderer.messagesReceived, isEmpty());
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.redCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.greenCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(showSelectionIndicator)));
+    assertThat(self.blueCellRenderer,
+               didNotReceive(@selector(hideSelectionIndicator)));
 }
 
 @end

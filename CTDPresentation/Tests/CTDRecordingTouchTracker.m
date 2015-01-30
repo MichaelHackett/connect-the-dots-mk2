@@ -2,49 +2,35 @@
 
 #import "CTDRecordingTouchTracker.h"
 
-#import "CTDTestHelpers/CTDMessageList.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
 @implementation CTDRecordingTouchTracker
-{
-    CTDMessageList* _messagesReceived;
-}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _lastTouchPosition = nil;
-        _messagesReceived = [[CTDMessageList alloc] init];
+        _lastTrackerMessage = nil;
     }
     return self;
 }
 
 - (void)reset
 {
+    [super reset];
     _lastTouchPosition = nil;
-    [_messagesReceived reset];
-}
-
-- (CTDMethodSelector*)lastMessage
-{
-    return [_messagesReceived lastMessage];
-}
-
-- (BOOL)hasReceivedMessage:(SEL)selector
-{
-    return [_messagesReceived includesMessageWithSelector:selector];
-
+    _lastTrackerMessage = nil;
 }
 
 - (NSUInteger)countOfTrackerMessagesReceived
 {
-    return [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchDidMoveTo:)] count]
-         + [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchDidEnd)] count]
-         + [[_messagesReceived indexesOfMessagesWithSelector:@selector(touchWasCancelled)] count];
+    return [self countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)]
+         + [self countOfMessagesReceivedWithSelector:@selector(touchDidEnd)]
+         + [self countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)];
 }
 
 
@@ -55,17 +41,20 @@
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     _lastTouchPosition = [newPosition copy];
-    [_messagesReceived addMessageWithSelector:_cmd];
+    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 - (void)touchDidEnd
 {
-    [_messagesReceived addMessageWithSelector:_cmd];
+    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 - (void)touchWasCancelled
 {
-    [_messagesReceived addMessageWithSelector:_cmd];
+    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 @end

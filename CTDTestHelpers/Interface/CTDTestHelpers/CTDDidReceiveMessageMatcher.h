@@ -14,6 +14,7 @@
 
 
 FOUNDATION_EXPORT id didReceive(SEL selector, id<CTDMessageCountMatcher> countMatcher);
+FOUNDATION_EXPORT id didNotReceive(SEL selector);
 
 FOUNDATION_EXPORT id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactly(NSUInteger expectedCount);
 FOUNDATION_EXPORT id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactlyOnce(void);

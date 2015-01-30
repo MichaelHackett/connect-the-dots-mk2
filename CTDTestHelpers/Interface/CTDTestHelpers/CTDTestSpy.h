@@ -8,7 +8,8 @@
 // messagesReceivedThatMatch:(SEL)selector -- return list (array, iterator?)
 @protocol CTDTestSpy
 - (void)recordMessageWithSelector:(SEL)selector;
-- (NSUInteger)countOfMessagesReceivedThatMatch:(SEL)selector;  // invocation?
+- (NSUInteger)countOfMessagesReceivedWithSelector:(SEL)selector;  // invocation?
+- (BOOL)hasReceivedMessageWithSelector:(SEL)selector;
 - (void)reset;
 @end
 
