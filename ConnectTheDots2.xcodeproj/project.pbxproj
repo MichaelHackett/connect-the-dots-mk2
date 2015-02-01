@@ -25,13 +25,13 @@
 		4C32364A1A151035005C25D7 /* CTDColorCellsTestFixture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */; };
 		4C32364C1A153B04005C25D7 /* CTDColorCellGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */; };
 		4C32364F1A16415E005C25D7 /* CTDColorCellGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32364E1A16415E005C25D7 /* CTDColorCellGroup.m */; };
+		4C5857411A7EC30B00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
+		4C5857421A7EC32300CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
+		4C5857431A7EC32F00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
+		4C5857441A7EC33A00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C60BB501A1C33CF0067A72F /* CTDDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C60BB4F1A1C33CF0067A72F /* CTDDot.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
-		4CD5BF751A19771D003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF731A19771D003A6321 /* libocmockito.a */; };
-		4CD5BF791A197822003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF781A197822003A6321 /* libocmockito.a */; };
-		4CD5BF7D1A19784C003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7C1A19784C003A6321 /* libocmockito.a */; };
-		4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD5BF7E1A197B65003A6321 /* libocmockito.a */; };
 		4CD5BF971A19A8C1003A6321 /* CTDSelectionChangeRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */; };
 		4CD5BF9A1A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */; };
 		4CD5BF9D1A1A6C74003A6321 /* CTDFakeTouchMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */; };
@@ -278,13 +278,6 @@
 		4CD4E2601A0940B9006A244D /* CTDModelTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDModelTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E2991A0949A6006A244D /* CTDApplicationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CD4E29C1A094B7D006A244D /* CTDUtilityTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDUtilityTests-Prefix.pch"; sourceTree = "<group>"; };
-		4CD5BF6E1A1976E8003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
-		4CD5BF6F1A1976E8003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF721A19771D003A6321 /* libochamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libochamcrest.a; path = "External/OCHamcrest/Source/build/Debug-iphoneos/libochamcrest.a"; sourceTree = "<group>"; };
-		4CD5BF731A19771D003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF781A197822003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF7C1A19784C003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
-		4CD5BF7E1A197B65003A6321 /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CD5BF901A199FA2003A6321 /* CTDMessageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMessageList.h; sourceTree = "<group>"; };
 		4CD5BF911A199FA2003A6321 /* CTDMessageList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageList.m; sourceTree = "<group>"; };
 		4CD5BF931A199FCA003A6321 /* CTDMessageListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDMessageListTests.m; sourceTree = "<group>"; };
@@ -434,7 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CD5BF7D1A19784C003A6321 /* libocmockito.a in Frameworks */,
+				4C5857421A7EC32300CC1B1E /* libocmockito.a in Frameworks */,
 				4CEBCA2419BB564600D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA2619BB564600D2B498 /* UIKit.framework in Frameworks */,
 				4CEBCA2519BB564600D2B498 /* Foundation.framework in Frameworks */,
@@ -454,7 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
-				4CD5BF751A19771D003A6321 /* libocmockito.a in Frameworks */,
+				4C5857441A7EC33A00CC1B1E /* libocmockito.a in Frameworks */,
 				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -477,7 +470,7 @@
 				4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */,
 				4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */,
 				4CFEF4431A7582D00086C37B /* libCTDTestHelpers.a in Frameworks */,
-				4CD5BF7F1A197B65003A6321 /* libocmockito.a in Frameworks */,
+				4C5857411A7EC30B00CC1B1E /* libocmockito.a in Frameworks */,
 				4CEBCA8B19BB77D300D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA8C19BB77D300D2B498 /* Foundation.framework in Frameworks */,
 			);
@@ -496,7 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFDEEC919C688D00041B910 /* libCTDUtility.a in Frameworks */,
-				4CD5BF791A197822003A6321 /* libocmockito.a in Frameworks */,
+				4C5857431A7EC32F00CC1B1E /* libocmockito.a in Frameworks */,
 				4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */,
 				4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */,
 			);
@@ -594,13 +587,6 @@
 			children = (
 				4CFEF4401A75710B0086C37B /* libochamcrest.a */,
 				4CFEF3B61A70025B0086C37B /* libocmockito.a */,
-				4CD5BF7E1A197B65003A6321 /* libocmockito.a */,
-				4CD5BF7C1A19784C003A6321 /* libocmockito.a */,
-				4CD5BF781A197822003A6321 /* libocmockito.a */,
-				4CD5BF721A19771D003A6321 /* libochamcrest.a */,
-				4CD5BF731A19771D003A6321 /* libocmockito.a */,
-				4CD5BF6E1A1976E8003A6321 /* libochamcrest.a */,
-				4CD5BF6F1A1976E8003A6321 /* libocmockito.a */,
 				4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */,
 				4CEBCA0A19BB564600D2B498 /* Foundation.framework */,
 				4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */,
