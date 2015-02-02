@@ -58,7 +58,30 @@
 - (void)describeTo:(id<HCDescription>)description
 {
     [description appendText:@"exactly "];
-    [description appendDescriptionOf:self.referenceCount];
+    [description appendText:[self.referenceCount description]];
+}
+
+@end
+
+
+
+
+
+@interface CTDMessageCountGreaterThanOrEqualMatcher
+    : CTDMessageCountBaseMatcher <CTDMessageCountMatcher>
+@end
+
+@implementation CTDMessageCountGreaterThanOrEqualMatcher
+
+- (BOOL)matches:(NSUInteger)actualCount
+{
+    return (NSInteger)actualCount >= self.referenceCount.magnitude;
+}
+
+- (void)describeTo:(id<HCDescription>)description
+{
+    [description appendText:@"at least "];
+    [description appendText:[self.referenceCount description]];
 }
 
 @end
@@ -132,18 +155,11 @@ CTD_NO_DEFAULT_INIT
 
 #pragma mark - Convenience functions
 
-id didReceive(SEL selector, id<CTDMessageCountMatcher> countMatcher)
+id CTD_receivedMessage(SEL selector, id<CTDMessageCountMatcher> countMatcher)
 {
     return [[CTDDidReceiveMessageMatcher alloc]
             initWithMessageSelector:selector
-                       countMatcher:countMatcher];
-}
-
-id didNotReceive(SEL selector)
-{
-    return [[CTDDidReceiveMessageMatcher alloc]
-            initWithMessageSelector:selector
-            countMatcher:CTDMessageCountMatcher_never()];
+            countMatcher:countMatcher];
 }
 
 id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactly(NSUInteger expectedCount)
@@ -159,4 +175,15 @@ id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactlyOnce(void)
 id<CTDMessageCountMatcher> CTDMessageCountMatcher_never(void)
 {
     return CTDMessageCountMatcher_exactly(0);
+}
+
+id<CTDMessageCountMatcher> CTDMessageCountMatcher_atLeast(NSUInteger expectedCount)
+{
+    return [[CTDMessageCountGreaterThanOrEqualMatcher alloc]
+            initWithReferenceCount:expectedCount];
+}
+
+id<CTDMessageCountMatcher> CTDMessageCountMatcher_atLeastOnce(void)
+{
+    return CTDMessageCountMatcher_atLeast(1);
 }

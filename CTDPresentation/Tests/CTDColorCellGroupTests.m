@@ -129,12 +129,9 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 - (void)testThatAllCellRenderersAreSyncedToCellInitialState
 {
-    assertThat(self.redCellRenderer,
-               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
-    assertThat(self.greenCellRenderer,
-               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
-    assertThat(self.blueCellRenderer,
-               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
+    assertThat(self.redCellRenderer, receivedMessage(hideSelectionIndicator));
+    assertThat(self.greenCellRenderer, receivedMessage(hideSelectionIndicator));
+    assertThat(self.blueCellRenderer, receivedMessage(hideSelectionIndicator));
 }
 
 @end
@@ -159,20 +156,16 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 - (void)testThatSelectedCellIsRenderedAsSelected {
     assertThat(self.redCellRenderer,
-               didReceive(@selector(showSelectionIndicator), exactlyOnce()));
+               receivedMessage(showSelectionIndicator, exactlyOnce()));
     assertThat(self.redCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+               didNotReceiveMessage(hideSelectionIndicator));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
 }
 
 @end
@@ -198,23 +191,19 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 - (void)testThatTheNewlySelectedCellIsRenderedAsSelected {
     assertThat(self.blueCellRenderer,
-               didReceive(@selector(showSelectionIndicator), exactlyOnce()));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+               receivedMessage(showSelectionIndicator, exactlyOnce()));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
 }
 
 - (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
     assertThat(self.redCellRenderer,
-               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
-    assertThat(self.redCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
+               receivedMessage(hideSelectionIndicator, exactlyOnce()));
+    assertThat(self.redCellRenderer, didNotReceiveMessage(showSelectionIndicator));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
 }
 
 @end
@@ -240,20 +229,15 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 
 - (void)testThatThePreviouslySelectedCellIsRenderedAsUnselected {
     assertThat(self.blueCellRenderer,
-               didReceive(@selector(hideSelectionIndicator), exactlyOnce()));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
+               receivedMessage(hideSelectionIndicator, exactlyOnce()));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(showSelectionIndicator));
 }
 
 - (void)testThatOtherCellsAreNotRerendered {
-    assertThat(self.redCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.redCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.redCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.redCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
 }
 
 @end
@@ -277,18 +261,12 @@ static CTDDotColor const DEFAULT_COLOR = CTDDotColor_None;
 }
 
 - (void)testThatNoneOfTheCellRenderersReceiveAnyUpdates {
-    assertThat(self.redCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.redCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
-    assertThat(self.greenCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(showSelectionIndicator)));
-    assertThat(self.blueCellRenderer,
-               didNotReceive(@selector(hideSelectionIndicator)));
+    assertThat(self.redCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.redCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
+    assertThat(self.greenCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(showSelectionIndicator));
+    assertThat(self.blueCellRenderer, didNotReceiveMessage(hideSelectionIndicator));
 }
 
 @end
