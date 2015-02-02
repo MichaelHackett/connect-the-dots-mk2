@@ -4,10 +4,4 @@
    <FileRef
       location = "group:ConnectTheDots2.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:External/OCHamcrest/Source/OCHamcrest.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:External/OCMockito/Source/OCMockito.xcodeproj">
-   </FileRef>
 </Workspace>
