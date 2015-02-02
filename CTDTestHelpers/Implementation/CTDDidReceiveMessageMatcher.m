@@ -5,87 +5,7 @@
 #import "CTDIntegerQuantity.h"
 #import "CTDTestSpy.h"
 
-
-
-@interface CTDMessageCountBaseMatcher : NSObject
-
-@property (strong, readonly, nonatomic) CTDIntegerQuantity* referenceCount;
-
-- (instancetype)initWithReferenceCount:(NSUInteger)referenceCount;
-
-@end
-
-
-@implementation CTDMessageCountBaseMatcher
-
-- (instancetype)initWithReferenceCount:(NSUInteger)referenceCount
-{
-    self = [super init];
-    if (self) {
-        if (referenceCount > (NSUInteger)NSIntegerMax) {
-            [NSException raise:NSInvalidArgumentException
-                        format:@"reference count argument greater than max allowed %lu",
-                               (unsigned long)NSIntegerMax];
-        }
-        _referenceCount = [[CTDIntegerQuantity alloc]
-                           initWithMagnitude:(NSInteger)referenceCount
-                                        unit:@"time"];
-    }
-    return self;
-}
-
-- (instancetype)init
-{
-    return [self initWithReferenceCount:0];
-}
-
-@end
-
-
-
-
-
-@interface CTDMessageCountExactMatcher : CTDMessageCountBaseMatcher <CTDMessageCountMatcher>
-@end
-
-@implementation CTDMessageCountExactMatcher
-
-- (BOOL)matches:(NSUInteger)actualCount
-{
-    return (NSInteger)actualCount == self.referenceCount.magnitude;
-}
-
-- (void)describeTo:(id<HCDescription>)description
-{
-    [description appendText:@"exactly "];
-    [description appendText:[self.referenceCount description]];
-}
-
-@end
-
-
-
-
-
-@interface CTDMessageCountGreaterThanOrEqualMatcher
-    : CTDMessageCountBaseMatcher <CTDMessageCountMatcher>
-@end
-
-@implementation CTDMessageCountGreaterThanOrEqualMatcher
-
-- (BOOL)matches:(NSUInteger)actualCount
-{
-    return (NSInteger)actualCount >= self.referenceCount.magnitude;
-}
-
-- (void)describeTo:(id<HCDescription>)description
-{
-    [description appendText:@"at least "];
-    [description appendText:[self.referenceCount description]];
-}
-
-@end
-
+#import <OCHamcrest/HCBaseMatcher.h>
 
 
 
@@ -98,11 +18,11 @@ CTD_NO_DEFAULT_INIT
 {
     SEL _selectorToMatch;
 //    NSInvocation* _invocationToMatch;
-    id<CTDMessageCountMatcher> _receptionCountMatcher;
+    id<CTDOccurrenceCountMatcher> _receptionCountMatcher;
 }
 
 - (instancetype)initWithMessageSelector:(SEL)selectorToMatch
-                           countMatcher:(id<CTDMessageCountMatcher>)receptionCountMatcher
+                           countMatcher:(id<CTDOccurrenceCountMatcher>)receptionCountMatcher
 {
     self = [super init];
     if (self) {
@@ -153,37 +73,12 @@ CTD_NO_DEFAULT_INIT
 
 
 
-#pragma mark - Convenience functions
+#pragma mark - Factory functions
 
-id CTD_receivedMessage(SEL selector, id<CTDMessageCountMatcher> countMatcher)
+
+id CTD_receivedMessage(SEL selector, id<CTDOccurrenceCountMatcher> countMatcher)
 {
     return [[CTDDidReceiveMessageMatcher alloc]
             initWithMessageSelector:selector
             countMatcher:countMatcher];
-}
-
-id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactly(NSUInteger expectedCount)
-{
-    return [[CTDMessageCountExactMatcher alloc] initWithReferenceCount:expectedCount];
-}
-
-id<CTDMessageCountMatcher> CTDMessageCountMatcher_exactlyOnce(void)
-{
-    return CTDMessageCountMatcher_exactly(1);
-}
-
-id<CTDMessageCountMatcher> CTDMessageCountMatcher_never(void)
-{
-    return CTDMessageCountMatcher_exactly(0);
-}
-
-id<CTDMessageCountMatcher> CTDMessageCountMatcher_atLeast(NSUInteger expectedCount)
-{
-    return [[CTDMessageCountGreaterThanOrEqualMatcher alloc]
-            initWithReferenceCount:expectedCount];
-}
-
-id<CTDMessageCountMatcher> CTDMessageCountMatcher_atLeastOnce(void)
-{
-    return CTDMessageCountMatcher_atLeast(1);
 }
