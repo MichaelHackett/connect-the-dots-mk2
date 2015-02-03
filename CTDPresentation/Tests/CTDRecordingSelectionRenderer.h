@@ -12,4 +12,6 @@
 
 @property (assign, readonly, nonatomic, getter=isSelected) BOOL selected;
 
+- (NSArray*)selectionRenderingMesssagesReceived;
+
 @end

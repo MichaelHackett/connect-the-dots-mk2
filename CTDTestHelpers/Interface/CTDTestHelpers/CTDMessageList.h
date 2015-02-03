@@ -9,6 +9,8 @@
 @class CTDMethodSelector;
 
 
+typedef BOOL (^CTDMessageFilterBlock)(CTDMethodSelector* messageSelector);
+
 
 @interface CTDMessageList : NSObject
 
@@ -19,5 +21,6 @@
 - (BOOL)includesMessageWithSelector:(SEL)selector;
 - (CTDMethodSelector*)lastMessage;
 - (NSIndexSet*)indexesOfMessagesWithSelector:(SEL)selector;
+- (NSArray*)messagesMatching:(CTDMessageFilterBlock)filterBlock;
 
 @end

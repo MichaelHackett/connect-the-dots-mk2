@@ -4,6 +4,8 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "CTDMessageList.h"
+
 
 // messagesReceivedThatMatch:(SEL)selector -- return list (array, iterator?)
 @protocol CTDTestSpy
@@ -11,6 +13,7 @@
 - (NSUInteger)countOfMessagesReceivedWithSelector:(SEL)selector;  // invocation?
 - (BOOL)hasReceivedMessageWithSelector:(SEL)selector;
 - (void)reset;
+- (NSArray*)messagesReceivedThatMatch:(CTDMessageFilterBlock)filterBlock;
 @end
 
 

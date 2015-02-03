@@ -3,6 +3,7 @@
 #import "CTDRecordingSelectionRenderer.h"
 
 #import "CTDTestHelpers/CTDMessageList.h"
+#import "CTDUtility/CTDMethodSelector.h"
 
 
 
@@ -16,6 +17,15 @@
     }
     return self;
 }
+
+- (NSArray*)selectionRenderingMesssagesReceived
+{
+    return [self messagesReceivedThatMatch:^BOOL(CTDMethodSelector* messageSelector) {
+        return [messageSelector isEqualToRawSelector:@selector(showSelectionIndicator)]
+            || [messageSelector isEqualToRawSelector:@selector(hideSelectionIndicator)];
+    }];
+}
+
 
 
 

@@ -56,4 +56,15 @@
         }];
 }
 
+- (NSArray*)messagesMatching:(CTDMessageFilterBlock)filterBlock
+{
+    return [_messageSelectors objectsAtIndexes:
+        [_messageSelectors indexesOfObjectsPassingTest:
+            ^BOOL(id message, __unused NSUInteger index, __unused BOOL* stop) {
+                return filterBlock(message);
+            }
+        ]
+    ];
+}
+
 @end

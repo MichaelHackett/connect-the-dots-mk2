@@ -46,4 +46,9 @@
     return [_receivedMessages includesMessageWithSelector:selector];
 }
 
+- (NSArray*)messagesReceivedThatMatch:(CTDMessageFilterBlock)filterBlock
+{
+    return [_receivedMessages messagesMatching:filterBlock];
+}
+
 @end
