@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDRecordingTouchTracker.h"
 
@@ -14,7 +14,6 @@
     self = [super init];
     if (self) {
         _lastTouchPosition = nil;
-        _lastTrackerMessage = nil;
     }
     return self;
 }
@@ -23,14 +22,15 @@
 {
     [super reset];
     _lastTouchPosition = nil;
-    _lastTrackerMessage = nil;
 }
 
-- (NSUInteger)countOfTrackerMessagesReceived
+- (NSArray*)touchTrackingMesssagesReceived
 {
-    return [self countOfMessagesReceivedWithSelector:@selector(touchDidMoveTo:)]
-         + [self countOfMessagesReceivedWithSelector:@selector(touchDidEnd)]
-         + [self countOfMessagesReceivedWithSelector:@selector(touchWasCancelled)];
+    return [self messagesReceivedThatMatch:^BOOL(CTDMethodSelector* messageSelector) {
+        return [messageSelector isEqualToRawSelector:@selector(touchDidMoveTo:)]
+        || [messageSelector isEqualToRawSelector:@selector(touchDidEnd)]
+        || [messageSelector isEqualToRawSelector:@selector(touchWasCancelled)];
+    }];
 }
 
 
@@ -41,19 +41,16 @@
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
     _lastTouchPosition = [newPosition copy];
-    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
     [self recordMessageWithSelector:_cmd];
 }
 
 - (void)touchDidEnd
 {
-    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
     [self recordMessageWithSelector:_cmd];
 }
 
 - (void)touchWasCancelled
 {
-    _lastTrackerMessage = [[CTDMethodSelector alloc] initWithRawSelector:_cmd];
     [self recordMessageWithSelector:_cmd];
 }
 

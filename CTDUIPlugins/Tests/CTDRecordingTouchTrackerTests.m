@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDRecordingTouchTracker.h"
 
@@ -38,15 +38,9 @@
     assertThat(self.subject.lastTouchPosition, is(nilValue()));
 }
 
-- (void)testThatLastTrackerMessageIsNil
-{
-    assertThat(self.subject.lastTrackerMessage, is(nilValue()));
-}
-
 - (void)testThatItReportsThatZeroTrackerMessagesHaveBeenReceived
 {
-    assertThatUnsignedInt([self.subject countOfTrackerMessagesReceived],
-                          is(equalToUnsignedInt(0)));
+    assertThat([self.subject touchTrackingMesssagesReceived], isEmpty());
 }
 
 @end
@@ -73,15 +67,9 @@
     assertThat(self.subject.lastTouchPosition, is(equalTo(self.touchPosition)));
 }
 
-- (void)testThatLastTrackerMessageWasPositionChangeMessage
-{
-    assertThat(self.subject.lastTrackerMessage, is(equalTo(message(touchDidMoveTo:))));
-}
-
 - (void)testThatItHasRecordedReceivingASingleProtocolMessage
 {
-    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
-                              is(equalToUnsignedInteger(1)));
+    assertThat([self.subject touchTrackingMesssagesReceived], hasCountOf(1));
 }
 
 - (void)testThatItHasRecordedReceivingTheSentMessage
@@ -131,15 +119,9 @@
     assertThat(self.subject.lastTouchPosition, is(equalTo(self.finalTouchPosition)));
 }
 
-- (void)testThatLastTrackerMessageWasPositionChangeMessage
-{
-    assertThat(self.subject.lastTrackerMessage, is(equalTo(message(touchDidMoveTo:))));
-}
-
 - (void)testThatItHasRecordedReceivingAllProtocolMessages
 {
-    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
-                              is(equalToUnsignedInteger(5)));
+    assertThat([self.subject touchTrackingMesssagesReceived], hasCountOf(5));
 }
 
 - (void)testThatItHasRecordedReceivingTheSentMessage
@@ -181,13 +163,7 @@
 
 - (void)testThatItHasRecordedReceivingAllProtocolMessages
 {
-    assertThatUnsignedInteger([self.subject countOfTrackerMessagesReceived],
-                              is(equalToUnsignedInteger(7)));
-}
-
-- (void)testThatLastTrackerMessageWasTouchEndMessage
-{
-    assertThat(self.subject.lastTrackerMessage, is(equalTo(message(touchDidEnd))));
+    assertThat([self.subject touchTrackingMesssagesReceived], hasCountOf(7));
 }
 
 - (void)testThatItHasRecordedReceivingAllSentMessages

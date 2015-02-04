@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDTouchTrackingGroup.h"
 
@@ -68,7 +68,7 @@
     NSMutableArray* lastMessageList =
         [NSMutableArray arrayWithCapacity:[self.trackers count]];
     for (CTDRecordingTouchTracker* tracker in self.trackers) {
-        id lastMessage = [tracker lastTrackerMessage];
+        id lastMessage = [[tracker touchTrackingMesssagesReceived] lastObject];
         if (!lastMessage) {
             lastMessage = [NSNull null];
         }
