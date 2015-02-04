@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDSelectionChangeRecorder.h"
 
@@ -9,28 +9,22 @@
 
 
 @implementation CTDSelectionChangeRecorder
-{
-    CTDMessageList* _messagesReceived;
-}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _selected = NO;
-        _messagesReceived = [[CTDMessageList alloc] init];
     }
     return self;
 }
 
-- (void)reset
+- (NSArray*)selectionMesssagesReceived
 {
-    [_messagesReceived reset];
-}
-
-- (NSArray*)messagesReceived
-{
-    return [_messagesReceived messageSelectors];
+    return [self messagesReceivedThatMatch:^BOOL(CTDMethodSelector* messageSelector) {
+        return [messageSelector isEqualToRawSelector:@selector(select)]
+        || [messageSelector isEqualToRawSelector:@selector(deselect)];
+    }];
 }
 
 
@@ -41,13 +35,13 @@
 - (void)select
 {
     _selected = YES;
-    [_messagesReceived addMessageWithSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 - (void)deselect
 {
     _selected = NO;
-    [_messagesReceived addMessageWithSelector:_cmd];
+    [self recordMessageWithSelector:_cmd];
 }
 
 @end

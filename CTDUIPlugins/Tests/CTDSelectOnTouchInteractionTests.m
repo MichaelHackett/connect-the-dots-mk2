@@ -49,9 +49,9 @@
 }
 
 - (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -70,9 +70,9 @@
 }
 
 - (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -93,13 +93,13 @@
 }
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected {
-    assertThat([self.fixture.colorCell1 messagesReceived],
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived],
                hasItem(message(select)));
 }
 
 - (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -119,13 +119,13 @@
 }
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected {
-    assertThat([self.fixture.colorCell2 messagesReceived],
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived],
                hasItem(message(select)));
 }
 
 - (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -146,9 +146,9 @@
 }
 
 - (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -169,13 +169,13 @@
 }
 
 - (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
-    assertThat([self.fixture.colorCell1 messagesReceived],
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived],
                hasItem(message(deselect)));
 }
 
 - (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -196,12 +196,12 @@
 }
 
 - (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
-    assertThat([self.fixture.colorCell1 messagesReceived],
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived],
                hasItem(message(deselect)));
 }
 
 - (void)testThatTheColorCellNowUnderTheTouchIsSelected {
-    assertThat([self.fixture.colorCell2 messagesReceived],
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived],
                hasItem(message(select)));
 }
 
@@ -223,13 +223,13 @@
 }
 
 - (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
-    assertThat([self.fixture.colorCell3 messagesReceived],
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived],
                hasItem(message(deselect)));
 }
 
 - (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
 }
 
 @end
@@ -249,13 +249,13 @@
 }
 
 - (void)testThatTheColorCellPreviouslyUnderTheTouchIsDeselected {
-    assertThat([self.fixture.colorCell2 messagesReceived],
+    assertThat([self.fixture.colorCell2 selectionMesssagesReceived],
                hasItem(message(deselect)));
 }
 
 - (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 messagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 messagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
+    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
 }
 
 
