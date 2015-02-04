@@ -640,6 +640,44 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4C8497B91A82C5D8000A094E /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */,
+				4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */,
+				4C2619421A105656005E87A9 /* CTDFakeDotRenderer.h */,
+				4C2619431A105656005E87A9 /* CTDFakeDotRenderer.m */,
+				4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */,
+				4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */,
+				4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */,
+				4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */,
+				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
+				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
+				4C8497A31A82AE1B000A094E /* CTDRecordingDotConnectionView.h */,
+				4C2619461A105784005E87A9 /* CTDRecordingDotConnectionView.m */,
+				4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */,
+				4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */,
+				4C25B9771A0E90E800275138 /* CTDRecordingTouchTracker.h */,
+				4C25B9781A0E90E800275138 /* CTDRecordingTouchTracker.m */,
+				4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */,
+				4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */,
+				4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */,
+				4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */,
+				4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */,
+				4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */,
+			);
+			name = "Test Helpers";
+			sourceTree = "<group>";
+		};
+		4C8497C31A82C5E8000A094E /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */,
+				4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */,
+			);
+			name = "Test Helpers";
+			sourceTree = "<group>";
+		};
 		4CEBC9FE19BB564600D2B498 = {
 			isa = PBXGroup;
 			children = (
@@ -811,6 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */,
+				4C8497C31A82C5E8000A094E /* Test Helpers */,
 				4CEBCA9219BB77D300D2B498 /* Supporting Files */,
 			);
 			path = Tests;
@@ -822,8 +861,6 @@
 				4CEBCAB219BB955700D2B498 /* CTDPresentationTests-Prefix.pch */,
 				4CEBCA9319BB77D300D2B498 /* CTDPresentationTests-Info.plist */,
 				4CEBCA9419BB77D300D2B498 /* InfoPlist.strings */,
-				4C26194C1A105ADC005E87A9 /* CTDRecordingColorCellRenderer.h */,
-				4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1007,11 +1044,11 @@
 			isa = PBXGroup;
 			children = (
 				4CD5BF991A1A6A1C003A6321 /* CTDListOrderTouchMapperTests.m */,
-				4C25B98F1A0EC21300275138 /* CTDRecordingTouchTrackerTests.m */,
 				4C3236421A150A98005C25D7 /* CTDSelectOnTapInteractionTests.m */,
 				4C3236401A146A64005C25D7 /* CTDSelectOnTouchInteractionTests.m */,
 				4C25B9701A0E6AA100275138 /* CTDTouchTrackingGroupTests.m */,
 				4C1F86471A094D2A001A3F0F /* CTDTrialSceneTouchRouterTests.m */,
+				4C8497B91A82C5D8000A094E /* Test Helpers */,
 				4CFEF39F1A6FF89A0086C37B /* Supporting Files */,
 			);
 			path = Tests;
@@ -1023,27 +1060,6 @@
 				4CFEF3B21A7000C40086C37B /* CTDUIPluginsTests-Prefix.pch */,
 				4CFEF3A01A6FF89A0086C37B /* CTDUIPluginsTests-Info.plist */,
 				4CFEF3A11A6FF89A0086C37B /* InfoPlist.strings */,
-				4C3236481A151035005C25D7 /* CTDColorCellsTestFixture.h */,
-				4C3236491A151035005C25D7 /* CTDColorCellsTestFixture.m */,
-				4C2619421A105656005E87A9 /* CTDFakeDotRenderer.h */,
-				4C2619431A105656005E87A9 /* CTDFakeDotRenderer.m */,
-				4CD5BF9E1A1A7183003A6321 /* CTDFakeTouchable.h */,
-				4CD5BF9F1A1A7183003A6321 /* CTDFakeTouchable.m */,
-				4CD5BF9B1A1A6C74003A6321 /* CTDFakeTouchMapper.h */,
-				4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMapper.m */,
-				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
-				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
-				4C8497A31A82AE1B000A094E /* CTDRecordingDotConnectionView.h */,
-				4C2619461A105784005E87A9 /* CTDRecordingDotConnectionView.m */,
-				4C26194D1A105B7E005E87A9 /* CTDRecordingSelectionRenderer.h */,
-				4C26194E1A105C39005E87A9 /* CTDRecordingSelectionRenderer.m */,
-				4C25B9771A0E90E800275138 /* CTDRecordingTouchTracker.h */,
-				4C25B9781A0E90E800275138 /* CTDRecordingTouchTracker.m */,
-				4C2619481A1058B5005E87A9 /* CTDRecordingTrialRenderer.h */,
-				4C2619491A1058B5005E87A9 /* CTDRecordingTrialRenderer.m */,
-				4CD5BF951A19A0A4003A6321 /* CTDSelectionChangeRecorder.h */,
-				4CD5BF961A19A8C1003A6321 /* CTDSelectionChangeRecorder.m */,
-				4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
