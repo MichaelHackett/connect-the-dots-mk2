@@ -2,8 +2,8 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
+#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
@@ -33,11 +33,19 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
     _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
+    NSDictionary* dotColorMap = @{
+        @(CTDPaletteColor_RedDot): [_drawingConfig colorFor:CTDPaletteColor_RedDot],
+        @(CTDPaletteColor_GreenDot): [_drawingConfig colorFor:CTDPaletteColor_GreenDot],
+        @(CTDPaletteColor_BlueDot): [_drawingConfig colorFor:CTDPaletteColor_BlueDot]
+    };
+
     CTDUIKitConnectSceneViewController* initialViewController =
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
-    initialViewController.drawingConfig = _drawingConfig;
+    initialViewController.dotColorMap = dotColorMap;
+    initialViewController.connectionLineColor = _drawingConfig.connectionLineColor;
+    initialViewController.connectionLineWidth = _drawingConfig.connectionLineWidth;
 
     application.statusBarHidden = YES;
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -47,7 +55,7 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
     [_applicationController runTrialWithRenderer:initialViewController
                                     colorCellMap:initialViewController.colorCellMap
-                                touchInputSource:initialViewController];
+                                touchInputRouter:initialViewController];
 
     return YES;
 }

@@ -1,7 +1,7 @@
 // CTDPoint:
 //     A value object representing a point in 2D space.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 
 typedef float CTDPointCoordinate;  // might want to change to double on some platforms
@@ -24,3 +24,7 @@ typedef float CTDPointCoordinate;  // might want to change to double on some pla
 - (BOOL)isEqualToPoint:(CTDPoint*)otherPoint;
 
 @end
+
+
+// Convenience macro for defining CTDPoints
+#define CTDMakePoint(XCOORD,YCOORD) [[CTDPoint alloc] initWithX:XCOORD y:YCOORD]

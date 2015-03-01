@@ -1,19 +1,19 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDApplication.h"
 
 #import "CTDColorCellGroup.h"
 #import "CTDColorPalette.h"
 #import "CTDDotSetPresenter.h"
-#import "CTDListOrderTouchMapper.h"
-#import "CTDSelectOnTapInteraction.h"
-#import "CTDSelectOnTouchInteraction.h"
-#import "CTDTrialSceneTouchRouter.h"
-#import "CTDTouchResponder.h"
-#import "CTDTouchTrackerFactory.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDUtility/CTDPoint.h"
+#import "CTDUIBridge/CTDTouchInputRouter.h"
+#import "CTDUIPlugins/CTDListOrderTouchMapper.h"
+#import "CTDUIPlugins/CTDSelectOnTapInteraction.h"
+#import "CTDUIPlugins/CTDSelectOnTouchInteraction.h"
+#import "CTDUIPlugins/CTDTouchTrackerFactory.h"
+#import "CTDUIPlugins/CTDTrialSceneTouchRouter.h"
 
 
 
@@ -44,7 +44,7 @@
 
 - (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellMap:(NSDictionary*)colorCellMap
-            touchInputSource:(id<CTDTouchInputSource>)touchInputSource
+            touchInputRouter:(id<CTDTouchInputRouter>)touchInputRouter
 {
     _currentPresenter = [[CTDDotSetPresenter alloc]
                          initWithDotList:_dotList
@@ -94,7 +94,7 @@
     // laid out in the touch router.
 
     // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
-    [touchInputSource addTouchResponder:
+    [touchInputRouter addTouchResponder:
         [[CTDTrialSceneTouchRouter alloc]
          initWithTrialRenderer:trialRenderer
          dotsTouchMapper:[_currentPresenter dotsTouchMapper]

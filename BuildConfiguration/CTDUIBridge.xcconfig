@@ -1,0 +1,7 @@
+// Common configuration for UI Bridge target.
+
+#include "General-Common-StaticLibrary.xcconfig"
+
+// Project module source dependencies:
+TEMP_USER_HEADER_SEARCH_PATHS = $(CTD_PRESENTATION_HEADERS)
+USER_HEADER_SEARCH_PATHS = $(TEMP_USER_HEADER_SEARCH_PATHS) $(CTD_UI_PLUGINS_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)
