@@ -3,8 +3,8 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
+#import "CTDTouchable.h"
 #import "CTDUIKitToolbar.h"
-#import "CTDUIPlugins/CTDTouchable.h"
 
 
 

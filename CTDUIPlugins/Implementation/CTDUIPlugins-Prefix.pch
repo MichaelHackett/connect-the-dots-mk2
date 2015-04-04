@@ -6,5 +6,9 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+    #import <QuartzCore/QuartzCore.h>
+    #import "CTDUtility/NSArray+ORCSubscriptSupport.h"
+    #import "CTDUtility/NSDictionary+ORCSubscriptSupport.h"
 #endif
 #import "CTDMethodAnnotations.h"

@@ -3,7 +3,7 @@
 #import "CTDAppDelegate.h"
 
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
+#import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
 #import "CTDPresentation/CTDApplication.h"
 
 
