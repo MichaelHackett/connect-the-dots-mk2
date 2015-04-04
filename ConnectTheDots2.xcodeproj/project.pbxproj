@@ -628,6 +628,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4C6E10691AD08ACE0014338E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */,
+				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
+				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
+				4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */,
+				4CFDEE9319C619560041B910 /* CTDUIKitDotSelectionIndicatorController.h */,
+				4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */,
+				4C5A56A719E20A2A00E994CB /* CTDUIKitConnectionView.h */,
+				4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */,
+				4CEBCACD19BD26D600D2B498 /* CTDUIKitToolbar.h */,
+				4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */,
+				4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */,
+				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4C6E106A1AD08AD90014338E /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */,
+				4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */,
+				4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */,
+				4C3236451A150AE7005C25D7 /* CTDSelectOnTapInteraction.m */,
+				4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */,
+				4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */,
+				4C25B9731A0E7F0000275138 /* CTDTouchTrackingGroup.m */,
+				4CFDEEAD19C683450041B910 /* CTDTrialSceneTouchRouter.m */,
+			);
+			name = Interactions;
+			sourceTree = "<group>";
+		};
 		4C84975A1A7FE9DA000A094E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -1067,26 +1101,8 @@
 		4CFEF3AC1A6FF9EA0086C37B /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */,
-				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
-				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
-				4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */,
-				4CFDEE9319C619560041B910 /* CTDUIKitDotSelectionIndicatorController.h */,
-				4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */,
-				4C5A56A719E20A2A00E994CB /* CTDUIKitConnectionView.h */,
-				4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */,
-				4CEBCACD19BD26D600D2B498 /* CTDUIKitToolbar.h */,
-				4CEBCACE19BD26D600D2B498 /* CTDUIKitToolbar.m */,
-				4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */,
-				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
-				4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */,
-				4CD4E25E1A084676006A244D /* CTDDelegatingTouchTracker.m */,
-				4CD4E25B1A080D61006A244D /* CTDListOrderTouchMapper.m */,
-				4C3236451A150AE7005C25D7 /* CTDSelectOnTapInteraction.m */,
-				4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */,
-				4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */,
-				4C25B9731A0E7F0000275138 /* CTDTouchTrackingGroup.m */,
-				4CFDEEAD19C683450041B910 /* CTDTrialSceneTouchRouter.m */,
+				4C6E10691AD08ACE0014338E /* Views */,
+				4C6E106A1AD08AD90014338E /* Interactions */,
 				4C6E10591AD06A530014338E /* Supporting Files */,
 			);
 			path = Implementation;
