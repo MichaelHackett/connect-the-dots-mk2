@@ -13,6 +13,7 @@
 		4C2619511A106114005E87A9 /* CTDRecordingColorCellRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2619501A106114005E87A9 /* CTDRecordingColorCellRenderer.m */; };
 		4C32364C1A153B04005C25D7 /* CTDColorCellGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32364B1A153B04005C25D7 /* CTDColorCellGroupTests.m */; };
 		4C32364F1A16415E005C25D7 /* CTDColorCellGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32364E1A16415E005C25D7 /* CTDColorCellGroup.m */; };
+		4C56A99B1AA4F9220068129F /* CTDUIKitStandardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */; };
 		4C5857411A7EC30B00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C5857421A7EC32300CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C5857431A7EC32F00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
@@ -313,6 +314,8 @@
 		4C32364E1A16415E005C25D7 /* CTDColorCellGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorCellGroup.m; sourceTree = "<group>"; };
 		4C3236501A1641CC005C25D7 /* CTDDotColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDDotColor.h; sourceTree = "<group>"; };
 		4C3236511A16434C005C25D7 /* CTDSelectable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectable.h; sourceTree = "<group>"; };
+		4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitStandardViewController.m; sourceTree = "<group>"; };
+		4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitStandardViewController.h; sourceTree = "<group>"; };
 		4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
@@ -1002,6 +1005,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFEF3BD1A7183570086C37B /* CTDTouchInputRouter.h */,
+				4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */,
 				4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */,
 				4CFEF3BB1A7182790086C37B /* ExtensionPoints */,
 			);
@@ -1012,6 +1016,7 @@
 		4CFEF3841A6EC0DD0086C37B /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */,
 				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
 				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */,
 				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
@@ -1661,6 +1666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C56A99B1AA4F9220068129F /* CTDUIKitStandardViewController.m in Sources */,
 				4CFEF37A1A6EBB250086C37B /* CAAnimation+CTDAnimationConstruction.m in Sources */,
 				4CFEF3731A6EBB190086C37B /* CTDUIKitDotView.m in Sources */,
 				4CFEF37C1A6EBB250086C37B /* CTDPoint+CGConversion.m in Sources */,
