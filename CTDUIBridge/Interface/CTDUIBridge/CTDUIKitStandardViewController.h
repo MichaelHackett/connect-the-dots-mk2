@@ -3,10 +3,11 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchInputRouter.h"
+@protocol CTDTouchResponder;
 
 
-@interface CTDUIKitStandardViewController
-    : UIViewController <CTDTouchInputRouter>
+@interface CTDUIKitStandardViewController : UIViewController
+
+@property (strong, nonatomic) id<CTDTouchResponder> touchResponder;
 
 @end

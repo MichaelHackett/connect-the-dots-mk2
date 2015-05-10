@@ -8,7 +8,6 @@
 
 
 
-
 static id<NSCopying> keyForTouch(UITouch* touch)
 {
     return [NSValue valueWithNonretainedObject:touch];
@@ -17,11 +16,10 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-
 @implementation CTDUIKitStandardViewController
 {
     NSMutableArray* _touchResponders;
-    NSMutableDictionary* _touchTrackersMap; // UITouch -> NSSet(CTDTouchTrackers)
+    NSMutableDictionary* _touchTrackerMap; // UITouch -> CTDTouchTracker
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -38,7 +36,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 {
     [super viewDidLoad];
     _touchResponders = [[NSMutableArray alloc] init];
-    _touchTrackersMap = [[NSMutableDictionary alloc] init];
+    _touchTrackerMap = [[NSMutableDictionary alloc] init];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -52,23 +50,6 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 
 
 
-#pragma mark CTDTouchInputSource protocol
-
-
-// TODO: Move distribution to presentation layer, if possible.
-
-- (void)addTouchResponder:(id<CTDTouchResponder>)touchResponder
-{
-    [_touchResponders addObject:touchResponder];
-}
-
-- (void)removeTouchResponder:(id<CTDTouchResponder>)touchResponder
-{
-    [_touchResponders removeObject:touchResponder];
-}
-
-
-
 #pragma mark Touch distribution
 
 
@@ -78,19 +59,10 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     for (UITouch* touch in touches) {
         CTDPoint* touchLocation =
             [CTDPoint fromCGPoint:[touch locationInView:self.view]];
-
-        NSMutableSet* trackersForThisTouch = [[NSMutableSet alloc] init];
-        for (id<CTDTouchResponder> touchResponder in _touchResponders) {
-            id<CTDTouchTracker> touchTracker =
-            [touchResponder trackerForTouchStartingAt:touchLocation];
-            if (touchTracker) {
-                [trackersForThisTouch addObject:touchTracker];
-            }
-        }
-
-        if ([trackersForThisTouch count] > 0) {
-            [_touchTrackersMap setObject:trackersForThisTouch
-                                  forKey:keyForTouch(touch)];
+        id<CTDTouchTracker> touchTracker =
+            [self.touchResponder trackerForTouchStartingAt:touchLocation];
+        if (touchTracker) {
+            [_touchTrackerMap setObject:touchTracker forKey:keyForTouch(touch)];
         }
     }
 }
@@ -101,11 +73,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     for (UITouch* touch in touches) {
         CTDPoint* newLocation =
             [CTDPoint fromCGPoint:[touch locationInView:self.view]];
-
-        NSSet* trackersForTouch = [_touchTrackersMap objectForKey:keyForTouch(touch)];
-        for (id<CTDTouchTracker> tracker in trackersForTouch) {
-            [tracker touchDidMoveTo:newLocation];
-        }
+        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchDidMoveTo:newLocation];
     }
 }
 
@@ -113,11 +81,8 @@ static id<NSCopying> keyForTouch(UITouch* touch)
            withEvent:(__unused UIEvent*)event
 {
     for (UITouch* touch in touches) {
-        NSSet* trackersForTouch = [_touchTrackersMap objectForKey:keyForTouch(touch)];
-        for (id<CTDTouchTracker> tracker in trackersForTouch) {
-            [tracker touchDidEnd];
-        }
-        [_touchTrackersMap removeObjectForKey:keyForTouch(touch)];
+        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchDidEnd];
+        [_touchTrackerMap removeObjectForKey:keyForTouch(touch)];
     }
 }
 
@@ -125,11 +90,8 @@ static id<NSCopying> keyForTouch(UITouch* touch)
                withEvent:(__unused UIEvent*)event
 {
     for (UITouch* touch in touches) {
-        NSSet* trackersForTouch = [_touchTrackersMap objectForKey:keyForTouch(touch)];
-        for (id<CTDTouchTracker> tracker in trackersForTouch) {
-            [tracker touchWasCancelled];
-        }
-        [_touchTrackersMap removeObjectForKey:keyForTouch(touch)];
+        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchWasCancelled];
+        [_touchTrackerMap removeObjectForKey:keyForTouch(touch)];
     }
 }
 

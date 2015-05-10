@@ -8,7 +8,6 @@
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDUIBridge/CTDTouchInputRouter.h"
 #import "CTDUIPlugins/CTDListOrderTouchMapper.h"
 #import "CTDUIPlugins/CTDSelectOnTapInteraction.h"
 #import "CTDUIPlugins/CTDSelectOnTouchInteraction.h"
@@ -42,9 +41,9 @@
     return self;
 }
 
-- (void)runTrialWithRenderer:(id<CTDTrialRenderer>)trialRenderer
+- (id<CTDTouchResponder>)
+      newTrialPresenterWithRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellMap:(NSDictionary*)colorCellMap
-            touchInputRouter:(id<CTDTouchInputRouter>)touchInputRouter
 {
     _currentPresenter = [[CTDDotSetPresenter alloc]
                          initWithDotList:_dotList
@@ -94,11 +93,12 @@
     // laid out in the touch router.
 
     // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
-    [touchInputRouter addTouchResponder:
-        [[CTDTrialSceneTouchRouter alloc]
-         initWithTrialRenderer:trialRenderer
-         dotsTouchMapper:[_currentPresenter dotsTouchMapper]
-         colorCellsTouchResponder:colorCellsTouchResponder]];
+//    [touchInputRouter addTouchResponder:
+
+    return [[CTDTrialSceneTouchRouter alloc]
+            initWithTrialRenderer:trialRenderer
+            dotsTouchMapper:[_currentPresenter dotsTouchMapper]
+            colorCellsTouchResponder:colorCellsTouchResponder];
 }
 
 @end
