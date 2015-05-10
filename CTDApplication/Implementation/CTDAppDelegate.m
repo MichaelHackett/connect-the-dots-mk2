@@ -11,6 +11,16 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
           @"CTDUIKitConnectSceneViewController";
 
 
+static NSDictionary* dotColorMapForDrawingConfig(CTDUIKitDrawingConfig* drawingConfig) {
+    return @{
+        @(CTDPaletteColor_RedDot): [drawingConfig colorFor:CTDPaletteColor_RedDot],
+        @(CTDPaletteColor_GreenDot): [drawingConfig colorFor:CTDPaletteColor_GreenDot],
+        @(CTDPaletteColor_BlueDot): [drawingConfig colorFor:CTDPaletteColor_BlueDot]
+    };
+}
+
+
+
 
 @implementation CTDAppDelegate
 {
@@ -33,11 +43,6 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
     _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
-    NSDictionary* dotColorMap = @{
-        @(CTDPaletteColor_RedDot): [_drawingConfig colorFor:CTDPaletteColor_RedDot],
-        @(CTDPaletteColor_GreenDot): [_drawingConfig colorFor:CTDPaletteColor_GreenDot],
-        @(CTDPaletteColor_BlueDot): [_drawingConfig colorFor:CTDPaletteColor_BlueDot]
-    };
 
     // Create the Presentation's renderer (provided by the View Controller),
     // then the Presenter, which returns a touch-input responder, which gets
@@ -47,7 +52,7 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
-    connectSceneVC.dotColorMap = dotColorMap;
+    connectSceneVC.dotColorMap = dotColorMapForDrawingConfig(_drawingConfig);
     connectSceneVC.connectionLineColor = _drawingConfig.connectionLineColor;
     connectSceneVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
 
