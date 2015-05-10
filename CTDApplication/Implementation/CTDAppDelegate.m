@@ -39,23 +39,27 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
         @(CTDPaletteColor_BlueDot): [_drawingConfig colorFor:CTDPaletteColor_BlueDot]
     };
 
-    CTDUIKitConnectSceneViewController* initialViewController =
+    // Create the Presentation's renderer (provided by the View Controller),
+    // then the Presenter, which returns a touch-input responder, which gets
+    // passed to the VC.
+
+    CTDUIKitConnectSceneViewController* connectSceneVC =
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
-    initialViewController.dotColorMap = dotColorMap;
-    initialViewController.connectionLineColor = _drawingConfig.connectionLineColor;
-    initialViewController.connectionLineWidth = _drawingConfig.connectionLineWidth;
+    connectSceneVC.dotColorMap = dotColorMap;
+    connectSceneVC.connectionLineColor = _drawingConfig.connectionLineColor;
+    connectSceneVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
 
     application.statusBarHidden = YES;
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _window.backgroundColor = [UIColor whiteColor];
-    _window.rootViewController = initialViewController;
+    _window.rootViewController = connectSceneVC;
     [_window makeKeyAndVisible];
 
-    initialViewController.touchResponder =
-        [_applicationController newTrialPresenterWithRenderer:initialViewController
-                                                 colorCellMap:initialViewController.colorCellMap];
+    connectSceneVC.touchResponder =
+        [_applicationController newTrialPresenterWithRenderer:connectSceneVC
+                                                 colorCellMap:connectSceneVC.colorCellMap];
 
     return YES;
 }
