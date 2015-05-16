@@ -4,8 +4,8 @@
 
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDUIKitDotSelectionIndicatorController.h"
+#import "CTDUIBridge/CTDPoint+CGConversion.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDPoint+CGConversion.h"
 #import <QuartzCore/CAShapeLayer.h>
 
 

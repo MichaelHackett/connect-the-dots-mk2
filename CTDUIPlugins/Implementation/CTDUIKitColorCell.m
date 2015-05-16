@@ -2,7 +2,7 @@
 
 #import "CTDUIKitColorCell.h"
 
-#import "CTDPoint+CGConversion.h"
+#import "CTDUIBridge/CTDPoint+CGConversion.h"
 
 
 

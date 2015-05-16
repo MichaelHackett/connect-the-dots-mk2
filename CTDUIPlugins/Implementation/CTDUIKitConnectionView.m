@@ -3,7 +3,7 @@
 #import "CTDUIKitConnectionView.h"
 
 #import "CTDCoreGraphicsUtils.h"
-#import "CTDPoint+CGConversion.h"
+#import "CTDUIBridge/CTDPoint+CGConversion.h"
 
 
 

@@ -3,7 +3,9 @@
 //
 // Installed touch responders are notified when a new touch is detected on the
 // associated screen area and can respond by returning a "tracker" that will
-// be send updates continuous as long as the touch is active.
+// be sent updates continuously as long as the touch is active. The tracker
+// will be retained by the touch source while the touch remains active.
+// (Revisit this if it results in difficult retain loops.)
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
