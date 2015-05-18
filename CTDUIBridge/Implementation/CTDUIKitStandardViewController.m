@@ -2,24 +2,16 @@
 
 #import "CTDUIKitStandardViewController.h"
 
+#import "CTDUIKitTouchRoutingTable.h"
 #import "CTDPoint+CGConversion.h"
 #import "ExtensionPoints/CTDTouchResponder.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
-static id<NSCopying> keyForTouch(UITouch* touch)
-{
-    return [NSValue valueWithNonretainedObject:touch];
-}
-
-
-
-
 @implementation CTDUIKitStandardViewController
 {
-    NSMutableArray* _touchResponders;
-    NSMutableDictionary* _touchTrackerMap; // UITouch -> CTDTouchTracker
+    CTDUIKitTouchRoutingTable* _touchRoutingTable;
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -35,8 +27,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _touchResponders = [[NSMutableArray alloc] init];
-    _touchTrackerMap = [[NSMutableDictionary alloc] init];
+    _touchRoutingTable = [[CTDUIKitTouchRoutingTable alloc] init];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -62,7 +53,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
         id<CTDTouchTracker> touchTracker =
             [self.touchResponder trackerForTouchStartingAt:touchLocation];
         if (touchTracker) {
-            [_touchTrackerMap setObject:touchTracker forKey:keyForTouch(touch)];
+            [_touchRoutingTable setTracker:touchTracker forTouch:touch];
         }
     }
 }
@@ -73,7 +64,7 @@ static id<NSCopying> keyForTouch(UITouch* touch)
     for (UITouch* touch in touches) {
         CTDPoint* newLocation =
             [CTDPoint fromCGPoint:[touch locationInView:self.view]];
-        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchDidMoveTo:newLocation];
+        [[_touchRoutingTable trackerForTouch:touch] touchDidMoveTo:newLocation];
     }
 }
 
@@ -81,8 +72,8 @@ static id<NSCopying> keyForTouch(UITouch* touch)
            withEvent:(__unused UIEvent*)event
 {
     for (UITouch* touch in touches) {
-        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchDidEnd];
-        [_touchTrackerMap removeObjectForKey:keyForTouch(touch)];
+        [[_touchRoutingTable trackerForTouch:touch] touchDidEnd];
+        [_touchRoutingTable setTracker:nil forTouch:touch];
     }
 }
 
@@ -90,8 +81,8 @@ static id<NSCopying> keyForTouch(UITouch* touch)
                withEvent:(__unused UIEvent*)event
 {
     for (UITouch* touch in touches) {
-        [[_touchTrackerMap objectForKey:keyForTouch(touch)] touchWasCancelled];
-        [_touchTrackerMap removeObjectForKey:keyForTouch(touch)];
+        [[_touchRoutingTable trackerForTouch:touch] touchWasCancelled];
+        [_touchRoutingTable setTracker:nil forTouch:touch];
     }
 }
 
