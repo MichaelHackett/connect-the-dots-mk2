@@ -5,6 +5,7 @@
 #import "CTDUIKitDrawingConfig.h"
 #import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
 #import "CTDPresentation/CTDApplication.h"
+#import "CocoaAdditions/UIKit.h"
 
 
 static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
@@ -57,9 +58,8 @@ static NSDictionary* dotColorMapForDrawingConfig(CTDUIKitDrawingConfig* drawingC
     connectSceneVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
 
     application.statusBarHidden = YES;
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    _window.backgroundColor = [UIColor whiteColor];
-    _window.rootViewController = connectSceneVC;
+    _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
+                                            backgroundColor:[UIColor whiteColor]];
     [_window makeKeyAndVisible];
 
     connectSceneVC.touchResponder =
