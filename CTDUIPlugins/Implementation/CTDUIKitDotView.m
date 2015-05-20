@@ -5,6 +5,7 @@
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDUIKitDotSelectionIndicatorController.h"
 #import "CTDUIBridge/CTDPoint+CGConversion.h"
+#import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 #import <QuartzCore/CAShapeLayer.h>
 
@@ -13,6 +14,7 @@
 @implementation CTDUIKitDotView
 {
     CTDUIKitDotSelectionIndicatorController* _selectionIndicatorController;
+    CTDUIKitColorPalette* _colorPalette;
 }
 
 
@@ -27,6 +29,7 @@
 
 - (id)initWithFrame:(CGRect)frameRect
            dotColor:(UIColor*)dotColor
+       colorPalette:(CTDUIKitColorPalette*)colorPalette
 {
     self = [super initWithFrame:frameRect];
     if (self) {
@@ -43,6 +46,8 @@
             [[CTDUIKitDotSelectionIndicatorController alloc] init];
         [_selectionIndicatorController attachIndicatorToLayer:dotLayer];
 
+        _colorPalette = colorPalette;
+
         [dotLayer setNeedsDisplay];
     }
     return self;
@@ -50,7 +55,9 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame dotColor:[UIColor whiteColor]];
+    return [self initWithFrame:frame
+                      dotColor:[UIColor whiteColor]
+                  colorPalette:[[CTDUIKitColorPalette alloc] init]];
 }
 
 
@@ -69,10 +76,9 @@
     return [CTDPoint fromCGPoint:ctdCGRectCenter(self.frame)];
 }
 
-- (void)changeDotColorTo:(CTDPaletteColor)newDotColor
+- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
 {
-    ((CAShapeLayer*)self.layer).fillColor =
-        [self.dotColorMap[@(newDotColor)] CGColor];
+    ((CAShapeLayer*)self.layer).fillColor = [_colorPalette[newDotColor] CGColor];
 }
 
 - (void)showSelectionIndicator

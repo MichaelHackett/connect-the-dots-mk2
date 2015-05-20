@@ -1,17 +1,16 @@
 // CTDUIKitDrawingConfig:
 //     Parameter settings for drawing code.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDColorPalette.h"
+@class CTDUIKitColorPalette;
 
 
 
 @interface CTDUIKitDrawingConfig : NSObject <NSCopying>
 
 @property (assign, readonly, nonatomic) float connectionLineWidth;
-@property (assign, readonly, nonatomic) CGColorRef connectionLineColor;
-
-- (UIColor*)colorFor:(CTDPaletteColor)paletteColor;
+@property (strong, readonly, nonatomic) UIColor* connectionLineColor;
+@property (strong, readonly, nonatomic) CTDUIKitColorPalette* colorPalette;
 
 @end

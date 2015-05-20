@@ -7,14 +7,14 @@
 #import "CTDTouchable.h"
 #import "CTDPresentation/CTDDotRenderer.h"
 
+@class CTDUIKitColorPalette;
+
 
 
 @interface CTDUIKitDotView : UIView <CTDDotRenderer, CTDTouchable>
 
-@property (copy, nonatomic) NSDictionary* dotColorMap; // @(CTDPaletteColor) -> UIColor*
-
-
 - (id)initWithFrame:(CGRect)frameRect
-           dotColor:(UIColor*)dotColor;
+           dotColor:(UIColor*)dotColor
+       colorPalette:(CTDUIKitColorPalette*)colorPalette;
 
 @end

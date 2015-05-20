@@ -2,13 +2,12 @@
 
 #import "CTDUIKitDrawingConfig.h"
 
+#import "CTDPresentation/CTDColorPalette.h"
+#import "CTDUIBridge/CTDUIKitColorPalette.h"
 
 
 
 @implementation CTDUIKitDrawingConfig
-{
-    NSDictionary* _colorPalette;
-}
 
 - (id)init
 {
@@ -17,20 +16,15 @@
         // TODO: Load these values from a plist or XML file.
         //
         _connectionLineWidth = 5.0;
-        _connectionLineColor = [[UIColor yellowColor] CGColor];
-        _colorPalette = @{
-            @(CTDPaletteColor_WhiteDot):   [UIColor whiteColor],
-            @(CTDPaletteColor_RedDot):     [UIColor redColor],
-            @(CTDPaletteColor_GreenDot):   [UIColor greenColor],
-            @(CTDPaletteColor_BlueDot):    [UIColor blueColor]
-        };
+        _connectionLineColor = [UIColor yellowColor];
+        _colorPalette = [[CTDUIKitColorPalette alloc] initWithColorMap:@{
+            CTDPaletteColor_InactiveDot: [UIColor whiteColor],
+            CTDPaletteColor_DotType1:    [UIColor redColor],
+            CTDPaletteColor_DotType2:    [UIColor greenColor],
+            CTDPaletteColor_DotType3:    [UIColor blueColor]
+        }];
     }
     return self;
-}
-
-- (UIColor*)colorFor:(CTDPaletteColor)paletteColor
-{
-    return [_colorPalette objectForKey:@(paletteColor)];
 }
 
 
@@ -60,9 +54,8 @@
     if (object && [object isMemberOfClass:[CTDUIKitDrawingConfig class]]) {
         CTDUIKitDrawingConfig* other = (CTDUIKitDrawingConfig*)object;
         return (self.connectionLineWidth == other.connectionLineWidth) &&
-               CGColorEqualToColor(self.connectionLineColor,
-                                   other.connectionLineColor) &&
-               [super isEqual:object];
+               [self.connectionLineColor isEqual:other.connectionLineColor] &&
+               [self.colorPalette isEqual:other.colorPalette];
     }
     return NO;
 }
@@ -73,8 +66,10 @@
     // for the double values. (Could convert directly to bits to be faster, but
     // this may never be used so not worrying about speed for now.)
     static const NSUInteger prime = 31;
-    return (17 * prime + [@(self.connectionLineWidth) hash]) * prime
-           + [[UIColor colorWithCGColor:self.connectionLineColor] hash];
+    NSUInteger hash = ((17 * prime + [@(self.connectionLineWidth) hash]) * prime
+                       + [self.connectionLineColor hash]) * prime
+                      + [self.colorPalette hash];
+    return hash;
 }
 
 @end

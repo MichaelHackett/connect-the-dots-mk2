@@ -3,19 +3,26 @@
 //     presentation layer. The NativeUI adapter will map these to suitable
 //     native-platform, consistently across all uses.
 //
-// Note that the name of the enumeration type is "CTDPaletteColor", as it
-// describes a single instance of a palette color, but the file is named with
-// respect to the collection colors, which forms the "color palette" for the
-// application.
+// Strings were chosen for the palette keys as this permits extension without
+// worry of collision between indexes. (Numerical indices require coordination
+// if two separate entities are using them, e.g., an app and a Presentation
+// library element, whereas with strings, one can use prefixes, for example,
+// to avoid collisions.)
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// The downside of strings is that it is harder to ensure that all palette
+// entries are filled in the UIKit initialization code, so the palette needs to
+// either support the specification of a *default* color to use when there is
+// no element in the table (and to log such occurrences), or to raise an
+// exception (fail fast, so developer knows of error).
+//
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 
-typedef enum {
-
-    CTDPaletteColor_WhiteDot,
-    CTDPaletteColor_RedDot,
-    CTDPaletteColor_GreenDot,
-    CTDPaletteColor_BlueDot
-
-} CTDPaletteColor;
+//
+// Palette color labels
+//
+typedef NSString* CTDPaletteColorLabel;
+extern CTDPaletteColorLabel const CTDPaletteColor_InactiveDot;
+extern CTDPaletteColorLabel const CTDPaletteColor_DotType1;
+extern CTDPaletteColorLabel const CTDPaletteColor_DotType2;
+extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;

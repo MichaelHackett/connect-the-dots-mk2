@@ -12,16 +12,6 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
           @"CTDUIKitConnectSceneViewController";
 
 
-static NSDictionary* dotColorMapForDrawingConfig(CTDUIKitDrawingConfig* drawingConfig) {
-    return @{
-        @(CTDPaletteColor_RedDot): [drawingConfig colorFor:CTDPaletteColor_RedDot],
-        @(CTDPaletteColor_GreenDot): [drawingConfig colorFor:CTDPaletteColor_GreenDot],
-        @(CTDPaletteColor_BlueDot): [drawingConfig colorFor:CTDPaletteColor_BlueDot]
-    };
-}
-
-
-
 
 @implementation CTDAppDelegate
 {
@@ -53,10 +43,9 @@ static NSDictionary* dotColorMapForDrawingConfig(CTDUIKitDrawingConfig* drawingC
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
                   bundle:nil];
-    connectSceneVC.dotColorMap = dotColorMapForDrawingConfig(_drawingConfig);
-    connectSceneVC.connectionLineColor = _drawingConfig.connectionLineColor;
     connectSceneVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
-
+    connectSceneVC.connectionLineColor = _drawingConfig.connectionLineColor;
+    connectSceneVC.colorPalette = _drawingConfig.colorPalette;
     application.statusBarHidden = YES;
     _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
                                             backgroundColor:[UIColor whiteColor]];
