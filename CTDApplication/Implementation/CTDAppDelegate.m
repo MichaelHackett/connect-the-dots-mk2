@@ -2,14 +2,11 @@
 
 #import "CTDAppDelegate.h"
 
+#import "CTDSceneFactory.h"
 #import "CTDUIKitDrawingConfig.h"
 #import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
 #import "CTDPresentation/CTDApplication.h"
 #import "CocoaAdditions/UIKit.h"
-
-
-static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
-          @"CTDUIKitConnectSceneViewController";
 
 
 
@@ -17,7 +14,7 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 {
     UIWindow* _window;
     CTDApplication* _applicationController;
-    CTDUIKitDrawingConfig* _drawingConfig;
+    CTDSceneFactory* _sceneFactory;
 }
 
 - (instancetype)init
@@ -25,6 +22,8 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
     self = [super init];
     if (self) {
         _applicationController = [[CTDApplication alloc] init];
+        _sceneFactory = [[CTDSceneFactory alloc]
+                         initWithDrawingConfig:[[CTDUIKitDrawingConfig alloc] init]];
     }
     return self;
 }
@@ -33,19 +32,11 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
-    _drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
-
     // Create the Presentation's renderer (provided by the View Controller),
-    // then the Presenter, which returns a touch-input responder, which gets
+    // then the Presenter, which returns a touch-input responder that gets
     // passed to the VC.
 
-    CTDUIKitConnectSceneViewController* connectSceneVC =
-        [[CTDUIKitConnectSceneViewController alloc]
-         initWithNibName:kCTDUIKitConnectSceneViewControllerNibName
-                  bundle:nil];
-    connectSceneVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
-    connectSceneVC.connectionLineColor = _drawingConfig.connectionLineColor;
-    connectSceneVC.colorPalette = _drawingConfig.colorPalette;
+    CTDUIKitConnectSceneViewController* connectSceneVC = [_sceneFactory connectScene];
     application.statusBarHidden = YES;
     _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
                                             backgroundColor:[UIColor whiteColor]];

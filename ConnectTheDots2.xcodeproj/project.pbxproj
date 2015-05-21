@@ -21,6 +21,7 @@
 		4C41B7481B0BE93C00B54422 /* CTDColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B7471B0BE93C00B54422 /* CTDColorPalette.m */; };
 		4C41B74A1B0BEC5200B54422 /* CTDUIKitColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B7491B0BEC5200B54422 /* CTDUIKitColorPalette.m */; };
 		4C41B74B1B0C1E1B00B54422 /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
+		4C41B7521B0C40C700B54422 /* CTDSceneFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B7511B0C40C700B54422 /* CTDSceneFactory.m */; };
 		4C56A99B1AA4F9220068129F /* CTDUIKitStandardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */; };
 		4C5857411A7EC30B00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C5857421A7EC32300CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
@@ -341,6 +342,8 @@
 		4C41B7451B0AC6E100B54422 /* CTDUIKitColorPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDUIKitColorPalette.h; sourceTree = "<group>"; };
 		4C41B7471B0BE93C00B54422 /* CTDColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorPalette.m; sourceTree = "<group>"; };
 		4C41B7491B0BEC5200B54422 /* CTDUIKitColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitColorPalette.m; sourceTree = "<group>"; };
+		4C41B7501B0C40C700B54422 /* CTDSceneFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSceneFactory.h; sourceTree = "<group>"; };
+		4C41B7511B0C40C700B54422 /* CTDSceneFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSceneFactory.m; sourceTree = "<group>"; };
 		4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitStandardViewController.m; sourceTree = "<group>"; };
 		4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitStandardViewController.h; sourceTree = "<group>"; };
 		4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTouchInteraction.h; sourceTree = "<group>"; };
@@ -1106,6 +1109,8 @@
 				4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */,
 				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
 				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
+				4C41B7501B0C40C700B54422 /* CTDSceneFactory.h */,
+				4C41B7511B0C40C700B54422 /* CTDSceneFactory.m */,
 				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
 			);
 			path = Implementation;
@@ -1718,6 +1723,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA1B19BB564600D2B498 /* CTDAppDelegate.m in Sources */,
+				4C41B7521B0C40C700B54422 /* CTDSceneFactory.m in Sources */,
 				4C41B74B1B0C1E1B00B54422 /* CTDUIKitDrawingConfig.m in Sources */,
 				4CEBCA1719BB564600D2B498 /* main.m in Sources */,
 			);
