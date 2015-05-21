@@ -26,6 +26,7 @@
 {
     CGPoint _firstEndpoint;
     CGPoint _secondEndpoint;
+    UIColor* _lineColor;
 }
 
 + (Class)layerClass
@@ -36,18 +37,19 @@
 // layer's anchor point is (0,1)? (top-left)
 
 - (instancetype)initWithLineWidth:(CGFloat)lineWidth
-                        lineColor:(CGColorRef)lineColor
+                        lineColor:(UIColor*)lineColor
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _firstEndpoint = CGPointZero;
         _secondEndpoint = CGPointZero;
+        _lineColor = [lineColor copy];  // need to retain UIColor while using its CGColor field
         CTDUIKitLineLayer* viewLayer = (CTDUIKitLineLayer*)self.layer;
 //        viewLayer.anchorPoint = CGPointMake(0.0, 0.0);
         viewLayer.lineCap = kCALineCapRound;
         viewLayer.lineWidth = lineWidth;
         viewLayer.opaque = NO;
-        viewLayer.strokeColor = lineColor;
+        viewLayer.strokeColor = [_lineColor CGColor];
     }
     return self;
 }

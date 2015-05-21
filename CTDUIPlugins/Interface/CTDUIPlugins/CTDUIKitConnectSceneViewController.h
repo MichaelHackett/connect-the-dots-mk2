@@ -6,18 +6,20 @@
 #import "CTDUIBridge/CTDUIKitStandardViewController.h"
 #import "CTDPresentation/CTDTrialRenderer.h"
 
+@class CTDUIKitColorPalette;
+
 
 
 @interface CTDUIKitConnectSceneViewController
     : CTDUIKitStandardViewController <CTDTrialRenderer>
 
 // VC configuration (must be set before the container view is loaded, and
-// changed made after view is loaded will usually have no effect)
+// changes made after view is loaded may have strange or no effects)
 @property (assign, nonatomic) float connectionLineWidth;
-@property (assign, nonatomic) CGColorRef connectionLineColor;
-@property (copy, nonatomic) NSDictionary* dotColorMap; // @(CTDPaletteColor) -> UIColor*
+@property (copy, nonatomic) UIColor* connectionLineColor;
+@property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
 
-// maps NSNumber(CTDPaletteColor) -> CTDKUIKitColorCell
+// maps CTDPaletteColorLabel -> CTDKUIKitColorCell
 @property (strong, readonly, nonatomic) NSDictionary* colorCellMap;
 
 @end

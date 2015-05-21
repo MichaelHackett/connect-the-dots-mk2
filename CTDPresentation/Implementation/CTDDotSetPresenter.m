@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDDotSetPresenter.h"
 
@@ -27,9 +27,9 @@ static NSDictionary const* dotPaletteColorMap;
 + (void)initialize
 {
     dotPaletteColorMap = @{
-        @(CTDDotColor_Red): @(CTDPaletteColor_RedDot),
-        @(CTDDotColor_Green): @(CTDPaletteColor_GreenDot),
-        @(CTDDotColor_Blue): @(CTDPaletteColor_BlueDot),
+        @(CTDDotColor_Red): CTDPaletteColor_DotType1,
+        @(CTDDotColor_Green): CTDPaletteColor_DotType2,
+        @(CTDDotColor_Blue): CTDPaletteColor_DotType3,
     };
 }
 
@@ -40,8 +40,7 @@ static NSDictionary const* dotPaletteColorMap;
     if (self) {
         NSMutableArray* dotViews = [[NSMutableArray alloc] init];
         for (CTDDot* dot in dotList) {
-            CTDPaletteColor dotColor =
-                [dotPaletteColorMap[@(dot.color)] unsignedIntegerValue];
+            CTDPaletteColorLabel dotColor = dotPaletteColorMap[@(dot.color)];
             [dotViews addObject:
                 [trialRenderer newDotViewCenteredAt:dot.position
                                    withInitialColor:dotColor]];

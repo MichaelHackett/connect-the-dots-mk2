@@ -13,7 +13,7 @@
 @interface CTDUIKitConnectionView : UIView <CTDDotConnectionRenderer>
 
 - (instancetype)initWithLineWidth:(CGFloat)lineWidth
-                        lineColor:(CGColorRef)lineColor;
+                        lineColor:(UIColor*)lineColor;
 
 CTD_NO_DEFAULT_INIT
 

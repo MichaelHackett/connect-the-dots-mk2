@@ -59,22 +59,22 @@
 
     // TODO: reduce repetition in this section
 
-    id<CTDColorCellRenderer, CTDTouchable> redColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_RedDot)];
-    id<CTDColorCellRenderer, CTDTouchable> greenColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_GreenDot)];
-    id<CTDColorCellRenderer, CTDTouchable> blueColorCellRenderer =
-        [colorCellMap objectForKey:@(CTDPaletteColor_BlueDot)];
+    id<CTDColorCellRenderer, CTDTouchable> colorCell1Renderer =
+        [colorCellMap objectForKey:CTDPaletteColor_DotType1];
+    id<CTDColorCellRenderer, CTDTouchable> colorCell2Renderer =
+        [colorCellMap objectForKey:CTDPaletteColor_DotType2];
+    id<CTDColorCellRenderer, CTDTouchable> colorCell3Renderer =
+        [colorCellMap objectForKey:CTDPaletteColor_DotType3];
 
-    [colorCellsTouchMapper mapTouchable:redColorCellRenderer
+    [colorCellsTouchMapper mapTouchable:colorCell1Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red
-                                                         withRenderer:redColorCellRenderer]];
-    [colorCellsTouchMapper mapTouchable:greenColorCellRenderer
+                                                         withRenderer:colorCell1Renderer]];
+    [colorCellsTouchMapper mapTouchable:colorCell2Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Green
-                                                         withRenderer:greenColorCellRenderer]];
-    [colorCellsTouchMapper mapTouchable:blueColorCellRenderer
+                                                         withRenderer:colorCell2Renderer]];
+    [colorCellsTouchMapper mapTouchable:colorCell3Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Blue
-                                                         withRenderer:blueColorCellRenderer]];
+                                                         withRenderer:colorCell3Renderer]];
 
     id<CTDTouchResponder> colorCellsTouchResponder =
         [[CTDTouchTrackerFactory alloc]

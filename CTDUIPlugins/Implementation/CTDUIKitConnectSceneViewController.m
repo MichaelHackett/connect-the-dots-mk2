@@ -6,6 +6,7 @@
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitDotView.h"
 #import "CTDUIKitToolbar.h"
+#import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -50,20 +51,20 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 
     CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
                                 initWithFrame:CGRectMake(200, 50, 400, 60)];
-    CTDUIKitColorCell* redCell = [[CTDUIKitColorCell alloc]
-                                  initWithColor:self.dotColorMap[@(CTDPaletteColor_RedDot)]];
-    CTDUIKitColorCell* greenCell = [[CTDUIKitColorCell alloc]
-                                    initWithColor:self.dotColorMap[@(CTDPaletteColor_GreenDot)]];
-    CTDUIKitColorCell* blueCell = [[CTDUIKitColorCell alloc]
-                                   initWithColor:self.dotColorMap[@(CTDPaletteColor_BlueDot)]];
-    [toolbar addCell:redCell];
-    [toolbar addCell:greenCell];
-    [toolbar addCell:blueCell];
+    CTDUIKitColorCell* colorCell1 = [[CTDUIKitColorCell alloc]
+                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType1]];
+    CTDUIKitColorCell* colorCell2 = [[CTDUIKitColorCell alloc]
+                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType2]];
+    CTDUIKitColorCell* colorCell3 = [[CTDUIKitColorCell alloc]
+                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType3]];
+    [toolbar addCell:colorCell1];
+    [toolbar addCell:colorCell2];
+    [toolbar addCell:colorCell3];
     [self.view addSubview:toolbar];
 
-    [_colorCellMap setObject:redCell forKey:@(CTDPaletteColor_RedDot)];
-    [_colorCellMap setObject:greenCell forKey:@(CTDPaletteColor_GreenDot)];
-    [_colorCellMap setObject:blueCell forKey:@(CTDPaletteColor_BlueDot)];
+    [_colorCellMap setObject:colorCell1 forKey:CTDPaletteColor_DotType1];
+    [_colorCellMap setObject:colorCell2 forKey:CTDPaletteColor_DotType2];
+    [_colorCellMap setObject:colorCell3 forKey:CTDPaletteColor_DotType3];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -83,14 +84,14 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 
 
 - (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
-                                        withInitialColor:(CTDPaletteColor)dotColor
+                                        withInitialColor:(CTDPaletteColorLabel)dotColor
 {
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
          initWithFrame:frameForDotCenteredAt(cgCenterPosition)
-         dotColor:self.dotColorMap[@(dotColor)]];
-    newDotView.dotColorMap = [self.dotColorMap copy];
+         dotColor:self.colorPalette[dotColor]
+         colorPalette:self.colorPalette];
     [self.view addSubview:newDotView];
     [_dotViews addObject:newDotView];
     return newDotView;

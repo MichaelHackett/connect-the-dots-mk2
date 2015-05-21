@@ -1,0 +1,3 @@
+// Common configuration for CocoaAdditions target.
+
+#include "General-Common-StaticLibrary.xcconfig"

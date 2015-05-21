@@ -202,6 +202,20 @@
                ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C41B7331B0A4F1900B54422"
+               BuildableName = "libCocoaAdditions.a"
+               BlueprintName = "CocoaAdditions"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
