@@ -36,14 +36,11 @@
     // then the Presenter, which returns a touch-input responder that gets
     // passed to the VC.
 
-    CTDUIKitConnectSceneViewController* connectSceneVC = [_sceneFactory connectScene];
+    CTDUIKitConnectSceneViewController* connectSceneVC =
+        [_sceneFactory connectSceneWithApplication:_applicationController];
     application.statusBarHidden = YES;
     _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
                                             backgroundColor:[UIColor whiteColor]];
-    __unused UIView* mainView = connectSceneVC.view; // force VC views to load
-    connectSceneVC.touchResponder =
-        [_applicationController newTrialPresenterWithRenderer:connectSceneVC
-                                                 colorCellMap:connectSceneVC.colorCellMap];
 
     [_window makeKeyAndVisible];
 

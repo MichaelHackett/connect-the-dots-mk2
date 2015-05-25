@@ -4,6 +4,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+@class CTDApplication;
 @class CTDUIKitConnectSceneViewController;
 @class CTDUIKitDrawingConfig;
 
@@ -15,6 +16,6 @@
 
 CTD_NO_DEFAULT_INIT
 
-- (CTDUIKitConnectSceneViewController*)connectScene;
+- (CTDUIKitConnectSceneViewController*)connectSceneWithApplication:(CTDApplication*)application;
 
 @end

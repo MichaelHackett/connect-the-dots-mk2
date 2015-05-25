@@ -2,6 +2,7 @@
 
 #import "CTDSceneFactory.h"
 
+#import "CTDApplication.h"
 #import "CTDUIKitDrawingConfig.h"
 #import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
 
@@ -39,7 +40,8 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 #pragma mark Factory methods
 
 
-- (CTDUIKitConnectSceneViewController*)connectScene
+// temporary argument
+- (CTDUIKitConnectSceneViewController*)connectSceneWithApplication:(CTDApplication*)application
 {
     CTDUIKitConnectSceneViewController* vc =
         [[CTDUIKitConnectSceneViewController alloc]
@@ -48,6 +50,10 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
     vc.connectionLineWidth = _drawingConfig.connectionLineWidth;
     vc.connectionLineColor = _drawingConfig.connectionLineColor;
     vc.colorPalette = _drawingConfig.colorPalette;
+
+    [vc view]; // force VC views to load
+    vc.touchResponder = [application newTrialPresenterWithRenderer:vc
+                                                      colorCellMap:vc.colorCellMap];
 
     return vc;
 }
