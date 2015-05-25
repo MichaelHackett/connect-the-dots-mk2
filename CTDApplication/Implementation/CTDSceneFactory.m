@@ -4,7 +4,7 @@
 
 #import "CTDApplication.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
+#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 
 
 static NSString* const kCTDUIKitConnectSceneViewControllerNibName =

@@ -1,11 +1,11 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDAppDelegate.h"
 
 #import "CTDApplication.h"
 #import "CTDSceneFactory.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDUIPlugins/CTDUIKitConnectSceneViewController.h"
+#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CocoaAdditions/UIKit.h"
 
 
