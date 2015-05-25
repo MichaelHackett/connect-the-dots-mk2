@@ -40,11 +40,12 @@
     application.statusBarHidden = YES;
     _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
                                             backgroundColor:[UIColor whiteColor]];
-    [_window makeKeyAndVisible];
-
+    __unused UIView* mainView = connectSceneVC.view; // force VC views to load
     connectSceneVC.touchResponder =
         [_applicationController newTrialPresenterWithRenderer:connectSceneVC
                                                  colorCellMap:connectSceneVC.colorCellMap];
+
+    [_window makeKeyAndVisible];
 
     return YES;
 }
