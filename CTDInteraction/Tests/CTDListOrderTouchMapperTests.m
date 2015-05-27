@@ -1,9 +1,9 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDListOrderTouchMapper.h"
 
 #import "CTDFakeTouchable.h"
-#import "CTDTouchable.h"
+#import "ExtensionPoints/CTDTouchable.h"
 #import "CTDUtility/CTDPoint.h"
 
 #define point CTDMakePoint

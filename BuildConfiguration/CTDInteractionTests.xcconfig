@@ -1,0 +1,9 @@
+// Configuration for CTDInteractionTests target.
+
+#include "ConnectTheDots-AllTests.xcconfig"
+
+// Tests are part of a parent module.
+CTD_MODULE_NAME = CTDInteraction
+
+// Project module source dependencies:
+RXC_MODULE_DEPENDENCIES = $(CTD_UI_BRIDGE_HEADERS) $(CTD_PRESENTATION_HEADERS) $(CTD_UTILITY_HEADERS)

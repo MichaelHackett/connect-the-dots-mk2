@@ -1,4 +1,4 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDFakeDotRenderer.h"
 
@@ -12,13 +12,13 @@
 }
 
 - (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
-                              dotColor:(CTDPaletteColor)dotColor
+                              dotColor:(CTDPaletteColorLabel)dotColor
 {
     self = [super init];
     if (self) {
         _centerPosition = [centerPosition copy];
         _colorChanges = [[NSMutableArray alloc] init];
-        [_colorChanges addObject:@(dotColor)];
+        [_colorChanges addObject:dotColor];
     }
     return self;
 }
@@ -40,9 +40,24 @@
     return self.centerPosition;
 }
 
-- (void)changeDotColorTo:(CTDPaletteColor)newDotColor
+- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
 {
-    [_colorChanges addObject:@(newDotColor)];
+    [_colorChanges addObject:newDotColor];
+}
+
+
+
+#pragma mark CTDSelectionRenderer protocol
+
+
+- (void)showSelectionIndicator
+{
+    [self recordMessageWithSelector:_cmd];
+}
+
+- (void)hideSelectionIndicator
+{
+    [self recordMessageWithSelector:_cmd];
 }
 
 

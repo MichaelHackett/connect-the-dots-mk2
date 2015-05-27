@@ -1,9 +1,9 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "CTDSelectable.h"
 #import "CTDTouchMapper.h"
+#import "CTDPresentation/CTDSelectable.h"
 #import "CTDUtility/CTDPoint.h"
 
 

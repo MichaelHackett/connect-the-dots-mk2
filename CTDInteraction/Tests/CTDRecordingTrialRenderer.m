@@ -1,13 +1,13 @@
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDRecordingTrialRenderer.h"
 
-#import "CTDColorPalette.h"
-#import "CTDDotConnectionRenderer.h"
-#import "CTDDotRenderer.h"
 #import "CTDFakeDotRenderer.h"
 #import "CTDRecordingDotConnectionView.h"
-#import "CTDTouchable.h"
+#import "ExtensionPoints/CTDTouchable.h"
+#import "CTDPresentation/CTDColorPalette.h"
+#import "CTDPresentation/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/CTDDotRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -39,7 +39,7 @@
 }
 
 - (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
-                                        withInitialColor:(CTDPaletteColor)dotColor
+                                        withInitialColor:(CTDPaletteColorLabel)dotColor
 {
     id newDotView = [[CTDFakeDotRenderer alloc]
                      initWithCenterPosition:centerPosition

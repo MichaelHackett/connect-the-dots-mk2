@@ -1,9 +1,11 @@
+// !!! Needs to be revised --- temporarily disabled !!!
+
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDTrialSceneTouchRouter.h"
 
-#import "CTDDotConnectionRenderer.h"
-#import "CTDDotRenderer.h"
+#import "CTDPresentation/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/CTDDotRenderer.h"
 #import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
@@ -32,6 +34,8 @@
 #define POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,250)
 
+#define SOME_DOT_COLOR CTDPaletteColor_DotType1
+
 
 
 static CTDFakeDotRenderer* dot1;
@@ -58,7 +62,7 @@ static CTDFakeDotRenderer* dot1;
 
     dot1 = [[CTDFakeDotRenderer alloc]
             initWithCenterPosition:DOT_1_CENTER
-                          dotColor:CTDPaletteColor_WhiteDot];
+                          dotColor:SOME_DOT_COLOR];
 
     _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
     CTDRecordingTouchTracker* colorCellsTouchTracker =

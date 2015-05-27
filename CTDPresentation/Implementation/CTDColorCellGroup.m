@@ -3,7 +3,7 @@
 #import "CTDColorCellGroup.h"
 
 #import "CTDColorCellRenderer.h"
-#import "CTDUIPlugins/CTDSelectable.h"
+#import "CTDSelectable.h"
 
 
 

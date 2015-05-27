@@ -4,9 +4,9 @@
 //     the instances of new touches and the trackers returned (for examination
 //     by test verification code).
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchResponder.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
 
 @class CTDPoint;
 

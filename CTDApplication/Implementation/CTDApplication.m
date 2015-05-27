@@ -2,17 +2,17 @@
 
 #import "CTDApplication.h"
 
-#import "CTDColorCellGroup.h"
-#import "CTDColorPalette.h"
-#import "CTDDotSetPresenter.h"
+#import "CTDInteraction/CTDListOrderTouchMapper.h"
+#import "CTDInteraction/CTDSelectOnTapInteraction.h"
+#import "CTDInteraction/CTDSelectOnTouchInteraction.h"
+#import "CTDInteraction/CTDTouchTrackerFactory.h"
+#import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
+#import "CTDPresentation/CTDColorCellGroup.h"
+#import "CTDPresentation/CTDColorPalette.h"
+#import "CTDPresentation/CTDDotSetPresenter.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDUIPlugins/CTDListOrderTouchMapper.h"
-#import "CTDUIPlugins/CTDSelectOnTapInteraction.h"
-#import "CTDUIPlugins/CTDSelectOnTouchInteraction.h"
-#import "CTDUIPlugins/CTDTouchTrackerFactory.h"
-#import "CTDUIPlugins/CTDTrialSceneTouchRouter.h"
 
 
 
