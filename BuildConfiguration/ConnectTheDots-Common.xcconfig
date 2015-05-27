@@ -22,6 +22,7 @@ CTD_PROJECT_SHARED_HEADERS = Common
 // Module public interface directory paths (when referenced by other modules):
 CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
+CTD_INTERACTION_HEADERS = CTDInteraction/Interface
 CTD_UTILITY_HEADERS = CTDUtility/Interface
 CTD_UI_BRIDGE_HEADERS = CTDUIBridge/Interface
 CTD_UI_PLUGINS_HEADERS = CTDUIPlugins/Interface

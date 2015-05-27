@@ -1,0 +1,6 @@
+// Common configuration for CTDInteraction target.
+
+#include "General-Common-StaticLibrary.xcconfig"
+
+// Project module source dependencies:
+USER_HEADER_SEARCH_PATHS = $(CTD_UI_BRIDGE_HEADERS) $(CTD_PRESENTATION_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)

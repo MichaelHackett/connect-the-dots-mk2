@@ -5,9 +5,9 @@
 //
 // Use the macros to create instances more compactly.
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchable.h"
+#import "ExtensionPoints/CTDTouchable.h"
 
 
 

@@ -6,8 +6,8 @@
 #import "CTDDotRenderer.h"
 #import "CTDTrialRenderer.h"
 #import "CTDModel/CTDDot.h"
-#import "CTDUIPlugins/CTDListOrderTouchMapper.h"
-#import "CTDUIPlugins/CTDTouchMapper.h"
+#import "CTDInteraction/CTDListOrderTouchMapper.h"
+#import "CTDInteraction/CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 

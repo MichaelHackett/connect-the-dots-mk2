@@ -3,7 +3,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchResponder.h"
+#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
 #import "CTDTestHelpers/CTDTestSpy.h"
 
 @class CTDPoint;

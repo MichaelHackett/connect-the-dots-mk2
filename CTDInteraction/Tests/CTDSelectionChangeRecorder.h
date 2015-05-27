@@ -4,7 +4,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDSelectable.h"
+#import "CTDPresentation/CTDSelectable.h"
 #import "CTDTestHelpers/CTDTestSpy.h"
 
 

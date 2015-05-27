@@ -2,7 +2,7 @@
 
 #import "CTDListOrderTouchMapper.h"
 
-#import "CTDTouchable.h"
+#import "ExtensionPoints/CTDTouchable.h"
 
 
 

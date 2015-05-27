@@ -8,11 +8,11 @@
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDUIPlugins/CTDListOrderTouchMapper.h"
-#import "CTDUIPlugins/CTDSelectOnTapInteraction.h"
-#import "CTDUIPlugins/CTDSelectOnTouchInteraction.h"
-#import "CTDUIPlugins/CTDTouchTrackerFactory.h"
-#import "CTDUIPlugins/CTDTrialSceneTouchRouter.h"
+#import "CTDInteraction/CTDListOrderTouchMapper.h"
+#import "CTDInteraction/CTDSelectOnTapInteraction.h"
+#import "CTDInteraction/CTDSelectOnTouchInteraction.h"
+#import "CTDInteraction/CTDTouchTrackerFactory.h"
+#import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 
 
 
