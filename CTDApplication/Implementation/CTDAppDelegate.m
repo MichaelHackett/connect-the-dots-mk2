@@ -2,9 +2,9 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDApplication.h"
-#import "CTDSceneFactory.h"
+#import "CTDSceneBuilder.h"
 #import "CTDUIKitDrawingConfig.h"
+#import "CTDUIBridge/CTDUIKitBridge.h"
 #import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CocoaAdditions/UIKit.h"
 
@@ -13,16 +13,14 @@
 @implementation CTDAppDelegate
 {
     UIWindow* _window;
-    CTDApplication* _applicationController;
-    CTDSceneFactory* _sceneFactory;
+    CTDSceneBuilder* _sceneBuilder;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _applicationController = [[CTDApplication alloc] init];
-        _sceneFactory = [[CTDSceneFactory alloc]
+        _sceneBuilder = [[CTDSceneBuilder alloc]
                          initWithDrawingConfig:[[CTDUIKitDrawingConfig alloc] init]];
     }
     return self;
@@ -32,16 +30,20 @@
 - (BOOL)application:(UIApplication*)application
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
-    // Create the Presentation's renderer (provided by the View Controller),
-    // then the Presenter, which returns a touch-input responder that gets
-    // passed to the VC.
-
-    CTDUIKitConnectSceneViewController* connectSceneVC =
-        [_sceneFactory connectSceneWithApplication:_applicationController];
+    // If we were using a storyboard, the window and initial view controller
+    // would already be loaded at this point. To avoid disrupting other code
+    // if/when we make that change, reproduce those steps here.
     application.statusBarHidden = YES;
-    _window = [UIKit fullScreenWindowWithRootViewController:connectSceneVC
+    CTDUIKitConnectSceneViewController* connectVC = [CTDUIKitBridge connectScene];
+    _window = [UIKit fullScreenWindowWithRootViewController:connectVC
                                             backgroundColor:[UIColor whiteColor]];
 
+    // Now wire up the scene to the Presentation and Interaction modules.
+    [_sceneBuilder prepareConnectScene:connectVC];
+
+    // Lastly, make it visible. (Have to do this after running the Scene
+    // Builder, so that it has a chance to set some values before loading the
+    // views. FIXME!)
     [_window makeKeyAndVisible];
 
     return YES;

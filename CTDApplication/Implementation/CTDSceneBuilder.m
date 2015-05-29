@@ -1,7 +1,8 @@
-// Copyright 2014-5 Michael Hackett. All rights reserved.
+// Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDApplication.h"
+#import "CTDSceneBuilder.h"
 
+#import "CTDUIKitDrawingConfig.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDSelectOnTouchInteraction.h"
@@ -12,47 +13,70 @@
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
+#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CTDUtility/CTDPoint.h"
 
 
+static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
+          @"CTDUIKitConnectSceneViewController";
 
 // Macro for defining sample data
 #define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
+// Merge drawing config into this class (rather than separate class)?
+// If config gets loaded from a file eventually, then makes sense to keep it separate.
 
-@implementation CTDApplication
+
+
+@implementation CTDSceneBuilder
 {
-    CTDDotSetPresenter* _currentPresenter;
-    NSArray* _dotList;
+    CTDUIKitDrawingConfig* _drawingConfig;
 }
 
-- (instancetype)init
+
+#pragma mark Initialization
+
+
+- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
 {
     self = [super init];
     if (self) {
-        _currentPresenter = nil;
-        _dotList = @[
-            dot(CTDDotColor_Green, 100, 170),
-            dot(CTDDotColor_Red, 600, 400),
-            dot(CTDDotColor_Blue, 250, 650)
-        ];
+        _drawingConfig = drawingConfig;
     }
     return self;
 }
 
-- (id<CTDTouchResponder>)
-      newTrialPresenterWithRenderer:(id<CTDTrialRenderer>)trialRenderer
-                colorCellMap:(NSDictionary*)colorCellMap
-{
-    _currentPresenter = [[CTDDotSetPresenter alloc]
-                         initWithDotList:_dotList
-                           trialRenderer:trialRenderer];
+- (instancetype)init CTD_BLOCK_PARENT_METHOD
 
-    CTDColorCellGroup* colorCellGroup =
-        [[CTDColorCellGroup alloc]
-         initWithDefaultColor:CTDDotColor_White
-            selectedColorSink:nil];
+
+
+#pragma mark Builder methods
+
+
+- (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
+{
+    // VC properties that must be set before `viewDidLoad` runs (BAD!)
+    connectVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
+    connectVC.connectionLineColor = _drawingConfig.connectionLineColor;
+    connectVC.colorPalette = _drawingConfig.colorPalette;
+
+    [connectVC view]; // force VC views to load
+
+    // TODO: Replace with data passed in
+    NSArray* dotList = @[
+        dot(CTDDotColor_Green, 100, 170),
+        dot(CTDDotColor_Red, 600, 400),
+        dot(CTDDotColor_Blue, 250, 650)
+    ];
+
+    CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
+                                           initWithDotList:dotList
+                                             trialRenderer:connectVC];  // TODO: Make a connect view class to become the renderer
+
+    CTDColorCellGroup* colorCellGroup = [[CTDColorCellGroup alloc]
+                                         initWithDefaultColor:CTDDotColor_White
+                                            selectedColorSink:nil];
 
     CTDListOrderTouchMapper* colorCellsTouchMapper =
         [[CTDListOrderTouchMapper alloc] init];
@@ -60,11 +84,11 @@
     // TODO: reduce repetition in this section
 
     id<CTDColorCellRenderer, CTDTouchable> colorCell1Renderer =
-        [colorCellMap objectForKey:CTDPaletteColor_DotType1];
+        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType1];
     id<CTDColorCellRenderer, CTDTouchable> colorCell2Renderer =
-        [colorCellMap objectForKey:CTDPaletteColor_DotType2];
+        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType2];
     id<CTDColorCellRenderer, CTDTouchable> colorCell3Renderer =
-        [colorCellMap objectForKey:CTDPaletteColor_DotType3];
+        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType3];
 
     [colorCellsTouchMapper mapTouchable:colorCell1Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red
@@ -95,10 +119,10 @@
     // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
 //    [touchInputRouter addTouchResponder:
 
-    return [[CTDTrialSceneTouchRouter alloc]
-            initWithTrialRenderer:trialRenderer
-            dotsTouchMapper:[_currentPresenter dotsTouchMapper]
-            colorCellsTouchResponder:colorCellsTouchResponder];
+    connectVC.touchResponder = [[CTDTrialSceneTouchRouter alloc]
+                                initWithTrialRenderer:connectVC
+                                dotsTouchMapper:[dotSetPresenter dotsTouchMapper]
+                                colorCellsTouchResponder:colorCellsTouchResponder];
 }
 
 @end
