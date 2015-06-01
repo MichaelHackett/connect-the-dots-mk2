@@ -2,11 +2,11 @@
 
 #import "CTDUIKitConnectSceneViewController.h"
 
-#import "CTDUIKitColorCell.h"
-#import "CTDUIKitConnectionView.h"
-#import "CTDUIKitDotView.h"
-#import "CTDUIKitToolbar.h"
-#import "CTDUIBridge/CTDUIKitColorPalette.h"
+#import "CTDUIKitColorPalette.h"
+#import "CTDUIPlugins/CTDUIKitColorCell.h"
+#import "CTDUIPlugins/CTDUIKitConnectionView.h"
+#import "CTDUIPlugins/CTDUIKitDotView.h"
+#import "CTDUIPlugins/CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
