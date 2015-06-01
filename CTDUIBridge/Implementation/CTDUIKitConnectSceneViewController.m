@@ -49,18 +49,16 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     _dotViews = [[NSMutableArray alloc] init];
     _colorCellMap = [[NSMutableDictionary alloc] init];
 
-    CTDUIKitToolbar* toolbar = [[CTDUIKitToolbar alloc]
-                                initWithFrame:CGRectMake(200, 50, 400, 60)];
     CTDUIKitColorCell* colorCell1 = [[CTDUIKitColorCell alloc]
                                      initWithColor:self.colorPalette[CTDPaletteColor_DotType1]];
     CTDUIKitColorCell* colorCell2 = [[CTDUIKitColorCell alloc]
                                      initWithColor:self.colorPalette[CTDPaletteColor_DotType2]];
     CTDUIKitColorCell* colorCell3 = [[CTDUIKitColorCell alloc]
                                      initWithColor:self.colorPalette[CTDPaletteColor_DotType3]];
+    CTDUIKitToolbar* toolbar = self.colorsToolbar;
     [toolbar addCell:colorCell1];
     [toolbar addCell:colorCell2];
     [toolbar addCell:colorCell3];
-    [self.view addSubview:toolbar];
 
     [_colorCellMap setObject:colorCell1 forKey:CTDPaletteColor_DotType1];
     [_colorCellMap setObject:colorCell2 forKey:CTDPaletteColor_DotType2];

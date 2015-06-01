@@ -33,11 +33,28 @@
 			<object class="IBUIView" id="629645449">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
-				<array class="NSMutableArray" key="NSSubviews"/>
-				<string key="NSFrameSize">{768, 1004}</string>
+				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIView" id="1033733553">
+						<reference key="NSNextResponder" ref="629645449"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{200, 50}, {400, 60}}</string>
+						<reference key="NSSuperview" ref="629645449"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSAppearance" key="NSAppearance">
+							<string key="NSAppearanceName">NSAppearanceNameAqua</string>
+						</object>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+				</array>
+				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSNextKeyView" ref="1033733553"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -56,6 +73,14 @@
 						<reference key="destination" ref="629645449"/>
 					</object>
 					<string key="id">sfx-zR-JGt</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">colorsToolbar</string>
+						<reference key="source" ref="62624560"/>
+						<reference key="destination" ref="1033733553"/>
+					</object>
+					<string key="id">Izc-wI-Dhl</string>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -80,18 +105,28 @@
 					<object class="IBObjectRecord">
 						<string key="id">i5M-Pr-FkT</string>
 						<reference key="object" ref="629645449"/>
-						<array class="NSMutableArray" key="children"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="1033733553"/>
+						</array>
 						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">hI6-IS-PUI</string>
+						<reference key="object" ref="1033733553"/>
+						<reference key="parent" ref="629645449"/>
+						<string key="objectName">Colors Toolbar</string>
 					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">CTDConnectSceneViewController</string>
+				<string key="-1.CustomClassName">CTDUIKitConnectSceneViewController</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<boolean value="NO" key="-1.showNotes"/>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<boolean value="NO" key="-2.showNotes"/>
+				<string key="hI6-IS-PUI.CustomClassName">CTDUIKitToolbar</string>
+				<string key="hI6-IS-PUI.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="i5M-Pr-FkT.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<reference key="i5M-Pr-FkT.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="i5M-Pr-FkT.showNotes"/>
@@ -104,25 +139,38 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">CTDConnectSceneViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="hideIndicator">id</string>
-						<string key="showIndicator">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="hideIndicator">
-							<string key="name">hideIndicator</string>
-							<string key="candidateClassName">id</string>
+					<string key="className">CTDUIKitConnectSceneViewController</string>
+					<string key="superclassName">CTDUIKitStandardViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">colorsToolbar</string>
+						<string key="NS.object.0">CTDUIKitToolbar</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">colorsToolbar</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">colorsToolbar</string>
+							<string key="candidateClassName">CTDUIKitToolbar</string>
 						</object>
-						<object class="IBActionInfo" key="showIndicator">
-							<string key="name">showIndicator</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CTDConnectSceneViewController.h</string>
+						<string key="minorKey">./Classes/CTDUIKitConnectSceneViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CTDUIKitStandardViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CTDUIKitStandardViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CTDUIKitToolbar</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CTDUIKitToolbar.h</string>
 					</object>
 				</object>
 			</array>

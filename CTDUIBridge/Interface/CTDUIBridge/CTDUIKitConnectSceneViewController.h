@@ -7,6 +7,7 @@
 #import "CTDPresentation/CTDTrialRenderer.h"
 
 @class CTDUIKitColorPalette;
+@class CTDUIKitToolbar;
 
 
 
@@ -21,5 +22,8 @@
 
 // maps CTDPaletteColorLabel -> CTDKUIKitColorCell
 @property (strong, readonly, nonatomic) NSDictionary* colorCellMap;
+
+// IB Outlets
+@property (weak, nonatomic) IBOutlet CTDUIKitToolbar* colorsToolbar;
 
 @end

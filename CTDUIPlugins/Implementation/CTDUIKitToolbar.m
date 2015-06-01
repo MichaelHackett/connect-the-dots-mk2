@@ -17,14 +17,26 @@ static CGFloat const kToolbarFrameThickness = 4;
     NSMutableArray* _toolbarCells;
 }
 
+// Private: common initialization
+- (void)CTDUIKitToolbar_init
+{
+    _toolbarCells = [[NSMutableArray alloc] init];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _toolbarCells = [[NSMutableArray alloc] init];
-        CALayer* rootLayer = self.layer;
-        rootLayer.backgroundColor = [[UIColor grayColor] CGColor];
-        [self setNeedsLayout];
+        [self CTDUIKitToolbar_init];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder*)decoder
+{
+    self = [super initWithCoder:decoder];
+    if (self) {
+        [self CTDUIKitToolbar_init];
     }
     return self;
 }
@@ -33,6 +45,7 @@ static CGFloat const kToolbarFrameThickness = 4;
 {
     [_toolbarCells addObject:cell];
     [self addSubview:[cell toolbarCellContentView]];
+    [self setNeedsLayout];
 }
 
 - (void)layoutSubviews

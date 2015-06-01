@@ -1204,10 +1204,10 @@
 				4CEBCA1619BB564600D2B498 /* main.m */,
 				4CEBCA1919BB564600D2B498 /* CTDAppDelegate.h */,
 				4CEBCA1A19BB564600D2B498 /* CTDAppDelegate.m */,
-				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
-				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
 				4C41B7501B0C40C700B54422 /* CTDSceneBuilder.h */,
 				4C41B7511B0C40C700B54422 /* CTDSceneBuilder.m */,
+				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
+				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
 				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
 			);
 			path = Implementation;
