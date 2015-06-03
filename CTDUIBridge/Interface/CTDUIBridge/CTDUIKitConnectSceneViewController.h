@@ -7,7 +7,6 @@
 #import "CTDPresentation/CTDTrialRenderer.h"
 
 @class CTDUIKitColorPalette;
-@class CTDUIKitToolbar;
 
 
 
@@ -20,10 +19,7 @@
 @property (copy, nonatomic) UIColor* connectionLineColor;
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
 
-// maps CTDPaletteColorLabel -> CTDKUIKitColorCell
-@property (strong, readonly, nonatomic) NSDictionary* colorCellMap;
-
 // IB Outlets
-@property (weak, nonatomic) IBOutlet CTDUIKitToolbar* colorsToolbar;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
 
 @end

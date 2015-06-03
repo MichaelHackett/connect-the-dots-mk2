@@ -13,6 +13,7 @@
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
+#import "CTDPresentation/CTDSelectionRenderer.h"
 #import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -83,12 +84,9 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
     // TODO: reduce repetition in this section
 
-    id<CTDColorCellRenderer, CTDTouchable> colorCell1Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType1];
-    id<CTDColorCellRenderer, CTDTouchable> colorCell2Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType2];
-    id<CTDColorCellRenderer, CTDTouchable> colorCell3Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType3];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell1Renderer = connectVC.colorSelectionCells[0];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell2Renderer = connectVC.colorSelectionCells[1];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell3Renderer = connectVC.colorSelectionCells[2];
 
     [colorCellsTouchMapper mapTouchable:colorCell1Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red

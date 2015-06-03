@@ -3,10 +3,8 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDUIKitColorPalette.h"
-#import "CTDUIPlugins/CTDUIKitColorCell.h"
 #import "CTDUIPlugins/CTDUIKitConnectionView.h"
 #import "CTDUIPlugins/CTDUIKitDotView.h"
-#import "CTDUIPlugins/CTDUIKitToolbar.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -47,22 +45,6 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 {
     [super viewDidLoad];
     _dotViews = [[NSMutableArray alloc] init];
-    _colorCellMap = [[NSMutableDictionary alloc] init];
-
-    CTDUIKitColorCell* colorCell1 = [[CTDUIKitColorCell alloc]
-                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType1]];
-    CTDUIKitColorCell* colorCell2 = [[CTDUIKitColorCell alloc]
-                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType2]];
-    CTDUIKitColorCell* colorCell3 = [[CTDUIKitColorCell alloc]
-                                     initWithColor:self.colorPalette[CTDPaletteColor_DotType3]];
-    CTDUIKitToolbar* toolbar = self.colorsToolbar;
-    [toolbar addCell:colorCell1];
-    [toolbar addCell:colorCell2];
-    [toolbar addCell:colorCell3];
-
-    [_colorCellMap setObject:colorCell1 forKey:CTDPaletteColor_DotType1];
-    [_colorCellMap setObject:colorCell2 forKey:CTDPaletteColor_DotType2];
-    [_colorCellMap setObject:colorCell3 forKey:CTDPaletteColor_DotType3];
 }
 
 //- (void)didReceiveMemoryWarning
