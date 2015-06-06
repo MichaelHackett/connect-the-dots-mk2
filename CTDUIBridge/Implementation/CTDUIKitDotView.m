@@ -15,6 +15,8 @@
 {
     CTDUIKitDotSelectionIndicatorController* _selectionIndicatorController;
     CTDUIKitColorPalette* _colorPalette;
+    // Copy of parent's layer property, cast to the correct type (for convenience).
+    __unsafe_unretained CAShapeLayer* _dotLayer;
 }
 
 
@@ -28,27 +30,27 @@
 }
 
 - (id)initWithFrame:(CGRect)frameRect
-           dotColor:(UIColor*)dotColor
+           dotColor:(CTDPaletteColorLabel)dotColor
        colorPalette:(CTDUIKitColorPalette*)colorPalette
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        CAShapeLayer* dotLayer = (CAShapeLayer*)self.layer;
-        dotLayer.lineWidth = 0;
-        dotLayer.opaque = NO;
-        dotLayer.fillColor = [dotColor CGColor];
+        _dotLayer = (CAShapeLayer*)self.layer;
+        _dotLayer.lineWidth = 0;
+        _dotLayer.opaque = NO;
+        _dotLayer.fillColor = [colorPalette[dotColor] CGColor];
 
         CGPathRef dotPath = CGPathCreateWithEllipseInRect(self.bounds, NULL);
-        dotLayer.path = dotPath;
+        _dotLayer.path = dotPath;
         CGPathRelease(dotPath);
 
         _selectionIndicatorController =
             [[CTDUIKitDotSelectionIndicatorController alloc] init];
-        [_selectionIndicatorController attachIndicatorToLayer:dotLayer];
+        [_selectionIndicatorController attachIndicatorToLayer:_dotLayer];
 
         _colorPalette = colorPalette;
 
-        [dotLayer setNeedsDisplay];
+        [_dotLayer setNeedsDisplay];
     }
     return self;
 }
@@ -56,7 +58,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     return [self initWithFrame:frame
-                      dotColor:[UIColor whiteColor]
+                      dotColor:@""
                   colorPalette:[[CTDUIKitColorPalette alloc] init]];
 }
 
@@ -78,7 +80,7 @@
 
 - (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
 {
-    ((CAShapeLayer*)self.layer).fillColor = [_colorPalette[newDotColor] CGColor];
+    _dotLayer.fillColor = [_colorPalette[newDotColor] CGColor];
 }
 
 - (void)showSelectionIndicator
@@ -100,7 +102,7 @@
 {
     CGPoint localPoint = [self convertPoint:[touchLocation asCGPoint]
                                    fromView:self.superview];
-    CGPathRef dotPath = ((CAShapeLayer*)self.layer).path;
+    CGPathRef dotPath = _dotLayer.path;
     return (BOOL)CGPathContainsPoint(dotPath, NULL, localPoint, false);
 }
 

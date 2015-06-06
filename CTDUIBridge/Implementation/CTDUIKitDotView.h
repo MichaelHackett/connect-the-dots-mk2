@@ -14,7 +14,7 @@
 @interface CTDUIKitDotView : UIView <CTDDotRenderer, CTDTouchable>
 
 - (id)initWithFrame:(CGRect)frameRect
-           dotColor:(UIColor*)dotColor
+           dotColor:(CTDPaletteColorLabel)dotColor
        colorPalette:(CTDUIKitColorPalette*)colorPalette;
 
 @end

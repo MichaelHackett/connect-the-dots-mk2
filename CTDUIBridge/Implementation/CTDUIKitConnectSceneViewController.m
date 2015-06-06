@@ -70,7 +70,7 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
          initWithFrame:frameForDotCenteredAt(cgCenterPosition)
-         dotColor:self.colorPalette[dotColor]
+         dotColor:dotColor
          colorPalette:self.colorPalette];
     [self.view addSubview:newDotView];
     [_dotViews addObject:newDotView];
