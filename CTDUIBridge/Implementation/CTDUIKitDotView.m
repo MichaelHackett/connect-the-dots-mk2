@@ -3,9 +3,9 @@
 #import "CTDUIKitDotView.h"
 
 #import "CTDCoreGraphicsUtils.h"
+#import "CTDPoint+CGConversion.h"
+#import "CTDUIKitColorPalette.h"
 #import "CTDUIKitDotSelectionIndicatorController.h"
-#import "CTDUIBridge/CTDPoint+CGConversion.h"
-#import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 #import <QuartzCore/CAShapeLayer.h>
 

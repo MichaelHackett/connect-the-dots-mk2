@@ -3,8 +3,8 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDUIKitColorPalette.h"
-#import "CTDUIPlugins/CTDUIKitConnectionView.h"
-#import "CTDUIPlugins/CTDUIKitDotView.h"
+#import "CTDUIKitConnectionView.h"
+#import "CTDUIKitDotView.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 

@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		4C15CA161B180415000512C1 /* CTDUIKitBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15CA151B180415000512C1 /* CTDUIKitBridge.m */; };
 		4C15CA311B1E8C13000512C1 /* CTDUIKitColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */; };
+		4C15CA351B227A85000512C1 /* CTDUIKitDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */; };
+		4C15CA361B227C6C000512C1 /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
+		4C15CA381B227D07000512C1 /* CTDUIKitDotSelectionIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */; };
+		4C15CA391B227DF7000512C1 /* CAAnimation+CTDAnimationConstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */; };
+		4C15CA3A1B227E4C000512C1 /* CTDCoreGraphicsUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */; };
+		4C15CA3B1B227E50000512C1 /* CTDAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */; };
+		4C15CA3C1B227E54000512C1 /* CALayer+CTDAnimationSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAA19C63C670041B910 /* CALayer+CTDAnimationSupport.m */; };
 		4C25B97D1A0E95E300275138 /* CTDMethodSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B97C1A0E95E300275138 /* CTDMethodSelector.m */; };
 		4C25B97F1A0EB08F00275138 /* CTDMethodSelectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B97E1A0EB08F00275138 /* CTDMethodSelectorTests.m */; };
 		4C25B9931A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25B9921A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m */; };
@@ -25,7 +32,6 @@
 		4C41B74B1B0C1E1B00B54422 /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
 		4C41B7521B0C40C700B54422 /* CTDSceneBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B7511B0C40C700B54422 /* CTDSceneBuilder.m */; };
 		4C41B75F1B12A84800B54422 /* CTDUIKitConnectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */; };
-		4C41B7811B15554900B54422 /* CTDCoreGraphicsUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */; };
 		4C41B7921B155AA500B54422 /* CTDConnectionTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A569E19E1C65600E994CB /* CTDConnectionTouchInteraction.m */; };
 		4C41B7931B155AA500B54422 /* CTDTouchTrackerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C32363D1A145074005C25D7 /* CTDTouchTrackerFactory.m */; };
 		4C41B7941B155AA500B54422 /* CTDTrialSceneTouchRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAD19C683450041B910 /* CTDTrialSceneTouchRouter.m */; };
@@ -67,12 +73,6 @@
 		4C5857431A7EC32F00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C5857441A7EC33A00CC1B1E /* libocmockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3B61A70025B0086C37B /* libocmockito.a */; };
 		4C60BB501A1C33CF0067A72F /* CTDDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C60BB4F1A1C33CF0067A72F /* CTDDot.m */; };
-		4C6E10541AD069C10014338E /* CTDUIKitDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */; };
-		4C6E10551AD069C10014338E /* CTDUIKitDotSelectionIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */; };
-		4C6E10561AD069C10014338E /* CTDUIKitConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */; };
-		4C6E10651AD07A050014338E /* CTDAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */; };
-		4C6E10671AD07A050014338E /* CAAnimation+CTDAnimationConstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */; };
-		4C6E10681AD07A050014338E /* CALayer+CTDAnimationSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEAA19C63C670041B910 /* CALayer+CTDAnimationSupport.m */; };
 		4C84978B1A802852000A094E /* CTDOccurrenceCountMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84978A1A802852000A094E /* CTDOccurrenceCountMatcher.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
@@ -114,8 +114,6 @@
 		4CFEF37C1A6EBB250086C37B /* CTDPoint+CGConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEF319C762580041B910 /* CTDPoint+CGConversion.m */; };
 		4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */; };
 		4CFEF37E1A6EBB7D0086C37B /* libCTDUIBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */; };
-		4CFEF38B1A6FF89A0086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
-		4CFEF3B51A70022C0086C37B /* libCTDUIPlugins.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */; };
 		4CFEF3EA1A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFEF3F71A72F1B70086C37B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
 		4CFEF3F81A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -281,15 +279,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4CFEF3481A6EB63F0086C37B /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4CFEF3881A6FF89A0086C37B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -492,9 +481,6 @@
 		4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDUIBridge.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIBridge.xcconfig; path = BuildConfiguration/CTDUIBridge.xcconfig; sourceTree = "<group>"; };
 		4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDUIKitConnectSceneViewController.h; sourceTree = "<group>"; };
-		4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDUIPlugins.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CFEF38E1A6FF89A0086C37B /* CTDUIPlugins-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDUIPlugins-Prefix.pch"; sourceTree = "<group>"; };
-		4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDUIPlugins.xcconfig; path = BuildConfiguration/CTDUIPlugins.xcconfig; sourceTree = "<group>"; };
 		4CFEF3B61A70025B0086C37B /* libocmockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocmockito.a; path = "External/OCMockito/Source/build/Debug-iphoneos/libocmockito.a"; sourceTree = "<group>"; };
 		4CFEF3BC1A7182AF0086C37B /* CTDTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchResponder.h; sourceTree = "<group>"; };
 		4CFEF3C01A7193710086C37B /* CTDTrialSceneTouchRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTrialSceneTouchRouter.h; sourceTree = "<group>"; };
@@ -560,7 +546,6 @@
 				4CEBCAB019BB928B00D2B498 /* libCTDPresentation.a in Frameworks */,
 				4C41B7C21B1564F900B54422 /* libCTDInteraction.a in Frameworks */,
 				4CFEF37E1A6EBB7D0086C37B /* libCTDUIBridge.a in Frameworks */,
-				4CFEF3B51A70022C0086C37B /* libCTDUIPlugins.a in Frameworks */,
 				4C41B7421B0A514100B54422 /* libCocoaAdditions.a in Frameworks */,
 				4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */,
 				4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */,
@@ -646,14 +631,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFEF34B1A6EB63F0086C37B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4CFEF3871A6FF89A0086C37B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4CFEF38B1A6FF89A0086C37B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,33 +796,6 @@
 			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
-		4C6E10591AD06A530014338E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4CFEF38E1A6FF89A0086C37B /* CTDUIPlugins-Prefix.pch */,
-				4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */,
-				4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */,
-				4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */,
-				4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */,
-				4CFDEEA619C631880041B910 /* CAAnimation+CTDAnimationConstruction.h */,
-				4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */,
-				4CFDEEA919C63C670041B910 /* CALayer+CTDAnimationSupport.h */,
-				4CFDEEAA19C63C670041B910 /* CALayer+CTDAnimationSupport.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4C6E10691AD08ACE0014338E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */,
-				4CFDEE9319C619560041B910 /* CTDUIKitDotSelectionIndicatorController.h */,
-				4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */,
-				4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		4C84975A1A7FE9DA000A094E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,7 +844,6 @@
 				4C41B7301B0A3D0600B54422 /* Cocoa Additions */,
 				4CFEF3431A6EB2480086C37B /* CTDApplication */,
 				4CEBCA1019BB564600D2B498 /* UI Bridge */,
-				4CFEF38C1A6FF89A0086C37B /* UI Plugins */,
 				4C41B78B1B1557C700B54422 /* CTDInteraction */,
 				4CEBCA7F19BB77D300D2B498 /* CTDPresentation */,
 				4CEBCA5919BB77C400D2B498 /* CTDModel */,
@@ -920,7 +869,6 @@
 				4CFDEEB619C688CF0041B910 /* libCTDUtility.a */,
 				4CFDEEC319C688D00041B910 /* CTDUtilityTests.xctest */,
 				4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */,
-				4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */,
 				4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */,
 				4CFEF3F61A72F1B70086C37B /* CTDTestHelpersTests.xctest */,
 				4C41B73C1B0A4F1900B54422 /* libCocoaAdditions.a */,
@@ -959,6 +907,15 @@
 			isa = PBXGroup;
 			children = (
 				4CEBCA1819BB564600D2B498 /* CTDUIBridge-Prefix.pch */,
+				4CFDEEA619C631880041B910 /* CAAnimation+CTDAnimationConstruction.h */,
+				4CFDEEA719C631880041B910 /* CAAnimation+CTDAnimationConstruction.m */,
+				4CFDEEA919C63C670041B910 /* CALayer+CTDAnimationSupport.h */,
+				4CFDEEAA19C63C670041B910 /* CALayer+CTDAnimationSupport.m */,
+				4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */,
+				4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */,
+				4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */,
+				4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */,
+				4CFDEEF219C762580041B910 /* CTDPoint+CGConversion.h */,
 				4CFDEEF319C762580041B910 /* CTDPoint+CGConversion.m */,
 			);
 			name = "Supporting Files";
@@ -1004,7 +961,6 @@
 				4C41B7C01B155CB800B54422 /* CTDInteraction.xcconfig */,
 				4C41B7C11B155CB800B54422 /* CTDInteractionTests.xcconfig */,
 				4CFEF36F1A6EB8B10086C37B /* CTDUIBridge.xcconfig */,
-				4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */,
 				4CFDEED819C689260041B910 /* CTDUtility.xcconfig */,
 				4CFDEED919C689500041B910 /* CTDUtilityTests.xcconfig */,
 				4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */,
@@ -1216,7 +1172,6 @@
 				4C41B7451B0AC6E100B54422 /* CTDUIKitColorPalette.h */,
 				4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */,
 				4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */,
-				4CFDEEF219C762580041B910 /* CTDPoint+CGConversion.h */,
 				4CFEF3BB1A7182790086C37B /* ExtensionPoints */,
 			);
 			name = Interface;
@@ -1229,6 +1184,12 @@
 				4C15CA151B180415000512C1 /* CTDUIKitBridge.m */,
 				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
 				4C41B7491B0BEC5200B54422 /* CTDUIKitColorPalette.m */,
+				4C5A56A719E20A2A00E994CB /* CTDUIKitConnectionView.h */,
+				4C5A56A819E20A2A00E994CB /* CTDUIKitConnectionView.m */,
+				4CFDEE9319C619560041B910 /* CTDUIKitDotSelectionIndicatorController.h */,
+				4CFDEE9419C619560041B910 /* CTDUIKitDotSelectionIndicatorController.m */,
+				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
+				4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */,
 				4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */,
 				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
 				4C41B72A1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.h */,
@@ -1237,35 +1198,6 @@
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
 			);
 			path = Implementation;
-			sourceTree = "<group>";
-		};
-		4CFEF38C1A6FF89A0086C37B /* UI Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				4CFEF3AD1A6FF9F30086C37B /* Interface */,
-				4CFEF3AC1A6FF9EA0086C37B /* Implementation */,
-			);
-			name = "UI Plugins";
-			path = CTDUIPlugins;
-			sourceTree = "<group>";
-		};
-		4CFEF3AC1A6FF9EA0086C37B /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
-				4C6E10691AD08ACE0014338E /* Views */,
-				4C6E10591AD06A530014338E /* Supporting Files */,
-			);
-			path = Implementation;
-			sourceTree = "<group>";
-		};
-		4CFEF3AD1A6FF9F30086C37B /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				4C5A56A719E20A2A00E994CB /* CTDUIKitConnectionView.h */,
-				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
-			);
-			name = Interface;
-			path = Interface/CTDUIPlugins;
 			sourceTree = "<group>";
 		};
 		4CFEF3BB1A7182790086C37B /* ExtensionPoints */ = {
@@ -1544,23 +1476,6 @@
 			productReference = 4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4CFEF3A61A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPlugins" */;
-			buildPhases = (
-				4CFEF3861A6FF89A0086C37B /* Sources */,
-				4CFEF3871A6FF89A0086C37B /* Frameworks */,
-				4CFEF3881A6FF89A0086C37B /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CTDUIPlugins;
-			productName = CTDUIPlugins;
-			productReference = 4CFEF38A1A6FF89A0086C37B /* libCTDUIPlugins.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		4CFEF3E81A72F1B70086C37B /* CTDTestHelpers */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CFEF4051A72F1B80086C37B /* Build configuration list for PBXNativeTarget "CTDTestHelpers" */;
@@ -1652,7 +1567,6 @@
 				4CEBCA0619BB564600D2B498 /* CTDApplication */,
 				4CEBCA2119BB564600D2B498 /* CTDApplicationTests */,
 				4CFEF3491A6EB63F0086C37B /* CTDUIBridge */,
-				4CFEF3891A6FF89A0086C37B /* CTDUIPlugins */,
 				4C41B78E1B155AA500B54422 /* CTDInteraction */,
 				4C41B7A51B155ABB00B54422 /* CTDInteractionTests */,
 				4CEBCA7C19BB77D200D2B498 /* CTDPresentation */,
@@ -1910,27 +1824,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C15CA361B227C6C000512C1 /* CTDUIKitConnectionView.m in Sources */,
+				4C15CA3A1B227E4C000512C1 /* CTDCoreGraphicsUtils.c in Sources */,
 				4C41B74A1B0BEC5200B54422 /* CTDUIKitColorPalette.m in Sources */,
 				4C56A99B1AA4F9220068129F /* CTDUIKitStandardViewController.m in Sources */,
+				4C15CA381B227D07000512C1 /* CTDUIKitDotSelectionIndicatorController.m in Sources */,
+				4C15CA391B227DF7000512C1 /* CAAnimation+CTDAnimationConstruction.m in Sources */,
+				4C15CA3C1B227E54000512C1 /* CALayer+CTDAnimationSupport.m in Sources */,
 				4C41B72C1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m in Sources */,
 				4CFEF37C1A6EBB250086C37B /* CTDPoint+CGConversion.m in Sources */,
 				4C41B75F1B12A84800B54422 /* CTDUIKitConnectSceneViewController.m in Sources */,
 				4C15CA311B1E8C13000512C1 /* CTDUIKitColorCell.m in Sources */,
 				4C15CA161B180415000512C1 /* CTDUIKitBridge.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4CFEF3861A6FF89A0086C37B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4C6E10551AD069C10014338E /* CTDUIKitDotSelectionIndicatorController.m in Sources */,
-				4C6E10561AD069C10014338E /* CTDUIKitConnectionView.m in Sources */,
-				4C6E10541AD069C10014338E /* CTDUIKitDotView.m in Sources */,
-				4C41B7811B15554900B54422 /* CTDCoreGraphicsUtils.c in Sources */,
-				4C6E10651AD07A050014338E /* CTDAnimationUtils.m in Sources */,
-				4C6E10671AD07A050014338E /* CAAnimation+CTDAnimationConstruction.m in Sources */,
-				4C6E10681AD07A050014338E /* CALayer+CTDAnimationSupport.m in Sources */,
+				4C15CA351B227A85000512C1 /* CTDUIKitDotView.m in Sources */,
+				4C15CA3B1B227E50000512C1 /* CTDAnimationUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2235,20 +2142,6 @@
 			};
 			name = Release;
 		};
-		4CFEF3A71A6FF89B0086C37B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		4CFEF3A81A6FF89B0086C37B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CFEF3AE1A6FFCD30086C37B /* CTDUIPlugins.xcconfig */;
-			buildSettings = {
-			};
-			name = Release;
-		};
 		4CFEF4061A72F1B80086C37B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */;
@@ -2393,15 +2286,6 @@
 			buildConfigurations = (
 				4CFEF3671A6EB6400086C37B /* Debug */,
 				4CFEF3681A6EB6400086C37B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		4CFEF3A61A6FF89B0086C37B /* Build configuration list for PBXNativeTarget "CTDUIPlugins" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4CFEF3A71A6FF89B0086C37B /* Debug */,
-				4CFEF3A81A6FF89B0086C37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
