@@ -18,36 +18,9 @@ static CGColorRef kSelectionIndicatorColor;
 static CGFloat const kSelectionIndicatorThickness = 3.0;
 static CGFloat const kSelectionIndicatorPadding = 12.0;
 static CGFloat const kSelectionAnimationDuration = (CGFloat)0.12;  // seconds
+
+static NSString* const kDotLayerName = @"Dot";
 static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
-
-
-
-@interface CTDUIKitDotViewSelectionIndicatorFactory : NSObject
-@end
-@implementation CTDUIKitDotViewSelectionIndicatorFactory
-
-// make into a plain function?
-+ (CAShapeLayer*)indicatorLayerWithSize:(CGSize)layerSize
-{
-    CAShapeLayer* indicatorLayer = [CAShapeLayer layer];
-    indicatorLayer.name = kSelectionIndicatorLayerName;
-    indicatorLayer.lineWidth = kSelectionIndicatorThickness;  // config.selectionIndicatorThickness
-    indicatorLayer.strokeColor = kSelectionIndicatorColor;  // config.selectionIndicatorColor
-    indicatorLayer.fillColor = nil;
-    indicatorLayer.opaque = NO;
-    indicatorLayer.hidden = YES;
-    indicatorLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
-
-    UIBezierPath* indicatorPath =
-        [UIBezierPath bezierPathWithOvalInRect:indicatorLayer.bounds];
-    ctdPerformWithCopyOfPath(indicatorPath.CGPath, ^(CGPathRef path) {
-        indicatorLayer.path = path;
-    });
-
-    return indicatorLayer;
-}
-
-@end
 
 
 
@@ -55,8 +28,7 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 @implementation CTDUIKitDotView
 {
     CTDUIKitColorPalette* _colorPalette;
-    // Copy of parent's layer property, cast to the correct type (for convenience).
-    __unsafe_unretained CAShapeLayer* _dotLayer;
+    CAShapeLayer* _dotLayer;
     CAShapeLayer* _selectionIndicatorLayer;
 }
 
@@ -72,9 +44,39 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
     }
 }
 
-+ (Class)layerClass
++ (CAShapeLayer*)dotLayerWithSize:(CGSize)layerSize
+                            color:(CGColorRef)dotColor
 {
-    return [CAShapeLayer class];
+    CAShapeLayer* newLayer = [CAShapeLayer layer];
+    newLayer.name = kDotLayerName;
+    newLayer.lineWidth = 0;
+    newLayer.fillColor = dotColor;
+    newLayer.strokeColor = nil;
+    newLayer.opaque = NO;
+    newLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
+
+    CGPathRef dotPath = CGPathCreateWithEllipseInRect(newLayer.bounds, NULL);
+    newLayer.path = dotPath;
+    CGPathRelease(dotPath);
+
+    return newLayer;
+}
+
++ (CAShapeLayer*)indicatorLayerWithSize:(CGSize)layerSize
+{
+    CAShapeLayer* newLayer = [CAShapeLayer layer];
+    newLayer.name = kSelectionIndicatorLayerName;
+    newLayer.lineWidth = kSelectionIndicatorThickness;  // config.selectionIndicatorThickness
+    newLayer.strokeColor = kSelectionIndicatorColor;  // config.selectionIndicatorColor
+    newLayer.fillColor = nil;
+    newLayer.opaque = NO;
+    newLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
+
+    CGPathRef indicatorPath = CGPathCreateWithEllipseInRect(newLayer.bounds, NULL);
+    newLayer.path = indicatorPath;
+    CGPathRelease(indicatorPath);
+
+    return newLayer;
 }
 
 - (id)initWithFrame:(CGRect)frameRect
@@ -85,21 +87,21 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
     if (self) {
         _colorPalette = colorPalette;
 
-        _dotLayer = (CAShapeLayer*)self.layer;
-        _dotLayer.lineWidth = 0;
-        _dotLayer.opaque = NO;
-        _dotLayer.fillColor = [colorPalette[dotColor] CGColor];
+        CGSize dotSize = CGRectInset(frameRect,
+                                     kSelectionIndicatorPadding,
+                                     kSelectionIndicatorPadding).size;
 
-        CGPathRef dotPath = CGPathCreateWithEllipseInRect(_dotLayer.bounds, NULL);
-        _dotLayer.path = dotPath;
-        CGPathRelease(dotPath);
+        _dotLayer = [[self class] dotLayerWithSize:dotSize
+                                             color:[colorPalette[dotColor] CGColor]];
+        [self.layer addSublayer:_dotLayer];
+        _dotLayer.position = ctdCGRectCenter(self.layer.bounds);
 
         CGFloat const padding = kSelectionIndicatorPadding;
         CGSize selectionIndicatorSize = ctdCGSizeAdd(_dotLayer.bounds.size,
                                                      padding * 2.0, padding * 2.0);
 
-        _selectionIndicatorLayer = [CTDUIKitDotViewSelectionIndicatorFactory
-                                    indicatorLayerWithSize:selectionIndicatorSize];
+        _selectionIndicatorLayer = [[self class] indicatorLayerWithSize:selectionIndicatorSize];
+        _selectionIndicatorLayer.hidden = YES;
         [_dotLayer addSublayer:_selectionIndicatorLayer];
         _selectionIndicatorLayer.position = ctdCGRectCenter(_dotLayer.bounds);
 
@@ -175,10 +177,9 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
 {
-    CGPoint localPoint = [self convertPoint:[touchLocation asCGPoint]
-                                   fromView:self.superview];
-    CGPathRef dotPath = _dotLayer.path;
-    return (BOOL)CGPathContainsPoint(dotPath, NULL, localPoint, false);
+    CGPoint localPoint = [_dotLayer convertPoint:[touchLocation asCGPoint]
+                                       fromLayer:self.superview.layer];
+    return (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, localPoint, false);
 }
 
 @end

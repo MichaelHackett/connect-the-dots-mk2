@@ -10,12 +10,13 @@
 
 
 
-static CGFloat const kDotDiameter = 75;
+static CGFloat const kDotDiameter = 75;  // To DrawingConfig
+static CGFloat const kSelectionIndicatorPadding = 12.0;  // TEMP: copied from DotView
 
 
 static CGRect frameForDotCenteredAt(CGPoint center)
 {
-    CGFloat radius = kDotDiameter / (CGFloat)2.0;
+    CGFloat radius = kDotDiameter / (CGFloat)2.0 + kSelectionIndicatorPadding;
     CGFloat left = center.x - radius;
     CGFloat top = center.y - radius;
     return CGRectMake(left, top, kDotDiameter, kDotDiameter);
