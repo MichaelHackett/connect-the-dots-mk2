@@ -4,10 +4,8 @@
 
 #import "CTDAnimationUtils.h"
 #import "CTDCoreGraphicsUtils.h"
-#import "CTDPoint+CGConversion.h"
 #import "CTDUIKitAnimator.h"
 #import "CTDUIKitColorPalette.h"
-#import "CTDUtility/CTDPoint.h"
 #import <QuartzCore/CAShapeLayer.h>
 
 
@@ -27,7 +25,6 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 
 @implementation CTDUIKitDotView
 {
-    CTDUIKitColorPalette* _colorPalette;
     CAShapeLayer* _dotLayer;
     CAShapeLayer* _selectionIndicatorLayer;
 }
@@ -80,19 +77,15 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 }
 
 - (id)initWithFrame:(CGRect)frameRect
-           dotColor:(CTDPaletteColorLabel)dotColor
-       colorPalette:(CTDUIKitColorPalette*)colorPalette
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        _colorPalette = colorPalette;
-
         CGSize dotSize = CGRectInset(frameRect,
                                      kSelectionIndicatorPadding,
                                      kSelectionIndicatorPadding).size;
 
         _dotLayer = [[self class] dotLayerWithSize:dotSize
-                                             color:[colorPalette[dotColor] CGColor]];
+                                             color:[[UIColor whiteColor] CGColor]];
         [self.layer addSublayer:_dotLayer];
         _dotLayer.position = ctdCGRectCenter(self.layer.bounds);
 
@@ -110,74 +103,71 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+
+
+
+#pragma mark Property accessors
+
+
+- (UIColor*)dotColor
 {
-    return [self initWithFrame:frame
-                      dotColor:@""
-                  colorPalette:[[CTDUIKitColorPalette alloc] init]];
+    return [UIColor colorWithCGColor:_dotLayer.fillColor];
 }
 
-
-
-
-#pragma mark CTDDotRenderer protocol
-
-
-//- (void)discardView
-//{
-//    [self removeFromSuperview];
-//}
-
-- (CTDPoint*)connectionPoint
+- (void)setDotColor:(UIColor*)dotColor
 {
-    return [CTDPoint fromCGPoint:ctdCGRectCenter(self.frame)];
+    _dotLayer.fillColor = dotColor.CGColor;
 }
 
-- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
+- (BOOL)selectionIndicatorIsVisible
 {
-    _dotLayer.fillColor = [_colorPalette[newDotColor] CGColor];
+    return !_selectionIndicatorLayer.hidden;
 }
 
-- (void)showSelectionIndicator
+- (void)setSelectionIndicatorIsVisible:(BOOL)visible
 {
+    BOOL indicatorToBeHidden = !visible; // to make layer-state comparisons clearer
+    if (indicatorToBeHidden == _selectionIndicatorLayer.hidden) {
+        return;
+    }
+
+    CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
+                                       kSelectionIndicatorPadding - 1,
+                                       kSelectionIndicatorPadding - 1);
+    UIBezierPath* minimizedPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
+
+    CGPathRef startPath;
+    CGPathRef endPath;
+    if (indicatorToBeHidden) {
+        startPath = _selectionIndicatorLayer.path;
+        endPath = minimizedPath.CGPath;
+    } else {
+        startPath = minimizedPath.CGPath;
+        endPath = _selectionIndicatorLayer.path;
+    }
+
     withoutImplicitAnimationDo(^{
-        CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
-                                           kSelectionIndicatorPadding - 1,
-                                           kSelectionIndicatorPadding - 1);
-        UIBezierPath* startPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
-
         [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
-                           fromStartingPath:startPath.CGPath
-                               toEndingPath:_selectionIndicatorLayer.path
+                           fromStartingPath:startPath
+                               toEndingPath:endPath
                                 forDuration:kSelectionAnimationDuration];
-        _selectionIndicatorLayer.hidden = NO;
+        _selectionIndicatorLayer.hidden = indicatorToBeHidden;
     });
 }
 
-- (void)hideSelectionIndicator
+- (CGPoint)connectionPoint
 {
-    withoutImplicitAnimationDo(^{
-        CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
-                                           kSelectionIndicatorPadding - 1,
-                                           kSelectionIndicatorPadding - 1);
-        UIBezierPath* endPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
-
-        [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
-                           fromStartingPath:_selectionIndicatorLayer.path
-                               toEndingPath:endPath.CGPath
-                                forDuration:kSelectionAnimationDuration];
-        _selectionIndicatorLayer.hidden = YES;
-    });
+    return ctdCGRectCenter(self.frame);
 }
 
 
 
-#pragma mark CTDTouchable protocol
+#pragma mark Touch support
 
 
-- (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
+- (BOOL)containsTouchLocation:(CGPoint)touchLocation
 {
-    CGPoint localPoint = [_dotLayer convertPoint:[touchLocation asCGPoint]
+    CGPoint localPoint = [_dotLayer convertPoint:touchLocation
                                        fromLayer:self.superview.layer];
     return (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, localPoint, false);
 }

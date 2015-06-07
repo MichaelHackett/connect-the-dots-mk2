@@ -4,17 +4,14 @@
 //
 // Copyright 2013-5 Michael Hackett. All rights reserved.
 
-#import "CTDInteraction/ExtensionPoints/CTDTouchable.h"
-#import "CTDPresentation/CTDDotRenderer.h"
-
-@class CTDUIKitColorPalette;
 
 
+@interface CTDUIKitDotView : UIView
 
-@interface CTDUIKitDotView : UIView <CTDDotRenderer, CTDTouchable>
+@property (strong, nonatomic) UIColor* dotColor;
+@property (assign, nonatomic) BOOL selectionIndicatorIsVisible;
+@property (assign, nonatomic, readonly) CGPoint connectionPoint;
 
-- (id)initWithFrame:(CGRect)frameRect
-           dotColor:(CTDPaletteColorLabel)dotColor
-       colorPalette:(CTDUIKitColorPalette*)colorPalette;
+- (BOOL)containsTouchLocation:(CGPoint)touchLocation;
 
 @end

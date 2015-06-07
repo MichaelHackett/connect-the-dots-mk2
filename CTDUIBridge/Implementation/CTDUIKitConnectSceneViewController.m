@@ -5,6 +5,7 @@
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitConnectionView.h"
 #import "CTDUIKitDotView.h"
+#import "CTDUIKitDotViewAdapter.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -70,12 +71,16 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     CGPoint cgCenterPosition = CGPointMake(centerPosition.x, centerPosition.y);
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
-         initWithFrame:frameForDotCenteredAt(cgCenterPosition)
-         dotColor:dotColor
-         colorPalette:self.colorPalette];
+         initWithFrame:frameForDotCenteredAt(cgCenterPosition)];
     [self.view addSubview:newDotView];
     [_dotViews addObject:newDotView];
-    return newDotView;
+
+    id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
+        [[CTDUIKitDotViewAdapter alloc] initWithDotView:newDotView
+                                           colorPalette:self.colorPalette];
+    [dotViewAdapter changeDotColorTo:dotColor];
+
+    return dotViewAdapter;
 }
 
 - (id<CTDDotConnectionRenderer>)
