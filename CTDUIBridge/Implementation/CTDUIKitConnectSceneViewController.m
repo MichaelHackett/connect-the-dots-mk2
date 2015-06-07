@@ -29,7 +29,6 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 
 @implementation CTDUIKitConnectSceneViewController
 {
-    NSMutableArray* _dotViews;
     NSMutableDictionary* _colorCellMap;
 }
 
@@ -46,7 +45,6 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _dotViews = [[NSMutableArray alloc] init];
 }
 
 //- (void)didReceiveMemoryWarning
@@ -73,7 +71,6 @@ static CGRect frameForDotCenteredAt(CGPoint center)
         [[CTDUIKitDotView alloc]
          initWithFrame:frameForDotCenteredAt(cgCenterPosition)];
     [self.view addSubview:newDotView];
-    [_dotViews addObject:newDotView];
 
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
         [[CTDUIKitDotViewAdapter alloc] initWithDotView:newDotView
