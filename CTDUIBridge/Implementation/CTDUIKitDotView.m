@@ -2,27 +2,75 @@
 
 #import "CTDUIKitDotView.h"
 
+#import "CTDAnimationUtils.h"
 #import "CTDCoreGraphicsUtils.h"
 #import "CTDPoint+CGConversion.h"
+#import "CTDUIKitAnimator.h"
 #import "CTDUIKitColorPalette.h"
-#import "CTDUIKitDotSelectionIndicatorController.h"
 #import "CTDUtility/CTDPoint.h"
 #import <QuartzCore/CAShapeLayer.h>
+
+
+// TODO: Move to CTDUIKitDrawingConfig
+
+// Dot selection ring display parameters:
+static CGColorRef kSelectionIndicatorColor;
+static CGFloat const kSelectionIndicatorThickness = 3.0;
+static CGFloat const kSelectionIndicatorPadding = 12.0;
+static CGFloat const kSelectionAnimationDuration = (CGFloat)0.12;  // seconds
+static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
+
+
+
+@interface CTDUIKitDotViewSelectionIndicatorFactory : NSObject
+@end
+@implementation CTDUIKitDotViewSelectionIndicatorFactory
+
+// make into a plain function?
++ (CAShapeLayer*)indicatorLayerWithSize:(CGSize)layerSize
+{
+    CAShapeLayer* indicatorLayer = [CAShapeLayer layer];
+    indicatorLayer.name = kSelectionIndicatorLayerName;
+    indicatorLayer.lineWidth = kSelectionIndicatorThickness;  // config.selectionIndicatorThickness
+    indicatorLayer.strokeColor = kSelectionIndicatorColor;  // config.selectionIndicatorColor
+    indicatorLayer.fillColor = nil;
+    indicatorLayer.opaque = NO;
+    indicatorLayer.hidden = YES;
+    indicatorLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
+
+    UIBezierPath* indicatorPath =
+        [UIBezierPath bezierPathWithOvalInRect:indicatorLayer.bounds];
+    ctdPerformWithCopyOfPath(indicatorPath.CGPath, ^(CGPathRef path) {
+        indicatorLayer.path = path;
+    });
+
+    return indicatorLayer;
+}
+
+@end
+
 
 
 
 @implementation CTDUIKitDotView
 {
-    CTDUIKitDotSelectionIndicatorController* _selectionIndicatorController;
     CTDUIKitColorPalette* _colorPalette;
     // Copy of parent's layer property, cast to the correct type (for convenience).
     __unsafe_unretained CAShapeLayer* _dotLayer;
+    CAShapeLayer* _selectionIndicatorLayer;
 }
 
 
 
 #pragma mark Initialization
 
+
++ (void)initialize
+{
+    if (self == [CTDUIKitDotView class]) {
+        kSelectionIndicatorColor = [[UIColor purpleColor] CGColor];  // should come from DrawingConfig
+    }
+}
 
 + (Class)layerClass
 {
@@ -35,20 +83,25 @@
 {
     self = [super initWithFrame:frameRect];
     if (self) {
+        _colorPalette = colorPalette;
+
         _dotLayer = (CAShapeLayer*)self.layer;
         _dotLayer.lineWidth = 0;
         _dotLayer.opaque = NO;
         _dotLayer.fillColor = [colorPalette[dotColor] CGColor];
 
-        CGPathRef dotPath = CGPathCreateWithEllipseInRect(self.bounds, NULL);
+        CGPathRef dotPath = CGPathCreateWithEllipseInRect(_dotLayer.bounds, NULL);
         _dotLayer.path = dotPath;
         CGPathRelease(dotPath);
 
-        _selectionIndicatorController =
-            [[CTDUIKitDotSelectionIndicatorController alloc] init];
-        [_selectionIndicatorController attachIndicatorToLayer:_dotLayer];
+        CGFloat const padding = kSelectionIndicatorPadding;
+        CGSize selectionIndicatorSize = ctdCGSizeAdd(_dotLayer.bounds.size,
+                                                     padding * 2.0, padding * 2.0);
 
-        _colorPalette = colorPalette;
+        _selectionIndicatorLayer = [CTDUIKitDotViewSelectionIndicatorFactory
+                                    indicatorLayerWithSize:selectionIndicatorSize];
+        [_dotLayer addSublayer:_selectionIndicatorLayer];
+        _selectionIndicatorLayer.position = ctdCGRectCenter(_dotLayer.bounds);
 
         [_dotLayer setNeedsDisplay];
     }
@@ -85,12 +138,34 @@
 
 - (void)showSelectionIndicator
 {
-    [_selectionIndicatorController showIndicator];
+    withoutImplicitAnimationDo(^{
+        CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
+                                           kSelectionIndicatorPadding - 1,
+                                           kSelectionIndicatorPadding - 1);
+        UIBezierPath* startPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
+
+        [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
+                           fromStartingPath:startPath.CGPath
+                               toEndingPath:_selectionIndicatorLayer.path
+                                forDuration:kSelectionAnimationDuration];
+        _selectionIndicatorLayer.hidden = NO;
+    });
 }
 
 - (void)hideSelectionIndicator
 {
-    [_selectionIndicatorController hideIndicator];
+    withoutImplicitAnimationDo(^{
+        CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
+                                           kSelectionIndicatorPadding - 1,
+                                           kSelectionIndicatorPadding - 1);
+        UIBezierPath* endPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
+
+        [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
+                           fromStartingPath:_selectionIndicatorLayer.path
+                               toEndingPath:endPath.CGPath
+                                forDuration:kSelectionAnimationDuration];
+        _selectionIndicatorLayer.hidden = YES;
+    });
 }
 
 
