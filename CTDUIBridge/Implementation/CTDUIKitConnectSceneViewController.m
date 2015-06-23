@@ -12,8 +12,10 @@
 
 
 
-static CGFloat const kDotDiameter = 75;  // To DrawingConfig
-static CGFloat const kSelectionIndicatorPadding = 12.0;  // TEMP: copied from DotView
+static CGFloat const kDotDiameter = 65;  // To DrawingConfig
+static UIColor* kSelectionIndicatorColor;  // set by +initialize
+static CGFloat const kSelectionIndicatorThickness = 3.0;
+static CGFloat const kSelectionIndicatorPadding = 15.0;
 
 
 static CGRect frameForDotCenteredAt(CGPoint center)
@@ -21,7 +23,7 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     CGFloat radius = kDotDiameter / (CGFloat)2.0 + kSelectionIndicatorPadding;
     CGFloat left = center.x - radius;
     CGFloat top = center.y - radius;
-    return CGRectMake(left, top, kDotDiameter, kDotDiameter);
+    return CGRectMake(left, top, radius * 2, radius * 2);
 }
 
 
@@ -31,6 +33,13 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 @implementation CTDUIKitConnectSceneViewController
 {
     NSMutableDictionary* _colorCellMap;
+}
+
++ (void)initialize
+{
+    if (self == [CTDUIKitConnectSceneViewController class]) {
+        kSelectionIndicatorColor = [UIColor purpleColor];  // should come from DrawingConfig
+    }
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -70,6 +79,9 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
          initWithFrame:frameForDotCenteredAt([centerPosition asCGPoint])];
+    newDotView.dotScale = kDotDiameter / newDotView.frame.size.height;
+    newDotView.selectionIndicatorColor = kSelectionIndicatorColor;
+    newDotView.selectionIndicatorThickness = kSelectionIndicatorThickness;
     [self.view addSubview:newDotView];
 
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =

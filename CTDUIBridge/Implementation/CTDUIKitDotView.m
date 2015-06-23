@@ -9,16 +9,9 @@
 #import <QuartzCore/CAShapeLayer.h>
 
 
-// TODO: Move to CTDUIKitDrawingConfig
-
-// Dot selection ring display parameters:
-static CGColorRef kSelectionIndicatorColor;
-static CGFloat const kSelectionIndicatorThickness = 3.0;
-static CGFloat const kSelectionIndicatorPadding = 12.0;
-static CGFloat const kSelectionAnimationDuration = (CGFloat)0.12;  // seconds
-
-static NSString* const kDotLayerName = @"Dot";
-static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
+// Additional default display parameters (see layer factory methods for others):
+static CGFloat const kDefaultDotScale = 0.5;
+static CGFloat const kDefaultSelectionAnimationDuration = (CGFloat)0.12;
 
 
 
@@ -34,20 +27,21 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 #pragma mark Initialization
 
 
-+ (void)initialize
-{
-    if (self == [CTDUIKitDotView class]) {
-        kSelectionIndicatorColor = [[UIColor purpleColor] CGColor];  // should come from DrawingConfig
-    }
-}
+// These factory methods define the default states for each of the elements of
+// the view. The configuration steps serve the same purpose as constant
+// declarations (since the values are never used outside of this method), so
+// there is no real value in making separate definitions above.
+//
+// It is possible to override these in subclasses (the initializer will call
+// the version of the actual class being instantiated), if necessary to achieve
+// some effect, however, they are not currently exposed as public methods.
 
 + (CAShapeLayer*)dotLayerWithSize:(CGSize)layerSize
-                            color:(CGColorRef)dotColor
 {
     CAShapeLayer* newLayer = [CAShapeLayer layer];
-    newLayer.name = kDotLayerName;
+    newLayer.name = @"Dot";
     newLayer.lineWidth = 0;
-    newLayer.fillColor = dotColor;
+    newLayer.fillColor = [[UIColor whiteColor] CGColor]; //dotColor;
     newLayer.strokeColor = nil;
     newLayer.opaque = NO;
     newLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
@@ -62,9 +56,9 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 + (CAShapeLayer*)indicatorLayerWithSize:(CGSize)layerSize
 {
     CAShapeLayer* newLayer = [CAShapeLayer layer];
-    newLayer.name = kSelectionIndicatorLayerName;
-    newLayer.lineWidth = kSelectionIndicatorThickness;  // config.selectionIndicatorThickness
-    newLayer.strokeColor = kSelectionIndicatorColor;  // config.selectionIndicatorColor
+    newLayer.name = @"Selection indicator";
+    newLayer.lineWidth = 1.0;
+    newLayer.strokeColor = [[UIColor whiteColor] CGColor];
     newLayer.fillColor = nil;
     newLayer.opaque = NO;
     newLayer.bounds = ctdCGRectMake(CGPointZero, layerSize);
@@ -80,25 +74,18 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        CGSize dotSize = CGRectInset(frameRect,
-                                     kSelectionIndicatorPadding,
-                                     kSelectionIndicatorPadding).size;
+        _selectionAnimationDuration = kDefaultSelectionAnimationDuration;
 
-        _dotLayer = [[self class] dotLayerWithSize:dotSize
-                                             color:[[UIColor whiteColor] CGColor]];
+        CGSize dotSize = CGSizeMake(frameRect.size.width * kDefaultDotScale,
+                                    frameRect.size.height * kDefaultDotScale);
+        _dotLayer = [[self class] dotLayerWithSize:dotSize];
         [self.layer addSublayer:_dotLayer];
         _dotLayer.position = ctdCGRectCenter(self.layer.bounds);
 
-        CGFloat const padding = kSelectionIndicatorPadding;
-        CGSize selectionIndicatorSize = ctdCGSizeAdd(_dotLayer.bounds.size,
-                                                     padding * 2.0, padding * 2.0);
-
-        _selectionIndicatorLayer = [[self class] indicatorLayerWithSize:selectionIndicatorSize];
+        _selectionIndicatorLayer = [[self class] indicatorLayerWithSize:frameRect.size];
         _selectionIndicatorLayer.hidden = YES;
-        [_dotLayer addSublayer:_selectionIndicatorLayer];
-        _selectionIndicatorLayer.position = ctdCGRectCenter(_dotLayer.bounds);
-
-        [_dotLayer setNeedsDisplay];
+        [self.layer addSublayer:_selectionIndicatorLayer];
+        _selectionIndicatorLayer.position = ctdCGRectCenter(self.layer.bounds);
     }
     return self;
 }
@@ -119,6 +106,45 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
     _dotLayer.fillColor = dotColor.CGColor;
 }
 
+- (CGFloat)dotScale
+{
+    return _dotLayer.frame.size.height / self.layer.bounds.size.height;
+}
+
+- (void)setDotScale:(CGFloat)dotScale
+{
+    CGRect dotBounds = _dotLayer.bounds;
+    dotBounds.size.width = self.bounds.size.width * dotScale;
+    dotBounds.size.height = self.bounds.size.height * dotScale;
+    _dotLayer.bounds = dotBounds;
+
+    CGPathRef dotPath = CGPathCreateWithEllipseInRect(dotBounds, NULL);
+    _dotLayer.path = dotPath;
+    CGPathRelease(dotPath);
+}
+
+// TODO: Watch View's frame (or its layer's frame) and adjust dot layer size, path, and selection indicator path
+
+- (UIColor*)selectionIndicatorColor
+{
+    return [UIColor colorWithCGColor:_selectionIndicatorLayer.strokeColor];
+}
+
+- (void)setSelectionIndicatorColor:(UIColor*)selectionIndicatorColor
+{
+    _selectionIndicatorLayer.strokeColor = [selectionIndicatorColor CGColor];
+}
+
+- (CGFloat)selectionIndicatorThickness
+{
+    return _selectionIndicatorLayer.lineWidth;
+}
+
+- (void)setSelectionIndicatorThickness:(CGFloat)selectionIndicatorThickness
+{
+    _selectionIndicatorLayer.lineWidth = selectionIndicatorThickness;
+}
+
 - (BOOL)selectionIndicatorIsVisible
 {
     return !_selectionIndicatorLayer.hidden;
@@ -131,9 +157,8 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
         return;
     }
 
-    CGRect minimizedRect = CGRectInset(_selectionIndicatorLayer.bounds,
-                                       kSelectionIndicatorPadding - 1,
-                                       kSelectionIndicatorPadding - 1);
+    CGRect dotRect = [_selectionIndicatorLayer convertRect:_dotLayer.bounds fromLayer:_dotLayer];
+    CGRect minimizedRect = CGRectInset(dotRect, -1, -1);
     UIBezierPath* minimizedPath = [UIBezierPath bezierPathWithOvalInRect:minimizedRect];
 
     CGPathRef startPath;
@@ -150,7 +175,7 @@ static NSString* const kSelectionIndicatorLayerName = @"Selection indicator";
         [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
                            fromStartingPath:startPath
                                toEndingPath:endPath
-                                forDuration:kSelectionAnimationDuration];
+                                forDuration:self.selectionAnimationDuration];
         _selectionIndicatorLayer.hidden = indicatorToBeHidden;
     });
 }
