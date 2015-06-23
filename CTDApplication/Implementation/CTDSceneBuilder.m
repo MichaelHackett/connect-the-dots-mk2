@@ -58,6 +58,11 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 - (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
 {
     // VC properties that must be set before `viewDidLoad` runs (BAD!)
+    connectVC.dotDiameter = _drawingConfig.dotDiameter;
+    connectVC.dotSelectionIndicatorColor = _drawingConfig.dotSelectionIndicatorColor;
+    connectVC.dotSelectionIndicatorThickness = _drawingConfig.dotSelectionIndicatorThickness;
+    connectVC.dotSelectionIndicatorPadding = _drawingConfig.dotSelectionIndicatorPadding;
+    connectVC.dotSelectionAnimationDuration = _drawingConfig.dotSelectionAnimationDuration;
     connectVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
     connectVC.connectionLineColor = _drawingConfig.connectionLineColor;
     connectVC.colorPalette = _drawingConfig.colorPalette;

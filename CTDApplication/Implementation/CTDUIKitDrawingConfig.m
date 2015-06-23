@@ -15,6 +15,11 @@
     if (self) {
         // TODO: Load these values from a plist or XML file.
         //
+        _dotDiameter = 65.0;
+        _dotSelectionIndicatorColor = [UIColor purpleColor];
+        _dotSelectionIndicatorThickness = 3.0;
+        _dotSelectionIndicatorPadding = 15.0;
+        _dotSelectionAnimationDuration = (CGFloat)0.12;
         _connectionLineWidth = 5.0;
         _connectionLineColor = [UIColor yellowColor];
         _colorPalette = [[CTDUIKitColorPalette alloc] initWithColorMap:@{
@@ -53,7 +58,12 @@
     if (object == self) { return YES; }
     if (object && [object isMemberOfClass:[CTDUIKitDrawingConfig class]]) {
         CTDUIKitDrawingConfig* other = (CTDUIKitDrawingConfig*)object;
-        return (self.connectionLineWidth == other.connectionLineWidth) &&
+        return (self.dotDiameter == other.dotDiameter) &&
+               [self.dotSelectionIndicatorColor isEqual:other.dotSelectionIndicatorColor] &&
+               (self.dotSelectionIndicatorThickness == other.dotSelectionIndicatorThickness) &&
+               (self.dotSelectionIndicatorPadding == other.dotSelectionIndicatorPadding) &&
+               (self.dotSelectionAnimationDuration == other.dotSelectionAnimationDuration) &&
+               (self.connectionLineWidth == other.connectionLineWidth) &&
                [self.connectionLineColor isEqual:other.connectionLineColor] &&
                [self.colorPalette isEqual:other.colorPalette];
     }
@@ -66,9 +76,15 @@
     // for the double values. (Could convert directly to bits to be faster, but
     // this may never be used so not worrying about speed for now.)
     static const NSUInteger prime = 31;
-    NSUInteger hash = ((17 * prime + [@(self.connectionLineWidth) hash]) * prime
-                       + [self.connectionLineColor hash]) * prime
-                      + [self.colorPalette hash];
+    NSUInteger hash = 17;
+    hash = hash * prime + [@(self.dotDiameter) hash];
+    hash = hash * prime + [self.dotSelectionIndicatorColor hash];
+    hash = hash * prime + [@(self.dotSelectionIndicatorThickness) hash];
+    hash = hash * prime + [@(self.dotSelectionIndicatorPadding) hash];
+    hash = hash * prime + [@(self.dotSelectionAnimationDuration) hash];
+    hash = hash * prime + [@(self.connectionLineWidth) hash];
+    hash = hash * prime + [self.connectionLineColor hash];
+    hash = hash * prime + [self.colorPalette hash];
     return hash;
 }
 

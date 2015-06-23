@@ -15,8 +15,15 @@
 
 // VC configuration (must be set before the container view is loaded, and
 // changes made after view is loaded may have strange or no effects) --- fix?
+@property (assign, nonatomic) CGFloat dotDiameter; // in pixels
+@property (copy, nonatomic) UIColor* dotSelectionIndicatorColor;
+@property (assign, nonatomic) CGFloat dotSelectionIndicatorThickness;
+@property (assign, nonatomic) CGFloat dotSelectionIndicatorPadding;
+@property (assign, nonatomic) CGFloat dotSelectionAnimationDuration; // seconds
+
 @property (assign, nonatomic) float connectionLineWidth;
 @property (copy, nonatomic) UIColor* connectionLineColor;
+
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
 
 // IB Outlets

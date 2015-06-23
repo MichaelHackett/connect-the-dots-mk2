@@ -9,8 +9,15 @@
 
 @interface CTDUIKitDrawingConfig : NSObject <NSCopying>
 
+@property (assign, readonly, nonatomic) CGFloat dotDiameter; // in pixels
+@property (copy, readonly, nonatomic) UIColor* dotSelectionIndicatorColor;
+@property (assign, readonly, nonatomic) CGFloat dotSelectionIndicatorThickness;
+@property (assign, readonly, nonatomic) CGFloat dotSelectionIndicatorPadding;
+@property (assign, readonly, nonatomic) CGFloat dotSelectionAnimationDuration; // seconds
+
 @property (assign, readonly, nonatomic) float connectionLineWidth;
-@property (strong, readonly, nonatomic) UIColor* connectionLineColor;
+@property (copy, readonly, nonatomic) UIColor* connectionLineColor;
+
 @property (strong, readonly, nonatomic) CTDUIKitColorPalette* colorPalette;
 
 @end

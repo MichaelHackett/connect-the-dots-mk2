@@ -12,34 +12,10 @@
 
 
 
-static CGFloat const kDotDiameter = 65;  // To DrawingConfig
-static UIColor* kSelectionIndicatorColor;  // set by +initialize
-static CGFloat const kSelectionIndicatorThickness = 3.0;
-static CGFloat const kSelectionIndicatorPadding = 15.0;
-
-
-static CGRect frameForDotCenteredAt(CGPoint center)
-{
-    CGFloat radius = kDotDiameter / (CGFloat)2.0 + kSelectionIndicatorPadding;
-    CGFloat left = center.x - radius;
-    CGFloat top = center.y - radius;
-    return CGRectMake(left, top, radius * 2, radius * 2);
-}
-
-
-
-
 
 @implementation CTDUIKitConnectSceneViewController
 {
     NSMutableDictionary* _colorCellMap;
-}
-
-+ (void)initialize
-{
-    if (self == [CTDUIKitConnectSceneViewController class]) {
-        kSelectionIndicatorColor = [UIColor purpleColor];  // should come from DrawingConfig
-    }
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -78,10 +54,11 @@ static CGRect frameForDotCenteredAt(CGPoint center)
 {
     CTDUIKitDotView* newDotView =
         [[CTDUIKitDotView alloc]
-         initWithFrame:frameForDotCenteredAt([centerPosition asCGPoint])];
-    newDotView.dotScale = kDotDiameter / newDotView.frame.size.height;
-    newDotView.selectionIndicatorColor = kSelectionIndicatorColor;
-    newDotView.selectionIndicatorThickness = kSelectionIndicatorThickness;
+         initWithFrame:[self csvc_frameForDotCenteredAt:[centerPosition asCGPoint]]];
+    newDotView.dotScale = self.dotDiameter / newDotView.frame.size.height;
+    newDotView.selectionIndicatorColor = self.dotSelectionIndicatorColor;
+    newDotView.selectionIndicatorThickness = self.dotSelectionIndicatorThickness;
+    newDotView.selectionAnimationDuration = self.dotSelectionAnimationDuration;
     [self.view addSubview:newDotView];
 
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
@@ -104,6 +81,19 @@ static CGRect frameForDotCenteredAt(CGPoint center)
     [connectionView setSecondEndpointPosition:secondEndpointPosition];
     [self.view addSubview:connectionView];
     return connectionView;
+}
+
+
+
+#pragma mark Private methods
+
+
+- (CGRect)csvc_frameForDotCenteredAt:(CGPoint)center
+{
+    CGFloat radius = self.dotDiameter / (CGFloat)2.0 + self.dotSelectionIndicatorPadding;
+    CGFloat left = center.x - radius;
+    CGFloat top = center.y - radius;
+    return CGRectMake(left, top, radius * 2, radius * 2);
 }
 
 @end
