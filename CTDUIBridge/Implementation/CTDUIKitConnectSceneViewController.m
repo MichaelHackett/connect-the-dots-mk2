@@ -73,10 +73,10 @@
       newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                              secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    CTDUIKitConnectionView* connectionView =
-        [[CTDUIKitConnectionView alloc]
-         initWithLineWidth:self.connectionLineWidth
-                 lineColor:self.connectionLineColor];
+    CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
+                                              initWithFrame:CGRectZero];
+    connectionView.lineWidth = self.connectionLineWidth;
+    connectionView.lineColor = self.connectionLineColor;
     [connectionView setFirstEndpointPosition:firstEndpointPosition];
     [connectionView setSecondEndpointPosition:secondEndpointPosition];
     [self.view addSubview:connectionView];

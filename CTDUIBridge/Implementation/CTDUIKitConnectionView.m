@@ -7,12 +7,15 @@
 
 
 
+static CGFloat kDefaultLineWidth = 1.0;
+
+
+
 
 @implementation CTDUIKitConnectionView
 {
     CGPoint _firstEndpoint;
     CGPoint _secondEndpoint;
-    UIColor* _lineColor;
     // Copy of parent's layer property, cast to the correct type (for convenience).
     __unsafe_unretained CAShapeLayer* _lineLayer;
 }
@@ -24,18 +27,17 @@
 
 // layer's anchor point is (0,1)? (top-left)
 
-- (instancetype)initWithLineWidth:(CGFloat)lineWidth
-                        lineColor:(UIColor*)lineColor
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectZero];
+    self = [super initWithFrame:frame];
     if (self) {
         _firstEndpoint = CGPointZero;
         _secondEndpoint = CGPointZero;
-        _lineColor = [lineColor copy];  // need to retain UIColor while using its CGColor field
+        _lineColor = [UIColor whiteColor];
         _lineLayer = (CAShapeLayer*)self.layer;
 //        _lineLayer.anchorPoint = CGPointMake(0.0, 0.0);
         _lineLayer.lineCap = kCALineCapRound;
-        _lineLayer.lineWidth = lineWidth;
+        _lineLayer.lineWidth = kDefaultLineWidth;
         _lineLayer.opaque = NO;
         _lineLayer.strokeColor = [_lineColor CGColor];
     }
@@ -48,6 +50,27 @@
 - (void)willMoveToSuperview:(UIView*)newSuperview
 {
     [self setFrame:newSuperview.bounds];
+}
+
+
+
+#pragma mark Property accessors
+
+
+- (void)setLineColor:(UIColor*)lineColor
+{
+    _lineColor = [lineColor copy];
+    _lineLayer.strokeColor = [_lineColor CGColor];
+}
+
+- (CGFloat)lineWidth
+{
+    return _lineLayer.lineWidth;
+}
+
+- (void)setLineWidth:(CGFloat)lineWidth
+{
+    _lineLayer.lineWidth = lineWidth;
 }
 
 
