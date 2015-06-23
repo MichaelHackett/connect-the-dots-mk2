@@ -74,7 +74,7 @@
                              secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
-                                              initWithFrame:CGRectZero];
+                                              initWithFrame:self.view.bounds];
     connectionView.lineWidth = self.connectionLineWidth;
     connectionView.lineColor = self.connectionLineColor;
     [connectionView setFirstEndpointPosition:firstEndpointPosition];

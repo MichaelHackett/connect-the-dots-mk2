@@ -35,21 +35,12 @@ static CGFloat kDefaultLineWidth = 1.0;
         _secondEndpoint = CGPointZero;
         _lineColor = [UIColor whiteColor];
         _lineLayer = (CAShapeLayer*)self.layer;
-//        _lineLayer.anchorPoint = CGPointMake(0.0, 0.0);
         _lineLayer.lineCap = kCALineCapRound;
         _lineLayer.lineWidth = kDefaultLineWidth;
         _lineLayer.opaque = NO;
         _lineLayer.strokeColor = [_lineColor CGColor];
     }
     return self;
-}
-
-- (id)init CTD_BLOCK_PARENT_METHOD
-
-// Automatically resize to match the parent view's bounds.
-- (void)willMoveToSuperview:(UIView*)newSuperview
-{
-    [self setFrame:newSuperview.bounds];
 }
 
 
