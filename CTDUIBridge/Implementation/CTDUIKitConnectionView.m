@@ -3,7 +3,6 @@
 #import "CTDUIKitConnectionView.h"
 
 #import "CTDCoreGraphicsUtils.h"
-#import "CTDPoint+CGConversion.h"
 
 
 
@@ -14,8 +13,6 @@ static CGFloat kDefaultLineWidth = 1.0;
 
 @implementation CTDUIKitConnectionView
 {
-    CGPoint _firstEndpoint;
-    CGPoint _secondEndpoint;
     // Copy of parent's layer property, cast to the correct type (for convenience).
     __unsafe_unretained CAShapeLayer* _lineLayer;
 }
@@ -64,26 +61,16 @@ static CGFloat kDefaultLineWidth = 1.0;
     _lineLayer.lineWidth = lineWidth;
 }
 
-
-
-#pragma mark CTDDotConnectionRenderer protocol
-
-
-- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+- (void)setFirstEndpoint:(CGPoint)firstEndpoint
 {
-    _firstEndpoint = [firstEndpointPosition asCGPoint];
+    _firstEndpoint = firstEndpoint;
     [self CTDUIKitConnectionView_refreshPath];
 }
 
-- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (void)setSecondEndpoint:(CGPoint)secondEndpoint
 {
-    _secondEndpoint = [secondEndpointPosition asCGPoint];
+    _secondEndpoint = secondEndpoint;
     [self CTDUIKitConnectionView_refreshPath];
-}
-
-- (void)invalidate
-{
-    [self removeFromSuperview];
 }
 
 

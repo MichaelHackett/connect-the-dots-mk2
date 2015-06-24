@@ -5,6 +5,7 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitConnectionView.h"
+#import "CTDUIKitConnectionViewAdaptor.h"
 #import "CTDUIKitDotView.h"
 #import "CTDUIKitDotViewAdapter.h"
 #import "CTDPresentation/CTDColorPalette.h"
@@ -77,10 +78,15 @@
                                               initWithFrame:self.view.bounds];
     connectionView.lineWidth = self.connectionLineWidth;
     connectionView.lineColor = self.connectionLineColor;
-    [connectionView setFirstEndpointPosition:firstEndpointPosition];
-    [connectionView setSecondEndpointPosition:secondEndpointPosition];
+
+    id<CTDDotConnectionRenderer> connectionViewAdapter =
+        [[CTDUIKitConnectionViewAdaptor alloc] initWithConnectionView:connectionView];
+    [connectionViewAdapter setFirstEndpointPosition:firstEndpointPosition];
+    [connectionViewAdapter setSecondEndpointPosition:secondEndpointPosition];
+
     [self.view addSubview:connectionView];
-    return connectionView;
+
+    return connectionViewAdapter;
 }
 
 
