@@ -11,7 +11,7 @@
 
 @implementation CTDUIKitDotViewAdapter
 {
-    CTDUIKitDotView* _dotView;
+    __weak CTDUIKitDotView* _dotView;
     CTDUIKitColorPalette* _colorPalette;
 }
 
@@ -37,22 +37,26 @@
 
 - (CTDPoint*)connectionPoint
 {
-    return [CTDPoint fromCGPoint:[_dotView connectionPoint]];
+    CTDUIKitDotView* strongDotView = _dotView;
+    return [CTDPoint fromCGPoint:[strongDotView connectionPoint]];
 }
 
 - (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
 {
-    _dotView.dotColor = _colorPalette[newDotColor];
+    CTDUIKitDotView* strongDotView = _dotView;
+    strongDotView.dotColor = _colorPalette[newDotColor];
 }
 
 - (void)showSelectionIndicator
 {
-    _dotView.selectionIndicatorIsVisible = YES;
+    CTDUIKitDotView* strongDotView = _dotView;
+    strongDotView.selectionIndicatorIsVisible = YES;
 }
 
 - (void)hideSelectionIndicator
 {
-    _dotView.selectionIndicatorIsVisible = NO;
+    CTDUIKitDotView* strongDotView = _dotView;
+    strongDotView.selectionIndicatorIsVisible = NO;
 }
 
 
@@ -62,7 +66,8 @@
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
 {
-    return [_dotView containsTouchLocation:[touchLocation asCGPoint]];
+    CTDUIKitDotView* strongDotView = _dotView;
+    return [strongDotView containsTouchLocation:[touchLocation asCGPoint]];
 }
 
 @end

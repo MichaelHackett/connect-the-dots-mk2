@@ -7,7 +7,7 @@
 //     change if there are other aspects that might make sense to take from
 //     the view.
 //
-//  Copyright (c) 2015 Michael Hackett. All rights reserved.
+//  Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDInteraction/ExtensionPoints/CTDTouchable.h"
 #import "CTDPresentation/CTDDotRenderer.h"
