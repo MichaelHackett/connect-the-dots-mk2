@@ -172,11 +172,11 @@ static CGFloat const kDefaultSelectionAnimationDuration = (CGFloat)0.12;
     }
 
     withoutImplicitAnimationDo(^{
-        [CTDUIKitAnimator animateShapeLayer:_selectionIndicatorLayer
+        [CTDUIKitAnimator animateShapeLayer:self->_selectionIndicatorLayer
                            fromStartingPath:startPath
                                toEndingPath:endPath
                                 forDuration:self.selectionAnimationDuration];
-        _selectionIndicatorLayer.hidden = indicatorToBeHidden;
+        self->_selectionIndicatorLayer.hidden = indicatorToBeHidden;
     });
 }
 

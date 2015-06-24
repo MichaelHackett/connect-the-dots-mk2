@@ -85,7 +85,7 @@ static CGFloat kDefaultLineWidth = 1.0;
     [line addLineToPoint:_secondEndpoint];
     ctdPerformWithCopyOfPath([line CGPath], ^(CGPathRef pathCopy) {
         // path is not implicitly animated, so just update it
-        _lineLayer.path = pathCopy;
+        self->_lineLayer.path = pathCopy;
     });
     // no need to do an explicit refresh either; path changes are immediately redrawn
 }
