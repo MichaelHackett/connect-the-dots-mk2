@@ -1,12 +1,11 @@
-// CTDUIKitConnectionView:
-//     UIKit renderer for dot-to-dot connections. The connections are drawn as
-//     solid lines between the two given points.
+// CTDUIKitLineView:
+//     A UIView that renders a line whose endpoints can be changed dynamically.
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 
 
-@interface CTDUIKitConnectionView : UIView
+@interface CTDUIKitLineView : UIView
 
 @property (assign, nonatomic) CGFloat lineWidth;
 @property (copy, nonatomic) UIColor* lineColor;

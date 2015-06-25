@@ -1,6 +1,6 @@
 // CTDUIKitDotView:
-//     UIKit renderer for the "dots" to be connected. They are drawn as circles
-//     filled with a solid color.
+//     A UIView that displays a filled circle, with an animated ring that can
+//     be used as an indicator.
 //
 // Copyright 2013-5 Michael Hackett. All rights reserved.
 

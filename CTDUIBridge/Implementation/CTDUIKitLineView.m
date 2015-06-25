@@ -1,6 +1,6 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDUIKitConnectionView.h"
+#import "CTDUIKitLineView.h"
 
 #import "CTDCoreGraphicsUtils.h"
 
@@ -11,7 +11,7 @@ static CGFloat kDefaultLineWidth = 1.0;
 
 
 
-@implementation CTDUIKitConnectionView
+@implementation CTDUIKitLineView
 {
     // Copy of parent's layer property, cast to the correct type (for convenience).
     __unsafe_unretained CAShapeLayer* _lineLayer;
@@ -64,13 +64,13 @@ static CGFloat kDefaultLineWidth = 1.0;
 - (void)setFirstEndpoint:(CGPoint)firstEndpoint
 {
     _firstEndpoint = firstEndpoint;
-    [self CTDUIKitConnectionView_refreshPath];
+    [self CTDUIKitLineView_refreshPath];
 }
 
 - (void)setSecondEndpoint:(CGPoint)secondEndpoint
 {
     _secondEndpoint = secondEndpoint;
-    [self CTDUIKitConnectionView_refreshPath];
+    [self CTDUIKitLineView_refreshPath];
 }
 
 
@@ -78,7 +78,7 @@ static CGFloat kDefaultLineWidth = 1.0;
 #pragma mark Internal methods
 
 
-- (void)CTDUIKitConnectionView_refreshPath
+- (void)CTDUIKitLineView_refreshPath
 {
     UIBezierPath* line = [[UIBezierPath alloc] init];
     [line moveToPoint:_firstEndpoint];

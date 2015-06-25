@@ -4,10 +4,11 @@
 
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorPalette.h"
-#import "CTDUIKitConnectionView.h"
-#import "CTDUIKitConnectionViewAdaptor.h"
 #import "CTDUIKitDotView.h"
 #import "CTDUIKitDotViewAdapter.h"
+#import "CTDUIKitLineView.h"
+#import "CTDUIKitLineViewAdaptor.h"
+
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -74,19 +75,19 @@
       newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
                              secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    CTDUIKitConnectionView* connectionView = [[CTDUIKitConnectionView alloc]
-                                              initWithFrame:self.view.bounds];
-    connectionView.lineWidth = self.connectionLineWidth;
-    connectionView.lineColor = self.connectionLineColor;
+    CTDUIKitLineView* lineView = [[CTDUIKitLineView alloc]
+                                  initWithFrame:self.view.bounds];
+    lineView.lineWidth = self.connectionLineWidth;
+    lineView.lineColor = self.connectionLineColor;
 
-    id<CTDDotConnectionRenderer> connectionViewAdapter =
-        [[CTDUIKitConnectionViewAdaptor alloc] initWithConnectionView:connectionView];
-    [connectionViewAdapter setFirstEndpointPosition:firstEndpointPosition];
-    [connectionViewAdapter setSecondEndpointPosition:secondEndpointPosition];
+    id<CTDDotConnectionRenderer> lineViewAdapter =
+        [[CTDUIKitLineViewAdaptor alloc] initWithLineView:lineView];
+    [lineViewAdapter setFirstEndpointPosition:firstEndpointPosition];
+    [lineViewAdapter setSecondEndpointPosition:secondEndpointPosition];
 
-    [self.view addSubview:connectionView];
+    [self.view addSubview:lineView];
 
-    return connectionViewAdapter;
+    return lineViewAdapter;
 }
 
 
