@@ -1,4 +1,4 @@
-// CTDUIKitLineViewAdaptor:
+// CTDUIKitLineViewAdapter:
 //     Adapts CTDUIKitLineView to the CTDDotConnectionRenderer protocol.
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
@@ -9,7 +9,7 @@
 
 
 
-@interface CTDUIKitLineViewAdaptor : NSObject <CTDDotConnectionRenderer>
+@interface CTDUIKitLineViewAdapter : NSObject <CTDDotConnectionRenderer>
 
 - (instancetype)initWithLineView:(CTDUIKitLineView*)connectionView;
 

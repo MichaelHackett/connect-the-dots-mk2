@@ -7,7 +7,7 @@
 #import "CTDUIKitDotView.h"
 #import "CTDUIKitDotViewAdapter.h"
 #import "CTDUIKitLineView.h"
-#import "CTDUIKitLineViewAdaptor.h"
+#import "CTDUIKitLineViewAdapter.h"
 
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
@@ -81,7 +81,7 @@
     lineView.lineColor = self.connectionLineColor;
 
     id<CTDDotConnectionRenderer> lineViewAdapter =
-        [[CTDUIKitLineViewAdaptor alloc] initWithLineView:lineView];
+        [[CTDUIKitLineViewAdapter alloc] initWithLineView:lineView];
     [lineViewAdapter setFirstEndpointPosition:firstEndpointPosition];
     [lineViewAdapter setSecondEndpointPosition:secondEndpointPosition];
 

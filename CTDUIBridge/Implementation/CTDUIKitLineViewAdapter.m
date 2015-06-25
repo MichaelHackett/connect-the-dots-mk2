@@ -1,6 +1,6 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDUIKitLineViewAdaptor.h"
+#import "CTDUIKitLineViewAdapter.h"
 
 #import "CTDUIKitLineView.h"
 #import "CTDUtility/CTDPoint.h"
@@ -8,7 +8,7 @@
 
 
 
-@implementation CTDUIKitLineViewAdaptor
+@implementation CTDUIKitLineViewAdapter
 {
     __weak CTDUIKitLineView* _lineView;
 }
