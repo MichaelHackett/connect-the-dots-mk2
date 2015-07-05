@@ -9,6 +9,7 @@
 
 @interface CTDUIKitBridge : NSObject
 
-+ (CTDUIKitConnectSceneViewController*)connectScene;
++ (CTDUIKitConnectSceneViewController*)
+      connectSceneFromNibName:(NSString*)connectSceneNibName;
 
 @end

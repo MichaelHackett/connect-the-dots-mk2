@@ -9,6 +9,9 @@
 #import "CocoaAdditions/UIKit.h"
 
 
+static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
+
+
 
 @implementation CTDAppDelegate
 {
@@ -34,7 +37,8 @@
     // would already be loaded at this point. To avoid disrupting other code
     // if/when we make that change, reproduce those steps here.
     application.statusBarHidden = YES;
-    CTDUIKitConnectSceneViewController* connectVC = [CTDUIKitBridge connectScene];
+    CTDUIKitConnectSceneViewController* connectVC =
+        [CTDUIKitBridge connectSceneFromNibName:kCTDConnectSceneNibName];
     _window = [UIKit fullScreenWindowWithRootViewController:connectVC
                                             backgroundColor:[UIColor whiteColor]];
 

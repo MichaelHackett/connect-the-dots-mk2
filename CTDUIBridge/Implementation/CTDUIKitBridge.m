@@ -5,18 +5,20 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 
-static NSString* const kCTDUIKitBridgeConnectSceneViewControllerNibName =
-          @"CTDUIKitConnectSceneViewController";
-
-
 
 @implementation CTDUIKitBridge
 
-+ (CTDUIKitConnectSceneViewController*)connectScene
++ (CTDUIKitConnectSceneViewController*)
+      connectSceneFromNibName:(NSString*)connectSceneNibName
 {
-    return [[CTDUIKitConnectSceneViewController alloc]
-            initWithNibName:kCTDUIKitBridgeConnectSceneViewControllerNibName
-                     bundle:nil];
+    CTDUIKitConnectSceneViewController* connectVC =
+        [[CTDUIKitConnectSceneViewController alloc]
+         initWithNibName:connectSceneNibName
+                  bundle:nil];
+
+    [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand
+
+    return connectVC;
 }
 
 @end

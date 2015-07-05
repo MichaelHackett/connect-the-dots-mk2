@@ -114,7 +114,7 @@
 		4CFDEEE819C69F4A0041B910 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFEF34B1A6EB63F0086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFEF37C1A6EBB250086C37B /* CTDPoint+CGConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDEEF319C762580041B910 /* CTDPoint+CGConversion.m */; };
-		4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */; };
+		4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectScene.xib */; };
 		4CFEF37E1A6EBB7D0086C37B /* libCTDUIBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF34A1A6EB63F0086C37B /* libCTDUIBridge.a */; };
 		4CFEF3EA1A72F1B70086C37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFEF3F71A72F1B70086C37B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
@@ -455,7 +455,7 @@
 		4CEBCAB219BB955700D2B498 /* CTDPresentationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDPresentationTests-Prefix.pch"; sourceTree = "<group>"; };
 		4CEBCAB319BB964300D2B498 /* CTDApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDApplicationTests.xcconfig; path = BuildConfiguration/CTDApplicationTests.xcconfig; sourceTree = "<group>"; };
 		4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitConnectSceneViewController.m; sourceTree = "<group>"; };
-		4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTDUIKitConnectSceneViewController.xib; sourceTree = "<group>"; };
+		4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectScene.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTDUIKitConnectScene.xib; sourceTree = "<group>"; };
 		4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitDotView.h; sourceTree = "<group>"; };
 		4CEBCAC119BCD54D00D2B498 /* CTDUIKitDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitDotView.m; sourceTree = "<group>"; };
 		4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -691,14 +691,6 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
-		4C41B75E1B12A7F900B54422 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.xib */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		4C41B78B1B1557C700B54422 /* CTDInteraction */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +792,17 @@
 				4C2619401A1054D5005E87A9 /* TestHelpers-README.txt */,
 			);
 			name = "Test Helpers";
+			sourceTree = "<group>";
+		};
+		4C591B971B48233700AE980B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
+				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
+				4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectScene.xib */,
+				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		4C84975A1A7FE9DA000A094E /* Libraries */ = {
@@ -1159,6 +1162,7 @@
 		4CFEF3431A6EB2480086C37B /* CTDApplication */ = {
 			isa = PBXGroup;
 			children = (
+				4C591B971B48233700AE980B /* Resources */,
 				4CFEF3811A6EBEFE0086C37B /* Implementation */,
 				4CEBCA2919BB564600D2B498 /* Tests */,
 			);
@@ -1168,8 +1172,6 @@
 		4CFEF3811A6EBEFE0086C37B /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				4CEBCA1219BB564600D2B498 /* CTDApplication-Info.plist */,
-				4CEBCA1319BB564600D2B498 /* InfoPlist.strings */,
 				4CFEF3451A6EB4D70086C37B /* CTDApplication-Prefix.pch */,
 				4CEBCA1619BB564600D2B498 /* main.m */,
 				4CEBCA1919BB564600D2B498 /* CTDAppDelegate.h */,
@@ -1178,7 +1180,6 @@
 				4C41B7511B0C40C700B54422 /* CTDSceneBuilder.m */,
 				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
 				4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */,
-				4CEBCA1C19BB564600D2B498 /* Images.xcassets */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -1211,7 +1212,6 @@
 				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
 				4C41B72A1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.h */,
 				4C41B72B1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m */,
-				4C41B75E1B12A7F900B54422 /* Resources */,
 				4C9B86211B3B9C7C005BB419 /* Widgets */,
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
 			);
@@ -1673,7 +1673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA1519BB564600D2B498 /* InfoPlist.strings in Resources */,
-				4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectSceneViewController.xib in Resources */,
+				4CFEF37D1A6EBB300086C37B /* CTDUIKitConnectScene.xib in Resources */,
 				4CEBCA1D19BB564600D2B498 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2034,6 +2034,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/CTDApplication/Resources/CTDApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -2046,6 +2048,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/CTDApplication/Resources/CTDApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
