@@ -710,6 +710,7 @@
 				4C3236441A150AE6005C25D7 /* CTDSelectOnTapInteraction.h */,
 				4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */,
 				4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */,
+				4CFEF3BC1A7182AF0086C37B /* CTDTouchResponder.h */,
 				4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */,
 				4C25B9721A0E7F0000275138 /* CTDTouchTrackingGroup.h */,
 				4CFEF3C01A7193710086C37B /* CTDTrialSceneTouchRouter.h */,
@@ -1191,7 +1192,6 @@
 				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
 				4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */,
 				4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */,
-				4CFEF3BB1A7182790086C37B /* ExtensionPoints */,
 			);
 			name = Interface;
 			path = Interface/CTDUIBridge;
@@ -1216,14 +1216,6 @@
 				4CEBCA1119BB564600D2B498 /* Supporting Files */,
 			);
 			path = Implementation;
-			sourceTree = "<group>";
-		};
-		4CFEF3BB1A7182790086C37B /* ExtensionPoints */ = {
-			isa = PBXGroup;
-			children = (
-				4CFEF3BC1A7182AF0086C37B /* CTDTouchResponder.h */,
-			);
-			path = ExtensionPoints;
 			sourceTree = "<group>";
 		};
 		4CFEF3E11A72F0160086C37B /* CTDTestHelpers */ = {

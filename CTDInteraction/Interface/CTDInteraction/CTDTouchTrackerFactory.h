@@ -4,7 +4,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDUIBridge/ExtensionPoints/CTDTouchResponder.h"
+#import "CTDTouchResponder.h"
 
 @protocol CTDTouchTracker;
 

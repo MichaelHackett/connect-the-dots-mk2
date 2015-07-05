@@ -4,7 +4,7 @@
 
 #import "CTDUIKitTouchRoutingTable.h"
 #import "CTDPoint+CGConversion.h"
-#import "ExtensionPoints/CTDTouchResponder.h"
+#import "CTDInteraction/CTDTouchResponder.h"
 #import "CTDUtility/CTDPoint.h"
 
 

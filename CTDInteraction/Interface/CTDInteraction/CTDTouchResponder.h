@@ -1,7 +1,7 @@
 // CTDTouchResponder:
-//     Extends the default touch routing to handle custom interactions.
+//     An interpreter of touch-based user input.
 //
-// Installed touch responders are notified when a new touch is detected on the
+// Active touch responders are notified when a new touch is detected on the
 // associated screen area and can respond by returning a "tracker" that will
 // be sent updates continuously as long as the touch is active. The tracker
 // will be retained by the touch source while the touch remains active.
