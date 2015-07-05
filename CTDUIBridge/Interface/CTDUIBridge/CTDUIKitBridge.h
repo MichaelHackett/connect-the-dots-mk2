@@ -4,12 +4,14 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @class CTDUIKitConnectSceneViewController;
+@class CTDUIKitDrawingConfig;
 
 
 
 @interface CTDUIKitBridge : NSObject
 
 + (CTDUIKitConnectSceneViewController*)
-      connectSceneFromNibName:(NSString*)connectSceneNibName;
+      connectSceneFromNibName:(NSString*)connectSceneNibName
+            withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig;
 
 @end

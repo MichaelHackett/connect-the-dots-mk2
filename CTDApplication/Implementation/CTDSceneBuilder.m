@@ -2,7 +2,6 @@
 
 #import "CTDSceneBuilder.h"
 
-#import "CTDUIKitDrawingConfig.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDSelectOnTouchInteraction.h"
@@ -18,9 +17,6 @@
 #import "CTDUtility/CTDPoint.h"
 
 
-static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
-          @"CTDUIKitConnectSceneViewController";
-
 // Macro for defining sample data
 #define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
@@ -31,44 +27,13 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
 
 @implementation CTDSceneBuilder
-{
-    CTDUIKitDrawingConfig* _drawingConfig;
-}
-
-
-#pragma mark Initialization
-
-
-- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
-{
-    self = [super init];
-    if (self) {
-        _drawingConfig = drawingConfig;
-    }
-    return self;
-}
-
-- (instancetype)init CTD_BLOCK_PARENT_METHOD
-
 
 
 #pragma mark Builder methods
 
 
-- (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
++ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
 {
-    // VC properties that must be set before `viewDidLoad` runs (BAD!)
-    connectVC.dotDiameter = _drawingConfig.dotDiameter;
-    connectVC.dotSelectionIndicatorColor = _drawingConfig.dotSelectionIndicatorColor;
-    connectVC.dotSelectionIndicatorThickness = _drawingConfig.dotSelectionIndicatorThickness;
-    connectVC.dotSelectionIndicatorPadding = _drawingConfig.dotSelectionIndicatorPadding;
-    connectVC.dotSelectionAnimationDuration = _drawingConfig.dotSelectionAnimationDuration;
-    connectVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
-    connectVC.connectionLineColor = _drawingConfig.connectionLineColor;
-    connectVC.colorPalette = _drawingConfig.colorPalette;
-
-    [connectVC view]; // force VC views to load
-
     // TODO: Replace with data passed in
     NSArray* dotList = @[
         dot(CTDDotColor_Green, 100, 170),

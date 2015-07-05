@@ -6,16 +6,11 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @class CTDUIKitConnectSceneViewController;
-@class CTDUIKitDrawingConfig;
 
 
 
 @interface CTDSceneBuilder : NSObject
 
-- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig;
-
-CTD_NO_DEFAULT_INIT
-
-- (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC;
++ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC;
 
 @end

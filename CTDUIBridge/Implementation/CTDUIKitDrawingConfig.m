@@ -2,8 +2,8 @@
 
 #import "CTDUIKitDrawingConfig.h"
 
+#import "CTDUIKitColorPalette.h"
 #import "CTDPresentation/CTDColorPalette.h"
-#import "CTDUIBridge/CTDUIKitColorPalette.h"
 
 
 
@@ -13,21 +13,15 @@
 {
     self = [super init];
     if (self) {
-        // TODO: Load these values from a plist or XML file.
-        //
-        _dotDiameter = 65.0;
-        _dotSelectionIndicatorColor = [UIColor purpleColor];
-        _dotSelectionIndicatorThickness = 3.0;
-        _dotSelectionIndicatorPadding = 15.0;
-        _dotSelectionAnimationDuration = (CGFloat)0.12;
-        _connectionLineWidth = 5.0;
-        _connectionLineColor = [UIColor yellowColor];
-        _colorPalette = [[CTDUIKitColorPalette alloc] initWithColorMap:@{
-            CTDPaletteColor_InactiveDot: [UIColor whiteColor],
-            CTDPaletteColor_DotType1:    [UIColor redColor],
-            CTDPaletteColor_DotType2:    [UIColor greenColor],
-            CTDPaletteColor_DotType3:    [UIColor blueColor]
-        }];
+        // Default values
+        _dotDiameter = 5.0;
+        _dotSelectionIndicatorColor = [UIColor whiteColor];
+        _dotSelectionIndicatorThickness = 1.0;
+        _dotSelectionIndicatorPadding = 10.0;
+        _dotSelectionAnimationDuration = (CGFloat)0.25;
+        _connectionLineWidth = 1.0;
+        _connectionLineColor = [UIColor whiteColor];
+        _colorPalette = nil;
     }
     return self;
 }
