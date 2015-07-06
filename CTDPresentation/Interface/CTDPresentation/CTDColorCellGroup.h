@@ -22,8 +22,8 @@
 
 #import "CTDModel/CTDDotColor.h"
 
-@protocol CTDColorCellRenderer;
 @protocol CTDSelectable;
+@protocol CTDSelectionRenderer;
 
 
 
@@ -35,6 +35,6 @@
 CTD_NO_DEFAULT_INIT
 
 - (id<CTDSelectable>)addCellForColor:(CTDDotColor)cellColor
-                        withRenderer:(id<CTDColorCellRenderer>)cellRenderer;
+                        withRenderer:(id<CTDSelectionRenderer>)cellSelectionRenderer;
 
 @end

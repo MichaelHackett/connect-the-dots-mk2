@@ -2,7 +2,6 @@
 
 #import "CTDSceneBuilder.h"
 
-#import "CTDUIKitDrawingConfig.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDSelectOnTouchInteraction.h"
@@ -13,12 +12,10 @@
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
+#import "CTDPresentation/CTDSelectionRenderer.h"
 #import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CTDUtility/CTDPoint.h"
 
-
-static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
-          @"CTDUIKitConnectSceneViewController";
 
 // Macro for defining sample data
 #define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
@@ -30,46 +27,14 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
 
 @implementation CTDSceneBuilder
-{
-    CTDUIKitDrawingConfig* _drawingConfig;
-}
-
-
-#pragma mark Initialization
-
-
-- (instancetype)initWithDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
-{
-    self = [super init];
-    if (self) {
-        _drawingConfig = drawingConfig;
-    }
-    return self;
-}
-
-- (instancetype)init CTD_BLOCK_PARENT_METHOD
-
 
 
 #pragma mark Builder methods
 
 
-- (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
++ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
+                withDotList:(NSArray *)dotList
 {
-    // VC properties that must be set before `viewDidLoad` runs (BAD!)
-    connectVC.connectionLineWidth = _drawingConfig.connectionLineWidth;
-    connectVC.connectionLineColor = _drawingConfig.connectionLineColor;
-    connectVC.colorPalette = _drawingConfig.colorPalette;
-
-    [connectVC view]; // force VC views to load
-
-    // TODO: Replace with data passed in
-    NSArray* dotList = @[
-        dot(CTDDotColor_Green, 100, 170),
-        dot(CTDDotColor_Red, 600, 400),
-        dot(CTDDotColor_Blue, 250, 650)
-    ];
-
     CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
                                            initWithDotList:dotList
                                              trialRenderer:connectVC];  // TODO: Make a connect view class to become the renderer
@@ -83,12 +48,9 @@ static NSString* const kCTDUIKitConnectSceneViewControllerNibName =
 
     // TODO: reduce repetition in this section
 
-    id<CTDColorCellRenderer, CTDTouchable> colorCell1Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType1];
-    id<CTDColorCellRenderer, CTDTouchable> colorCell2Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType2];
-    id<CTDColorCellRenderer, CTDTouchable> colorCell3Renderer =
-        [connectVC.colorCellMap objectForKey:CTDPaletteColor_DotType3];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell1Renderer = connectVC.colorSelectionCells[0];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell2Renderer = connectVC.colorSelectionCells[1];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell3Renderer = connectVC.colorSelectionCells[2];
 
     [colorCellsTouchMapper mapTouchable:colorCell1Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red

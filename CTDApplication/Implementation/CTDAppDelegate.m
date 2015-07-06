@@ -3,25 +3,51 @@
 #import "CTDAppDelegate.h"
 
 #import "CTDSceneBuilder.h"
-#import "CTDUIKitDrawingConfig.h"
 #import "CTDUIBridge/CTDUIKitBridge.h"
 #import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
+#import "CTDUIBridge/CTDUIKitDrawingConfig.h"
+#import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CocoaAdditions/UIKit.h"
+#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotColor.h"
+#import "CTDUtility/CTDPoint.h"
+
+
+static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
+
+
+// Macro for defining sample data
+#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
 @implementation CTDAppDelegate
 {
     UIWindow* _window;
-    CTDSceneBuilder* _sceneBuilder;
+    CTDUIKitDrawingConfig* _drawingConfig;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _sceneBuilder = [[CTDSceneBuilder alloc]
-                         initWithDrawingConfig:[[CTDUIKitDrawingConfig alloc] init]];
+        CTDUIKitDrawingConfig* drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
+        // TODO: Load these values from a plist or XML file.
+        drawingConfig.dotDiameter = 65.0;
+        drawingConfig.dotSelectionIndicatorColor = [UIColor purpleColor];
+        drawingConfig.dotSelectionIndicatorThickness = 3.0;
+        drawingConfig.dotSelectionIndicatorPadding = 15.0;
+        drawingConfig.dotSelectionAnimationDuration = (CGFloat)0.12;
+        drawingConfig.connectionLineWidth = 5.0;
+        drawingConfig.connectionLineColor = [UIColor yellowColor];
+        drawingConfig.colorPalette =
+            [[CTDUIKitColorPalette alloc] initWithColorMap:@{
+                CTDPaletteColor_InactiveDot: [UIColor whiteColor],
+                CTDPaletteColor_DotType1:    [UIColor redColor],
+                CTDPaletteColor_DotType2:    [UIColor greenColor],
+                CTDPaletteColor_DotType3:    [UIColor blueColor]
+            }];
+        _drawingConfig = drawingConfig;
     }
     return self;
 }
@@ -34,12 +60,21 @@
     // would already be loaded at this point. To avoid disrupting other code
     // if/when we make that change, reproduce those steps here.
     application.statusBarHidden = YES;
-    CTDUIKitConnectSceneViewController* connectVC = [CTDUIKitBridge connectScene];
+    CTDUIKitConnectSceneViewController* connectVC =
+        [CTDUIKitBridge connectSceneFromNibName:kCTDConnectSceneNibName
+                              withDrawingConfig:_drawingConfig];
     _window = [UIKit fullScreenWindowWithRootViewController:connectVC
                                             backgroundColor:[UIColor whiteColor]];
 
+    // TODO: Replace with data loaded from disk
+    NSArray* dotList = @[
+        dot(CTDDotColor_Green, 100, 170),
+        dot(CTDDotColor_Red, 600, 400),
+        dot(CTDDotColor_Blue, 250, 650)
+    ];
+
     // Now wire up the scene to the Presentation and Interaction modules.
-    [_sceneBuilder prepareConnectScene:connectVC];
+    [CTDSceneBuilder prepareConnectScene:connectVC withDotList:dotList];
 
     // Lastly, make it visible. (Have to do this after running the Scene
     // Builder, so that it has a chance to set some values before loading the

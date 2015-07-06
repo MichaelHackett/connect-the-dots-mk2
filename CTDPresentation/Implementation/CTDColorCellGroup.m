@@ -2,8 +2,8 @@
 
 #import "CTDColorCellGroup.h"
 
-#import "CTDColorCellRenderer.h"
 #import "CTDSelectable.h"
+#import "CTDSelectionRenderer.h"
 
 
 
@@ -69,8 +69,8 @@
 - (instancetype)initWithDefaultColor:(CTDDotColor)defaultColor
                    selectedColorSink:(id<CTDDotColorSink>)selectedColorSink;
 
-- (void)addRenderer:(id<CTDColorCellRenderer>)cellRenderer
-   forCellWithColor:(CTDDotColor)cellColor;
+- (void)addSelectionRenderer:(id<CTDSelectionRenderer>)cellSelectionRenderer
+            forCellWithColor:(CTDDotColor)cellColor;
 
 @end
 
@@ -97,10 +97,10 @@
     return self;
 }
 
-- (void)addRenderer:(id<CTDColorCellRenderer>)cellRenderer
-   forCellWithColor:(CTDDotColor)cellColor
+- (void)addSelectionRenderer:(id<CTDSelectionRenderer>)cellSelectionRenderer
+            forCellWithColor:(CTDDotColor)cellColor
 {
-    [_colorToCellRendererMap setObject:cellRenderer forKey:@(cellColor)];
+    [_colorToCellRendererMap setObject:cellSelectionRenderer forKey:@(cellColor)];
 }
 
 - (void)selectCellWithColor:(CTDDotColor)color
@@ -109,7 +109,7 @@
     // (doesn't change defined behaviour, so no tests required?)
 
     // Hide previous selection, if any.
-    id <CTDColorCellRenderer> deselectedCellRenderer =
+    id <CTDSelectionRenderer> deselectedCellRenderer =
         [_colorToCellRendererMap objectForKey:@(_selectedColor)];
     [deselectedCellRenderer hideSelectionIndicator];
 
@@ -118,7 +118,7 @@
     [_selectedColorSink colorChangedTo:color];
 
     // Show new selection.
-    id <CTDColorCellRenderer> selectedCellRenderer =
+    id <CTDSelectionRenderer> selectedCellRenderer =
         [_colorToCellRendererMap objectForKey:@(color)];
     [selectedCellRenderer showSelectionIndicator];
 }
@@ -162,10 +162,10 @@
 }
 
 - (id<CTDSelectable>)addCellForColor:(CTDDotColor)cellColor
-                        withRenderer:(id<CTDColorCellRenderer>)cellRenderer;
+                        withRenderer:(id<CTDSelectionRenderer>)cellSelectionRenderer;
 {
-    [cellRenderer hideSelectionIndicator]; // sync renderer to new cell's state
-    [_mutex addRenderer:cellRenderer forCellWithColor:cellColor];
+    [cellSelectionRenderer hideSelectionIndicator]; // sync renderer to new cell's state
+    [_mutex addSelectionRenderer:cellSelectionRenderer forCellWithColor:cellColor];
     CTDColorCellGroup_CellProxy* cellProxy = [[CTDColorCellGroup_CellProxy alloc]
                                               initWithCellColor:cellColor
                                               groupSelectionFilter:_mutex];
