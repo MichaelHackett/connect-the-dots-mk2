@@ -33,14 +33,8 @@
 
 
 + (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
+                withDotList:(NSArray *)dotList
 {
-    // TODO: Replace with data passed in
-    NSArray* dotList = @[
-        dot(CTDDotColor_Green, 100, 170),
-        dot(CTDDotColor_Red, 600, 400),
-        dot(CTDDotColor_Blue, 250, 650)
-    ];
-
     CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
                                            initWithDotList:dotList
                                              trialRenderer:connectVC];  // TODO: Make a connect view class to become the renderer

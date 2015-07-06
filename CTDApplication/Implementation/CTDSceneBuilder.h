@@ -11,6 +11,7 @@
 
 @interface CTDSceneBuilder : NSObject
 
-+ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC;
++ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
+                withDotList:(NSArray*)dotList;
 
 @end

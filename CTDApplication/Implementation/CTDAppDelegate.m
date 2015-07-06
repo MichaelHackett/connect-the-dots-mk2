@@ -8,9 +8,16 @@
 #import "CTDUIBridge/CTDUIKitDrawingConfig.h"
 #import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CocoaAdditions/UIKit.h"
+#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotColor.h"
+#import "CTDUtility/CTDPoint.h"
 
 
 static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
+
+
+// Macro for defining sample data
+#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
@@ -59,8 +66,15 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     _window = [UIKit fullScreenWindowWithRootViewController:connectVC
                                             backgroundColor:[UIColor whiteColor]];
 
+    // TODO: Replace with data loaded from disk
+    NSArray* dotList = @[
+        dot(CTDDotColor_Green, 100, 170),
+        dot(CTDDotColor_Red, 600, 400),
+        dot(CTDDotColor_Blue, 250, 650)
+    ];
+
     // Now wire up the scene to the Presentation and Interaction modules.
-    [CTDSceneBuilder prepareConnectScene:connectVC];
+    [CTDSceneBuilder prepareConnectScene:connectVC withDotList:dotList];
 
     // Lastly, make it visible. (Have to do this after running the Scene
     // Builder, so that it has a chance to set some values before loading the
