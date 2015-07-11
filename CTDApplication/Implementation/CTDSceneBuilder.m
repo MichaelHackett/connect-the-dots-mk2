@@ -7,10 +7,7 @@
 #import "CTDInteraction/CTDSelectOnTouchInteraction.h"
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
-#import "CTDModel/CTDDot.h"
-#import "CTDModel/CTDDotColor.h"
 #import "CTDPresentation/CTDColorCellGroup.h"
-#import "CTDPresentation/CTDColorPalette.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
 #import "CTDPresentation/CTDSelectionRenderer.h"
 #import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
@@ -37,7 +34,7 @@
 {
     CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
                                            initWithDotList:dotList
-                                             trialRenderer:connectVC];  // TODO: Make a connect view class to become the renderer
+                                             trialRenderer:connectVC.trialRenderer];
 
     CTDColorCellGroup* colorCellGroup = [[CTDColorCellGroup alloc]
                                          initWithDefaultColor:CTDDotColor_White
@@ -82,7 +79,7 @@
 //    [touchInputRouter addTouchResponder:
 
     connectVC.touchResponder = [[CTDTrialSceneTouchRouter alloc]
-                                initWithTrialRenderer:connectVC
+                                initWithTrialRenderer:connectVC.trialRenderer
                                 dotsTouchMapper:[dotSetPresenter dotsTouchMapper]
                                 colorCellsTouchResponder:colorCellsTouchResponder];
 }

@@ -185,16 +185,10 @@ static CGFloat const kDefaultSelectionAnimationDuration = (CGFloat)0.12;
     return ctdCGRectCenter(self.frame);
 }
 
-
-
-#pragma mark Touch support
-
-
-- (BOOL)containsTouchLocation:(CGPoint)touchLocation
-{
-    CGPoint localPoint = [_dotLayer convertPoint:touchLocation
-                                       fromLayer:self.superview.layer];
-    return (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, localPoint, false);
+- (BOOL)dotContainsPoint:(CGPoint)point {
+    CGPoint dotLayerRelativePoint = [_dotLayer convertPoint:point fromLayer:self.layer];
+    return CGRectContainsPoint(self.bounds, dotLayerRelativePoint) &&
+           (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, dotLayerRelativePoint, false);
 }
 
 @end

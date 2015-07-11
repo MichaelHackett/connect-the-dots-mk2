@@ -4,29 +4,21 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitStandardViewController.h"
-#import "CTDPresentation/CTDTrialRenderer.h"
 
 @class CTDUIKitColorPalette;
+@class CTDUIKitConnectTheDotsView;
+@protocol CTDTrialRenderer;
 
 
 
 @interface CTDUIKitConnectSceneViewController
-    : CTDUIKitStandardViewController <CTDTrialRenderer>
-
-// VC configuration (must be set before the container view is loaded, and
-// changes made after view is loaded may have strange or no effects) --- fix?
-@property (assign, nonatomic) CGFloat dotDiameter; // in pixels
-@property (copy, nonatomic) UIColor* dotSelectionIndicatorColor;
-@property (assign, nonatomic) CGFloat dotSelectionIndicatorThickness;
-@property (assign, nonatomic) CGFloat dotSelectionIndicatorPadding;
-@property (assign, nonatomic) CGFloat dotSelectionAnimationDuration; // seconds
-
-@property (assign, nonatomic) float connectionLineWidth;
-@property (copy, nonatomic) UIColor* connectionLineColor;
+    : CTDUIKitStandardViewController
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
+@property (strong, nonatomic) id<CTDTrialRenderer> trialRenderer;
 
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
+@property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
 
 @end
