@@ -7,13 +7,14 @@
 #import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotConnectionRenderer.h"
 #import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/CTDTrialRenderer.h"
+
 #import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
 #import "CTDRecordingDotConnectionView.h"
 #import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
-#import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
