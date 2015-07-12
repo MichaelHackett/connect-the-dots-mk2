@@ -7,7 +7,7 @@
 
 @class CTDPoint;
 @protocol CTDDotRenderer;
-@protocol CTDTouchMapper;
+@protocol CTDTouchToElementMapper;
 @protocol CTDTrialRenderer;
 @protocol CTDTouchToPointMapper;
 
@@ -27,7 +27,7 @@
 // Designated initializer
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-             dotTouchMapper:(id<CTDTouchMapper>)dotTouchMapper
+             dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
               freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
               anchorDotView:(id<CTDDotRenderer>)anchorDotView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition;

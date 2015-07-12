@@ -2,7 +2,6 @@
 
 #import "CTDConnectionTouchInteraction.h"
 
-#import "CTDTouchMapper.h"
 #import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotConnectionRenderer.h"
 #import "CTDPresentation/CTDDotRenderer.h"
@@ -35,7 +34,7 @@
 
 @implementation CTDConnectionTouchInteraction
 {
-    id<CTDTouchMapper> _dotTouchMapper;
+    id<CTDTouchToElementMapper> _dotTouchMapper;
     id<CTDTouchToPointMapper> _freeEndMapper;
     CTDConnectionPresenter* _presenter;
     id<CTDDotRenderer> _anchorDotView;
@@ -48,7 +47,7 @@
 
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-             dotTouchMapper:(id<CTDTouchMapper>)dotTouchMapper
+             dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
               freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
               anchorDotView:(id<CTDDotRenderer>)anchorDotView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition

@@ -5,10 +5,10 @@
 #import "CTDConnectionTouchInteraction.h"
 #import "CTDDelegatingTouchTracker.h"
 #import "CTDSelectOnTouchInteraction.h"
-#import "CTDTouchMapper.h"
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
 //#import "CTDTrialRenderer.h"
+#import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotRenderer.h"
 
 @protocol CTDTrialRenderer; // TEMP!
@@ -22,7 +22,7 @@ typedef void (^CTDDotHitHandler)(id<CTDDotRenderer> hitDotView);
 
 @interface CTDDotDetectionTracker : NSObject <CTDTouchTracker>
 
-- (instancetype)initWithDotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+- (instancetype)initWithDotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                    initialTouchLocation:(CTDPoint*)initialTouchLocation
                           dotHitHandler:(CTDDotHitHandler)dotHitHandler;
 CTD_NO_DEFAULT_INIT
@@ -31,11 +31,11 @@ CTD_NO_DEFAULT_INIT
 
 @implementation CTDDotDetectionTracker
 {
-    id<CTDTouchMapper> _dotsTouchMapper;
+    id<CTDTouchToElementMapper> _dotsTouchMapper;
     CTDDotHitHandler _dotHitHandler;
 }
 
-- (instancetype)initWithDotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+- (instancetype)initWithDotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                    initialTouchLocation:(CTDPoint*)initialTouchLocation
                           dotHitHandler:(void(^)(id<CTDDotRenderer> hitDotView))dotHitHandler
 {
@@ -75,7 +75,7 @@ CTD_NO_DEFAULT_INIT
 @implementation CTDTrialSceneTouchRouter
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
-    id<CTDTouchMapper> _dotsTouchMapper;
+    id<CTDTouchToElementMapper> _dotsTouchMapper;
     id<CTDTouchToPointMapper> _freeEndMapper;
     id<CTDTouchResponder> _colorCellsTouchResponder;
 }
@@ -83,7 +83,7 @@ CTD_NO_DEFAULT_INIT
 #pragma mark Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                      dotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+                      dotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                         freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder
 {
@@ -142,7 +142,7 @@ CTD_NO_DEFAULT_INIT
 
     // local copies for the block's use
     __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
-    id<CTDTouchMapper> dotsTouchMapper = _dotsTouchMapper;
+    id<CTDTouchToElementMapper> dotsTouchMapper = _dotsTouchMapper;
     id<CTDTouchToPointMapper> freeEndMapper = _freeEndMapper;
 
     id<CTDTouchTracker> actionDiscriminator =

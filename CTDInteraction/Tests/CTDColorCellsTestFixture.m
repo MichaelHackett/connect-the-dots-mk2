@@ -2,9 +2,9 @@
 
 #import "CTDColorCellsTestFixture.h"
 
+#import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDSelectable.h"
 #import "CTDSelectionChangeRecorder.h"
-#import "CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 #define pt CTDMakePoint
@@ -12,7 +12,7 @@
 
 
 
-@interface CTDColorCellsTestFixture_TouchMapper : NSObject <CTDTouchMapper>
+@interface CTDColorCellsTestFixture_TouchMapper : NSObject <CTDTouchToElementMapper>
 @end
 @implementation CTDColorCellsTestFixture_TouchMapper
 {

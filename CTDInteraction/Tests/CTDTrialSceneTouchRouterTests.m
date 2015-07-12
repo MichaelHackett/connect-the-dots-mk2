@@ -4,6 +4,7 @@
 
 #import "CTDTrialSceneTouchRouter.h"
 
+#import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotConnectionRenderer.h"
 #import "CTDPresentation/CTDDotRenderer.h"
 #import "CTDFakeDotRenderer.h"
@@ -12,7 +13,6 @@
 #import "CTDRecordingDotConnectionView.h"
 #import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
-#import "CTDTouchMapper.h"
 #import "CTDTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
@@ -75,7 +75,7 @@ static CTDFakeDotRenderer* dot1;
             return colorCellsTouchTracker;
         }];
 
-    id<CTDTouchMapper> dotTouchMapper =
+    id<CTDTouchToElementMapper> dotTouchMapper =
         [[CTDFakeTouchMapper alloc]
          initWithPointMap:@{ POINT_INSIDE_DOT_1: dot1,
                              ANOTHER_POINT_INSIDE_DOT_1: dot1 }];

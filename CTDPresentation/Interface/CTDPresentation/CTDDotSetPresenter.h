@@ -3,7 +3,7 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-@protocol CTDTouchMapper;
+@protocol CTDTouchToElementMapper;
 @protocol CTDTrialRenderer;
 
 
@@ -15,6 +15,6 @@
 
 CTD_NO_DEFAULT_INIT
 
-- (id<CTDTouchMapper>)dotsTouchMapper;
+- (id<CTDTouchToElementMapper>)dotsTouchMapper;
 
 @end

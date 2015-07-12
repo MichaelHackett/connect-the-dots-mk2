@@ -2,7 +2,7 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "CTDTouchMapper.h"
+#import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDSelectable.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -10,7 +10,7 @@
 
 @implementation CTDSelectOnTouchInteraction
 {
-    id<CTDTouchMapper> _touchMapper;
+    id<CTDTouchToElementMapper> _touchMapper;
     id<CTDSelectable> _selectedElement;
 }
 
@@ -19,7 +19,7 @@
 #pragma mark Initialization
 
 
-- (instancetype)initWithTouchMapper:(id<CTDTouchMapper>)touchMapper
+- (instancetype)initWithTouchMapper:(id<CTDTouchToElementMapper>)touchMapper
                 initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];

@@ -716,7 +716,6 @@
 				4CD4E25A1A080D61006A244D /* CTDListOrderTouchMapper.h */,
 				4C3236441A150AE6005C25D7 /* CTDSelectOnTapInteraction.h */,
 				4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */,
-				4CD4E2591A080BBC006A244D /* CTDTouchMapper.h */,
 				4CFEF3BC1A7182AF0086C37B /* CTDTouchResponder.h */,
 				4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */,
 				4C25B9721A0E7F0000275138 /* CTDTouchTrackingGroup.h */,
