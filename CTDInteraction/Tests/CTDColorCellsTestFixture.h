@@ -2,7 +2,7 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-@protocol CTDTouchMapper;
+@protocol CTDTouchToElementMapper;
 @class CTDSelectionChangeRecorder;
 
 
@@ -20,7 +20,7 @@
 @property (copy, nonatomic) NSArray* pointsInsideCell3;
 @property (copy, nonatomic) NSArray* pointsOutsideElements;
 
-@property (strong, nonatomic) id<CTDTouchMapper> colorCellTouchMapper;
+@property (strong, nonatomic) id<CTDTouchToElementMapper> colorCellTouchMapper;
 
 - (void)resetCellSelectionRecording;
 

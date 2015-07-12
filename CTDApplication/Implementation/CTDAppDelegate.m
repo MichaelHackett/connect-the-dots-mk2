@@ -10,6 +10,7 @@
 #import "CocoaAdditions/UIKit.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
+#import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -33,13 +34,6 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     if (self) {
         CTDUIKitDrawingConfig* drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
         // TODO: Load these values from a plist or XML file.
-        drawingConfig.dotDiameter = 65.0;
-        drawingConfig.dotSelectionIndicatorColor = [UIColor purpleColor];
-        drawingConfig.dotSelectionIndicatorThickness = 3.0;
-        drawingConfig.dotSelectionIndicatorPadding = 15.0;
-        drawingConfig.dotSelectionAnimationDuration = (CGFloat)0.12;
-        drawingConfig.connectionLineWidth = 5.0;
-        drawingConfig.connectionLineColor = [UIColor yellowColor];
         drawingConfig.colorPalette =
             [[CTDUIKitColorPalette alloc] initWithColorMap:@{
                 CTDPaletteColor_InactiveDot: [UIColor whiteColor],

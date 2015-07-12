@@ -3,7 +3,6 @@
 #import "CTDUIKitDrawingConfig.h"
 
 #import "CTDUIKitColorPalette.h"
-#import "CTDPresentation/CTDColorPalette.h"
 
 
 
@@ -14,13 +13,6 @@
     self = [super init];
     if (self) {
         // Default values
-        _dotDiameter = 5.0;
-        _dotSelectionIndicatorColor = [UIColor whiteColor];
-        _dotSelectionIndicatorThickness = 1.0;
-        _dotSelectionIndicatorPadding = 10.0;
-        _dotSelectionAnimationDuration = (CGFloat)0.25;
-        _connectionLineWidth = 1.0;
-        _connectionLineColor = [UIColor whiteColor];
         _colorPalette = nil;
     }
     return self;
@@ -52,14 +44,7 @@
     if (object == self) { return YES; }
     if (object && [object isMemberOfClass:[CTDUIKitDrawingConfig class]]) {
         CTDUIKitDrawingConfig* other = (CTDUIKitDrawingConfig*)object;
-        return (self.dotDiameter == other.dotDiameter) &&
-               [self.dotSelectionIndicatorColor isEqual:other.dotSelectionIndicatorColor] &&
-               (self.dotSelectionIndicatorThickness == other.dotSelectionIndicatorThickness) &&
-               (self.dotSelectionIndicatorPadding == other.dotSelectionIndicatorPadding) &&
-               (self.dotSelectionAnimationDuration == other.dotSelectionAnimationDuration) &&
-               (self.connectionLineWidth == other.connectionLineWidth) &&
-               [self.connectionLineColor isEqual:other.connectionLineColor] &&
-               [self.colorPalette isEqual:other.colorPalette];
+        return [self.colorPalette isEqual:other.colorPalette];
     }
     return NO;
 }
@@ -71,13 +56,6 @@
     // this may never be used so not worrying about speed for now.)
     static const NSUInteger prime = 31;
     NSUInteger hash = 17;
-    hash = hash * prime + [@(self.dotDiameter) hash];
-    hash = hash * prime + [self.dotSelectionIndicatorColor hash];
-    hash = hash * prime + [@(self.dotSelectionIndicatorThickness) hash];
-    hash = hash * prime + [@(self.dotSelectionIndicatorPadding) hash];
-    hash = hash * prime + [@(self.dotSelectionAnimationDuration) hash];
-    hash = hash * prime + [@(self.connectionLineWidth) hash];
-    hash = hash * prime + [self.connectionLineColor hash];
     hash = hash * prime + [self.colorPalette hash];
     return hash;
 }

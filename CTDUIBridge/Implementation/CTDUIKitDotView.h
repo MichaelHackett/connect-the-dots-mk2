@@ -19,6 +19,10 @@
 
 @property (assign, nonatomic, readonly) CGPoint connectionPoint;
 
-- (BOOL)containsTouchLocation:(CGPoint)touchLocation;
+// The given point should be in the receiver's coordinate system. Unlike
+// `pointInside:withEvent:`, however, this method takes into account the
+// visible region of the drawn dot; points within the view's rectangular bounds
+// but outside of the dot will not be considered within the dot.
+- (BOOL)dotContainsPoint:(CGPoint)point;
 
 @end

@@ -4,13 +4,13 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDTouchMapper.h"
+#import "ExtensionPoints/CTDTouchMappers.h"
 
 @protocol CTDTouchable;
 
 
 
-@interface CTDListOrderTouchMapper : NSObject <CTDTouchMapper>
+@interface CTDListOrderTouchMapper : NSObject <CTDTouchToElementMapper>
 
 - (void)mapTouchable:(id<CTDTouchable>)touchableElement
           toActuator:(id)actuator;

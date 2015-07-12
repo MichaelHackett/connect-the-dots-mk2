@@ -7,7 +7,6 @@
 #import "CTDTrialRenderer.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
-#import "CTDInteraction/CTDTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -58,7 +57,7 @@ static NSDictionary const* dotPaletteColorMap;
 
 - (id)init CTD_BLOCK_PARENT_METHOD
 
-- (id<CTDTouchMapper>)dotsTouchMapper
+- (id<CTDTouchToElementMapper>)dotsTouchMapper
 {
     return _dotsTouchMapper;
 }

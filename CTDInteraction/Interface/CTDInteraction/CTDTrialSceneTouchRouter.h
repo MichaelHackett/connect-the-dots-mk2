@@ -5,7 +5,8 @@
 
 #import "CTDTouchResponder.h"
 
-@protocol CTDTouchMapper;
+@protocol CTDTouchToElementMapper;
+@protocol CTDTouchToPointMapper;
 @protocol CTDTrialRenderer;
 
 
@@ -13,7 +14,8 @@
 @interface CTDTrialSceneTouchRouter : NSObject <CTDTouchResponder>
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                      dotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+                      dotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
+                        freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder;
 CTD_NO_DEFAULT_INIT
 
