@@ -30,7 +30,6 @@
     NSAssert(ctdView, @"Missing outlet connection to connect-the-dots view");
     _ctdViewAdapter = [[CTDUIKitConnectTheDotsViewAdapter alloc]
                        initWithConnectTheDotsView:ctdView
-                               touchReferenceView:self.view
                                      colorPalette:self.colorPalette];
 }
 

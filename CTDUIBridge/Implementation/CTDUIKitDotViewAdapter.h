@@ -20,7 +20,6 @@
 @interface CTDUIKitDotViewAdapter : NSObject <CTDDotRenderer, CTDTouchable>
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
-                   colorPalette:(CTDUIKitColorPalette*)colorPalette
-             touchReferenceView:(UIView*)touchReferenceView;
+                   colorPalette:(CTDUIKitColorPalette*)colorPalette;
 
 @end

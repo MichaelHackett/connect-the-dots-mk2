@@ -14,7 +14,6 @@
 @interface CTDUIKitConnectTheDotsViewAdapter : NSObject <CTDTrialRenderer, CTDTouchToPointMapper>
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
-                        touchReferenceView:(UIView*)touchReferenceView
                               colorPalette:(CTDUIKitColorPalette*)colorPalette;
 
 @end

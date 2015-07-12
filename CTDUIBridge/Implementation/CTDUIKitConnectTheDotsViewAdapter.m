@@ -15,18 +15,15 @@
 @implementation CTDUIKitConnectTheDotsViewAdapter
 {
     __weak CTDUIKitConnectTheDotsView* _connectTheDotsView;
-    __weak UIView* _touchReferenceView;
     CTDUIKitColorPalette* _colorPalette;
 }
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
-                        touchReferenceView:(UIView*)touchReferenceView
                               colorPalette:(CTDUIKitColorPalette*)colorPalette
 {
     self = [super init];
     if (self) {
         _connectTheDotsView = connectTheDotsView;
-        _touchReferenceView = touchReferenceView;
         _colorPalette = [colorPalette copy];
     }
     return self;
@@ -48,8 +45,7 @@
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
         [[CTDUIKitDotViewAdapter alloc]
          initWithDotView:[ctdView newDotCenteredAt:[centerPosition asCGPoint]]
-            colorPalette:_colorPalette
-      touchReferenceView:_touchReferenceView];
+            colorPalette:_colorPalette];
     [dotViewAdapter changeDotColorTo:dotColor];
 
     return dotViewAdapter;
@@ -81,7 +77,7 @@
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     CGPoint localPoint = [ctdView convertPoint:[touchLocation asCGPoint]
-                                      fromView:_touchReferenceView];
+                                      fromView:nil];
     return [CTDPoint fromCGPoint:localPoint];
 }
 

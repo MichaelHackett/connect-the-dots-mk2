@@ -12,7 +12,6 @@
 @implementation CTDUIKitDotViewAdapter
 {
     __weak CTDUIKitDotView* _dotView;
-    __weak UIView* _touchReferenceView;
     CTDUIKitColorPalette* _colorPalette;
 }
 
@@ -22,12 +21,10 @@
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
                    colorPalette:(CTDUIKitColorPalette*)colorPalette
-             touchReferenceView:(UIView*)touchReferenceView
 {
     self = [super init];
     if (self) {
         _dotView = dotView;
-        _touchReferenceView = touchReferenceView;
         _colorPalette = colorPalette;
     }
     return self;
@@ -70,9 +67,8 @@
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
 {
     CTDUIKitDotView* dotView = _dotView;
-    UIView* touchRefView = _touchReferenceView;
     CGPoint localTouchLocation = [dotView convertPoint:[touchLocation asCGPoint]
-                                              fromView:touchRefView];
+                                              fromView:nil];
     return [dotView dotContainsPoint:localTouchLocation];
 }
 
