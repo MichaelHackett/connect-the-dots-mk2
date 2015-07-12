@@ -72,4 +72,17 @@
     return lineViewAdapter;
 }
 
+
+
+#pragma mark CTDTouchToPointMapper protocol
+
+
+- (CTDPoint*)pointAtTouchLocation:(CTDPoint*)touchLocation
+{
+    CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
+    CGPoint localPoint = [ctdView convertPoint:[touchLocation asCGPoint]
+                                      fromView:_touchReferenceView];
+    return [CTDPoint fromCGPoint:localPoint];
+}
+
 @end

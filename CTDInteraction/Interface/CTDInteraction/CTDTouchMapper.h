@@ -6,9 +6,7 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-@class CTDPoint;
+#import "./ExtensionPoints/CTDTouchMappers.h"
 
-
-@protocol CTDTouchMapper <NSObject>
-- (id)elementAtTouchLocation:(CTDPoint*)touchLocation;
-@end
+// Temporary remapping of new protocol name to old.
+@protocol CTDTouchMapper <CTDTouchToElementMapper> @end

@@ -80,7 +80,8 @@
 
     connectVC.touchResponder = [[CTDTrialSceneTouchRouter alloc]
                                 initWithTrialRenderer:connectVC.trialRenderer
-                                dotsTouchMapper:[dotSetPresenter dotsTouchMapper]
+                                dotsTouchMapper:dotSetPresenter.dotsTouchMapper
+                                freeEndMapper:connectVC.trialTouchMapper
                                 colorCellsTouchResponder:colorCellsTouchResponder];
 }
 

@@ -3,6 +3,7 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "CTDTouchMapper.h"
+#import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotConnectionRenderer.h"
 #import "CTDPresentation/CTDDotRenderer.h"
 #import "CTDPresentation/CTDTrialRenderer.h"
@@ -35,6 +36,7 @@
 @implementation CTDConnectionTouchInteraction
 {
     id<CTDTouchMapper> _dotTouchMapper;
+    id<CTDTouchToPointMapper> _freeEndMapper;
     CTDConnectionPresenter* _presenter;
     id<CTDDotRenderer> _anchorDotView;
 }
@@ -47,6 +49,7 @@
 - (instancetype)
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
              dotTouchMapper:(id<CTDTouchMapper>)dotTouchMapper
+              freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
               anchorDotView:(id<CTDDotRenderer>)anchorDotView
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition
 {
@@ -57,6 +60,7 @@
                         format:@"Anchor dot view must not be nil"];
         }
         _dotTouchMapper = dotTouchMapper;
+        _freeEndMapper = freeEndMapper;
         _presenter = [[CTDConnectionPresenter alloc]
                       initWithTrialRenderer:trialRenderer];
 
@@ -87,7 +91,7 @@
     }
 
     [_presenter connectFreeEndToDotView:connectedDotView
-                       orMoveToPosition:newPosition];
+                       orMoveToPosition:[_freeEndMapper pointAtTouchLocation:newPosition]];
 }
 
 - (void)touchDidEnd

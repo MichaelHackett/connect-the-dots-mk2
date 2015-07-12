@@ -3,6 +3,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "CTDInteraction/ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDTrialRenderer.h"
 
 @class CTDUIKitColorPalette;
@@ -10,7 +11,7 @@
 
 
 
-@interface CTDUIKitConnectTheDotsViewAdapter : NSObject <CTDTrialRenderer>
+@interface CTDUIKitConnectTheDotsViewAdapter : NSObject <CTDTrialRenderer, CTDTouchToPointMapper>
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
                         touchReferenceView:(UIView*)touchReferenceView

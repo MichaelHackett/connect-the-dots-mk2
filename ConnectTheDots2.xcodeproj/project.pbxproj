@@ -370,6 +370,7 @@
 		4C41B7C11B155CB800B54422 /* CTDInteractionTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDInteractionTests.xcconfig; path = BuildConfiguration/CTDInteractionTests.xcconfig; sourceTree = "<group>"; };
 		4C56A99A1AA4F9220068129F /* CTDUIKitStandardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitStandardViewController.m; sourceTree = "<group>"; };
 		4C56A9A51AA4F93E0068129F /* CTDUIKitStandardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitStandardViewController.h; sourceTree = "<group>"; };
+		4C591BC91B519A5A00AE980B /* CTDTouchMappers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTouchMappers.h; sourceTree = "<group>"; };
 		4C5A568E19E1C37A00E994CB /* CTDSelectOnTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectOnTouchInteraction.h; sourceTree = "<group>"; };
 		4C5A568F19E1C37A00E994CB /* CTDSelectOnTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSelectOnTouchInteraction.m; sourceTree = "<group>"; };
 		4C5A569D19E1C65600E994CB /* CTDConnectionTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDConnectionTouchInteraction.h; sourceTree = "<group>"; };
@@ -770,6 +771,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFEF3C71A719C6D0086C37B /* CTDTouchable.h */,
+				4C591BC91B519A5A00AE980B /* CTDTouchMappers.h */,
 			);
 			path = ExtensionPoints;
 			sourceTree = "<group>";

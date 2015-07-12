@@ -45,4 +45,9 @@
     return _ctdViewAdapter;
 }
 
+- (id<CTDTouchToPointMapper>)trialTouchMapper
+{
+    return _ctdViewAdapter;
+}
+
 @end

@@ -76,19 +76,22 @@ CTD_NO_DEFAULT_INIT
 {
     __weak id<CTDTrialRenderer> _trialRenderer;
     id<CTDTouchMapper> _dotsTouchMapper;
+    id<CTDTouchToPointMapper> _freeEndMapper;
     id<CTDTouchResponder> _colorCellsTouchResponder;
 }
 
 #pragma mark Initialization
 
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                   dotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+                      dotsTouchMapper:(id<CTDTouchMapper>)dotsTouchMapper
+                        freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder
 {
     self = [super init];
     if (self) {
         _trialRenderer = trialRenderer;
         _dotsTouchMapper = dotsTouchMapper;
+        _freeEndMapper = freeEndMapper;
         _colorCellsTouchResponder = colorCellsTouchResponder;
     }
     return self;
@@ -140,19 +143,23 @@ CTD_NO_DEFAULT_INIT
     // local copies for the block's use
     __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
     id<CTDTouchMapper> dotsTouchMapper = _dotsTouchMapper;
+    id<CTDTouchToPointMapper> freeEndMapper = _freeEndMapper;
 
     id<CTDTouchTracker> actionDiscriminator =
         [[CTDDotDetectionTracker alloc]
          initWithDotsTouchMapper:_dotsTouchMapper
-               initialTouchLocation:initialPosition
+            initialTouchLocation:initialPosition
                    dotHitHandler:^(id<CTDDotRenderer> hitDotView)
     {
+        CTDPoint *initialFreeEndPosition =
+            [freeEndMapper pointAtTouchLocation:initialPosition];
         [delegatingTracker changeDelegateTo:
             [[CTDConnectionTouchInteraction alloc]
              initWithTrialRenderer:trialRenderer
                     dotTouchMapper:dotsTouchMapper
+                     freeEndMapper:freeEndMapper
                      anchorDotView:hitDotView
-            initialFreeEndPosition:initialPosition]];
+            initialFreeEndPosition:initialFreeEndPosition]];
         if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
             [colorCellsTouchTracker touchWasCancelled];
         }
