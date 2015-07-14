@@ -15,11 +15,12 @@
 
 @protocol CTDTrialRenderer <NSObject>
 
-- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
-                                        withInitialColor:(CTDPaletteColorLabel)dotColor;
+- (id<CTDDotRenderer, CTDTouchable>)
+      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
+               withInitialColor:(CTDPaletteColorLabel)dotColor;
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                             secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
+      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 @end

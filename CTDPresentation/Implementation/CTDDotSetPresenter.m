@@ -19,7 +19,7 @@ static NSDictionary const* dotPaletteColorMap;
 
 @implementation CTDDotSetPresenter
 {
-    NSArray* _dotViews;
+    NSArray* _dotRenderings;
     CTDListOrderTouchMapper* _dotsTouchMapper;
 }
 
@@ -37,19 +37,19 @@ static NSDictionary const* dotPaletteColorMap;
 {
     self = [super init];
     if (self) {
-        NSMutableArray* dotViews = [[NSMutableArray alloc] init];
+        NSMutableArray* dotRenderings = [[NSMutableArray alloc] init];
         for (CTDDot* dot in dotList) {
             CTDPaletteColorLabel dotColor = dotPaletteColorMap[@(dot.color)];
-            [dotViews addObject:
-                [trialRenderer newDotViewCenteredAt:dot.position
-                                   withInitialColor:dotColor]];
+            [dotRenderings addObject:
+                [trialRenderer newDotRenderingCenteredAt:dot.position
+                                        withInitialColor:dotColor]];
         }
 
-        _dotViews = [dotViews copy];
+        _dotRenderings = [dotRenderings copy];
         _dotsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
-        for (id<CTDTouchable> dotView in dotViews) {
-            [_dotsTouchMapper mapTouchable:dotView
-                                toActuator:dotView]; // TODO: Change to some PM obj
+        for (id<CTDTouchable> dotRendering in dotRenderings) {
+            [_dotsTouchMapper mapTouchable:dotRendering
+                                toActuator:dotRendering]; // TODO: Change to some PM obj
         }
     }
     return self;

@@ -12,7 +12,7 @@
 #import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
-#import "CTDRecordingDotConnectionView.h"
+#import "CTDRecordingDotConnectionRenderer.h"
 #import "CTDRecordingTouchTracker.h"
 #import "CTDRecordingTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
@@ -100,8 +100,8 @@ static CTDFakeDotRenderer* dot1;
     return selectedDots;
 }
 
-- (CTDRecordingDotConnectionView*)activeConnection {
-    return [self.trialRenderer.connectionViewsCreated firstObject];
+- (CTDRecordingDotConnectionRenderer*)activeConnection {
+    return [self.trialRenderer.connectionRenderersCreated firstObject];
 }
 
 @end
@@ -124,7 +124,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, isEmpty());
+    assertThat(self.trialRenderer.connectionRenderersCreated, isEmpty());
 }
 
 - (void)testThatColorCellResponderIsAskedForATracker {
@@ -157,7 +157,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatNoConnectionsAreStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, isEmpty());
+    assertThat(self.trialRenderer.connectionRenderersCreated, isEmpty());
 }
 
 - (void)testThatColorCellTrackerReceivedNewPosition {
@@ -190,7 +190,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatAConnectionIsStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerWasCancelled {
@@ -275,7 +275,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatAConnectionIsStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
 }
 
 - (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheDotConnectionPoint {
@@ -329,7 +329,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -372,7 +372,7 @@ static CTDFakeDotRenderer* dot1;
 }
 
 - (void)testThatNoNewConnectionsAreStarted {
-    assertThat(self.trialRenderer.connectionViewsCreated, hasCountOf(1));
+    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates {

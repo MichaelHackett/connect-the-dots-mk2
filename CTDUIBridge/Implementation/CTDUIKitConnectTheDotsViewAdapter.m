@@ -34,8 +34,9 @@
 #pragma mark CTDTrialRenderer protocol
 
 
-- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
-                                        withInitialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer, CTDTouchable>)
+      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
+               withInitialColor:(CTDPaletteColorLabel)dotColor
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
@@ -52,8 +53,8 @@
 }
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                             secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {

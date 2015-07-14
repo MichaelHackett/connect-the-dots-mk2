@@ -3,7 +3,7 @@
 #import "CTDRecordingTrialRenderer.h"
 
 #import "CTDFakeDotRenderer.h"
-#import "CTDRecordingDotConnectionView.h"
+#import "CTDRecordingDotConnectionRenderer.h"
 #import "ExtensionPoints/CTDTouchable.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDPresentation/CTDDotConnectionRenderer.h"
@@ -14,49 +14,50 @@
 
 @implementation CTDRecordingTrialRenderer
 {
-    NSMutableArray* _dotViewsCreated;
-    NSMutableArray* _connectionViewsCreated;
+    NSMutableArray* _dotRenderersCreated;
+    NSMutableArray* _connectionRenderersCreated;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _dotViewsCreated = [[NSMutableArray alloc] init];
-        _connectionViewsCreated = [[NSMutableArray alloc] init];
+        _dotRenderersCreated = [[NSMutableArray alloc] init];
+        _connectionRenderersCreated = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (NSArray*)dotViewsCreated
+- (NSArray*)dotRenderersCreated
 {
-    return [_dotViewsCreated copy];
+    return [_dotRenderersCreated copy];
 }
 
-- (NSArray*)connectionViewsCreated
+- (NSArray*)connectionRenderersCreated
 {
-    return [_connectionViewsCreated copy];
+    return [_connectionRenderersCreated copy];
 }
 
-- (id<CTDDotRenderer, CTDTouchable>)newDotViewCenteredAt:(CTDPoint*)centerPosition
-                                        withInitialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer, CTDTouchable>)
+      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
+               withInitialColor:(CTDPaletteColorLabel)dotColor
 {
-    id newDotView = [[CTDFakeDotRenderer alloc]
-                     initWithCenterPosition:centerPosition
-                                   dotColor:dotColor];
-    [_dotViewsCreated addObject:newDotView];
-    return newDotView;
+    id newDotRenderer = [[CTDFakeDotRenderer alloc]
+                         initWithCenterPosition:centerPosition
+                                       dotColor:dotColor];
+    [_dotRenderersCreated addObject:newDotRenderer];
+    return newDotRenderer;
 }
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionViewWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
       secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    id newConnectionView = [[CTDRecordingDotConnectionView alloc]
-                                  initWithFirstEndpointPosition:firstEndpointPosition
-                                  secondEndpointPosition:secondEndpointPosition];
-    [_connectionViewsCreated addObject:newConnectionView];
-    return newConnectionView;
+    id newConnectionRenderer = [[CTDRecordingDotConnectionRenderer alloc]
+                                initWithFirstEndpointPosition:firstEndpointPosition
+                                secondEndpointPosition:secondEndpointPosition];
+    [_connectionRenderersCreated addObject:newConnectionRenderer];
+    return newConnectionRenderer;
 }
 
 @end

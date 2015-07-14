@@ -7,7 +7,6 @@
 #import "CTDSelectOnTouchInteraction.h"
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
-//#import "CTDTrialRenderer.h"
 #import "ExtensionPoints/CTDTouchMappers.h"
 #import "CTDPresentation/CTDDotRenderer.h"
 
@@ -17,7 +16,7 @@
 
 #pragma mark - Initial delegate touch tracker (private)
 
-typedef void (^CTDDotHitHandler)(id<CTDDotRenderer> hitDotView);
+typedef void (^CTDDotHitHandler)(id<CTDDotRenderer> hitDotRenderer);
 
 
 @interface CTDDotDetectionTracker : NSObject <CTDTouchTracker>
@@ -37,7 +36,7 @@ CTD_NO_DEFAULT_INIT
 
 - (instancetype)initWithDotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                    initialTouchLocation:(CTDPoint*)initialTouchLocation
-                          dotHitHandler:(void(^)(id<CTDDotRenderer> hitDotView))dotHitHandler
+                          dotHitHandler:(CTDDotHitHandler)dotHitHandler
 {
     self = [super init];
     if (self) {
@@ -149,7 +148,7 @@ CTD_NO_DEFAULT_INIT
         [[CTDDotDetectionTracker alloc]
          initWithDotsTouchMapper:_dotsTouchMapper
             initialTouchLocation:initialPosition
-                   dotHitHandler:^(id<CTDDotRenderer> hitDotView)
+                   dotHitHandler:^(id<CTDDotRenderer> hitDotRenderer)
     {
         CTDPoint *initialFreeEndPosition =
             [freeEndMapper pointAtTouchLocation:initialPosition];
@@ -158,7 +157,7 @@ CTD_NO_DEFAULT_INIT
              initWithTrialRenderer:trialRenderer
                     dotTouchMapper:dotsTouchMapper
                      freeEndMapper:freeEndMapper
-                     anchorDotView:hitDotView
+                 anchorDotRenderer:hitDotRenderer
             initialFreeEndPosition:initialFreeEndPosition]];
         if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
             [colorCellsTouchTracker touchWasCancelled];

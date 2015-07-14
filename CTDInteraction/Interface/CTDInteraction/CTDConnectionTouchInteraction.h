@@ -29,7 +29,7 @@
       initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
              dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
               freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
-              anchorDotView:(id<CTDDotRenderer>)anchorDotView
+          anchorDotRenderer:(id<CTDDotRenderer>)anchorDotRenderer
      initialFreeEndPosition:(CTDPoint*)initialFreeEndPosition;
 CTD_NO_DEFAULT_INIT
 
