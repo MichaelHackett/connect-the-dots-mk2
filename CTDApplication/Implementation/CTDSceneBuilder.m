@@ -10,7 +10,7 @@
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
 #import "CTDPresentation/CTDSelectionRenderer.h"
-#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
+#import "Ports/CTDConnectScene.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -29,12 +29,12 @@
 #pragma mark Builder methods
 
 
-+ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
-                withDotList:(NSArray *)dotList
++ (void)prepareConnectScene:(id<CTDConnectScene>)connectScene
+                withDotList:(NSArray*)dotList
 {
     CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
                                            initWithDotList:dotList
-                                             trialRenderer:connectVC.trialRenderer];
+                                             trialRenderer:connectScene.trialRenderer];
 
     CTDColorCellGroup* colorCellGroup = [[CTDColorCellGroup alloc]
                                          initWithDefaultColor:CTDDotColor_White
@@ -45,9 +45,9 @@
 
     // TODO: reduce repetition in this section
 
-    id<CTDSelectionRenderer, CTDTouchable> colorCell1Renderer = connectVC.colorSelectionCells[0];
-    id<CTDSelectionRenderer, CTDTouchable> colorCell2Renderer = connectVC.colorSelectionCells[1];
-    id<CTDSelectionRenderer, CTDTouchable> colorCell3Renderer = connectVC.colorSelectionCells[2];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell1Renderer = connectScene.colorSelectionCells[0];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell2Renderer = connectScene.colorSelectionCells[1];
+    id<CTDSelectionRenderer, CTDTouchable> colorCell3Renderer = connectScene.colorSelectionCells[2];
 
     [colorCellsTouchMapper mapTouchable:colorCell1Renderer
                            toActuator:[colorCellGroup addCellForColor:CTDDotColor_Red
@@ -78,11 +78,11 @@
     // TODO: Roll touch router into scene presenter? (It already knows about touch mapping.)
 //    [touchInputRouter addTouchResponder:
 
-    connectVC.touchResponder = [[CTDTrialSceneTouchRouter alloc]
-                                initWithTrialRenderer:connectVC.trialRenderer
-                                dotsTouchMapper:dotSetPresenter.dotsTouchMapper
-                                freeEndMapper:connectVC.trialTouchMapper
-                                colorCellsTouchResponder:colorCellsTouchResponder];
+    [connectScene setTouchResponder:[[CTDTrialSceneTouchRouter alloc]
+                                     initWithTrialRenderer:connectScene.trialRenderer
+                                     dotsTouchMapper:dotSetPresenter.dotsTouchMapper
+                                     freeEndMapper:connectScene.trialTouchMapper
+                                     colorCellsTouchResponder:colorCellsTouchResponder]];
 }
 
 @end

@@ -20,6 +20,7 @@ CTD_PROJECT_LIBRARY_DIR = External
 CTD_PROJECT_SHARED_HEADERS = Common
 
 // Module public interface directory paths (when referenced by other modules):
+CTD_APPLICATION_HEADERS = CTDApplication/Interface
 CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
 CTD_INTERACTION_HEADERS = CTDInteraction/Interface

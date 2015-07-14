@@ -3,15 +3,15 @@
 #import "CTDAppDelegate.h"
 
 #import "CTDSceneBuilder.h"
+#import "Ports/CTDConnectScene.h"
 #import "CTDUIBridge/CTDUIKitBridge.h"
-#import "CTDUIBridge/CTDUIKitConnectSceneViewController.h"
 #import "CTDUIBridge/CTDUIKitDrawingConfig.h"
 #import "CTDUIBridge/CTDUIKitColorPalette.h"
-#import "CocoaAdditions/UIKit.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CTDUtility/CTDPoint.h"
+#import "CocoaAdditions/UIKit.h"
 
 
 static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
@@ -54,10 +54,10 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     // would already be loaded at this point. To avoid disrupting other code
     // if/when we make that change, reproduce those steps here.
     application.statusBarHidden = YES;
-    CTDUIKitConnectSceneViewController* connectVC =
+    id<CTDConnectScene> connectScene =
         [CTDUIKitBridge connectSceneFromNibName:kCTDConnectSceneNibName
                               withDrawingConfig:_drawingConfig];
-    _window = [UIKit fullScreenWindowWithRootViewController:connectVC
+    _window = [UIKit fullScreenWindowWithRootViewController:connectScene.rootViewController
                                             backgroundColor:[UIColor whiteColor]];
 
     // TODO: Replace with data loaded from disk
@@ -68,7 +68,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     ];
 
     // Now wire up the scene to the Presentation and Interaction modules.
-    [CTDSceneBuilder prepareConnectScene:connectVC withDotList:dotList];
+    [CTDSceneBuilder prepareConnectScene:connectScene withDotList:dotList];
 
     // Lastly, make it visible. (Have to do this after running the Scene
     // Builder, so that it has a chance to set some values before loading the

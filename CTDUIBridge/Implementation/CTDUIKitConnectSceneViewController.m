@@ -39,6 +39,11 @@
 //    // Dispose of any resources that can be recreated.
 //}
 
+
+
+#pragma mark CTDConnectScene
+
+
 - (id<CTDTrialRenderer>)trialRenderer
 {
     return _ctdViewAdapter;
@@ -47,6 +52,11 @@
 - (id<CTDTouchToPointMapper>)trialTouchMapper
 {
     return _ctdViewAdapter;
+}
+
+- (UIViewController*)rootViewController
+{
+    return self;
 }
 
 @end

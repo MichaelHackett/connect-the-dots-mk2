@@ -9,9 +9,8 @@
 
 @implementation CTDUIKitBridge
 
-+ (CTDUIKitConnectSceneViewController*)
-      connectSceneFromNibName:(NSString*)connectSceneNibName
-            withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
++ (id<CTDConnectScene>)connectSceneFromNibName:(NSString*)connectSceneNibName
+                             withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]

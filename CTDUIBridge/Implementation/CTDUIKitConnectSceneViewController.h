@@ -4,6 +4,7 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitStandardViewController.h"
+#import "CTDApplication/Ports/CTDConnectScene.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
@@ -13,7 +14,7 @@
 
 
 @interface CTDUIKitConnectSceneViewController
-    : CTDUIKitStandardViewController
+    : CTDUIKitStandardViewController <CTDConnectScene>
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
 

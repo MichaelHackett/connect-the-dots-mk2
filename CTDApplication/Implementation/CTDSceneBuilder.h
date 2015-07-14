@@ -5,13 +5,13 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-@class CTDUIKitConnectSceneViewController;
+@protocol CTDConnectScene;
 
 
 
 @interface CTDSceneBuilder : NSObject
 
-+ (void)prepareConnectScene:(CTDUIKitConnectSceneViewController*)connectVC
++ (void)prepareConnectScene:(id<CTDConnectScene>)connectScene
                 withDotList:(NSArray*)dotList;
 
 @end
