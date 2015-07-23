@@ -9,7 +9,9 @@
 #import "CTDUIBridge/CTDUIKitColorPalette.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
+#import "CTDModel/CTDModel.h"
 #import "CTDPresentation/CTDColorPalette.h"
+#import "CTDPresentation/CTDPresentation.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CocoaAdditions/UIKit.h"
 
@@ -61,14 +63,14 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
                                             backgroundColor:[UIColor whiteColor]];
 
     // TODO: Replace with data loaded from disk
-    NSArray* dotList = @[
+    id<CTDTrial> trial = [CTDModel trialWithDots:@[
         dot(CTDDotColor_Green, 100, 170),
         dot(CTDDotColor_Red, 600, 400),
         dot(CTDDotColor_Blue, 250, 650)
-    ];
-
+    ]];
+    
     // Now wire up the scene to the Presentation and Interaction modules.
-    [CTDSceneBuilder prepareConnectScene:connectScene withDotList:dotList];
+    [CTDSceneBuilder prepareConnectScene:connectScene withTrial:trial];
 
     // Lastly, make it visible. (Have to do this after running the Scene
     // Builder, so that it has a chance to set some values before loading the

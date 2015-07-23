@@ -8,7 +8,8 @@
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 #import "CTDPresentation/CTDColorCellGroup.h"
-#import "CTDPresentation/CTDDotSetPresenter.h"
+#import "CTDPresentation/CTDPresentation.h"
+#import "CTDPresentation/CTDTrialPresenter.h"
 #import "CTDPresentation/Ports/CTDSelectionRenderer.h"
 #import "Ports/CTDConnectScene.h"
 #import "CTDUtility/CTDPoint.h"
@@ -30,11 +31,11 @@
 
 
 + (void)prepareConnectScene:(id<CTDConnectScene>)connectScene
-                withDotList:(NSArray*)dotList
+                  withTrial:(id<CTDTrial>)trial
 {
-    CTDDotSetPresenter* dotSetPresenter = [[CTDDotSetPresenter alloc]
-                                           initWithDotList:dotList
-                                             trialRenderer:connectScene.trialRenderer];
+    id<CTDTrialPresenter> trialPresenter =
+        [CTDPresentation presenterForTrial:trial
+                             trialRenderer:connectScene.trialRenderer];
 
     CTDColorCellGroup* colorCellGroup = [[CTDColorCellGroup alloc]
                                          initWithDefaultColor:CTDDotColor_White
@@ -80,7 +81,7 @@
 
     [connectScene setTouchResponder:[[CTDTrialSceneTouchRouter alloc]
                                      initWithTrialRenderer:connectScene.trialRenderer
-                                     dotsTouchMapper:dotSetPresenter.dotsTouchMapper
+                                     dotsTouchMapper:trialPresenter.dotsTouchMapper
                                      freeEndMapper:connectScene.trialTouchMapper
                                      colorCellsTouchResponder:colorCellsTouchResponder]];
 }

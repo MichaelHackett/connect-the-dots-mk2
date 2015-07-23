@@ -6,12 +6,13 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @protocol CTDConnectScene;
+@protocol CTDTrial;
 
 
 
 @interface CTDSceneBuilder : NSObject
 
 + (void)prepareConnectScene:(id<CTDConnectScene>)connectScene
-                withDotList:(NSArray*)dotList;
+                  withTrial:(id<CTDTrial>)trial;
 
 @end
