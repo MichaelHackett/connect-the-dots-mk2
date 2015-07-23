@@ -5,7 +5,7 @@
 
 #import "ExtensionPoints/CTDTouchable.h"
 #import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
 #import "CTDTestHelpers/CTDTestSpy.h"
 
 @class CTDPoint;

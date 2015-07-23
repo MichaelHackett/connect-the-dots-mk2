@@ -3,9 +3,9 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "ExtensionPoints/CTDTouchMappers.h"
-#import "CTDPresentation/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/CTDDotRenderer.h"
-#import "CTDPresentation/CTDTrialRenderer.h"
+#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
+#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 

@@ -3,7 +3,7 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
-#import "CTDPresentation/CTDTrialRenderer.h"
+#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 
 
 

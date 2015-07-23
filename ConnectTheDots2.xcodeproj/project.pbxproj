@@ -855,6 +855,18 @@
 			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
+		4C94793C1B6088D200EFCF6C /* Ports */ = {
+			isa = PBXGroup;
+			children = (
+				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
+				4C5A56A419E1E2F800E994CB /* CTDDotConnectionRenderer.h */,
+				4CFDEEE019C694C90041B910 /* CTDDotRenderer.h */,
+				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
+				4C5A56A619E1EEF200E994CB /* CTDTrialRenderer.h */,
+			);
+			path = Ports;
+			sourceTree = "<group>";
+		};
 		4C9B86211B3B9C7C005BB419 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -1074,14 +1086,10 @@
 			isa = PBXGroup;
 			children = (
 				4C32364D1A16415E005C25D7 /* CTDColorCellGroup.h */,
-				4C26194B1A105A43005E87A9 /* CTDColorCellRenderer.h */,
 				4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */,
-				4C5A56A419E1E2F800E994CB /* CTDDotConnectionRenderer.h */,
-				4CFDEEE019C694C90041B910 /* CTDDotRenderer.h */,
 				4CFDEEE119C698520041B910 /* CTDDotSetPresenter.h */,
-				4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */,
-				4C5A56A619E1EEF200E994CB /* CTDTrialRenderer.h */,
 				4C3236511A16434C005C25D7 /* CTDSelectable.h */,
+				4C94793C1B6088D200EFCF6C /* Ports */,
 			);
 			name = Interface;
 			path = Interface/CTDPresentation;

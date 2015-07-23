@@ -9,7 +9,7 @@
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDDotSetPresenter.h"
-#import "CTDPresentation/CTDSelectionRenderer.h"
+#import "CTDPresentation/Ports/CTDSelectionRenderer.h"
 #import "Ports/CTDConnectScene.h"
 #import "CTDUtility/CTDPoint.h"
 

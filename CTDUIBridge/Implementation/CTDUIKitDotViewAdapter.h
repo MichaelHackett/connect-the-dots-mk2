@@ -10,7 +10,7 @@
 //  Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDInteraction/ExtensionPoints/CTDTouchable.h"
-#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitDotView;

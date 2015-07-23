@@ -6,8 +6,8 @@
 #import "CTDRecordingDotConnectionRenderer.h"
 #import "ExtensionPoints/CTDTouchable.h"
 #import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
