@@ -9,8 +9,9 @@
 
 @implementation CTDPresentation
 
-+ (id<CTDTrialPresenter>)presenterForTrial:(id<CTDTrial>)trial
-                             trialRenderer:(id<CTDTrialRenderer>)trialRenderer
++ (id<CTDTrialActivityView>)
+      trialActivityViewForTrial:(id<CTDTrial>)trial
+                  trialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     return [[CTDDotSetPresenter alloc]
             initWithDotList:[trial dotList]

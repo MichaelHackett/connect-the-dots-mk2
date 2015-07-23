@@ -9,7 +9,7 @@
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 #import "CTDPresentation/CTDColorCellGroup.h"
 #import "CTDPresentation/CTDPresentation.h"
-#import "CTDPresentation/CTDTrialPresenter.h"
+#import "CTDPresentation/CTDTrialActivityView.h"
 #import "CTDPresentation/Ports/CTDSelectionRenderer.h"
 #import "Ports/CTDConnectScene.h"
 #import "CTDUtility/CTDPoint.h"
@@ -33,9 +33,9 @@
 + (void)prepareConnectScene:(id<CTDConnectScene>)connectScene
                   withTrial:(id<CTDTrial>)trial
 {
-    id<CTDTrialPresenter> trialPresenter =
-        [CTDPresentation presenterForTrial:trial
-                             trialRenderer:connectScene.trialRenderer];
+    id<CTDTrialActivityView> trialActivityView =
+        [CTDPresentation trialActivityViewForTrial:trial
+                                     trialRenderer:connectScene.trialRenderer];
 
     CTDColorCellGroup* colorCellGroup = [[CTDColorCellGroup alloc]
                                          initWithDefaultColor:CTDDotColor_White
@@ -81,7 +81,7 @@
 
     [connectScene setTouchResponder:[[CTDTrialSceneTouchRouter alloc]
                                      initWithTrialRenderer:connectScene.trialRenderer
-                                     dotsTouchMapper:trialPresenter.dotsTouchMapper
+                                     dotsTouchMapper:trialActivityView.dotsTouchMapper
                                      freeEndMapper:connectScene.trialTouchMapper
                                      colorCellsTouchResponder:colorCellsTouchResponder]];
 }

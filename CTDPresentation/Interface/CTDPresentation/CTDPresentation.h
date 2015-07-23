@@ -5,14 +5,15 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @protocol CTDTrial;
-@protocol CTDTrialPresenter;
+@protocol CTDTrialActivityView;
 @protocol CTDTrialRenderer;
 
 
 
 @interface CTDPresentation : NSObject
 
-+ (id<CTDTrialPresenter>)presenterForTrial:(id<CTDTrial>)trial
-                             trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
++ (id<CTDTrialActivityView>)
+      trialActivityViewForTrial:(id<CTDTrial>)trial
+                  trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
 
 @end

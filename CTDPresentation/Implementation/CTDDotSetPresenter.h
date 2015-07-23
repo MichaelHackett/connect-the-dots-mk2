@@ -3,14 +3,14 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDTrialPresenter.h"
+#import "CTDTrialActivityView.h"
 
 @protocol CTDTouchToElementMapper;
 @protocol CTDTrialRenderer;
 
 
 
-@interface CTDDotSetPresenter : NSObject <CTDTrialPresenter>
+@interface CTDDotSetPresenter : NSObject <CTDTrialActivityView>
 
 - (instancetype)initWithDotList:(NSArray*)dotList
                   trialRenderer:(id<CTDTrialRenderer>)trialRenderer;

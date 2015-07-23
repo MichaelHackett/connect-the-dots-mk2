@@ -394,7 +394,7 @@
 		4C8497891A802852000A094E /* CTDOccurrenceCountMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDOccurrenceCountMatcher.h; sourceTree = "<group>"; };
 		4C84978A1A802852000A094E /* CTDOccurrenceCountMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDOccurrenceCountMatcher.m; sourceTree = "<group>"; };
 		4C8497A31A82AE1B000A094E /* CTDRecordingDotConnectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDRecordingDotConnectionRenderer.h; sourceTree = "<group>"; };
-		4C9479461B6089E100EFCF6C /* CTDTrialPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialPresenter.h; sourceTree = "<group>"; };
+		4C9479461B6089E100EFCF6C /* CTDTrialActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialActivityView.h; sourceTree = "<group>"; };
 		4C9B86151B392C21005BB419 /* CTDUIKitLineViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitLineViewAdapter.h; sourceTree = "<group>"; };
 		4C9B86161B392C21005BB419 /* CTDUIKitLineViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitLineViewAdapter.m; sourceTree = "<group>"; };
 		4C9B86241B3BA32E005BB419 /* CTDUIKitConnectTheDotsViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitConnectTheDotsViewAdapter.h; sourceTree = "<group>"; };
@@ -1100,7 +1100,7 @@
 				4C32364D1A16415E005C25D7 /* CTDColorCellGroup.h */,
 				4CD5BF981A1A4F4A003A6321 /* CTDColorPalette.h */,
 				4C3236511A16434C005C25D7 /* CTDSelectable.h */,
-				4C9479461B6089E100EFCF6C /* CTDTrialPresenter.h */,
+				4C9479461B6089E100EFCF6C /* CTDTrialActivityView.h */,
 				4C94793C1B6088D200EFCF6C /* Ports */,
 			);
 			name = Interface;

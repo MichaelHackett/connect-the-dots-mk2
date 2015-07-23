@@ -1,4 +1,4 @@
-// CTDTrialPresenter:
+// CTDTrialActivityView:
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
@@ -6,7 +6,7 @@
 
 
 
-@protocol CTDTrialPresenter <NSObject>
+@protocol CTDTrialActivityView <NSObject>
 
 // TEMPORARY?
 - (id<CTDTouchToElementMapper>)dotsTouchMapper;
