@@ -2,7 +2,7 @@
 
 #import "CTDColorCellsTestFixture.h"
 
-#import "ExtensionPoints/CTDTouchMappers.h"
+#import "Ports/CTDTouchMappers.h"
 #import "CTDPresentation/CTDSelectable.h"
 #import "CTDSelectionChangeRecorder.h"
 #import "CTDUtility/CTDPoint.h"

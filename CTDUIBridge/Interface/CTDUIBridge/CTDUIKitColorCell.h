@@ -3,7 +3,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDInteraction/ExtensionPoints/CTDTouchable.h"
+#import "CTDInteraction/Ports/CTDTouchable.h"
 #import "CTDPresentation/Ports/CTDSelectionRenderer.h"
 
 

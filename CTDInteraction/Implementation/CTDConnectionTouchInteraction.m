@@ -2,7 +2,7 @@
 
 #import "CTDConnectionTouchInteraction.h"
 
-#import "ExtensionPoints/CTDTouchMappers.h"
+#import "Ports/CTDTouchMappers.h"
 #import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
 #import "CTDPresentation/Ports/CTDDotRenderer.h"
 #import "CTDPresentation/Ports/CTDTrialRenderer.h"

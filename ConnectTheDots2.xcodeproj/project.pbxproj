@@ -720,7 +720,7 @@
 				4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */,
 				4C25B9721A0E7F0000275138 /* CTDTouchTrackingGroup.h */,
 				4CFEF3C01A7193710086C37B /* CTDTrialSceneTouchRouter.h */,
-				4C41B7C91B15700400B54422 /* ExtensionPoints */,
+				4C41B7C91B15700400B54422 /* Ports */,
 			);
 			name = Interface;
 			path = Interface/CTDInteraction;
@@ -766,13 +766,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4C41B7C91B15700400B54422 /* ExtensionPoints */ = {
+		4C41B7C91B15700400B54422 /* Ports */ = {
 			isa = PBXGroup;
 			children = (
 				4CFEF3C71A719C6D0086C37B /* CTDTouchable.h */,
 				4C591BC91B519A5A00AE980B /* CTDTouchMappers.h */,
 			);
-			path = ExtensionPoints;
+			path = Ports;
 			sourceTree = "<group>";
 		};
 		4C41B7CA1B15724000B54422 /* Test Helpers */ = {

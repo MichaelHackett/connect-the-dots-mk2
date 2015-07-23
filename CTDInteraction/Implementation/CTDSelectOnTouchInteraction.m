@@ -2,7 +2,7 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
-#import "ExtensionPoints/CTDTouchMappers.h"
+#import "Ports/CTDTouchMappers.h"
 #import "CTDPresentation/CTDSelectable.h"
 #import "CTDUtility/CTDPoint.h"
 
