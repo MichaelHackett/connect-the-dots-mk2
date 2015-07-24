@@ -25,7 +25,7 @@ CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
 CTD_INTERACTION_HEADERS = CTDInteraction/Interface
 CTD_UTILITY_HEADERS = CTDUtility/Interface
-CTD_UI_BRIDGE_HEADERS = CTDUIBridge/Interface
+CTD_UIKIT_BRIDGE_HEADERS = CTDUIKitBridge/Interface
 COCOA_ADDITIONS_HEADERS = CocoaAdditions/Interface
 
 // Test targets need the application bundle for to run the tests inside.

@@ -1,4 +1,4 @@
-// Common configuration for UI Bridge target.
+// Common configuration for UIKit Bridge target.
 
 #include "General-Common-StaticLibrary.xcconfig"
 

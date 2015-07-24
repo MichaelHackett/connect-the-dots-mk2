@@ -4,9 +4,9 @@
 
 #import "CTDSceneBuilder.h"
 #import "Ports/CTDConnectScene.h"
-#import "CTDUIBridge/CTDUIKitBridge.h"
-#import "CTDUIBridge/CTDUIKitDrawingConfig.h"
-#import "CTDUIBridge/CTDUIKitColorPalette.h"
+#import "CTDUIKitBridge/CTDUIKitBridge.h"
+#import "CTDUIKitBridge/CTDUIKitDrawingConfig.h"
+#import "CTDUIKitBridge/CTDUIKitColorPalette.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDModel/CTDModel.h"

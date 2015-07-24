@@ -155,36 +155,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CFEF3491A6EB63F0086C37B"
-               BuildableName = "libCTDUIBridge.a"
-               BlueprintName = "CTDUIBridge"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFEF3891A6FF89A0086C37B"
-               BuildableName = "libCTDUIPlugins.a"
-               BlueprintName = "CTDUIPlugins"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFEF3961A6FF89A0086C37B"
-               BuildableName = "CTDUIPluginsTests.xctest"
-               BlueprintName = "CTDUIPluginsTests"
+               BuildableName = "libCTDUIKitBridge.a"
+               BlueprintName = "CTDUIKitBridge"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -259,16 +231,6 @@
                BlueprintIdentifier = "4CEBCA2119BB564600D2B498"
                BuildableName = "CTDApplicationTests.xctest"
                BlueprintName = "CTDApplicationTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFEF3961A6FF89A0086C37B"
-               BuildableName = "CTDUIPluginsTests.xctest"
-               BlueprintName = "CTDUIPluginsTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
