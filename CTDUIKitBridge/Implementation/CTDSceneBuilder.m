@@ -2,7 +2,7 @@
 
 #import "CTDSceneBuilder.h"
 
-#import "CTDApplication/Ports/CTDConnectScene.h"
+#import "CTDActivities/Ports/CTDConnectScene.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDSelectOnTouchInteraction.h"

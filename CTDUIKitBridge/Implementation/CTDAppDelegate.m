@@ -6,7 +6,7 @@
 #import "CTDUIKitBridge.h"
 #import "CTDUIKitDrawingConfig.h"
 #import "CTDUIKitColorPalette.h"
-#import "CTDApplication/Ports/CTDConnectScene.h"
+#import "CTDActivities/Ports/CTDConnectScene.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDModel/CTDDotColor.h"
 #import "CTDModel/CTDModel.h"
@@ -68,7 +68,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
         dot(CTDDotColor_Red, 600, 400),
         dot(CTDDotColor_Blue, 250, 650)
     ]];
-    
+
     // Now wire up the scene to the Presentation and Interaction modules.
     [CTDSceneBuilder prepareConnectScene:connectScene withTrial:trial];
 
@@ -88,7 +88,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
 
 - (void)applicationDidEnterBackground:(__unused UIApplication*)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

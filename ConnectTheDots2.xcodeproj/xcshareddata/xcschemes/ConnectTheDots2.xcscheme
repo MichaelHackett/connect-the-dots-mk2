@@ -42,6 +42,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C94796B1B61F43F00EFCF6C"
+               BuildableName = "libCTDActivities.a"
+               BlueprintName = "CTDActivities"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CEBCA5619BB77C400D2B498"
                BuildableName = "libCTDModel.a"
                BlueprintName = "CTDModel"
@@ -281,6 +295,16 @@
                BlueprintIdentifier = "4C41B7A51B155ABB00B54422"
                BuildableName = "CTDInteractionTests.xctest"
                BlueprintName = "CTDInteractionTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C9479781B61F43F00EFCF6C"
+               BuildableName = "CTDActivitiesTests.xctest"
+               BlueprintName = "CTDActivitiesTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
