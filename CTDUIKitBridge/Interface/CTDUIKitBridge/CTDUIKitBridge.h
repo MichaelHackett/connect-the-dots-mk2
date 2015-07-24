@@ -9,6 +9,8 @@
 
 @interface CTDUIKitBridge : NSObject
 
++ (int)runApp;
+
 + (id<CTDConnectScene>)connectSceneFromNibName:(NSString*)connectSceneNibName
                              withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig;
 

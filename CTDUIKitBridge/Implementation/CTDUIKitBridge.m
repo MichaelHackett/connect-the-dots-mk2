@@ -2,12 +2,18 @@
 
 #import "CTDUIKitBridge.h"
 
+#import "CTDAppDelegate.h"
 #import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
 
 
 
 @implementation CTDUIKitBridge
+
++ (int)runApp  // pass in argc & argv? ever used?
+{
+    return UIApplicationMain(0, NULL, nil, NSStringFromClass([CTDAppDelegate class]));
+}
 
 + (id<CTDConnectScene>)connectSceneFromNibName:(NSString*)connectSceneNibName
                              withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig

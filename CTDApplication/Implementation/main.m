@@ -1,15 +1,13 @@
 // main.m
 //
-// Copyright 2014 Michael Hackett. All rights reserved.
+// Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import <UIKit/UIKit.h>
-
-#import "CTDAppDelegate.h"
+#import "CTDUIKitBridge/CTDUIKitBridge.h"
 
 
-int main(int argc, char * argv[])
+int main(__unused int argc, __unused char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CTDAppDelegate class]));
+        return [CTDUIKitBridge runApp];
     }
 }
