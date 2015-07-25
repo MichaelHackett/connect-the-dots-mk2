@@ -2,31 +2,15 @@
 
 #import "CTDUIKitBridge.h"
 
-#import "CTDAppDelegate.h"
-#import "CTDUIKitConnectSceneViewController.h"
-#import "CTDUIKitDrawingConfig.h"
+#import "CTDUIKitWhatzit.h"
 
 
 
 @implementation CTDUIKitBridge
 
-+ (int)runApp  // pass in argc & argv? ever used?
++ (id<CTDDisplayController>)displayControllerForApplication:(UIApplication*)application
 {
-    return UIApplicationMain(0, NULL, nil, NSStringFromClass([CTDAppDelegate class]));
-}
-
-+ (id<CTDConnectScene>)connectSceneFromNibName:(NSString*)connectSceneNibName
-                             withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
-{
-    CTDUIKitConnectSceneViewController* connectVC =
-        [[CTDUIKitConnectSceneViewController alloc]
-         initWithNibName:connectSceneNibName
-                  bundle:nil];
-    connectVC.colorPalette = drawingConfig.colorPalette;
-
-    [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand
-
-    return connectVC;
+    return [[CTDUIKitWhatzit alloc] initWithApplication:application];
 }
 
 @end
