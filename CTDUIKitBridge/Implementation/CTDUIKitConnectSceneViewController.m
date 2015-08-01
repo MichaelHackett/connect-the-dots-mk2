@@ -54,9 +54,4 @@
     return _ctdViewAdapter;
 }
 
-- (UIViewController*)rootViewController
-{
-    return self;
-}
-
 @end

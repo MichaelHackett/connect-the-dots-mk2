@@ -60,12 +60,12 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     UIApplication* application = _application;
     application.statusBarHidden = YES;
 
-    id<CTDConnectScene> connectScene =
+    CTDUIKitConnectSceneViewController* connectScene =
         [[self class] connectSceneFromNibName:kCTDConnectSceneNibName
                             withDrawingConfig:_drawingConfig];
 
     _mainWindow =
-        [UIKit fullScreenWindowWithRootViewController:connectScene.rootViewController
+        [UIKit fullScreenWindowWithRootViewController:connectScene
                                       backgroundColor:[UIColor whiteColor]];
 
     // TODO: Replace with data loaded from disk
@@ -84,8 +84,9 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     [_mainWindow makeKeyAndVisible];
 }
 
-+ (id<CTDConnectScene>)connectSceneFromNibName:(NSString*)connectSceneNibName
-                             withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
++ (CTDUIKitConnectSceneViewController*)
+      connectSceneFromNibName:(NSString*)connectSceneNibName
+            withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]

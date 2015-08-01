@@ -15,7 +15,6 @@
 
 - (void)setTouchResponder:(id<CTDTouchResponder>)touchResponder;
 
-- (UIViewController*)rootViewController;
 - (id<CTDTrialRenderer>)trialRenderer;
 - (id<CTDTouchToPointMapper>)trialTouchMapper;
 - (NSArray *)colorSelectionCells; // of id<CTDSelectionRenderer, CTDTouchable>
