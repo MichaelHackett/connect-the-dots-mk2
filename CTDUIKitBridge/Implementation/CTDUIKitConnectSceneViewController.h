@@ -8,8 +8,6 @@
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
-@protocol CTDTouchToPointMapper;
-@protocol CTDTrialRenderer;
 
 
 
@@ -21,9 +19,5 @@
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
-
-// Property-like accessors
-- (id<CTDTrialRenderer>)trialRenderer;
-- (id<CTDTouchToPointMapper>)trialTouchMapper;
 
 @end
