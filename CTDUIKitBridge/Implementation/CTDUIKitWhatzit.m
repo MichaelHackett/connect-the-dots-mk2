@@ -60,13 +60,9 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     UIApplication* application = _application;
     application.statusBarHidden = YES;
 
-    CTDUIKitConnectSceneViewController* connectScene =
-        [[self class] connectSceneFromNibName:kCTDConnectSceneNibName
-                            withDrawingConfig:_drawingConfig];
-
-    _mainWindow =
-        [UIKit fullScreenWindowWithRootViewController:connectScene
-                                      backgroundColor:[UIColor whiteColor]];
+    CTDUIKitConnectSceneViewController* connectScene = [self connectScene];
+    _mainWindow = [UIKit fullScreenWindowWithRootViewController:connectScene
+                                                backgroundColor:[UIColor whiteColor]];
 
     // TODO: Replace with data loaded from disk
     id<CTDTrial> trial = [CTDModel trialWithDots:@[
@@ -84,15 +80,13 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     [_mainWindow makeKeyAndVisible];
 }
 
-+ (CTDUIKitConnectSceneViewController*)
-      connectSceneFromNibName:(NSString*)connectSceneNibName
-            withDrawingConfig:(CTDUIKitDrawingConfig*)drawingConfig
+- (CTDUIKitConnectSceneViewController*)connectScene
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]
-         initWithNibName:connectSceneNibName
+         initWithNibName:kCTDConnectSceneNibName
                   bundle:nil];
-    connectVC.colorPalette = drawingConfig.colorPalette;
+    connectVC.colorPalette = _drawingConfig.colorPalette;
 
     [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand
 
