@@ -4,12 +4,10 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitStandardViewController.h"
-#import "CTDApplication/Ports/CTDConnectScene.h"
+#import "CTDActivities/Ports/CTDConnectScene.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
-@protocol CTDTouchToPointMapper;
-@protocol CTDTrialRenderer;
 
 
 
@@ -21,9 +19,5 @@
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
-
-// Property-like accessors
-- (id<CTDTrialRenderer>)trialRenderer;
-- (id<CTDTouchToPointMapper>)trialTouchMapper;
 
 @end

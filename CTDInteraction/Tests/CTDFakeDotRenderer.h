@@ -3,9 +3,9 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "ExtensionPoints/CTDTouchable.h"
+#import "Ports/CTDTouchable.h"
 #import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/CTDDotRenderer.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
 #import "CTDTestHelpers/CTDTestSpy.h"
 
 @class CTDPoint;

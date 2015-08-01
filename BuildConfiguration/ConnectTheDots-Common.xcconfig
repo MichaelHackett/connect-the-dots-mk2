@@ -20,15 +20,16 @@ CTD_PROJECT_LIBRARY_DIR = External
 CTD_PROJECT_SHARED_HEADERS = Common
 
 // Module public interface directory paths (when referenced by other modules):
+CTD_ACTIVITIES_HEADERS = CTDActivities/Interface
 CTD_APPLICATION_HEADERS = CTDApplication/Interface
+CTD_INTERACTION_HEADERS = CTDInteraction/Interface
 CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_PRESENTATION_HEADERS = CTDPresentation/Interface
-CTD_INTERACTION_HEADERS = CTDInteraction/Interface
+CTD_UIKIT_BRIDGE_HEADERS = CTDUIKitBridge/Interface
 CTD_UTILITY_HEADERS = CTDUtility/Interface
-CTD_UI_BRIDGE_HEADERS = CTDUIBridge/Interface
 COCOA_ADDITIONS_HEADERS = CocoaAdditions/Interface
 
-// Test targets need the application bundle for to run the tests inside.
+// Test targets need the application bundle in which to run the tests.
 CTD_APP_TARGET = ConnectTheDots2
 CTD_APP_BUNDLE = $(BUILT_PRODUCTS_DIR)/$(CTD_APP_TARGET).app/$(CTD_APP_TARGET)
 

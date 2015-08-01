@@ -3,7 +3,7 @@
 //
 // Copyright 2014 Michael Hackett. All rights reserved.
 
-#import "CTDColorCellRenderer.h"
+#import "Ports/CTDColorCellRenderer.h"
 #import "CTDRecordingSelectionRenderer.h"
 
 

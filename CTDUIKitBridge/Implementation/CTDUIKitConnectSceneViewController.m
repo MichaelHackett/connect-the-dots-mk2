@@ -3,7 +3,7 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
-#import "CTDPresentation/CTDTrialRenderer.h"
+#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 
 
 
@@ -52,11 +52,6 @@
 - (id<CTDTouchToPointMapper>)trialTouchMapper
 {
     return _ctdViewAdapter;
-}
-
-- (UIViewController*)rootViewController
-{
-    return self;
 }
 
 @end

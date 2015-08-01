@@ -3,8 +3,8 @@
 #import "CTDDotSetPresenter.h"
 
 #import "CTDColorPalette.h"
-#import "CTDDotRenderer.h"
-#import "CTDTrialRenderer.h"
+#import "Ports/CTDDotRenderer.h"
+#import "Ports/CTDTrialRenderer.h"
 #import "CTDModel/CTDDot.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"

@@ -3,7 +3,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
 
 @class CTDUIKitLineView;
 

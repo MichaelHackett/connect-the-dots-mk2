@@ -3,7 +3,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/CTDDotConnectionRenderer.h"
+#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
 
 @class CTDPoint;
 

@@ -7,8 +7,8 @@
 #import "CTDSelectOnTouchInteraction.h"
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
-#import "ExtensionPoints/CTDTouchMappers.h"
-#import "CTDPresentation/CTDDotRenderer.h"
+#import "Ports/CTDTouchMappers.h"
+#import "CTDPresentation/Ports/CTDDotRenderer.h"
 
 @protocol CTDTrialRenderer; // TEMP!
 
