@@ -4,8 +4,11 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+@protocol CTDConnectScene;
+
+
 @protocol CTDDisplayController <NSObject>
 
-- (void)launchUI;
+- (id<CTDConnectScene>)initialScene;
 
 @end

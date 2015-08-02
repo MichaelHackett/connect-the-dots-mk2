@@ -9,21 +9,10 @@
 #import "CTDPresentation/CTDColorPalette.h"
 #import "CocoaAdditions/UIKit.h"
 
-// TEMPORARY
-#import "CTDModel/CTDDot.h"
-//#import "CTDModel/CTDDotColor.h"
-#import "CTDModel/CTDModel.h"
-#import "CTDModel/CTDTrial.h"
-#import "CTDUtility/CTDPoint.h"
-
 
 
 // NIB names
 static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
-
-
-// Macro for defining sample data
-#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
@@ -55,7 +44,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     return self;
 }
 
-- (void)launchUI
+- (id<CTDConnectScene>)initialScene
 {
     UIApplication* application = _application;
     application.statusBarHidden = YES;
@@ -64,20 +53,15 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     _mainWindow = [UIKit fullScreenWindowWithRootViewController:connectScene
                                                 backgroundColor:[UIColor whiteColor]];
 
-    // TODO: Replace with data loaded from disk
-    id<CTDTrial> trial = [CTDModel trialWithDots:@[
-        dot(CTDDotColor_Green, 100, 170),
-        dot(CTDDotColor_Red, 600, 400),
-        dot(CTDDotColor_Blue, 250, 650)
-    ]];
-
     // Now wire up the scene to the Presentation and Interaction modules.
-    [CTDSceneBuilder prepareConnectScene:connectScene withTrial:trial];
+//    [CTDSceneBuilder prepareConnectScene:connectScene withTrial:trial];
 
     // Lastly, make it visible. (Have to do this after running the Scene
     // Builder, so that it has a chance to set some values before loading the
     // views. FIXME!)
     [_mainWindow makeKeyAndVisible];
+
+    return connectScene;
 }
 
 - (CTDUIKitConnectSceneViewController*)connectScene

@@ -2,8 +2,20 @@
 
 #import "CTDAppDelegate.h"
 
+#import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
+
+#import "CTDActivities/CTDConnectionActivity.h"
+#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDModel.h"
+#import "CTDModel/CTDTrial.h"
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
+#import "CTDUtility/CTDPoint.h"
+
+
+
+// Macro for defining sample data
+#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
 
 
 
@@ -17,7 +29,19 @@
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
     _displayController = [CTDUIKitBridge displayControllerForApplication:application];
-    [_displayController launchUI];
+    id<CTDConnectScene> connectScene = [_displayController initialScene];
+
+    // TODO: Replace with data loaded from disk
+    id<CTDTrial> trial = [CTDModel trialWithDots:@[
+        dot(CTDDotColor_Green, 500, 170),
+        dot(CTDDotColor_Red, 200, 400),
+        dot(CTDDotColor_Blue, 250, 650)
+    ]];
+
+    CTDConnectionActivity* connectionActivity =
+        [[CTDConnectionActivity alloc] initWithTrial:trial
+                                       trialRenderer:connectScene.trialRenderer];
+    [connectionActivity beginTrial];
 
     return YES;
 }
