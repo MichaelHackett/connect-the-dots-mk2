@@ -2,7 +2,7 @@
 
 #import "CTDConnectionActivity.h"
 
-#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrial.h"
 #import "CTDPresentation/Ports/CTDTrialRenderer.h"
@@ -35,7 +35,7 @@
 @property (strong, nonatomic) CTDTrialRendererSpy* trialRenderer;
 
 // Test fixture
-@property (copy, nonatomic) NSArray* dots;
+@property (copy, nonatomic) NSArray* dotPairs;
 @property (strong, nonatomic) id<CTDTrial> trial;
 
 @end
@@ -45,11 +45,15 @@
 - (void)setUp
 {
     [super setUp];
-    self.dots = @[
-        [CTDModel dotWithColor:CTDDotColor_Red position:[CTDPoint x:49 y:250]],
-        [CTDModel dotWithColor:CTDDotColor_Blue position:[CTDPoint x:500 y:20]]
+    self.dotPairs = @[
+        [CTDModel dotPairWithColor:CTDDotColor_Red
+                     startPosition:[CTDPoint x:49 y:250]
+                       endPosition:[CTDPoint x:500 y:20]],
+        [CTDModel dotPairWithColor:CTDDotColor_Blue
+                     startPosition:[CTDPoint x:275 y:50]
+                       endPosition:[CTDPoint x:25 y:460]]
     ];
-    self.trial = [CTDModel trialWithDots:self.dots];
+    self.trial = [CTDModel trialWithDotPairs:self.dotPairs];
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
     self.subject = [[CTDConnectionActivity alloc] initWithTrial:self.trial
                                                   trialRenderer:self.trialRenderer];
@@ -69,33 +73,21 @@
     [self.subject beginTrial];
 }
 
-- (void)testThatItAddsFirstTwoDots
+- (void)testThatItRendersOnlyOneDot
 {
-    assertThat(self.trialRenderer.dotRenderings, hasCountOf(2));
+    assertThat(self.trialRenderer.dotRenderings, hasCountOf(1));
 }
 
 - (void)testThatFirstDotIsRenderedInCorrectPosition
 {
     assertThat([self.trialRenderer.dotRenderings[0] centerPosition],
-               is(equalTo([self.dots[0] position])));
+               is(equalTo([self.dotPairs[0] startPosition])));
 }
 
 - (void)testThatFirstDotIsRenderedWithCorrectColor
 {
     assertThat([self.trialRenderer.dotRenderings[0] dotColor],
                is(equalTo(CTDPaletteColor_DotType1)));
-}
-
-- (void)testThatSecondDotIsRenderedInCorrectPosition
-{
-    assertThat([self.trialRenderer.dotRenderings[1] centerPosition],
-               is(equalTo([self.dots[1] position])));
-}
-
-- (void)testThatSecondDotIsRenderedWithCorrectColor
-{
-    assertThat([self.trialRenderer.dotRenderings[1] dotColor],
-               is(equalTo(CTDPaletteColor_DotType3)));
 }
 
 - (void)testThatItAddsNoConnections

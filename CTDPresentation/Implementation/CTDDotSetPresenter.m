@@ -5,7 +5,7 @@
 #import "CTDColorPalette.h"
 #import "Ports/CTDDotRenderer.h"
 #import "Ports/CTDTrialRenderer.h"
-#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotPair.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -32,16 +32,19 @@ static NSDictionary const* dotPaletteColorMap;
     };
 }
 
-- (instancetype)initWithDotList:(NSArray*)dotList
-                  trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+- (instancetype)initWithDotPairs:(NSArray*)dotPairs
+                   trialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     self = [super init];
     if (self) {
         NSMutableArray* dotRenderings = [[NSMutableArray alloc] init];
-        for (CTDDot* dot in dotList) {
-            CTDPaletteColorLabel dotColor = dotPaletteColorMap[@(dot.color)];
+        for (CTDDotPair* dotPair in dotPairs) {
+            CTDPaletteColorLabel dotColor = dotPaletteColorMap[@(dotPair.color)];
             [dotRenderings addObject:
-                [trialRenderer newDotRenderingCenteredAt:dot.position
+                [trialRenderer newDotRenderingCenteredAt:dotPair.startPosition
+                                        withInitialColor:dotColor]];
+            [dotRenderings addObject:
+                [trialRenderer newDotRenderingCenteredAt:dotPair.endPosition
                                         withInitialColor:dotColor]];
         }
 

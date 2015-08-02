@@ -8,7 +8,7 @@
 
 @interface CTDInMemoryTrial : NSObject <CTDTrial>
 
-- (instancetype)initWithDots:(NSArray*)dots;  // array of CTDDots
+- (instancetype)initWithDotPairs:(NSArray*)dotPairs;  // array of CTDDotPairs
 
 CTD_NO_DEFAULT_INIT
 

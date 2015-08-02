@@ -6,7 +6,7 @@
 #import "Ports/CTDDisplayController.h"
 
 #import "CTDActivities/CTDConnectionActivity.h"
-#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrial.h"
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
@@ -15,7 +15,8 @@
 
 
 // Macro for defining sample data
-#define dot(COLOR,X,Y) [[CTDDot alloc] initWithColor:COLOR position:[[CTDPoint alloc] initWithX:X y:Y]]
+#define step(COLOR,START,END) [[CTDDotPair alloc] initWithColor:(COLOR) startPosition:(START) endPosition:(END)]
+#define dot(X,Y) [[CTDPoint alloc] initWithX:X y:Y]
 
 
 
@@ -32,10 +33,9 @@
     id<CTDConnectScene> connectScene = [_displayController initialScene];
 
     // TODO: Replace with data loaded from disk
-    id<CTDTrial> trial = [CTDModel trialWithDots:@[
-        dot(CTDDotColor_Green, 500, 170),
-        dot(CTDDotColor_Red, 200, 400),
-        dot(CTDDotColor_Blue, 250, 650)
+    id<CTDTrial> trial = [CTDModel trialWithDotPairs:@[
+        step(CTDDotColor_Green, dot(500,170), dot(200,400)),
+        step(CTDDotColor_Red, dot(175,40), dot(350,75))
     ]];
 
     CTDConnectionActivity* connectionActivity =

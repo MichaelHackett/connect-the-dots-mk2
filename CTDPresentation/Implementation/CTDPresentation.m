@@ -14,8 +14,8 @@
                   trialRenderer:(id<CTDTrialRenderer>)trialRenderer
 {
     return [[CTDDotSetPresenter alloc]
-            initWithDotList:[trial dotList]
-              trialRenderer:trialRenderer];
+            initWithDotPairs:[trial dotPairs]
+               trialRenderer:trialRenderer];
 }
 
 @end

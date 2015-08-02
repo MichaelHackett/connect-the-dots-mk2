@@ -5,7 +5,7 @@
 
 @implementation CTDInMemoryTrial
 {
-    NSArray* _dotList;
+    NSArray* _dotPairs;
 }
 
 
@@ -14,10 +14,10 @@
 
 - (id)init CTD_BLOCK_PARENT_METHOD
 
-- (instancetype)initWithDots:(NSArray*)dots {
+- (instancetype)initWithDotPairs:(NSArray*)dotPairs {
     self = [super init];
     if (self) {
-        _dotList = [dots copy];
+        _dotPairs = [dotPairs copy];
     }
     return self;
 }
@@ -27,8 +27,8 @@
 #pragma mark CTDTrial protocol
 
 
-- (NSArray*)dotList {
-    return _dotList;
+- (NSArray*)dotPairs {
+    return _dotPairs;
 }
 
 @end

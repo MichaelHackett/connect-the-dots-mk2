@@ -4,7 +4,7 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDDotColor.h"
-@class CTDDot;
+@class CTDDotPair;
 @class CTDPoint;
 @protocol CTDTrial;
 
@@ -12,9 +12,10 @@
 
 @interface CTDModel : NSObject
 
-+ (CTDDot*)dotWithColor:(CTDDotColor)color
-               position:(CTDPoint*)position;
++ (CTDDotPair*)dotPairWithColor:(CTDDotColor)color
+                  startPosition:(CTDPoint*)startPosition
+                    endPosition:(CTDPoint*)endPosition;
 
-+ (id<CTDTrial>)trialWithDots:(NSArray*)dots;  // array of CTDDots
++ (id<CTDTrial>)trialWithDotPairs:(NSArray*)dotPairs;  // array of CTDDotPairs
 
 @end

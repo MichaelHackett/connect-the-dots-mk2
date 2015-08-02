@@ -3,7 +3,7 @@
 #import "CTDConnectionActivity.h"
 
 #import "CTDColorMapping.h"
-#import "CTDModel/CTDDot.h"
+#import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDTrial.h"
 #import "CTDPresentation/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
@@ -29,12 +29,9 @@
 
 - (void)beginTrial
 {
-    CTDDot* startingDot = [_trial dotList][0];
-    CTDDot* firstTargetDot = [_trial dotList][1];
-    [_trialRenderer newDotRenderingCenteredAt:startingDot.position
-                             withInitialColor:paletteColorForDotColor(startingDot.color)];
-    [_trialRenderer newDotRenderingCenteredAt:firstTargetDot.position
-                             withInitialColor:paletteColorForDotColor(firstTargetDot.color)];
+    CTDDotPair* firstStep = [_trial dotPairs][0];
+    [_trialRenderer newDotRenderingCenteredAt:firstStep.startPosition
+                             withInitialColor:paletteColorForDotColor(firstStep.color)];
 }
 
 @end

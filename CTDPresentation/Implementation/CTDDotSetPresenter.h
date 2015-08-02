@@ -12,8 +12,8 @@
 
 @interface CTDDotSetPresenter : NSObject <CTDTrialActivityView>
 
-- (instancetype)initWithDotList:(NSArray*)dotList
-                  trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
+- (instancetype)initWithDotPairs:(NSArray*)dotPairs
+                   trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
 
 CTD_NO_DEFAULT_INIT
 

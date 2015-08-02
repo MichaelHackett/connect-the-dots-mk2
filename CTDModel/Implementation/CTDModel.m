@@ -2,22 +2,25 @@
 
 #import "CTDModel.h"
 
-#import "CTDDot.h"
+#import "CTDDotPair.h"
 #import "CTDInMemoryTrial.h"
 
 
 
 @implementation CTDModel
 
-+ (CTDDot*)dotWithColor:(CTDDotColor)color
-               position:(CTDPoint*)position
++ (CTDDotPair*)dotPairWithColor:(CTDDotColor)color
+                  startPosition:(CTDPoint*)startPosition
+                    endPosition:(CTDPoint*)endPosition
 {
-    return [[CTDDot alloc] initWithColor:color position:position];
+    return [[CTDDotPair alloc] initWithColor:color
+                               startPosition:startPosition
+                                 endPosition:endPosition];
 }
 
-+ (id<CTDTrial>)trialWithDots:(NSArray *)dots
++ (id<CTDTrial>)trialWithDotPairs:(NSArray*)dotPairs
 {
-    return [[CTDInMemoryTrial alloc] initWithDots:dots];
+    return [[CTDInMemoryTrial alloc] initWithDotPairs:dotPairs];
 }
 
 @end
