@@ -3,9 +3,10 @@
 #import "CTDConnectionActivity.h"
 
 #import "CTDColorMapping.h"
+#import "Ports/CTDTrialRenderer.h"
+
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDTrial.h"
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 

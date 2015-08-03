@@ -3,6 +3,12 @@
 #import "CTDColorMapping.h"
 
 
+CTDPaletteColorLabel const CTDPaletteColor_InactiveDot = @"Inactive dot";
+CTDPaletteColorLabel const CTDPaletteColor_DotType1 = @"Dot type 1";
+CTDPaletteColorLabel const CTDPaletteColor_DotType2 = @"Dot type 2";
+CTDPaletteColorLabel const CTDPaletteColor_DotType3 = @"Dot type 3";
+
+
 CTDPaletteColorLabel paletteColorForDotColor(CTDDotColor dotColor)
 {
     switch (dotColor) {

@@ -2,10 +2,11 @@
 
 #import "CTDConnectionActivity.h"
 
+#import "Ports/CTDTrialRenderer.h"
+
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrial.h"
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -121,7 +122,7 @@
     return self;
 }
 
-- (id<CTDDotRenderer,CTDTouchable>)
+- (id<CTDDotRenderer>)
       newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
                              initialColor:(CTDPaletteColorLabel)dotColor
 {

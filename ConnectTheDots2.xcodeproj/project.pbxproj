@@ -11,8 +11,6 @@
 		4C09C1ED1B642D8600D06E17 /* CTDUIKitWhatzit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C09C1EC1B642D8600D06E17 /* CTDUIKitWhatzit.m */; };
 		4C09C1F51B6CF17200D06E17 /* CTDConnectionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C09C1F41B6CF17200D06E17 /* CTDConnectionActivity.m */; };
 		4C09C2021B6CF9F400D06E17 /* CTDConnectionActivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C09C1FF1B6CF8B600D06E17 /* CTDConnectionActivityTests.m */; };
-		4C09C2071B6D248D00D06E17 /* libCTDInteraction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C41B7A41B155AA500B54422 /* libCTDInteraction.a */; };
-		4C09C2081B6D248D00D06E17 /* libCTDPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA7D19BB77D200D2B498 /* libCTDPresentation.a */; };
 		4C09C2091B6D37BB00D06E17 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
 		4C15CA161B180415000512C1 /* CTDUIKitBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15CA151B180415000512C1 /* CTDUIKitBridge.m */; };
 		4C15CA311B1E8C13000512C1 /* CTDUIKitColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */; };
@@ -384,6 +382,8 @@
 		4C3236511A16434C005C25D7 /* CTDSelectable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectable.h; sourceTree = "<group>"; };
 		4C3DB3C91B6D5F7600AE6AD9 /* CTDColorMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDColorMapping.m; sourceTree = "<group>"; };
 		4C3DB3D41B6D5F9B00AE6AD9 /* CTDColorMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorMapping.h; sourceTree = "<group>"; };
+		4C3DB3E41B6FBC4E00AE6AD9 /* CTDSelectionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSelectionRenderer.h; sourceTree = "<group>"; };
+		4C3DB3E51B6FBC4E00AE6AD9 /* CTDTrialRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTrialRenderer.h; sourceTree = "<group>"; };
 		4C41B72A1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitTouchRoutingTable.h; sourceTree = "<group>"; };
 		4C41B72B1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitTouchRoutingTable.m; sourceTree = "<group>"; };
 		4C41B72D1B0A3C5A00B54422 /* UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKit.h; sourceTree = "<group>"; };
@@ -615,8 +615,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C09C2091B6D37BB00D06E17 /* libCTDModel.a in Frameworks */,
-				4C09C2071B6D248D00D06E17 /* libCTDInteraction.a in Frameworks */,
-				4C09C2081B6D248D00D06E17 /* libCTDPresentation.a in Frameworks */,
 				4C94797F1B61F43F00EFCF6C /* libCTDActivities.a in Frameworks */,
 				4C9479A41B620CC400EFCF6C /* libCTDUtility.a in Frameworks */,
 				4C9479A31B620C9200EFCF6C /* libCTDTestHelpers.a in Frameworks */,
@@ -1004,6 +1002,8 @@
 		4C9479911B61F55600EFCF6C /* Ports */ = {
 			isa = PBXGroup;
 			children = (
+				4C3DB3E41B6FBC4E00AE6AD9 /* CTDSelectionRenderer.h */,
+				4C3DB3E51B6FBC4E00AE6AD9 /* CTDTrialRenderer.h */,
 			);
 			path = Ports;
 			sourceTree = "<group>";
