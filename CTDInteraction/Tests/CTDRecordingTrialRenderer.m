@@ -39,8 +39,8 @@
 }
 
 - (id<CTDDotRenderer, CTDTouchable>)
-      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
-               withInitialColor:(CTDPaletteColorLabel)dotColor
+      newRendererForDotWithCenterPosition:(CTDPoint *)centerPosition
+                             initialColor:(CTDPaletteColorLabel)dotColor
 {
     id newDotRenderer = [[CTDFakeDotRenderer alloc]
                          initWithCenterPosition:centerPosition
@@ -50,8 +50,8 @@
 }
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-      secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+      newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint *)firstEndpointPosition
+                                    secondEndpointPosition:(CTDPoint *)secondEndpointPosition
 {
     id newConnectionRenderer = [[CTDRecordingDotConnectionRenderer alloc]
                                 initWithFirstEndpointPosition:firstEndpointPosition

@@ -30,8 +30,8 @@
 - (void)beginTrial
 {
     CTDDotPair* firstStep = [_trial dotPairs][0];
-    [_trialRenderer newDotRenderingCenteredAt:firstStep.startPosition
-                             withInitialColor:paletteColorForDotColor(firstStep.color)];
+    [_trialRenderer newRendererForDotWithCenterPosition:firstStep.startPosition
+                                           initialColor:paletteColorForDotColor(firstStep.color)];
 }
 
 @end

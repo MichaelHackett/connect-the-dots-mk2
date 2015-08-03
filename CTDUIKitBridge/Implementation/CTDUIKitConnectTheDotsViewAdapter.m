@@ -35,8 +35,8 @@
 
 
 - (id<CTDDotRenderer, CTDTouchable>)
-      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
-               withInitialColor:(CTDPaletteColorLabel)dotColor
+      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
+                             initialColor:(CTDPaletteColorLabel)dotColor
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
@@ -53,8 +53,8 @@
 }
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+      newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                    secondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {

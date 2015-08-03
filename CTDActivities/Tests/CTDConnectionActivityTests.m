@@ -121,8 +121,9 @@
     return self;
 }
 
-- (id<CTDDotRenderer,CTDTouchable>)newDotRenderingCenteredAt:(CTDPoint *)centerPosition
-                                            withInitialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer,CTDTouchable>)
+      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
+                             initialColor:(CTDPaletteColorLabel)dotColor
 {
     CTDFakeDotRendering* dotRendering = [[CTDFakeDotRendering alloc] init];
     dotRendering.centerPosition = centerPosition;
@@ -132,8 +133,8 @@
 }
 
 - (id<CTDDotConnectionRenderer>)
-    newDotConnectionRenderingWithFirstEndpointPosition:(__unused CTDPoint *)firstEndpointPosition
-    secondEndpointPosition:(__unused CTDPoint *)secondEndpointPosition
+    newRendererForDotConnectionWithFirstEndpointPosition:(__unused CTDPoint*)firstEndpointPosition
+                                  secondEndpointPosition:(__unused CTDPoint*)secondEndpointPosition
 {
     [_connectionRenderings addObject:@1];
     return nil;

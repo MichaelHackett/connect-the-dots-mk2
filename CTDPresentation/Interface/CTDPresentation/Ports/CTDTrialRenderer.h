@@ -16,11 +16,11 @@
 @protocol CTDTrialRenderer <NSObject>
 
 - (id<CTDDotRenderer, CTDTouchable>)
-      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
-               withInitialColor:(CTDPaletteColorLabel)dotColor;
+      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
+                             initialColor:(CTDPaletteColorLabel)dotColor;
 
 - (id<CTDDotConnectionRenderer>)
-      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
+      newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+                                    secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 @end

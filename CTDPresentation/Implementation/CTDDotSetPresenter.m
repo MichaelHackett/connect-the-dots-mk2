@@ -41,11 +41,11 @@ static NSDictionary const* dotPaletteColorMap;
         for (CTDDotPair* dotPair in dotPairs) {
             CTDPaletteColorLabel dotColor = dotPaletteColorMap[@(dotPair.color)];
             [dotRenderings addObject:
-                [trialRenderer newDotRenderingCenteredAt:dotPair.startPosition
-                                        withInitialColor:dotColor]];
+                [trialRenderer newRendererForDotWithCenterPosition:dotPair.startPosition
+                                                      initialColor:dotColor]];
             [dotRenderings addObject:
-                [trialRenderer newDotRenderingCenteredAt:dotPair.endPosition
-                                        withInitialColor:dotColor]];
+                [trialRenderer newRendererForDotWithCenterPosition:dotPair.endPosition
+                                                      initialColor:dotColor]];
         }
 
         _dotRenderings = [dotRenderings copy];

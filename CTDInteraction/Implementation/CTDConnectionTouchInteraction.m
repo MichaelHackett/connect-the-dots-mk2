@@ -170,9 +170,8 @@
         id<CTDTrialRenderer> trialRenderer = _trialRenderer;
         CTDPoint* anchorPosition = [_anchorDotRenderer connectionPoint];
         _connectionRenderer =
-            [trialRenderer
-             newDotConnectionRenderingWithFirstEndpointPosition:anchorPosition
-             secondEndpointPosition:freeEndPosition];
+            [trialRenderer newRendererForDotConnectionWithFirstEndpointPosition:anchorPosition
+                                                         secondEndpointPosition:freeEndPosition];
     } else {
         [_connectionRenderer setSecondEndpointPosition:freeEndPosition];
     }
