@@ -19,4 +19,5 @@
     #define MOCKITO_SHORTHAND
     #import <OCMockito/OCMockito.h>
     #import "CTDMethodAnnotations.h"
+    #import "CTDStrongWeak.h"
 #endif

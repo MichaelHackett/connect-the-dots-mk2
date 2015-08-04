@@ -16,4 +16,5 @@
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
     #import "CTDMethodAnnotations.h"
+    #import "CTDStrongWeak.h"
 #endif

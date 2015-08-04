@@ -520,6 +520,7 @@
 		4CEBCAC519BCFD3A00D2B498 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4CEBCAD019BD2F8000D2B498 /* CTDCoreGraphicsUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CTDCoreGraphicsUtils.c; sourceTree = "<group>"; };
 		4CEBCAD119BD2F8000D2B498 /* CTDCoreGraphicsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCoreGraphicsUtils.h; sourceTree = "<group>"; };
+		4CF1D7EF1B706C2500672991 /* CTDStrongWeak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDStrongWeak.h; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDAnimationUtils.h; sourceTree = "<group>"; };
 		4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDAnimationUtils.m; sourceTree = "<group>"; };
@@ -1294,6 +1295,7 @@
 			isa = PBXGroup;
 			children = (
 				4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */,
+				4CF1D7EF1B706C2500672991 /* CTDStrongWeak.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
