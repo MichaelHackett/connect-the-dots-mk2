@@ -2,8 +2,7 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDConnectTheDotsThingy.h"
-#import "Ports/CTDConnectScene.h"
+#import "CTDApplication.h"
 #import "Ports/CTDDisplayController.h"
 
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
@@ -12,8 +11,8 @@
 
 @implementation CTDAppDelegate
 {
+    CTDApplication* _ctdApplication;
     id<CTDDisplayController> _displayController;
-    CTDConnectTheDotsThingy* _thingy;
 }
 
 // Override point for customization after application launch.
@@ -21,10 +20,8 @@
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
     _displayController = [CTDUIKitBridge displayControllerForApplication:application];
-    id<CTDConnectScene> connectScene = [_displayController initialScene];
-
-    _thingy = [CTDConnectTheDotsThingy prepareTrialScene:connectScene];
-    [_thingy start];
+    _ctdApplication = [[CTDApplication alloc] initWithDisplayController:_displayController];
+    [_ctdApplication start];
 
     return YES;
 }

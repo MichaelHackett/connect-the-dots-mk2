@@ -61,6 +61,16 @@ CTD_NO_DEFAULT_INIT
             initWithConnectionRenderer:connectionRenderer];
 }
 
+
+
+#pragma mark CTDTrialStepEditor protocol
+
+- (void)beginConnection
+{
+    [self newConnection];
+}
+
+
 @end
 
 

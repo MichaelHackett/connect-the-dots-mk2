@@ -5,7 +5,8 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "Ports/CTDTouchMappers.h"
-#import "Ports/CTDTrialStepEditor.h"
+
+#import "CTDApplication/CTDTrialStepEditor.h"
 
 //#import "CTDPresentation/CTDDotConnectionRenderer.h"
 //#import "CTDPresentation/CTDDotRenderer.h"

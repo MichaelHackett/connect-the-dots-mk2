@@ -242,16 +242,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C9479781B61F43F00EFCF6C"
-               BuildableName = "CTDActivitiesTests.xctest"
-               BlueprintName = "CTDActivitiesTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CEBCA2119BB564600D2B498"
                BuildableName = "CTDApplicationTests.xctest"
                BlueprintName = "CTDApplicationTests"

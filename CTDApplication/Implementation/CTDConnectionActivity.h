@@ -2,6 +2,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "CTDTrialStepEditor.h"
 @protocol CTDTrial;
 @protocol CTDTrialRenderer;
 
@@ -13,7 +14,7 @@
 
 
 
-@interface CTDConnectionActivity : NSObject
+@interface CTDConnectionActivity : NSObject <CTDTrialStepEditor>
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
