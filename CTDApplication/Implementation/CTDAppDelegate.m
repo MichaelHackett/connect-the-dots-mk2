@@ -2,27 +2,18 @@
 
 #import "CTDAppDelegate.h"
 
+#import "CTDConnectTheDotsThingy.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
 
-#import "CTDActivities/CTDConnectionActivity.h"
-#import "CTDModel/CTDDotPair.h"
-#import "CTDModel/CTDModel.h"
-#import "CTDModel/CTDTrial.h"
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
-#import "CTDUtility/CTDPoint.h"
-
-
-
-// Macro for defining sample data
-#define step(COLOR,START,END) [[CTDDotPair alloc] initWithColor:(COLOR) startPosition:(START) endPosition:(END)]
-#define dot(X,Y) [[CTDPoint alloc] initWithX:X y:Y]
 
 
 
 @implementation CTDAppDelegate
 {
     id<CTDDisplayController> _displayController;
+    CTDConnectTheDotsThingy* _thingy;
 }
 
 // Override point for customization after application launch.
@@ -32,16 +23,8 @@
     _displayController = [CTDUIKitBridge displayControllerForApplication:application];
     id<CTDConnectScene> connectScene = [_displayController initialScene];
 
-    // TODO: Replace with data loaded from disk
-    id<CTDTrial> trial = [CTDModel trialWithDotPairs:@[
-        step(CTDDotColor_Green, dot(500,170), dot(200,400)),
-        step(CTDDotColor_Red, dot(175,40), dot(350,75))
-    ]];
-
-    CTDConnectionActivity* connectionActivity =
-        [[CTDConnectionActivity alloc] initWithTrial:trial
-                                       trialRenderer:connectScene.trialRenderer];
-    [connectionActivity beginTrial];
+    _thingy = [CTDConnectTheDotsThingy prepareTrialScene:connectScene];
+    [_thingy start];
 
     return YES;
 }

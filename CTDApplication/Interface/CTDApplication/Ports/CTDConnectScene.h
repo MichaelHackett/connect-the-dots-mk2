@@ -3,9 +3,10 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-@protocol CTDTrialRenderer;
 @protocol CTDTouchResponder;
 @protocol CTDTouchToPointMapper;
+@protocol CTDTrialRenderer;
+@protocol CTDTrialStepEditor;
 
 
 
@@ -14,6 +15,7 @@
 // - setColorPalette:(CTDUIKitColorPalette*)
 
 - (void)setTouchResponder:(id<CTDTouchResponder>)touchResponder;
+- (void)setTrialStepEditor:(id<CTDTrialStepEditor>)trialStepEditor;
 
 - (id<CTDTrialRenderer>)trialRenderer;
 - (id<CTDTouchToPointMapper>)trialTouchMapper;

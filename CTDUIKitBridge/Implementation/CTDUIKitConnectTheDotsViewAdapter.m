@@ -10,21 +10,26 @@
 #import "CTDUIKitLineView.h"
 #import "CTDUIKitLineViewAdapter.h"
 
+#import "CTDInteraction/CTDMutableTouchToElementMapper.h"
+
 
 
 @implementation CTDUIKitConnectTheDotsViewAdapter
 {
     __weak CTDUIKitConnectTheDotsView* _connectTheDotsView;
     CTDUIKitColorPalette* _colorPalette;
+    id<CTDMutableTouchToElementMapper> _touchToDotMapper;
 }
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
                               colorPalette:(CTDUIKitColorPalette*)colorPalette
+                          touchToDotMapper:(id<CTDMutableTouchToElementMapper>)touchToDotMapper;
 {
     self = [super init];
     if (self) {
         _connectTheDotsView = connectTheDotsView;
         _colorPalette = [colorPalette copy];
+        _touchToDotMapper = touchToDotMapper;
     }
     return self;
 }
@@ -48,6 +53,8 @@
          initWithDotView:[ctdView newDotCenteredAt:[centerPosition asCGPoint]]
             colorPalette:_colorPalette];
     [dotViewAdapter changeDotColorTo:dotColor];
+    [_touchToDotMapper mapTouchable:dotViewAdapter
+                         toActuator:dotViewAdapter]; // TEMP until I know what this should be
 
     return dotViewAdapter;
 }

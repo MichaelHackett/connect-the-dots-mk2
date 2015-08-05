@@ -4,10 +4,12 @@
 
 #import "CTDTrialSceneTouchRouter.h"
 
-#import "ExtensionPoints/CTDTouchMappers.h"
-#import "CTDPresentation/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/CTDDotRenderer.h"
-#import "CTDPresentation/CTDTrialRenderer.h"
+#import "Ports/CTDTouchMappers.h"
+#import "Ports/CTDTrialStepEditor.h"
+
+//#import "CTDPresentation/CTDDotConnectionRenderer.h"
+//#import "CTDPresentation/CTDDotRenderer.h"
+//#import "CTDPresentation/CTDTrialRenderer.h"
 
 #import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
@@ -39,70 +41,75 @@
 
 
 
-static CTDFakeDotRenderer* dot1;
+
+@interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor>
+
+@property (copy, readonly, nonatomic) NSArray* connections;
+
+@end
 
 
 
 
-@interface CTDTrialSceneTouchTrackerBaseTestCase : XCTestCase
+@interface CTDTrialSceneTouchTrackerTestCase : XCTestCase
 
 // The tracker instantiated by the router (created in subclass test cases)
 @property (strong, nonatomic) id<CTDTouchTracker> subject;
 
+// Collaborators
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
-@property (strong, readonly, nonatomic) CTDRecordingTrialRenderer* trialRenderer;
-@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
-@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorCellsTouchTracker;
+@property (strong, readonly, nonatomic) CTDFakeTrialStep* trialStep;
+@property (strong, readonly, nonatomic) id<CTDTouchToElementMapper> dotTouchMapper;
+//@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
+//@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorCellsTouchTracker;
+
+// Test fixture
+@property (strong, nonatomic) CTDFakeDotRenderer* dot1;
+
 @end
 
-@implementation CTDTrialSceneTouchTrackerBaseTestCase
+@implementation CTDTrialSceneTouchTrackerTestCase
 
 - (void)setUp
 {
     [super setUp];
 
-    dot1 = [[CTDFakeDotRenderer alloc]
-            initWithCenterPosition:DOT_1_CENTER
-                          dotColor:SOME_DOT_COLOR];
+    self.dot1 = [[CTDFakeDotRenderer alloc]
+                 initWithCenterPosition:DOT_1_CENTER
+                               dotColor:SOME_DOT_COLOR];
 
-    _trialRenderer = [[CTDRecordingTrialRenderer alloc] init];
-    CTDRecordingTouchTracker* colorCellsTouchTracker =
-            [[CTDRecordingTouchTracker alloc] init];
-    _colorCellsTouchTracker = colorCellsTouchTracker;
-    _colorCellsTouchResponder = [[CTDFakeTouchResponder alloc]
-                                 initWithTouchTrackerFactoryBlock:
-        ^(__unused CTDPoint* initialPosition)
-        {
-            return colorCellsTouchTracker;
-        }];
+//    CTDRecordingTouchTracker* colorCellsTouchTracker =
+//        [[CTDRecordingTouchTracker alloc] init];
+//    _colorCellsTouchTracker = colorCellsTouchTracker;
+//    _colorCellsTouchResponder = [[CTDFakeTouchResponder alloc]
+//                                 initWithTouchTrackerFactoryBlock:
+//        ^(__unused CTDPoint* initialPosition)
+//        {
+//            return colorCellsTouchTracker;
+//        }];
 
-    id<CTDTouchToElementMapper> dotTouchMapper =
+    _dotTouchMapper =
         [[CTDFakeTouchMapper alloc]
-         initWithPointMap:@{ POINT_INSIDE_DOT_1: dot1,
-                             ANOTHER_POINT_INSIDE_DOT_1: dot1 }];
+         initWithPointMap:@{ POINT_INSIDE_DOT_1: self.dot1,
+                             ANOTHER_POINT_INSIDE_DOT_1: self.dot1 }];
 
-    _router = [[CTDTrialSceneTouchRouter alloc]
-               initWithTrialRenderer:_trialRenderer
-               dotsTouchMapper:dotTouchMapper
-               colorCellsTouchResponder:_colorCellsTouchResponder];
+    _trialStep = [[CTDFakeTrialStep alloc] init];
+
+    _router = [[CTDTrialSceneTouchRouter alloc] init];
+    _router.trialStepEditor = self.trialStep;
+    _router.dotsTouchMapper = self.dotTouchMapper;
 }
 
-- (void)tearDown
-{
-    dot1 = nil;
-    [super tearDown];
-}
-
-- (NSArray*)selectedDots
-{
-    NSMutableArray* selectedDots = [[NSMutableArray alloc] init];
-    if ([dot1 isSelected]) { [selectedDots addObject:dot1]; }
-    return selectedDots;
-}
-
-- (CTDRecordingDotConnectionRenderer*)activeConnection {
-    return [self.trialRenderer.connectionRenderersCreated firstObject];
-}
+//- (NSArray*)selectedDots
+//{
+//    NSMutableArray* selectedDots = [[NSMutableArray alloc] init];
+//    if ([dot1 isSelected]) { [selectedDots addObject:dot1]; }
+//    return selectedDots;
+//}
+//
+//- (CTDRecordingDotConnectionRenderer*)activeConnection {
+//    return [self.trialRenderer.connectionRenderersCreated firstObject];
+//}
 
 @end
 
@@ -110,8 +117,9 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
+
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
 
 - (void)setUp {
@@ -119,30 +127,32 @@ static CTDFakeDotRenderer* dot1;
     self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
 }
 
-- (void)testThatNoDotsAreSelected {
-    assertThat([self selectedDots], isEmpty());
-}
+//- (void)testThatNoDotsAreSelected {
+//    assertThat([self selectedDots], isEmpty());
+//}
 
 - (void)testThatNoConnectionsAreStarted {
-    assertThat(self.trialRenderer.connectionRenderersCreated, isEmpty());
+    assertThat(self.trialStep.connections, isEmpty());
 }
 
-- (void)testThatColorCellResponderIsAskedForATracker {
-    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
-}
-
-- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition {
-    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
-               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
-}
+//- (void)testThatColorCellResponderIsAskedForATracker {
+//    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
+//}
+//
+//- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition {
+//    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
+//               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
+//}
 
 @end
 
 
 
 
+#if 0
+
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
 
@@ -171,7 +181,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
 
@@ -204,7 +214,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchEndsOutsideOfAnyElement
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchEndsOutsideOfAnyElement
 
@@ -231,7 +241,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledOutsideOfAnyElement
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledOutsideOfAnyElement
 
@@ -252,11 +262,12 @@ static CTDFakeDotRenderer* dot1;
 
 @end
 
+#endif
 
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
@@ -266,40 +277,41 @@ static CTDFakeDotRenderer* dot1;
     self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatTheDotIsSelected {
-    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
-}
-
-- (void)testThatNoOtherDotsAreSelected {
-    assertThat([self selectedDots], hasCountOf(1));
-}
+//- (void)testThatTheDotIsSelected {
+//    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
+//}
+//
+//- (void)testThatNoOtherDotsAreSelected {
+//    assertThat([self selectedDots], hasCountOf(1));
+//}
 
 - (void)testThatAConnectionIsStarted {
-    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
+    assertThat(self.trialStep.connections, hasCountOf(1));
 }
 
-- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheDotConnectionPoint {
-    assertThat([self activeConnection].firstEndpointPosition,
-               is(equalTo([dot1 connectionPoint])));
-}
-
-- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-    assertThat([self activeConnection].secondEndpointPosition,
-               is(equalTo(POINT_INSIDE_DOT_1)));
-}
-
-- (void)testThatColorCellTrackerWasCancelled {
-    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
-               is(equalTo(message(touchWasCancelled))));
-}
+//- (void)testThatTheFirstEndpointOfTheConnectionIsAnchoredToTheDotConnectionPoint {
+//    assertThat([self activeConnection].firstEndpointPosition,
+//               is(equalTo([dot1 connectionPoint])));
+//}
+//
+//- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
+//    assertThat([self activeConnection].secondEndpointPosition,
+//               is(equalTo(POINT_INSIDE_DOT_1)));
+//}
+//
+//- (void)testThatColorCellTrackerWasCancelled {
+//    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
+//               is(equalTo(message(touchWasCancelled))));
+//}
 
 @end
 
 
 
+#if 0
 
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
 
@@ -342,7 +354,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
 
@@ -385,7 +397,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
 - (void)setUp {
@@ -413,7 +425,7 @@ static CTDFakeDotRenderer* dot1;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
-    : CTDTrialSceneTouchTrackerBaseTestCase
+    : CTDTrialSceneTouchTrackerTestCase
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
 
@@ -438,8 +450,35 @@ static CTDFakeDotRenderer* dot1;
 
 @end
 
-
-
-
 // TODO: CTDTrialSceneTouchTrackerTrackingFromADot
 
+#endif
+
+
+
+
+@implementation CTDFakeTrialStep
+{
+    NSMutableArray* _connections;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _connections = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+- (NSArray*)connections
+{
+    return [_connections copy];
+}
+
+- (void)beginConnection
+{
+    [_connections addObject:@1];
+}
+
+@end

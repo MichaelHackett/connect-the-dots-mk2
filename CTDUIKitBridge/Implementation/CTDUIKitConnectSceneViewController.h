@@ -15,6 +15,7 @@
     : CTDUIKitStandardViewController <CTDConnectScene>
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
+@property (weak, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
 
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;

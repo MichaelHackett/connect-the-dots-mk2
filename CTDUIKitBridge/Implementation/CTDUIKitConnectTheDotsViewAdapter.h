@@ -8,12 +8,14 @@
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
+@protocol CTDMutableTouchToElementMapper;
 
 
 
 @interface CTDUIKitConnectTheDotsViewAdapter : NSObject <CTDTrialRenderer, CTDTouchToPointMapper>
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
-                              colorPalette:(CTDUIKitColorPalette*)colorPalette;
+                              colorPalette:(CTDUIKitColorPalette*)colorPalette
+                          touchToDotMapper:(id<CTDMutableTouchToElementMapper>)touchToDotMapper;
 
 @end
