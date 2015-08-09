@@ -2,8 +2,8 @@
 
 #import "CTDAppDelegate.h"
 
-#import "CTDApplication.h"
-#import "Ports/CTDDisplayController.h"
+#import "CTDApplication/CTDApplication.h"
+#import "CTDApplication/Ports/CTDDisplayController.h"
 
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
 

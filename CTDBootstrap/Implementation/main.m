@@ -6,7 +6,7 @@
 #import <UIKit/UIApplication.h>
 
 
-int main(__unused int argc, __unused char * argv[])
+int main(__unused int argc, __unused char* argv[])
 {
     @autoreleasepool {
         return UIApplicationMain(0, NULL, nil, NSStringFromClass([CTDAppDelegate class]));

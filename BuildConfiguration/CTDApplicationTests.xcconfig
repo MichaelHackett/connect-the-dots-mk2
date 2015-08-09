@@ -5,9 +5,6 @@
 // Tests are part of a parent module.
 CTD_MODULE_NAME = CTDApplication
 
-// Application tests run in the context of the app bundle
-BUNDLE_LOADER = $(CTD_APP_BUNDLE)
-
 // Project module source dependencies:
 //HEADER_SEARCH_PATHS = $(CTD_PROJECT_LIBRARY_DIR) $(inherited)
-RXC_MODULE_DEPENDENCIES = $(CTD_PRESENTATION_HEADERS) $(CTD_MODEL_HEADERS) $(CTD_UTILITY_HEADERS)
+RXC_MODULE_DEPENDENCIES = $(CTD_MODEL_HEADERS) $(CTD_UTILITY_HEADERS)

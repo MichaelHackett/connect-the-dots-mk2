@@ -16,21 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CEBCA0619BB564600D2B498"
                BuildableName = "ConnectTheDots2.app"
-               BlueprintName = "CTDApplication"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA2119BB564600D2B498"
-               BuildableName = "CTDApplicationTests.xctest"
-               BlueprintName = "CTDApplicationTests"
+               BlueprintName = "CTDBootstrap"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C94796B1B61F43F00EFCF6C"
-               BuildableName = "libCTDActivities.a"
-               BlueprintName = "CTDActivities"
+               BlueprintIdentifier = "4CFA353D1B76D18E0060A689"
+               BuildableName = "libCTDApplication.a"
+               BlueprintName = "CTDApplication"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -190,6 +176,20 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C41B7331B0A4F1900B54422"
+               BuildableName = "libCocoaAdditions.a"
+               BlueprintName = "CocoaAdditions"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -216,20 +216,6 @@
                ReferencedContainer = "container:External/OCMockito/Source/OCMockito.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C41B7331B0A4F1900B54422"
-               BuildableName = "libCocoaAdditions.a"
-               BlueprintName = "CocoaAdditions"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -238,16 +224,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA2119BB564600D2B498"
-               BuildableName = "CTDApplicationTests.xctest"
-               BlueprintName = "CTDApplicationTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -298,13 +274,23 @@
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CFA354A1B76D18F0060A689"
+               BuildableName = "CTDApplicationTests.xctest"
+               BlueprintName = "CTDApplicationTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CEBCA0619BB564600D2B498"
             BuildableName = "ConnectTheDots2.app"
-            BlueprintName = "CTDApplication"
+            BlueprintName = "CTDBootstrap"
             ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -323,7 +309,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CEBCA0619BB564600D2B498"
             BuildableName = "ConnectTheDots2.app"
-            BlueprintName = "CTDApplication"
+            BlueprintName = "CTDBootstrap"
             ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -341,7 +327,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CEBCA0619BB564600D2B498"
             BuildableName = "ConnectTheDots2.app"
-            BlueprintName = "CTDApplication"
+            BlueprintName = "CTDBootstrap"
             ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
