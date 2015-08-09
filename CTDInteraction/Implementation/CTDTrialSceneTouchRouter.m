@@ -154,32 +154,37 @@ CTD_NO_DEFAULT_INIT
 
     // local copies for the block's use
 //    __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
-//    id<CTDTouchToElementMapper> dotsTouchMapper = _dotsTouchMapper;
-//    id<CTDTouchToPointMapper> freeEndMapper = _freeEndMapper;
+    id<CTDTouchToElementMapper> dotsTouchMapper = _dotsTouchMapper;
+    id<CTDTouchToPointMapper> freeEndMapper = _freeEndMapper;
     ctd_weakify(self, weakSelf);
 
     id<CTDTouchTracker> actionDiscriminator =
         [[CTDDotDetectionTracker alloc]
-         initWithDotsTouchMapper:_dotsTouchMapper
+         initWithDotsTouchMapper:dotsTouchMapper
             initialTouchLocation:initialPosition
                    dotHitHandler:^(/*id<CTDDotRenderer> hitDotRenderer*/)
     {
         ctd_strongify(weakSelf, strongSelf);
         ctd_strongify(strongSelf.trialStepEditor, trialStepEditor);
 
-        [trialStepEditor beginConnection];
+        id<CTDTrialStepConnectionEditor> connectionEditor =
+            [trialStepEditor editorForNewConnection];
 //        CTDPoint* initialFreeEndPosition =
 //            [freeEndMapper pointAtTouchLocation:initialPosition];
-//        [delegatingTracker changeDelegateTo:
-//            [[CTDConnectionTouchInteraction alloc]
+        [delegatingTracker changeDelegateTo:
+            [[CTDConnectionTouchInteraction alloc]
+             initWithConnectionEditor:connectionEditor
+                       dotTouchMapper:dotsTouchMapper
+                        freeEndMapper:freeEndMapper]];
 //             initWithTrialRenderer:trialRenderer
 //                    dotTouchMapper:dotsTouchMapper
 //                     freeEndMapper:freeEndMapper
 //                 anchorDotRenderer:hitDotRenderer
 //            initialFreeEndPosition:initialFreeEndPosition]];
-        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
-            [colorCellsTouchTracker touchWasCancelled];
-        }
+
+//        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
+//            [colorCellsTouchTracker touchWasCancelled];
+//        }
     }];
 
     if (actionDiscriminator) {

@@ -8,26 +8,33 @@
 
 @implementation CTDRecordingDotConnectionRenderer
 
-- (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                       secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (instancetype)init
 {
     self = [super init];
-    if (self) {
-        _firstEndpointPosition = [firstEndpointPosition copy];
-        _secondEndpointPosition = [secondEndpointPosition copy];
+    if (self)
+    {
+        _firstEndpointPosition = nil;
+        _secondEndpointPosition = nil;
     }
     return self;
 }
 
-- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition {
+- (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
+{
     _firstEndpointPosition = [firstEndpointPosition copy];
 }
 
-- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition {
+- (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition
+{
     _secondEndpointPosition = [secondEndpointPosition copy];
 }
 
-- (void)discardRendering {
+- (void)setVisible:(__unused BOOL)visible
+{
+}
+
+- (void)discardRendering
+{
     _invalidated = YES;
 }
 

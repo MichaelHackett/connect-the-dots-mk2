@@ -41,10 +41,22 @@
     return [CTDPoint fromCGPoint:[dotView connectionPoint]];
 }
 
+- (void)setDotCenterPosition:(CTDPoint*)centerPosition
+{
+    ctd_strongify(_dotView, dotView);
+    dotView.center = [centerPosition asCGPoint];
+}
+
 - (void)setDotColor:(CTDPaletteColorLabel)newDotColor
 {
     ctd_strongify(_dotView, dotView);
     dotView.dotColor = _colorPalette[newDotColor];
+}
+
+- (void)setVisible:(BOOL)visible
+{
+    ctd_strongify(_dotView, dotView);
+    dotView.hidden = !visible;
 }
 
 - (void)showSelectionIndicator
@@ -59,6 +71,12 @@
     dotView.selectionIndicatorIsVisible = NO;
 }
 
+- (void)discardRendering
+{
+    ctd_strongify(_dotView, dotView);
+    _dotView = nil;
+    [dotView removeFromSuperview];
+}
 
 
 #pragma mark CTDTouchable protocol

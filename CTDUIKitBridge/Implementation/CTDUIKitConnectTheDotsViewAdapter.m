@@ -39,9 +39,7 @@
 #pragma mark CTDTrialRenderer protocol
 
 
-- (id<CTDDotRenderer, CTDTouchable>)
-      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
-                             initialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer, CTDTouchable>)newRendererForDot
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
@@ -50,30 +48,22 @@
 
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
         [[CTDUIKitDotViewAdapter alloc]
-         initWithDotView:[ctdView newDotCenteredAt:[centerPosition asCGPoint]]
+         initWithDotView:[ctdView newDotCenteredAt:CGPointZero]
             colorPalette:_colorPalette];
-    [dotViewAdapter setDotColor:dotColor];
+    [dotViewAdapter setVisible:NO];
     [_touchToDotMapper mapTouchable:dotViewAdapter
                          toActuator:dotViewAdapter]; // TEMP until I know what this should be
 
     return dotViewAdapter;
 }
 
-- (id<CTDDotConnectionRenderer>)
-      newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                    secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (id<CTDDotConnectionRenderer>)newRendererForDotConnection
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
         return nil;
     }
-
-    id<CTDDotConnectionRenderer> lineViewAdapter =
-        [[CTDUIKitLineViewAdapter alloc] initWithLineView:[ctdView newConnection]];
-    [lineViewAdapter setFirstEndpointPosition:firstEndpointPosition];
-    [lineViewAdapter setSecondEndpointPosition:secondEndpointPosition];
-
-    return lineViewAdapter;
+    return [[CTDUIKitLineViewAdapter alloc] initWithLineView:[ctdView newConnection]];
 }
 
 

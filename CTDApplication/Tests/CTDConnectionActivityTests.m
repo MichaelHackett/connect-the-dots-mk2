@@ -13,23 +13,37 @@
 
 @interface CTDFakeDotRendering : NSObject <CTDDotRenderer>
 
-@property (copy, readonly, nonatomic) CTDPoint* centerPosition;
+// Configuration:
+@property (copy, nonatomic) void (^cancellationBlock)(void);
+
+// Captured rendering state:
+@property (copy, readonly, nonatomic) CTDPoint* dotCenterPosition;
 @property (copy, readonly, nonatomic) CTDPaletteColorLabel dotColor;
-@property (assign, readonly,nonatomic) BOOL hasSelectionIndicator;
+@property (assign, readonly, nonatomic) BOOL isVisible;
+@property (assign, readonly, nonatomic) BOOL hasSelectionIndicator;
 
 @end
 
 
 @interface CTDFakeConnectionRendering : NSObject <CTDDotConnectionRenderer>
 
+// Configuration:
+@property (copy, nonatomic) void (^cancellationBlock)(void);
+
+// Captured rendering state:
 @property (copy, nonatomic) CTDPoint* firstEndpointPosition;
 @property (copy, nonatomic) CTDPoint* secondEndpointPosition;
+@property (assign, readonly, nonatomic) BOOL isVisible;
 
 @end
 
 
 @interface CTDTrialRendererSpy : NSObject <CTDTrialRenderer>
 
+// Both of these return only the currently visible renderings. This is so that
+// tests don't need to care whether the implementation creates renderings only
+// when needed for display, or pre-creates them hidden and just shows and hides
+// them as needed.
 @property (strong, nonatomic, readonly) NSArray* dotRenderings; // of CTDFakeDotRenderings
 @property (strong, nonatomic, readonly) NSArray* connectionRenderings; // of CTDFakeConnectionRendering
 
@@ -83,14 +97,14 @@
     [self.subject beginTrial];
 }
 
-- (void)testThatItRendersOnlyOneDot
+- (void)testThatExactlyOneDotIsVisible
 {
     assertThat(self.trialRenderer.dotRenderings, hasCountOf(1));
 }
 
 - (void)testThatFirstDotIsRenderedInCorrectPosition
 {
-    assertThat([self.trialRenderer.dotRenderings[0] centerPosition],
+    assertThat([self.trialRenderer.dotRenderings[0] dotCenterPosition],
                is(equalTo([self.dotPairs[0] startPosition])));
 }
 
@@ -106,7 +120,7 @@
                    is(equalToBool(NO)));
 }
 
-- (void)testThatItAddsNoConnections
+- (void)testThatItAddsNoVisibleConnections
 {
     assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
 }
@@ -120,12 +134,14 @@
 
 @implementation CTDConnectionActivityAfterConnectionAnchoredToFirstDot
 {
-    id<CTDDotConnection> _newConnectionResult;
+    id<CTDTrialStepConnectionEditor> _newConnectionEditor;
 }
-- (void)setUp {
+
+- (void)setUp
+{
     [super setUp];
     [self.subject beginTrial];
-    _newConnectionResult = [self.subject newConnection];
+    _newConnectionEditor = [[self.subject trialStepEditor] editorForNewConnection];
 }
 
 - (void)testThatStartingDotIsRenderedAsActivated
@@ -141,7 +157,7 @@
 
 - (void)testThatSecondDotIsInCorrectPosition
 {
-    assertThat([self.trialRenderer.dotRenderings[1] centerPosition],
+    assertThat([self.trialRenderer.dotRenderings[1] dotCenterPosition],
                is(equalTo([self.dotPairs[0] endPosition])));
 }
 
@@ -151,13 +167,13 @@
                is(equalTo(CTDPaletteColor_DotType1)));
 }
 
-- (void)testThatStartingDotIsNotRenderedAsActivated
+- (void)testThatSecondDotIsNotRenderedAsActivated
 {
     assertThatBool([self.trialRenderer.dotRenderings[1] hasSelectionIndicator],
                    is(equalToBool(NO)));
 }
 
-- (void)testThatConnectionIsCreated
+- (void)testThatConnectionIsRendered
 {
     assertThat(self.trialRenderer.connectionRenderings, hasCountOf(1));
 }
@@ -165,18 +181,111 @@
 - (void)testThatConnectionIsAnchoredAtFirstDot
 {
     CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
-    assertThat(connection.firstEndpointPosition, is(equalTo([self.dotPairs[0] startPosition])));
+    assertThat(connection.firstEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
 }
 
 - (void)testThatFreeEndOfConnectionIsTheSameAsTheAnchoredEnd
 {
     CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
-    assertThat(connection.secondEndpointPosition, is(equalTo([self.dotPairs[0] startPosition])));
+    assertThat(connection.secondEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
 }
 
-- (void)testThatReturnedConnectionIsNotNil
+- (void)testThatReturnedConnectionEditorIsNotNil
 {
-    assertThat(_newConnectionResult, is(notNilValue()));
+    assertThat(_newConnectionEditor, is(notNilValue()));
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityAfterCancellingConnection : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityAfterCancellingConnection
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    id<CTDTrialStepConnectionEditor> connectionEditor =
+        [[self.subject trialStepEditor] editorForNewConnection];
+    [connectionEditor cancelConnection];
+}
+
+- (void)testThatStartingDotIsNotRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatSecondDotIsHidden
+{
+    assertThat(self.trialRenderer.dotRenderings, hasCountOf(1));
+}
+
+- (void)testThatConnectionIsNoLongerRendered
+{
+    assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
+}
+
+@end
+
+
+
+@interface CTDConnectionActivityStartingSecondConnectionAfterFirstCancelled : CTDConnectionActivityTestCase
+@end
+@implementation CTDConnectionActivityStartingSecondConnectionAfterFirstCancelled
+{
+    id<CTDTrialStepConnectionEditor> _connectionEditor;
+}
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    // Start and cancel one connection.
+    [[[self.subject trialStepEditor] editorForNewConnection] cancelConnection];
+    // Then start a second.
+    _connectionEditor = [[self.subject trialStepEditor] editorForNewConnection];
+}
+
+- (void)testThatStartingDotIsRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatSecondDotIsMadeVisible
+{
+    assertThat(self.trialRenderer.dotRenderings, hasCountOf(2));
+}
+
+- (void)testThatConnectionIsRendered
+{
+    assertThat(self.trialRenderer.connectionRenderings, hasCountOf(1));
+}
+
+- (void)testThatConnectionIsAnchoredAtFirstDot
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.firstEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
+}
+
+- (void)testThatFreeEndOfConnectionIsTheSameAsTheAnchoredEnd
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.secondEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
+}
+
+- (void)testThatReturnedConnectionEditorIsNotNil
+{
+    assertThat(_connectionEditor, is(notNilValue()));
 }
 
 @end
@@ -185,28 +294,46 @@
 
 @implementation CTDFakeDotRendering
 
-- (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
-                                 color:(CTDPaletteColorLabel)color
+- (instancetype)init
 {
     self = [super init];
-    if (self) {
-        _centerPosition = [centerPosition copy];
-        _dotColor = [color copy];
+    if (self)
+    {
+        _cancellationBlock = nil;
+        _dotCenterPosition = [CTDPoint origin];
+        _dotColor = nil;
+        _isVisible = NO;
         _hasSelectionIndicator = NO;
     }
     return self;
 }
 
-- (instancetype)init
+- (void)discardRendering
 {
-    return [self initWithCenterPosition:[CTDPoint origin] color:nil];
+    self.cancellationBlock();
 }
 
-- (CTDPoint*)dotConnectionPoint { return [CTDPoint origin]; }
-- (void)setDotColor:(__unused CTDPaletteColorLabel)newDotColor {}
+- (void)setDotCenterPosition:(CTDPoint*)centerPosition
+{
+    _dotCenterPosition = [centerPosition copy];
+}
 
+- (void)setDotColor:(CTDPaletteColorLabel)newDotColor
+{
+    _dotColor = [newDotColor copy];
+}
+
+- (void)setVisible:(BOOL)visible { _isVisible = visible; }
 - (void)hideSelectionIndicator { _hasSelectionIndicator = NO; }
 - (void)showSelectionIndicator { _hasSelectionIndicator = YES; }
+
+- (CTDPoint*)dotConnectionPoint {
+    // Return an arbitrarily different value for the connection point (based
+    // on the given position), so tests can distinguish that connection code
+    // is using this value and not the one right from the trial step data.
+    return [CTDPoint x:(999 - self.dotCenterPosition.x)
+                     y:(999 - self.dotCenterPosition.y)];
+}
 
 @end
 
@@ -217,14 +344,22 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
+        _cancellationBlock = nil;
         _firstEndpointPosition = nil;
         _secondEndpointPosition = nil;
+        _isVisible = NO;
     }
     return self;
 }
 
-- (void)discardRendering {}
+- (void)discardRendering
+{
+    self.cancellationBlock();
+}
+
+- (void)setVisible:(BOOL)visible { _isVisible = visible; }
 
 @end
 
@@ -246,36 +381,39 @@
     return self;
 }
 
-- (id<CTDDotRenderer>)
-      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
-                             initialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer>)newRendererForDot
 {
-    CTDFakeDotRendering* dotRendering = [[CTDFakeDotRendering alloc]
-                                         initWithCenterPosition:centerPosition
-                                         color:dotColor];
+    CTDFakeDotRendering* dotRendering = [[CTDFakeDotRendering alloc] init];
     [_dotRenderings addObject:dotRendering];
     return dotRendering;
 }
 
-- (id<CTDDotConnectionRenderer>)
-    newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (id<CTDDotConnectionRenderer>)newRendererForDotConnection
 {
     CTDFakeConnectionRendering* connectionRendering = [[CTDFakeConnectionRendering alloc] init];
-    connectionRendering.firstEndpointPosition = firstEndpointPosition;
-    connectionRendering.secondEndpointPosition = secondEndpointPosition;
+
+    ctd_weakify(self, weakSelf);
+    ctd_weakify(connectionRendering, weakConnectionRendering);
+    connectionRendering.cancellationBlock = ^{
+        ctd_strongify(weakSelf, strongSelf);
+        ctd_strongify(weakConnectionRendering, strongConnectionRendering);
+        [strongSelf->_connectionRenderings removeObject:strongConnectionRendering];
+    };
+
     [_connectionRenderings addObject:connectionRendering];
     return connectionRendering;
 }
 
 - (NSArray*)dotRenderings
 {
-    return [_dotRenderings copy];
+    return [_dotRenderings filteredArrayUsingPredicate:
+            [NSPredicate predicateWithFormat:@"isVisible == YES"]];
 }
 
 - (NSArray*)connectionRenderings
 {
-    return [_connectionRenderings copy];
+    return [_connectionRenderings filteredArrayUsingPredicate:
+            [NSPredicate predicateWithFormat:@"isVisible == YES"]];
 }
 
 @end

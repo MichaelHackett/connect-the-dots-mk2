@@ -18,6 +18,5 @@
 
 - (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
                               dotColor:(CTDPaletteColorLabel)dotColor;
-CTD_NO_DEFAULT_INIT
 
 @end

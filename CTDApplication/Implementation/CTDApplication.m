@@ -50,9 +50,8 @@
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrial:trial
                            trialRenderer:_connectionScene.trialRenderer];
-    [_connectionScene setTrialStepEditor:_connectionActivity];
-
     [_connectionActivity beginTrial];
+    [_connectionScene setTrialStepEditor:[_connectionActivity trialStepEditor]];
 }
 
 @end

@@ -8,13 +8,10 @@
 
 
 
-@protocol CTDDotConnection <NSObject>
+@interface CTDConnectionActivity : NSObject
 
-@end
+@property (strong, readonly, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
 
-
-
-@interface CTDConnectionActivity : NSObject <CTDTrialStepEditor>
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
@@ -23,8 +20,5 @@ CTD_NO_DEFAULT_INIT
 
 // Start the trial from the beginning.
 - (void)beginTrial;
-
-// Create a new "live" connection, anchored at the current starting dot.
-- (id<CTDDotConnection>)newConnection;
 
 @end

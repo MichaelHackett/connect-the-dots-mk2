@@ -22,20 +22,22 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 
 
 
+// Note that DotRenderings and DotConnectionRenderings are not visible until
+// explicitly shown.
+// (TODO: Make this consistent across all Rendering interfaces?)
+
 @protocol CTDDotRenderer <CTDSelectionRenderer>
+
+- (void)setDotCenterPosition:(CTDPoint*)centerPosition;
+- (void)setDotColor:(CTDPaletteColorLabel)newDotColor;
+- (void)setVisible:(BOOL)visible;
+
+// Remove rendering permanently and discards any native-level components
+// associated with it.
+- (void)discardRendering;
 
 // This point is relative to the bounds of the dot container rendering.
 - (CTDPoint*)dotConnectionPoint;
-
-- (void)setDotColor:(CTDPaletteColorLabel)newDotColor;
-
-// This is part of the child interface only because it avoids the situation
-// where, if the container was asked to remove the dot rendering, it would only
-// work with implementations that the container itself created, and it would
-// have to verify that that was true. Here, the child will still have to ask
-// the container for assistance, but it will be able to use native calls to
-// do so.
-//- (void)discardRendering; // don't even need this at the moment
 
 @end
 
@@ -48,6 +50,8 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 - (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition;
 - (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
+- (void)setVisible:(BOOL)visible;
+
 // Remove the rendering from the display and do not allow its reuse.
 - (void)discardRendering;
 
@@ -57,12 +61,7 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 
 @protocol CTDTrialRenderer <NSObject>
 
-- (id<CTDDotRenderer>)
-      newRendererForDotWithCenterPosition:(CTDPoint*)centerPosition
-                             initialColor:(CTDPaletteColorLabel)dotColor;
-
-- (id<CTDDotConnectionRenderer>)
-      newRendererForDotConnectionWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                    secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
+- (id<CTDDotRenderer>)newRendererForDot;
+- (id<CTDDotConnectionRenderer>)newRendererForDotConnection;
 
 @end

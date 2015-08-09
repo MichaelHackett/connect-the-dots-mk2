@@ -15,7 +15,5 @@
 @property (copy, readonly, nonatomic) CTDPoint* secondEndpointPosition;
 @property (assign, readonly, nonatomic, getter=wasInvalidated) BOOL invalidated;
 
-- (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                       secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 @end
 

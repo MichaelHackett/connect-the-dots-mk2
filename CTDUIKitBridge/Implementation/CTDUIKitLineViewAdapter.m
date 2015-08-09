@@ -40,6 +40,12 @@
     lineView.secondEndpoint = [secondEndpointPosition asCGPoint];
 }
 
+- (void)setVisible:(BOOL)visible
+{
+    ctd_strongify(_lineView, lineView);
+    lineView.hidden = !visible;
+}
+
 - (void)discardRendering
 {
     ctd_strongify(_lineView, lineView);

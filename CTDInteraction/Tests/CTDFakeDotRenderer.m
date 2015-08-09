@@ -18,12 +18,17 @@
     if (self) {
         _centerPosition = [centerPosition copy];
         _colorChanges = [[NSMutableArray alloc] init];
-        [_colorChanges addObject:dotColor];
+        if (dotColor) {
+            [_colorChanges addObject:dotColor];
+        }
     }
     return self;
 }
 
-- (instancetype)init CTD_BLOCK_PARENT_METHOD
+- (instancetype)init
+{
+    return [self initWithCenterPosition:nil dotColor:nil];
+}
 
 - (NSArray*)colorChanges
 {
@@ -40,9 +45,22 @@
     return self.centerPosition;
 }
 
+- (void)setDotCenterPosition:(CTDPoint*)centerPosition
+{
+    _centerPosition = [centerPosition copy];
+}
+
 - (void)setDotColor:(CTDPaletteColorLabel)newDotColor
 {
     [_colorChanges addObject:newDotColor];
+}
+
+- (void)setVisible:(__unused BOOL)visible
+{
+}
+
+- (void)discardRendering
+{
 }
 
 
