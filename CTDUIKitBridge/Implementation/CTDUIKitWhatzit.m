@@ -6,7 +6,7 @@
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDPresentation/CTDColorPalette.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CocoaAdditions/UIKit.h"
 
 

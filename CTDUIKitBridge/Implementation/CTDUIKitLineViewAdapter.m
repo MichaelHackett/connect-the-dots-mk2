@@ -40,7 +40,7 @@
     strongLineView.secondEndpoint = [secondEndpointPosition asCGPoint];
 }
 
-- (void)invalidate
+- (void)discardRendering
 {
     CTDUIKitLineView* strongLineView = _lineView;
     _lineView = nil;

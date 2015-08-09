@@ -224,7 +224,7 @@
     return self;
 }
 
-- (void)invalidate {}
+- (void)discardRendering {}
 
 @end
 

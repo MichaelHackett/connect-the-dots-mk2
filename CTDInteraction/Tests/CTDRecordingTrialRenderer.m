@@ -5,9 +5,7 @@
 #import "CTDFakeDotRenderer.h"
 #import "CTDRecordingDotConnectionRenderer.h"
 #import "Ports/CTDTouchable.h"
-#import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 

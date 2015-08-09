@@ -4,9 +4,9 @@
 
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
 
 
 

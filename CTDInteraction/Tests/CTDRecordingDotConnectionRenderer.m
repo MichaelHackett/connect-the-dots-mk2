@@ -27,7 +27,7 @@
     _secondEndpointPosition = [secondEndpointPosition copy];
 }
 
-- (void)invalidate {
+- (void)discardRendering {
     _invalidated = YES;
 }
 

@@ -35,13 +35,13 @@
 #pragma mark CTDDotRenderer protocol
 
 
-- (CTDPoint*)connectionPoint
+- (CTDPoint*)dotConnectionPoint
 {
     CTDUIKitDotView* strongDotView = _dotView;
     return [CTDPoint fromCGPoint:[strongDotView connectionPoint]];
 }
 
-- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
+- (void)setDotColor:(CTDPaletteColorLabel)newDotColor
 {
     CTDUIKitDotView* strongDotView = _dotView;
     strongDotView.dotColor = _colorPalette[newDotColor];

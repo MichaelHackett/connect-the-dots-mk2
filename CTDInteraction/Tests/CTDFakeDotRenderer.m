@@ -35,12 +35,12 @@
 #pragma mark CTDDotRenderer protocol
 
 
-- (CTDPoint*)connectionPoint
+- (CTDPoint*)dotConnectionPoint
 {
     return self.centerPosition;
 }
 
-- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
+- (void)setDotColor:(CTDPaletteColorLabel)newDotColor
 {
     [_colorChanges addObject:newDotColor];
 }

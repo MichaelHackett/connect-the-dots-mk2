@@ -52,7 +52,7 @@
         [[CTDUIKitDotViewAdapter alloc]
          initWithDotView:[ctdView newDotCenteredAt:[centerPosition asCGPoint]]
             colorPalette:_colorPalette];
-    [dotViewAdapter changeDotColorTo:dotColor];
+    [dotViewAdapter setDotColor:dotColor];
     [_touchToDotMapper mapTouchable:dotViewAdapter
                          toActuator:dotViewAdapter]; // TEMP until I know what this should be
 

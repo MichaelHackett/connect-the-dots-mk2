@@ -10,7 +10,6 @@
 #import "Ports/CTDTouchMappers.h"
 
 #import "CTDApplication/CTDTrialStepEditor.h"
-//#import "CTDPresentation/Ports/CTDDotRenderer.h"
 
 @protocol CTDTrialRenderer; // TEMP!
 

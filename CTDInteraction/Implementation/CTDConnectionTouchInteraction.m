@@ -3,9 +3,8 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "Ports/CTDTouchMappers.h"
-#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
+#import "CTDApplication/CTDTrialStepEditor.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -141,7 +140,7 @@
         if (_connectionRenderer) {
             // Anchor must always be set before free end, so we never need to
             // *create* the connection renderer here; just update it if it exists.
-            [_connectionRenderer setFirstEndpointPosition:[dotRenderer connectionPoint]];
+            [_connectionRenderer setFirstEndpointPosition:[dotRenderer dotConnectionPoint]];
         }
     }
 }
@@ -163,12 +162,12 @@
     if (dotRenderer) {
         [dotRenderer showSelectionIndicator];
         // snap end of connection to dot's connection point
-        freeEndPosition = [dotRenderer connectionPoint];
+        freeEndPosition = [dotRenderer dotConnectionPoint];
     }
 
     if (!_connectionRenderer) {
         id<CTDTrialRenderer> trialRenderer = _trialRenderer;
-        CTDPoint* anchorPosition = [_anchorDotRenderer connectionPoint];
+        CTDPoint* anchorPosition = [_anchorDotRenderer dotConnectionPoint];
         _connectionRenderer =
             [trialRenderer newRendererForDotConnectionWithFirstEndpointPosition:anchorPosition
                                                          secondEndpointPosition:freeEndPosition];
@@ -179,7 +178,7 @@
 
 - (void)cancelConnection
 {
-    [_connectionRenderer invalidate];
+    [_connectionRenderer discardRendering];
     _connectionRenderer = nil;
     [_anchorDotRenderer hideSelectionIndicator];
     [_freeEndDotRenderer hideSelectionIndicator];

@@ -49,7 +49,7 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 - (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 
 // Remove the rendering from the display and do not allow its reuse.
-//- (void)discardRendering;
+- (void)discardRendering;
 
 @end
 

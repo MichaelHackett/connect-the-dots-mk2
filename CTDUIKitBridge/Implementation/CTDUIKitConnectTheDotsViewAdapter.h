@@ -4,7 +4,7 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDInteraction/Ports/CTDTouchMappers.h"
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;

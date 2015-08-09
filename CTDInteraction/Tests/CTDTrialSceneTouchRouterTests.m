@@ -8,10 +8,6 @@
 
 #import "CTDApplication/CTDTrialStepEditor.h"
 
-//#import "CTDPresentation/CTDDotConnectionRenderer.h"
-//#import "CTDPresentation/CTDDotRenderer.h"
-//#import "CTDPresentation/CTDTrialRenderer.h"
-
 #import "CTDFakeDotRenderer.h"
 #import "CTDFakeTouchMapper.h"
 #import "CTDFakeTouchResponder.h"
