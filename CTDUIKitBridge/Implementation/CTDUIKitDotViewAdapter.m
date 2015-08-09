@@ -37,26 +37,26 @@
 
 - (CTDPoint*)dotConnectionPoint
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    return [CTDPoint fromCGPoint:[strongDotView connectionPoint]];
+    ctd_strongify(_dotView, dotView);
+    return [CTDPoint fromCGPoint:[dotView connectionPoint]];
 }
 
 - (void)setDotColor:(CTDPaletteColorLabel)newDotColor
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.dotColor = _colorPalette[newDotColor];
+    ctd_strongify(_dotView, dotView);
+    dotView.dotColor = _colorPalette[newDotColor];
 }
 
 - (void)showSelectionIndicator
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.selectionIndicatorIsVisible = YES;
+    ctd_strongify(_dotView, dotView);
+    dotView.selectionIndicatorIsVisible = YES;
 }
 
 - (void)hideSelectionIndicator
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.selectionIndicatorIsVisible = NO;
+    ctd_strongify(_dotView, dotView);
+    dotView.selectionIndicatorIsVisible = NO;
 }
 
 
@@ -66,7 +66,7 @@
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
 {
-    CTDUIKitDotView* dotView = _dotView;
+    ctd_strongify(_dotView, dotView);
     CGPoint localTouchLocation = [dotView convertPoint:[touchLocation asCGPoint]
                                               fromView:nil];
     return [dotView dotContainsPoint:localTouchLocation];

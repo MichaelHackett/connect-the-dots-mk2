@@ -30,21 +30,21 @@
 
 - (void)setFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
 {
-    CTDUIKitLineView* strongLineView = _lineView;
-    strongLineView.firstEndpoint = [firstEndpointPosition asCGPoint];
+    ctd_strongify(_lineView, lineView);
+    lineView.firstEndpoint = [firstEndpointPosition asCGPoint];
 }
 
 - (void)setSecondEndpointPosition:(CTDPoint*)secondEndpointPosition
 {
-    CTDUIKitLineView* strongLineView = _lineView;
-    strongLineView.secondEndpoint = [secondEndpointPosition asCGPoint];
+    ctd_strongify(_lineView, lineView);
+    lineView.secondEndpoint = [secondEndpointPosition asCGPoint];
 }
 
 - (void)discardRendering
 {
-    CTDUIKitLineView* strongLineView = _lineView;
+    ctd_strongify(_lineView, lineView);
     _lineView = nil;
-    [strongLineView removeFromSuperview];
+    [lineView removeFromSuperview];
 }
 
 @end
