@@ -85,6 +85,7 @@
 		4CB1F90E1B605E6100B3776D /* CTDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F90D1B605E6100B3776D /* CTDModel.m */; };
 		4CD4E2951A09466C006A244D /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CD4E2961A094679006A244D /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CE8271D1B7833FF006BB0E2 /* CTDTrialRendererSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE8271C1B7833FF006BB0E2 /* CTDTrialRendererSpy.m */; };
 		4CEBCA0B19BB564600D2B498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CEBCA0D19BB564600D2B498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */; };
 		4CEBCA0F19BB564600D2B498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0E19BB564600D2B498 /* UIKit.framework */; };
@@ -462,6 +463,8 @@
 		4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ORCSubscriptSupport.h"; sourceTree = "<group>"; };
 		4CDAD56D1B402FCF00A9E4F7 /* CTDConnectScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDConnectScene.h; sourceTree = "<group>"; };
+		4CE8271B1B7833FF006BB0E2 /* CTDTrialRendererSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTrialRendererSpy.h; sourceTree = "<group>"; };
+		4CE8271C1B7833FF006BB0E2 /* CTDTrialRendererSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDTrialRendererSpy.m; sourceTree = "<group>"; };
 		4CEBCA0719BB564600D2B498 /* ConnectTheDots2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectTheDots2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEBCA0A19BB564600D2B498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CEBCA0C19BB564600D2B498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -978,6 +981,15 @@
 			name = Widgets;
 			sourceTree = "<group>";
 		};
+		4CE827111B7833C7006BB0E2 /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4CE8271B1B7833FF006BB0E2 /* CTDTrialRendererSpy.h */,
+				4CE8271C1B7833FF006BB0E2 /* CTDTrialRendererSpy.m */,
+			);
+			name = "Test Helpers";
+			sourceTree = "<group>";
+		};
 		4CEBC9FE19BB564600D2B498 = {
 			isa = PBXGroup;
 			children = (
@@ -1071,6 +1083,7 @@
 			isa = PBXGroup;
 			children = (
 				4C09C1FF1B6CF8B600D06E17 /* CTDConnectionActivityTests.m */,
+				4CE827111B7833C7006BB0E2 /* Test Helpers */,
 				4CEBCA2A19BB564600D2B498 /* Supporting Files */,
 			);
 			path = Tests;
@@ -2024,6 +2037,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE8271D1B7833FF006BB0E2 /* CTDTrialRendererSpy.m in Sources */,
 				4CFA35681B76D7210060A689 /* CTDConnectionActivityTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
