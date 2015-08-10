@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
 @property (weak, nonatomic) id<CTDTouchToElementMapper> dotsTouchMapper;
+@property (weak, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
 
 // DEPRECATED
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer

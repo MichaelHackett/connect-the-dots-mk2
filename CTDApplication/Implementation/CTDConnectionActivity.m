@@ -12,6 +12,7 @@
 
 
 @protocol CTDDotConnection <NSObject>
+- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
 - (void)invalidate;
 @end
 
@@ -192,6 +193,11 @@ CTD_NO_DEFAULT_INIT
     return self;
 }
 
+- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
+{
+    [_renderer setSecondEndpointPosition:freeEndPosition];
+}
+
 - (void)invalidate
 {
 //    [_renderer discardRendering];
@@ -219,6 +225,11 @@ CTD_NO_DEFAULT_INIT
         _dotConnection = dotConnection;
     }
     return self;
+}
+
+- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
+{
+    [_dotConnection setFreeEndPosition:freeEndPosition];
 }
 
 - (void)cancelConnection

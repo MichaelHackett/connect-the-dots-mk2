@@ -5,6 +5,7 @@
 
 #import "CTDTouchResponder.h"
 
+@class CTDPoint;
 @protocol CTDTouchToElementMapper;
 @protocol CTDTouchToPointMapper;
 @protocol CTDTrialStepConnectionEditor;
@@ -26,7 +27,9 @@
 - (instancetype)
       initWithConnectionEditor:(id<CTDTrialStepConnectionEditor>)connectionEditor
                 dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
-                 freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper;
+                 freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
+          initialTouchPosition:(CTDPoint*)initialPosition;
+
 CTD_NO_DEFAULT_INIT
 
 @end

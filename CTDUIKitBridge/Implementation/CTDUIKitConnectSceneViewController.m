@@ -43,6 +43,8 @@
     _touchRouter = [[CTDTrialSceneTouchRouter alloc] init];
     _touchRouter.trialStepEditor = self.trialStepEditor;
     _touchRouter.dotsTouchMapper = _touchToDotMapper;
+    _touchRouter.freeEndMapper = _ctdViewAdapter;
+
     self.touchResponder = _touchRouter;
 }
 

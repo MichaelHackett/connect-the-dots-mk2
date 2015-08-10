@@ -25,6 +25,8 @@
 
 @end
 
+
+
 @implementation CTDConnectionActivityTestCase
 
 - (void)setUp
@@ -139,14 +141,14 @@
     assertThat(self.trialRenderer.connectionRenderings, hasCountOf(1));
 }
 
-- (void)testThatConnectionIsAnchoredAtFirstDot
+- (void)testThatOneEndOfConnectionIsRenderedFromFirstDot
 {
     CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
     assertThat(connection.firstEndpointPosition,
                is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
 }
 
-- (void)testThatFreeEndOfConnectionIsTheSameAsTheAnchoredEnd
+- (void)testThatFreeEndOfConnectionIsRenderedToTheSamePointAsTheAnchoredEnd
 {
     CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
     assertThat(connection.secondEndpointPosition,
@@ -159,6 +161,55 @@
 }
 
 @end
+
+
+
+
+@interface CTDConnectionActivityWhenFreeEndOfConnectionChanges : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityWhenFreeEndOfConnectionChanges
+{
+    CTDPoint* _newFreeEndPosition;
+}
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    id<CTDTrialStepConnectionEditor> connectionEditor =
+        [[self.subject trialStepEditor] editorForNewConnection];
+    _newFreeEndPosition = [CTDPoint x:50 y:290];
+    [connectionEditor setFreeEndPosition:_newFreeEndPosition];
+}
+
+- (void)testThatStartingDotRemainsRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatTheEndingDotRemainsRenderedAsUnactivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[1] hasSelectionIndicator],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatConnectionRemainsRenderedAnchoredFromFirstDot
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.firstEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
+}
+
+- (void)testThatFreeEndOfConnectionIsRendereredToTheNewFreeEndPosition
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.secondEndpointPosition, is(equalTo(_newFreeEndPosition)));
+}
+
+@end
+
 
 
 

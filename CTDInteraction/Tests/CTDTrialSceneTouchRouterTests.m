@@ -1,19 +1,13 @@
-// !!! Needs to be revised --- temporarily disabled !!!
-
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "Ports/CTDTouchMappers.h"
-
 #import "CTDApplication/CTDTrialStepEditor.h"
 
-#import "CTDFakeDotRenderer.h"
-#import "CTDFakeTouchMapper.h"
+#import "CTDFakeTouchMappers.h"
 #import "CTDFakeTouchResponder.h"
-#import "CTDRecordingDotConnectionRenderer.h"
 #import "CTDRecordingTouchTracker.h"
-#import "CTDRecordingTrialRenderer.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -29,10 +23,14 @@
 // Note: These coordinate values are arbitrary, but CTDPoint comparisons are
 // done by value, so the coordinates all must be unique.
 #define DOT_1_CENTER point(40,96)
-#define POINT_INSIDE_DOT_1 point(45,99)
-#define ANOTHER_POINT_INSIDE_DOT_1 point(47,95)
-#define POINT_OUTSIDE_ELEMENTS point(22,70)
-#define ANOTHER_POINT_OUTSIDE_ELEMENTS point(140,250)
+#define TOUCH_POINT_INSIDE_DOT_1 point(45,99)
+#define ANOTHER_TOUCH_POINT_INSIDE_DOT_1 point(47,95)
+#define TOUCH_POINT_OUTSIDE_ELEMENTS point(22,70)
+#define ANOTHER_TOUCH_POINT_OUTSIDE_ELEMENTS point(140,250)
+
+#define SOME_TRIAL_POINT point(100,150)
+#define SOME_OTHER_TRIAL_POINT point(275,40)
+#define TRIAL_POINT_OUTSIDE_ELEMENTS point(15,15)
 
 #define SOME_DOT_COLOR CTDPaletteColor_DotType1
 
@@ -42,8 +40,10 @@
 @interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
 
 @property (assign, readonly, nonatomic) BOOL connectionActive;
+@property (copy, readonly, nonatomic) CTDPoint* connectionFreeEndPosition;
 
 @end
+
 
 
 
@@ -57,11 +57,11 @@
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
 @property (strong, readonly, nonatomic) CTDFakeTrialStep* trialStep;
 @property (strong, readonly, nonatomic) id<CTDTouchToElementMapper> dotTouchMapper;
+@property (strong, readonly, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
 //@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
 //@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorCellsTouchTracker;
 
 // Test fixture
-@property (strong, nonatomic) CTDFakeDotRenderer* dot1;
 
 @end
 
@@ -70,10 +70,6 @@
 - (void)setUp
 {
     [super setUp];
-
-    self.dot1 = [[CTDFakeDotRenderer alloc]
-                 initWithCenterPosition:DOT_1_CENTER
-                               dotColor:SOME_DOT_COLOR];
 
 //    CTDRecordingTouchTracker* colorCellsTouchTracker =
 //        [[CTDRecordingTouchTracker alloc] init];
@@ -86,20 +82,23 @@
 //        }];
 
     _dotTouchMapper =
-        [[CTDFakeTouchMapper alloc]
-         initWithPointMap:@{ POINT_INSIDE_DOT_1: self.dot1,
-                             ANOTHER_POINT_INSIDE_DOT_1: self.dot1 }];
+        [[CTDFakeTouchToElementMapper alloc]
+         initWithPointMap:@{ TOUCH_POINT_INSIDE_DOT_1: @1,
+                             ANOTHER_TOUCH_POINT_INSIDE_DOT_1: @1 }];
+
+    _freeEndMapper =
+        [[CTDFakeTouchToPointMapper alloc]
+         initWithPointMap:@{ TOUCH_POINT_INSIDE_DOT_1: SOME_TRIAL_POINT,
+                             ANOTHER_TOUCH_POINT_INSIDE_DOT_1: SOME_OTHER_TRIAL_POINT,
+                             TOUCH_POINT_OUTSIDE_ELEMENTS: TRIAL_POINT_OUTSIDE_ELEMENTS }];
 
     _trialStep = [[CTDFakeTrialStep alloc] init];
 
     _router = [[CTDTrialSceneTouchRouter alloc] init];
     _router.trialStepEditor = self.trialStep;
     _router.dotsTouchMapper = self.dotTouchMapper;
+    _router.freeEndMapper = self.freeEndMapper;
 }
-
-//- (CTDRecordingDotConnectionRenderer*)activeConnection {
-//    return [self.trialRenderer.connectionRenderersCreated firstObject];
-//}
 
 @end
 
@@ -115,7 +114,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
 }
 
 - (void)testThatNoConnectionIsStarted
@@ -145,8 +144,8 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
-    [self.subject touchDidMoveTo:ANOTHER_POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:ANOTHER_TOUCH_POINT_OUTSIDE_ELEMENTS];
 }
 
 - (void)testThatNoConnectionIsStarted
@@ -173,13 +172,18 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
-    [self.subject touchDidMoveTo:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
 }
 
 - (void)testThatAConnectionIsStarted
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+- (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
+{
+    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
 //- (void)testThatColorCellTrackerWasCancelled
@@ -201,7 +205,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
     [self.subject touchDidEnd];
 }
 
@@ -231,7 +235,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_OUTSIDE_ELEMENTS];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
     [self.subject touchWasCancelled];
 }
 
@@ -259,7 +263,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 }
 
 - (void)testThatAConnectionIsStarted
@@ -267,11 +271,11 @@
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
 }
 
-//- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-//    assertThat([self activeConnection].secondEndpointPosition,
-//               is(equalTo(POINT_INSIDE_DOT_1)));
-//}
-//
+- (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
+{
+    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
+}
+
 //- (void)testThatColorCellTrackerWasCancelled {
 //    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
 //               is(equalTo(message(touchWasCancelled))));
@@ -289,9 +293,9 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 //    [self.colorCellsTouchTracker reset];
-    [self.subject touchDidMoveTo:ANOTHER_POINT_INSIDE_DOT_1];
+    [self.subject touchDidMoveTo:ANOTHER_TOUCH_POINT_INSIDE_DOT_1];
 }
 
 - (void)testThatTheConnectionRemainsActive
@@ -299,23 +303,10 @@
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
 }
 
-//- (void)testThatTheInitialDotRemainsSelected {
-//    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
-//}
-//
-//- (void)testThatNoOtherDotBecomesSelected {
-//    assertThat([self selectedDots], hasCountOf(1));
-//}
-//
-//- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialDotConnectionPoint {
-//    assertThat([self activeConnection].firstEndpointPosition,
-//               is(equalTo([dot1 connectionPoint])));
-//}
-//
-//- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-//    assertThat([self activeConnection].secondEndpointPosition,
-//               is(equalTo(ANOTHER_POINT_INSIDE_DOT_1)));
-//}
+- (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
+{
+    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_OTHER_TRIAL_POINT)));
+}
 
 //- (void)testThatNoNewConnectionsAreStarted
 //{
@@ -340,28 +331,15 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 //    [self.colorCellsTouchTracker reset];
-    [self.subject touchDidMoveTo:POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
 }
 
-//- (void)testThatTheInitialDotRemainsSelected {
-//    assertThatBool([dot1 isSelected], is(equalToBool(YES)));
-//}
-//
-//- (void)testThatNoOtherDotsAreSelected {
-//    assertThat([self selectedDots], hasCountOf(1));
-//}
-//
-//- (void)testThatTheFirstEndpointOfTheConnectionRemainsAnchoredToTheInitialDotConnectionPoint {
-//    assertThat([self activeConnection].firstEndpointPosition,
-//               is(equalTo([dot1 connectionPoint])));
-//}
-//
-//- (void)testThatTheSecondEndpointOfTheConnectionFollowsTheTouchPosition {
-//    assertThat([self activeConnection].secondEndpointPosition,
-//               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
-//}
+- (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
+{
+    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
+}
 
 //- (void)testThatNoNewConnectionsAreStarted {
 //    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
@@ -389,16 +367,12 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 //    [self.colorCellsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
-//- (void)testThatNoDotsAreSelected {
-//    assertThat([self selectedDots], isEmpty());
-//}
-
-- (void)DISABLED_testThatTheConnectionIsEnded
+- (void)testThatTheConnectionIsEnded
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
 }
@@ -424,16 +398,12 @@
 - (void)setUp
 {
     [super setUp];
-    self.subject = [self.router trackerForTouchStartingAt:POINT_INSIDE_DOT_1];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 //    [self.colorCellsTouchTracker reset];
     [self.subject touchWasCancelled];
 }
 
-//- (void)testThatNoDotsAreSelected {
-//    assertThat([self selectedDots], isEmpty());
-//}
-
-- (void)DISABLED_testThatTheConnectionIsEnded
+- (void)testThatTheConnectionIsEnded
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
 }
@@ -474,6 +444,11 @@
 {
     _connectionActive = YES;
     return self;
+}
+
+- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
+{
+    _connectionFreeEndPosition = [freeEndPosition copy];
 }
 
 - (void)cancelConnection

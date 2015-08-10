@@ -35,6 +35,7 @@
       initWithConnectionEditor:(id<CTDTrialStepConnectionEditor>)connectionEditor
                 dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
                  freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
+          initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self)
@@ -42,6 +43,9 @@
         _connectionEditor = connectionEditor;
         _dotTouchMapper = dotTouchMapper;
         _freeEndMapper = freeEndMapper;
+
+        [connectionEditor setFreeEndPosition:
+            [freeEndMapper pointAtTouchLocation:initialPosition]];
     }
     return self;
 }
@@ -53,8 +57,10 @@
 #pragma mark CTDTouchTracker protocol
 
 
-- (void)touchDidMoveTo:(__unused CTDPoint*)newPosition
+- (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
+    [_connectionEditor setFreeEndPosition:
+        [_freeEndMapper pointAtTouchLocation:newPosition]];
 }
 
 - (void)touchDidEnd

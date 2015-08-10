@@ -3,10 +3,13 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+@class CTDPoint;
+
 
 
 @protocol CTDTrialStepConnectionEditor <NSObject>
 
+- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
 - (void)cancelConnection;
 
 @end
