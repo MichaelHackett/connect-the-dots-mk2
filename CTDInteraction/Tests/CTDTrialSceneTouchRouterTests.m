@@ -27,6 +27,7 @@
 #define ANOTHER_TOUCH_POINT_INSIDE_DOT_1 point(47,95)
 #define TOUCH_POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_TOUCH_POINT_OUTSIDE_ELEMENTS point(140,250)
+#define TOUCH_POINT_OUTSIDE_WINDOW point(999,999)
 
 #define SOME_TRIAL_POINT point(100,150)
 #define SOME_OTHER_TRIAL_POINT point(275,40)
@@ -344,6 +345,39 @@
 //- (void)testThatNoNewConnectionsAreStarted {
 //    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
 //}
+
+- (void)testThatTheConnectionRemainsActive
+{
+    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+//- (void)testThatColorCellTrackerReceivedNoUpdates {
+//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
+//}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenConnectionDraggedOutsideOfWindow
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedOutsideOfWindow
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
+//    [self.colorCellsTouchTracker reset];
+    [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_WINDOW];
+}
+
+- (void)testThatTheFreeEndOfTheConnectionSticksToLastPointInsideWindow
+{
+    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
+}
 
 - (void)testThatTheConnectionRemainsActive
 {

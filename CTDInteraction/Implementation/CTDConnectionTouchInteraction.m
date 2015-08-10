@@ -59,8 +59,10 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    [_connectionEditor setFreeEndPosition:
-        [_freeEndMapper pointAtTouchLocation:newPosition]];
+    CTDPoint* freeEndPosition = [_freeEndMapper pointAtTouchLocation:newPosition];
+    if (freeEndPosition) {
+        [_connectionEditor setFreeEndPosition:freeEndPosition];
+    }
 }
 
 - (void)touchDidEnd

@@ -76,6 +76,11 @@
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     CGPoint localPoint = [ctdView convertPoint:[touchLocation asCGPoint]
                                       fromView:nil];
+
+    if (!CGRectContainsPoint(ctdView.bounds, localPoint)) {
+        return nil;  // Point is outside view
+    }
+
     return [CTDPoint fromCGPoint:localPoint];
 }
 
