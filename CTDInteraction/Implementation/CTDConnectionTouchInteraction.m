@@ -24,6 +24,7 @@
     id<CTDTrialStepConnectionEditor> _connectionEditor;
     id<CTDTouchToElementMapper> _dotTouchMapper;
     id<CTDTouchToPointMapper> _freeEndMapper;
+    id _startingDotId;
 }
 
 
@@ -35,14 +36,20 @@
       initWithConnectionEditor:(id<CTDTrialStepConnectionEditor>)connectionEditor
                 dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
                  freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
+                 startingDotId:(id)startingDotId
           initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
     if (self)
     {
+        if (!connectionEditor) {
+            [NSException raise:NSInvalidArgumentException
+                        format:@"Connection Editor must be supplied"];
+        }
         _connectionEditor = connectionEditor;
         _dotTouchMapper = dotTouchMapper;
         _freeEndMapper = freeEndMapper;
+        _startingDotId = startingDotId;
 
         [connectionEditor setFreeEndPosition:
             [freeEndMapper pointAtTouchLocation:initialPosition]];
@@ -59,9 +66,18 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    CTDPoint* freeEndPosition = [_freeEndMapper pointAtTouchLocation:newPosition];
-    if (freeEndPosition) {
-        [_connectionEditor setFreeEndPosition:freeEndPosition];
+    id hitElement = [_dotTouchMapper elementAtTouchLocation:newPosition];
+    if (hitElement && (hitElement != _startingDotId))
+    {
+        [_connectionEditor completeConnection];
+    }
+    else
+    {
+        CTDPoint* freeEndPosition = [_freeEndMapper pointAtTouchLocation:newPosition];
+        if (freeEndPosition)
+        {
+            [_connectionEditor setFreeEndPosition:freeEndPosition];
+        }
     }
 }
 

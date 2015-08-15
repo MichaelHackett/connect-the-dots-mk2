@@ -73,7 +73,7 @@ static id keyFromEntity(id entity)
 @implementation CTDListOrderTouchMapper
 {
     NSMutableArray* _touchables;
-    CTDEntityKeyedDictionary* _touchableToActuatorMap;
+    CTDEntityKeyedDictionary* _touchableToIdMap;
 }
 
 - (instancetype)init
@@ -81,7 +81,7 @@ static id keyFromEntity(id entity)
     self = [super init];
     if (self) {
         _touchables = [[NSMutableArray alloc] init];
-        _touchableToActuatorMap = [[CTDEntityKeyedDictionary alloc] init];
+        _touchableToIdMap = [[CTDEntityKeyedDictionary alloc] init];
     }
     return self;
 }
@@ -92,16 +92,16 @@ static id keyFromEntity(id entity)
 
 
 - (void)mapTouchable:(id<CTDTouchable>)touchableElement
-          toActuator:(id)actuator
+                toId:(id)elementId
 {
-    [_touchableToActuatorMap setObject:actuator forKey:touchableElement];
+    [_touchableToIdMap setObject:elementId forKey:touchableElement];
     [_touchables addObject:touchableElement];
 }
 
 - (void)unmapTouchable:(id<CTDTouchable>)touchableElement
 {
     [_touchables removeObject:touchableElement];
-    [_touchableToActuatorMap removeObjectForKey:touchableElement];
+    [_touchableToIdMap removeObjectForKey:touchableElement];
 }
 
 // TODO --- when needed
@@ -120,7 +120,7 @@ static id keyFromEntity(id entity)
 {
     for (id<CTDTouchable> touchTarget in _touchables) {
         if ([touchTarget containsTouchLocation:touchLocation]) {
-            return [_touchableToActuatorMap objectForKey:touchTarget];
+            return [_touchableToIdMap objectForKey:touchTarget];
         }
     }
     return nil;

@@ -39,7 +39,7 @@
 #pragma mark CTDTrialRenderer protocol
 
 
-- (id<CTDDotRenderer, CTDTouchable>)newRendererForDot
+- (id<CTDDotRenderer, CTDTouchable>)newRendererForDotWithId:(id)dotId
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
@@ -52,7 +52,7 @@
             colorPalette:_colorPalette];
     [dotViewAdapter setVisible:NO];
     [_touchToDotMapper mapTouchable:dotViewAdapter
-                         toActuator:dotViewAdapter]; // TEMP until I know what this should be
+                               toId:dotId];
 
     return dotViewAdapter;
 }

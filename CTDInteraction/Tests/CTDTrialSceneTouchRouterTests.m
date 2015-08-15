@@ -25,6 +25,7 @@
 #define DOT_1_CENTER point(40,96)
 #define TOUCH_POINT_INSIDE_DOT_1 point(45,99)
 #define ANOTHER_TOUCH_POINT_INSIDE_DOT_1 point(47,95)
+#define TOUCH_POINT_INSIDE_DOT_2 point(430,165)
 #define TOUCH_POINT_OUTSIDE_ELEMENTS point(22,70)
 #define ANOTHER_TOUCH_POINT_OUTSIDE_ELEMENTS point(140,250)
 #define TOUCH_POINT_OUTSIDE_WINDOW point(999,999)
@@ -41,6 +42,7 @@
 @interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
 
 @property (assign, readonly, nonatomic) BOOL connectionActive;
+@property (assign, readonly, nonatomic) BOOL connectionMade;
 @property (copy, readonly, nonatomic) CTDPoint* connectionFreeEndPosition;
 
 @end
@@ -85,7 +87,8 @@
     _dotTouchMapper =
         [[CTDFakeTouchToElementMapper alloc]
          initWithPointMap:@{ TOUCH_POINT_INSIDE_DOT_1: @1,
-                             ANOTHER_TOUCH_POINT_INSIDE_DOT_1: @1 }];
+                             ANOTHER_TOUCH_POINT_INSIDE_DOT_1: @1,
+                             TOUCH_POINT_INSIDE_DOT_2: @2 }];
 
     _freeEndMapper =
         [[CTDFakeTouchToPointMapper alloc]
@@ -165,10 +168,10 @@
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoADot
+@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDot
 
 - (void)setUp
 {
@@ -255,11 +258,11 @@
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
 
-@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideADot
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
 
 - (void)setUp
 {
@@ -270,6 +273,11 @@
 - (void)testThatAConnectionIsStarted
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+- (void)testThatConnectionIsNotCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
 }
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
@@ -302,6 +310,11 @@
 - (void)testThatTheConnectionRemainsActive
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+- (void)testThatConnectionIsNotCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
 }
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
@@ -342,13 +355,14 @@
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
 }
 
-//- (void)testThatNoNewConnectionsAreStarted {
-//    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
-//}
-
 - (void)testThatTheConnectionRemainsActive
 {
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+- (void)testThatConnectionIsNotCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
 }
 
 //- (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -384,6 +398,11 @@
     assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
 }
 
+- (void)testThatConnectionIsNotCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+}
+
 //- (void)testThatColorCellTrackerReceivedNoUpdates {
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
 //}
@@ -393,10 +412,77 @@
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
+@interface CTDTrialSceneTouchTrackerWhenConnectionDraggedIntoSecondDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinADot
+@implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedIntoSecondDot
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
+//    [self.colorCellsTouchTracker reset];
+    [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_2];
+}
+
+- (void)testThatConnectionIsNotCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(YES)));
+}
+
+- (void)testThatTheConnectionRemainsActive
+{
+    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
+//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
+//}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenConnectionDraggedBackOntoFirstDot
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedBackOntoFirstDot
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
+    //    [self.colorCellsTouchTracker reset];
+    [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
+}
+
+- (void)testThatConnectionIsCompleted
+{
+    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+}
+
+- (void)testThatTheConnectionRemainsActive
+{
+    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+}
+
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
+//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
+//}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinStartingDot
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinStartingDot
 
 - (void)setUp
 {
@@ -424,10 +510,10 @@
 
 
 
-@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
+@interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinStartingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
-@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinADot
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinStartingDot
 
 - (void)setUp
 {
@@ -465,6 +551,8 @@
     if (self)
     {
         _connectionActive = NO;
+        _connectionMade = NO;
+        _connectionFreeEndPosition = nil;
     }
     return self;
 }
@@ -483,11 +571,20 @@
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
     _connectionFreeEndPosition = [freeEndPosition copy];
+    _connectionMade = NO;
+}
+
+- (void)completeConnection
+{
+    _connectionMade = YES;
+    _connectionFreeEndPosition = nil;
 }
 
 - (void)cancelConnection
 {
     _connectionActive = NO;
+    _connectionMade = NO;
+    _connectionFreeEndPosition = nil;
 }
 
 @end

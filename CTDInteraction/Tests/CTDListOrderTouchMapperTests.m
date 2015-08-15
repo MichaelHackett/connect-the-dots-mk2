@@ -54,7 +54,7 @@ static CTDPoint* somePoint() { return point(100,150); }
 
 - (void)setUp {
     [super setUp];
-    [self.subject mapTouchable:TOUCHED toActuator:@"HIT"];
+    [self.subject mapTouchable:TOUCHED toId:@"HIT"];
 }
 
 - (void)testThatItReturnsTheActuatorForTheSingleElements {
@@ -73,7 +73,7 @@ static CTDPoint* somePoint() { return point(100,150); }
 
 - (void)setUp {
     [super setUp];
-    [self.subject mapTouchable:NOT_TOUCHED toActuator:@"HIT"];
+    [self.subject mapTouchable:NOT_TOUCHED toId:@"HIT"];
 }
 
 - (void)testThatItReturnsNilWhenQueried {
@@ -92,9 +92,9 @@ static CTDPoint* somePoint() { return point(100,150); }
 
 - (void)setUp {
     [super setUp];
-    [self.subject mapTouchable:NOT_TOUCHED toActuator:@"#1"];
-    [self.subject mapTouchable:TOUCHED toActuator:@"#2"];
-    [self.subject mapTouchable:TOUCHED toActuator:@"#3"];
+    [self.subject mapTouchable:NOT_TOUCHED toId:@"#1"];
+    [self.subject mapTouchable:TOUCHED toId:@"#2"];
+    [self.subject mapTouchable:TOUCHED toId:@"#3"];
 }
 
 - (void)testThatItReturnsEarliestAddedActuatorThatSignalsAHit {

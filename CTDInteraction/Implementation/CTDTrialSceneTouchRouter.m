@@ -17,7 +17,7 @@
 
 #pragma mark - Initial delegate touch tracker (private)
 
-typedef void (^CTDDotHitHandler)(CTDPoint* touchPosition /*id<CTDDotRenderer> hitDotRenderer*/);
+typedef void (^CTDDotHitHandler)(CTDPoint* touchPosition, id hitDotId);
 
 
 @interface CTDDotDetectionTracker : NSObject <CTDTouchTracker>
@@ -56,11 +56,12 @@ CTD_NO_DEFAULT_INIT
     [self CTDDotDetectionTracker_hitTestWithLocation:newPosition];
 }
 
+// TODO: Turn into a block in an ivar
 - (void)CTDDotDetectionTracker_hitTestWithLocation:(CTDPoint*)touchLocation
 {
     id hitElement = [_dotsTouchMapper elementAtTouchLocation:touchLocation];
     if (hitElement /* && [hitElement conformsToProtocol:@protocol(CTDDotRenderer)]*/) {
-        _dotHitHandler(touchLocation /*(id<CTDDotRenderer>)hitElement*/);
+        _dotHitHandler(touchLocation, hitElement);
     }
 }
 
@@ -158,7 +159,7 @@ CTD_NO_DEFAULT_INIT
         [[CTDDotDetectionTracker alloc]
          initWithDotsTouchMapper:dotsTouchMapper
             initialTouchLocation:initialPosition
-                   dotHitHandler:^(CTDPoint* touchPosition /*id<CTDDotRenderer> hitDotRenderer*/)
+                   dotHitHandler:^(CTDPoint* touchPosition, id hitDotId)
     {
         ctd_strongify(weakSelf, strongSelf);
         ctd_strongify(strongSelf.trialStepEditor, trialStepEditor);
@@ -171,6 +172,7 @@ CTD_NO_DEFAULT_INIT
              initWithConnectionEditor:connectionEditor
                        dotTouchMapper:strongSelf.dotsTouchMapper
                         freeEndMapper:freeEndMapper
+                        startingDotId:hitDotId
                  initialTouchPosition:touchPosition]];
 
 //        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {

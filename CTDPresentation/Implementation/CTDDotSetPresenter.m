@@ -50,10 +50,11 @@ static NSDictionary const* dotPaletteColorMap;
 
         _dotRenderings = [dotRenderings copy];
         _dotsTouchMapper = [[CTDListOrderTouchMapper alloc] init];
-        for (id<CTDTouchable> dotRendering in dotRenderings) {
-            [_dotsTouchMapper mapTouchable:dotRendering
-                                toActuator:dotRendering]; // TODO: Change to some PM obj
-        }
+        [dotRenderings enumerateObjectsUsingBlock:
+            ^(id<CTDTouchable> dotRendering, NSUInteger index, __unused BOOL* stop) {
+                [self->_dotsTouchMapper mapTouchable:dotRendering
+                                                toId:@(index)]; // TODO: Change to some PM obj
+            }];
     }
     return self;
 }

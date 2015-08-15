@@ -41,7 +41,7 @@
     return self;
 }
 
-- (id<CTDDotRenderer>)newRendererForDot
+- (id<CTDDotRenderer>)newRendererForDotWithId:(__unused id)dotId
 {
     CTDFakeDotRendering* dotRendering = [[CTDFakeDotRendering alloc] init];
     [_dotRenderings addObject:dotRendering];

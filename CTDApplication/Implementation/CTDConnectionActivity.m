@@ -12,9 +12,13 @@
 
 
 @protocol CTDDotConnection <NSObject>
+
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
+- (void)completeConnection;
 - (void)invalidate;
+
 @end
+
 
 @protocol CTDDotConnectionStateObserver <NSObject>
 - (void)connectionEnded;
@@ -26,7 +30,8 @@
 @interface CTDConnectionActivityDotConnection : NSObject <CTDDotConnection>
 
 - (instancetype)initWithConnectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
-                   connectionStateObserver:(id<CTDDotConnectionStateObserver>)connectionStateObserver;
+                   connectionStateObserver:(id<CTDDotConnectionStateObserver>)connectionStateObserver
+                         targetDotRenderer:(id<CTDDotRenderer>)targetDotRenderer;
 CTD_NO_DEFAULT_INIT
 
 @end
@@ -75,11 +80,11 @@ CTD_NO_DEFAULT_INIT
 {
     CTDDotPair* firstStep = [_trial dotPairs][0];
 
-    id<CTDDotRenderer> startingDotRenderer = [_trialRenderer newRendererForDot];
+    id<CTDDotRenderer> startingDotRenderer = [_trialRenderer newRendererForDotWithId:@1];
     [startingDotRenderer setDotCenterPosition:firstStep.startPosition];
     [startingDotRenderer setDotColor:paletteColorForDotColor(firstStep.color)];
 
-    id<CTDDotRenderer> endingDotRenderer = [_trialRenderer newRendererForDot];
+    id<CTDDotRenderer> endingDotRenderer = [_trialRenderer newRendererForDotWithId:@2];
     [endingDotRenderer setDotCenterPosition:firstStep.endPosition];
     [endingDotRenderer setDotColor:paletteColorForDotColor(firstStep.color)];
 
@@ -139,7 +144,8 @@ CTD_NO_DEFAULT_INIT
 
     id<CTDDotConnection> dotConnection = [[CTDConnectionActivityDotConnection alloc]
                                           initWithConnectionRenderer:_connectionRenderer
-                                             connectionStateObserver:self];
+                                             connectionStateObserver:self
+                                                   targetDotRenderer:_endingDotRenderer];
     [_connectionRenderer setSecondEndpointPosition:[_startingDotRenderer dotConnectionPoint]];
 
     [_startingDotRenderer showSelectionIndicator];
@@ -179,16 +185,19 @@ CTD_NO_DEFAULT_INIT
 {
     id<CTDDotConnectionRenderer> _renderer;
     __weak id<CTDDotConnectionStateObserver> _connectionStateObserver;
+    __weak id<CTDDotRenderer> _targetDotRenderer;
 }
 
 - (instancetype)initWithConnectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
                    connectionStateObserver:(id<CTDDotConnectionStateObserver>)connectionStateObserver
+                         targetDotRenderer:(id<CTDDotRenderer>)targetDotRenderer
 {
     self = [super init];
     if (self)
     {
         _renderer = connectionRenderer;
         _connectionStateObserver = connectionStateObserver;
+        _targetDotRenderer = targetDotRenderer;
     }
     return self;
 }
@@ -196,12 +205,24 @@ CTD_NO_DEFAULT_INIT
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
     [_renderer setSecondEndpointPosition:freeEndPosition];
+    id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
+    [targetDotRenderer hideSelectionIndicator];
+}
+
+- (void)completeConnection
+{
+    id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
+    [_renderer setSecondEndpointPosition:[targetDotRenderer dotConnectionPoint]];
+    [targetDotRenderer showSelectionIndicator];
 }
 
 - (void)invalidate
 {
 //    [_renderer discardRendering];
     _renderer = nil;
+
+    id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
+    [targetDotRenderer hideSelectionIndicator];
 
     id<CTDDotConnectionStateObserver> connectionStateObserver = _connectionStateObserver;
     [connectionStateObserver connectionEnded];
@@ -230,6 +251,11 @@ CTD_NO_DEFAULT_INIT
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
     [_dotConnection setFreeEndPosition:freeEndPosition];
+}
+
+- (void)completeConnection
+{
+    [_dotConnection completeConnection];
 }
 
 - (void)cancelConnection

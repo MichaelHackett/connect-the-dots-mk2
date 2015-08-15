@@ -28,6 +28,7 @@
       initWithConnectionEditor:(id<CTDTrialStepConnectionEditor>)connectionEditor
                 dotTouchMapper:(id<CTDTouchToElementMapper>)dotTouchMapper
                  freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
+                 startingDotId:(id)startingDotId
           initialTouchPosition:(CTDPoint*)initialPosition;
 
 CTD_NO_DEFAULT_INIT

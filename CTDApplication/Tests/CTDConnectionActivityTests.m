@@ -214,6 +214,102 @@
 
 
 
+@interface CTDConnectionActivityAfterCompletingConnection : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityAfterCompletingConnection
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    id<CTDTrialStepConnectionEditor> connectionEditor =
+        [[self.subject trialStepEditor] editorForNewConnection];
+    [connectionEditor completeConnection];
+}
+
+- (void)testThatStartingDotRemainsRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatEndingDotIsRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[1] hasSelectionIndicator],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatConnectionRemainsRenderedAnchoredFromFirstDot
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.firstEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
+}
+
+- (void)testThatFreeEndOfConnectionIsRendereredConnectedToSecondDot
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.secondEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[1] dotConnectionPoint])));
+}
+
+@end
+
+
+
+
+
+@interface CTDConnectionActivityAfterBreakingEstablishedConnection : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityAfterBreakingEstablishedConnection
+{
+    CTDPoint* _newFreeEndPosition;
+}
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    id<CTDTrialStepConnectionEditor> connectionEditor =
+    [[self.subject trialStepEditor] editorForNewConnection];
+    [connectionEditor completeConnection];
+    _newFreeEndPosition = [CTDPoint x:4 y:36];
+    [connectionEditor setFreeEndPosition:_newFreeEndPosition];
+}
+
+- (void)testThatStartingDotRemainsRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatEndingDotIsRenderedAsNotActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[1] hasSelectionIndicator],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatConnectionRemainsRenderedAnchoredFromFirstDot
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.firstEndpointPosition,
+               is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
+}
+
+- (void)testThatFreeEndOfConnectionIsRendereredToTheNewFreeEndPosition
+{
+    CTDFakeConnectionRendering* connection = self.trialRenderer.connectionRenderings[0];
+    assertThat(connection.secondEndpointPosition, is(equalTo(_newFreeEndPosition)));
+}
+
+@end
+
+
+
+
+
 @interface CTDConnectionActivityAfterCancellingConnection : CTDConnectionActivityTestCase
 @end
 

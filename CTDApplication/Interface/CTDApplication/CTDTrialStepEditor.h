@@ -9,7 +9,10 @@
 
 @protocol CTDTrialStepConnectionEditor <NSObject>
 
+// Note that setting the free-end position breaks any existing connection
+// (though leaves the connection anchored to the first point).
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
+- (void)completeConnection;
 - (void)cancelConnection;
 
 @end

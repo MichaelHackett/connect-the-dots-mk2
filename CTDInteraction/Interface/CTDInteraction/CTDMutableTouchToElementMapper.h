@@ -13,7 +13,7 @@
 @protocol CTDMutableTouchToElementMapper <CTDTouchToElementMapper>
 
 - (void)mapTouchable:(id<CTDTouchable>)touchableElement
-          toActuator:(id)actuator;
+                toId:(id)elementId;
 - (void)unmapTouchable:(id<CTDTouchable>)touchableElement;
 
 @end

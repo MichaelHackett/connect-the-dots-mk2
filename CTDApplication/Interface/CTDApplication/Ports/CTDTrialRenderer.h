@@ -61,7 +61,7 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 
 @protocol CTDTrialRenderer <NSObject>
 
-- (id<CTDDotRenderer>)newRendererForDot;
+- (id<CTDDotRenderer>)newRendererForDotWithId:(id)dotId;
 - (id<CTDDotConnectionRenderer>)newRendererForDotConnection;
 
 @end

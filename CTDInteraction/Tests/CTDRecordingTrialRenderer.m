@@ -36,7 +36,7 @@
     return [_connectionRenderersCreated copy];
 }
 
-- (id<CTDDotRenderer>)newRendererForDot
+- (id<CTDDotRenderer>)newRendererForDotWithId:(__unused id)dotId
 {
     id newDotRenderer = [[CTDFakeDotRenderer alloc] init];
     [_dotRenderersCreated addObject:newDotRenderer];
