@@ -18,7 +18,7 @@
 @property (weak, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
 
 // IB Outlets
-@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray* colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
 
 @end

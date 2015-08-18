@@ -40,7 +40,8 @@ CTD_NO_DEFAULT_INIT
                           dotHitHandler:(CTDDotHitHandler)dotHitHandler
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _dotsTouchMapper = dotsTouchMapper;
         _dotHitHandler = [dotHitHandler copy];
 
@@ -60,7 +61,8 @@ CTD_NO_DEFAULT_INIT
 - (void)CTDDotDetectionTracker_hitTestWithLocation:(CTDPoint*)touchLocation
 {
     id hitElement = [_dotsTouchMapper elementAtTouchLocation:touchLocation];
-    if (hitElement /* && [hitElement conformsToProtocol:@protocol(CTDDotRenderer)]*/) {
+    if (hitElement)
+    {
         _dotHitHandler(touchLocation, hitElement);
     }
 }
@@ -84,7 +86,8 @@ CTD_NO_DEFAULT_INIT
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _trialStepEditor = nil;
         _dotsTouchMapper = nil;
         _trialRenderer = nil;
@@ -100,7 +103,8 @@ CTD_NO_DEFAULT_INIT
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _trialRenderer = trialRenderer;
         _dotsTouchMapper = dotsTouchMapper;
         _freeEndMapper = freeEndMapper;
@@ -144,7 +148,8 @@ CTD_NO_DEFAULT_INIT
         [[CTDTouchTrackingGroup alloc] init];
     id<CTDTouchTracker> colorCellsTouchTracker =
         [_colorCellsTouchResponder trackerForTouchStartingAt:initialPosition];
-    if (colorCellsTouchTracker) {
+    if (colorCellsTouchTracker)
+    {
         [initialTrackingGroup addTracker:colorCellsTouchTracker];
     }
 
@@ -180,7 +185,8 @@ CTD_NO_DEFAULT_INIT
 //        }
     }];
 
-    if (actionDiscriminator) {
+    if (actionDiscriminator)
+    {
         [initialTrackingGroup addTracker:actionDiscriminator];
     }
 
