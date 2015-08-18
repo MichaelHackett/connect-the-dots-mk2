@@ -165,6 +165,16 @@ CTD_NO_DEFAULT_INIT
             initWithDotConnection:[self newConnection]];
 }
 
+- (id)startingDotId
+{
+    return @1;
+}
+
+- (id)endingDotId
+{
+    return @2;
+}
+
 
 
 #pragma mark CTDDotConnectionStateObserver protocol

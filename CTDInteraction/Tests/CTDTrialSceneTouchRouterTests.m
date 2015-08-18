@@ -36,6 +36,9 @@
 
 #define SOME_DOT_COLOR CTDPaletteColor_DotType1
 
+#define STARTING_DOT_ID @1
+#define ENDING_DOT_ID @2
+
 
 
 
@@ -258,6 +261,7 @@
 
 
 
+
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
@@ -294,6 +298,29 @@
 
 
 
+
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_2];
+}
+
+- (void)testThatNoConnectionIsStarted
+{
+    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+}
+
+@end
+
+
+
+
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
@@ -322,11 +349,6 @@
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_OTHER_TRIAL_POINT)));
 }
 
-//- (void)testThatNoNewConnectionsAreStarted
-//{
-//    assertThat(self.trialRenderer.connectionRenderersCreated, hasCountOf(1));
-//}
-//
 //- (void)testThatColorCellTrackerReceivedNoUpdates
 //{
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
@@ -454,7 +476,7 @@
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-    //    [self.colorCellsTouchTracker reset];
+//    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
 }
@@ -557,15 +579,20 @@
     return self;
 }
 
-//- (void)beginConnection
-//{
-//    _connectionActive = YES;
-//}
-//
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection
 {
     _connectionActive = YES;
     return self;
+}
+
+- (id)startingDotId
+{
+    return STARTING_DOT_ID;
+}
+
+- (id)endingDotId
+{
+    return ENDING_DOT_ID;
 }
 
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition

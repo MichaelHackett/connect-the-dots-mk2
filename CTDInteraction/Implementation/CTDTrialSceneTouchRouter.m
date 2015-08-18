@@ -168,21 +168,21 @@ CTD_NO_DEFAULT_INIT
     {
         ctd_strongify(weakSelf, strongSelf);
         ctd_strongify(strongSelf.trialStepEditor, trialStepEditor);
-        ctd_strongify(strongSelf.freeEndMapper, freeEndMapper);
 
-        id<CTDTrialStepConnectionEditor> connectionEditor =
-            [trialStepEditor editorForNewConnection];
-        [delegatingTracker changeDelegateTo:
-            [[CTDConnectionTouchInteraction alloc]
-             initWithConnectionEditor:connectionEditor
-                       dotTouchMapper:strongSelf.dotsTouchMapper
-                        freeEndMapper:freeEndMapper
-                        startingDotId:hitDotId
-                 initialTouchPosition:touchPosition]];
-
-//        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
-//            [colorCellsTouchTracker touchWasCancelled];
-//        }
+        if ([hitDotId isEqual:[trialStepEditor startingDotId]]) {
+            id<CTDTrialStepConnectionEditor> connectionEditor =
+                [trialStepEditor editorForNewConnection];
+            [delegatingTracker changeDelegateTo:
+                [[CTDConnectionTouchInteraction alloc]
+                 initWithConnectionEditor:connectionEditor
+                           dotTouchMapper:strongSelf.dotsTouchMapper
+                            freeEndMapper:strongSelf.freeEndMapper
+                            startingDotId:hitDotId
+                     initialTouchPosition:touchPosition]];
+//            if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
+//                [colorCellsTouchTracker touchWasCancelled];
+//            }
+        }
     }];
 
     if (actionDiscriminator)

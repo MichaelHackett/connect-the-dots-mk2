@@ -25,4 +25,7 @@
 // (Note: Attempting to start a second connection while one is active will cancel the first one.)
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection;
 
+- (id)startingDotId;
+- (id)endingDotId;
+
 @end
