@@ -157,11 +157,13 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatColorCellResponderIsAskedForATracker {
+//- (void)testThatColorCellResponderIsAskedForATracker
+//{
 //    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
 //}
 //
-//- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition {
+//- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition
+//{
 //    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
 //               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
 //}
@@ -312,7 +314,8 @@ typedef enum {
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
-//- (void)testThatColorCellTrackerWasCancelled {
+//- (void)testThatColorCellTrackerWasCancelled
+//{
 //    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
 //               is(equalTo(message(touchWasCancelled))));
 //}
@@ -400,7 +403,8 @@ typedef enum {
     assertThatConnectionStateIs(Active);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates {
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
 //}
 
@@ -433,7 +437,8 @@ typedef enum {
     assertThatConnectionStateIs(Active);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates {
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
 //}
 
@@ -517,11 +522,13 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatTheConnectionIsDiscarded {
+//- (void)testThatTheConnectionIsDiscarded
+//{
 //    // TODO
 //}
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates {
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
 //}
 
@@ -548,11 +555,13 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatTheConnectionIsDiscarded {
+//- (void)testThatTheConnectionIsDiscarded
+//{
 //    // TODO
 //}
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates {
+//- (void)testThatColorCellTrackerReceivedNoUpdates
+//{
 //    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
 //}
 
