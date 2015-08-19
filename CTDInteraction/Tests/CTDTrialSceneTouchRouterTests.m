@@ -40,12 +40,20 @@
 #define ENDING_DOT_ID @2
 
 
+// The states a trial-step connection can be in.
+typedef enum {
+    kCTDTrialConnectionStateInactive,
+    kCTDTrialConnectionStateActive,
+    kCTDTrialConnectionStateEstablished,
+    kCTDTrialConnectionStateCompleted
+} CTDTrialConnectionState;
+
+
 
 
 @interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
 
-@property (assign, readonly, nonatomic) BOOL connectionActive;
-@property (assign, readonly, nonatomic) BOOL connectionMade;
+@property (assign, readonly, nonatomic) CTDTrialConnectionState connectionState;
 @property (copy, readonly, nonatomic) CTDPoint* connectionFreeEndPosition;
 
 @end
@@ -70,6 +78,10 @@
 // Test fixture
 
 @end
+
+// Convenience assertion
+#define assertThatConnectionStateIs(EXPECTED_STATE) assertThatUnsignedInteger(self.trialStep.connectionState, is(equalToUnsignedInteger(kCTDTrialConnectionState ## EXPECTED_STATE)))
+
 
 @implementation CTDTrialSceneTouchTrackerTestCase
 
@@ -112,6 +124,22 @@
 
 
 
+@interface CTDTrialSceneTouchRouterPriorToAnyTouch
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+
+@implementation CTDTrialSceneTouchRouterPriorToAnyTouch
+
+- (void)testThatNoConnectionIsStarted
+{
+    assertThatConnectionStateIs(Inactive);
+}
+
+@end
+
+
+
+
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
     : CTDTrialSceneTouchTrackerTestCase
 @end
@@ -126,7 +154,7 @@
 
 - (void)testThatNoConnectionIsStarted
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatColorCellResponderIsAskedForATracker {
@@ -157,7 +185,7 @@
 
 - (void)testThatNoConnectionIsStarted
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatColorCellTrackerReceivedNewPosition
@@ -183,9 +211,9 @@
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatAConnectionIsStarted
+- (void)testThatAConnectionIsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+    assertThatConnectionStateIs(Active);
 }
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
@@ -218,7 +246,7 @@
 
 - (void)testThatNoConnectionIsStarted
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatColorCellTrackerIsNotifedThatTouchEnded
@@ -248,7 +276,7 @@
 
 - (void)testThatNoConnectionIsStarted
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatColorCellTrackerWasCancelled
@@ -274,14 +302,9 @@
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatAConnectionIsStarted
+- (void)testThatConnectionIsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
-}
-
-- (void)testThatConnectionIsNotCompleted
-{
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Active);
 }
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
@@ -313,7 +336,7 @@
 
 - (void)testThatNoConnectionIsStarted
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 @end
@@ -336,12 +359,7 @@
 
 - (void)testThatTheConnectionRemainsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
-}
-
-- (void)testThatConnectionIsNotCompleted
-{
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Active);
 }
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
@@ -379,12 +397,7 @@
 
 - (void)testThatTheConnectionRemainsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
-}
-
-- (void)testThatConnectionIsNotCompleted
-{
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Active);
 }
 
 //- (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -417,12 +430,7 @@
 
 - (void)testThatTheConnectionRemainsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
-}
-
-- (void)testThatConnectionIsNotCompleted
-{
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Active);
 }
 
 //- (void)testThatColorCellTrackerReceivedNoUpdates {
@@ -447,14 +455,9 @@
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_2];
 }
 
-- (void)testThatConnectionIsNotCompleted
+- (void)testThatConnectionIsEstablished
 {
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(YES)));
-}
-
-- (void)testThatTheConnectionRemainsActive
-{
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+    assertThatConnectionStateIs(Established);
 }
 
 //- (void)testThatColorCellTrackerReceivedNoUpdates
@@ -481,14 +484,9 @@
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
 }
 
-- (void)testThatConnectionIsCompleted
-{
-    assertThatBool(self.trialStep.connectionMade, is(equalToBool(NO)));
-}
-
 - (void)testThatTheConnectionRemainsActive
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(YES)));
+    assertThatConnectionStateIs(Active);
 }
 
 //- (void)testThatColorCellTrackerReceivedNoUpdates
@@ -516,7 +514,7 @@
 
 - (void)testThatTheConnectionIsEnded
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -547,7 +545,7 @@
 
 - (void)testThatTheConnectionIsEnded
 {
-    assertThatBool(self.trialStep.connectionActive, is(equalToBool(NO)));
+    assertThatConnectionStateIs(Inactive);
 }
 
 //- (void)testThatTheConnectionIsDiscarded {
@@ -560,7 +558,33 @@
 
 @end
 
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchIsEndedWhileWithinEndingDot
+    : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchIsEndedWhileWithinEndingDot
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
+    [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_2];
+//    [self.colorCellsTouchTracker reset];
+    [self.subject touchDidEnd];
+}
+
+- (void)testThatTheConnectionIsSuccessfullyCompleted
+{
+    assertThatConnectionStateIs(Completed);
+}
+
+@end
+
+
 // TODO: CTDTrialSceneTouchTrackerTrackingFromADot
+// - touching first dot after connection is started should have no effect
 
 
 
@@ -572,8 +596,7 @@
     self = [super init];
     if (self)
     {
-        _connectionActive = NO;
-        _connectionMade = NO;
+        _connectionState = kCTDTrialConnectionStateInactive;
         _connectionFreeEndPosition = nil;
     }
     return self;
@@ -581,7 +604,7 @@
 
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection
 {
-    _connectionActive = YES;
+    _connectionState = kCTDTrialConnectionStateActive;
     return self;
 }
 
@@ -595,22 +618,39 @@
     return ENDING_DOT_ID;
 }
 
+- (void)invalidate {}
+
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
+    NSAssert(_connectionState == kCTDTrialConnectionStateActive ||
+             _connectionState == kCTDTrialConnectionStateEstablished,
+             @"Connection is not in a valid state for changing its free end position.");
+
     _connectionFreeEndPosition = [freeEndPosition copy];
-    _connectionMade = NO;
+    _connectionState = kCTDTrialConnectionStateActive;
 }
 
-- (void)completeConnection
+- (void)establishConnection
 {
-    _connectionMade = YES;
+    _connectionState = kCTDTrialConnectionStateEstablished;
     _connectionFreeEndPosition = nil;
+}
+
+- (void)commitConnectionState
+{
+    if (_connectionState == kCTDTrialConnectionStateEstablished)
+    {
+        _connectionState = kCTDTrialConnectionStateCompleted;
+    }
+    else
+    {
+        _connectionState = kCTDTrialConnectionStateInactive;
+    }
 }
 
 - (void)cancelConnection
 {
-    _connectionActive = NO;
-    _connectionMade = NO;
+    _connectionState = kCTDTrialConnectionStateInactive;
     _connectionFreeEndPosition = nil;
 }
 

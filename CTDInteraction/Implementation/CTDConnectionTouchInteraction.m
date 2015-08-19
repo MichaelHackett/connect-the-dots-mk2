@@ -69,7 +69,7 @@
     id hitElement = [_dotTouchMapper elementAtTouchLocation:newPosition];
     if (hitElement && (hitElement != _startingDotId))
     {
-        [_connectionEditor completeConnection];
+        [_connectionEditor establishConnection];
     }
     else
     {
@@ -83,7 +83,7 @@
 
 - (void)touchDidEnd
 {
-    [self touchWasCancelled];
+    [_connectionEditor commitConnectionState];
 }
 
 - (void)touchWasCancelled

@@ -105,7 +105,9 @@
 
 - (void)discardRendering
 {
-    self.cancellationBlock();
+    if (self.cancellationBlock) {
+        self.cancellationBlock();
+    }
 }
 
 - (void)setDotCenterPosition:(CTDPoint*)centerPosition

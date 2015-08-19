@@ -14,14 +14,20 @@
 @protocol CTDDotConnection <NSObject>
 
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
-- (void)completeConnection;
+- (void)establishConnection;
 - (void)invalidate;
 
 @end
 
 
 @protocol CTDDotConnectionStateObserver <NSObject>
-- (void)connectionEnded;
+// Only one of these two messages will be sent and it will be sent only once.
+- (void)connectionCompleted;
+- (void)connectionCancelled;
+@end
+
+@protocol CTDTrialStepStateObserver <NSObject>
+- (void)trialStepCompleted;
 @end
 
 
@@ -48,10 +54,23 @@ CTD_NO_DEFAULT_INIT
 @interface CTDConnectionActivityTrialStepEditor : NSObject <CTDTrialStepEditor,
                                                             CTDDotConnectionStateObserver>
 
+// TODO: Move to separate factory class (as instance method)?
++ (instancetype)trialStepEditorWithDotPair:(CTDDotPair*)dotPair
+                             trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                    trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
+
+// Transfers ownership of dot and connection renderers. Weak ref to given observer.
 - (instancetype)initWithStartingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
                           endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
-                         connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer;
+                         connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+                     trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
 
+@end
+
+
+
+
+@interface CTDConnectionActivity () <CTDTrialStepStateObserver>
 @end
 
 
@@ -61,6 +80,7 @@ CTD_NO_DEFAULT_INIT
     id<CTDTrial> _trial;
     id<CTDTrialRenderer> _trialRenderer;
     id<CTDTrialStepEditor> _trialStepEditor;
+    NSUInteger _stepIndex;
 }
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
@@ -72,34 +92,28 @@ CTD_NO_DEFAULT_INIT
         _trial = trial;
         _trialRenderer = trialRenderer;
         _trialStepEditor = nil;
+        _stepIndex = NSUIntegerMax;
     }
     return self;
 }
 
 - (void)beginTrial
 {
-    CTDDotPair* firstStep = [_trial dotPairs][0];
+    _stepIndex = 0;
+    _trialStepEditor = [CTDConnectionActivityTrialStepEditor
+                        trialStepEditorWithDotPair:[_trial dotPairs][0]
+                                     trialRenderer:_trialRenderer
+                            trialStepStateObserver:self];
+}
 
-    id<CTDDotRenderer> startingDotRenderer = [_trialRenderer newRendererForDotWithId:@1];
-    [startingDotRenderer setDotCenterPosition:firstStep.startPosition];
-    [startingDotRenderer setDotColor:paletteColorForDotColor(firstStep.color)];
-
-    id<CTDDotRenderer> endingDotRenderer = [_trialRenderer newRendererForDotWithId:@2];
-    [endingDotRenderer setDotCenterPosition:firstStep.endPosition];
-    [endingDotRenderer setDotColor:paletteColorForDotColor(firstStep.color)];
-
-    id<CTDDotConnectionRenderer> connectionRenderer =
-        [_trialRenderer newRendererForDotConnection];
-    [connectionRenderer setFirstEndpointPosition:[startingDotRenderer dotConnectionPoint]];
-
-    [startingDotRenderer setVisible:YES];
-    [endingDotRenderer setVisible:NO];
-    [connectionRenderer setVisible:NO];
-
-    _trialStepEditor = [[CTDConnectionActivityTrialStepEditor alloc]
-                        initWithStartingDotRenderer:startingDotRenderer
-                                  endingDotRenderer:endingDotRenderer
-                                 connectionRenderer:connectionRenderer];
+- (void)trialStepCompleted
+{
+    [_trialStepEditor invalidate];
+    _stepIndex += 1;
+    _trialStepEditor = [CTDConnectionActivityTrialStepEditor
+                        trialStepEditorWithDotPair:[_trial dotPairs][_stepIndex]
+                                     trialRenderer:_trialRenderer
+                            trialStepStateObserver:self];
 }
 
 @end
@@ -111,17 +125,46 @@ CTD_NO_DEFAULT_INIT
     id<CTDDotRenderer> _startingDotRenderer;
     id<CTDDotRenderer> _endingDotRenderer;
     id<CTDDotConnectionRenderer> _connectionRenderer;
+    __weak id<CTDTrialStepStateObserver> _trialStepStateObserver;
+}
+
++ (instancetype)trialStepEditorWithDotPair:(CTDDotPair*)dotPair
+                             trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                    trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
+{
+    id<CTDDotRenderer> startingDotRenderer = [trialRenderer newRendererForDotWithId:@1];
+    [startingDotRenderer setDotCenterPosition:dotPair.startPosition];
+    [startingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
+
+    id<CTDDotRenderer> endingDotRenderer = [trialRenderer newRendererForDotWithId:@2];
+    [endingDotRenderer setDotCenterPosition:dotPair.endPosition];
+    [endingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
+
+    id<CTDDotConnectionRenderer> connectionRenderer = [trialRenderer newRendererForDotConnection];
+    [connectionRenderer setFirstEndpointPosition:[startingDotRenderer dotConnectionPoint]];
+
+    [startingDotRenderer setVisible:YES];
+    [endingDotRenderer setVisible:NO];
+    [connectionRenderer setVisible:NO];
+    
+    return [[CTDConnectionActivityTrialStepEditor alloc]
+            initWithStartingDotRenderer:startingDotRenderer
+                      endingDotRenderer:endingDotRenderer
+                     connectionRenderer:connectionRenderer
+                 trialStepStateObserver:trialStepStateObserver];
 }
 
 - (instancetype)initWithStartingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
                           endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
                          connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+                     trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
 {
     self = [super init];
     if (self) {
         _startingDotRenderer = startingDotRenderer;
         _endingDotRenderer = endingDotRenderer;
         _connectionRenderer = connectionRenderer;
+        _trialStepStateObserver = trialStepStateObserver;
     }
     return self;
 }
@@ -175,12 +218,32 @@ CTD_NO_DEFAULT_INIT
     return @2;
 }
 
+- (void)invalidate
+{
+    [_startingDotRenderer discardRendering];
+    _startingDotRenderer = nil;
+    [_endingDotRenderer discardRendering];
+    _endingDotRenderer = nil;
+    [_connectionRenderer discardRendering];
+    _connectionRenderer = nil;
+}
+
 
 
 #pragma mark CTDDotConnectionStateObserver protocol
 
 
-- (void)connectionEnded
+- (void)connectionCompleted
+{
+    [self connectionCancelled];
+    [_startingDotRenderer hideSelectionIndicator];
+    [_startingDotRenderer setVisible:NO];
+
+    ctd_strongify(_trialStepStateObserver, trialStepStateObserver);
+    [trialStepStateObserver trialStepCompleted];
+}
+
+- (void)connectionCancelled
 {
     [_startingDotRenderer hideSelectionIndicator];
     [_endingDotRenderer setVisible:NO];
@@ -196,6 +259,7 @@ CTD_NO_DEFAULT_INIT
     id<CTDDotConnectionRenderer> _renderer;
     __weak id<CTDDotConnectionStateObserver> _connectionStateObserver;
     __weak id<CTDDotRenderer> _targetDotRenderer;
+    BOOL _connectionEstablished;
 }
 
 - (instancetype)initWithConnectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
@@ -208,25 +272,32 @@ CTD_NO_DEFAULT_INIT
         _renderer = connectionRenderer;
         _connectionStateObserver = connectionStateObserver;
         _targetDotRenderer = targetDotRenderer;
+        _connectionEstablished = NO;
     }
     return self;
 }
 
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
+    if (_connectionEstablished) {
+        _connectionEstablished = NO;
+        id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
+        [targetDotRenderer hideSelectionIndicator];
+    }
     [_renderer setSecondEndpointPosition:freeEndPosition];
-    id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
-    [targetDotRenderer hideSelectionIndicator];
 }
 
-- (void)completeConnection
+- (void)establishConnection
 {
-    id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
-    [_renderer setSecondEndpointPosition:[targetDotRenderer dotConnectionPoint]];
-    [targetDotRenderer showSelectionIndicator];
+    if (!_connectionEstablished) {
+        _connectionEstablished = YES;
+        id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
+        [_renderer setSecondEndpointPosition:[targetDotRenderer dotConnectionPoint]];
+        [targetDotRenderer showSelectionIndicator];
+    }
 }
 
-- (void)invalidate
+- (void)commitConnectionState
 {
 //    [_renderer discardRendering];
     _renderer = nil;
@@ -234,9 +305,22 @@ CTD_NO_DEFAULT_INIT
     id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
     [targetDotRenderer hideSelectionIndicator];
 
-    id<CTDDotConnectionStateObserver> connectionStateObserver = _connectionStateObserver;
-    [connectionStateObserver connectionEnded];
+    ctd_strongify(_connectionStateObserver, connectionStateObserver);
+    if (_connectionEstablished)
+    {
+        [connectionStateObserver connectionCompleted];
+    }
+    else
+    {
+        [connectionStateObserver connectionCancelled];
+    }
     _connectionStateObserver = nil;  // send no further updates
+}
+
+- (void)invalidate
+{
+    _connectionEstablished = NO;
+    [self commitConnectionState];
 }
 
 @end
@@ -263,9 +347,14 @@ CTD_NO_DEFAULT_INIT
     [_dotConnection setFreeEndPosition:freeEndPosition];
 }
 
-- (void)completeConnection
+- (void)establishConnection
 {
-    [_dotConnection completeConnection];
+    [_dotConnection establishConnection];
+}
+
+- (void)commitConnectionState
+{
+    [_dotConnection commitConnectionState];
 }
 
 - (void)cancelConnection

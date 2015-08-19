@@ -50,6 +50,7 @@
 
 
 
+
 @interface CTDConnectionActivityWhenFirstBegan : CTDConnectionActivityTestCase
 @end
 @implementation CTDConnectionActivityWhenFirstBegan
@@ -89,6 +90,7 @@
 }
 
 @end
+
 
 
 
@@ -213,7 +215,6 @@
 
 
 
-
 @interface CTDConnectionActivityAfterCompletingConnection : CTDConnectionActivityTestCase
 @end
 
@@ -225,7 +226,7 @@
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
         [[self.subject trialStepEditor] editorForNewConnection];
-    [connectionEditor completeConnection];
+    [connectionEditor establishConnection];
 }
 
 - (void)testThatStartingDotRemainsRenderedAsActivated
@@ -259,6 +260,78 @@
 
 
 
+@interface CTDConnectionActivityAfterCommittingConnection : CTDConnectionActivityTestCase
+@property (strong, nonatomic) CTDFakeDotRendering* previousStepFirstDotRendering;
+@property (strong, nonatomic) CTDFakeDotRendering* previousStepSecondDotRendering;
+@property (strong, nonatomic) CTDFakeConnectionRendering* previousStepConnectionRendering;
+@end
+
+@implementation CTDConnectionActivityAfterCommittingConnection
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    id<CTDTrialStepConnectionEditor> connectionEditor =
+        [[self.subject trialStepEditor] editorForNewConnection];
+    [connectionEditor establishConnection];
+
+    // Save refs to current renderings so we can verify that they have been
+    // hidden after the step has been completed.
+    self.previousStepFirstDotRendering = self.trialRenderer.dotRenderings[0];
+    self.previousStepSecondDotRendering = self.trialRenderer.dotRenderings[1];
+    self.previousStepConnectionRendering = self.trialRenderer.connectionRenderings[0];
+
+    [connectionEditor commitConnectionState];
+}
+
+- (void)testThatStartingDotFromPreviousStepHasBeenHidden
+{
+    assertThatBool([self.previousStepFirstDotRendering isVisible], is(equalToBool(NO)));
+}
+
+- (void)testThatEndingDotFromPreviousStepHasBeenHidden
+{
+    assertThatBool([self.previousStepSecondDotRendering isVisible], is(equalToBool(NO)));
+}
+
+- (void)testThatConnectionFromPreviousStepHasBeenHidden
+{
+    assertThatBool([self.previousStepConnectionRendering isVisible], is(equalToBool(NO)));
+}
+
+- (void)testThatExactlyOneDotIsVisible
+{
+    assertThat(self.trialRenderer.dotRenderings, hasCountOf(1));
+}
+
+- (void)testThatFirstDotIsRenderedInStartingPositionFromFollowingStep
+{
+    assertThat([self.trialRenderer.dotRenderings[0] dotCenterPosition],
+               is(equalTo([self.dotPairs[1] startPosition])));
+}
+
+- (void)testThatFirstDotIsRenderedWithColorForFollowingStep
+{
+    assertThat([self.trialRenderer.dotRenderings[0] dotColor],
+               is(equalTo(CTDPaletteColor_DotType3)));
+}
+
+- (void)testThatStartingDotIsNotRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatNoConnectionIsVisible
+{
+    assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
+}
+
+@end
+
+
+
 
 @interface CTDConnectionActivityAfterBreakingEstablishedConnection : CTDConnectionActivityTestCase
 @end
@@ -274,7 +347,7 @@
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
     [[self.subject trialStepEditor] editorForNewConnection];
-    [connectionEditor completeConnection];
+    [connectionEditor establishConnection];
     _newFreeEndPosition = [CTDPoint x:4 y:36];
     [connectionEditor setFreeEndPosition:_newFreeEndPosition];
 }
@@ -305,7 +378,6 @@
 }
 
 @end
-
 
 
 
@@ -341,6 +413,7 @@
 }
 
 @end
+
 
 
 
