@@ -11,8 +11,12 @@
 #import "CTDUIKitLineViewAdapter.h"
 
 #import "CTDInteraction/CTDMutableTouchToElementMapper.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 
 
+
+@interface CTDUIKitConnectTheDotsViewAdapter () <CTDNotificationReceiver>
+@end
 
 @implementation CTDUIKitConnectTheDotsViewAdapter
 {
@@ -49,7 +53,8 @@
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
         [[CTDUIKitDotViewAdapter alloc]
          initWithDotView:[ctdView newDotCenteredAt:CGPointZero]
-            colorPalette:_colorPalette];
+         colorPalette:_colorPalette
+         notificationReceiver:self];
     [dotViewAdapter setVisible:NO];
     [_touchToDotMapper mapTouchable:dotViewAdapter
                                toId:dotId];
@@ -82,6 +87,21 @@
     }
 
     return [CTDPoint fromCGPoint:localPoint];
+}
+
+
+
+#pragma mark CTDNotificationReceiver protocol
+
+
+- (void)receiveNotification:(NSString*)notificationId
+                 fromSender:(id)sender
+                   withInfo:(__unused NSDictionary*)info
+{
+    if ([notificationId isEqualToString:CTDDotViewDiscardedNotification])
+    {
+        [_touchToDotMapper unmapTouchable:sender];
+    }
 }
 
 @end

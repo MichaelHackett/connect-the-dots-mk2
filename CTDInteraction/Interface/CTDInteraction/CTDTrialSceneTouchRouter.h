@@ -8,13 +8,13 @@
 @protocol CTDTouchToElementMapper;
 @protocol CTDTouchToPointMapper;
 @protocol CTDTrialRenderer;
-@protocol CTDTrialStepEditor;
+@protocol CTDTrialEditor;
 
 
 
 @interface CTDTrialSceneTouchRouter : NSObject <CTDTouchResponder>
 
-@property (weak, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
+@property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
 @property (weak, nonatomic) id<CTDTouchToElementMapper> dotsTouchMapper;
 @property (weak, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
 

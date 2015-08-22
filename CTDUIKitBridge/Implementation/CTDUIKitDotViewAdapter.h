@@ -14,12 +14,19 @@
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitDotView;
+@protocol CTDNotificationReceiver;
+
+
+
+// Notifications
+FOUNDATION_EXPORT NSString * const CTDDotViewDiscardedNotification;
 
 
 
 @interface CTDUIKitDotViewAdapter : NSObject <CTDDotRenderer, CTDTouchable>
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
-                   colorPalette:(CTDUIKitColorPalette*)colorPalette;
+                   colorPalette:(CTDUIKitColorPalette*)colorPalette
+           notificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
 
 @end

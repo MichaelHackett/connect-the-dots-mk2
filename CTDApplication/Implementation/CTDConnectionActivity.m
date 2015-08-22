@@ -97,6 +97,11 @@ CTD_NO_DEFAULT_INIT
     return self;
 }
 
+
+
+#pragma mark CTDTrialEditor protocol
+
+
 - (void)beginTrial
 {
     _stepIndex = 0;
@@ -106,7 +111,7 @@ CTD_NO_DEFAULT_INIT
                             trialStepStateObserver:self];
 }
 
-- (void)trialStepCompleted
+- (void)advanceToNextStep
 {
     [_trialStepEditor invalidate];
     _stepIndex += 1;
@@ -114,6 +119,21 @@ CTD_NO_DEFAULT_INIT
                         trialStepEditorWithDotPair:[_trial dotPairs][_stepIndex]
                                      trialRenderer:_trialRenderer
                             trialStepStateObserver:self];
+}
+
+- (id<CTDTrialStepEditor>)editorForCurrentStep
+{
+    return _trialStepEditor;
+}
+
+
+
+#pragma mark CTDTrialStepStateObserver protocol
+
+
+- (void)trialStepCompleted
+{
+    [self advanceToNextStep];
 }
 
 @end
@@ -279,7 +299,8 @@ CTD_NO_DEFAULT_INIT
 
 - (void)setFreeEndPosition:(CTDPoint*)freeEndPosition
 {
-    if (_connectionEstablished) {
+    if (_connectionEstablished)
+    {
         _connectionEstablished = NO;
         id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
         [targetDotRenderer hideSelectionIndicator];
@@ -289,7 +310,8 @@ CTD_NO_DEFAULT_INIT
 
 - (void)establishConnection
 {
-    if (!_connectionEstablished) {
+    if (!_connectionEstablished)
+    {
         _connectionEstablished = YES;
         id<CTDDotRenderer> targetDotRenderer = _targetDotRenderer;
         [_renderer setSecondEndpointPosition:[targetDotRenderer dotConnectionPoint]];

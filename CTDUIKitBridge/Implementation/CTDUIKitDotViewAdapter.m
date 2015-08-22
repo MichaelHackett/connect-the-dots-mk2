@@ -5,7 +5,14 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitDotView.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
+
+
+
+// Notification definitions
+NSString * const CTDDotViewDiscardedNotification = @"CTDDotViewDiscardedNotification";
+
 
 
 
@@ -13,6 +20,7 @@
 {
     __weak CTDUIKitDotView* _dotView;
     CTDUIKitColorPalette* _colorPalette;
+    __weak id<CTDNotificationReceiver> _notificationReceiver;
 }
 
 
@@ -21,11 +29,13 @@
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
                    colorPalette:(CTDUIKitColorPalette*)colorPalette
+           notificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
 {
     self = [super init];
     if (self) {
         _dotView = dotView;
         _colorPalette = colorPalette;
+        _notificationReceiver = notificationReceiver;
     }
     return self;
 }
@@ -73,6 +83,11 @@
 
 - (void)discardRendering
 {
+    ctd_strongify(_notificationReceiver, notificationReceiver);
+    [notificationReceiver receiveNotification:CTDDotViewDiscardedNotification
+                                   fromSender:self
+                                     withInfo:nil];
+
     ctd_strongify(_dotView, dotView);
     _dotView = nil;
     [dotView removeFromSuperview];

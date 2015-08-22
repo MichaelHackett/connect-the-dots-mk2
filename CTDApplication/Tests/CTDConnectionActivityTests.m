@@ -106,7 +106,7 @@
 {
     [super setUp];
     [self.subject beginTrial];
-    _newConnectionEditor = [[self.subject trialStepEditor] editorForNewConnection];
+    _newConnectionEditor = [[self.subject editorForCurrentStep] editorForNewConnection];
 }
 
 - (void)testThatStartingDotIsRenderedAsActivated
@@ -180,7 +180,7 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject trialStepEditor] editorForNewConnection];
+        [[self.subject editorForCurrentStep] editorForNewConnection];
     _newFreeEndPosition = [CTDPoint x:50 y:290];
     [connectionEditor setFreeEndPosition:_newFreeEndPosition];
 }
@@ -225,7 +225,7 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject trialStepEditor] editorForNewConnection];
+        [[self.subject editorForCurrentStep] editorForNewConnection];
     [connectionEditor establishConnection];
 }
 
@@ -261,6 +261,7 @@
 
 
 @interface CTDConnectionActivityAfterCommittingConnection : CTDConnectionActivityTestCase
+@property (strong, nonatomic) id<CTDTrialStepEditor> previousStepEditor;
 @property (strong, nonatomic) CTDFakeDotRendering* previousStepFirstDotRendering;
 @property (strong, nonatomic) CTDFakeDotRendering* previousStepSecondDotRendering;
 @property (strong, nonatomic) CTDFakeConnectionRendering* previousStepConnectionRendering;
@@ -273,11 +274,12 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject trialStepEditor] editorForNewConnection];
+        [[self.subject editorForCurrentStep] editorForNewConnection];
     [connectionEditor establishConnection];
 
     // Save refs to current renderings so we can verify that they have been
     // hidden after the step has been completed.
+    self.previousStepEditor = [self.subject editorForCurrentStep];
     self.previousStepFirstDotRendering = self.trialRenderer.dotRenderings[0];
     self.previousStepSecondDotRendering = self.trialRenderer.dotRenderings[1];
     self.previousStepConnectionRendering = self.trialRenderer.connectionRenderings[0];
@@ -328,6 +330,12 @@
     assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
 }
 
+- (void)testThatTheTrialEditorHasNewStepEditor
+{
+    assertThat([self.subject editorForCurrentStep],
+               is(allOf(notNilValue(), isNot(sameInstance(self.previousStepEditor)), nil)));
+}
+
 @end
 
 
@@ -346,7 +354,7 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-    [[self.subject trialStepEditor] editorForNewConnection];
+    [[self.subject editorForCurrentStep] editorForNewConnection];
     [connectionEditor establishConnection];
     _newFreeEndPosition = [CTDPoint x:4 y:36];
     [connectionEditor setFreeEndPosition:_newFreeEndPosition];
@@ -392,7 +400,7 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject trialStepEditor] editorForNewConnection];
+        [[self.subject editorForCurrentStep] editorForNewConnection];
     [connectionEditor cancelConnection];
 }
 
@@ -428,10 +436,11 @@
 {
     [super setUp];
     [self.subject beginTrial];
+    id<CTDTrialStepEditor> trialStepEditor = [self.subject editorForCurrentStep];
     // Start and cancel one connection.
-    [[[self.subject trialStepEditor] editorForNewConnection] cancelConnection];
+    [[trialStepEditor editorForNewConnection] cancelConnection];
     // Then start a second.
-    _connectionEditor = [[self.subject trialStepEditor] editorForNewConnection];
+    _connectionEditor = [trialStepEditor editorForNewConnection];
 }
 
 - (void)testThatStartingDotIsRenderedAsActivated

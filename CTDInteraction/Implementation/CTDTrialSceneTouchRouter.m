@@ -9,7 +9,7 @@
 #import "CTDTouchTrackingGroup.h"
 #import "Ports/CTDTouchMappers.h"
 
-#import "CTDApplication/CTDTrialStepEditor.h"
+#import "CTDApplication/CTDTrialEditor.h"
 
 @protocol CTDTrialRenderer; // TEMP!
 
@@ -88,7 +88,7 @@ CTD_NO_DEFAULT_INIT
     self = [super init];
     if (self)
     {
-        _trialStepEditor = nil;
+        _trialEditor = nil;
         _dotsTouchMapper = nil;
         _trialRenderer = nil;
         _freeEndMapper = nil;
@@ -167,7 +167,8 @@ CTD_NO_DEFAULT_INIT
                    dotHitHandler:^(CTDPoint* touchPosition, id hitDotId)
     {
         ctd_strongify(weakSelf, strongSelf);
-        ctd_strongify(strongSelf.trialStepEditor, trialStepEditor);
+        ctd_strongify(strongSelf.trialEditor, trialEditor);
+        id<CTDTrialStepEditor> trialStepEditor = [trialEditor editorForCurrentStep];
 
         if ([hitDotId isEqual:[trialStepEditor startingDotId]]) {
             id<CTDTrialStepConnectionEditor> connectionEditor =

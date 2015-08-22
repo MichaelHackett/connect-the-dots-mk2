@@ -3,7 +3,7 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "Ports/CTDTouchMappers.h"
-#import "CTDApplication/CTDTrialStepEditor.h"
+#import "CTDApplication/CTDTrialEditor.h"
 
 #import "CTDFakeTouchMappers.h"
 #import "CTDFakeTouchResponder.h"
@@ -51,6 +51,14 @@ typedef enum {
 
 
 
+@interface CTDFakeTrialEditor : NSObject <CTDTrialEditor>
+
+@property (strong, nonatomic) id<CTDTrialStepEditor> editorForCurrentStep;
+
+@end
+
+
+
 @interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
 
 @property (assign, readonly, nonatomic) CTDTrialConnectionState connectionState;
@@ -69,6 +77,7 @@ typedef enum {
 
 // Collaborators
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
+@property (strong, readonly, nonatomic) CTDFakeTrialEditor* trialEditor;
 @property (strong, readonly, nonatomic) CTDFakeTrialStep* trialStep;
 @property (strong, readonly, nonatomic) id<CTDTouchToElementMapper> dotTouchMapper;
 @property (strong, readonly, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
@@ -112,9 +121,11 @@ typedef enum {
                              TOUCH_POINT_OUTSIDE_ELEMENTS: TRIAL_POINT_OUTSIDE_ELEMENTS }];
 
     _trialStep = [[CTDFakeTrialStep alloc] init];
+    _trialEditor = [[CTDFakeTrialEditor alloc] init];
+    self.trialEditor.editorForCurrentStep = _trialStep;
 
     _router = [[CTDTrialSceneTouchRouter alloc] init];
-    _router.trialStepEditor = self.trialStep;
+    _router.trialEditor = self.trialEditor;
     _router.dotsTouchMapper = self.dotTouchMapper;
     _router.freeEndMapper = self.freeEndMapper;
 }
@@ -594,6 +605,25 @@ typedef enum {
 
 // TODO: CTDTrialSceneTouchTrackerTrackingFromADot
 // - touching first dot after connection is started should have no effect
+
+
+
+
+@implementation CTDFakeTrialEditor
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _editorForCurrentStep = nil;
+    }
+    return self;
+}
+
+- (void)beginTrial {}
+- (void)advanceToNextStep {}
+
+@end
 
 
 

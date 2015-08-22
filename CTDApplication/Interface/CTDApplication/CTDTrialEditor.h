@@ -1,5 +1,11 @@
+// CTDTrialEditor:
+//     Manipulator for a trial.
+//
 // CTDTrialStepEditor:
 //     Manipulator for one step in a trial.
+//
+// CTDTrialStepConnectionEditor:
+//     Manipulator for a connection in a trial step.
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
@@ -31,5 +37,16 @@
 
 // Remove editor interface and prepare to be deallocated.
 - (void)invalidate;
+
+@end
+
+
+
+@protocol CTDTrialEditor <NSObject>
+
+- (void)beginTrial;
+- (void)advanceToNextStep;
+
+- (id<CTDTrialStepEditor>)editorForCurrentStep;
 
 @end

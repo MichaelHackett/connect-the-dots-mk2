@@ -5,8 +5,8 @@
 
 @protocol CTDTouchResponder;
 @protocol CTDTouchToPointMapper;
+@protocol CTDTrialEditor;
 @protocol CTDTrialRenderer;
-@protocol CTDTrialStepEditor;
 
 
 
@@ -15,7 +15,7 @@
 // - setColorPalette:(CTDUIKitColorPalette*)
 
 - (void)setTouchResponder:(id<CTDTouchResponder>)touchResponder;
-- (void)setTrialStepEditor:(id<CTDTrialStepEditor>)trialStepEditor;
+- (void)setTrialEditor:(id<CTDTrialEditor>)trialEditor;
 
 - (id<CTDTrialRenderer>)trialRenderer;
 - (id<CTDTouchToPointMapper>)trialTouchMapper;

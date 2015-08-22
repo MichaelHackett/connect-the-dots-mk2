@@ -41,7 +41,7 @@
                                  touchToDotMapper:_touchToDotMapper];
 
     _touchRouter = [[CTDTrialSceneTouchRouter alloc] init];
-    _touchRouter.trialStepEditor = self.trialStepEditor;
+    _touchRouter.trialEditor = self.trialEditor;
     _touchRouter.dotsTouchMapper = _touchToDotMapper;
     _touchRouter.freeEndMapper = _ctdViewAdapter;
 
@@ -59,16 +59,16 @@
 #pragma mark CTDConnectScene
 
 
-- (void)setTrialStepEditor:(id<CTDTrialStepEditor>)trialStepEditor
+- (void)setTrialEditor:(id<CTDTrialEditor>)trialEditor
 {
     // KVO support
-    NSString* propertyKey = NSStringFromSelector(@selector(trialStepEditor));
+    NSString* propertyKey = NSStringFromSelector(@selector(trialEditor));
     [self willChangeValueForKey:propertyKey];
-    _trialStepEditor = trialStepEditor;
+    _trialEditor = trialEditor;
     [self didChangeValueForKey:propertyKey];
 
     // Update external entities that share a reference to the editor.
-    _touchRouter.trialStepEditor = trialStepEditor;
+    _touchRouter.trialEditor = trialEditor;
 }
 
 - (id<CTDTrialRenderer>)trialRenderer

@@ -3,7 +3,7 @@
 #import "CTDConnectionTouchInteraction.h"
 
 #import "Ports/CTDTouchMappers.h"
-#import "CTDApplication/CTDTrialStepEditor.h"
+#import "CTDApplication/CTDTrialEditor.h"
 #import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 

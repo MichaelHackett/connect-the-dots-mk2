@@ -8,6 +8,7 @@
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
+@protocol CTDTrialEditor;
 
 
 
@@ -15,7 +16,7 @@
     : CTDUIKitStandardViewController <CTDConnectScene>
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
-@property (weak, nonatomic) id<CTDTrialStepEditor> trialStepEditor;
+@property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
 
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray* colorSelectionCells;

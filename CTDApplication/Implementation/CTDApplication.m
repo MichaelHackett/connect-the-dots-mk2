@@ -51,7 +51,7 @@
                            initWithTrial:trial
                            trialRenderer:_connectionScene.trialRenderer];
     [_connectionActivity beginTrial];
-    [_connectionScene setTrialStepEditor:[_connectionActivity trialStepEditor]];
+    [_connectionScene setTrialEditor:_connectionActivity];
 }
 
 @end
