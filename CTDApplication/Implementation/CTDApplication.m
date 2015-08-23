@@ -9,8 +9,15 @@
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrial.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
+#import "CTDUtility/CTDRunLoopTimer.h"
 
+
+
+
+// UI time intervals
+static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 
 // Macro for defining sample data
@@ -19,11 +26,18 @@
 
 
 
+// TODO: Split to helper class, so as to avoid having private methods?
+@interface CTDApplication () <CTDNotificationReceiver>
+@end
+
+
+
 @implementation CTDApplication
 {
     id<CTDDisplayController> _displayController;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
+    CTDRunLoopTimer* _displayTimer;
 }
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
@@ -31,6 +45,9 @@
     self = [super init];
     if (self) {
         _displayController = displayController;
+        _connectionScene = nil;
+        _connectionActivity = nil;
+        _displayTimer = nil;
     }
     return self;
 }
@@ -49,9 +66,30 @@
     _connectionScene = [_displayController initialScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrial:trial
-                           trialRenderer:_connectionScene.trialRenderer];
+                           trialRenderer:_connectionScene.trialRenderer
+                           trialCompletionNotificationReceiver:self];
     [_connectionActivity beginTrial];
     [_connectionScene setTrialEditor:_connectionActivity];
+}
+
+- (void)receiveNotification:(NSString*)notificationId
+                 fromSender:(id)sender
+                   withInfo:(__unused NSDictionary*)info
+{
+    if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
+    {
+        [_connectionScene displayTrialCompletionMessage];
+
+        ctd_weakify(self, weakSelf);
+        _displayTimer = [[CTDRunLoopTimer alloc]
+                         initWithDuration:CTDTrialCompletionMessageDuration
+                             onExpiration:
+        ^{
+            ctd_strongify(weakSelf, strongSelf);
+            strongSelf->_displayTimer = nil;
+            [strongSelf->_connectionScene hideTrialCompletionMessage];
+        }];
+    }
 }
 
 @end

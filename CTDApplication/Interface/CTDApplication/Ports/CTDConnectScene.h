@@ -21,4 +21,7 @@
 - (id<CTDTouchToPointMapper>)trialTouchMapper;
 - (NSArray *)colorSelectionCells; // of id<CTDSelectionRenderer, CTDTouchable>
 
+- (void)displayTrialCompletionMessage;
+- (void)hideTrialCompletionMessage;
+
 @end

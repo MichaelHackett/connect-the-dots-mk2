@@ -21,5 +21,6 @@
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray* colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
+@property (weak, nonatomic) IBOutlet UILabel* trialCompletionMessageLabel;
 
 @end

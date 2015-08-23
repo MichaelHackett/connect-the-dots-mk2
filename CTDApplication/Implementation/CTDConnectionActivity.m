@@ -7,7 +7,13 @@
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDTrial.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
+
+
+
+// Notification definitions
+NSString * const CTDTrialCompletedNotification = @"CTDTrialCompletedNotification";
 
 
 
@@ -79,18 +85,21 @@ CTD_NO_DEFAULT_INIT
 {
     id<CTDTrial> _trial;
     id<CTDTrialRenderer> _trialRenderer;
+    __weak id<CTDNotificationReceiver> _notificationReceiver;
     id<CTDTrialStepEditor> _trialStepEditor;
     NSUInteger _stepIndex;
 }
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
 {
     self = [super init];
     if (self)
     {
         _trial = trial;
         _trialRenderer = trialRenderer;
+        _notificationReceiver = notificationReceiver;
         _trialStepEditor = nil;
         _stepIndex = NSUIntegerMax;
     }
@@ -114,11 +123,23 @@ CTD_NO_DEFAULT_INIT
 - (void)advanceToNextStep
 {
     [_trialStepEditor invalidate];
+    _trialStepEditor = nil;
+
     _stepIndex += 1;
-    _trialStepEditor = [CTDConnectionActivityTrialStepEditor
-                        trialStepEditorWithDotPair:[_trial dotPairs][_stepIndex]
-                                     trialRenderer:_trialRenderer
-                            trialStepStateObserver:self];
+    if (_stepIndex >= [[_trial dotPairs] count])
+    {
+        ctd_strongify(_notificationReceiver, notificationReceiver);
+        [notificationReceiver receiveNotification:CTDTrialCompletedNotification
+                                       fromSender:self
+                                         withInfo:nil];
+    }
+    else
+    {
+        _trialStepEditor = [CTDConnectionActivityTrialStepEditor
+                            trialStepEditorWithDotPair:[_trial dotPairs][_stepIndex]
+                                         trialRenderer:_trialRenderer
+                                trialStepStateObserver:self];
+    }
 }
 
 - (id<CTDTrialStepEditor>)editorForCurrentStep

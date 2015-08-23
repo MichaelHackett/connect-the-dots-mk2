@@ -81,4 +81,22 @@
     return _ctdViewAdapter;
 }
 
+- (void)displayTrialCompletionMessage
+{
+    ctd_strongify(self.trialCompletionMessageLabel, completionMessageLabel);
+    completionMessageLabel.hidden = NO;
+
+    // disable touch input while message visible
+    self.view.userInteractionEnabled = NO;
+}
+
+- (void)hideTrialCompletionMessage
+{
+    ctd_strongify(self.trialCompletionMessageLabel, completionMessageLabel);
+    completionMessageLabel.hidden = YES;
+
+    // reenable touch input
+    self.view.userInteractionEnabled = YES;
+}
+
 @end

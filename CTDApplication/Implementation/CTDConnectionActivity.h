@@ -5,13 +5,20 @@
 #import "CTDTrialEditor.h"
 @protocol CTDTrial;
 @protocol CTDTrialRenderer;
+@protocol CTDNotificationReceiver;
+
+
+
+// Notifications
+FOUNDATION_EXPORT NSString * const CTDTrialCompletedNotification;
 
 
 
 @interface CTDConnectionActivity : NSObject <CTDTrialEditor>
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
-                trialRenderer:(id<CTDTrialRenderer>)trialRenderer;
+                trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
 
 CTD_NO_DEFAULT_INIT
 

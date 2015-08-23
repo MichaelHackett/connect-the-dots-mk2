@@ -4,15 +4,17 @@
 
 #import "Ports/CTDTrialRenderer.h"
 
+#import "CTDTrialRendererSpy.h"
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrial.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
-#import "CTDTrialRendererSpy.h"
 
 
 
-@interface CTDConnectionActivityTestCase : XCTestCase
+
+@interface CTDConnectionActivityTestCase : XCTestCase <CTDNotificationReceiver>
 
 @property (strong, nonatomic) CTDConnectionActivity* subject;
 
@@ -23,27 +25,52 @@
 @property (copy, nonatomic) NSArray* dotPairs;
 @property (strong, nonatomic) id<CTDTrial> trial;
 
+- (NSArray*)trialCompletionNotificationSenders;
+
 @end
 
 
 
 @implementation CTDConnectionActivityTestCase
+{
+    NSMutableArray* _trialCompletionNotificationSenders;
+}
 
 - (void)setUp
 {
     [super setUp];
+    _trialCompletionNotificationSenders = [[NSMutableArray alloc] init];
     self.dotPairs = @[
         [CTDModel dotPairWithColor:CTDDotColor_Red
                      startPosition:[CTDPoint x:49 y:250]
                        endPosition:[CTDPoint x:500 y:20]],
         [CTDModel dotPairWithColor:CTDDotColor_Blue
                      startPosition:[CTDPoint x:275 y:50]
-                       endPosition:[CTDPoint x:25 y:460]]
+                       endPosition:[CTDPoint x:25 y:460]],
+        [CTDModel dotPairWithColor:CTDDotColor_Green
+                     startPosition:[CTDPoint x:250 y:310]
+                       endPosition:[CTDPoint x:415 y:315]]
     ];
     self.trial = [CTDModel trialWithDotPairs:self.dotPairs];
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
     self.subject = [[CTDConnectionActivity alloc] initWithTrial:self.trial
-                                                  trialRenderer:self.trialRenderer];
+                                                  trialRenderer:self.trialRenderer
+                                                  trialCompletionNotificationReceiver:self];
+}
+
+- (NSArray*)trialCompletionNotificationSenders
+{
+    return [_trialCompletionNotificationSenders copy];
+}
+
+- (void)receiveNotification:(NSString*)notificationId
+                 fromSender:(id)sender
+                   withInfo:(__unused NSDictionary*)info
+{
+    if ([notificationId isEqualToString:CTDTrialCompletedNotification])
+    {
+        [_trialCompletionNotificationSenders addObject:sender];
+    }
 }
 
 @end
@@ -354,7 +381,7 @@
     [super setUp];
     [self.subject beginTrial];
     id<CTDTrialStepConnectionEditor> connectionEditor =
-    [[self.subject editorForCurrentStep] editorForNewConnection];
+        [[self.subject editorForCurrentStep] editorForNewConnection];
     [connectionEditor establishConnection];
     _newFreeEndPosition = [CTDPoint x:4 y:36];
     [connectionEditor setFreeEndPosition:_newFreeEndPosition];
@@ -482,3 +509,29 @@
 
 
 
+
+@interface CTDConnectionActivityAfterCompletingFinalStep : CTDConnectionActivityTestCase
+@end
+@implementation CTDConnectionActivityAfterCompletingFinalStep
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject beginTrial];
+    NSUInteger stepCount = [self.dotPairs count];
+    for (NSUInteger stepIndex = 0; stepIndex < stepCount; stepIndex += 1)
+    {
+        [self.subject advanceToNextStep];
+    }
+}
+
+//- (void)testThatTrialIsMarkedCompleted
+//{
+//}
+
+- (void)testThatListenersAreNotifiedThatTheTrialIsComplete
+{
+    assertThat(self.trialCompletionNotificationSenders, hasItem(self.subject));
+}
+
+@end
