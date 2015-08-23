@@ -186,9 +186,12 @@ static CGFloat const kDefaultSelectionAnimationDuration = (CGFloat)0.12;
 }
 
 - (BOOL)dotContainsPoint:(CGPoint)point {
+    // Fast check to eliminate points outside bounds of view.
+    if (! CGRectContainsPoint(self.bounds, point) ) { return NO; }
+
+    // Second, check against actual circle of dot.
     CGPoint dotLayerRelativePoint = [_dotLayer convertPoint:point fromLayer:self.layer];
-    return CGRectContainsPoint(self.bounds, dotLayerRelativePoint) &&
-           (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, dotLayerRelativePoint, false);
+    return (BOOL)CGPathContainsPoint(_dotLayer.path, NULL, dotLayerRelativePoint, false);
 }
 
 @end
