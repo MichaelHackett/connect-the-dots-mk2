@@ -10,6 +10,7 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @class CTDPoint;
+@protocol CTDSelectionEditor;
 
 
 
@@ -48,5 +49,6 @@
 - (void)advanceToNextStep;
 
 - (id<CTDTrialStepEditor>)editorForCurrentStep;
+- (id<CTDSelectionEditor>)editorForColorSelection;
 
 @end

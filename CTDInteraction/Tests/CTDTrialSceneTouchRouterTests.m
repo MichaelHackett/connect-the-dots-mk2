@@ -7,7 +7,7 @@
 
 #import "CTDFakeTouchMappers.h"
 #import "CTDFakeTouchResponder.h"
-#import "CTDRecordingTouchTracker.h"
+#import "CTDFakeTouchTracker.h"
 #import "CTDUtility/CTDMethodSelector.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -41,12 +41,14 @@
 
 
 // The states a trial-step connection can be in.
-typedef enum {
+typedef enum
+{
     kCTDTrialConnectionStateInactive,
     kCTDTrialConnectionStateActive,
     kCTDTrialConnectionStateEstablished,
     kCTDTrialConnectionStateCompleted
-} CTDTrialConnectionState;
+}
+CTDTrialConnectionState;
 
 
 
@@ -81,15 +83,17 @@ typedef enum {
 @property (strong, readonly, nonatomic) CTDFakeTrialStep* trialStep;
 @property (strong, readonly, nonatomic) id<CTDTouchToElementMapper> dotTouchMapper;
 @property (strong, readonly, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
-//@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
-//@property (strong, readonly, nonatomic) CTDRecordingTouchTracker* colorCellsTouchTracker;
+@property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
+@property (strong, readonly, nonatomic) CTDFakeTouchTracker* colorCellsTouchTracker;
 
 // Test fixture
 
 @end
 
+
 // Convenience assertion
 #define assertThatConnectionStateIs(EXPECTED_STATE) assertThatUnsignedInteger(self.trialStep.connectionState, is(equalToUnsignedInteger(kCTDTrialConnectionState ## EXPECTED_STATE)))
+
 
 
 @implementation CTDTrialSceneTouchTrackerTestCase
@@ -98,15 +102,14 @@ typedef enum {
 {
     [super setUp];
 
-//    CTDRecordingTouchTracker* colorCellsTouchTracker =
-//        [[CTDRecordingTouchTracker alloc] init];
-//    _colorCellsTouchTracker = colorCellsTouchTracker;
-//    _colorCellsTouchResponder = [[CTDFakeTouchResponder alloc]
-//                                 initWithTouchTrackerFactoryBlock:
-//        ^(__unused CTDPoint* initialPosition)
-//        {
-//            return colorCellsTouchTracker;
-//        }];
+    CTDFakeTouchTracker* colorCellsTouchTracker = [[CTDFakeTouchTracker alloc] init];
+    _colorCellsTouchTracker = colorCellsTouchTracker;
+    _colorCellsTouchResponder = [[CTDFakeTouchResponder alloc]
+                                 initWithTouchTrackerFactoryBlock:
+        ^(__unused CTDPoint* initialPosition)
+        {
+            return colorCellsTouchTracker;
+        }];
 
     _dotTouchMapper =
         [[CTDFakeTouchToElementMapper alloc]
@@ -128,6 +131,7 @@ typedef enum {
     _router.trialEditor = self.trialEditor;
     _router.dotsTouchMapper = self.dotTouchMapper;
     _router.freeEndMapper = self.freeEndMapper;
+    _router.colorCellsTouchResponder = self.colorCellsTouchResponder;
 }
 
 @end
@@ -168,16 +172,16 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatColorCellResponderIsAskedForATracker
-//{
-//    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
-//}
-//
-//- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition
-//{
-//    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
-//               is(equalTo(POINT_OUTSIDE_ELEMENTS)));
-//}
+- (void)testThatColorCellTouchResponderIsAskedForATracker
+{
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
+}
+
+- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition
+{
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
+               is(equalTo(TOUCH_POINT_OUTSIDE_ELEMENTS)));
+}
 
 @end
 
@@ -201,11 +205,11 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatColorCellTrackerReceivedNewPosition
-//{
-//    assertThatBool([self.colorCellsTouchTracker hasReceivedMessageWithSelector:@selector(touchDidMoveTo:)],
-//                   is(equalToBool(YES)));
-//}
+- (void)testThatColorCellTrackerReceivedNewPosition
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition,
+               is(equalTo(ANOTHER_TOUCH_POINT_OUTSIDE_ELEMENTS)));
+}
 
 @end
 
@@ -234,11 +238,10 @@ typedef enum {
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
-//- (void)testThatColorCellTrackerWasCancelled
-//{
-//    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
-//               is(equalTo(message(touchWasCancelled))));
-//}
+- (void)testThatColorCellTrackerWasCancelled
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateCancelled)));
+}
 
 @end
 
@@ -262,13 +265,10 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatColorCellTrackerIsNotifedThatTouchEnded
-//{
-//    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
-//               is(equalTo(message(touchDidEnd))));
-//}
-
-// TODO: separate tests for receiving `touchDidEnd` and that nothing came after?
+- (void)testThatColorCellTrackerIsNotifedThatTouchEnded
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateEnded)));
+}
 
 @end
 
@@ -292,11 +292,10 @@ typedef enum {
     assertThatConnectionStateIs(Inactive);
 }
 
-//- (void)testThatColorCellTrackerWasCancelled
-//{
-//    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
-//               is(equalTo(message(touchWasCancelled))));
-//}
+- (void)testThatColorCellTrackerWasCancelled
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateCancelled)));
+}
 
 @end
 
@@ -306,7 +305,6 @@ typedef enum {
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
-
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
 
 - (void)setUp
@@ -325,11 +323,10 @@ typedef enum {
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
-//- (void)testThatColorCellTrackerWasCancelled
-//{
-//    assertThat([[self.colorCellsTouchTracker touchTrackingMesssagesReceived] lastObject],
-//               is(equalTo(message(touchWasCancelled))));
-//}
+- (void)testThatColorCellTrackerWasCancelled
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateCancelled)));
+}
 
 @end
 
@@ -339,7 +336,6 @@ typedef enum {
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
     : CTDTrialSceneTouchTrackerTestCase
 @end
-
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
 
 - (void)setUp
@@ -351,6 +347,17 @@ typedef enum {
 - (void)testThatNoConnectionIsStarted
 {
     assertThatConnectionStateIs(Inactive);
+}
+
+- (void)testThatColorCellTouchResponderIsAskedForATracker
+{
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions, isNot(isEmpty()));
+}
+
+- (void)testThatColorCellResponderIsPassedTheInitialTouchPosition
+{
+    assertThat(self.colorCellsTouchResponder.touchStartingPositions[0],
+               is(equalTo(TOUCH_POINT_INSIDE_DOT_2)));
 }
 
 @end
@@ -367,7 +374,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:ANOTHER_TOUCH_POINT_INSIDE_DOT_1];
 }
 
@@ -381,10 +388,11 @@ typedef enum {
     assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_OTHER_TRIAL_POINT)));
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -400,7 +408,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
 }
 
@@ -414,10 +422,11 @@ typedef enum {
     assertThatConnectionStateIs(Active);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -433,7 +442,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
     [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_WINDOW];
 }
@@ -448,10 +457,11 @@ typedef enum {
     assertThatConnectionStateIs(Active);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -467,7 +477,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_2];
 }
 
@@ -476,10 +486,11 @@ typedef enum {
     assertThatConnectionStateIs(Established);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -495,7 +506,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidMoveTo:TOUCH_POINT_OUTSIDE_ELEMENTS];
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
 }
@@ -505,10 +516,11 @@ typedef enum {
     assertThatConnectionStateIs(Active);
 }
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -524,7 +536,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
@@ -538,10 +550,11 @@ typedef enum {
 //    // TODO
 //}
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -557,7 +570,7 @@ typedef enum {
 {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchWasCancelled];
 }
 
@@ -571,10 +584,11 @@ typedef enum {
 //    // TODO
 //}
 
-//- (void)testThatColorCellTrackerReceivedNoUpdates
-//{
-//    assertThat([self.colorCellsTouchTracker touchTrackingMesssagesReceived], isEmpty());
-//}
+- (void)testThatColorCellTrackerReceivedNoUpdates
+{
+    assertThat(self.colorCellsTouchTracker.lastTouchPosition, is(nilValue()));
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
 
 @end
 
@@ -591,7 +605,7 @@ typedef enum {
     [super setUp];
     self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
     [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_2];
-//    [self.colorCellsTouchTracker reset];
+    [self.colorCellsTouchTracker reset];
     [self.subject touchDidEnd];
 }
 
@@ -622,6 +636,7 @@ typedef enum {
 
 - (void)beginTrial {}
 - (void)advanceToNextStep {}
+- (id<CTDSelectionEditor>)editorForColorSelection { return nil; }
 
 @end
 

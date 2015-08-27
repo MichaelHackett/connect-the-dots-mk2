@@ -4,13 +4,14 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDInteraction/Ports/CTDTouchable.h"
-#import "CTDApplication/Ports/CTDSelectionRenderer.h"
+#import "CTDApplication/Ports/CTDColorCellRenderer.h"
 
 
 
-@interface CTDUIKitColorCell : UIView <CTDSelectionRenderer, CTDTouchable>
+@interface CTDUIKitColorCell : UIView <CTDColorCellRenderer, CTDTouchable>
 
 @property (copy, nonatomic) UIColor* colorWhenSelected;
 @property (copy, nonatomic) UIColor* colorWhenNotSelected;
+@property (assign, nonatomic) NSUInteger cellId; // currently 1-based index
 
 @end

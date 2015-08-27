@@ -76,6 +76,7 @@
 		4C591B951B478E1D00AE980B /* CTDUIKitDrawingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A56AB19E20CC200E994CB /* CTDUIKitDrawingConfig.m */; };
 		4C5B9CDF1B8A1C05003E8E46 /* CTDRunLoopTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9CDE1B8A1C05003E8E46 /* CTDRunLoopTimer.m */; };
 		4C5B9CEB1B8A2C99003E8E46 /* CTDBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9CEA1B8A2C99003E8E46 /* CTDBlockExecutor.m */; };
+		4C5B9CEE1B8AAAEE003E8E46 /* CTDFakeTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B9CED1B8AAAEE003E8E46 /* CTDFakeTouchTracker.m */; };
 		4C60BB501A1C33CF0067A72F /* CTDDotPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C60BB4F1A1C33CF0067A72F /* CTDDotPair.m */; };
 		4C84978B1A802852000A094E /* CTDOccurrenceCountMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84978A1A802852000A094E /* CTDOccurrenceCountMatcher.m */; };
 		4C9B86171B392C21005BB419 /* CTDUIKitLineViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B86161B392C21005BB419 /* CTDUIKitLineViewAdapter.m */; };
@@ -331,6 +332,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C0065401B8C0DBD0040A8AF /* CTDColorCellRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorCellRenderer.h; sourceTree = "<group>"; };
+		4C00654A1B8D3A190040A8AF /* CTDSelectionEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionEditor.h; sourceTree = "<group>"; };
 		4C09C1AE1B63F8DF00D06E17 /* CTDDisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDDisplayController.h; sourceTree = "<group>"; };
 		4C09C1EB1B642D8600D06E17 /* CTDUIKitWhatzit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitWhatzit.h; sourceTree = "<group>"; };
 		4C09C1EC1B642D8600D06E17 /* CTDUIKitWhatzit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitWhatzit.m; sourceTree = "<group>"; };
@@ -424,6 +427,8 @@
 		4C5B9CDE1B8A1C05003E8E46 /* CTDRunLoopTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDRunLoopTimer.m; sourceTree = "<group>"; };
 		4C5B9CE91B8A2C99003E8E46 /* CTDBlockExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDBlockExecutor.h; sourceTree = "<group>"; };
 		4C5B9CEA1B8A2C99003E8E46 /* CTDBlockExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDBlockExecutor.m; sourceTree = "<group>"; };
+		4C5B9CEC1B8AAAD8003E8E46 /* CTDFakeTouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchTracker.h; sourceTree = "<group>"; };
+		4C5B9CED1B8AAAEE003E8E46 /* CTDFakeTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchTracker.m; sourceTree = "<group>"; };
 		4C60BB4F1A1C33CF0067A72F /* CTDDotPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDDotPair.m; sourceTree = "<group>"; };
 		4C60BB511A1C34B80067A72F /* CTDDotPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDDotPair.h; sourceTree = "<group>"; };
 		4C7B5B811A0C1B600040EC64 /* CTDSelectionRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionRenderer.h; sourceTree = "<group>"; };
@@ -769,6 +774,7 @@
 		4C09C1AD1B63F85E00D06E17 /* Ports */ = {
 			isa = PBXGroup;
 			children = (
+				4C0065401B8C0DBD0040A8AF /* CTDColorCellRenderer.h */,
 				4CDAD56D1B402FCF00A9E4F7 /* CTDConnectScene.h */,
 				4C09C1AE1B63F8DF00D06E17 /* CTDDisplayController.h */,
 				4C3DB3E41B6FBC4E00AE6AD9 /* CTDSelectionRenderer.h */,
@@ -879,6 +885,7 @@
 			children = (
 				4CFEF3C71A719C6D0086C37B /* CTDTouchable.h */,
 				4C591BC91B519A5A00AE980B /* CTDTouchMappers.h */,
+				4C00654A1B8D3A190040A8AF /* CTDSelectionEditor.h */,
 			);
 			path = Ports;
 			sourceTree = "<group>";
@@ -896,6 +903,8 @@
 				4CD5BF9C1A1A6C74003A6321 /* CTDFakeTouchMappers.m */,
 				4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */,
 				4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */,
+				4C5B9CEC1B8AAAD8003E8E46 /* CTDFakeTouchTracker.h */,
+				4C5B9CED1B8AAAEE003E8E46 /* CTDFakeTouchTracker.m */,
 				4C8497A31A82AE1B000A094E /* CTDRecordingDotConnectionRenderer.h */,
 				4C2619461A105784005E87A9 /* CTDRecordingDotConnectionRenderer.m */,
 				4C25B9771A0E90E800275138 /* CTDRecordingTouchTracker.h */,
@@ -977,6 +986,8 @@
 		4C9B86211B3B9C7C005BB419 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */,
+				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
 				4C9B86311B3BB042005BB419 /* CTDUIKitConnectTheDotsView.h */,
 				4C9B86321B3BB042005BB419 /* CTDUIKitConnectTheDotsView.m */,
 				4CEBCAC019BCD54D00D2B498 /* CTDUIKitDotView.h */,
@@ -1353,7 +1364,6 @@
 			isa = PBXGroup;
 			children = (
 				4C15CA141B18037C000512C1 /* CTDUIKitBridge.h */,
-				4C7B5B821A0C1F750040EC64 /* CTDUIKitColorCell.h */,
 				4C41B7451B0AC6E100B54422 /* CTDUIKitColorPalette.h */,
 				4C5A56AA19E20CC200E994CB /* CTDUIKitDrawingConfig.h */,
 			);
@@ -1369,7 +1379,6 @@
 				4C09C1EC1B642D8600D06E17 /* CTDUIKitWhatzit.m */,
 				4C41B7501B0C40C700B54422 /* CTDSceneBuilder.h */,
 				4C41B7511B0C40C700B54422 /* CTDSceneBuilder.m */,
-				4C7B5B831A0C1F750040EC64 /* CTDUIKitColorCell.m */,
 				4C41B7491B0BEC5200B54422 /* CTDUIKitColorPalette.m */,
 				4CFEF3851A6EC1340086C37B /* CTDUIKitConnectSceneViewController.h */,
 				4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */,
@@ -1946,6 +1955,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C5B9CEE1B8AAAEE003E8E46 /* CTDFakeTouchTracker.m in Sources */,
 				4C41B7921B155AA500B54422 /* CTDConnectionTouchInteraction.m in Sources */,
 				4C41B7931B155AA500B54422 /* CTDTouchTrackerFactory.m in Sources */,
 				4C41B7941B155AA500B54422 /* CTDTrialSceneTouchRouter.m in Sources */,

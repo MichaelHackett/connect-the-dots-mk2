@@ -44,6 +44,22 @@
     return nil;
 }
 
+- (id)idOfElementAtTouchLocation:(CTDPoint*)touchLocation
+{
+    CTDColorCellsTestFixture* fixture = _fixture;
+
+    if ([fixture.pointsInsideCell1 containsObject:touchLocation]) {
+        return @1;
+    }
+    else if ([fixture.pointsInsideCell2 containsObject:touchLocation]) {
+        return @2;
+    }
+    else if ([fixture.pointsInsideCell3 containsObject:touchLocation]) {
+        return @3;
+    }
+    return nil;
+}
+
 @end
 
 

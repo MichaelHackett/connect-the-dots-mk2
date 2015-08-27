@@ -113,10 +113,16 @@ static id keyFromEntity(id entity)
 
 
 
-#pragma mark CTDTouchable protocol
+#pragma mark CTDTouchToElementMapper protocol
 
 
+// DEPRECATED
 - (id)elementAtTouchLocation:(CTDPoint*)touchLocation
+{
+    return [self idOfElementAtTouchLocation:touchLocation];
+}
+
+- (id)idOfElementAtTouchLocation:(CTDPoint*)touchLocation
 {
     for (id<CTDTouchable> touchTarget in _touchables) {
         if ([touchTarget containsTouchLocation:touchLocation]) {

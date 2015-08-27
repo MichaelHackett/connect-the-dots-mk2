@@ -7,7 +7,21 @@
 
 
 @implementation CTDUIKitColorCell
+{
+    BOOL _selected;
+    BOOL _activated;
+}
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _selected = NO;
+        _activated = NO;
+    }
+    return self;
+}
 
 #pragma mark CTDSelectionRenderer protocol
 
@@ -15,13 +29,33 @@
 - (void)showSelectionIndicator
 {
     self.backgroundColor = self.colorWhenSelected;
+    _selected = YES;
 }
 
 - (void)hideSelectionIndicator
 {
-    self.backgroundColor = self.colorWhenNotSelected;
+    _selected = NO;
+    if (!_activated)
+    {
+        self.backgroundColor = self.colorWhenNotSelected;
+    }
 }
 
+- (void)showActivationIndicator
+{
+    // TODO: Different effect for activation
+    self.backgroundColor = self.colorWhenSelected;
+    _activated = YES;
+}
+
+- (void)hideActivationIndicator
+{
+    _activated = NO;
+    if (!_selected)
+    {
+        self.backgroundColor = self.colorWhenNotSelected;
+    }
+}
 
 
 

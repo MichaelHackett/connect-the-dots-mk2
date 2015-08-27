@@ -9,6 +9,7 @@
 
 @interface CTDColorCellsTestFixture : NSObject
 
+// TO BE REMOVED
 @property (strong, readonly, nonatomic) CTDSelectionChangeRecorder* colorCell1;
 @property (strong, readonly, nonatomic) CTDSelectionChangeRecorder* colorCell2;
 @property (strong, readonly, nonatomic) CTDSelectionChangeRecorder* colorCell3;
@@ -20,8 +21,10 @@
 @property (copy, nonatomic) NSArray* pointsInsideCell3;
 @property (copy, nonatomic) NSArray* pointsOutsideElements;
 
+// The IDs returned by the mapper are 1, 2, and 3, for the three cells.
 @property (strong, nonatomic) id<CTDTouchToElementMapper> colorCellTouchMapper;
 
+// REMOVE?
 - (void)resetCellSelectionRecording;
 
 @end

@@ -3,8 +3,10 @@
 #import "CTDConnectionActivity.h"
 
 #import "CTDColorMapping.h"
+#import "Ports/CTDColorCellRenderer.h"
 #import "Ports/CTDTrialRenderer.h"
 
+#import "CTDInteraction/Ports/CTDSelectionEditor.h"
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDTrial.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
@@ -74,6 +76,59 @@ CTD_NO_DEFAULT_INIT
 @end
 
 
+@interface CTDColorSelectionCell : NSObject
+
+@property (assign, nonatomic, getter=isSelected) BOOL selected;
+
+- (void)incrementActivationCount;
+- (void)decrementActivationCount;
+
+@end
+
+
+@interface CTDColorPicker : NSObject
+
+@property (assign, readonly, nonatomic) CTDDotColor selectedColor;
+
+- (instancetype)initWithColorCellRenderers:(NSDictionary*)colorCellRenderers;
+CTD_NO_DEFAULT_INIT
+
+- (id<CTDSelectionRenderer>)editorForColorSelection;
+
+@end
+
+
+typedef void (^CTDColorSelectionSetter)(CTDDotColor);
+typedef void (^CTDColorSelectionCommitter)(void);
+
+@interface CTDColorSelectionEditor : NSObject <CTDSelectionEditor>
+
+- (instancetype)initWithColorSetter:(CTDColorSelectionSetter)colorSetter
+                 selectionCommitter:(CTDColorSelectionCommitter)selectionCommitter;
+CTD_NO_DEFAULT_INIT
+
+@end
+
+
+
+
+
+//
+// Conversion between model colors and display element IDs.
+//
+static CTDDotColor dotColorFromCellId(id colorCellId)
+{
+    NSUInteger cellIndex = [colorCellId unsignedIntegerValue] - CTDColorCellIdMin;
+    return CTDDotColor_Red + cellIndex;
+}
+
+//static id colorCellIdFromDotColor(CTDDotColor dotColor)
+//{
+//    NSUInteger cellIndex = dotColor - CTDDotColor_Red;
+//    return @(CTDColorCellIdMin + cellIndex);
+//}
+
+
 
 
 @interface CTDConnectionActivity () <CTDTrialStepStateObserver>
@@ -87,11 +142,13 @@ CTD_NO_DEFAULT_INIT
     id<CTDTrialRenderer> _trialRenderer;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
     id<CTDTrialStepEditor> _trialStepEditor;
+    CTDColorPicker* _colorPicker;
     NSUInteger _stepIndex;
 }
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                colorCellRenderers:(NSDictionary*)colorCellRenderers
                 trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
 {
     self = [super init];
@@ -101,6 +158,8 @@ CTD_NO_DEFAULT_INIT
         _trialRenderer = trialRenderer;
         _notificationReceiver = notificationReceiver;
         _trialStepEditor = nil;
+        _colorPicker = [[CTDColorPicker alloc]
+                        initWithColorCellRenderers:colorCellRenderers];
         _stepIndex = NSUIntegerMax;
     }
     return self;
@@ -145,6 +204,11 @@ CTD_NO_DEFAULT_INIT
 - (id<CTDTrialStepEditor>)editorForCurrentStep
 {
     return _trialStepEditor;
+}
+
+- (id<CTDSelectionRenderer>)editorForColorSelection
+{
+    return [_colorPicker editorForColorSelection];
 }
 
 
@@ -403,6 +467,191 @@ CTD_NO_DEFAULT_INIT
 - (void)cancelConnection
 {
     [_dotConnection invalidate];
+}
+
+@end
+
+
+
+
+@implementation CTDColorSelectionCell
+{
+    __weak id<CTDColorCellRenderer> _renderer;
+    NSUInteger _activationCount;
+}
+
+- (id)initWithRenderer:(id<CTDColorCellRenderer>)renderer
+{
+    self = [super init];
+    if (self)
+    {
+        _renderer = renderer;
+        _activationCount = 0;
+    }
+    return self;
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    ctd_strongify(_renderer, renderer);
+    if (selected)
+    {
+        [renderer showSelectionIndicator];
+    }
+    else
+    {
+        [renderer hideSelectionIndicator];
+    }
+}
+
+- (void)incrementActivationCount
+{
+    if (_activationCount == 0)
+    {
+        ctd_strongify(_renderer, renderer);
+        [renderer showActivationIndicator];
+    }
+    _activationCount += 1;
+}
+
+- (void)decrementActivationCount
+{
+    _activationCount -= 1;
+    if (_activationCount == 0)
+    {
+        ctd_strongify(_renderer, renderer);
+        [renderer hideActivationIndicator];
+    }
+}
+
+@end
+
+
+
+@implementation CTDColorPicker
+{
+    NSDictionary* _colorCells;
+}
+
+- (instancetype)initWithColorCellRenderers:(NSDictionary*)colorCellRenderers
+{
+    self = [super init];
+    if (self)
+    {
+        NSMutableDictionary* colorCells =
+            [NSMutableDictionary dictionaryWithCapacity:[colorCellRenderers count]];
+        [colorCellRenderers enumerateKeysAndObjectsUsingBlock:
+            ^(id cellId, id<CTDColorCellRenderer> cellRenderer, __unused BOOL* stop)
+        {
+            CTDColorSelectionCell* cell = [[CTDColorSelectionCell alloc]
+                                           initWithRenderer:cellRenderer];
+            [colorCells setObject:cell forKey:@(dotColorFromCellId(cellId))];
+        }];
+
+        _colorCells = [colorCells copy];
+        _selectedColor = CTDDotColor_None;
+    }
+    return self;
+}
+
+- (instancetype)init CTD_BLOCK_PARENT_METHOD
+
+- (id<CTDSelectionEditor>)editorForColorSelection
+{
+    __block CTDDotColor previouslySelectedColor = CTDDotColor_None;
+
+    CTDColorSelectionSetter colorSetter = ^(CTDDotColor selectedColor)
+    {
+        if (selectedColor == previouslySelectedColor) { return; }
+
+        if (previouslySelectedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(previouslySelectedColor)] decrementActivationCount];
+        }
+        if (selectedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(selectedColor)] incrementActivationCount];
+        }
+        previouslySelectedColor = selectedColor;
+    };
+
+    CTDColorSelectionCommitter selectionCommitter = ^
+    {
+        if (previouslySelectedColor == CTDDotColor_None) { return; }
+
+        if (self.selectedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(self.selectedColor)] setSelected:NO];
+        }
+
+        self->_selectedColor = previouslySelectedColor;
+        [self->_colorCells[@(self.selectedColor)] setSelected:YES];
+
+        // Remove activation indicator.
+        colorSetter(CTDDotColor_None);
+    };
+
+    return [[CTDColorSelectionEditor alloc]
+            initWithColorSetter:colorSetter
+             selectionCommitter:selectionCommitter];
+}
+
+@end
+
+
+
+@implementation CTDColorSelectionEditor
+{
+    CTDColorSelectionSetter _colorSetter;
+    CTDColorSelectionCommitter _selectionCommitter;
+    BOOL _completed;
+}
+
+- (instancetype)initWithColorSetter:(CTDColorSelectionSetter)colorSetter
+                 selectionCommitter:(CTDColorSelectionCommitter)selectionCommitter
+{
+    self = [super init];
+    if (self)
+    {
+        _colorSetter = colorSetter;
+        _selectionCommitter = selectionCommitter;
+        _completed = NO;
+    }
+    return self;
+}
+
+- (instancetype)init CTD_BLOCK_PARENT_METHOD
+
+- (void)dealloc
+{
+    NSAssert(_completed, @"Must either commit or cancel editor before releasing.");
+}
+
+- (void)selectElementWithId:(id)elementId
+{
+    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
+    _colorSetter(dotColorFromCellId(elementId));
+}
+
+- (void)clearSelection
+{
+    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
+    _colorSetter(CTDDotColor_None);
+}
+
+- (void)commitSelection
+{
+    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
+    _selectionCommitter();
+    _completed = YES;
+}
+
+- (void)cancelSelection
+{
+    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
+    [self clearSelection];
+    _selectionCommitter();
+    _completed = YES;
 }
 
 @end

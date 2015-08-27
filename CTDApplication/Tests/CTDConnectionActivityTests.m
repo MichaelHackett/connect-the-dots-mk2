@@ -55,6 +55,7 @@
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
     self.subject = [[CTDConnectionActivity alloc] initWithTrial:self.trial
                                                   trialRenderer:self.trialRenderer
+                                                  colorCellRenderers:nil // TODO
                                                   trialCompletionNotificationReceiver:self];
 }
 

@@ -19,7 +19,7 @@
 
 - (id<CTDTrialRenderer>)trialRenderer;
 - (id<CTDTouchToPointMapper>)trialTouchMapper;
-- (NSArray *)colorSelectionCells; // of id<CTDSelectionRenderer, CTDTouchable>
+- (NSDictionary*)colorCellRendererMap; // of cellId -> id<CTDColorCellRenderer>
 
 - (void)displayTrialCompletionMessage;
 - (void)hideTrialCompletionMessage;

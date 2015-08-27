@@ -18,6 +18,7 @@ FOUNDATION_EXPORT NSString * const CTDTrialCompletedNotification;
 
 - (instancetype)initWithTrial:(id<CTDTrial>)trial
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                colorCellRenderers:(NSDictionary*)colorCellRenderers
                 trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
 
 CTD_NO_DEFAULT_INIT

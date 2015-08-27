@@ -66,8 +66,8 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id hitElement = [_dotTouchMapper elementAtTouchLocation:newPosition];
-    if (hitElement && (hitElement != _startingDotId))
+    id hitElementId = [_dotTouchMapper idOfElementAtTouchLocation:newPosition];
+    if (hitElementId && (hitElementId != _startingDotId))
     {
         [_connectionEditor establishConnection];
     }

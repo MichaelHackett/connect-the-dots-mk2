@@ -67,6 +67,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrial:trial
                            trialRenderer:_connectionScene.trialRenderer
+                           colorCellRenderers:[_connectionScene colorCellRendererMap]
                            trialCompletionNotificationReceiver:self];
     [_connectionActivity beginTrial];
     [_connectionScene setTrialEditor:_connectionActivity];
