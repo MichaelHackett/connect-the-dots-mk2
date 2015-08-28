@@ -20,11 +20,11 @@
 
 #import <Foundation/NSDictionary.h>
 
-@interface  NSDictionary (ORCSubscriptSupport)
+@interface NSDictionary (ORCSubscriptSupport)
 - (id)objectForKeyedSubscript:(id)key NS_AVAILABLE(10_6, 5_0);
 @end
 
-@interface  NSMutableDictionary (ORCSubscriptSupport)
+@interface NSMutableDictionary (ORCSubscriptSupport)
 - (void)setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key NS_AVAILABLE(10_6, 5_0);
 @end
 

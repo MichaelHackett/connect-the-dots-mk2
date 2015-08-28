@@ -10,21 +10,30 @@
 #import "CTDUIKitLineView.h"
 #import "CTDUIKitLineViewAdapter.h"
 
+#import "CTDInteraction/CTDMutableTouchToElementMapper.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 
+
+
+@interface CTDUIKitConnectTheDotsViewAdapter () <CTDNotificationReceiver>
+@end
 
 @implementation CTDUIKitConnectTheDotsViewAdapter
 {
     __weak CTDUIKitConnectTheDotsView* _connectTheDotsView;
     CTDUIKitColorPalette* _colorPalette;
+    id<CTDMutableTouchToElementMapper> _touchToDotMapper;
 }
 
 - (instancetype)initWithConnectTheDotsView:(CTDUIKitConnectTheDotsView*)connectTheDotsView
                               colorPalette:(CTDUIKitColorPalette*)colorPalette
+                          touchToDotMapper:(id<CTDMutableTouchToElementMapper>)touchToDotMapper;
 {
     self = [super init];
     if (self) {
         _connectTheDotsView = connectTheDotsView;
         _colorPalette = [colorPalette copy];
+        _touchToDotMapper = touchToDotMapper;
     }
     return self;
 }
@@ -34,9 +43,7 @@
 #pragma mark CTDTrialRenderer protocol
 
 
-- (id<CTDDotRenderer, CTDTouchable>)
-      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
-               withInitialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer, CTDTouchable>)newRendererForDotWithId:(id)dotId
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
@@ -45,28 +52,23 @@
 
     id<CTDDotRenderer, CTDTouchable> dotViewAdapter =
         [[CTDUIKitDotViewAdapter alloc]
-         initWithDotView:[ctdView newDotCenteredAt:[centerPosition asCGPoint]]
-            colorPalette:_colorPalette];
-    [dotViewAdapter changeDotColorTo:dotColor];
+         initWithDotView:[ctdView newDotCenteredAt:CGPointZero]
+         colorPalette:_colorPalette
+         notificationReceiver:self];
+    [dotViewAdapter setVisible:NO];
+    [_touchToDotMapper mapTouchable:dotViewAdapter
+                               toId:dotId];
 
     return dotViewAdapter;
 }
 
-- (id<CTDDotConnectionRenderer>)
-      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                                  secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (id<CTDDotConnectionRenderer>)newRendererForDotConnection
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     if (!ctdView) {
         return nil;
     }
-
-    id<CTDDotConnectionRenderer> lineViewAdapter =
-        [[CTDUIKitLineViewAdapter alloc] initWithLineView:[ctdView newConnection]];
-    [lineViewAdapter setFirstEndpointPosition:firstEndpointPosition];
-    [lineViewAdapter setSecondEndpointPosition:secondEndpointPosition];
-
-    return lineViewAdapter;
+    return [[CTDUIKitLineViewAdapter alloc] initWithLineView:[ctdView newConnection]];
 }
 
 
@@ -79,7 +81,27 @@
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
     CGPoint localPoint = [ctdView convertPoint:[touchLocation asCGPoint]
                                       fromView:nil];
+
+    if (!CGRectContainsPoint(ctdView.bounds, localPoint)) {
+        return nil;  // Point is outside view
+    }
+
     return [CTDPoint fromCGPoint:localPoint];
+}
+
+
+
+#pragma mark CTDNotificationReceiver protocol
+
+
+- (void)receiveNotification:(NSString*)notificationId
+                 fromSender:(id)sender
+                   withInfo:(__unused NSDictionary*)info
+{
+    if ([notificationId isEqualToString:CTDDotViewDiscardedNotification])
+    {
+        [_touchToDotMapper unmapTouchable:sender];
+    }
 }
 
 @end

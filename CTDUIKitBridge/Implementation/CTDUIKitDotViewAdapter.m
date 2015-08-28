@@ -5,7 +5,14 @@
 #import "CTDPoint+CGConversion.h"
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitDotView.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
+
+
+
+// Notification definitions
+NSString * const CTDDotViewDiscardedNotification = @"CTDDotViewDiscardedNotification";
+
 
 
 
@@ -13,6 +20,7 @@
 {
     __weak CTDUIKitDotView* _dotView;
     CTDUIKitColorPalette* _colorPalette;
+    __weak id<CTDNotificationReceiver> _notificationReceiver;
 }
 
 
@@ -21,11 +29,13 @@
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
                    colorPalette:(CTDUIKitColorPalette*)colorPalette
+           notificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
 {
     self = [super init];
     if (self) {
         _dotView = dotView;
         _colorPalette = colorPalette;
+        _notificationReceiver = notificationReceiver;
     }
     return self;
 }
@@ -35,30 +45,53 @@
 #pragma mark CTDDotRenderer protocol
 
 
-- (CTDPoint*)connectionPoint
+- (CTDPoint*)dotConnectionPoint
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    return [CTDPoint fromCGPoint:[strongDotView connectionPoint]];
+    ctd_strongify(_dotView, dotView);
+    return [CTDPoint fromCGPoint:[dotView connectionPoint]];
 }
 
-- (void)changeDotColorTo:(CTDPaletteColorLabel)newDotColor
+- (void)setDotCenterPosition:(CTDPoint*)centerPosition
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.dotColor = _colorPalette[newDotColor];
+    ctd_strongify(_dotView, dotView);
+    dotView.center = [centerPosition asCGPoint];
+}
+
+- (void)setDotColor:(CTDPaletteColorLabel)newDotColor
+{
+    ctd_strongify(_dotView, dotView);
+    dotView.dotColor = _colorPalette[newDotColor];
+}
+
+- (void)setVisible:(BOOL)visible
+{
+    ctd_strongify(_dotView, dotView);
+    dotView.hidden = !visible;
 }
 
 - (void)showSelectionIndicator
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.selectionIndicatorIsVisible = YES;
+    ctd_strongify(_dotView, dotView);
+    dotView.selectionIndicatorIsVisible = YES;
 }
 
 - (void)hideSelectionIndicator
 {
-    CTDUIKitDotView* strongDotView = _dotView;
-    strongDotView.selectionIndicatorIsVisible = NO;
+    ctd_strongify(_dotView, dotView);
+    dotView.selectionIndicatorIsVisible = NO;
 }
 
+- (void)discardRendering
+{
+    ctd_strongify(_notificationReceiver, notificationReceiver);
+    [notificationReceiver receiveNotification:CTDDotViewDiscardedNotification
+                                   fromSender:self
+                                     withInfo:nil];
+
+    ctd_strongify(_dotView, dotView);
+    _dotView = nil;
+    [dotView removeFromSuperview];
+}
 
 
 #pragma mark CTDTouchable protocol
@@ -66,7 +99,7 @@
 
 - (BOOL)containsTouchLocation:(CTDPoint*)touchLocation
 {
-    CTDUIKitDotView* dotView = _dotView;
+    ctd_strongify(_dotView, dotView);
     CGPoint localTouchLocation = [dotView convertPoint:[touchLocation asCGPoint]
                                               fromView:nil];
     return [dotView dotContainsPoint:localTouchLocation];

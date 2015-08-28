@@ -1,5 +1,5 @@
 // CTDTrial:
-//     Given a sequence of dots, a trial plays the sequence in order and
+//     Given a sequence of dot pairs, a trial plays the sequence in order and
 //     records the connection attempts made, to the level of detail required
 //     for data collection.
 //
@@ -7,6 +7,6 @@
 
 @protocol CTDTrial <NSObject>
 
-- (NSArray*)dotList;
+- (NSArray*)dotPairs;
 
 @end

@@ -8,15 +8,21 @@
 @protocol CTDTouchToElementMapper;
 @protocol CTDTouchToPointMapper;
 @protocol CTDTrialRenderer;
+@protocol CTDTrialEditor;
 
 
 
 @interface CTDTrialSceneTouchRouter : NSObject <CTDTouchResponder>
 
+@property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
+@property (weak, nonatomic) id<CTDTouchToElementMapper> dotsTouchMapper;
+@property (weak, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
+@property (weak, nonatomic) id<CTDTouchResponder> colorCellsTouchResponder;
+
+// DEPRECATED
 - (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
                       dotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                         freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder;
-CTD_NO_DEFAULT_INIT
 
 @end

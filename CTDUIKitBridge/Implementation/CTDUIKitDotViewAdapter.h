@@ -9,17 +9,24 @@
 //
 //  Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDInteraction/Ports/CTDTouchable.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitDotView;
+@protocol CTDNotificationReceiver;
+
+
+
+// Notifications
+FOUNDATION_EXPORT NSString * const CTDDotViewDiscardedNotification;
 
 
 
 @interface CTDUIKitDotViewAdapter : NSObject <CTDDotRenderer, CTDTouchable>
 
 - (instancetype)initWithDotView:(CTDUIKitDotView*)dotView
-                   colorPalette:(CTDUIKitColorPalette*)colorPalette;
+                   colorPalette:(CTDUIKitColorPalette*)colorPalette
+           notificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
 
 @end

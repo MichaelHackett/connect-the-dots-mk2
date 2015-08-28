@@ -8,15 +8,14 @@
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
 #import "Ports/CTDTouchMappers.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
 
-@protocol CTDTrialRenderer; // TEMP!
+#import "CTDApplication/CTDTrialEditor.h"
 
 
 
 #pragma mark - Initial delegate touch tracker (private)
 
-typedef void (^CTDDotHitHandler)(id<CTDDotRenderer> hitDotRenderer);
+typedef void (^CTDDotHitHandler)(CTDPoint* touchPosition, id hitDotId);
 
 
 @interface CTDDotDetectionTracker : NSObject <CTDTouchTracker>
@@ -39,7 +38,8 @@ CTD_NO_DEFAULT_INIT
                           dotHitHandler:(CTDDotHitHandler)dotHitHandler
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _dotsTouchMapper = dotsTouchMapper;
         _dotHitHandler = [dotHitHandler copy];
 
@@ -55,11 +55,13 @@ CTD_NO_DEFAULT_INIT
     [self CTDDotDetectionTracker_hitTestWithLocation:newPosition];
 }
 
+// TODO: Turn into a block in an ivar
 - (void)CTDDotDetectionTracker_hitTestWithLocation:(CTDPoint*)touchLocation
 {
-    id hitElement = [_dotsTouchMapper elementAtTouchLocation:touchLocation];
-    if (hitElement && [hitElement conformsToProtocol:@protocol(CTDDotRenderer)]) {
-        _dotHitHandler((id<CTDDotRenderer>)hitElement);
+    id hitElementId = [_dotsTouchMapper idOfElementAtTouchLocation:touchLocation];
+    if (hitElementId)
+    {
+        _dotHitHandler(touchLocation, hitElementId);
     }
 }
 
@@ -72,23 +74,31 @@ CTD_NO_DEFAULT_INIT
 
 
 @implementation CTDTrialSceneTouchRouter
-{
-    __weak id<CTDTrialRenderer> _trialRenderer;
-    id<CTDTouchToElementMapper> _dotsTouchMapper;
-    id<CTDTouchToPointMapper> _freeEndMapper;
-    id<CTDTouchResponder> _colorCellsTouchResponder;
-}
+
 
 #pragma mark Initialization
 
-- (instancetype)initWithTrialRenderer:(id<CTDTrialRenderer>)trialRenderer
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _trialEditor = nil;
+        _dotsTouchMapper = nil;
+        _freeEndMapper = nil;
+        _colorCellsTouchResponder = nil;
+    }
+    return self;
+}
+
+- (instancetype)initWithTrialRenderer:(__unused id<CTDTrialRenderer>)trialRenderer
                       dotsTouchMapper:(id<CTDTouchToElementMapper>)dotsTouchMapper
                         freeEndMapper:(id<CTDTouchToPointMapper>)freeEndMapper
              colorCellsTouchResponder:(id<CTDTouchResponder>)colorCellsTouchResponder
 {
     self = [super init];
-    if (self) {
-        _trialRenderer = trialRenderer;
+    if (self)
+    {
         _dotsTouchMapper = dotsTouchMapper;
         _freeEndMapper = freeEndMapper;
         _colorCellsTouchResponder = colorCellsTouchResponder;
@@ -96,11 +106,10 @@ CTD_NO_DEFAULT_INIT
     return self;
 }
 
-- (instancetype)init CTD_BLOCK_PARENT_METHOD
-
 
 
 #pragma mark CTDTouchResponder protocol
+
 
 - (id<CTDTouchTracker>)trackerForTouchStartingAt:(CTDPoint*)initialPosition
 {
@@ -108,9 +117,9 @@ CTD_NO_DEFAULT_INIT
     // dot-hit block we are supplying will be executed before the tracker's
     // initializer returns (if the initial point is within an object of
     // interest). This may result in changing the main tracker's delegate to
-    // a more specific tracker, so we don't want to, on return from the
-    // initializer, overwrite this change, switching the tracker's delegate
-    // back to this disciminator.
+    // a more specific tracker, so we don't want to overwrite this change on
+    // return from the initializer, switching the tracker's delegate back to
+    // this disciminator.
     //
     // To avoid this problem, *another* delegating tracker is created first and
     // used as the main tracker's initial delegate. This second delegator can
@@ -126,45 +135,55 @@ CTD_NO_DEFAULT_INIT
     // It's a little bit "clever" (tricky), but it solves the problem fairly
     // simply, without resorting to delayed execution or locking. And if it
     // weren't for the number of arguments required for the initializers below,
-    // it would actually be a pretty short block of code (7 statements plus 1
-    // in the block).
+    // it would actually be a pretty short block of code.
 
-    CTDTouchTrackingGroup* initialTrackingGroup =
-        [[CTDTouchTrackingGroup alloc] init];
+    CTDTouchTrackingGroup* initialTrackingGroup = [[CTDTouchTrackingGroup alloc] init];
+
+    ctd_strongify(self.colorCellsTouchResponder, colorCellsTouchResponder);
     id<CTDTouchTracker> colorCellsTouchTracker =
-        [_colorCellsTouchResponder trackerForTouchStartingAt:initialPosition];
-    [initialTrackingGroup addTracker:colorCellsTouchTracker];
+        [colorCellsTouchResponder trackerForTouchStartingAt:initialPosition];
+    if (colorCellsTouchTracker)
+    {
+        [initialTrackingGroup addTracker:colorCellsTouchTracker];
+    }
 
     CTDDelegatingTouchTracker* delegatingTracker =
         [[CTDDelegatingTouchTracker alloc]
          initWithInitialDelegate:initialTrackingGroup];
 
-    // local copies for the block's use
-    __weak id<CTDTrialRenderer> trialRenderer = _trialRenderer;
-    id<CTDTouchToElementMapper> dotsTouchMapper = _dotsTouchMapper;
-    id<CTDTouchToPointMapper> freeEndMapper = _freeEndMapper;
+    ctd_strongify(self.dotsTouchMapper, dotsTouchMapper);
+    ctd_weakify(self, weakSelf);
 
     id<CTDTouchTracker> actionDiscriminator =
         [[CTDDotDetectionTracker alloc]
-         initWithDotsTouchMapper:_dotsTouchMapper
+         initWithDotsTouchMapper:dotsTouchMapper
             initialTouchLocation:initialPosition
-                   dotHitHandler:^(id<CTDDotRenderer> hitDotRenderer)
+                   dotHitHandler:^(CTDPoint* touchPosition, id hitDotId)
     {
-        CTDPoint *initialFreeEndPosition =
-            [freeEndMapper pointAtTouchLocation:initialPosition];
-        [delegatingTracker changeDelegateTo:
-            [[CTDConnectionTouchInteraction alloc]
-             initWithTrialRenderer:trialRenderer
-                    dotTouchMapper:dotsTouchMapper
-                     freeEndMapper:freeEndMapper
-                 anchorDotRenderer:hitDotRenderer
-            initialFreeEndPosition:initialFreeEndPosition]];
-        if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
-            [colorCellsTouchTracker touchWasCancelled];
+        ctd_strongify(weakSelf, strongSelf);
+        ctd_strongify(strongSelf.trialEditor, trialEditor);
+        id<CTDTrialStepEditor> trialStepEditor = [trialEditor editorForCurrentStep];
+
+        if ([hitDotId isEqual:[trialStepEditor startingDotId]]) {
+            id<CTDTrialStepConnectionEditor> connectionEditor =
+                [trialStepEditor editorForNewConnection];
+            [delegatingTracker changeDelegateTo:
+                [[CTDConnectionTouchInteraction alloc]
+                 initWithConnectionEditor:connectionEditor
+                           dotTouchMapper:strongSelf.dotsTouchMapper
+                            freeEndMapper:strongSelf.freeEndMapper
+                            startingDotId:hitDotId
+                     initialTouchPosition:touchPosition]];
+            if ([colorCellsTouchTracker respondsToSelector:@selector(touchWasCancelled)]) {
+                [colorCellsTouchTracker touchWasCancelled];
+            }
         }
     }];
 
-    [initialTrackingGroup addTracker:actionDiscriminator];
+    if (actionDiscriminator)
+    {
+        [initialTrackingGroup addTracker:actionDiscriminator];
+    }
 
     return delegatingTracker;
 }

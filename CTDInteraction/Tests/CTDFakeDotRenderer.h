@@ -4,8 +4,7 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "Ports/CTDTouchable.h"
-#import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDTestHelpers/CTDTestSpy.h"
 
 @class CTDPoint;
@@ -19,6 +18,5 @@
 
 - (instancetype)initWithCenterPosition:(CTDPoint*)centerPosition
                               dotColor:(CTDPaletteColorLabel)dotColor;
-CTD_NO_DEFAULT_INIT
 
 @end

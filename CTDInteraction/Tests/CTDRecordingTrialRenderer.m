@@ -5,9 +5,7 @@
 #import "CTDFakeDotRenderer.h"
 #import "CTDRecordingDotConnectionRenderer.h"
 #import "Ports/CTDTouchable.h"
-#import "CTDPresentation/CTDColorPalette.h"
-#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
-#import "CTDPresentation/Ports/CTDDotRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDUtility/CTDPoint.h"
 
 
@@ -38,24 +36,16 @@
     return [_connectionRenderersCreated copy];
 }
 
-- (id<CTDDotRenderer, CTDTouchable>)
-      newDotRenderingCenteredAt:(CTDPoint*)centerPosition
-               withInitialColor:(CTDPaletteColorLabel)dotColor
+- (id<CTDDotRenderer>)newRendererForDotWithId:(__unused id)dotId
 {
-    id newDotRenderer = [[CTDFakeDotRenderer alloc]
-                         initWithCenterPosition:centerPosition
-                                       dotColor:dotColor];
+    id newDotRenderer = [[CTDFakeDotRenderer alloc] init];
     [_dotRenderersCreated addObject:newDotRenderer];
     return newDotRenderer;
 }
 
-- (id<CTDDotConnectionRenderer>)
-      newDotConnectionRenderingWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-      secondEndpointPosition:(CTDPoint*)secondEndpointPosition
+- (id<CTDDotConnectionRenderer>)newRendererForDotConnection
 {
-    id newConnectionRenderer = [[CTDRecordingDotConnectionRenderer alloc]
-                                initWithFirstEndpointPosition:firstEndpointPosition
-                                secondEndpointPosition:secondEndpointPosition];
+    id newConnectionRenderer = [[CTDRecordingDotConnectionRenderer alloc] init];
     [_connectionRenderersCreated addObject:newConnectionRenderer];
     return newConnectionRenderer;
 }

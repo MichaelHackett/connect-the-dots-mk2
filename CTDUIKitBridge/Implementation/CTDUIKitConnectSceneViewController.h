@@ -4,10 +4,11 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDUIKitStandardViewController.h"
-#import "CTDActivities/Ports/CTDConnectScene.h"
+#import "CTDApplication/Ports/CTDConnectScene.h"
 
 @class CTDUIKitColorPalette;
 @class CTDUIKitConnectTheDotsView;
+@protocol CTDTrialEditor;
 
 
 
@@ -15,9 +16,11 @@
     : CTDUIKitStandardViewController <CTDConnectScene>
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
+@property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
 
 // IB Outlets
-@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *colorSelectionCells;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray* colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
+@property (weak, nonatomic) IBOutlet UILabel* trialCompletionMessageLabel;
 
 @end

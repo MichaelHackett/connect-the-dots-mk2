@@ -3,7 +3,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/Ports/CTDTrialRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 
 
 @interface CTDRecordingTrialRenderer : NSObject <CTDTrialRenderer>

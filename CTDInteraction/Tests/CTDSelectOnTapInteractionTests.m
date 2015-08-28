@@ -2,54 +2,69 @@
 
 #import "CTDSelectOnTapInteraction.h"
 
+#import "Ports/CTDSelectionEditor.h"
+
 #import "CTDColorCellsTestFixture.h"
-#import "CTDSelectionChangeRecorder.h"
-#import "CTDUtility/CTDMethodSelector.h"
-#import "CTDUtility/CTDPoint.h"
-
-#define message CTDMakeMethodSelector
 
 
 
 
-@interface CTDSelectOnTapInteractionBaseTestCase : XCTestCase
+@interface CTDSelectOnTapInteractionTestCase : XCTestCase <CTDSelectionEditor>
+
 @property (strong, nonatomic) CTDSelectOnTapInteraction* subject;
 @property (strong, nonatomic) CTDColorCellsTestFixture* fixture;
+@property (copy, readonly, nonatomic) id highlightedElementId;
+@property (copy, readonly, nonatomic) id selectedElementId;
+
 @end
 
-@implementation CTDSelectOnTapInteractionBaseTestCase
+@implementation CTDSelectOnTapInteractionTestCase
 
 - (void)setUp
 {
     [super setUp];
+    self.subject = nil;
     self.fixture = [[CTDColorCellsTestFixture alloc] init];
+    _highlightedElementId = nil;
+    _selectedElementId = nil;
 }
 
-- (CTDSelectOnTapInteraction*)subjectWithInitialPosition:(CTDPoint*)initialTouchPosition
+- (void)createSubjectWithInitialPosition:(CTDPoint*)initialTouchPosition
 {
-    return [[CTDSelectOnTapInteraction alloc]
-            initWithTouchMapper:self.fixture.colorCellTouchMapper
-            initialTouchPosition:initialTouchPosition];
+    self.subject = [[CTDSelectOnTapInteraction alloc]
+                    initWithSelectionEditor:self
+                    touchMapper:self.fixture.colorCellTouchMapper
+                    initialTouchPosition:initialTouchPosition];
 }
+
+- (void)highlightElementWithId:(id)elementId { _highlightedElementId = [elementId copy]; }
+- (void)clearHighlighting { _highlightedElementId = nil; }
+- (void)selectElementWithId:(id)elementId { _selectedElementId = [elementId copy]; }
+- (void)clearSelection { _selectedElementId = nil; }
 
 @end
 
 
 
 @interface CTDSelectOnTapInteractionWhenInitialPositionIsOutsideOfAllElements
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenInitialPositionIsOutsideOfAllElements
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
+    [self createSubjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
-- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatNoElementIsHighlighted
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoElementIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end
@@ -58,21 +73,25 @@
 
 
 @interface CTDSelectOnTapInteractionWhenTouchFirstMovesOntoAColorCell
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenTouchFirstMovesOntoAColorCell
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
-    [self.fixture resetCellSelectionRecording];
+    [self createSubjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
     [self.subject touchDidMoveTo:self.fixture.pointsInsideCell1[0]];
 }
 
-- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatTouchedCellIsHighlighted
+{
+    assertThat(self.highlightedElementId, is(equalTo(@1)));
+}
+
+- (void)testThatNoElementIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end
@@ -81,27 +100,27 @@
 
 
 @interface CTDSelectOnTapInteractionWhenTouchEndsWhileWithinAColorCell
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenTouchEndsWhileWithinAColorCell
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
-    [self.fixture resetCellSelectionRecording];
+    [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
     if ([self.subject respondsToSelector:@selector(touchDidEnd)]) {
         [self.subject touchDidEnd];
     }
 }
 
-- (void)testThatTheColorCellUnderTheTouchIsSelected {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived],
-               hasItem(message(select)));
+- (void)testThatTheColorCellUnderTheTouchIsSelected
+{
+    assertThat(self.selectedElementId, is(equalTo(@1)));
 }
 
-- (void)testThatNoOtherColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatTheHighlightingIsRemoved
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 @end
@@ -110,23 +129,48 @@
 
 
 @interface CTDSelectOnTapInteractionWhenTouchIsCancelledWhileWithinAColorCell
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenTouchIsCancelledWhileWithinAColorCell
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[0]];
-    [self.fixture resetCellSelectionRecording];
+    [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell1[0]];
     if ([self.subject respondsToSelector:@selector(touchWasCancelled)]) {
         [self.subject touchWasCancelled];
     }
 }
 
-- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatTheHighlightingIsRemoved
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoElementIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
+}
+
+@end
+
+
+
+
+@interface CTDSelectOnTapInteractionWhenTouchMovesOutsideAnyColorCell
+    : CTDSelectOnTapInteractionTestCase
+@end
+@implementation CTDSelectOnTapInteractionWhenTouchMovesOutsideAnyColorCell
+
+- (void)setUp {
+    [super setUp];
+    [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
+    [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[1]];
+}
+
+- (void)testThatTheHighlightingIsRemoved
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 @end
@@ -135,24 +179,27 @@
 
 
 @interface CTDSelectOnTapInteractionWhenTouchEndsWhileOutsideAnyColorCell
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenTouchEndsWhileOutsideAnyColorCell
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
+    [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell1[1]];
     [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[1]];
-    [self.fixture resetCellSelectionRecording];
     if ([self.subject respondsToSelector:@selector(touchDidEnd)]) {
         [self.subject touchDidEnd];
     }
 }
 
-- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatTheHighlightingIsRemoved
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoCellIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end
@@ -161,24 +208,27 @@
 
 
 @interface CTDSelectOnTapInteractionWhenTouchIsCancelledWhileOutsideAnyColorCell
-    : CTDSelectOnTapInteractionBaseTestCase
+    : CTDSelectOnTapInteractionTestCase
 @end
 @implementation CTDSelectOnTapInteractionWhenTouchIsCancelledWhileOutsideAnyColorCell
 
 - (void)setUp {
     [super setUp];
-    self.subject = [self subjectWithInitialPosition:self.fixture.pointsInsideCell1[0]];
+    [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell1[0]];
     [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[1]];
-    [self.fixture resetCellSelectionRecording];
     if ([self.subject respondsToSelector:@selector(touchWasCancelled)]) {
         [self.subject touchWasCancelled];
     }
 }
 
-- (void)testThatNoColorCellsReceivedSelectionChangeMessages {
-    assertThat([self.fixture.colorCell1 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell2 selectionMesssagesReceived], isEmpty());
-    assertThat([self.fixture.colorCell3 selectionMesssagesReceived], isEmpty());
+- (void)testThatNoCellIsHighlighted
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoCellIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end

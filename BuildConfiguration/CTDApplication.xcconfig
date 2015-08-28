@@ -1,9 +1,6 @@
 // Common configuration for CTDApplication target.
 
-// Build an iOS app. (Final app name matches product name, not target name.)
-PRODUCT_NAME = $(CTD_APP_TARGET)
-WRAPPER_EXTENSION = app
-MACH_O_TYPE = mh_executable
+#include "General-Common-StaticLibrary.xcconfig"
 
 // Project module source dependencies:
-USER_HEADER_SEARCH_PATHS = $(CTD_UIKIT_BRIDGE_HEADERS) $(CTD_INTERACTION_HEADERS) $(CTD_PRESENTATION_HEADERS) $(CTD_MODEL_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)
+USER_HEADER_SEARCH_PATHS = $(CTD_MODEL_HEADERS) $(CTD_INTERACTION_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)

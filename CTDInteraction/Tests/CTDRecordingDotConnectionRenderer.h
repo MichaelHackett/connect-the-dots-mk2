@@ -3,7 +3,7 @@
 //
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
-#import "CTDPresentation/Ports/CTDDotConnectionRenderer.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h"
 
 @class CTDPoint;
 
@@ -15,7 +15,5 @@
 @property (copy, readonly, nonatomic) CTDPoint* secondEndpointPosition;
 @property (assign, readonly, nonatomic, getter=wasInvalidated) BOOL invalidated;
 
-- (instancetype)initWithFirstEndpointPosition:(CTDPoint*)firstEndpointPosition
-                       secondEndpointPosition:(CTDPoint*)secondEndpointPosition;
 @end
 
