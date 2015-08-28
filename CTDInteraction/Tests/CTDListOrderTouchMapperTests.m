@@ -37,11 +37,6 @@ static CTDPoint* somePoint() { return point(100,150); }
 @end
 @implementation CTDListOrderTouchMapperWhenFreshlyCreated
 
-- (void)testThatItReturnsNilWhenQueriedOld {
-    assertThat([self.subject elementAtTouchLocation:somePoint()],
-               is(nilValue()));
-}
-
 - (void)testThatItReturnsNilWhenQueried {
     assertThat([self.subject idOfElementAtTouchLocation:somePoint()],
                is(nilValue()));
@@ -60,10 +55,6 @@ static CTDPoint* somePoint() { return point(100,150); }
 - (void)setUp {
     [super setUp];
     [self.subject mapTouchable:TOUCHED toId:@"HIT"];
-}
-
-- (void)testThatItReturnsTheActuatorForTheSingleElementsOld {
-    assertThat([self.subject elementAtTouchLocation:somePoint()], is(@"HIT"));
 }
 
 - (void)testThatItReturnsTheActuatorForTheSingleElements {
@@ -85,10 +76,6 @@ static CTDPoint* somePoint() { return point(100,150); }
     [self.subject mapTouchable:NOT_TOUCHED toId:@"HIT"];
 }
 
-- (void)testThatItReturnsNilWhenQueriedOld {
-    assertThat([self.subject elementAtTouchLocation:somePoint()], is(nilValue()));
-}
-
 - (void)testThatItReturnsNilWhenQueried {
     assertThat([self.subject idOfElementAtTouchLocation:somePoint()], is(nilValue()));
 }
@@ -108,10 +95,6 @@ static CTDPoint* somePoint() { return point(100,150); }
     [self.subject mapTouchable:NOT_TOUCHED toId:@"#1"];
     [self.subject mapTouchable:TOUCHED toId:@"#2"];
     [self.subject mapTouchable:TOUCHED toId:@"#3"];
-}
-
-- (void)testThatItReturnsEarliestAddedActuatorThatSignalsAHitOld {
-    assertThat([self.subject elementAtTouchLocation:somePoint()], is(@"#2"));
 }
 
 - (void)testThatItReturnsEarliestAddedActuatorThatSignalsAHit {

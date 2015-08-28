@@ -12,13 +12,11 @@
 
 @protocol CTDConnectScene <NSObject>
 
-// - setColorPalette:(CTDUIKitColorPalette*)
-
-- (void)setTouchResponder:(id<CTDTouchResponder>)touchResponder;
+//- (void)setTouchResponder:(id<CTDTouchResponder>)touchResponder;
 - (void)setTrialEditor:(id<CTDTrialEditor>)trialEditor;
 
 - (id<CTDTrialRenderer>)trialRenderer;
-- (id<CTDTouchToPointMapper>)trialTouchMapper;
+//- (id<CTDTouchToPointMapper>)trialTouchMapper;
 - (NSDictionary*)colorCellRendererMap; // of cellId -> id<CTDColorCellRenderer>
 
 - (void)displayTrialCompletionMessage;

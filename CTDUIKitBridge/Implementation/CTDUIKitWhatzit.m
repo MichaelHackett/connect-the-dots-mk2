@@ -2,7 +2,6 @@
 
 #import "CTDUIKitWhatzit.h"
 
-#import "CTDSceneBuilder.h"
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
@@ -53,12 +52,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     _mainWindow = [UIKit fullScreenWindowWithRootViewController:connectScene
                                                 backgroundColor:[UIColor whiteColor]];
 
-    // Now wire up the scene to the Presentation and Interaction modules.
-//    [CTDSceneBuilder prepareConnectScene:connectScene withTrial:trial];
-
-    // Lastly, make it visible. (Have to do this after running the Scene
-    // Builder, so that it has a chance to set some values before loading the
-    // views. FIXME!)
+    // Lastly, make the initial scene visible.
     [_mainWindow makeKeyAndVisible];
 
     return connectScene;

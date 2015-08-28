@@ -126,10 +126,10 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     return _ctdViewAdapter;
 }
 
-- (id<CTDTouchToPointMapper>)trialTouchMapper
-{
-    return _ctdViewAdapter;
-}
+//- (id<CTDTouchToPointMapper>)trialTouchMapper
+//{
+//    return _ctdViewAdapter;
+//}
 
 - (NSDictionary*)colorCellRendererMap
 {

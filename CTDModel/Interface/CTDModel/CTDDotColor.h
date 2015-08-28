@@ -12,8 +12,3 @@ typedef enum {
     CTDDotColor_Green,
     CTDDotColor_Blue
 } CTDDotColor;
-
-
-@protocol CTDDotColorSink <NSObject>
-- (void)colorChangedTo:(CTDDotColor)newColor;
-@end

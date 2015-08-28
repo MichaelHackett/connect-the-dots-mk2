@@ -19,6 +19,5 @@
 // Maps touch locations to interaction objects; the priority ordering of
 // overlapping objects is implementation specific.
 @protocol CTDTouchToElementMapper <NSObject>
-- (id)elementAtTouchLocation:(CTDPoint*)touchLocation; // DEPRECATED
 - (id)idOfElementAtTouchLocation:(CTDPoint*)touchLocation;
 @end

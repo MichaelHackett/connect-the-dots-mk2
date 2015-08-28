@@ -21,9 +21,6 @@
 
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
-// DEPRECATED
-- (id)elementAtTouchLocation:(__unused CTDPoint*)touchLocation { return nil; }
-
 - (id)idOfElementAtTouchLocation:(CTDPoint*)touchLocation
 {
     return [_pointToElementMap objectForKey:touchLocation];

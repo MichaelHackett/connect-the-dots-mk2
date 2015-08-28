@@ -70,34 +70,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA7C19BB77D200D2B498"
-               BuildableName = "libCTDPresentation.a"
-               BlueprintName = "CTDPresentation"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA8919BB77D300D2B498"
-               BuildableName = "CTDPresentationTests.xctest"
-               BlueprintName = "CTDPresentationTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C41B78E1B155AA500B54422"
                BuildableName = "libCTDInteraction.a"
                BlueprintName = "CTDInteraction"
@@ -228,6 +200,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4CFEF3F51A72F1B70086C37B"
+               BuildableName = "CTDTestHelpersTests.xctest"
+               BlueprintName = "CTDTestHelpersTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CEBCA6319BB77C400D2B498"
                BuildableName = "CTDModelTests.xctest"
                BlueprintName = "CTDModelTests"
@@ -248,29 +230,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CEBCA8919BB77D300D2B498"
-               BuildableName = "CTDPresentationTests.xctest"
-               BlueprintName = "CTDPresentationTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CFDEEC219C688D00041B910"
                BuildableName = "CTDUtilityTests.xctest"
                BlueprintName = "CTDUtilityTests"
-               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFEF3F51A72F1B70086C37B"
-               BuildableName = "CTDTestHelpersTests.xctest"
-               BlueprintName = "CTDTestHelpersTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
