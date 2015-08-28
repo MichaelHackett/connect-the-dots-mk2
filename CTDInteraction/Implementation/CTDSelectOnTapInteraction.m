@@ -16,14 +16,14 @@
 //
 @interface CTDSelectOnTapInteraction_TouchMapper : NSObject
 
-@property (copy, readonly, nonatomic) id selectedElementId;
+@property (copy, readonly, nonatomic) id highlightedElementId;
 
 
 - (instancetype)initWithTouchMapper:(id<CTDTouchToElementMapper>)touchMapper
                     selectionEditor:(id<CTDSelectionEditor>)selectionEditor;
 CTD_NO_DEFAULT_INIT
 
-- (void)selectElementAtTouchPosition:(CTDPoint*)touchPosition;
+- (void)highlightElementAtTouchPosition:(CTDPoint*)touchPosition;
 
 @end
 
@@ -42,23 +42,23 @@ CTD_NO_DEFAULT_INIT
     {
         _touchMapper = touchMapper;
         _selectionEditor = selectionEditor;
-        _selectedElementId = nil;
+        _highlightedElementId = nil;
     }
     return self;
 }
 
-- (void)selectElementAtTouchPosition:(CTDPoint*)touchPosition
+- (void)highlightElementAtTouchPosition:(CTDPoint*)touchPosition
 {
     id hitElementId = [_touchMapper idOfElementAtTouchLocation:touchPosition];
     if (hitElementId)
     {
-        [_selectionEditor selectElementWithId:hitElementId];
-        _selectedElementId = [hitElementId copy];
+        [_selectionEditor highlightElementWithId:hitElementId];
+        _highlightedElementId = [hitElementId copy];
     }
     else
     {
-        [_selectionEditor clearSelection];
-        _selectedElementId = nil;
+        [_selectionEditor clearHighlighting];
+        _highlightedElementId = nil;
     }
 }
 
@@ -90,7 +90,7 @@ CTD_NO_DEFAULT_INIT
                             selectionEditor:selectionEditor];
         _selectionEditor = selectionEditor;
 
-        [_touchMapper selectElementAtTouchPosition:initialPosition];
+        [_touchMapper highlightElementAtTouchPosition:initialPosition];
     }
     return self;
 }
@@ -104,24 +104,22 @@ CTD_NO_DEFAULT_INIT
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    [_touchMapper selectElementAtTouchPosition:newPosition];
+    [_touchMapper highlightElementAtTouchPosition:newPosition];
 }
 
 - (void)touchDidEnd
 {
-    if (_touchMapper.selectedElementId)
+    id highlightedElementId = _touchMapper.highlightedElementId;
+    if (highlightedElementId)
     {
-        [_selectionEditor commitSelection];
-    }
-    else
-    {
-        [_selectionEditor cancelSelection];
+        [_selectionEditor selectElementWithId:highlightedElementId];
+        [_selectionEditor clearHighlighting];
     }
 }
 
 - (void)touchWasCancelled
 {
-    [_selectionEditor cancelSelection];
+    [_selectionEditor clearHighlighting];
 }
 
 @end

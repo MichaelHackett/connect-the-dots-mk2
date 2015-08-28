@@ -99,12 +99,12 @@ CTD_NO_DEFAULT_INIT
 
 
 typedef void (^CTDColorSelectionSetter)(CTDDotColor);
-typedef void (^CTDColorSelectionCommitter)(void);
+typedef void (^CTDColorHighlightSetter)(CTDDotColor);
 
 @interface CTDColorSelectionEditor : NSObject <CTDSelectionEditor>
 
-- (instancetype)initWithColorSetter:(CTDColorSelectionSetter)colorSetter
-                 selectionCommitter:(CTDColorSelectionCommitter)selectionCommitter;
+- (instancetype)initWithSelectionSetter:(CTDColorSelectionSetter)selectionSetter
+                        highlightSetter:(CTDColorHighlightSetter)highlightSetter;
 CTD_NO_DEFAULT_INIT
 
 @end
@@ -558,42 +558,42 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 - (id<CTDSelectionEditor>)editorForColorSelection
 {
-    __block CTDDotColor previouslySelectedColor = CTDDotColor_None;
-
-    CTDColorSelectionSetter colorSetter = ^(CTDDotColor selectedColor)
+    CTDColorSelectionSetter selectionSetter = ^(CTDDotColor selectedColor)
     {
-        if (selectedColor == previouslySelectedColor) { return; }
-
-        if (previouslySelectedColor != CTDDotColor_None)
-        {
-            [self->_colorCells[@(previouslySelectedColor)] decrementHighlightCount];
-        }
-        if (selectedColor != CTDDotColor_None)
-        {
-            [self->_colorCells[@(selectedColor)] incrementHighlightCount];
-        }
-        previouslySelectedColor = selectedColor;
-    };
-
-    CTDColorSelectionCommitter selectionCommitter = ^
-    {
-        if (previouslySelectedColor == CTDDotColor_None) { return; }
+        if (selectedColor == self.selectedColor) { return; }
 
         if (self.selectedColor != CTDDotColor_None)
         {
             [self->_colorCells[@(self.selectedColor)] setSelected:NO];
         }
+        if (selectedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(selectedColor)] setSelected:YES];
+        }
+        self->_selectedColor = selectedColor;
+    };
 
-        self->_selectedColor = previouslySelectedColor;
-        [self->_colorCells[@(self.selectedColor)] setSelected:YES];
+    __block CTDDotColor previouslyHighlightedColor = CTDDotColor_None;
 
-        // Remove activation indicator.
-        colorSetter(CTDDotColor_None);
+    CTDColorHighlightSetter highlightSetter = ^(CTDDotColor highlightedColor)
+    {
+        if (highlightedColor == previouslyHighlightedColor) { return; }
+
+        if (previouslyHighlightedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(previouslyHighlightedColor)] decrementHighlightCount];
+        }
+        if (highlightedColor != CTDDotColor_None)
+        {
+            [self->_colorCells[@(highlightedColor)] incrementHighlightCount];
+        }
+        previouslyHighlightedColor = highlightedColor;
+
     };
 
     return [[CTDColorSelectionEditor alloc]
-            initWithColorSetter:colorSetter
-             selectionCommitter:selectionCommitter];
+            initWithSelectionSetter:selectionSetter
+                    highlightSetter:highlightSetter];
 }
 
 @end
@@ -602,56 +602,43 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 @implementation CTDColorSelectionEditor
 {
-    CTDColorSelectionSetter _colorSetter;
-    CTDColorSelectionCommitter _selectionCommitter;
-    BOOL _completed;
+    CTDColorSelectionSetter _selectionSetter;
+    CTDColorHighlightSetter _highlightSetter;
 }
 
-- (instancetype)initWithColorSetter:(CTDColorSelectionSetter)colorSetter
-                 selectionCommitter:(CTDColorSelectionCommitter)selectionCommitter
+- (instancetype)initWithSelectionSetter:(CTDColorSelectionSetter)selectionSetter
+                        highlightSetter:(CTDColorHighlightSetter)highlightSetter
 {
     self = [super init];
     if (self)
     {
-        _colorSetter = colorSetter;
-        _selectionCommitter = selectionCommitter;
-        _completed = NO;
+        _selectionSetter = [selectionSetter copy];
+        _highlightSetter = [highlightSetter copy];
     }
     return self;
 }
 
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
-- (void)dealloc
+
+- (void)highlightElementWithId:(id)elementId
 {
-    NSAssert(_completed, @"Must either commit or cancel editor before releasing.");
+    _highlightSetter(dotColorFromCellId(elementId));
+}
+
+- (void)clearHighlighting
+{
+    _highlightSetter(CTDDotColor_None);
 }
 
 - (void)selectElementWithId:(id)elementId
 {
-    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
-    _colorSetter(dotColorFromCellId(elementId));
+    _selectionSetter(dotColorFromCellId(elementId));
 }
 
 - (void)clearSelection
 {
-    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
-    _colorSetter(CTDDotColor_None);
-}
-
-- (void)commitSelection
-{
-    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
-    _selectionCommitter();
-    _completed = YES;
-}
-
-- (void)cancelSelection
-{
-    NSAssert(!_completed, @"Must not make further editor calls after committing or cancelling");
-    [self clearSelection];
-    _selectionCommitter();
-    _completed = YES;
+    _selectionSetter(CTDDotColor_None);
 }
 
 @end

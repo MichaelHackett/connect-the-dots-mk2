@@ -13,9 +13,8 @@
 
 @property (strong, nonatomic) CTDSelectOnTapInteraction* subject;
 @property (strong, nonatomic) CTDColorCellsTestFixture* fixture;
+@property (copy, readonly, nonatomic) id highlightedElementId;
 @property (copy, readonly, nonatomic) id selectedElementId;
-@property (copy, readonly, nonatomic) id committedSelectionId;
-@property (assign, readonly, nonatomic) BOOL selectionCancelled;
 
 @end
 
@@ -26,9 +25,8 @@
     [super setUp];
     self.subject = nil;
     self.fixture = [[CTDColorCellsTestFixture alloc] init];
+    _highlightedElementId = nil;
     _selectedElementId = nil;
-    _committedSelectionId = nil;
-    _selectionCancelled = NO;
 }
 
 - (void)createSubjectWithInitialPosition:(CTDPoint*)initialTouchPosition
@@ -39,10 +37,10 @@
                     initialTouchPosition:initialTouchPosition];
 }
 
+- (void)highlightElementWithId:(id)elementId { _highlightedElementId = [elementId copy]; }
+- (void)clearHighlighting { _highlightedElementId = nil; }
 - (void)selectElementWithId:(id)elementId { _selectedElementId = [elementId copy]; }
 - (void)clearSelection { _selectedElementId = nil; }
-- (void)commitSelection { _committedSelectionId = _selectedElementId; }
-- (void)cancelSelection { _selectionCancelled = YES; }
 
 @end
 
@@ -57,6 +55,11 @@
 {
     [super setUp];
     [self createSubjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
+}
+
+- (void)testThatNoElementIsHighlighted
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 - (void)testThatNoElementIsSelected
@@ -81,9 +84,14 @@
     [self.subject touchDidMoveTo:self.fixture.pointsInsideCell1[0]];
 }
 
-- (void)testThatTouchedCellIsSelectedInEditor
+- (void)testThatTouchedCellIsHighlighted
 {
-    assertThat(self.selectedElementId, is(equalTo(@1)));
+    assertThat(self.highlightedElementId, is(equalTo(@1)));
+}
+
+- (void)testThatNoElementIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end
@@ -107,7 +115,12 @@
 
 - (void)testThatTheColorCellUnderTheTouchIsSelected
 {
-    assertThat(self.committedSelectionId, is(equalTo(@1)));
+    assertThat(self.selectedElementId, is(equalTo(@1)));
+}
+
+- (void)testThatTheHighlightingIsRemoved
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 @end
@@ -129,9 +142,14 @@
     }
 }
 
-- (void)testThatEditorIsCancelled
+- (void)testThatTheHighlightingIsRemoved
 {
-    assertThatBool(self.selectionCancelled, is(equalToBool(YES)));
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoElementIsSelected
+{
+    assertThat(self.selectedElementId, is(nilValue()));
 }
 
 @end
@@ -150,9 +168,9 @@
     [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[1]];
 }
 
-- (void)testThatNoElementIsSelectedInEditor
+- (void)testThatTheHighlightingIsRemoved
 {
-    assertThat(self.selectedElementId, is(nilValue()));
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 @end
@@ -174,9 +192,9 @@
     }
 }
 
-- (void)testThatEditorIsCancelled
+- (void)testThatTheHighlightingIsRemoved
 {
-    assertThatBool(self.selectionCancelled, is(equalToBool(YES)));
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 - (void)testThatNoCellIsSelected
@@ -203,9 +221,9 @@
     }
 }
 
-- (void)testThatEditorIsCancelled
+- (void)testThatNoCellIsHighlighted
 {
-    assertThatBool(self.selectionCancelled, is(equalToBool(YES)));
+    assertThat(self.highlightedElementId, is(nilValue()));
 }
 
 - (void)testThatNoCellIsSelected
