@@ -2,16 +2,76 @@
 
 #import "CTDSelectOnTouchInteraction.h"
 
+#import "Ports/CTDSelectionEditor.h"
 #import "Ports/CTDTouchMappers.h"
-#import "CTDPresentation/CTDSelectable.h"
+
 #import "CTDUtility/CTDPoint.h"
+
+
+
+//
+// Internal helper to avoid repeating touch mapping logic with initial position
+// and for when the touch position changes.
+//
+@interface CTDSelectOnTouchInteraction_TouchMapper : NSObject
+
+@property (copy, readonly, nonatomic) id selectedElementId;
+
+
+- (instancetype)initWithTouchMapper:(id<CTDTouchToElementMapper>)touchMapper
+                    selectionEditor:(id<CTDSelectionEditor>)selectionEditor;
+CTD_NO_DEFAULT_INIT
+
+- (void)selectElementAtTouchPosition:(CTDPoint*)touchPosition;
+
+@end
+
+
+@implementation CTDSelectOnTouchInteraction_TouchMapper
+{
+    id<CTDTouchToElementMapper> _touchMapper;
+    id<CTDSelectionEditor> _selectionEditor;
+}
+
+- (instancetype)initWithTouchMapper:(id<CTDTouchToElementMapper>)touchMapper
+                    selectionEditor:(id<CTDSelectionEditor>)selectionEditor
+{
+    self = [super init];
+    if (self)
+    {
+        _touchMapper = touchMapper;
+        _selectionEditor = selectionEditor;
+        _selectedElementId = nil;
+    }
+    return self;
+}
+
+- (void)selectElementAtTouchPosition:(CTDPoint*)touchPosition
+{
+    id hitElementId = [_touchMapper idOfElementAtTouchLocation:touchPosition];
+    if (hitElementId)
+    {
+        [_selectionEditor highlightElementWithId:hitElementId];
+        [_selectionEditor selectElementWithId:hitElementId];
+        _selectedElementId = [hitElementId copy];
+    }
+    else
+    {
+        [_selectionEditor clearHighlighting];
+        [_selectionEditor clearSelection];
+        _selectedElementId = nil;
+    }
+}
+
+@end
+
 
 
 
 @implementation CTDSelectOnTouchInteraction
 {
-    id<CTDTouchToElementMapper> _touchMapper;
-    id<CTDSelectable> _selectedElement;
+    CTDSelectOnTouchInteraction_TouchMapper* _touchMapper;
+    id<CTDSelectionEditor> _selectionEditor;
 }
 
 
@@ -19,18 +79,19 @@
 #pragma mark Initialization
 
 
-- (instancetype)initWithTouchMapper:(id<CTDTouchToElementMapper>)touchMapper
-                initialTouchPosition:(CTDPoint*)initialPosition
+- (instancetype)initWithSelectionEditor:(id<CTDSelectionEditor>)selectionEditor
+                            touchMapper:(id<CTDTouchToElementMapper>)touchMapper
+                   initialTouchPosition:(CTDPoint*)initialPosition
 {
     self = [super init];
-    if (self) {
-        _touchMapper = touchMapper;
-        _selectedElement = nil;
-        id hitElement = [_touchMapper elementAtTouchLocation:initialPosition];
-        if ([hitElement conformsToProtocol:@protocol(CTDSelectable)]) {
-            _selectedElement = (id<CTDSelectable>)hitElement;
-            [_selectedElement select];
-        }
+    if (self)
+    {
+        _touchMapper = [[CTDSelectOnTouchInteraction_TouchMapper alloc]
+                        initWithTouchMapper:touchMapper
+                            selectionEditor:selectionEditor];
+        _selectionEditor = selectionEditor;
+
+        [_touchMapper selectElementAtTouchPosition:initialPosition];
     }
     return self;
 }
@@ -44,31 +105,18 @@
 
 - (void)touchDidMoveTo:(CTDPoint*)newPosition
 {
-    id hitElement = [_touchMapper elementAtTouchLocation:newPosition];
-    if (hitElement != _selectedElement &&
-        (!hitElement ||
-         [hitElement conformsToProtocol:@protocol(CTDSelectable)]))
-    {
-        if (_selectedElement) {
-            [_selectedElement deselect];
-        }
-        _selectedElement = (id<CTDSelectable>)hitElement;
-        [_selectedElement select];
-    }
+    [_touchMapper selectElementAtTouchPosition:newPosition];
 }
 
 - (void)touchDidEnd
 {
-    if (_selectedElement) {
-        [_selectedElement deselect];
-    }
+    [_selectionEditor clearHighlighting];
+    [_selectionEditor clearSelection];
 }
 
 - (void)touchWasCancelled
 {
-    if (_selectedElement) {
-        [_selectedElement deselect];
-    }
+    [self touchDidEnd];
 }
 
 @end
