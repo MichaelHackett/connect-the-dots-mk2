@@ -41,14 +41,14 @@
     }
 }
 
-- (void)showActivationIndicator
+- (void)showHighlightIndicator
 {
-    // TODO: Different effect for activation
+    // TODO: Different effect for highlighting
     self.backgroundColor = self.colorWhenSelected;
     _activated = YES;
 }
 
-- (void)hideActivationIndicator
+- (void)hideHighlightIndicator
 {
     _activated = NO;
     if (!_selected)

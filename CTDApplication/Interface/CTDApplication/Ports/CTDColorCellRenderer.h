@@ -17,7 +17,7 @@
 
 @protocol CTDColorCellRenderer <CTDSelectionRenderer>
 
-- (void)showActivationIndicator;
-- (void)hideActivationIndicator;
+- (void)showHighlightIndicator;
+- (void)hideHighlightIndicator;
 
 @end

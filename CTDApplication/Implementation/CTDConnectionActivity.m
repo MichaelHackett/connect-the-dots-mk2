@@ -80,8 +80,8 @@ CTD_NO_DEFAULT_INIT
 
 @property (assign, nonatomic, getter=isSelected) BOOL selected;
 
-- (void)incrementActivationCount;
-- (void)decrementActivationCount;
+- (void)incrementHighlightCount;
+- (void)decrementHighlightCount;
 
 @end
 
@@ -477,7 +477,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 @implementation CTDColorSelectionCell
 {
     __weak id<CTDColorCellRenderer> _renderer;
-    NSUInteger _activationCount;
+    NSUInteger _highlightCount;
 }
 
 - (id)initWithRenderer:(id<CTDColorCellRenderer>)renderer
@@ -486,7 +486,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     if (self)
     {
         _renderer = renderer;
-        _activationCount = 0;
+        _highlightCount = 0;
     }
     return self;
 }
@@ -504,23 +504,23 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     }
 }
 
-- (void)incrementActivationCount
+- (void)incrementHighlightCount
 {
-    if (_activationCount == 0)
+    if (_highlightCount == 0)
     {
         ctd_strongify(_renderer, renderer);
-        [renderer showActivationIndicator];
+        [renderer showHighlightIndicator];
     }
-    _activationCount += 1;
+    _highlightCount += 1;
 }
 
-- (void)decrementActivationCount
+- (void)decrementHighlightCount
 {
-    _activationCount -= 1;
-    if (_activationCount == 0)
+    _highlightCount -= 1;
+    if (_highlightCount == 0)
     {
         ctd_strongify(_renderer, renderer);
-        [renderer hideActivationIndicator];
+        [renderer hideHighlightIndicator];
     }
 }
 
@@ -566,11 +566,11 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
         if (previouslySelectedColor != CTDDotColor_None)
         {
-            [self->_colorCells[@(previouslySelectedColor)] decrementActivationCount];
+            [self->_colorCells[@(previouslySelectedColor)] decrementHighlightCount];
         }
         if (selectedColor != CTDDotColor_None)
         {
-            [self->_colorCells[@(selectedColor)] incrementActivationCount];
+            [self->_colorCells[@(selectedColor)] incrementHighlightCount];
         }
         previouslySelectedColor = selectedColor;
     };
