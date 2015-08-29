@@ -8,7 +8,7 @@
 
 #import "CTDInteraction/Ports/CTDSelectionEditor.h"
 #import "CTDModel/CTDDotPair.h"
-#import "CTDModel/CTDTrial.h"
+#import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -138,7 +138,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 @implementation CTDConnectionActivity
 {
-    id<CTDTrial> _trial;
+    id<CTDTrialScript> _trialScript;
     id<CTDTrialRenderer> _trialRenderer;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
     id<CTDTrialStepEditor> _trialStepEditor;
@@ -146,7 +146,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     NSUInteger _stepIndex;
 }
 
-- (instancetype)initWithTrial:(id<CTDTrial>)trial
+- (instancetype)initWithTrialScript:(id<CTDTrialScript>)trialScript
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellRenderers:(NSDictionary*)colorCellRenderers
                 trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
@@ -154,7 +154,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     self = [super init];
     if (self)
     {
-        _trial = trial;
+        _trialScript = trialScript;
         _trialRenderer = trialRenderer;
         _notificationReceiver = notificationReceiver;
         _trialStepEditor = nil;
@@ -174,7 +174,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 {
     _stepIndex = 0;
     _trialStepEditor = [CTDConnectionActivityTrialStepEditor
-                        trialStepEditorWithDotPair:[_trial dotPairs][0]
+                        trialStepEditorWithDotPair:[_trialScript dotPairs][0]
                                      trialRenderer:_trialRenderer
                             trialStepStateObserver:self];
 }
@@ -185,7 +185,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     _trialStepEditor = nil;
 
     _stepIndex += 1;
-    if (_stepIndex >= [[_trial dotPairs] count])
+    if (_stepIndex >= [[_trialScript dotPairs] count])
     {
         ctd_strongify(_notificationReceiver, notificationReceiver);
         [notificationReceiver receiveNotification:CTDTrialCompletedNotification
@@ -195,7 +195,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     else
     {
         _trialStepEditor = [CTDConnectionActivityTrialStepEditor
-                            trialStepEditorWithDotPair:[_trial dotPairs][_stepIndex]
+                            trialStepEditorWithDotPair:[_trialScript dotPairs][_stepIndex]
                                          trialRenderer:_trialRenderer
                                 trialStepStateObserver:self];
     }

@@ -3,7 +3,7 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDTrialEditor.h"
-@protocol CTDTrial;
+@protocol CTDTrialScript;
 @protocol CTDTrialRenderer;
 @protocol CTDNotificationReceiver;
 
@@ -16,7 +16,7 @@ FOUNDATION_EXPORT NSString * const CTDTrialCompletedNotification;
 
 @interface CTDConnectionActivity : NSObject <CTDTrialEditor>
 
-- (instancetype)initWithTrial:(id<CTDTrial>)trial
+- (instancetype)initWithTrialScript:(id<CTDTrialScript>)trialScript
                 trialRenderer:(id<CTDTrialRenderer>)trialRenderer
                 colorCellRenderers:(NSDictionary*)colorCellRenderers
                 trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;

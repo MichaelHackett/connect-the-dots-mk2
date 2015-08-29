@@ -7,7 +7,7 @@
 #import "CTDTrialRendererSpy.h"
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
-#import "CTDModel/CTDTrial.h"
+#import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 
@@ -23,7 +23,7 @@
 
 // Test fixture
 @property (copy, nonatomic) NSArray* dotPairs;
-@property (strong, nonatomic) id<CTDTrial> trial;
+@property (strong, nonatomic) id<CTDTrialScript> trialScript;
 
 - (NSArray*)trialCompletionNotificationSenders;
 
@@ -51,9 +51,9 @@
                      startPosition:[CTDPoint x:250 y:310]
                        endPosition:[CTDPoint x:415 y:315]]
     ];
-    self.trial = [CTDModel trialWithDotPairs:self.dotPairs];
+    self.trialScript = [CTDModel trialScriptWithDotPairs:self.dotPairs];
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
-    self.subject = [[CTDConnectionActivity alloc] initWithTrial:self.trial
+    self.subject = [[CTDConnectionActivity alloc] initWithTrialScript:self.trialScript
                                                   trialRenderer:self.trialRenderer
                                                   colorCellRenderers:nil // TODO
                                                   trialCompletionNotificationReceiver:self];
