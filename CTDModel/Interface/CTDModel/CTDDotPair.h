@@ -10,7 +10,7 @@
 
 
 
-@interface CTDDotPair : NSObject
+@interface CTDDotPair : NSObject <NSCopying>
 
 // TODO: Replace properties with a rendering interface?
 @property (assign, readonly, nonatomic) CTDDotColor color;
@@ -22,5 +22,8 @@
                   endPosition:(CTDPoint*)endPosition;
 
 CTD_NO_DEFAULT_INIT
+
+
+- (BOOL)isEqualToDotPair:(CTDDotPair*)otherDotPair;
 
 @end

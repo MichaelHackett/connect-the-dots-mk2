@@ -29,7 +29,12 @@
 
 @protocol CTDTrialStepEditor <NSObject>
 
+// Returns YES if the conditions for starting a connection (e.g., the matching
+// color is selected) are in place.
+- (BOOL)isConnectionAllowed;
+
 // Create a new "live" connection, anchored at the current starting dot.
+// Returns nil is `isConnectionAllowed` would currently return NO.
 // (Note: Attempting to start a second connection while one is active will cancel the first one.)
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection;
 

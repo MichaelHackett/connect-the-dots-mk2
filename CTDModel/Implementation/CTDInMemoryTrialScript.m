@@ -1,9 +1,9 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDInMemoryTrial.h"
+#import "CTDInMemoryTrialScript.h"
 
 
-@implementation CTDInMemoryTrial
+@implementation CTDInMemoryTrialScript
 {
     NSArray* _dotPairs;
 }
@@ -24,7 +24,7 @@
 
 
 
-#pragma mark CTDTrial protocol
+#pragma mark CTDTrialScript protocol
 
 
 - (NSArray*)dotPairs {

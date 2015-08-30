@@ -8,7 +8,7 @@
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
-#import "CTDModel/CTDTrial.h"
+#import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDUtility/CTDRunLoopTimer.h"
@@ -58,14 +58,14 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 - (void)start
 {
     // TODO: Replace with data loaded from disk
-    id<CTDTrial> trial = [CTDModel trialWithDotPairs:@[
+    id<CTDTrialScript> trialScript = [CTDModel trialScriptWithDotPairs:@[
         step(CTDDotColor_Green, dot(500,170), dot(200,400)),
         step(CTDDotColor_Red, dot(175,40), dot(350,75))
     ]];
 
     _connectionScene = [_displayController initialScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
-                           initWithTrial:trial
+                           initWithTrialScript:trialScript
                            trialRenderer:_connectionScene.trialRenderer
                            colorCellRenderers:[_connectionScene colorCellRendererMap]
                            trialCompletionNotificationReceiver:self];
