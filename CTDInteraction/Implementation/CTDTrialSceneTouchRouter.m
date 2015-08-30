@@ -164,6 +164,9 @@ CTD_NO_DEFAULT_INIT
         ctd_strongify(strongSelf.trialEditor, trialEditor);
         id<CTDTrialStepEditor> trialStepEditor = [trialEditor editorForCurrentStep];
 
+        // Don't check for dot hits if proper color isn't selected.
+        if (![trialStepEditor isConnectionAllowed]) { return; }
+
         if ([hitDotId isEqual:[trialStepEditor startingDotId]]) {
             id<CTDTrialStepConnectionEditor> connectionEditor =
                 [trialStepEditor editorForNewConnection];

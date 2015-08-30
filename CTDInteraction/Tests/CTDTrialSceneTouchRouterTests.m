@@ -61,8 +61,9 @@ CTDTrialConnectionState;
 
 
 
-@interface CTDFakeTrialStep : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
+@interface CTDFakeTrialStepEditor : NSObject <CTDTrialStepEditor, CTDTrialStepConnectionEditor>
 
+@property (assign, nonatomic, getter=isConnectionAllowed) BOOL connectionAllowed;
 @property (assign, readonly, nonatomic) CTDTrialConnectionState connectionState;
 @property (copy, readonly, nonatomic) CTDPoint* connectionFreeEndPosition;
 
@@ -80,7 +81,7 @@ CTDTrialConnectionState;
 // Collaborators
 @property (strong, readonly, nonatomic) CTDTrialSceneTouchRouter* router;
 @property (strong, readonly, nonatomic) CTDFakeTrialEditor* trialEditor;
-@property (strong, readonly, nonatomic) CTDFakeTrialStep* trialStep;
+@property (strong, readonly, nonatomic) CTDFakeTrialStepEditor* trialStepEditor;
 @property (strong, readonly, nonatomic) id<CTDTouchToElementMapper> dotTouchMapper;
 @property (strong, readonly, nonatomic) id<CTDTouchToPointMapper> freeEndMapper;
 @property (strong, readonly, nonatomic) CTDFakeTouchResponder* colorCellsTouchResponder;
@@ -92,7 +93,7 @@ CTDTrialConnectionState;
 
 
 // Convenience assertion
-#define assertThatConnectionStateIs(EXPECTED_STATE) assertThatUnsignedInteger(self.trialStep.connectionState, is(equalToUnsignedInteger(kCTDTrialConnectionState ## EXPECTED_STATE)))
+#define assertThatConnectionStateIs(EXPECTED_STATE) assertThatUnsignedInteger(self.trialStepEditor.connectionState, is(equalToUnsignedInteger(kCTDTrialConnectionState ## EXPECTED_STATE)))
 
 
 
@@ -123,9 +124,9 @@ CTDTrialConnectionState;
                              ANOTHER_TOUCH_POINT_INSIDE_DOT_1: SOME_OTHER_TRIAL_POINT,
                              TOUCH_POINT_OUTSIDE_ELEMENTS: TRIAL_POINT_OUTSIDE_ELEMENTS }];
 
-    _trialStep = [[CTDFakeTrialStep alloc] init];
+    _trialStepEditor = [[CTDFakeTrialStepEditor alloc] init];
     _trialEditor = [[CTDFakeTrialEditor alloc] init];
-    self.trialEditor.editorForCurrentStep = _trialStep;
+    self.trialEditor.editorForCurrentStep = _trialStepEditor;
 
     _router = [[CTDTrialSceneTouchRouter alloc] init];
     _router.trialEditor = self.trialEditor;
@@ -138,9 +139,26 @@ CTDTrialConnectionState;
 
 
 
+#pragma mark - When connection is allowed
+
+
+@interface CTDTrialSceneTouchRouterWhenConnectionAllowed : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchRouterWhenConnectionAllowed
+
+- (void)setUp
+{
+    [super setUp];
+    self.trialStepEditor.connectionAllowed = YES;
+}
+
+@end
+
+
+
 
 @interface CTDTrialSceneTouchRouterPriorToAnyTouch
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 
 @implementation CTDTrialSceneTouchRouterPriorToAnyTouch
@@ -156,7 +174,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElement
@@ -189,7 +207,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutEnteringAnyElement
 
@@ -217,7 +235,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDot
 
@@ -235,7 +253,7 @@ CTDTrialConnectionState;
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
 {
-    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
+    assertThat(self.trialStepEditor.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
 - (void)testThatColorCellTrackerWasCancelled
@@ -249,7 +267,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchEndsWithoutEnteringAnyElement
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchEndsWithoutEnteringAnyElement
 
@@ -276,7 +294,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledBeforeEnteringAnyElement
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledBeforeEnteringAnyElement
 
@@ -303,7 +321,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDot
 
@@ -320,7 +338,7 @@ CTDTrialConnectionState;
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
 {
-    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
+    assertThat(self.trialStepEditor.connectionFreeEndPosition, is(equalTo(SOME_TRIAL_POINT)));
 }
 
 - (void)testThatColorCellTrackerWasCancelled
@@ -334,7 +352,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideEndingDot
 
@@ -366,7 +384,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesWithoutLeavingTheInitialDot
 
@@ -385,7 +403,7 @@ CTDTrialConnectionState;
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
 {
-    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(SOME_OTHER_TRIAL_POINT)));
+    assertThat(self.trialStepEditor.connectionFreeEndPosition, is(equalTo(SOME_OTHER_TRIAL_POINT)));
 }
 
 - (void)testThatColorCellTrackerReceivedNoUpdates
@@ -400,7 +418,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchMovesOffTheInitialDot
 
@@ -414,7 +432,7 @@ CTDTrialConnectionState;
 
 - (void)testThatTheFreeEndOfTheConnectionFollowsTheTouchPosition
 {
-    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
+    assertThat(self.trialStepEditor.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
 }
 
 - (void)testThatTheConnectionRemainsActive
@@ -434,7 +452,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenConnectionDraggedOutsideOfWindow
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedOutsideOfWindow
 
@@ -449,7 +467,7 @@ CTDTrialConnectionState;
 
 - (void)testThatTheFreeEndOfTheConnectionSticksToLastPointInsideWindow
 {
-    assertThat(self.trialStep.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
+    assertThat(self.trialStepEditor.connectionFreeEndPosition, is(equalTo(TRIAL_POINT_OUTSIDE_ELEMENTS)));
 }
 
 - (void)testThatTheConnectionRemainsActive
@@ -469,7 +487,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenConnectionDraggedIntoSecondDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedIntoSecondDot
 
@@ -498,7 +516,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenConnectionDraggedBackOntoFirstDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenConnectionDraggedBackOntoFirstDot
 
@@ -528,7 +546,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinStartingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchEndsWhileWithinStartingDot
 
@@ -562,7 +580,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinStartingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchIsCancelledWhileWithinStartingDot
 
@@ -596,7 +614,7 @@ CTDTrialConnectionState;
 
 
 @interface CTDTrialSceneTouchTrackerWhenTouchIsEndedWhileWithinEndingDot
-    : CTDTrialSceneTouchTrackerTestCase
+    : CTDTrialSceneTouchRouterWhenConnectionAllowed
 @end
 @implementation CTDTrialSceneTouchTrackerWhenTouchIsEndedWhileWithinEndingDot
 
@@ -622,6 +640,102 @@ CTDTrialConnectionState;
 
 
 
+#pragma mark - When connection not allowed
+
+
+@interface CTDTrialSceneTouchRouterWhenConnectionNotAllowed : CTDTrialSceneTouchTrackerTestCase
+@end
+@implementation CTDTrialSceneTouchRouterWhenConnectionNotAllowed
+
+- (void)setUp
+{
+    [super setUp];
+    self.trialStepEditor.connectionAllowed = NO;
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElementAndConnectionIsNotAllowed
+    : CTDTrialSceneTouchRouterWhenConnectionNotAllowed
+@end
+
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsOutsideAnyElementAndConnectionIsNotAllowed
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
+}
+
+- (void)testThatNoConnectionIsStarted
+{
+    assertThatConnectionStateIs(Inactive);
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDotAndConnectionIsNotAllowed
+    : CTDTrialSceneTouchRouterWhenConnectionNotAllowed
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchFirstMovesOntoStartingDotAndConnectionIsNotAllowed
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_OUTSIDE_ELEMENTS];
+    [self.subject touchDidMoveTo:TOUCH_POINT_INSIDE_DOT_1];
+}
+
+- (void)testThatNoConnectionIsStarted
+{
+    assertThatConnectionStateIs(Inactive);
+}
+
+- (void)testThatColorCellTrackerWasNotCancelled
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
+
+@end
+
+
+
+
+@interface CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDotAndConnectionIsNotAllowed
+    : CTDTrialSceneTouchRouterWhenConnectionNotAllowed
+@end
+@implementation CTDTrialSceneTouchTrackerWhenTouchStartsInsideStartingDotAndConnectionIsNotAllowed
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [self.router trackerForTouchStartingAt:TOUCH_POINT_INSIDE_DOT_1];
+}
+
+- (void)testThatNoConnectionIsStarted
+{
+    assertThatConnectionStateIs(Inactive);
+}
+
+- (void)testThatColorCellTrackerWasNotCancelled
+{
+    assertThat(self.colorCellsTouchTracker.state, is(equalTo(CTDTouchTrackerStateActive)));
+}
+
+@end
+
+
+
+
+
+#pragma mark - Test Helpers
+
 
 @implementation CTDFakeTrialEditor
 
@@ -643,13 +757,14 @@ CTDTrialConnectionState;
 
 
 
-@implementation CTDFakeTrialStep
+@implementation CTDFakeTrialStepEditor
 
 - (instancetype)init
 {
     self = [super init];
     if (self)
     {
+        _connectionAllowed = YES;
         _connectionState = kCTDTrialConnectionStateInactive;
         _connectionFreeEndPosition = nil;
     }
@@ -658,6 +773,7 @@ CTDTrialConnectionState;
 
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection
 {
+    if (![self isConnectionAllowed]) { return nil; }
     _connectionState = kCTDTrialConnectionStateActive;
     return self;
 }

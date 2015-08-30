@@ -19,14 +19,9 @@ NSString * const CTDTrialCompletedNotification = @"CTDTrialCompletedNotification
 
 
 
-@protocol CTDDotConnection <NSObject>
-
-- (void)setFreeEndPosition:(CTDPoint*)freeEndPosition;
-- (void)establishConnection;
-- (void)invalidate;
-
+@protocol CTDColorSelectionObserver <NSObject>
+- (void)selectedColorChangedTo:(CTDDotColor)newColor;
 @end
-
 
 @protocol CTDDotConnectionStateObserver <NSObject>
 // Only one of these two messages will be sent and it will be sent only once.
@@ -60,6 +55,7 @@ CTD_NO_DEFAULT_INIT
 
 
 @interface CTDConnectionActivityTrialStepEditor : NSObject <CTDTrialStepEditor,
+                                                            CTDColorSelectionObserver,
                                                             CTDDotConnectionStateObserver>
 
 // TODO: Move to separate factory class (as instance method)?
@@ -68,10 +64,11 @@ CTD_NO_DEFAULT_INIT
                     trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
 
 // Transfers ownership of dot and connection renderers. Weak ref to given observer.
-- (instancetype)initWithStartingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
-                          endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
-                         connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
-                     trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
+- (instancetype)initWithDotPair:(CTDDotPair*)dotPair
+            startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
+              endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
+             connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+         trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
 
 @end
 
@@ -88,9 +85,10 @@ CTD_NO_DEFAULT_INIT
 
 @interface CTDColorPicker : NSObject
 
-@property (assign, readonly, nonatomic) CTDDotColor selectedColor;
+@property (assign, nonatomic) CTDDotColor selectedColor;
 
-- (instancetype)initWithColorCellRenderers:(NSDictionary*)colorCellRenderers;
+- (instancetype)initWithColorCellRenderers:(NSDictionary*)colorCellRenderers
+                    colorSelectionObserver:(id<CTDColorSelectionObserver>)colorSelectionObserver;
 CTD_NO_DEFAULT_INIT
 
 - (id<CTDSelectionRenderer>)editorForColorSelection;
@@ -131,7 +129,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 
 
-@interface CTDConnectionActivity () <CTDTrialStepStateObserver>
+@interface CTDConnectionActivity () <CTDTrialStepStateObserver, CTDColorSelectionObserver>
 @end
 
 
@@ -141,7 +139,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     id<CTDTrialScript> _trialScript;
     id<CTDTrialRenderer> _trialRenderer;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
-    id<CTDTrialStepEditor> _trialStepEditor;
+    id<CTDTrialStepEditor, CTDColorSelectionObserver> _trialStepEditor;
     CTDColorPicker* _colorPicker;
     NSUInteger _stepIndex;
 }
@@ -159,10 +157,21 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
         _notificationReceiver = notificationReceiver;
         _trialStepEditor = nil;
         _colorPicker = [[CTDColorPicker alloc]
-                        initWithColorCellRenderers:colorCellRenderers];
+                        initWithColorCellRenderers:colorCellRenderers
+                            colorSelectionObserver:self];
         _stepIndex = NSUIntegerMax;
     }
     return self;
+}
+
+
+
+#pragma mark CTDTrial protocol
+
+
+- (void)selectColor:(CTDDotColor)color
+{
+    _colorPicker.selectedColor = color;
 }
 
 
@@ -198,6 +207,8 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
                             trialStepEditorWithDotPair:[_trialScript dotPairs][_stepIndex]
                                          trialRenderer:_trialRenderer
                                 trialStepStateObserver:self];
+        // Prime selected-color observer with current value.
+        [_trialStepEditor selectedColorChangedTo:_colorPicker.selectedColor];
     }
 }
 
@@ -215,18 +226,28 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 #pragma mark CTDTrialStepStateObserver protocol
 
-
 - (void)trialStepCompleted
 {
     [self advanceToNextStep];
+}
+
+
+#pragma mark CTDColorSelectionObserver protocol
+
+- (void)selectedColorChangedTo:(CTDDotColor)newColor
+{
+    [_trialStepEditor selectedColorChangedTo:newColor];
 }
 
 @end
 
 
 
+
 @implementation CTDConnectionActivityTrialStepEditor
 {
+    CTDDotColor _dotPairColor;
+    CTDDotColor _selectedColor;
     id<CTDDotRenderer> _startingDotRenderer;
     id<CTDDotRenderer> _endingDotRenderer;
     id<CTDDotConnectionRenderer> _connectionRenderer;
@@ -253,19 +274,23 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     [connectionRenderer setVisible:NO];
     
     return [[CTDConnectionActivityTrialStepEditor alloc]
-            initWithStartingDotRenderer:startingDotRenderer
-                      endingDotRenderer:endingDotRenderer
-                     connectionRenderer:connectionRenderer
-                 trialStepStateObserver:trialStepStateObserver];
+            initWithDotPair:dotPair
+            startingDotRenderer:startingDotRenderer
+            endingDotRenderer:endingDotRenderer
+            connectionRenderer:connectionRenderer
+            trialStepStateObserver:trialStepStateObserver];
 }
 
-- (instancetype)initWithStartingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
-                          endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
-                         connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
-                     trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
+- (instancetype)initWithDotPair:(CTDDotPair*)dotPair
+            startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
+              endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
+             connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+         trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
 {
     self = [super init];
     if (self) {
+        _dotPairColor = dotPair.color;
+        _selectedColor = CTDDotColor_None;
         _startingDotRenderer = startingDotRenderer;
         _endingDotRenderer = endingDotRenderer;
         _connectionRenderer = connectionRenderer;
@@ -278,17 +303,9 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 
 
-- (void)beginStep
-{
-    [_startingDotRenderer setVisible:YES];
-    [_endingDotRenderer setVisible:NO];
-    [_connectionRenderer setVisible:NO];
-}
-
 - (id<CTDDotConnection>)newConnection
 {
-    // TODO: Discard any previous dotConnection so we don't have two things
-    // using the same renderer!
+    // TODO: Discard any previous dotConnection so we don't have two things using the same renderer!
 
     id<CTDDotConnection> dotConnection = [[CTDConnectionActivityDotConnection alloc]
                                           initWithConnectionRenderer:_connectionRenderer
@@ -307,8 +324,15 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 #pragma mark CTDTrialStepEditor protocol
 
+
+- (BOOL)isConnectionAllowed
+{
+    return _selectedColor == _dotPairColor;
+}
+
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection
 {
+    if (![self isConnectionAllowed]) { return nil; }
     return [[CTDConnectionActivityDotConnectionEditor alloc]
             initWithDotConnection:[self newConnection]];
 }
@@ -331,6 +355,16 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     _endingDotRenderer = nil;
     [_connectionRenderer discardRendering];
     _connectionRenderer = nil;
+}
+
+
+
+#pragma mark CTDColorSelectionObserver protocol
+
+
+- (void)selectedColorChangedTo:(CTDDotColor)newColor
+{
+    _selectedColor = newColor;
 }
 
 
@@ -528,12 +562,15 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 
 
+
 @implementation CTDColorPicker
 {
     NSDictionary* _colorCells;
+    __weak id<CTDColorSelectionObserver> _colorSelectionObserver;
 }
 
 - (instancetype)initWithColorCellRenderers:(NSDictionary*)colorCellRenderers
+                colorSelectionObserver:(id<CTDColorSelectionObserver>)colorSelectionObserver
 {
     self = [super init];
     if (self)
@@ -549,28 +586,40 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
         }];
 
         _colorCells = [colorCells copy];
+        _colorSelectionObserver = colorSelectionObserver;
         _selectedColor = CTDDotColor_None;
+        [colorSelectionObserver selectedColorChangedTo:_selectedColor];
     }
     return self;
 }
 
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
+
+- (void)setSelectedColor:(CTDDotColor)selectedColor
+{
+    if (selectedColor == _selectedColor) { return; }
+
+    if (_selectedColor != CTDDotColor_None)
+    {
+        [_colorCells[@(_selectedColor)] setSelected:NO];
+    }
+    if (selectedColor != CTDDotColor_None)
+    {
+        [_colorCells[@(selectedColor)] setSelected:YES];
+    }
+    _selectedColor = selectedColor;
+
+    ctd_strongify(_colorSelectionObserver, colorSelectionObserver);
+    [colorSelectionObserver selectedColorChangedTo:selectedColor];
+}
+
 - (id<CTDSelectionEditor>)editorForColorSelection
 {
     CTDColorSelectionSetter selectionSetter = ^(CTDDotColor selectedColor)
     {
-        if (selectedColor == self.selectedColor) { return; }
-
-        if (self.selectedColor != CTDDotColor_None)
-        {
-            [self->_colorCells[@(self.selectedColor)] setSelected:NO];
-        }
-        if (selectedColor != CTDDotColor_None)
-        {
-            [self->_colorCells[@(selectedColor)] setSelected:YES];
-        }
-        self->_selectedColor = selectedColor;
+        // TODO: Handle contention between multiple simultaneous editors.
+        self.selectedColor = selectedColor;
     };
 
     __block CTDDotColor previouslyHighlightedColor = CTDDotColor_None;
@@ -597,6 +646,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 }
 
 @end
+
 
 
 

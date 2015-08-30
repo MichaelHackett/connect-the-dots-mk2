@@ -3,8 +3,10 @@
 #import "CTDConnectionActivity.h"
 
 #import "Ports/CTDTrialRenderer.h"
+#import "CTDInteraction/Ports/CTDSelectionEditor.h"
 
 #import "CTDTrialRendererSpy.h"
+#import "Ports/CTDColorCellRenderer.h"
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
 #import "CTDModel/CTDTrialScript.h"
@@ -57,6 +59,7 @@
                                                   trialRenderer:self.trialRenderer
                                                   colorCellRenderers:nil // TODO
                                                   trialCompletionNotificationReceiver:self];
+    [self.subject beginTrial];
 }
 
 - (NSArray*)trialCompletionNotificationSenders
@@ -82,12 +85,6 @@
 @interface CTDConnectionActivityWhenFirstBegan : CTDConnectionActivityTestCase
 @end
 @implementation CTDConnectionActivityWhenFirstBegan
-
-- (void)setUp
-{
-    [super setUp];
-    [self.subject beginTrial];
-}
 
 - (void)testThatExactlyOneDotIsVisible
 {
@@ -122,10 +119,67 @@
 
 
 
-@interface CTDConnectionActivityAfterConnectionAnchoredToFirstDot : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityTrialStepEditorWhenCorrectColorIsSelected
+    : CTDConnectionActivityTestCase
 @end
 
-@implementation CTDConnectionActivityAfterConnectionAnchoredToFirstDot
+@implementation CTDConnectionActivityTrialStepEditorWhenCorrectColorIsSelected
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject selectColor:[(CTDDotPair*)self.dotPairs[0] color]];
+}
+
+- (void)testThatConnectionIsAllowed
+{
+    assertThatBool([[self.subject editorForCurrentStep] isConnectionAllowed],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatReturnedConnectionEditorIsNotNil
+{
+    assertThat([[self.subject editorForCurrentStep] editorForNewConnection], is(notNilValue()));
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityTrialStepEditorWhenCorrectColorIsNotSelected
+    : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityTrialStepEditorWhenCorrectColorIsNotSelected
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject selectColor:[(CTDDotPair*)self.dotPairs[0] color] + 1];
+}
+
+- (void)testThatConnectionIsNotAllowed
+{
+    assertThatBool([[self.subject editorForCurrentStep] isConnectionAllowed],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatReturnedConnectionEditorIsNil
+{
+    assertThat([[self.subject editorForCurrentStep] editorForNewConnection], is(nilValue()));
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityWhenCorrectColorIsNotSelectedAndConnectionAttempted
+    : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityWhenCorrectColorIsNotSelectedAndConnectionAttempted
 {
     id<CTDTrialStepConnectionEditor> _newConnectionEditor;
 }
@@ -133,9 +187,85 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
     _newConnectionEditor = [[self.subject editorForCurrentStep] editorForNewConnection];
 }
+
+- (void)testThatStartingDotIsNotRenderedAsActivated
+{
+    assertThatBool([self.trialRenderer.dotRenderings[0] hasSelectionIndicator],
+                   is(equalToBool(NO)));
+}
+
+- (void)testThatSecondDotIsNotMadeVisible
+{
+    assertThat(self.trialRenderer.dotRenderings, hasCountOf(1));
+}
+
+- (void)testThatItAddsNoVisibleConnections
+{
+    assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityTrialStepEditorWhenColorIsSelectedThroughEditor
+    : CTDConnectionActivityTestCase
+@end
+
+@implementation CTDConnectionActivityTrialStepEditorWhenColorIsSelectedThroughEditor
+
+- (void)setUp
+{
+    [super setUp];
+    id<CTDSelectionEditor> selectionEditor = [self.subject editorForColorSelection];
+    id dotCellId = @([(CTDDotPair*)self.dotPairs[0] color] - CTDDotColor_Red + CTDColorCellIdMin);
+    [selectionEditor selectElementWithId:dotCellId];
+}
+
+- (void)testThatConnectionIsAllowed
+{
+    assertThatBool([[self.subject editorForCurrentStep] isConnectionAllowed],
+                   is(equalToBool(YES)));
+}
+
+- (void)testThatReturnedConnectionEditorIsNotNil
+{
+    assertThat([[self.subject editorForCurrentStep] editorForNewConnection], is(notNilValue()));
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityWithActiveConnection : CTDConnectionActivityTestCase
+
+@property (strong, nonatomic) id<CTDTrialStepConnectionEditor> connectionEditor;
+
+@end
+
+@implementation CTDConnectionActivityWithActiveConnection
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject selectColor:[(CTDDotPair*)self.dotPairs[0] color]];
+    self.connectionEditor = [[self.subject editorForCurrentStep] editorForNewConnection];
+}
+
+@end
+
+
+
+
+@interface CTDConnectionActivityAfterConnectionAnchoredToFirstDot
+    : CTDConnectionActivityWithActiveConnection
+@end
+
+@implementation CTDConnectionActivityAfterConnectionAnchoredToFirstDot
 
 - (void)testThatStartingDotIsRenderedAsActivated
 {
@@ -185,17 +315,13 @@
                is(equalTo([self.trialRenderer.dotRenderings[0] dotConnectionPoint])));
 }
 
-- (void)testThatReturnedConnectionEditorIsNotNil
-{
-    assertThat(_newConnectionEditor, is(notNilValue()));
-}
-
 @end
 
 
 
 
-@interface CTDConnectionActivityWhenFreeEndOfConnectionChanges : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityWhenFreeEndOfConnectionChanges
+    : CTDConnectionActivityWithActiveConnection
 @end
 
 @implementation CTDConnectionActivityWhenFreeEndOfConnectionChanges
@@ -206,11 +332,8 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
-    id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject editorForCurrentStep] editorForNewConnection];
     _newFreeEndPosition = [CTDPoint x:50 y:290];
-    [connectionEditor setFreeEndPosition:_newFreeEndPosition];
+    [self.connectionEditor setFreeEndPosition:_newFreeEndPosition];
 }
 
 - (void)testThatStartingDotRemainsRenderedAsActivated
@@ -243,7 +366,8 @@
 
 
 
-@interface CTDConnectionActivityAfterCompletingConnection : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityAfterCompletingConnection
+    : CTDConnectionActivityWithActiveConnection
 @end
 
 @implementation CTDConnectionActivityAfterCompletingConnection
@@ -251,10 +375,7 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
-    id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject editorForCurrentStep] editorForNewConnection];
-    [connectionEditor establishConnection];
+    [self.connectionEditor establishConnection];
 }
 
 - (void)testThatStartingDotRemainsRenderedAsActivated
@@ -288,7 +409,7 @@
 
 
 
-@interface CTDConnectionActivityAfterCommittingConnection : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityAfterCommittingConnection : CTDConnectionActivityWithActiveConnection
 @property (strong, nonatomic) id<CTDTrialStepEditor> previousStepEditor;
 @property (strong, nonatomic) CTDFakeDotRendering* previousStepFirstDotRendering;
 @property (strong, nonatomic) CTDFakeDotRendering* previousStepSecondDotRendering;
@@ -300,10 +421,7 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
-    id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject editorForCurrentStep] editorForNewConnection];
-    [connectionEditor establishConnection];
+    [self.connectionEditor establishConnection];
 
     // Save refs to current renderings so we can verify that they have been
     // hidden after the step has been completed.
@@ -312,7 +430,7 @@
     self.previousStepSecondDotRendering = self.trialRenderer.dotRenderings[1];
     self.previousStepConnectionRendering = self.trialRenderer.connectionRenderings[0];
 
-    [connectionEditor commitConnectionState];
+    [self.connectionEditor commitConnectionState];
 }
 
 - (void)testThatStartingDotFromPreviousStepHasBeenHidden
@@ -369,7 +487,8 @@
 
 
 
-@interface CTDConnectionActivityAfterBreakingEstablishedConnection : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityAfterBreakingEstablishedConnection
+    : CTDConnectionActivityWithActiveConnection
 @end
 
 @implementation CTDConnectionActivityAfterBreakingEstablishedConnection
@@ -380,12 +499,9 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
-    id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject editorForCurrentStep] editorForNewConnection];
-    [connectionEditor establishConnection];
+    [self.connectionEditor establishConnection];
     _newFreeEndPosition = [CTDPoint x:4 y:36];
-    [connectionEditor setFreeEndPosition:_newFreeEndPosition];
+    [self.connectionEditor setFreeEndPosition:_newFreeEndPosition];
 }
 
 - (void)testThatStartingDotRemainsRenderedAsActivated
@@ -418,7 +534,8 @@
 
 
 
-@interface CTDConnectionActivityAfterCancellingConnection : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityAfterCancellingConnection
+    : CTDConnectionActivityWithActiveConnection
 @end
 
 @implementation CTDConnectionActivityAfterCancellingConnection
@@ -426,10 +543,7 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
-    id<CTDTrialStepConnectionEditor> connectionEditor =
-        [[self.subject editorForCurrentStep] editorForNewConnection];
-    [connectionEditor cancelConnection];
+    [self.connectionEditor cancelConnection];
 }
 
 - (void)testThatStartingDotIsNotRenderedAsActivated
@@ -453,8 +567,10 @@
 
 
 
-@interface CTDConnectionActivityStartingSecondConnectionAfterFirstCancelled : CTDConnectionActivityTestCase
+@interface CTDConnectionActivityStartingSecondConnectionAfterFirstCancelled
+    : CTDConnectionActivityTestCase
 @end
+
 @implementation CTDConnectionActivityStartingSecondConnectionAfterFirstCancelled
 {
     id<CTDTrialStepConnectionEditor> _connectionEditor;
@@ -463,9 +579,9 @@
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
     id<CTDTrialStepEditor> trialStepEditor = [self.subject editorForCurrentStep];
     // Start and cancel one connection.
+    [self.subject selectColor:[(CTDDotPair*)self.dotPairs[0] color]];
     [[trialStepEditor editorForNewConnection] cancelConnection];
     // Then start a second.
     _connectionEditor = [trialStepEditor editorForNewConnection];
@@ -513,12 +629,12 @@
 
 @interface CTDConnectionActivityAfterCompletingFinalStep : CTDConnectionActivityTestCase
 @end
+
 @implementation CTDConnectionActivityAfterCompletingFinalStep
 
 - (void)setUp
 {
     [super setUp];
-    [self.subject beginTrial];
     NSUInteger stepCount = [self.dotPairs count];
     for (NSUInteger stepIndex = 0; stepIndex < stepCount; stepIndex += 1)
     {
