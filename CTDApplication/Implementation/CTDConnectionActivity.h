@@ -2,7 +2,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDTrialEditor.h"
+#import "CTDInteraction/Ports/CTDTrialEditor.h"
 #import "CTDModel/CTDDotColor.h"
 @protocol CTDTrialScript;
 @protocol CTDTrialRenderer;

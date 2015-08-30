@@ -681,7 +681,6 @@
 			isa = PBXGroup;
 			children = (
 				4CF1D7F01B71A77E00672991 /* CTDApplication.h */,
-				4CF1D7EB1B70114B00672991 /* CTDTrialEditor.h */,
 				4C09C1AD1B63F85E00D06E17 /* Ports */,
 			);
 			name = Interface;
@@ -803,6 +802,7 @@
 				4CFEF3C71A719C6D0086C37B /* CTDTouchable.h */,
 				4C591BC91B519A5A00AE980B /* CTDTouchMappers.h */,
 				4C00654A1B8D3A190040A8AF /* CTDSelectionEditor.h */,
+				4CF1D7EB1B70114B00672991 /* CTDTrialEditor.h */,
 			);
 			path = Ports;
 			sourceTree = "<group>";

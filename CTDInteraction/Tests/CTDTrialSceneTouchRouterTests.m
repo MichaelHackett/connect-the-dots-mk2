@@ -3,7 +3,7 @@
 #import "CTDTrialSceneTouchRouter.h"
 
 #import "Ports/CTDTouchMappers.h"
-#import "CTDApplication/CTDTrialEditor.h"
+#import "Ports/CTDTrialEditor.h"
 
 #import "CTDFakeTouchMappers.h"
 #import "CTDFakeTouchResponder.h"

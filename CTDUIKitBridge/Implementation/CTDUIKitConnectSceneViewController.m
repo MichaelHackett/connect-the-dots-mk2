@@ -5,12 +5,12 @@
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
 
-#import "CTDApplication/CTDTrialEditor.h"
 #import "CTDApplication/Ports/CTDTrialRenderer.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
+#import "CTDInteraction/Ports/CTDTrialEditor.h"
 
 
 

@@ -8,8 +8,7 @@
 #import "CTDTouchResponder.h"
 #import "CTDTouchTrackingGroup.h"
 #import "Ports/CTDTouchMappers.h"
-
-#import "CTDApplication/CTDTrialEditor.h"
+#import "Ports/CTDTrialEditor.h"
 
 
 
