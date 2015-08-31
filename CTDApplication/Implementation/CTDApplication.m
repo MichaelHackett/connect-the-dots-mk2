@@ -35,18 +35,23 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 @implementation CTDApplication
 {
     id<CTDDisplayController> _displayController;
+    id<CTDTimeSource> _timeSource;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
+    id<CTDTrialResults> _trialResults;
     CTDRunLoopTimer* _displayTimer;
 }
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
+                     timeSource:(id<CTDTimeSource>)timeSource
 {
     self = [super init];
     if (self) {
         _displayController = displayController;
+        _timeSource = timeSource;
         _connectionScene = nil;
         _connectionActivity = nil;
+        _trialResults = nil;
         _displayTimer = nil;
     }
     return self;
@@ -62,12 +67,15 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
         step(CTDDotColor_Green, dot(500,170), dot(200,400)),
         step(CTDDotColor_Red, dot(175,40), dot(350,75))
     ]];
+    _trialResults = [CTDModel trialResultsHolder];
 
     _connectionScene = [_displayController initialScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
+                           trialResultsHolder:_trialResults
                            trialRenderer:_connectionScene.trialRenderer
                            colorCellRenderers:[_connectionScene colorCellRendererMap]
+                           timeSource:_timeSource
                            trialCompletionNotificationReceiver:self];
     [_connectionActivity beginTrial];
     [_connectionScene setTrialEditor:_connectionActivity];

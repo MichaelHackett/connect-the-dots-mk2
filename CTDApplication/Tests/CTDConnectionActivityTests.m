@@ -5,27 +5,39 @@
 #import "Ports/CTDTrialRenderer.h"
 #import "CTDInteraction/Ports/CTDSelectionEditor.h"
 
+#import "CTDStubTimeSource.h"
 #import "CTDTrialRendererSpy.h"
 #import "Ports/CTDColorCellRenderer.h"
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
+#import "CTDModel/CTDTrialResults.h"
 #import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 
 
 
+// Test data
+static double FIRST_STEP_START_TIME = 100000;
+static double FIRST_STEP_END_TIME =   100008.5;
 
-@interface CTDConnectionActivityTestCase : XCTestCase <CTDNotificationReceiver>
+
+
+@interface CTDConnectionActivityTestCase : XCTestCase <CTDTrialResults,
+                                                       CTDNotificationReceiver>
 
 @property (strong, nonatomic) CTDConnectionActivity* subject;
 
 // Collaborators
 @property (strong, nonatomic) CTDTrialRendererSpy* trialRenderer;
+@property (strong, nonatomic) CTDStubTimeSource* timeSource;
 
 // Test fixture
 @property (copy, nonatomic) NSArray* dotPairs;
 @property (strong, nonatomic) id<CTDTrialScript> trialScript;
+
+// Indirect outputs
+@property (strong, nonatomic) NSMutableDictionary* stepDurations;
 
 - (NSArray*)trialCompletionNotificationSenders;
 
@@ -55,10 +67,17 @@
     ];
     self.trialScript = [CTDModel trialScriptWithDotPairs:self.dotPairs];
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
-    self.subject = [[CTDConnectionActivity alloc] initWithTrialScript:self.trialScript
-                                                  trialRenderer:self.trialRenderer
-                                                  colorCellRenderers:nil // TODO
-                                                  trialCompletionNotificationReceiver:self];
+    self.timeSource = [[CTDStubTimeSource alloc] init];
+    self.stepDurations = [[NSMutableDictionary alloc] init];
+    self.subject = [[CTDConnectionActivity alloc]
+                    initWithTrialScript:self.trialScript
+                     trialResultsHolder:self
+                          trialRenderer:self.trialRenderer
+                     colorCellRenderers:nil // TODO
+                             timeSource:self.timeSource
+                    trialCompletionNotificationReceiver:self];
+
+    self.timeSource.systemTime = FIRST_STEP_START_TIME;
     [self.subject beginTrial];
 }
 
@@ -66,6 +85,9 @@
 {
     return [_trialCompletionNotificationSenders copy];
 }
+
+
+#pragma mark CTDNotificationReceiver protocol
 
 - (void)receiveNotification:(NSString*)notificationId
                  fromSender:(id)sender
@@ -75,6 +97,14 @@
     {
         [_trialCompletionNotificationSenders addObject:sender];
     }
+}
+
+
+#pragma mark CTDTrialResults protocol
+
+- (void)setDuration:(double)stepDuration forStepNumber:(NSUInteger)stepNumber
+{
+    self.stepDurations[@(stepNumber)] = @(stepDuration);
 }
 
 @end
@@ -430,6 +460,7 @@
     self.previousStepSecondDotRendering = self.trialRenderer.dotRenderings[1];
     self.previousStepConnectionRendering = self.trialRenderer.connectionRenderings[0];
 
+    self.timeSource.systemTime = FIRST_STEP_END_TIME;
     [self.connectionEditor commitConnectionState];
 }
 
@@ -480,6 +511,12 @@
 {
     assertThat([self.subject editorForCurrentStep],
                is(allOf(notNilValue(), isNot(sameInstance(self.previousStepEditor)), nil)));
+}
+
+- (void)testThatTrialStepDurationHasBeenRecorded
+{
+    assertThat(self.stepDurations, hasCountOf(1));
+    assertThatDouble([self.stepDurations[@(1)] doubleValue], is(closeTo(8.5, 0.01)));
 }
 
 @end
@@ -631,15 +668,26 @@
 @end
 
 @implementation CTDConnectionActivityAfterCompletingFinalStep
+{
+    NSDictionary* _expectedStepDurations;
+}
 
 - (void)setUp
 {
     [super setUp];
     NSUInteger stepCount = [self.dotPairs count];
+    double nextStepDuration = 3.75;
+    NSMutableDictionary* expectedStepDurations = [[NSMutableDictionary alloc] init];
     for (NSUInteger stepIndex = 0; stepIndex < stepCount; stepIndex += 1)
     {
+        expectedStepDurations[@(stepIndex+1)] = @(nextStepDuration);
+        self.timeSource.systemTime += nextStepDuration;
         [self.subject advanceToNextStep];
+
+        nextStepDuration += 1.25; // make each step duration different
     }
+
+    _expectedStepDurations = [expectedStepDurations copy];
 }
 
 //- (void)testThatTrialIsMarkedCompleted
@@ -649,6 +697,11 @@
 - (void)testThatListenersAreNotifiedThatTheTrialIsComplete
 {
     assertThat(self.trialCompletionNotificationSenders, hasItem(self.subject));
+}
+
+- (void)testThatEachStepHasTheCorrectDuration
+{
+    assertThat(self.stepDurations, is(equalTo(_expectedStepDurations)));
 }
 
 @end

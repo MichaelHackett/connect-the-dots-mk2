@@ -4,10 +4,12 @@
 
 #import "CTDColorMapping.h"
 #import "Ports/CTDColorCellRenderer.h"
+#import "Ports/CTDTimeSource.h"
 #import "Ports/CTDTrialRenderer.h"
 
 #import "CTDInteraction/Ports/CTDSelectionEditor.h"
 #import "CTDModel/CTDDotPair.h"
+#import "CTDModel/CTDTrialResults.h"
 #import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
@@ -159,31 +161,65 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 @implementation CTDConnectionActivity
 {
+    // Inputs:
     id<CTDTrialScript> _trialScript;
+    __weak id<CTDTrialResults> _trialResults;
     __weak id<CTDTrialRenderer> _trialRenderer;
+    __weak id<CTDTimeSource> _timeSource;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
+
+    // Activity Model and internal helpers
     CTDColorPicker* _colorPicker;
     id<CTDTrialStep> _trialStep;
     id<CTDTrialStepEditor, CTDColorSelectionObserver> _trialStepEditor;
+    double _stepStartTime;
     NSUInteger _stepIndex;
+
+    void (^_startNextStep)(void);
 }
 
 - (instancetype)initWithTrialScript:(id<CTDTrialScript>)trialScript
-                trialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                colorCellRenderers:(NSDictionary*)colorCellRenderers
-                trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
+                 trialResultsHolder:(id<CTDTrialResults>)trialResultsHolder
+                      trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                 colorCellRenderers:(NSDictionary*)colorCellRenderers
+                         timeSource:(id<CTDTimeSource>)timeSource
+trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver
 {
     self = [super init];
     if (self)
     {
         _trialScript = trialScript;
+        _trialResults = trialResultsHolder;
         _trialRenderer = trialRenderer;
+        _timeSource = timeSource;
         _notificationReceiver = notificationReceiver;
         _colorPicker = [[CTDColorPicker alloc]
                         initWithColorCellRenderers:colorCellRenderers
                             colorSelectionObserver:self];
         _trialStep = nil;
+        _stepStartTime = 0.0;
         _stepIndex = NSUIntegerMax;
+
+        // Shared private code for starting a new trial step.
+        ctd_weakify(self, weakSelf);
+        _startNextStep = ^{
+            ctd_strongify(weakSelf, strongSelf);
+            CTDDotPair* stepDotPair =
+                [strongSelf->_trialScript dotPairs][strongSelf->_stepIndex];
+            strongSelf->_trialStep = [CTDConnectionActivityTrialStep
+                                      trialStepWithDotPair:stepDotPair
+                                      trialRenderer:strongSelf->_trialRenderer
+                                      trialStepStateObserver:strongSelf];
+            strongSelf->_trialStepEditor = [[CTDConnectionActivityTrialStepEditor alloc]
+                                            initWithTrialStep:strongSelf->_trialStep];
+            // Prime selected-color observer with current value.
+            [strongSelf->_trialStepEditor
+                selectedColorChangedTo:strongSelf->_colorPicker.selectedColor];
+
+            // Start step timer.
+            ctd_strongify(strongSelf->_timeSource, strongTimeSource);
+            strongSelf->_stepStartTime = [strongTimeSource systemTime];
+        };
     }
     return self;
 }
@@ -206,18 +242,18 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 - (void)beginTrial
 {
     _stepIndex = 0;
-    _trialStep = [CTDConnectionActivityTrialStep
-                  trialStepWithDotPair:[_trialScript dotPairs][0]
-                         trialRenderer:_trialRenderer
-                trialStepStateObserver:self];
-    _trialStepEditor = [[CTDConnectionActivityTrialStepEditor alloc]
-                        initWithTrialStep:_trialStep];
-    // Prime selected-color observer with current value.
-    [_trialStepEditor selectedColorChangedTo:_colorPicker.selectedColor];
+    _startNextStep();
 }
 
 - (void)advanceToNextStep
 {
+    // Calculate length of time required to complete step; store it in the results.
+    ctd_strongify(_timeSource, timeSource);
+    ctd_strongify(_trialResults, trialResults);
+    double stepEndTime = [timeSource systemTime];
+    double stepDuration = stepEndTime - _stepStartTime;
+    [trialResults setDuration:stepDuration forStepNumber:_stepIndex + 1];
+
     [_trialStep invalidate];
     _trialStep = nil;
 
@@ -231,14 +267,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     }
     else
     {
-        _trialStep = [CTDConnectionActivityTrialStep
-                      trialStepWithDotPair:[_trialScript dotPairs][_stepIndex]
-                             trialRenderer:_trialRenderer
-                    trialStepStateObserver:self];
-        _trialStepEditor = [[CTDConnectionActivityTrialStepEditor alloc]
-                            initWithTrialStep:_trialStep];
-        // Prime selected-color observer with current value.
-        [_trialStepEditor selectedColorChangedTo:_colorPicker.selectedColor];
+        _startNextStep();
     }
 }
 

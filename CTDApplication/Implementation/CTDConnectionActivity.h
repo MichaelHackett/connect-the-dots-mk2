@@ -4,6 +4,8 @@
 
 #import "CTDInteraction/Ports/CTDTrialEditor.h"
 #import "CTDModel/CTDDotColor.h"
+@protocol CTDTimeSource;
+@protocol CTDTrialResults;
 @protocol CTDTrialScript;
 @protocol CTDTrialRenderer;
 @protocol CTDNotificationReceiver;
@@ -39,9 +41,11 @@ FOUNDATION_EXPORT NSString * const CTDTrialCompletedNotification;
 @interface CTDConnectionActivity : NSObject <CTDTrial, CTDTrialEditor>
 
 - (instancetype)initWithTrialScript:(id<CTDTrialScript>)trialScript
-                trialRenderer:(id<CTDTrialRenderer>)trialRenderer
-                colorCellRenderers:(NSDictionary*)colorCellRenderers
-                trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
+                 trialResultsHolder:(id<CTDTrialResults>)trialResultsHolder
+                      trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                 colorCellRenderers:(NSDictionary*)colorCellRenderers
+                         timeSource:(id<CTDTimeSource>)timeSource
+trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationReceiver;
 
 CTD_NO_DEFAULT_INIT
 

@@ -1,6 +1,7 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDAppDelegate.h"
+#import "CTDFoundationTimeSource.h"
 
 #import "CTDApplication/CTDApplication.h"
 #import "CTDApplication/Ports/CTDDisplayController.h"
@@ -20,7 +21,9 @@
         didFinishLaunchingWithOptions:(__unused NSDictionary*)launchOptions
 {
     _displayController = [CTDUIKitBridge displayControllerForApplication:application];
-    _ctdApplication = [[CTDApplication alloc] initWithDisplayController:_displayController];
+    _ctdApplication = [[CTDApplication alloc]
+                       initWithDisplayController:_displayController
+                       timeSource:[[CTDFoundationTimeSource alloc] init]];
     [_ctdApplication start];
 
     return YES;
