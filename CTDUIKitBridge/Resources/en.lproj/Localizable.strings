@@ -1,0 +1,4 @@
+/* Copyright 2015 Michael Hackett. All rights reserved. */
+
+/* Trial time report at completion of trial. */
+"TrialCompletion" = "Time = %@";

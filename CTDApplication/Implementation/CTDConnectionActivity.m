@@ -251,7 +251,7 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     ctd_strongify(_timeSource, timeSource);
     ctd_strongify(_trialResults, trialResults);
     double stepEndTime = [timeSource systemTime];
-    double stepDuration = stepEndTime - _stepStartTime;
+    NSTimeInterval stepDuration = (NSTimeInterval)(stepEndTime - _stepStartTime);
     [trialResults setDuration:stepDuration forStepNumber:_stepIndex + 1];
 
     [_trialStep invalidate];

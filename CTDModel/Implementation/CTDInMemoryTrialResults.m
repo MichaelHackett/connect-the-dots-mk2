@@ -24,4 +24,14 @@
     _stepDurations[@(stepNumber)] = @(stepDuration);
 }
 
+- (NSTimeInterval)trialDuration
+{
+    double trialDuration = 0.0;
+    for (NSNumber* stepDuration in [_stepDurations allValues])
+    {
+        trialDuration += [stepDuration doubleValue];
+    }
+    return (NSTimeInterval)trialDuration;
+}
+
 @end

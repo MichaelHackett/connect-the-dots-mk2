@@ -8,6 +8,7 @@
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
+#import "CTDModel/CTDTrialResults.h"
 #import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
@@ -87,7 +88,11 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
     {
-        [_connectionScene displayTrialCompletionMessage];
+        int trialDurationSeconds = (int)round((double)[_trialResults trialDuration]);
+        NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",
+                                trialDurationSeconds / 60,
+                                trialDurationSeconds % 60];
+        [_connectionScene displayTrialCompletionMessageWithTimeString:timeString];
 
         ctd_weakify(self, weakSelf);
         _displayTimer = [[CTDRunLoopTimer alloc]

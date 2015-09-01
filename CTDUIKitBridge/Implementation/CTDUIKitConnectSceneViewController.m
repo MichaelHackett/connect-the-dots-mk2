@@ -2,6 +2,7 @@
 
 #import "CTDUIKitConnectSceneViewController.h"
 
+#import "CTDStrings.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
 
@@ -136,10 +137,13 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     return _colorCellRendererMap;
 }
 
-- (void)displayTrialCompletionMessage
+- (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString
 {
-    ctd_strongify(self.trialCompletionMessageLabel, completionMessageLabel);
-    completionMessageLabel.hidden = NO;
+    ctd_strongify(self.trialCompletionMessageView, completionMessageView);
+    ctd_strongify(self.trialTimeLabel, trialTimeLabel);
+    trialTimeLabel.text =
+        [NSString stringWithFormat:CTDString(@"TrialCompletion"), timeString];
+    completionMessageView.hidden = NO;
 
     // disable touch input while message visible
     self.view.userInteractionEnabled = NO;
@@ -147,8 +151,8 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 
 - (void)hideTrialCompletionMessage
 {
-    ctd_strongify(self.trialCompletionMessageLabel, completionMessageLabel);
-    completionMessageLabel.hidden = YES;
+    ctd_strongify(self.trialCompletionMessageView, completionMessageView);
+    completionMessageView.hidden = YES;
 
     // reenable touch input
     self.view.userInteractionEnabled = YES;

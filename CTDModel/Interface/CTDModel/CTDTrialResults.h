@@ -6,7 +6,9 @@
 
 @protocol CTDTrialResults <NSObject>
 
-// stepDuration is in seconds; stepNumber is 1-based
-- (void)setDuration:(double)stepDuration forStepNumber:(NSUInteger)stepNumber;
+// stepNumber is 1-based
+- (void)setDuration:(NSTimeInterval)stepDuration forStepNumber:(NSUInteger)stepNumber;
+
+- (NSTimeInterval)trialDuration;
 
 @end
