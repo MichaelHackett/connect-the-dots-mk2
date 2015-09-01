@@ -41,9 +41,6 @@
 - (id)startingDotId;
 - (id)endingDotId;
 
-// Remove editor interface and prepare to be deallocated.
-- (void)invalidate;
-
 @end
 
 

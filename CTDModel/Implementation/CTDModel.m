@@ -3,6 +3,7 @@
 #import "CTDModel.h"
 
 #import "CTDDotPair.h"
+#import "CTDInMemoryTrialResults.h"
 #import "CTDInMemoryTrialScript.h"
 
 
@@ -21,6 +22,11 @@
 + (id<CTDTrialScript>)trialScriptWithDotPairs:(NSArray*)dotPairs
 {
     return [[CTDInMemoryTrialScript alloc] initWithDotPairs:dotPairs];
+}
+
++ (id<CTDTrialResults>)trialResultsHolder
+{
+    return [[CTDInMemoryTrialResults alloc] init];
 }
 
 @end

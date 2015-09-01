@@ -6,6 +6,7 @@
 #import "CTDDotColor.h"
 @class CTDDotPair;
 @class CTDPoint;
+@protocol CTDTrialResults;
 @protocol CTDTrialScript;
 
 
@@ -17,5 +18,7 @@
                     endPosition:(CTDPoint*)endPosition;
 
 + (id<CTDTrialScript>)trialScriptWithDotPairs:(NSArray*)dotPairs;  // array of CTDDotPairs
+
++ (id<CTDTrialResults>)trialResultsHolder;
 
 @end
