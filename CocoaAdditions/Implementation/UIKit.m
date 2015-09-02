@@ -4,6 +4,11 @@
 
 @implementation UIKit
 
++ (UIWindow*)fullScreenWindow
+{
+    return [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
+
 + (UIWindow*)fullScreenWindowWithRootViewController:(UIViewController*)rootViewController
                                     backgroundColor:(UIColor*)backgroundColor
 {

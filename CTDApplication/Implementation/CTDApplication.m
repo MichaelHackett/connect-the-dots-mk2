@@ -37,6 +37,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     id<CTDDisplayController> _displayController;
     id<CTDTimeSource> _timeSource;
+    id<CTDConfigurationScene> _configurationScene;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
     id<CTDTrialResults> _trialResults;
@@ -50,6 +51,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     if (self) {
         _displayController = displayController;
         _timeSource = timeSource;
+        _configurationScene = nil;
         _connectionScene = nil;
         _connectionActivity = nil;
         _trialResults = nil;
@@ -63,6 +65,19 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 - (void)start
 {
+    [self displayConfigurationScreen];
+}
+
+- (void)displayConfigurationScreen
+{
+    _configurationScene = [_displayController configurationScene];
+}
+
+// TODO: Handle completion of configuration, release scene, and startTrial
+
+
+- (void)startTrial
+{
     // TODO: Replace with data loaded from disk
     id<CTDTrialScript> trialScript = [CTDModel trialScriptWithDotPairs:@[
         step(CTDDotColor_Green, dot(500,170), dot(200,400)),
@@ -70,7 +85,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     ]];
     _trialResults = [CTDModel trialResultsHolder];
 
-    _connectionScene = [_displayController initialScene];
+    _connectionScene = [_displayController connectScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
                            trialResultsHolder:_trialResults
