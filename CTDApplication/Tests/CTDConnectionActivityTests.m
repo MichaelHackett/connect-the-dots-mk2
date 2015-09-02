@@ -509,12 +509,6 @@ static double FIRST_STEP_END_TIME =   100008.5;
     assertThat(self.trialRenderer.connectionRenderings, hasCountOf(0));
 }
 
-- (void)testThatTheTrialEditorHasNewStepEditor
-{
-    assertThat([self.subject editorForCurrentStep],
-               is(allOf(notNilValue(), isNot(sameInstance(self.previousStepEditor)), nil)));
-}
-
 - (void)testThatTrialStepDurationHasBeenRecorded
 {
     assertThat(self.stepDurations, hasCountOf(1));

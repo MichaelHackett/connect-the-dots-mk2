@@ -89,15 +89,6 @@ CTD_NO_DEFAULT_INIT
 @end
 
 
-@interface CTDConnectionActivityTrialStepEditor : NSObject <CTDTrialStepEditor,
-                                                            CTDColorSelectionObserver>
-
-- (instancetype)initWithTrialStep:(id<CTDTrialStep>)trialStep;
-CTD_NO_DEFAULT_INIT
-
-@end
-
-
 @interface CTDColorSelectionCell : NSObject
 
 @property (assign, nonatomic, getter=isSelected) BOOL selected;
@@ -154,7 +145,9 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
 
 
 
-@interface CTDConnectionActivity () <CTDTrialStepStateObserver, CTDColorSelectionObserver>
+@interface CTDConnectionActivity () <CTDTrialStepEditor,
+                                     CTDTrialStepStateObserver,
+                                     CTDColorSelectionObserver>
 @end
 
 
@@ -171,7 +164,6 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     // Activity Model and internal helpers
     CTDColorPicker* _colorPicker;
     id<CTDTrialStep> _trialStep;
-    id<CTDTrialStepEditor, CTDColorSelectionObserver> _trialStepEditor;
     double _stepStartTime;
     NSUInteger _stepIndex;
 
@@ -210,11 +202,6 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
                                       trialStepWithDotPair:stepDotPair
                                       trialRenderer:strongSelf->_trialRenderer
                                       trialStepStateObserver:strongSelf];
-            strongSelf->_trialStepEditor = [[CTDConnectionActivityTrialStepEditor alloc]
-                                            initWithTrialStep:strongSelf->_trialStep];
-            // Prime selected-color observer with current value.
-            [strongSelf->_trialStepEditor
-                selectedColorChangedTo:strongSelf->_colorPicker.selectedColor];
 
             // Start step timer.
             ctd_strongify(strongSelf->_timeSource, strongTimeSource);
@@ -273,12 +260,39 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
 
 - (id<CTDTrialStepEditor>)editorForCurrentStep
 {
-    return _trialStepEditor;
+    return self;
 }
 
 - (id<CTDSelectionRenderer>)editorForColorSelection
 {
     return [_colorPicker editorForColorSelection];
+}
+
+
+
+#pragma mark CTDTrialStepEditor protocol
+
+
+- (BOOL)isConnectionAllowed
+{
+    return [_colorPicker selectedColor] == [_trialStep dotPairColor];
+}
+
+- (id<CTDTrialStepConnectionEditor>)editorForNewConnection
+{
+    if (![self isConnectionAllowed]) { return nil; }
+    return [[CTDConnectionActivityDotConnectionEditor alloc]
+            initWithDotConnection:[_trialStep newConnection]];
+}
+
+- (id)startingDotId
+{
+    return @1;
+}
+
+- (id)endingDotId
+{
+    return @2;
 }
 
 
@@ -293,9 +307,11 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
 
 #pragma mark CTDColorSelectionObserver protocol
 
-- (void)selectedColorChangedTo:(CTDDotColor)newColor
+- (void)selectedColorChangedTo:(__unused CTDDotColor)newColor
 {
-    [_trialStepEditor selectedColorChangedTo:newColor];
+    // TODO: May want to replace ColorPicker's getter with a locally-stored
+    // copy of the value here, and may want to notify any active Interactors,
+    // so that a connection could start if a touch is already on a target dot.
 }
 
 @end
@@ -414,67 +430,6 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     [_startingDotRenderer hideSelectionIndicator];
     [_endingDotRenderer setVisible:NO];
     [_connectionRenderer setVisible:NO];
-}
-
-@end
-
-
-
-
-@implementation CTDConnectionActivityTrialStepEditor
-{
-    id<CTDTrialStep> _trialStep;
-    CTDDotColor _selectedColor;
-}
-
-- (instancetype)initWithTrialStep:(id<CTDTrialStep>)trialStep
-{
-    self = [super init];
-    if (self)
-    {
-        _trialStep = trialStep;
-        _selectedColor = CTDDotColor_None;
-    }
-    return self;
-}
-
-- (instancetype)init CTD_BLOCK_PARENT_METHOD;
-
-
-
-#pragma mark CTDTrialStepEditor protocol
-
-
-- (BOOL)isConnectionAllowed
-{
-    return _selectedColor == [_trialStep dotPairColor];
-}
-
-- (id<CTDTrialStepConnectionEditor>)editorForNewConnection
-{
-    if (![self isConnectionAllowed]) { return nil; }
-    return [[CTDConnectionActivityDotConnectionEditor alloc]
-            initWithDotConnection:[_trialStep newConnection]];
-}
-
-- (id)startingDotId
-{
-    return @1;
-}
-
-- (id)endingDotId
-{
-    return @2;
-}
-
-
-
-#pragma mark CTDColorSelectionObserver protocol
-
-
-- (void)selectedColorChangedTo:(CTDDotColor)newColor
-{
-    _selectedColor = newColor;
 }
 
 @end
