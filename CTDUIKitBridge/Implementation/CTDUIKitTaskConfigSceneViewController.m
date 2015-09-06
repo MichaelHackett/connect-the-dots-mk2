@@ -1,14 +1,15 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDUIKitConfigSceneViewController.h"
+#import "CTDUIKitTaskConfigSceneViewController.h"
 
 
 
-@interface CTDUIKitConfigSceneViewController ()
+
+@interface CTDUIKitTaskConfigSceneViewController ()
 @end
 
 
-@implementation CTDUIKitConfigSceneViewController
+@implementation CTDUIKitTaskConfigSceneViewController
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 //{

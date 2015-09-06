@@ -37,7 +37,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     id<CTDDisplayController> _displayController;
     id<CTDTimeSource> _timeSource;
-    id<CTDConfigurationScene> _configurationScene;
+    id<CTDTaskConfigurationSceneRenderer> _configurationSceneRenderer;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
     id<CTDTrialResults> _trialResults;
@@ -51,7 +51,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     if (self) {
         _displayController = displayController;
         _timeSource = timeSource;
-        _configurationScene = nil;
+        _configurationSceneRenderer = nil;
         _connectionScene = nil;
         _connectionActivity = nil;
         _trialResults = nil;
@@ -70,7 +70,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 - (void)displayConfigurationScreen
 {
-    _configurationScene = [_displayController configurationScene];
+    _configurationSceneRenderer = [_displayController taskConfigurationSceneRenderer];
 }
 
 // TODO: Handle completion of configuration, release scene, and startTrial

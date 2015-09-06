@@ -3,17 +3,17 @@
 #import "CTDUIKitWhatzit.h"
 
 #import "CTDUIKitColorPalette.h"
-#import "CTDUIKitConfigSceneViewController.h"
 #import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
+#import "CTDUIKitTaskConfigSceneViewController.h"
 #import "CTDApplication/Ports/CTDTrialRenderer.h" // for CTDPaletteColor_xxx
 #import "CocoaAdditions/UIKit.h"
 
 
 
 // NIB names
-static NSString* const kCTDConfigurationSceneNibName = @"CTDUIKitConfigScene";
 static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
+static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigScene";
 
 
 
@@ -49,11 +49,11 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     return self;
 }
 
-- (id<CTDConfigurationScene>)configurationScene
+- (id<CTDTaskConfigurationSceneRenderer>)taskConfigurationSceneRenderer
 {
-    CTDUIKitConfigSceneViewController* configVC =
-        [[CTDUIKitConfigSceneViewController alloc]
-         initWithNibName:kCTDConfigurationSceneNibName
+    CTDUIKitTaskConfigSceneViewController* configVC =
+        [[CTDUIKitTaskConfigSceneViewController alloc]
+         initWithNibName:kCTDTaskConfigurationSceneNibName
                   bundle:nil];
 
     _mainWindow.rootViewController = configVC;

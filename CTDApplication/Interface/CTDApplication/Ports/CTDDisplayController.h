@@ -4,13 +4,13 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-@protocol CTDConfigurationScene;
 @protocol CTDConnectScene;
+@protocol CTDTaskConfigurationSceneRenderer;
 
 
 @protocol CTDDisplayController <NSObject>
 
-- (id<CTDConfigurationScene>)configurationScene;
+- (id<CTDTaskConfigurationSceneRenderer>)taskConfigurationSceneRenderer;
 - (id<CTDConnectScene>)connectScene;
 
 @end

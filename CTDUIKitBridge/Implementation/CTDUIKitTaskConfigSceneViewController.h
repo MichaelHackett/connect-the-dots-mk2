@@ -1,14 +1,14 @@
-// CTDUIKitConfigSceneViewController:
-//     Controller for the trial configuration scene.
+// CTDUIKitTaskConfigSceneViewController:
+//     Controller for the task configuration scene.
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDApplication/Ports/CTDConfigurationScene.h"
+#import "CTDApplication/Ports/CTDTaskConfigurationSceneRenderer.h"
 
 
 
-@interface CTDUIKitConfigSceneViewController
-    : UIViewController <CTDConfigurationScene>
+@interface CTDUIKitTaskConfigSceneViewController
+    : UIViewController <CTDTaskConfigurationSceneRenderer>
 
 // IB Outlets
 @property (weak, nonatomic) IBOutlet UITextField *participantIdField;
