@@ -8,6 +8,7 @@
 
 @interface UIKit : NSObject
 
++ (UIWindow*)fullScreenWindow;
 + (UIWindow*)fullScreenWindowWithRootViewController:(UIViewController*)rootViewController
                                     backgroundColor:(UIColor*)color;
 

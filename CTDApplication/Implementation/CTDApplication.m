@@ -3,8 +3,13 @@
 #import "CTDApplication.h"
 
 #import "CTDConnectionActivity.h"
+#import "CTDTaskConfiguration.h"
+#import "CTDTaskConfigurationActivity.h"
+#import "CTDTaskConfigurationScene.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
+#import "Ports/CTDTaskConfigurationSceneInputSource.h"
+#import "Ports/CTDTaskConfigurationSceneRenderer.h"
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
@@ -27,8 +32,8 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 
 
-// TODO: Split to helper class, so as to avoid having private methods?
-@interface CTDApplication () <CTDNotificationReceiver>
+// TODO: Split into helper class, so as to avoid having private methods?
+@interface CTDApplication () <CTDNotificationReceiver, CTDTaskConfiguration>
 @end
 
 
@@ -37,10 +42,18 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     id<CTDDisplayController> _displayController;
     id<CTDTimeSource> _timeSource;
+    CTDTaskConfigurationActivity* _configurationActivity;
+    CTDTaskConfigurationScene* _configurationScene;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
     id<CTDTrialResults> _trialResults;
     CTDRunLoopTimer* _displayTimer;
+
+    // Task configuration
+    NSUInteger _participantId;
+    CTDHand _preferredHand;
+    CTDInterfaceStyle _interfaceStyle;
+    NSUInteger _sequenceNumber;
 }
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
@@ -50,10 +63,17 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     if (self) {
         _displayController = displayController;
         _timeSource = timeSource;
+        _configurationScene = nil;
+        _configurationActivity = nil;
         _connectionScene = nil;
         _connectionActivity = nil;
         _trialResults = nil;
         _displayTimer = nil;
+
+        _participantId = 0;
+        _preferredHand = CTDRightHand;
+        _interfaceStyle = CTDModalInterfaceStyle;
+        _sequenceNumber = 1;
     }
     return self;
 }
@@ -63,6 +83,32 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 - (void)start
 {
+    [self displayConfigurationScreen];
+}
+
+- (void)displayConfigurationScreen
+{
+    _configurationScene = [[CTDTaskConfigurationScene alloc] init];
+    _configurationActivity = [[CTDTaskConfigurationActivity alloc] init];
+
+    id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>
+        sceneBridge = [_displayController taskConfigurationSceneBridge];
+    [sceneBridge setTaskConfigurationSceneInputRouter:_configurationScene];
+    _configurationScene.sceneRenderer = sceneBridge;
+    _configurationScene.configurationFormEditor = _configurationActivity;
+
+    _configurationActivity.taskConfiguration = self;
+    _configurationActivity.taskConfigurationForm = _configurationScene;
+    _configurationActivity.notificationReceiver = self;
+
+    [_configurationActivity resetForm];
+}
+
+// TODO: Handle completion of configuration, release scene, and startTrial
+
+
+- (void)startTrial
+{
     // TODO: Replace with data loaded from disk
     id<CTDTrialScript> trialScript = [CTDModel trialScriptWithDotPairs:@[
         step(CTDDotColor_Green, dot(500,170), dot(200,400)),
@@ -70,7 +116,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     ]];
     _trialResults = [CTDModel trialResultsHolder];
 
-    _connectionScene = [_displayController initialScene];
+    _connectionScene = [_displayController connectScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
                            trialResultsHolder:_trialResults
@@ -86,7 +132,13 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
                  fromSender:(id)sender
                    withInfo:(__unused NSDictionary*)info
 {
-    if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
+    if ([notificationId isEqualToString:CTDTaskConfigurationCompletedNotification])
+    {
+        [self startTrial];
+    }
+
+    // TODO: remove sender check?
+    else if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
     {
         int trialDurationSeconds = (int)round((double)[_trialResults trialDuration]);
         NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",
@@ -104,6 +156,31 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
             [strongSelf->_connectionScene hideTrialCompletionMessage];
         }];
     }
+}
+
+
+
+#pragma mark CTDTaskConfiguration protocol
+
+
+- (void)setParticipantId:(NSUInteger)participantId
+{
+    _participantId = participantId;
+}
+
+- (void)setPreferredHand:(CTDHand)preferredHand
+{
+    _preferredHand = preferredHand;
+}
+
+- (void)setInterfaceStyle:(CTDInterfaceStyle)interfaceStyle
+{
+    _interfaceStyle = interfaceStyle;
+}
+
+- (void)setSequenceNumber:(NSUInteger)sequenceNumber
+{
+    _sequenceNumber = sequenceNumber;
 }
 
 @end

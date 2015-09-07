@@ -5,13 +5,15 @@
 #import "CTDUIKitColorPalette.h"
 #import "CTDUIKitConnectSceneViewController.h"
 #import "CTDUIKitDrawingConfig.h"
-#import "CTDApplication/Ports/CTDTrialRenderer.h"
+#import "CTDUIKitTaskConfigSceneViewController.h"
+#import "CTDApplication/Ports/CTDTrialRenderer.h" // for CTDPaletteColor_xxx
 #import "CocoaAdditions/UIKit.h"
 
 
 
 // NIB names
 static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
+static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigScene";
 
 
 
@@ -25,9 +27,13 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
 - (instancetype)initWithApplication:(UIApplication*)application
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _application = application;
-        _mainWindow = nil;
+        application.statusBarHidden = YES;
+        _mainWindow = [UIKit fullScreenWindow];
+        _mainWindow.backgroundColor = [UIColor whiteColor];
+        [_mainWindow makeKeyAndVisible];
 
         CTDUIKitDrawingConfig* drawingConfig = [[CTDUIKitDrawingConfig alloc] init];
         // TODO: Load these values from a plist or XML file.
@@ -43,22 +49,20 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
     return self;
 }
 
-- (id<CTDConnectScene>)initialScene
+- (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
+      taskConfigurationSceneBridge
 {
-    UIApplication* application = _application;
-    application.statusBarHidden = YES;
+    CTDUIKitTaskConfigSceneViewController* configVC =
+        [[CTDUIKitTaskConfigSceneViewController alloc]
+         initWithNibName:kCTDTaskConfigurationSceneNibName
+                  bundle:nil];
 
-    CTDUIKitConnectSceneViewController* connectScene = [self connectScene];
-    _mainWindow = [UIKit fullScreenWindowWithRootViewController:connectScene
-                                                backgroundColor:[UIColor whiteColor]];
+    _mainWindow.rootViewController = configVC;
 
-    // Lastly, make the initial scene visible.
-    [_mainWindow makeKeyAndVisible];
-
-    return connectScene;
+    return configVC;
 }
 
-- (CTDUIKitConnectSceneViewController*)connectScene
+- (id<CTDConnectScene>)connectScene
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]
@@ -66,6 +70,7 @@ static NSString* const kCTDConnectSceneNibName = @"CTDUIKitConnectScene";
                   bundle:nil];
     connectVC.colorPalette = _drawingConfig.colorPalette;
 
+    _mainWindow.rootViewController = connectVC;
     [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand
 
     return connectVC;

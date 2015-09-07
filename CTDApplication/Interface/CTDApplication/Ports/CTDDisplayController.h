@@ -5,10 +5,14 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 @protocol CTDConnectScene;
+@protocol CTDTaskConfigurationSceneInputSource;
+@protocol CTDTaskConfigurationSceneRenderer;
 
 
 @protocol CTDDisplayController <NSObject>
 
-- (id<CTDConnectScene>)initialScene;
+- (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
+      taskConfigurationSceneBridge;
+- (id<CTDConnectScene>)connectScene;
 
 @end
