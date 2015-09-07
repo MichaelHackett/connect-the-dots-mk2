@@ -12,6 +12,12 @@
 //
 
 @protocol CTDTaskConfigurationForm <NSObject>
+
+- (void)setFormParticipantId:(NSUInteger)participantId;
+- (void)setFormPreferredHand:(NSNumber*)preferredHand;  // nil or CTDHand (wrapped)
+- (void)setFormInterfaceStyle:(NSNumber*)interfaceStyle; // nil or CTDInterfaceStyle (wrapped)
+- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber;
+
 @end
 
 
@@ -19,6 +25,8 @@
 // Editor interfaces
 
 @protocol CTDTaskConfigurationFormEditor <NSObject>
+// Reset or initialize values in form to those from the model configuration.
+- (void)resetForm;
 @end
 
 

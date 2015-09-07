@@ -2,6 +2,41 @@
 
 #import "CTDTaskConfigurationScene.h"
 
+#import "Ports/CTDTaskConfigurationSceneRenderer.h"
+
+
+
 @implementation CTDTaskConfigurationScene
+
+
+#pragma mark CTDTaskConfigurationForm protocol
+
+- (void)setFormParticipantId:(NSUInteger)participantId
+{
+    ctd_strongify(self.sceneRenderer, sceneRenderer);
+    [sceneRenderer setParticipantIdValue:@(participantId)];
+    [sceneRenderer setParticipantIdString:
+        [NSString stringWithFormat:@"%lu", (unsigned long)participantId]];
+}
+
+- (void)setFormPreferredHand:(NSNumber*)preferredHand
+{
+    ctd_strongify(self.sceneRenderer, sceneRenderer);
+    [sceneRenderer setPreferredHandIndex:preferredHand]; // 0-based index matches CTDHand values
+}
+
+- (void)setFormInterfaceStyle:(NSNumber*)interfaceStyle
+{
+    ctd_strongify(self.sceneRenderer, sceneRenderer);
+    [sceneRenderer setInterfaceStyleIndex:interfaceStyle]; // 0-based index matches CTDInterfaceStyle values
+}
+
+- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber
+{
+    ctd_strongify(self.sceneRenderer, sceneRenderer);
+    [sceneRenderer setSequenceNumberValue:@(sequenceNumber)];
+    [sceneRenderer setSequenceNumberString:
+        [NSString stringWithFormat:@"%lu", (unsigned long)sequenceNumber]];
+}
 
 @end

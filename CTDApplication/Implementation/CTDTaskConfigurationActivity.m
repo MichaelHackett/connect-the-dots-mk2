@@ -2,6 +2,7 @@
 
 #import "CTDTaskConfigurationActivity.h"
 
+#import "CTDApplicationDefaults.h"
 #import "CTDTaskConfiguration.h"
 
 
@@ -11,5 +12,14 @@
 
 #pragma mark CTDTaskConfigurationFormEditor protocol
 
+
+- (void)resetForm
+{
+    ctd_strongify(self.taskConfigurationForm, form);
+    [form setFormParticipantId:[CTDApplicationDefaults taskConfigurationFormDefaultParticipantId]];
+    [form setFormPreferredHand:[CTDApplicationDefaults taskConfigurationFormDefaultPreferredHand]];
+    [form setFormInterfaceStyle:[CTDApplicationDefaults taskConfigurationFormDefaultInterfaceStyle]];
+    [form setFormSequenceNumber:[CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber]];
+}
 
 @end

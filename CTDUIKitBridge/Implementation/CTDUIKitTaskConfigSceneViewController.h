@@ -11,9 +11,11 @@
     : UIViewController <CTDTaskConfigurationSceneRenderer>
 
 // IB Outlets
-@property (weak, nonatomic) IBOutlet UITextField *participantIdField;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *preferredHandPicker;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *interfaceStylePicker;
-@property (weak, nonatomic) IBOutlet UITextField *sequenceIdField;
+@property (weak, nonatomic) IBOutlet UIStepper* participantIdStepper;
+@property (weak, nonatomic) IBOutlet UITextField* participantIdField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl* preferredHandPicker;
+@property (weak, nonatomic) IBOutlet UISegmentedControl* interfaceStylePicker;
+@property (weak, nonatomic) IBOutlet UIStepper* sequenceIdStepper;
+@property (weak, nonatomic) IBOutlet UITextField* sequenceIdField;
 
 @end

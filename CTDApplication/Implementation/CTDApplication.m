@@ -94,6 +94,8 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
     _configurationActivity.taskConfiguration = self;
     _configurationActivity.taskConfigurationForm = _configurationScene;
+
+    [_configurationActivity resetForm];
 }
 
 // TODO: Handle completion of configuration, release scene, and startTrial

@@ -410,6 +410,22 @@
 					</object>
 					<string key="id">B90-56-QsK</string>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">participantIdStepper</string>
+						<reference key="source" ref="608423063"/>
+						<reference key="destination" ref="888071776"/>
+					</object>
+					<string key="id">QRR-8y-a0Y</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sequenceIdStepper</string>
+						<reference key="source" ref="608423063"/>
+						<reference key="destination" ref="997443700"/>
+					</object>
+					<string key="id">FN4-Da-Zzm</string>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -544,22 +560,13 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CTDUIKitTaskConfigSceneViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">beginButtonPressed</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">beginButtonPressed</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">beginButtonPressed</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="interfaceStylePicker">UISegmentedControl</string>
 						<string key="participantIdField">UITextField</string>
+						<string key="participantIdStepper">UIStepper</string>
 						<string key="preferredHandPicker">UISegmentedControl</string>
 						<string key="sequenceIdField">UITextField</string>
+						<string key="sequenceIdStepper">UIStepper</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="interfaceStylePicker">
@@ -570,6 +577,10 @@
 							<string key="name">participantIdField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="participantIdStepper">
+							<string key="name">participantIdStepper</string>
+							<string key="candidateClassName">UIStepper</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="preferredHandPicker">
 							<string key="name">preferredHandPicker</string>
 							<string key="candidateClassName">UISegmentedControl</string>
@@ -577,6 +588,10 @@
 						<object class="IBToOneOutletInfo" key="sequenceIdField">
 							<string key="name">sequenceIdField</string>
 							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sequenceIdStepper">
+							<string key="name">sequenceIdStepper</string>
+							<string key="candidateClassName">UIStepper</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
