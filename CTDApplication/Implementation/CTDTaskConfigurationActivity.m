@@ -48,4 +48,10 @@ NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurat
     [form setFormPreferredHand:newPreferredHand];
 }
 
+- (void)changeInterfaceStyleTo:(NSNumber*)newInterfaceStyle
+{
+    ctd_strongify(self.taskConfigurationForm, form);
+    [form setFormInterfaceStyle:newInterfaceStyle];
+}
+
 @end

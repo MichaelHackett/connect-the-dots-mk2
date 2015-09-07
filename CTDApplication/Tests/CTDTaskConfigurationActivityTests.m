@@ -90,6 +90,15 @@
     assertThat(self.formPreferredHand, is(nilValue()));
 }
 
+- (void)testThatInterfaceStyleChangeRequestCausesFormToBeUpdated
+{
+    self.formInterfaceStyle = nil;
+    [self.subject changeInterfaceStyleTo:@2];
+    assertThat(self.formInterfaceStyle, is(equalTo(@2)));
+    [self.subject changeInterfaceStyleTo:nil];
+    assertThat(self.formInterfaceStyle, is(nilValue()));
+}
+
 // TODO: Range checking; but current UI prevents out-of-range values, so ignoring it for now.
 
 @end

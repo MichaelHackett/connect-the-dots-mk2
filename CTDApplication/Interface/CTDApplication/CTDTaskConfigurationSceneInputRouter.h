@@ -8,6 +8,7 @@
 
 - (void)participantIdChangedTo:(NSUInteger)newParticipantId;
 - (void)preferredHandChangedTo:(NSNumber*)newHandIndex;
+- (void)interfaceStyleChangedTo:(NSNumber*)newStyleIndex;
 
 - (void)formSubmissionButtonPressed;
 

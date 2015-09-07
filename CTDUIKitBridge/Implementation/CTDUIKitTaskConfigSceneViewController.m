@@ -70,6 +70,18 @@
     [inputRouter preferredHandChangedTo:newHandIndex];
 }
 
+- (IBAction)interfaceStyleSelectionChanged
+{
+    ctd_strongify(self.interfaceStylePicker, picker);
+    NSInteger selectedIndex = picker.selectedSegmentIndex;
+    NSNumber* newStyleIndex = selectedIndex == UISegmentedControlNoSegment
+                            ? nil  // no selection
+                            : [NSNumber numberWithUnsignedInteger:(NSUInteger)selectedIndex];
+
+    ctd_strongify(_inputRouter, inputRouter);
+    [inputRouter interfaceStyleChangedTo:newStyleIndex];
+}
+
 - (IBAction)beginButtonPressed
 {
     ctd_strongify(_inputRouter, inputRouter);

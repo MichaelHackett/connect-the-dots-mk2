@@ -111,6 +111,7 @@
 // Indirect outputs (Form Editor)
 @property (assign, nonatomic) NSUInteger participantId;
 @property (copy, nonatomic)   NSNumber* preferredHand;
+@property (copy, nonatomic)   NSNumber* interfaceStyle;
 @property (assign, nonatomic) BOOL configurationAccepted;
 
 @end
@@ -141,6 +142,11 @@
 - (void)changePreferredHandTo:(NSNumber*)newPreferredHand
 {
     self.preferredHand = newPreferredHand;
+}
+
+- (void)changeInterfaceStyleTo:(NSNumber*)newInterfaceStyle
+{
+    self.interfaceStyle = newInterfaceStyle;
 }
 
 @end
@@ -207,6 +213,28 @@
 - (void)testThatItAsksEditorToChangeThePreferredHandIndexInTheForm
 {
     assertThat(self.preferredHand, is(equalTo(@1)));
+}
+
+@end
+
+
+
+
+@interface CTDTaskConfigurationSceneWhenInterfaceStyleChanges
+    : CTDTaskConfigurationSceneInputRouterTestCase
+@end
+@implementation CTDTaskConfigurationSceneWhenInterfaceStyleChanges
+
+- (void)setUp
+{
+    [super setUp];
+    self.interfaceStyle = nil;
+    [self.subject interfaceStyleChangedTo:@2];
+}
+
+- (void)testThatItAsksEditorToChangeThePreferredHandIndexInTheForm
+{
+    assertThat(self.interfaceStyle, is(equalTo(@2)));
 }
 
 @end

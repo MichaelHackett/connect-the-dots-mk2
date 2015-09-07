@@ -57,6 +57,12 @@
     [configurationFormEditor changePreferredHandTo:newHandIndex];
 }
 
+- (void)interfaceStyleChangedTo:(NSNumber*)newStyleIndex
+{
+    ctd_strongify(self.configurationFormEditor, configurationFormEditor);
+    [configurationFormEditor changeInterfaceStyleTo:newStyleIndex];
+}
+
 - (void)formSubmissionButtonPressed
 {
     ctd_strongify(self.configurationFormEditor, configurationFormEditor);

@@ -20,4 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIStepper* sequenceIdStepper;
 @property (weak, nonatomic) IBOutlet UITextField* sequenceIdField;
 
+// IB Actions
+- (IBAction)participantIdChangedByStepper;
+- (IBAction)preferredHandSelectionChanged;
+- (IBAction)interfaceStyleSelectionChanged;
+- (IBAction)beginButtonPressed;
+
 @end
