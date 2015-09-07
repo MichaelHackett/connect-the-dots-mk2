@@ -18,7 +18,7 @@
 @property (assign, nonatomic) NSUInteger formParticipantId;
 @property (copy, nonatomic) NSNumber* formPreferredHand;
 @property (copy, nonatomic) NSNumber* formInterfaceStyle;
-@property (assign, nonatomic) NSUInteger formSequenceNumber;
+//@property (assign, nonatomic) NSUInteger formSequenceNumber;
 
 // Collaborators:
 @property (strong, nonatomic) CTDNotificationRecorder* notificationRecorder;
@@ -44,7 +44,7 @@
     self.formParticipantId = 99;
     self.formPreferredHand = @99;
     self.formInterfaceStyle = @99;
-    self.formSequenceNumber = 99;
+//    self.formSequenceNumber = 99;
 
     // exercise
     [self.subject resetForm];
@@ -53,14 +53,14 @@
     NSUInteger defaultParticipantId = [CTDApplicationDefaults taskConfigurationFormDefaultParticipantId];
     NSNumber* defaultPreferredHand = [CTDApplicationDefaults taskConfigurationFormDefaultPreferredHand];
     NSNumber* defaultInterfaceStyle = [CTDApplicationDefaults taskConfigurationFormDefaultInterfaceStyle];
-    NSUInteger defaultSequenceNumber = [CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber];
+//    NSUInteger defaultSequenceNumber = [CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber];
 
     assertThatUnsignedInteger(self.formParticipantId,
                               is(equalToUnsignedInteger(defaultParticipantId)));
     assertThat(self.formPreferredHand, is(equalTo(defaultPreferredHand)));
     assertThat(self.formInterfaceStyle, is(equalTo(defaultInterfaceStyle)));
-    assertThatUnsignedInteger(self.formSequenceNumber,
-                              is(equalToUnsignedInteger(defaultSequenceNumber)));
+//    assertThatUnsignedInteger(self.formSequenceNumber,
+//                              is(equalToUnsignedInteger(defaultSequenceNumber)));
 }
 
 - (void)testThatCompletionNotificationIsSentWhenConfigurationFormIsAccepted

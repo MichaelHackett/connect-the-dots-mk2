@@ -23,6 +23,6 @@ typedef enum
 - (void)setParticipantId:(NSUInteger)participantId;
 - (void)setPreferredHand:(CTDHand)preferredHand;
 - (void)setInterfaceStyle:(CTDInterfaceStyle)interfaceStyle;
-- (void)setSequenceNumber:(NSUInteger)sequenceNumber;
+//- (void)setSequenceNumber:(NSUInteger)sequenceNumber;
 
 @end

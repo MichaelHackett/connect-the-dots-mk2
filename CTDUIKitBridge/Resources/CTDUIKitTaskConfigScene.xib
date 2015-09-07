@@ -245,7 +245,7 @@
 					</object>
 					<object class="IBUILabel" id="938232422">
 						<reference key="NSNextResponder" ref="54892636"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{166, 380}, {160, 25}}</string>
 						<reference key="NSSuperview" ref="54892636"/>
 						<reference key="NSWindow"/>
@@ -268,7 +268,7 @@
 					</object>
 					<object class="IBUITextField" id="360483238">
 						<reference key="NSNextResponder" ref="54892636"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{344, 375}, {130, 35}}</string>
 						<reference key="NSSuperview" ref="54892636"/>
 						<reference key="NSWindow"/>
@@ -302,7 +302,7 @@
 					</object>
 					<object class="IBUIStepper" id="997443700">
 						<reference key="NSNextResponder" ref="54892636"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{507, 379}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="54892636"/>
 						<reference key="NSWindow"/>
@@ -312,6 +312,7 @@
 						<reference key="NSAppearance" ref="353708357"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>

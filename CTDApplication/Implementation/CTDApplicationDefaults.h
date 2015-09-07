@@ -11,6 +11,6 @@
 + (NSUInteger)taskConfigurationFormDefaultParticipantId;
 + (NSNumber*)taskConfigurationFormDefaultPreferredHand;
 + (NSNumber*)taskConfigurationFormDefaultInterfaceStyle;
-+ (NSUInteger)taskConfigurationFormDefaultSequenceNumber;
+//+ (NSUInteger)taskConfigurationFormDefaultSequenceNumber;
 
 @end

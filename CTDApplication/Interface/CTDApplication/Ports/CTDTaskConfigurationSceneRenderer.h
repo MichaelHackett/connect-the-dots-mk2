@@ -11,7 +11,7 @@
 - (void)setParticipantIdString:(NSString*)participantIdString;
 - (void)setPreferredHandIndex:(NSNumber*)preferredHandIndex; // TODO: Use string resource refs?
 - (void)setInterfaceStyleIndex:(NSNumber*)interfaceStyleIndex;
-- (void)setSequenceNumberValue:(NSNumber*)sequenceNumber;
-- (void)setSequenceNumberString:(NSString*)sequenceNumberString;
+//- (void)setSequenceNumberValue:(NSNumber*)sequenceNumber;
+//- (void)setSequenceNumberString:(NSString*)sequenceNumberString;
 
 @end

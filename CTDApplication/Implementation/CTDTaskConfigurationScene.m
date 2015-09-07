@@ -32,13 +32,13 @@
     [sceneRenderer setInterfaceStyleIndex:interfaceStyle]; // 0-based index matches CTDInterfaceStyle values
 }
 
-- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber
-{
-    ctd_strongify(self.sceneRenderer, sceneRenderer);
-    [sceneRenderer setSequenceNumberValue:@(sequenceNumber)];
-    [sceneRenderer setSequenceNumberString:
-        [NSString stringWithFormat:@"%lu", (unsigned long)sequenceNumber]];
-}
+//- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber
+//{
+//    ctd_strongify(self.sceneRenderer, sceneRenderer);
+//    [sceneRenderer setSequenceNumberValue:@(sequenceNumber)];
+//    [sceneRenderer setSequenceNumberString:
+//        [NSString stringWithFormat:@"%lu", (unsigned long)sequenceNumber]];
+//}
 
 
 

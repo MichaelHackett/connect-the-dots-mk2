@@ -25,7 +25,7 @@ NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurat
     [form setFormParticipantId:[CTDApplicationDefaults taskConfigurationFormDefaultParticipantId]];
     [form setFormPreferredHand:[CTDApplicationDefaults taskConfigurationFormDefaultPreferredHand]];
     [form setFormInterfaceStyle:[CTDApplicationDefaults taskConfigurationFormDefaultInterfaceStyle]];
-    [form setFormSequenceNumber:[CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber]];
+//    [form setFormSequenceNumber:[CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber]];
 }
 
 - (void)acceptConfiguration

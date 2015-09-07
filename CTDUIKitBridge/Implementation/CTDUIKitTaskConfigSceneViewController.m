@@ -123,17 +123,17 @@
     [interfaceStylePicker setSelectedSegmentIndex:segmentIndex];
 }
 
-- (void)setSequenceNumberValue:(NSNumber*)sequenceNumber
-{
-    ctd_strongify(self.sequenceIdStepper, sequenceIdStepper);
-    sequenceIdStepper.value = [sequenceNumber doubleValue];
-}
-
-- (void)setSequenceNumberString:(NSString*)sequenceNumberString
-{
-    ctd_strongify(self.sequenceIdField, sequenceIdField);
-    sequenceIdField.text = sequenceNumberString;
-}
+//- (void)setSequenceNumberValue:(NSNumber*)sequenceNumber
+//{
+//    ctd_strongify(self.sequenceIdStepper, sequenceIdStepper);
+//    sequenceIdStepper.value = [sequenceNumber doubleValue];
+//}
+//
+//- (void)setSequenceNumberString:(NSString*)sequenceNumberString
+//{
+//    ctd_strongify(self.sequenceIdField, sequenceIdField);
+//    sequenceIdField.text = sequenceNumberString;
+//}
 
 
 

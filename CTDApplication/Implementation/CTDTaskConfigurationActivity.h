@@ -22,7 +22,7 @@ FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 - (void)setFormParticipantId:(NSUInteger)participantId;
 - (void)setFormPreferredHand:(NSNumber*)preferredHand;  // nil or CTDHand (wrapped)
 - (void)setFormInterfaceStyle:(NSNumber*)interfaceStyle; // nil or CTDInterfaceStyle (wrapped)
-- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber;
+//- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber;
 
 @end
 

@@ -33,8 +33,8 @@
 @property (copy, nonatomic) NSString* participantIdString;
 @property (copy, nonatomic) NSNumber* preferredHandIndex;
 @property (copy, nonatomic) NSNumber* interfaceStyleIndex;
-@property (copy, nonatomic) NSNumber* sequenceNumberValue;
-@property (copy, nonatomic) NSString* sequenceNumberString;
+//@property (copy, nonatomic) NSNumber* sequenceNumberValue;
+//@property (copy, nonatomic) NSString* sequenceNumberString;
 
 @end
 
@@ -82,23 +82,23 @@
     assertThat(self.interfaceStyleIndex, is(nilValue()));
 }
 
-- (void)testThatChangesToFormSequenceNumberAreReflectedInPresentationString
-{
-    self.sequenceNumberString = nil;
-    [self.subject setFormSequenceNumber:18];
-    assertThat(self.sequenceNumberString, is(equalTo(@"18")));
-    [self.subject setFormSequenceNumber:3];
-    assertThat(self.sequenceNumberString, is(equalTo(@"3")));
-}
-
-- (void)testThatChangesToFormSequenceNumberAreReflectedInPresentationValue
-{
-    self.sequenceNumberValue = nil;
-    [self.subject setFormSequenceNumber:18];
-    assertThat(self.sequenceNumberValue, is(equalTo(@18)));
-    [self.subject setFormSequenceNumber:3];
-    assertThat(self.sequenceNumberValue, is(equalTo(@3)));
-}
+//- (void)testThatChangesToFormSequenceNumberAreReflectedInPresentationString
+//{
+//    self.sequenceNumberString = nil;
+//    [self.subject setFormSequenceNumber:18];
+//    assertThat(self.sequenceNumberString, is(equalTo(@"18")));
+//    [self.subject setFormSequenceNumber:3];
+//    assertThat(self.sequenceNumberString, is(equalTo(@"3")));
+//}
+//
+//- (void)testThatChangesToFormSequenceNumberAreReflectedInPresentationValue
+//{
+//    self.sequenceNumberValue = nil;
+//    [self.subject setFormSequenceNumber:18];
+//    assertThat(self.sequenceNumberValue, is(equalTo(@18)));
+//    [self.subject setFormSequenceNumber:3];
+//    assertThat(self.sequenceNumberValue, is(equalTo(@3)));
+//}
 
 @end
 
