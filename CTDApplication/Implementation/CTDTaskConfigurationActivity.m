@@ -36,4 +36,10 @@ NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurat
                                      withInfo:nil];
 }
 
+- (void)changeParticipantIdTo:(NSUInteger)newParticipantId
+{
+    ctd_strongify(self.taskConfigurationForm, form);
+    [form setFormParticipantId:newParticipantId];
+}
+
 @end

@@ -45,6 +45,12 @@
 #pragma mark CTDTaskConfigurationSceneInputRouter protocol
 
 
+- (void)participantIdChangedTo:(NSUInteger)newParticipantId
+{
+    ctd_strongify(self.configurationFormEditor, configurationFormEditor);
+    [configurationFormEditor changeParticipantIdTo:newParticipantId];
+}
+
 - (void)formSubmissionButtonPressed
 {
     ctd_strongify(self.configurationFormEditor, configurationFormEditor);

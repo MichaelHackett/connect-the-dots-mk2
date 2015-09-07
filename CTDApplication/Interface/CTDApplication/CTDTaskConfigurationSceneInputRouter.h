@@ -6,6 +6,8 @@
 
 @protocol CTDTaskConfigurationSceneInputRouter <NSObject>
 
+- (void)participantIdChangedTo:(NSUInteger)newParticipantId;
+
 - (void)formSubmissionButtonPressed;
 
 @end

@@ -31,10 +31,14 @@ FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 // Editor interfaces
 
 @protocol CTDTaskConfigurationFormEditor <NSObject>
+
 // Reset or initialize values in form to those from the model configuration.
 - (void)resetForm;
 // Validate form values and update the model configuration (if validation passes).
 - (void)acceptConfiguration;
+
+- (void)changeParticipantIdTo:(NSUInteger)newParticipantId;
+
 @end
 
 

@@ -51,6 +51,13 @@
 #pragma mark IBActions
 
 
+- (IBAction)participantIdChangedByStepper
+{
+    ctd_strongify(_inputRouter, inputRouter);
+    ctd_strongify(self.participantIdStepper, stepper);
+    [inputRouter participantIdChangedTo:(NSUInteger)round(stepper.value)];
+}
+
 - (IBAction)beginButtonPressed
 {
     ctd_strongify(_inputRouter, inputRouter);

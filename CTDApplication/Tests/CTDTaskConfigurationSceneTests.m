@@ -109,6 +109,7 @@
     : CTDTaskConfigurationSceneTestCase <CTDTaskConfigurationFormEditor>
 
 // Indirect outputs (Form Editor)
+@property (assign, nonatomic) NSUInteger participantId;
 @property (assign, nonatomic) BOOL configurationAccepted;
 
 @end
@@ -132,6 +133,11 @@
     self.configurationAccepted = YES;
 }
 
+- (void)changeParticipantIdTo:(NSUInteger)newParticipantId
+{
+    self.participantId = newParticipantId;
+}
+
 @end
 
 
@@ -151,6 +157,28 @@
 - (void)testThatItTellsTheFormEditorToAcceptTheConfiguration
 {
     assertThatBool(self.configurationAccepted, is(equalToBool(YES)));
+}
+
+@end
+
+
+
+
+@interface CTDTaskConfigurationSceneWhenParticipantIdStepChanged
+    : CTDTaskConfigurationSceneInputRouterTestCase
+@end
+@implementation CTDTaskConfigurationSceneWhenParticipantIdStepChanged
+
+- (void)setUp
+{
+    [super setUp];
+    self.participantId = 5;
+    [self.subject participantIdChangedTo:6];
+}
+
+- (void)testThatItAsksEditorToChangeTheParticipantIdInTheForm
+{
+    assertThatUnsignedInteger(self.participantId, is(equalToUnsignedInteger(6)));
 }
 
 @end
