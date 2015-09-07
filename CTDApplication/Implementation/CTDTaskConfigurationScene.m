@@ -51,6 +51,12 @@
     [configurationFormEditor changeParticipantIdTo:newParticipantId];
 }
 
+- (void)preferredHandChangedTo:(NSNumber*)newHandIndex
+{
+    ctd_strongify(self.configurationFormEditor, configurationFormEditor);
+    [configurationFormEditor changePreferredHandTo:newHandIndex];
+}
+
 - (void)formSubmissionButtonPressed
 {
     ctd_strongify(self.configurationFormEditor, configurationFormEditor);

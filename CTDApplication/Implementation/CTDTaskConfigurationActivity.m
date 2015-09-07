@@ -42,4 +42,10 @@ NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurat
     [form setFormParticipantId:newParticipantId];
 }
 
+- (void)changePreferredHandTo:(NSNumber*)newPreferredHand
+{
+    ctd_strongify(self.taskConfigurationForm, form);
+    [form setFormPreferredHand:newPreferredHand];
+}
+
 @end

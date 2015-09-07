@@ -38,6 +38,7 @@ FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 - (void)acceptConfiguration;
 
 - (void)changeParticipantIdTo:(NSUInteger)newParticipantId;
+- (void)changePreferredHandTo:(NSNumber*)newPreferredHand;
 
 @end
 

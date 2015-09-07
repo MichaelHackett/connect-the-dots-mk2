@@ -72,11 +72,22 @@
                              nil)));
 }
 
-- (void)testThatParticipantIdChangeRequestsCauseFormToBeUpdated
+- (void)testThatParticipantIdChangeRequestCausesFormToBeUpdated
 {
     self.formParticipantId = 0;
     [self.subject changeParticipantIdTo:37];
     assertThatUnsignedInteger(self.formParticipantId, is(equalToUnsignedInteger(37)));
+    [self.subject changeParticipantIdTo:11];
+    assertThatUnsignedInteger(self.formParticipantId, is(equalToUnsignedInteger(11)));
+}
+
+- (void)testThatPreferredHandChangeRequestCausesFormToBeUpdated
+{
+    self.formPreferredHand = nil;
+    [self.subject changePreferredHandTo:@1];
+    assertThat(self.formPreferredHand, is(equalTo(@1)));
+    [self.subject changePreferredHandTo:nil];
+    assertThat(self.formPreferredHand, is(nilValue()));
 }
 
 // TODO: Range checking; but current UI prevents out-of-range values, so ignoring it for now.

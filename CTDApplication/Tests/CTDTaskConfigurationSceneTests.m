@@ -110,6 +110,7 @@
 
 // Indirect outputs (Form Editor)
 @property (assign, nonatomic) NSUInteger participantId;
+@property (copy, nonatomic)   NSNumber* preferredHand;
 @property (assign, nonatomic) BOOL configurationAccepted;
 
 @end
@@ -119,7 +120,6 @@
 - (void)setUp
 {
     [super setUp];
-    self.configurationAccepted = NO;
     self.subject.configurationFormEditor = self;
 }
 
@@ -138,6 +138,11 @@
     self.participantId = newParticipantId;
 }
 
+- (void)changePreferredHandTo:(NSNumber*)newPreferredHand
+{
+    self.preferredHand = newPreferredHand;
+}
+
 @end
 
 
@@ -151,6 +156,7 @@
 - (void)setUp
 {
     [super setUp];
+    self.configurationAccepted = NO;
     [self.subject formSubmissionButtonPressed];
 }
 
@@ -164,10 +170,10 @@
 
 
 
-@interface CTDTaskConfigurationSceneWhenParticipantIdStepChanged
+@interface CTDTaskConfigurationSceneWhenParticipantIdStepChanges
     : CTDTaskConfigurationSceneInputRouterTestCase
 @end
-@implementation CTDTaskConfigurationSceneWhenParticipantIdStepChanged
+@implementation CTDTaskConfigurationSceneWhenParticipantIdStepChanges
 
 - (void)setUp
 {
@@ -179,6 +185,28 @@
 - (void)testThatItAsksEditorToChangeTheParticipantIdInTheForm
 {
     assertThatUnsignedInteger(self.participantId, is(equalToUnsignedInteger(6)));
+}
+
+@end
+
+
+
+
+@interface CTDTaskConfigurationSceneWhenPreferredHandChanges
+    : CTDTaskConfigurationSceneInputRouterTestCase
+@end
+@implementation CTDTaskConfigurationSceneWhenPreferredHandChanges
+
+- (void)setUp
+{
+    [super setUp];
+    self.preferredHand = nil;
+    [self.subject preferredHandChangedTo:@1];
+}
+
+- (void)testThatItAsksEditorToChangeThePreferredHandIndexInTheForm
+{
+    assertThat(self.preferredHand, is(equalTo(@1)));
 }
 
 @end

@@ -428,6 +428,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">preferredHandSelectionChanged</string>
+						<reference key="source" ref="175727684"/>
+						<reference key="destination" ref="608423063"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<string key="id">QDg-l6-Fgn</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">beginButtonPressed</string>
 						<reference key="source" ref="1062273981"/>
 						<reference key="destination" ref="608423063"/>
@@ -581,6 +590,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="beginButtonPressed">id</string>
 						<string key="participantIdChangedByStepper">id</string>
+						<string key="preferredHandSelectionChanged">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="beginButtonPressed">
@@ -589,6 +599,10 @@
 						</object>
 						<object class="IBActionInfo" key="participantIdChangedByStepper">
 							<string key="name">participantIdChangedByStepper</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="preferredHandSelectionChanged">
+							<string key="name">preferredHandSelectionChanged</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

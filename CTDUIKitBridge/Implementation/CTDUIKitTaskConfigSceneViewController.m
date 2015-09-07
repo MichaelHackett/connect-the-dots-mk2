@@ -58,6 +58,18 @@
     [inputRouter participantIdChangedTo:(NSUInteger)round(stepper.value)];
 }
 
+- (IBAction)preferredHandSelectionChanged
+{
+    ctd_strongify(self.preferredHandPicker, picker);
+    NSInteger selectedIndex = picker.selectedSegmentIndex;
+    NSNumber* newHandIndex = selectedIndex == UISegmentedControlNoSegment
+                           ? nil  // no selection
+                           : [NSNumber numberWithUnsignedInteger:(NSUInteger)selectedIndex];
+
+    ctd_strongify(_inputRouter, inputRouter);
+    [inputRouter preferredHandChangedTo:newHandIndex];
+}
+
 - (IBAction)beginButtonPressed
 {
     ctd_strongify(_inputRouter, inputRouter);

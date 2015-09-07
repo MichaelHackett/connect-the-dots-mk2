@@ -7,6 +7,7 @@
 @protocol CTDTaskConfigurationSceneInputRouter <NSObject>
 
 - (void)participantIdChangedTo:(NSUInteger)newParticipantId;
+- (void)preferredHandChangedTo:(NSNumber*)newHandIndex;
 
 - (void)formSubmissionButtonPressed;
 
