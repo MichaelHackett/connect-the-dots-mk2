@@ -6,6 +6,16 @@
 
 
 
+@interface CTDTaskConfigurationScene ()
+
+@property (assign, nonatomic) NSUInteger formParticipantId;
+@property (copy, nonatomic)   NSNumber*  formPreferredHand;
+@property (copy, nonatomic)   NSNumber*  formInterfaceStyle;
+
+@end
+
+
+
 @implementation CTDTaskConfigurationScene
 
 
@@ -14,6 +24,8 @@
 
 - (void)setFormParticipantId:(NSUInteger)participantId
 {
+    _formParticipantId = participantId;
+
     ctd_strongify(self.sceneRenderer, sceneRenderer);
     [sceneRenderer setParticipantIdValue:@(participantId)];
     [sceneRenderer setParticipantIdString:
@@ -22,18 +34,24 @@
 
 - (void)setFormPreferredHand:(NSNumber*)preferredHand
 {
+    _formPreferredHand = preferredHand;
+
     ctd_strongify(self.sceneRenderer, sceneRenderer);
     [sceneRenderer setPreferredHandIndex:preferredHand]; // 0-based index matches CTDHand values
 }
 
 - (void)setFormInterfaceStyle:(NSNumber*)interfaceStyle
 {
+    _formInterfaceStyle = interfaceStyle;
+
     ctd_strongify(self.sceneRenderer, sceneRenderer);
     [sceneRenderer setInterfaceStyleIndex:interfaceStyle]; // 0-based index matches CTDInterfaceStyle values
 }
 
 //- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber
 //{
+//    _formSequenceNumber = sequenceNumber;
+//
 //    ctd_strongify(self.sceneRenderer, sceneRenderer);
 //    [sceneRenderer setSequenceNumberValue:@(sequenceNumber)];
 //    [sceneRenderer setSequenceNumberString:

@@ -30,6 +30,18 @@ NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurat
 
 - (void)acceptConfiguration
 {
+    ctd_strongify(self.taskConfigurationForm, form);
+    if (![form formPreferredHand] || ![form formInterfaceStyle])
+    {
+        // Incomplete form --- do not accept. (TODO: Should have some notification to Scene.)
+        return;
+    }
+
+    ctd_strongify(self.taskConfiguration, config);
+    [config setParticipantId:[form formParticipantId]];
+    [config setPreferredHand:[[form formPreferredHand] unsignedIntegerValue]];
+    [config setInterfaceStyle:[[form formInterfaceStyle] unsignedIntegerValue]];
+
     ctd_strongify(self.notificationReceiver, notificationReceiver);
     [notificationReceiver receiveNotification:CTDTaskConfigurationCompletedNotification
                                    fromSender:self

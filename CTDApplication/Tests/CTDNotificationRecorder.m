@@ -26,6 +26,11 @@
     return self;
 }
 
+- (void)reset
+{
+    [_receivedNotifications removeAllObjects];
+}
+
 - (NSArray*)receivedNotifications
 {
     return [_receivedNotifications copy];

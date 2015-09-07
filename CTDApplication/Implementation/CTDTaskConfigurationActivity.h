@@ -19,9 +19,13 @@ FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 
 @protocol CTDTaskConfigurationForm <NSObject>
 
+- (NSUInteger)formParticipantId;
 - (void)setFormParticipantId:(NSUInteger)participantId;
+- (NSNumber*)formPreferredHand;
 - (void)setFormPreferredHand:(NSNumber*)preferredHand;  // nil or CTDHand (wrapped)
+- (NSNumber*)formInterfaceStyle;
 - (void)setFormInterfaceStyle:(NSNumber*)interfaceStyle; // nil or CTDInterfaceStyle (wrapped)
+//- (NSUInteger)formSequenceNumber;
 //- (void)setFormSequenceNumber:(NSUInteger)sequenceNumber;
 
 @end
@@ -34,9 +38,11 @@ FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 
 // Reset or initialize values in form to those from the model configuration.
 - (void)resetForm;
+
 // Validate form values and update the model configuration (if validation passes).
 - (void)acceptConfiguration;
 
+// Change elements of the form:
 - (void)changeParticipantIdTo:(NSUInteger)newParticipantId;
 - (void)changePreferredHandTo:(NSNumber*)newPreferredHand;
 - (void)changeInterfaceStyleTo:(NSNumber*)newInterfaceStyle;

@@ -23,4 +23,6 @@
 
 @property (copy, readonly, nonatomic) NSArray* receivedNotifications;
 
+- (void)reset;
+
 @end
