@@ -2,6 +2,7 @@
 
 #import "CTDUIKitTaskConfigSceneViewController.h"
 
+#import "CTDApplication/CTDTaskConfigurationSceneInputRouter.h"
 
 
 
@@ -10,20 +11,24 @@
 
 
 @implementation CTDUIKitTaskConfigSceneViewController
+{
+    __weak id<CTDTaskConfigurationSceneInputRouter> _inputRouter;
+}
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self)
-//    {
-//        // Custom initialization
-//    }
-//    return self;
-//}
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle
+{
+    self = [super initWithNibName:nibName bundle:nibBundle];
+    if (self)
+    {
+        _inputRouter = nil;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     ctd_strongify(self.participantIdField, participantIdField);
     ctd_strongify(self.preferredHandPicker, preferredHandPicker);
     ctd_strongify(self.interfaceStylePicker, interfaceStylePicker);
@@ -43,7 +48,19 @@
 
 
 
+#pragma mark IBActions
+
+
+- (IBAction)beginButtonPressed
+{
+    ctd_strongify(_inputRouter, inputRouter);
+    [inputRouter formSubmissionButtonPressed];
+}
+
+
+
 #pragma mark CTDTaskConfigurationSceneRenderer protocol
+
 
 - (void)setParticipantIdValue:(NSNumber*)participantId
 {
@@ -85,6 +102,17 @@
 {
     ctd_strongify(self.sequenceIdField, sequenceIdField);
     sequenceIdField.text = sequenceNumberString;
+}
+
+
+
+#pragma mark CTDTaskConfigurationSceneInputSource protocol
+
+
+- (void)setTaskConfigurationSceneInputRouter:
+      (id<CTDTaskConfigurationSceneInputRouter>)sceneInputRouter
+{
+    _inputRouter = sceneInputRouter;
 }
 
 @end

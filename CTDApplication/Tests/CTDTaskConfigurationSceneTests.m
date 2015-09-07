@@ -2,14 +2,31 @@
 
 #import "CTDTaskConfigurationScene.h"
 
+#import "CTDTaskConfigurationActivity.h"
 #import "Ports/CTDTaskConfigurationSceneRenderer.h"
 
 
 
-@interface CTDTaskConfigurationSceneTestCase
-    : XCTestCase <CTDTaskConfigurationSceneRenderer>
+@interface CTDTaskConfigurationSceneTestCase : XCTestCase
 
 @property (strong, nonatomic) CTDTaskConfigurationScene* subject;
+
+@end
+
+@implementation CTDTaskConfigurationSceneTestCase
+
+- (void)setUp
+{
+    [super setUp];
+    self.subject = [[CTDTaskConfigurationScene alloc] init];
+}
+
+@end
+
+
+
+@interface CTDTaskConfigurationSceneFormProtocolTests
+    : CTDTaskConfigurationSceneTestCase <CTDTaskConfigurationSceneRenderer>
 
 // Indirect outputs (Presentation Model)
 @property (copy, nonatomic) NSNumber* participantIdValue;
@@ -21,16 +38,13 @@
 
 @end
 
-@implementation CTDTaskConfigurationSceneTestCase
+@implementation CTDTaskConfigurationSceneFormProtocolTests
 
 - (void)setUp
 {
     [super setUp];
-
-    self.subject = [[CTDTaskConfigurationScene alloc] init];
     self.subject.sceneRenderer = self;
 }
-
 
 - (void)testThatChangesToFormParticipantIdAreReflectedInPresentationString
 {
@@ -84,6 +98,59 @@
     assertThat(self.sequenceNumberValue, is(equalTo(@18)));
     [self.subject setFormSequenceNumber:3];
     assertThat(self.sequenceNumberValue, is(equalTo(@3)));
+}
+
+@end
+
+
+
+
+@interface CTDTaskConfigurationSceneInputRouterTestCase
+    : CTDTaskConfigurationSceneTestCase <CTDTaskConfigurationFormEditor>
+
+// Indirect outputs (Form Editor)
+@property (assign, nonatomic) BOOL configurationAccepted;
+
+@end
+
+@implementation CTDTaskConfigurationSceneInputRouterTestCase
+
+- (void)setUp
+{
+    [super setUp];
+    self.configurationAccepted = NO;
+    self.subject.configurationFormEditor = self;
+}
+
+
+// CTDTaskConfigurationFormEditor protocol
+
+- (void)resetForm {}
+
+- (void)acceptConfiguration
+{
+    self.configurationAccepted = YES;
+}
+
+@end
+
+
+
+
+@interface CTDTaskConfigurationSceneWhenFormSubmissionButtonPressed
+    : CTDTaskConfigurationSceneInputRouterTestCase
+@end
+@implementation CTDTaskConfigurationSceneWhenFormSubmissionButtonPressed
+
+- (void)setUp
+{
+    [super setUp];
+    [self.subject formSubmissionButtonPressed];
+}
+
+- (void)testThatItTellsTheFormEditorToAcceptTheConfiguration
+{
+    assertThatBool(self.configurationAccepted, is(equalToBool(YES)));
 }
 
 @end

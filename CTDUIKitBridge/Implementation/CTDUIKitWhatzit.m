@@ -49,7 +49,8 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
     return self;
 }
 
-- (id<CTDTaskConfigurationSceneRenderer>)taskConfigurationSceneRenderer
+- (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
+      taskConfigurationSceneBridge
 {
     CTDUIKitTaskConfigSceneViewController* configVC =
         [[CTDUIKitTaskConfigSceneViewController alloc]

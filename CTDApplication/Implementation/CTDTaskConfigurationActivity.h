@@ -3,7 +3,13 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+@protocol CTDNotificationReceiver;
 @protocol CTDTaskConfiguration;
+
+
+
+// Notifications
+FOUNDATION_EXPORT NSString * const CTDTaskConfigurationCompletedNotification;
 
 
 
@@ -27,6 +33,8 @@
 @protocol CTDTaskConfigurationFormEditor <NSObject>
 // Reset or initialize values in form to those from the model configuration.
 - (void)resetForm;
+// Validate form values and update the model configuration (if validation passes).
+- (void)acceptConfiguration;
 @end
 
 
@@ -36,5 +44,6 @@
 
 @property (weak, nonatomic) id<CTDTaskConfiguration> taskConfiguration;
 @property (weak, nonatomic) id<CTDTaskConfigurationForm> taskConfigurationForm;
+@property (weak, nonatomic) id<CTDNotificationReceiver> notificationReceiver;
 
 @end

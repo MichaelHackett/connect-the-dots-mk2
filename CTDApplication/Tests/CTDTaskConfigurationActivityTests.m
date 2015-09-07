@@ -6,10 +6,11 @@
 #import "CTDTaskConfiguration.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
 
+#import "CTDNotificationRecorder.h"
 
 
-@interface CTDTaskConfigurationActivityTestCase
-    : XCTestCase <CTDTaskConfigurationForm>
+
+@interface CTDTaskConfigurationActivityTestCase : XCTestCase <CTDTaskConfigurationForm>
 
 @property (strong, nonatomic) CTDTaskConfigurationActivity* subject;
 
@@ -19,6 +20,9 @@
 @property (copy, nonatomic) NSNumber* formInterfaceStyle;
 @property (assign, nonatomic) NSUInteger formSequenceNumber;
 
+// Collaborators:
+@property (strong, nonatomic) CTDNotificationRecorder* notificationRecorder;
+
 @end
 
 @implementation CTDTaskConfigurationActivityTestCase
@@ -26,8 +30,12 @@
 - (void)setUp
 {
     [super setUp];
+
+    self.notificationRecorder = [[CTDNotificationRecorder alloc] init];
+
     self.subject = [[CTDTaskConfigurationActivity alloc] init];
     self.subject.taskConfigurationForm = self;
+    self.subject.notificationReceiver = self.notificationRecorder;
 }
 
 - (void)testThatFormValuesAreSetToDefaultsAfterFormIsReset
@@ -53,6 +61,15 @@
     assertThat(self.formInterfaceStyle, is(equalTo(defaultInterfaceStyle)));
     assertThatUnsignedInteger(self.formSequenceNumber,
                               is(equalToUnsignedInteger(defaultSequenceNumber)));
+}
+
+- (void)testThatCompletionNotificationIsSentWhenConfigurationFormIsAccepted
+{
+    [self.subject acceptConfiguration];
+    assertThat(self.notificationRecorder.receivedNotifications,
+               hasItem(allOf(hasProperty(@"sender", sameInstance(self.subject)),
+                             hasProperty(@"notificationId", CTDTaskConfigurationCompletedNotification),
+                             nil)));
 }
 
 @end

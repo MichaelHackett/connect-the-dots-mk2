@@ -4,11 +4,13 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "CTDApplication/Ports/CTDTaskConfigurationSceneRenderer.h"
+#import "CTDApplication/Ports/CTDTaskConfigurationSceneInputSource.h"
 
 
 
 @interface CTDUIKitTaskConfigSceneViewController
-    : UIViewController <CTDTaskConfigurationSceneRenderer>
+    : UIViewController <CTDTaskConfigurationSceneRenderer,
+                        CTDTaskConfigurationSceneInputSource>
 
 // IB Outlets
 @property (weak, nonatomic) IBOutlet UIStepper* participantIdStepper;

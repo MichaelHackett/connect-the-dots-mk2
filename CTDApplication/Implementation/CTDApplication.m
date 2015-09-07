@@ -8,6 +8,8 @@
 #import "CTDTaskConfigurationScene.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
+#import "Ports/CTDTaskConfigurationSceneInputSource.h"
+#import "Ports/CTDTaskConfigurationSceneRenderer.h"
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
@@ -89,11 +91,15 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     _configurationScene = [[CTDTaskConfigurationScene alloc] init];
     _configurationActivity = [[CTDTaskConfigurationActivity alloc] init];
 
-    _configurationScene.sceneRenderer = [_displayController taskConfigurationSceneRenderer];
+    id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>
+        sceneBridge = [_displayController taskConfigurationSceneBridge];
+    [sceneBridge setTaskConfigurationSceneInputRouter:_configurationScene];
+    _configurationScene.sceneRenderer = sceneBridge;
     _configurationScene.configurationFormEditor = _configurationActivity;
 
     _configurationActivity.taskConfiguration = self;
     _configurationActivity.taskConfigurationForm = _configurationScene;
+    _configurationActivity.notificationReceiver = self;
 
     [_configurationActivity resetForm];
 }
@@ -126,7 +132,13 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
                  fromSender:(id)sender
                    withInfo:(__unused NSDictionary*)info
 {
-    if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
+    if ([notificationId isEqualToString:CTDTaskConfigurationCompletedNotification])
+    {
+        [self startTrial];
+    }
+
+    // TODO: remove sender check?
+    else if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
     {
         int trialDurationSeconds = (int)round((double)[_trialResults trialDuration]);
         NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",

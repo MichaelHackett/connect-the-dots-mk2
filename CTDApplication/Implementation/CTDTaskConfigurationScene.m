@@ -11,6 +11,7 @@
 
 #pragma mark CTDTaskConfigurationForm protocol
 
+
 - (void)setFormParticipantId:(NSUInteger)participantId
 {
     ctd_strongify(self.sceneRenderer, sceneRenderer);
@@ -37,6 +38,17 @@
     [sceneRenderer setSequenceNumberValue:@(sequenceNumber)];
     [sceneRenderer setSequenceNumberString:
         [NSString stringWithFormat:@"%lu", (unsigned long)sequenceNumber]];
+}
+
+
+
+#pragma mark CTDTaskConfigurationSceneInputRouter protocol
+
+
+- (void)formSubmissionButtonPressed
+{
+    ctd_strongify(self.configurationFormEditor, configurationFormEditor);
+    [configurationFormEditor acceptConfiguration];
 }
 
 @end

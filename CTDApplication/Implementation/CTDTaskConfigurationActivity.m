@@ -4,6 +4,12 @@
 
 #import "CTDApplicationDefaults.h"
 #import "CTDTaskConfiguration.h"
+#import "CTDUtility/CTDNotificationReceiver.h"
+
+
+
+// Notification definitions
+NSString * const CTDTaskConfigurationCompletedNotification = @"CTDTaskConfigurationCompletedNotification";
 
 
 
@@ -20,6 +26,14 @@
     [form setFormPreferredHand:[CTDApplicationDefaults taskConfigurationFormDefaultPreferredHand]];
     [form setFormInterfaceStyle:[CTDApplicationDefaults taskConfigurationFormDefaultInterfaceStyle]];
     [form setFormSequenceNumber:[CTDApplicationDefaults taskConfigurationFormDefaultSequenceNumber]];
+}
+
+- (void)acceptConfiguration
+{
+    ctd_strongify(self.notificationReceiver, notificationReceiver);
+    [notificationReceiver receiveNotification:CTDTaskConfigurationCompletedNotification
+                                   fromSender:self
+                                     withInfo:nil];
 }
 
 @end
