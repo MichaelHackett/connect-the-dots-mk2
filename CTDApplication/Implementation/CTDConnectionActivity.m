@@ -332,12 +332,18 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
                        trialRenderer:(id<CTDTrialRenderer>)trialRenderer
               trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
 {
+    CTDPoint* startingDotRenderedPosition =
+        [trialRenderer renderingCoordinatesForDotSpaceCoordinates:dotPair.startPosition];
+
     id<CTDDotRenderer> startingDotRenderer = [trialRenderer newRendererForDotWithId:@1];
-    [startingDotRenderer setDotCenterPosition:dotPair.startPosition];
+    [startingDotRenderer setDotCenterPosition:startingDotRenderedPosition];
     [startingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
 
+    CTDPoint* endingDotRenderedPosition =
+        [trialRenderer renderingCoordinatesForDotSpaceCoordinates:dotPair.endPosition];
+
     id<CTDDotRenderer> endingDotRenderer = [trialRenderer newRendererForDotWithId:@2];
-    [endingDotRenderer setDotCenterPosition:dotPair.endPosition];
+    [endingDotRenderer setDotCenterPosition:endingDotRenderedPosition];
     [endingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
 
     id<CTDDotConnectionRenderer> connectionRenderer = [trialRenderer newRendererForDotConnection];

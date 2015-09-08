@@ -28,7 +28,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 // Macro for defining sample data
 #define step(COLOR,START,END) [[CTDDotPair alloc] initWithColor:(COLOR) startPosition:(START) endPosition:(END)]
-#define dot(X,Y) [[CTDPoint alloc] initWithX:X y:Y]
+#define dot(X,Y) [[CTDPoint alloc] initWithX:(CTDPointCoordinate)X y:(CTDPointCoordinate)Y]
 
 
 
@@ -111,8 +111,8 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     // TODO: Replace with data loaded from disk
     id<CTDTrialScript> trialScript = [CTDModel trialScriptWithDotPairs:@[
-        step(CTDDotColor_Green, dot(500,170), dot(200,400)),
-        step(CTDDotColor_Red, dot(175,40), dot(350,75))
+        step(CTDDotColor_Green, dot(1.0,0.34), dot(0.25,0.8)),
+        step(CTDDotColor_Red, dot(0.15,0.01), dot(0.7,0.2))
     ]];
     _trialResults = [CTDModel trialResultsHolder];
 

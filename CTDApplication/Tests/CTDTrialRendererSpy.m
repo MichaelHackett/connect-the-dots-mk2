@@ -37,8 +37,19 @@
     if (self) {
         _dotRenderings = [[NSMutableArray alloc] init];
         _connectionRenderings = [[NSMutableArray alloc] init];
+
+        // Default values for point conversions:
+        _dotSpaceMargin = 0;
+        _dotSpaceWidth = 1000;
+        _dotSpaceHeight = 1000;
     }
     return self;
+}
+
+- (CTDPoint*)renderingCoordinatesForDotSpaceCoordinates:(CTDPoint*)dotSpaceCoordinates
+{
+    return [CTDPoint x:self.dotSpaceMargin + dotSpaceCoordinates.x * self.dotSpaceWidth
+                     y:self.dotSpaceMargin + dotSpaceCoordinates.y * self.dotSpaceHeight];
 }
 
 - (id<CTDDotRenderer>)newRendererForDotWithId:(__unused id)dotId

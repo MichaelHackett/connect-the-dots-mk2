@@ -5,10 +5,16 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
 #import "Ports/CTDTrialRenderer.h"
+#import "CTDUtility/CTDPoint.h"
 
 
 
 @interface CTDTrialRendererSpy : NSObject <CTDTrialRenderer>
+
+// Configuration for dot position mapping
+@property (assign, nonatomic) CTDPointCoordinate dotSpaceMargin;
+@property (assign, nonatomic) CTDPointCoordinate dotSpaceWidth;
+@property (assign, nonatomic) CTDPointCoordinate dotSpaceHeight;
 
 // Both of these return only the currently visible renderings. This is so that
 // tests don't need to care whether the implementation creates renderings only

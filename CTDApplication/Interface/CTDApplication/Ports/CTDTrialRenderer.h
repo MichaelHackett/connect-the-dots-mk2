@@ -61,6 +61,9 @@ extern CTDPaletteColorLabel const CTDPaletteColor_DotType3;
 
 @protocol CTDTrialRenderer <NSObject>
 
+// Converts from dot-space unit coordinates (0.0-1.0) to rendering position.
+- (CTDPoint*)renderingCoordinatesForDotSpaceCoordinates:(CTDPoint*)dotSpaceCoordinates;
+
 - (id<CTDDotRenderer>)newRendererForDotWithId:(id)dotId;
 - (id<CTDDotConnectionRenderer>)newRendererForDotConnection;
 

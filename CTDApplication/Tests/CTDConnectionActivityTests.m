@@ -56,14 +56,14 @@ static double FIRST_STEP_END_TIME =   100008.5;
     _trialCompletionNotificationSenders = [[NSMutableArray alloc] init];
     self.dotPairs = @[
         [CTDModel dotPairWithColor:CTDDotColor_Red
-                     startPosition:[CTDPoint x:49 y:250]
-                       endPosition:[CTDPoint x:500 y:20]],
+                     startPosition:[CTDPoint x:0.05f y:0.50f]
+                       endPosition:[CTDPoint x:0.36f y:0.02f]],
         [CTDModel dotPairWithColor:CTDDotColor_Blue
-                     startPosition:[CTDPoint x:275 y:50]
-                       endPosition:[CTDPoint x:25 y:460]],
+                     startPosition:[CTDPoint x:0.27f y:0.15f]
+                       endPosition:[CTDPoint x:0.03f y:0.94f]],
         [CTDModel dotPairWithColor:CTDDotColor_Green
-                     startPosition:[CTDPoint x:250 y:310]
-                       endPosition:[CTDPoint x:415 y:315]]
+                     startPosition:[CTDPoint x:0.42f y:0.31f]
+                       endPosition:[CTDPoint x:0.80f y:0.62f]]
     ];
     self.trialScript = [CTDModel trialScriptWithDotPairs:self.dotPairs];
     self.trialRenderer = [[CTDTrialRendererSpy alloc] init];
@@ -125,8 +125,11 @@ static double FIRST_STEP_END_TIME =   100008.5;
 
 - (void)testThatFirstDotIsRenderedInCorrectPosition
 {
+    CTDPoint* expectedRenderingPosition =
+        [self.trialRenderer renderingCoordinatesForDotSpaceCoordinates:
+                                [self.dotPairs[0] startPosition]];
     assertThat([self.trialRenderer.dotRenderings[0] dotCenterPosition],
-               is(equalTo([self.dotPairs[0] startPosition])));
+               is(equalTo(expectedRenderingPosition)));
 }
 
 - (void)testThatFirstDotIsRenderedWithCorrectColor
@@ -312,8 +315,11 @@ static double FIRST_STEP_END_TIME =   100008.5;
 
 - (void)testThatSecondDotIsInCorrectPosition
 {
+    CTDPoint* expectedRenderingPosition =
+        [self.trialRenderer renderingCoordinatesForDotSpaceCoordinates:
+                                [self.dotPairs[0] endPosition]];
     assertThat([self.trialRenderer.dotRenderings[1] dotCenterPosition],
-               is(equalTo([self.dotPairs[0] endPosition])));
+               is(equalTo(expectedRenderingPosition)));
 }
 
 - (void)testThatSecondDotIsRenderedInSameColor
@@ -488,8 +494,11 @@ static double FIRST_STEP_END_TIME =   100008.5;
 
 - (void)testThatFirstDotIsRenderedInStartingPositionFromFollowingStep
 {
+    CTDPoint* expectedRenderingPosition =
+        [self.trialRenderer renderingCoordinatesForDotSpaceCoordinates:
+                                [self.dotPairs[1] startPosition]];
     assertThat([self.trialRenderer.dotRenderings[0] dotCenterPosition],
-               is(equalTo([self.dotPairs[1] startPosition])));
+               is(equalTo(expectedRenderingPosition)));
 }
 
 - (void)testThatFirstDotIsRenderedWithColorForFollowingStep

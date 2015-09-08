@@ -43,6 +43,19 @@
 #pragma mark CTDTrialRenderer protocol
 
 
+- (CTDPoint*)renderingCoordinatesForDotSpaceCoordinates:(CTDPoint*)dotSpaceCoordinates
+{
+    ctd_strongify(_connectTheDotsView, containerView);
+    CGFloat dotDiameter = containerView.dotDiameter
+                        + containerView.dotSelectionIndicatorPadding * 2;
+    CGFloat containerMargin = dotDiameter / 2 + 1;
+    CTDPointCoordinate dotSpaceWidth = containerView.bounds.size.width - containerMargin * 2;
+    CTDPointCoordinate dotSpaceHeight = containerView.bounds.size.height - containerMargin * 2;
+
+    return [CTDPoint x:containerMargin + (dotSpaceCoordinates.x * dotSpaceWidth)
+                     y:containerMargin + (dotSpaceCoordinates.y * dotSpaceHeight)];
+}
+
 - (id<CTDDotRenderer, CTDTouchable>)newRendererForDotWithId:(id)dotId
 {
     CTDUIKitConnectTheDotsView* ctdView = _connectTheDotsView;
