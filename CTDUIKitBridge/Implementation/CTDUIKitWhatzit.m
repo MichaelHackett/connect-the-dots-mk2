@@ -21,6 +21,7 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
 {
     __weak UIApplication* _application;
     UIWindow* _mainWindow;
+    UIAlertView* _alertView;
     CTDUIKitDrawingConfig* _drawingConfig;
 }
 
@@ -74,6 +75,26 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
     [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand
 
     return connectVC;
+}
+
+- (void)displayFatalError:(NSString*)message
+{
+    [self showBlankScreen];
+    _alertView = [[UIAlertView alloc] initWithTitle:@"Fatal error"
+                                            message:message
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:@"OK", nil];
+    [_alertView show];
+}
+
+- (void)showBlankScreen
+{
+    UIViewController* vc = [[UIViewController alloc] init];
+    UIView* rootView = [[UIView alloc] initWithFrame:CGRectZero];
+    rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    vc.view = rootView;
+    _mainWindow.rootViewController = vc;
 }
 
 @end

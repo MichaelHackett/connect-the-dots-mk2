@@ -14,5 +14,6 @@
 - (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
       taskConfigurationSceneBridge;
 - (id<CTDConnectScene>)connectScene;
+- (void)displayFatalError:(NSString*)message;
 
 @end

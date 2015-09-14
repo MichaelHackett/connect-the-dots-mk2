@@ -6,6 +6,7 @@
 #import "CTDTaskConfiguration.h"
 #import "CTDTaskConfigurationActivity.h"
 #import "CTDTaskConfigurationScene.h"
+#import "CTDTrialScriptCSVLoader.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
 #import "Ports/CTDTaskConfigurationSceneInputSource.h"
@@ -26,10 +27,6 @@
 static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 
-// Macro for defining sample data
-#define step(COLOR,START,END) [[CTDDotPair alloc] initWithColor:(COLOR) startPosition:(START) endPosition:(END)]
-#define dot(X,Y) [[CTDPoint alloc] initWithX:(CTDPointCoordinate)X y:(CTDPointCoordinate)Y]
-
 
 
 // TODO: Split into helper class, so as to avoid having private methods?
@@ -40,6 +37,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 @implementation CTDApplication
 {
+    NSArray* _dotSequences;
     id<CTDDisplayController> _displayController;
     id<CTDTimeSource> _timeSource;
     CTDTaskConfigurationActivity* _configurationActivity;
@@ -61,6 +59,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     self = [super init];
     if (self) {
+        _dotSequences = nil;
         _displayController = displayController;
         _timeSource = timeSource;
         _configurationScene = nil;
@@ -83,7 +82,27 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 - (void)start
 {
+    NSString* scriptPath = [[NSBundle mainBundle]
+                            pathForResource:@"TrialSequences" ofType:@"csv"];
+    NSError* error = nil;
+    _dotSequences = [CTDTrialScriptCSVLoader sequencesFromFileAtPath:scriptPath
+                                                       sequenceCount:3
+                                                      sequenceLength:20
+                                                               error:&error];
+    if (!_dotSequences && error)
+    {
+        [self displayScriptLoadError:error];
+        return;
+    }
+
     [self displayConfigurationScreen];
+}
+
+- (void)displayScriptLoadError:(NSError*)error
+{
+    NSString* message = [NSString stringWithFormat:@"Unable to load trial scripts: %@",
+                         [error localizedDescription]];
+    [_displayController displayFatalError:message];
 }
 
 - (void)displayConfigurationScreen
@@ -109,11 +128,7 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 - (void)startTrial
 {
-    // TODO: Replace with data loaded from disk
-    id<CTDTrialScript> trialScript = [CTDModel trialScriptWithDotPairs:@[
-        step(CTDDotColor_Green, dot(1.0,0.34), dot(0.25,0.8)),
-        step(CTDDotColor_Red, dot(0.15,0.01), dot(0.7,0.2))
-    ]];
+    id<CTDTrialScript> trialScript = _dotSequences[0];
     _trialResults = [CTDModel trialResultsHolder];
 
     _connectionScene = [_displayController connectScene];
