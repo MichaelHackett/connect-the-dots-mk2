@@ -122,6 +122,7 @@
 		4CFA356C1B76DAF40060A689 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8497681A7FEA18000A094E /* libochamcrest.a */; };
 		4CFA356D1B76DB070060A689 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFA356E1B76DB240060A689 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CFCB6351BA7D0300014179C /* CTDCSVFileTrialResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */; };
 		4CFDEEB719C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
 		4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -514,6 +515,10 @@
 		4CFA35601B76D2FC0060A689 /* CTDApplication.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDApplication.xcconfig; path = BuildConfiguration/CTDApplication.xcconfig; sourceTree = "<group>"; };
 		4CFA35621B76D34E0060A689 /* CTDApplicationTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDApplicationTests.xcconfig; path = BuildConfiguration/CTDApplicationTests.xcconfig; sourceTree = "<group>"; };
 		4CFA35641B76D6260060A689 /* CTDBootstrap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDBootstrap-Prefix.pch"; sourceTree = "<group>"; };
+		4CFCB6331BA7D0300014179C /* CTDCSVFileTrialResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCSVFileTrialResults.h; sourceTree = "<group>"; };
+		4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCSVFileTrialResults.m; sourceTree = "<group>"; };
+		4CFCB6361BA7D1180014179C /* CTDTrial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrial.h; sourceTree = "<group>"; };
+		4CFCB63A1BA92ACA0014179C /* CTDTrialBlockResults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialBlockResults.h; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDAnimationUtils.h; sourceTree = "<group>"; };
 		4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDAnimationUtils.m; sourceTree = "<group>"; };
@@ -1133,6 +1138,8 @@
 				4CB1F90C1B605E6100B3776D /* CTDModel.h */,
 				4C60BB511A1C34B80067A72F /* CTDDotPair.h */,
 				4C3236501A1641CC005C25D7 /* CTDDotColor.h */,
+				4CFCB6361BA7D1180014179C /* CTDTrial.h */,
+				4CFCB63A1BA92ACA0014179C /* CTDTrialBlockResults.h */,
 				4C2BFDEF1B93569A00540A56 /* CTDTrialResults.h */,
 				4CB1F8FC1B5F2F2200B3776D /* CTDTrialScript.h */,
 				4C2BFDF01B93595300540A56 /* CTDInMemoryTrialResults.h */,
@@ -1257,6 +1264,8 @@
 				4CF33B6A1B9927CA00191D1F /* CTDTaskConfigurationScene.m */,
 				4C76B8C91BA4D01700276231 /* CTDTrialScriptCSVLoader.h */,
 				4C76B8CA1BA4D01700276231 /* CTDTrialScriptCSVLoader.m */,
+				4CFCB6331BA7D0300014179C /* CTDCSVFileTrialResults.h */,
+				4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -1881,6 +1890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CFCB6351BA7D0300014179C /* CTDCSVFileTrialResults.m in Sources */,
 				4CFA35651B76D7140060A689 /* CTDApplication.m in Sources */,
 				4CF33B6B1B9927CA00191D1F /* CTDTaskConfigurationScene.m in Sources */,
 				4CF33B681B9927A500191D1F /* CTDTaskConfigurationActivity.m in Sources */,

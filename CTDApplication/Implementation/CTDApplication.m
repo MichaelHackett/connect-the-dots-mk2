@@ -3,6 +3,7 @@
 #import "CTDApplication.h"
 
 #import "CTDConnectionActivity.h"
+#import "CTDCSVFileTrialResults.h"
 #import "CTDTaskConfiguration.h"
 #import "CTDTaskConfigurationActivity.h"
 #import "CTDTaskConfigurationScene.h"
@@ -14,6 +15,7 @@
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
+#import "CTDModel/CTDTrialBlockResults.h"
 #import "CTDModel/CTDTrialResults.h"
 #import "CTDModel/CTDTrialScript.h"
 #import "CTDUtility/CTDNotificationReceiver.h"
@@ -26,11 +28,15 @@
 // UI time intervals
 static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
+// Application error domain
+static NSString* CTDApplicationErrorDomain = @"CTDApplication";
+
 
 
 
 // TODO: Split into helper class, so as to avoid having private methods?
-@interface CTDApplication () <CTDNotificationReceiver, CTDTaskConfiguration>
+@interface CTDApplication () <CTDNotificationReceiver,
+                              CTDTaskConfiguration>
 @end
 
 
@@ -52,6 +58,17 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
     CTDHand _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
     NSUInteger _sequenceNumber;
+}
+
++ (NSURL*)documentsDirectoryOrError:(NSError *__autoreleasing *)error
+{
+    NSURL* documentsURL = [[NSFileManager defaultManager]
+                           URLForDirectory:NSDocumentDirectory
+                                  inDomain:NSUserDomainMask
+                         appropriateForURL:nil
+                                    create:YES
+                                     error:error];
+    return documentsURL;
 }
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
@@ -125,7 +142,6 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 
 // TODO: Handle completion of configuration, release scene, and startTrial
 
-
 - (void)startTrial
 {
     id<CTDTrialScript> trialScript = _dotSequences[0];
@@ -149,7 +165,56 @@ static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
 {
     if ([notificationId isEqualToString:CTDTaskConfigurationCompletedNotification])
     {
-        [self startTrial];
+        NSError* error = nil;
+        NSURL* documentsURL = [[self class] documentsDirectoryOrError:&error];
+        if (!documentsURL)
+        {
+            NSString* message = @"Unable to locate Documents directory (for storing results)";
+            NSString* fullText = [NSString stringWithFormat:@"%@: %@",
+                                  message,
+                                  [error localizedDescription]];
+            [_displayController displayFatalError:fullText];
+        }
+        else
+        {
+            //TODO: get actual results from config
+            NSUInteger participantId = 9;
+            CTDHand preferredHand = CTDLeftHand;
+            CTDInterfaceStyle interfaceStyle = CTDModalInterfaceStyle;
+
+            NSString* blockResultsFilename =
+                [NSString stringWithFormat:@"P%02lu%c.csv",
+                 (unsigned long)participantId,
+                 interfaceStyle == CTDModalInterfaceStyle ? 'M' : 'Q'];
+            NSURL* blockResultsURL =
+                [documentsURL URLByAppendingPathComponent:blockResultsFilename];
+            // TODO: Verify that no file exists at this path
+            NSOutputStream* blockResultsStream = [[NSOutputStream alloc]
+                                                  initWithURL:blockResultsURL
+                                                       append:NO];
+//            blockResultsStream.delegate = self;
+//            [blockResultsStream scheduleInRunLoop:self.runLoop forMode:self.runLoopMode];
+            [blockResultsStream scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                                          forMode:NSRunLoopCommonModes];
+            [blockResultsStream open];
+
+            id<CTDTrialBlockResults> blockResults =
+                [[CTDCSVTrialBlockWriter alloc]
+                 initWithParticipantId:participantId
+                         preferredHand:preferredHand
+                        interfaceStyle:interfaceStyle
+                          outputStream:blockResultsStream];
+            [blockResults setDuration:23.45 forTrialNumber:3 sequenceId:17];
+
+            // TODO: flush output before closing
+            [blockResultsStream close];
+//            [blockResultsStream removeFromRunLoop:self.runLoop forMode:self.runLoopMode];
+            [blockResultsStream removeFromRunLoop:[NSRunLoop mainRunLoop]
+                                          forMode:NSRunLoopCommonModes];
+            blockResultsStream.delegate = nil;
+
+            [self startTrial];
+        }
     }
 
     // TODO: remove sender check?

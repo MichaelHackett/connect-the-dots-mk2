@@ -3,18 +3,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-
-typedef enum
-{
-    CTDLeftHand,
-    CTDRightHand
-} CTDHand;
-
-typedef enum
-{
-    CTDModalInterfaceStyle,
-    CTDQuasimodalInterfaceStyle
-} CTDInterfaceStyle;
+#import "CTDModel/CTDTrial.h"
 
 
 
