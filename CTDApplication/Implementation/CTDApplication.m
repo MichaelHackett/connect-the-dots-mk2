@@ -21,6 +21,7 @@
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDUtility/CTDRunLoopTimer.h"
+#import "CTDUtility/CTDStreamWriter.h"
 
 
 
@@ -50,6 +51,9 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     CTDTaskConfigurationScene* _configurationScene;
     id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
+
+    CTDStreamWriter* _blockResultsStreamWriter;
+    id<CTDTrialBlockResults> _trialBlockResults;
     id<CTDTrialResults> _trialResults;
     CTDRunLoopTimer* _displayTimer;
 
@@ -192,26 +196,19 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
             NSOutputStream* blockResultsStream = [[NSOutputStream alloc]
                                                   initWithURL:blockResultsURL
                                                        append:NO];
-//            blockResultsStream.delegate = self;
-//            [blockResultsStream scheduleInRunLoop:self.runLoop forMode:self.runLoopMode];
-            [blockResultsStream scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                                          forMode:NSRunLoopCommonModes];
-            [blockResultsStream open];
+            _blockResultsStreamWriter = [[CTDStreamWriter alloc]
+                                         initWithOutputStream:blockResultsStream];
+            _trialBlockResults = [[CTDCSVTrialBlockWriter alloc]
+                                  initWithParticipantId:participantId
+                                          preferredHand:preferredHand
+                                         interfaceStyle:interfaceStyle
+                                     outputStreamWriter:_blockResultsStreamWriter];
+            [_trialBlockResults setDuration:23.45 forTrialNumber:3 sequenceId:17];
 
-            id<CTDTrialBlockResults> blockResults =
-                [[CTDCSVTrialBlockWriter alloc]
-                 initWithParticipantId:participantId
-                         preferredHand:preferredHand
-                        interfaceStyle:interfaceStyle
-                          outputStream:blockResultsStream];
-            [blockResults setDuration:23.45 forTrialNumber:3 sequenceId:17];
-
-            // TODO: flush output before closing
-            [blockResultsStream close];
-//            [blockResultsStream removeFromRunLoop:self.runLoop forMode:self.runLoopMode];
-            [blockResultsStream removeFromRunLoop:[NSRunLoop mainRunLoop]
-                                          forMode:NSRunLoopCommonModes];
-            blockResultsStream.delegate = nil;
+            // TEMP
+            [_blockResultsStreamWriter closeStream];
+            _blockResultsStreamWriter = nil;
+            _trialBlockResults = nil;
 
             [self startTrial];
         }

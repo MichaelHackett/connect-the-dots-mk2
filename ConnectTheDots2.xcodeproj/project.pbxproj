@@ -26,6 +26,7 @@
 		4C2BFDED1B934BA800540A56 /* CTDFoundationTimeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDEC1B934BA800540A56 /* CTDFoundationTimeSource.m */; };
 		4C2BFDF21B93595300540A56 /* CTDInMemoryTrialResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDF11B93595300540A56 /* CTDInMemoryTrialResults.m */; };
 		4C2BFDF51B935DEF00540A56 /* CTDStubTimeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDF41B935DEF00540A56 /* CTDStubTimeSource.m */; };
+		4C2D1BA01BAA4464004661AD /* CTDStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */; };
 		4C41B72C1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B72B1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m */; };
 		4C41B7371B0A4F1900B54422 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4C41B73D1B0A4F3100B54422 /* UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B72E1B0A3C5A00B54422 /* UIKit.m */; };
@@ -351,6 +352,8 @@
 		4C2BFDF11B93595300540A56 /* CTDInMemoryTrialResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDInMemoryTrialResults.m; sourceTree = "<group>"; };
 		4C2BFDF31B935DEF00540A56 /* CTDStubTimeSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDStubTimeSource.h; sourceTree = "<group>"; };
 		4C2BFDF41B935DEF00540A56 /* CTDStubTimeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDStubTimeSource.m; sourceTree = "<group>"; };
+		4C2D1B9E1BAA4464004661AD /* CTDStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDStreamWriter.h; sourceTree = "<group>"; };
+		4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDStreamWriter.m; sourceTree = "<group>"; };
 		4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchResponder.h; sourceTree = "<group>"; };
 		4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchResponder.m; sourceTree = "<group>"; };
 		4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchTrackerFactory.h; sourceTree = "<group>"; };
@@ -1216,6 +1219,7 @@
 				4C5B9CEA1B8A2C99003E8E46 /* CTDBlockExecutor.m */,
 				4C25B97C1A0E95E300275138 /* CTDMethodSelector.m */,
 				4CFDEEDD19C68B070041B910 /* CTDPoint.m */,
+				4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */,
 				4C5B9CDE1B8A1C05003E8E46 /* CTDRunLoopTimer.m */,
 				4C25B9921A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m */,
 			);
@@ -1230,6 +1234,7 @@
 				4C5B9CD11B865690003E8E46 /* CTDNotificationReceiver.h */,
 				4CFDEEDC19C68B070041B910 /* CTDPoint.h */,
 				4C5B9CDD1B8A1C05003E8E46 /* CTDRunLoopTimer.h */,
+				4C2D1B9E1BAA4464004661AD /* CTDStreamWriter.h */,
 				4C25B9911A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.h */,
 				4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */,
 				4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */,
@@ -1924,6 +1929,7 @@
 				4CFDEEDE19C68B070041B910 /* CTDPoint.m in Sources */,
 				4C5B9CDF1B8A1C05003E8E46 /* CTDRunLoopTimer.m in Sources */,
 				4C25B97D1A0E95E300275138 /* CTDMethodSelector.m in Sources */,
+				4C2D1BA01BAA4464004661AD /* CTDStreamWriter.m in Sources */,
 				4C25B9931A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

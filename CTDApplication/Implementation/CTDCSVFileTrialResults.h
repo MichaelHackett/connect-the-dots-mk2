@@ -7,6 +7,7 @@
 #import "CTDModel/CTDTrial.h"
 #import "CTDModel/CTDTrialBlockResults.h"
 #import "CTDModel/CTDTrialResults.h"
+@class CTDStreamWriter;
 
 
 
@@ -17,7 +18,7 @@
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
                         preferredHand:(CTDHand)preferredHand
                        interfaceStyle:(CTDInterfaceStyle)interfaceStyle
-                         outputStream:(NSOutputStream*)outputStream;
+                   outputStreamWriter:(CTDStreamWriter*)outputStreamWriter;
 
 CTD_NO_DEFAULT_INIT
 

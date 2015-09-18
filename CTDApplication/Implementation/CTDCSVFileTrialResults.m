@@ -2,15 +2,14 @@
 
 #import "CTDCSVFileTrialResults.h"
 
+#import "CTDUtility/CTDStreamWriter.h"
 
 
-@interface CTDCSVTrialBlockWriter () <NSStreamDelegate>
-@end
 
 
 @implementation CTDCSVTrialBlockWriter
 {
-    NSOutputStream* _outputStream;
+    CTDStreamWriter* _outputStreamWriter;
     NSUInteger _participantId;
     CTDHand    _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
@@ -19,17 +18,15 @@
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
                         preferredHand:(CTDHand)preferredHand
                        interfaceStyle:(CTDInterfaceStyle)interfaceStyle
-                         outputStream:(NSOutputStream*)outputStream
+                   outputStreamWriter:(CTDStreamWriter*)outputStreamWriter
 {
     self = [super init];
     if (self)
     {
-        _outputStream = outputStream;
+        _outputStreamWriter = outputStreamWriter;
         _participantId = participantId;
         _preferredHand = preferredHand;
         _interfaceStyle = interfaceStyle;
-
-        outputStream.delegate = self;
     }
     return self;
 }
@@ -46,40 +43,8 @@
                       (unsigned long)sequenceId,
                       (double)trialDuration];
 
-    // TEMP: write directly
-    NSData* data = [line dataUsingEncoding:NSASCIIStringEncoding];
-    [_outputStream write:[data bytes] maxLength:[data length]];
+    [_outputStreamWriter appendString:line];
 }
-
-
-
-#pragma mark - NSStreamDelegate
-
-
-- (void)stream:(__unused NSStream*)stream
-   handleEvent:(NSStreamEvent)eventCode
-{
-    switch(eventCode) {
-        case NSStreamEventOpenCompleted:
-//            [self ConnectionEndpoint_openCompletedForStream:stream];
-            break;
-        case NSStreamEventHasBytesAvailable:
-//            [self ConnectionEndpoint_dataAvailableFromStream:stream];
-            break;
-        case NSStreamEventHasSpaceAvailable:
-//            [self ConnectionEndpoint_spaceAvailableOnStream:stream];
-            break;
-        case NSStreamEventErrorOccurred:
-//            [self ConnectionEndpoint_error:[stream streamError] occurredOnStream:stream];
-            break;
-        case NSStreamEventEndEncountered:
-//            [self ConnectionEndpoint_encounteredEndOfStream:stream];
-            break;
-        default:
-            break;
-    }
-}
-
 @end
 
 
