@@ -144,7 +144,42 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     [_configurationActivity resetForm];
 }
 
-// TODO: Handle completion of configuration, release scene, and startTrial
+- (void)startTrialBlock
+{
+    NSError* error = nil;
+    NSURL* documentsURL = [[self class] documentsDirectoryOrError:&error];
+    if (!documentsURL)
+    {
+        NSString* message = @"Unable to locate Documents directory (for storing results)";
+        NSString* fullText = [NSString stringWithFormat:@"%@: %@",
+                              message,
+                              [error localizedDescription]];
+        [_displayController displayFatalError:fullText];
+        return;
+    }
+
+    NSString* blockResultsFilename =
+        [NSString stringWithFormat:@"P%02lu%c.csv",
+         (unsigned long)_participantId,
+         _interfaceStyle == CTDModalInterfaceStyle ? 'M' : 'Q'];
+    NSURL* blockResultsURL =
+        [documentsURL URLByAppendingPathComponent:blockResultsFilename];
+
+    // TODO: Verify that no file exists at this path
+
+    NSOutputStream* blockResultsStream = [[NSOutputStream alloc]
+                                          initWithURL:blockResultsURL
+                                          append:NO];
+    _blockResultsStreamWriter = [[CTDStreamWriter alloc]
+                                 initWithOutputStream:blockResultsStream];
+    _trialBlockResults = [[CTDCSVTrialBlockWriter alloc]
+                          initWithParticipantId:_participantId
+                                  preferredHand:_preferredHand
+                                 interfaceStyle:_interfaceStyle
+                             outputStreamWriter:_blockResultsStreamWriter];
+
+    [self startTrial];
+}
 
 - (void)startTrial
 {
@@ -169,54 +204,16 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 {
     if ([notificationId isEqualToString:CTDTaskConfigurationCompletedNotification])
     {
-        NSError* error = nil;
-        NSURL* documentsURL = [[self class] documentsDirectoryOrError:&error];
-        if (!documentsURL)
-        {
-            NSString* message = @"Unable to locate Documents directory (for storing results)";
-            NSString* fullText = [NSString stringWithFormat:@"%@: %@",
-                                  message,
-                                  [error localizedDescription]];
-            [_displayController displayFatalError:fullText];
-        }
-        else
-        {
-            //TODO: get actual results from config
-            NSUInteger participantId = 9;
-            CTDHand preferredHand = CTDLeftHand;
-            CTDInterfaceStyle interfaceStyle = CTDModalInterfaceStyle;
-
-            NSString* blockResultsFilename =
-                [NSString stringWithFormat:@"P%02lu%c.csv",
-                 (unsigned long)participantId,
-                 interfaceStyle == CTDModalInterfaceStyle ? 'M' : 'Q'];
-            NSURL* blockResultsURL =
-                [documentsURL URLByAppendingPathComponent:blockResultsFilename];
-            // TODO: Verify that no file exists at this path
-            NSOutputStream* blockResultsStream = [[NSOutputStream alloc]
-                                                  initWithURL:blockResultsURL
-                                                       append:NO];
-            _blockResultsStreamWriter = [[CTDStreamWriter alloc]
-                                         initWithOutputStream:blockResultsStream];
-            _trialBlockResults = [[CTDCSVTrialBlockWriter alloc]
-                                  initWithParticipantId:participantId
-                                          preferredHand:preferredHand
-                                         interfaceStyle:interfaceStyle
-                                     outputStreamWriter:_blockResultsStreamWriter];
-            [_trialBlockResults setDuration:23.45 forTrialNumber:3 sequenceId:17];
-
-            // TEMP
-            [_blockResultsStreamWriter closeStream];
-            _blockResultsStreamWriter = nil;
-            _trialBlockResults = nil;
-
-            [self startTrial];
-        }
+        [self startTrialBlock];
     }
 
     // TODO: remove sender check?
     else if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
     {
+        [_trialBlockResults setDuration:[_trialResults trialDuration]
+                         forTrialNumber:3
+                             sequenceId:17];
+
         int trialDurationSeconds = (int)round((double)[_trialResults trialDuration]);
         NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",
                                 trialDurationSeconds / 60,
@@ -232,6 +229,11 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
             strongSelf->_displayTimer = nil;
             [strongSelf->_connectionScene hideTrialCompletionMessage];
         }];
+
+        // TODO: Close only on end of last trial
+        [_blockResultsStreamWriter closeStream];
+        _blockResultsStreamWriter = nil;
+        _trialBlockResults = nil;
     }
 }
 
