@@ -8,6 +8,8 @@
 
 @interface CTDStreamWriter : NSObject
 
++ (instancetype)writeToURL:(NSURL*)destinationUrl;
+
 // Designated initializer
 - (instancetype)initWithOutputStream:(NSOutputStream*)outputStream
                   scheduledOnRunLoop:(NSRunLoop*)runLoop

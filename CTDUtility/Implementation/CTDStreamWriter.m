@@ -51,6 +51,16 @@ static NSMutableArray* writersInFinalFlush = nil;
     writersInFinalFlush = [[NSMutableArray alloc] init];
 }
 
++ (instancetype)writeToURL:(NSURL*)destinationUrl
+{
+    NSAssert(destinationUrl, @"nil URL supplied");
+
+    NSOutputStream* outputStream = [[NSOutputStream alloc]
+                                    initWithURL:destinationUrl
+                                         append:NO];
+    return [[self alloc] initWithOutputStream:outputStream];
+}
+
 - (instancetype)initWithOutputStream:(NSOutputStream*)outputStream
                   scheduledOnRunLoop:(NSRunLoop*)runLoop
                          runLoopMode:(NSString*)runLoopMode

@@ -126,6 +126,15 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     [_displayController displayFatalError:message];
 }
 
+- (void)displayResultsDestinationError:(NSError*)error
+{
+    NSString* message = @"Unable to locate Documents directory (for storing results)";
+    NSString* fullText = [NSString stringWithFormat:@"%@: %@",
+                          message,
+                          [error localizedDescription]];
+    [_displayController displayFatalError:fullText];
+}
+
 - (void)displayConfigurationScreen
 {
     _configurationScene = [[CTDTaskConfigurationScene alloc] init];
@@ -148,15 +157,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 {
     NSError* error = nil;
     NSURL* documentsURL = [[self class] documentsDirectoryOrError:&error];
-    if (!documentsURL)
-    {
-        NSString* message = @"Unable to locate Documents directory (for storing results)";
-        NSString* fullText = [NSString stringWithFormat:@"%@: %@",
-                              message,
-                              [error localizedDescription]];
-        [_displayController displayFatalError:fullText];
-        return;
-    }
+    if (!documentsURL) { [self displayResultsDestinationError:error]; return; }
 
     NSString* blockResultsFilename =
         [NSString stringWithFormat:@"P%02lu%c.csv",
@@ -167,11 +168,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
     // TODO: Verify that no file exists at this path
 
-    NSOutputStream* blockResultsStream = [[NSOutputStream alloc]
-                                          initWithURL:blockResultsURL
-                                          append:NO];
-    _blockResultsStreamWriter = [[CTDStreamWriter alloc]
-                                 initWithOutputStream:blockResultsStream];
+    _blockResultsStreamWriter = [CTDStreamWriter writeToURL:blockResultsURL];
     _trialBlockResults = [[CTDCSVTrialBlockWriter alloc]
                           initWithParticipantId:_participantId
                                   preferredHand:_preferredHand
