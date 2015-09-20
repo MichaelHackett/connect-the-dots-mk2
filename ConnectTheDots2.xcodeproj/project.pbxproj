@@ -522,8 +522,6 @@
 		4CEBCA6F19BB77C400D2B498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModel.xcconfig; path = BuildConfiguration/CTDModel.xcconfig; sourceTree = "<group>"; };
 		4CEBCAA019BB784800D2B498 /* CTDModelTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDModelTests.xcconfig; path = BuildConfiguration/CTDModelTests.xcconfig; sourceTree = "<group>"; };
-		4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDPresentation.xcconfig; path = BuildConfiguration/CTDPresentation.xcconfig; sourceTree = "<group>"; };
-		4CEBCAA219BB784800D2B498 /* CTDPresentationTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDPresentationTests.xcconfig; path = BuildConfiguration/CTDPresentationTests.xcconfig; sourceTree = "<group>"; };
 		4CEBCAB319BB964300D2B498 /* CTDEndToEndTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CTDEndToEndTests.xcconfig; path = BuildConfiguration/CTDEndToEndTests.xcconfig; sourceTree = "<group>"; };
 		4CEBCAB519BC97ED00D2B498 /* CTDUIKitConnectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitConnectSceneViewController.m; sourceTree = "<group>"; };
 		4CEBCAB619BC97ED00D2B498 /* CTDUIKitConnectScene.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTDUIKitConnectScene.xib; sourceTree = "<group>"; };
@@ -1213,8 +1211,6 @@
 				4CFA35621B76D34E0060A689 /* CTDApplicationTests.xcconfig */,
 				4CEBCA9F19BB784800D2B498 /* CTDModel.xcconfig */,
 				4CEBCAA019BB784800D2B498 /* CTDModelTests.xcconfig */,
-				4CEBCAA119BB784800D2B498 /* CTDPresentation.xcconfig */,
-				4CEBCAA219BB784800D2B498 /* CTDPresentationTests.xcconfig */,
 				4C41B7C01B155CB800B54422 /* CTDInteraction.xcconfig */,
 				4C41B7C11B155CB800B54422 /* CTDInteractionTests.xcconfig */,
 				4CFEF36F1A6EB8B10086C37B /* CTDUIKitBridge.xcconfig */,
