@@ -13,4 +13,6 @@
 
 - (NSTimeInterval)trialDuration;
 
+- (void)finalizeResults;
+
 @end

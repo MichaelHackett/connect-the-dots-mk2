@@ -34,4 +34,10 @@
     return (NSTimeInterval)trialDuration;
 }
 
+- (void)finalizeResults
+{
+    // TODO: Set a flag and check this in mutator methods, throwing an exception
+    // if results are modified after finalization.
+}
+
 @end

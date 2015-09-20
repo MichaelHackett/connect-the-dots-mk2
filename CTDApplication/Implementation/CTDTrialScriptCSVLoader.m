@@ -70,34 +70,4 @@
     return sequences;
 }
 
-//+ (NSError*)this:(NSString*)path
-//{
-//    NSError* streamError = nil;
-//    NSInputStream* in = [NSInputStream inputStreamWithFileAtPath:path];
-//    NSMutableString* line = [NSMutableString]
-//    uint8_t* buffer = malloc(lineReaderChunkSize);
-//
-//    while ([in hasBytesAvailable]) {
-//        NSInteger readResult = [in read:buffer maxLength:lineReaderChunkSize];
-//        if (readResult <= 0) { break; }  // stop at end-of-file or on error
-//        
-//    }
-//
-//    free(buffer);
-//
-//    if ([in streamStatus] == NSStreamStatusError) { return [in streamError]; }
-//
-//    FILE* file = fopen([path cStringUsingEncoding:NSUTF8StringEncoding], "r");
-//    NSAssert(file, @"cannot open file");
-//
-//    while (1) {
-//        while (fgets(line, sizeof(line), file)) {
-//
-//        unsigned int color;
-//        double x1, y1, x2, y2;
-//        if (fscanf(file, "%u, %g, %g, %g, %g", &color, &x1, &y1, &x2, &y2) < 5) { break; }
-//
-//    }
-//}
-
 @end

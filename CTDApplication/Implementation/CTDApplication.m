@@ -58,7 +58,8 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     NSUInteger _participantId;
     CTDHand _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
-    NSUInteger _sequenceNumber;
+    NSArray* _trialSequenceIds; // the order in which to present the sequences
+    NSUInteger _trialIndex; // current position within above list
 
     id<CTDTrialBlockResults> _trialBlockResults;
     id<CTDTrialResults> _trialResults;
@@ -95,7 +96,8 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
         _participantId = 0;
         _preferredHand = CTDRightHand;
         _interfaceStyle = CTDModalInterfaceStyle;
-        _sequenceNumber = 1;
+        _trialSequenceIds = nil;
+        _trialIndex = 0;
         _trialBlockResults = nil;
         _trialResults = nil;
     }
@@ -159,6 +161,8 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
 - (void)startTrialBlock
 {
+    _trialSequenceIds = @[ @1, @2 ]; // TODO: generate list from participant ID
+
     NSError* error = nil;
     _trialBlockResults =
         [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
@@ -167,13 +171,23 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                                                           error:&error];
     if (!_trialBlockResults) { [self displayResultsDestinationError:error]; return; }
 
+    _trialIndex = 0;
     [self startTrial];
 }
 
 - (void)startTrial
 {
-    id<CTDTrialScript> trialScript = _dotSequences[0];
-    _trialResults = [CTDModel trialResultsHolder];
+    NSUInteger sequenceId = [_trialSequenceIds[_trialIndex] unsignedIntegerValue];
+    id<CTDTrialScript> trialScript = _dotSequences[sequenceId - 1];
+
+    NSError* error = nil;
+    _trialResults =
+        [_trialResultsFactory trialResultsForParticipantId:_participantId
+                                             preferredHand:_preferredHand
+                                            interfaceStyle:_interfaceStyle
+                                               trialNumber:_trialIndex + 1
+                                                sequenceId:sequenceId
+                                                     error:&error];
 
     _connectionScene = [_displayController connectScene];
     _connectionActivity = [[CTDConnectionActivity alloc]
@@ -199,11 +213,14 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     // TODO: remove sender check?
     else if ([notificationId isEqualToString:CTDTrialCompletedNotification] && sender == _connectionActivity)
     {
-        [_trialBlockResults setDuration:[_trialResults trialDuration]
-                         forTrialNumber:3
-                             sequenceId:17];
+        [_trialResults finalizeResults];
+        NSTimeInterval trialDuration = [_trialResults trialDuration];
+        [_trialBlockResults setDuration:trialDuration
+                         forTrialNumber:_trialIndex + 1
+                             sequenceId:[_trialSequenceIds[_trialIndex] unsignedIntegerValue]];
+        _trialResults = nil;
 
-        int trialDurationSeconds = (int)round((double)[_trialResults trialDuration]);
+        int trialDurationSeconds = (int)round((double)trialDuration);
         NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",
                                 trialDurationSeconds / 60,
                                 trialDurationSeconds % 60];
@@ -217,11 +234,18 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
             ctd_strongify(weakSelf, strongSelf);
             strongSelf->_displayTimer = nil;
             [strongSelf->_connectionScene hideTrialCompletionMessage];
-        }];
 
-        // TODO: Close only on end of last trial
-        [_trialBlockResults finalizeResults];
-        _trialBlockResults = nil;
+            strongSelf->_trialIndex += 1;
+            if (strongSelf->_trialIndex < [strongSelf->_trialSequenceIds count])
+            {
+                [strongSelf startTrial];
+            }
+            else
+            {
+                [strongSelf->_trialBlockResults finalizeResults];
+                strongSelf->_trialBlockResults = nil;
+            }
+        }];
     }
 }
 
@@ -245,9 +269,9 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     _interfaceStyle = interfaceStyle;
 }
 
-- (void)setSequenceNumber:(NSUInteger)sequenceNumber
-{
-    _sequenceNumber = sequenceNumber;
-}
-
+//- (void)setSequenceNumber:(NSUInteger)sequenceNumber
+//{
+//    _sequenceNumber = sequenceNumber;
+//}
+//
 @end

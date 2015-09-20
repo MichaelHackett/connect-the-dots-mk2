@@ -109,6 +109,8 @@ static double FIRST_STEP_END_TIME =   100008.5;
 
 - (NSTimeInterval)trialDuration { return 0.0; }  // not used in tests
 
+- (void)finalizeResults { }
+
 @end
 
 

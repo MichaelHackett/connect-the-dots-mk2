@@ -49,9 +49,36 @@
 
 }
 
-//- (id<CTDTrialResults>)trialResultsForTrialNumber:(NSUInteger)trialNumber
-//{
-//
-//}
+- (id<CTDTrialResults>)
+      trialResultsForParticipantId:(NSUInteger)participantId
+                     preferredHand:(CTDHand)preferredHand
+                    interfaceStyle:(CTDInterfaceStyle)interfaceStyle
+                       trialNumber:(NSUInteger)trialNumber
+                        sequenceId:(NSUInteger)sequenceId
+                             error:(NSError**)error
+{
+    NSURL* documentsURL = [[self class] documentsDirectoryOrError:error];
+    if (!documentsURL) { return nil; }
+
+    NSString* filename = [NSString stringWithFormat:@"P%02lu%c-%02lu.csv",
+                          (unsigned long)participantId,
+                          interfaceStyle == CTDModalInterfaceStyle ? 'M' : 'Q',
+                          (unsigned long)trialNumber];
+
+    NSURL* blockResultsURL = [documentsURL URLByAppendingPathComponent:filename];
+
+    // TODO: Verify that no file exists at this path
+    
+    CTDStreamWriter* blockResultsStreamWriter =
+        [CTDStreamWriter writerForURL:blockResultsURL];
+
+    return [[CTDCSVStreamTrialResults alloc]
+            initWithParticipantId:participantId
+                    preferredHand:preferredHand
+                   interfaceStyle:interfaceStyle
+                      trialNumber:trialNumber
+                       sequenceId:sequenceId
+               outputStreamWriter:blockResultsStreamWriter];
+}
 
 @end

@@ -4,6 +4,7 @@
 //
 //  Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "CTDModel/CTDInMemoryTrialResults.h"
 #import "CTDModel/CTDTrial.h"
 #import "CTDModel/CTDTrialBlockResults.h"
 #import "CTDModel/CTDTrialResults.h"
@@ -24,14 +25,14 @@ CTD_NO_DEFAULT_INIT
 @end
 
 
-@interface CTDCSVStreamTrialResults : NSObject <CTDTrialResults>
+@interface CTDCSVStreamTrialResults : CTDInMemoryTrialResults <CTDTrialResults>
 
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
                         preferredHand:(CTDHand)preferredHand
                        interfaceStyle:(CTDInterfaceStyle)interfaceStyle
-                           trialIndex:(NSUInteger)trialIndex
+                          trialNumber:(NSUInteger)trialNumber
                            sequenceId:(NSUInteger)sequenceId
-                         outputStream:(NSOutputStream*)outputStream;
+                   outputStreamWriter:(CTDStreamWriter*)outputStreamWriter;
 
 CTD_NO_DEFAULT_INIT
 
