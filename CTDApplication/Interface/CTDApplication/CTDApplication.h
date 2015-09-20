@@ -5,6 +5,7 @@
 
 @protocol CTDDisplayController;
 @protocol CTDTimeSource;
+@protocol CTDTrialResultsFactory;
 
 
 
@@ -12,6 +13,7 @@
 
 // Designated initializer
 - (instancetype)initWithDisplayController:(id<CTDDisplayController>)displayController
+                      trialResultsFactory:(id<CTDTrialResultsFactory>)trialResultsFactory
                                timeSource:(id<CTDTimeSource>)timeSource;
 
 CTD_NO_DEFAULT_INIT

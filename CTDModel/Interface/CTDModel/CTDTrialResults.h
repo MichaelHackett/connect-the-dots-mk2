@@ -7,8 +7,12 @@
 @protocol CTDTrialResults <NSObject>
 
 // stepNumber is 1-based
-- (void)setDuration:(NSTimeInterval)stepDuration forStepNumber:(NSUInteger)stepNumber;
+- (void)setDuration:(NSTimeInterval)stepDuration
+      forStepNumber:(NSUInteger)stepNumber;
+// TODO: Need to record dot positions, unless delivering the script to the Results obj at init.
 
 - (NSTimeInterval)trialDuration;
+
+- (void)finalizeResults;
 
 @end
