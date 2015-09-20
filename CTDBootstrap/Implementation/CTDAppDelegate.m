@@ -6,6 +6,7 @@
 #import "CTDApplication/CTDApplication.h"
 #import "CTDApplication/Ports/CTDDisplayController.h"
 
+#import "CTDStorage/CTDStorage.h"
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
 
 
@@ -23,6 +24,7 @@
     _displayController = [CTDUIKitBridge displayControllerForApplication:application];
     _ctdApplication = [[CTDApplication alloc]
                        initWithDisplayController:_displayController
+                       trialResultsFactory:[CTDStorage csvFileTrialResultsFactory]
                        timeSource:[[CTDFoundationTimeSource alloc] init]];
     [_ctdApplication start];
 

@@ -10,5 +10,6 @@
      forTrialNumber:(NSUInteger)trialNumber
          sequenceId:(NSUInteger)sequenceId;
 
-@end
+- (void)finalizeResults;
 
+@end

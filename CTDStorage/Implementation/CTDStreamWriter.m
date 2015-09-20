@@ -51,7 +51,7 @@ static NSMutableArray* writersInFinalFlush = nil;
     writersInFinalFlush = [[NSMutableArray alloc] init];
 }
 
-+ (instancetype)writeToURL:(NSURL*)destinationUrl
++ (instancetype)writerForURL:(NSURL*)destinationUrl
 {
     NSAssert(destinationUrl, @"nil URL supplied");
 

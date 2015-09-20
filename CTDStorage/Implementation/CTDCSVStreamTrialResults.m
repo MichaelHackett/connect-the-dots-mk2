@@ -1,13 +1,13 @@
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#import "CTDCSVFileTrialResults.h"
+#import "CTDCSVStreamTrialResults.h"
 
-#import "CTDUtility/CTDStreamWriter.h"
-
-
+#import "CTDStreamWriter.h"
 
 
-@implementation CTDCSVTrialBlockWriter
+
+
+@implementation CTDCSVStreamTrialBlockResults
 {
     CTDStreamWriter* _outputStreamWriter;
     NSUInteger _participantId;
@@ -23,6 +23,8 @@
     self = [super init];
     if (self)
     {
+        NSAssert(outputStreamWriter, @"Must supply a non-nil CTDStreamWriter");
+
         _outputStreamWriter = outputStreamWriter;
         _participantId = participantId;
         _preferredHand = preferredHand;
@@ -35,6 +37,8 @@
      forTrialNumber:(NSUInteger)trialNumber
          sequenceId:(NSUInteger)sequenceId
 {
+    NSAssert(_outputStreamWriter, @"New trial result sent after results finalized.");
+
     NSString* line = [NSString stringWithFormat:@"%lu, %c, %c, %lu, %lu, %.2f\n",
                       (unsigned long)_participantId,
                       _preferredHand == CTDLeftHand ? 'L' : 'R',
@@ -45,13 +49,20 @@
 
     [_outputStreamWriter appendString:line];
 }
+
+- (void)finalizeResults
+{
+    [_outputStreamWriter closeStream];
+    _outputStreamWriter = nil;
+}
+
 @end
 
 
 
 
 
-@implementation CTDCSVFileTrialWriter
+@implementation CTDCSVStreamTrialResults
 {
     NSOutputStream* _outputStream;
     NSUInteger _participantId;

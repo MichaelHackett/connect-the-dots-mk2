@@ -1,0 +1,6 @@
+// Configuration for CTDStorageTests target.
+
+#include "ConnectTheDots-AllTests.xcconfig"
+
+// Tests are part of a parent module.
+CTD_MODULE_NAME = CTDStorage

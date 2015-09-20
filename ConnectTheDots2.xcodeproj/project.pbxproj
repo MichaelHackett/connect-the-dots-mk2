@@ -26,7 +26,19 @@
 		4C2BFDED1B934BA800540A56 /* CTDFoundationTimeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDEC1B934BA800540A56 /* CTDFoundationTimeSource.m */; };
 		4C2BFDF21B93595300540A56 /* CTDInMemoryTrialResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDF11B93595300540A56 /* CTDInMemoryTrialResults.m */; };
 		4C2BFDF51B935DEF00540A56 /* CTDStubTimeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BFDF41B935DEF00540A56 /* CTDStubTimeSource.m */; };
-		4C2D1BA01BAA4464004661AD /* CTDStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */; };
+		4C2D1BBB1BADD9A3004661AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4C2D1BC81BADD9A3004661AD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
+		4C2D1BC91BADD9A3004661AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
+		4C2D1BCD1BADD9A3004661AD /* libCTDStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2D1BBA1BADD9A3004661AD /* libCTDStorage.a */; };
+		4C2D1BD51BADD9A3004661AD /* CTDStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1BD41BADD9A3004661AD /* CTDStorageTests.m */; };
+		4C2D1BDC1BADD9DF004661AD /* libCTDTestHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFEF3E91A72F1B70086C37B /* libCTDTestHelpers.a */; };
+		4C2D1BDD1BADD9DF004661AD /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8497681A7FEA18000A094E /* libochamcrest.a */; };
+		4C2D1BE31BADF42F004661AD /* CTDStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1BE21BADF42F004661AD /* CTDStorage.m */; };
+		4C2D1BE91BAE18A8004661AD /* CTDCSVFileWriterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1BE81BAE18A8004661AD /* CTDCSVFileWriterFactory.m */; };
+		4C2D1BEA1BAE1B44004661AD /* CTDStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */; };
+		4C2D1BEB1BAE1B50004661AD /* CTDCSVStreamTrialResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFCB6341BA7D0300014179C /* CTDCSVStreamTrialResults.m */; };
+		4C2D1BEC1BAE4129004661AD /* libCTDStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2D1BBA1BADD9A3004661AD /* libCTDStorage.a */; };
+		4C2D1BED1BAE4374004661AD /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4C41B72C1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B72B1B0976AF00B54422 /* CTDUIKitTouchRoutingTable.m */; };
 		4C41B7371B0A4F1900B54422 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4C41B73D1B0A4F3100B54422 /* UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41B72E1B0A3C5A00B54422 /* UIKit.m */; };
@@ -123,7 +135,6 @@
 		4CFA356C1B76DAF40060A689 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8497681A7FEA18000A094E /* libochamcrest.a */; };
 		4CFA356D1B76DB070060A689 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFA356E1B76DB240060A689 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
-		4CFCB6351BA7D0300014179C /* CTDCSVFileTrialResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */; };
 		4CFDEEB719C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
 		4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -152,6 +163,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4C2D1BCB1BADD9A3004661AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C2D1BB91BADD9A3004661AD;
+			remoteInfo = CTDStorage;
+		};
 		4C41B7901B155AA500B54422 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4CEBC9FF19BB564600D2B498 /* Project object */;
@@ -246,6 +264,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4C2D1BB81BADD9A3004661AD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C41B7381B0A4F1900B54422 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +381,19 @@
 		4C2BFDF41B935DEF00540A56 /* CTDStubTimeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDStubTimeSource.m; sourceTree = "<group>"; };
 		4C2D1B9E1BAA4464004661AD /* CTDStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDStreamWriter.h; sourceTree = "<group>"; };
 		4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDStreamWriter.m; sourceTree = "<group>"; };
+		4C2D1BAA1BADD739004661AD /* CTDTrialResultsFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialResultsFactory.h; sourceTree = "<group>"; };
+		4C2D1BBA1BADD9A3004661AD /* libCTDStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCTDStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C2D1BBE1BADD9A3004661AD /* CTDStorage-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTDStorage-Prefix.pch"; sourceTree = "<group>"; };
+		4C2D1BC71BADD9A3004661AD /* CTDStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTDStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C2D1BD01BADD9A3004661AD /* CTDStorageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTDStorageTests-Info.plist"; sourceTree = "<group>"; };
+		4C2D1BD41BADD9A3004661AD /* CTDStorageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDStorageTests.m; sourceTree = "<group>"; };
+		4C2D1BDE1BADDBF8004661AD /* CTDStorageTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDStorageTests-Prefix.pch"; sourceTree = "<group>"; };
+		4C2D1BDF1BADDC25004661AD /* CTDStorage.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDStorage.xcconfig; path = BuildConfiguration/CTDStorage.xcconfig; sourceTree = "<group>"; };
+		4C2D1BE01BADDC36004661AD /* CTDStorageTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDStorageTests.xcconfig; path = BuildConfiguration/CTDStorageTests.xcconfig; sourceTree = "<group>"; };
+		4C2D1BE11BADF42F004661AD /* CTDStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDStorage.h; sourceTree = "<group>"; };
+		4C2D1BE21BADF42F004661AD /* CTDStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDStorage.m; sourceTree = "<group>"; };
+		4C2D1BE71BAE18A8004661AD /* CTDCSVFileWriterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCSVFileWriterFactory.h; sourceTree = "<group>"; };
+		4C2D1BE81BAE18A8004661AD /* CTDCSVFileWriterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCSVFileWriterFactory.m; sourceTree = "<group>"; };
 		4C3236391A141955005C25D7 /* CTDFakeTouchResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFakeTouchResponder.h; sourceTree = "<group>"; };
 		4C32363A1A141955005C25D7 /* CTDFakeTouchResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFakeTouchResponder.m; sourceTree = "<group>"; };
 		4C32363C1A145074005C25D7 /* CTDTouchTrackerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDTouchTrackerFactory.h; sourceTree = "<group>"; };
@@ -518,8 +558,8 @@
 		4CFA35601B76D2FC0060A689 /* CTDApplication.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDApplication.xcconfig; path = BuildConfiguration/CTDApplication.xcconfig; sourceTree = "<group>"; };
 		4CFA35621B76D34E0060A689 /* CTDApplicationTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CTDApplicationTests.xcconfig; path = BuildConfiguration/CTDApplicationTests.xcconfig; sourceTree = "<group>"; };
 		4CFA35641B76D6260060A689 /* CTDBootstrap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTDBootstrap-Prefix.pch"; sourceTree = "<group>"; };
-		4CFCB6331BA7D0300014179C /* CTDCSVFileTrialResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCSVFileTrialResults.h; sourceTree = "<group>"; };
-		4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCSVFileTrialResults.m; sourceTree = "<group>"; };
+		4CFCB6331BA7D0300014179C /* CTDCSVStreamTrialResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCSVStreamTrialResults.h; sourceTree = "<group>"; };
+		4CFCB6341BA7D0300014179C /* CTDCSVStreamTrialResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCSVStreamTrialResults.m; sourceTree = "<group>"; };
 		4CFCB6361BA7D1180014179C /* CTDTrial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrial.h; sourceTree = "<group>"; };
 		4CFCB63A1BA92ACA0014179C /* CTDTrialBlockResults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialBlockResults.h; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
@@ -569,6 +609,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4C2D1BB71BADD9A3004661AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2D1BBB1BADD9A3004661AD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C2D1BC41BADD9A3004661AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2D1BCD1BADD9A3004661AD /* libCTDStorage.a in Frameworks */,
+				4C2D1BDC1BADD9DF004661AD /* libCTDTestHelpers.a in Frameworks */,
+				4C2D1BED1BAE4374004661AD /* libCTDUtility.a in Frameworks */,
+				4C2D1BDD1BADD9DF004661AD /* libochamcrest.a in Frameworks */,
+				4C2D1BC81BADD9A3004661AD /* XCTest.framework in Frameworks */,
+				4C2D1BC91BADD9A3004661AD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C41B7361B0A4F1900B54422 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,6 +668,7 @@
 				4CFA35691B76D7470060A689 /* libCTDApplication.a in Frameworks */,
 				4C41B7C21B1564F900B54422 /* libCTDInteraction.a in Frameworks */,
 				4CEBCAAF19BB928B00D2B498 /* libCTDModel.a in Frameworks */,
+				4C2D1BEC1BAE4129004661AD /* libCTDStorage.a in Frameworks */,
 				4CFEF37E1A6EBB7D0086C37B /* libCTDUIKitBridge.a in Frameworks */,
 				4CFDEEE819C69F4A0041B910 /* libCTDUtility.a in Frameworks */,
 				4C41B7421B0A514100B54422 /* libCocoaAdditions.a in Frameworks */,
@@ -742,6 +804,7 @@
 				4CF33B651B96A2AF00191D1F /* CTDTaskConfigurationSceneRenderer.h */,
 				4C2BFDE11B9349B700540A56 /* CTDTimeSource.h */,
 				4C3DB3E51B6FBC4E00AE6AD9 /* CTDTrialRenderer.h */,
+				4C2D1BAA1BADD739004661AD /* CTDTrialResultsFactory.h */,
 			);
 			path = Ports;
 			sourceTree = "<group>";
@@ -758,6 +821,59 @@
 				4C2BFDEC1B934BA800540A56 /* CTDFoundationTimeSource.m */,
 			);
 			path = Implementation;
+			sourceTree = "<group>";
+		};
+		4C2D1BB41BADD961004661AD /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D1BE11BADF42F004661AD /* CTDStorage.h */,
+			);
+			name = Interface;
+			path = Interface/CTDStorage;
+			sourceTree = "<group>";
+		};
+		4C2D1BB51BADD973004661AD /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D1BBE1BADD9A3004661AD /* CTDStorage-Prefix.pch */,
+				4C2D1BE21BADF42F004661AD /* CTDStorage.m */,
+				4C2D1BE71BAE18A8004661AD /* CTDCSVFileWriterFactory.h */,
+				4C2D1BE81BAE18A8004661AD /* CTDCSVFileWriterFactory.m */,
+				4CFCB6331BA7D0300014179C /* CTDCSVStreamTrialResults.h */,
+				4CFCB6341BA7D0300014179C /* CTDCSVStreamTrialResults.m */,
+				4C2D1B9E1BAA4464004661AD /* CTDStreamWriter.h */,
+				4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		4C2D1BBC1BADD9A3004661AD /* CTDStorage */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D1BB41BADD961004661AD /* Interface */,
+				4C2D1BB51BADD973004661AD /* Implementation */,
+				4C2D1BCE1BADD9A3004661AD /* Tests */,
+			);
+			path = CTDStorage;
+			sourceTree = "<group>";
+		};
+		4C2D1BCE1BADD9A3004661AD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D1BD41BADD9A3004661AD /* CTDStorageTests.m */,
+				4C2D1BCF1BADD9A3004661AD /* Supporting Files */,
+			);
+			name = Tests;
+			path = CTDStorage/Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		4C2D1BCF1BADD9A3004661AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D1BDE1BADDBF8004661AD /* CTDStorageTests-Prefix.pch */,
+				4C2D1BD01BADD9A3004661AD /* CTDStorageTests-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		4C41B7301B0A3D0600B54422 /* Cocoa Additions */ = {
@@ -973,6 +1089,7 @@
 				4CFA35401B76D18F0060A689 /* CTDApplication */,
 				4CEBCA1019BB564600D2B498 /* UI Bridge */,
 				4C41B78B1B1557C700B54422 /* CTDInteraction */,
+				4C2D1BBC1BADD9A3004661AD /* CTDStorage */,
 				4CEBCA5919BB77C400D2B498 /* CTDModel */,
 				4CFDEEB819C688D00041B910 /* CTDUtility */,
 				4CFEF3E11A72F0160086C37B /* CTDTestHelpers */,
@@ -1001,6 +1118,8 @@
 				4C41B7B71B155ABB00B54422 /* CTDInteractionTests.xctest */,
 				4CFA353E1B76D18E0060A689 /* libCTDApplication.a */,
 				4CFA354B1B76D18F0060A689 /* CTDApplicationTests.xctest */,
+				4C2D1BBA1BADD9A3004661AD /* libCTDStorage.a */,
+				4C2D1BC71BADD9A3004661AD /* CTDStorageTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1097,6 +1216,8 @@
 				4C41B7C01B155CB800B54422 /* CTDInteraction.xcconfig */,
 				4C41B7C11B155CB800B54422 /* CTDInteractionTests.xcconfig */,
 				4CFEF36F1A6EB8B10086C37B /* CTDUIKitBridge.xcconfig */,
+				4C2D1BDF1BADDC25004661AD /* CTDStorage.xcconfig */,
+				4C2D1BE01BADDC36004661AD /* CTDStorageTests.xcconfig */,
 				4CFDEED819C689260041B910 /* CTDUtility.xcconfig */,
 				4CFDEED919C689500041B910 /* CTDUtilityTests.xcconfig */,
 				4CFEF40B1A74049C0086C37B /* CTDTestHelpers.xcconfig */,
@@ -1219,7 +1340,6 @@
 				4C5B9CEA1B8A2C99003E8E46 /* CTDBlockExecutor.m */,
 				4C25B97C1A0E95E300275138 /* CTDMethodSelector.m */,
 				4CFDEEDD19C68B070041B910 /* CTDPoint.m */,
-				4C2D1B9F1BAA4464004661AD /* CTDStreamWriter.m */,
 				4C5B9CDE1B8A1C05003E8E46 /* CTDRunLoopTimer.m */,
 				4C25B9921A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m */,
 			);
@@ -1234,7 +1354,6 @@
 				4C5B9CD11B865690003E8E46 /* CTDNotificationReceiver.h */,
 				4CFDEEDC19C68B070041B910 /* CTDPoint.h */,
 				4C5B9CDD1B8A1C05003E8E46 /* CTDRunLoopTimer.h */,
-				4C2D1B9E1BAA4464004661AD /* CTDStreamWriter.h */,
 				4C25B9911A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.h */,
 				4CD5BFA11A1B0FAE003A6321 /* NSArray+ORCSubscriptSupport.h */,
 				4CD5BFA21A1B0FAE003A6321 /* NSDictionary+ORCSubscriptSupport.h */,
@@ -1269,8 +1388,6 @@
 				4CF33B6A1B9927CA00191D1F /* CTDTaskConfigurationScene.m */,
 				4C76B8C91BA4D01700276231 /* CTDTrialScriptCSVLoader.h */,
 				4C76B8CA1BA4D01700276231 /* CTDTrialScriptCSVLoader.m */,
-				4CFCB6331BA7D0300014179C /* CTDCSVFileTrialResults.h */,
-				4CFCB6341BA7D0300014179C /* CTDCSVFileTrialResults.m */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -1374,6 +1491,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4C2D1BB91BADD9A3004661AD /* CTDStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C2D1BD61BADD9A5004661AD /* Build configuration list for PBXNativeTarget "CTDStorage" */;
+			buildPhases = (
+				4C2D1BB61BADD9A3004661AD /* Sources */,
+				4C2D1BB71BADD9A3004661AD /* Frameworks */,
+				4C2D1BB81BADD9A3004661AD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTDStorage;
+			productName = CTDStorage;
+			productReference = 4C2D1BBA1BADD9A3004661AD /* libCTDStorage.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4C2D1BC61BADD9A3004661AD /* CTDStorageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C2D1BD91BADD9A5004661AD /* Build configuration list for PBXNativeTarget "CTDStorageTests" */;
+			buildPhases = (
+				4C2D1BC31BADD9A3004661AD /* Sources */,
+				4C2D1BC41BADD9A3004661AD /* Frameworks */,
+				4C2D1BC51BADD9A3004661AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C2D1BCC1BADD9A3004661AD /* PBXTargetDependency */,
+			);
+			name = CTDStorageTests;
+			productName = CTDStorageTests;
+			productReference = 4C2D1BC71BADD9A3004661AD /* CTDStorageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4C41B7331B0A4F1900B54422 /* CocoaAdditions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C41B7391B0A4F1900B54422 /* Build configuration list for PBXNativeTarget "CocoaAdditions" */;
@@ -1627,8 +1779,11 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Michael Hackett";
 				TargetAttributes = {
+					4C2D1BC61BADD9A3004661AD = {
+						TestTargetID = 4CEBCA0619BB564600D2B498;
+					};
 					4C41B7A51B155ABB00B54422 = {
-						TestTargetID = 4C41B78E1B155AA500B54422;
+						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CEBCA0619BB564600D2B498 = {
 						DevelopmentTeam = HQKPLQT856;
@@ -1637,16 +1792,16 @@
 						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CEBCA6319BB77C400D2B498 = {
-						TestTargetID = 4CEBCA5619BB77C400D2B498;
+						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CFA354A1B76D18F0060A689 = {
-						TestTargetID = 4CFA353D1B76D18E0060A689;
+						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CFDEEC219C688D00041B910 = {
-						TestTargetID = 4CFDEEB519C688CF0041B910;
+						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 					4CFEF3F51A72F1B70086C37B = {
-						TestTargetID = 4CFEF3E81A72F1B70086C37B;
+						TestTargetID = 4CEBCA0619BB564600D2B498;
 					};
 				};
 			};
@@ -1677,6 +1832,8 @@
 				4CFA353D1B76D18E0060A689 /* CTDApplication */,
 				4CFA354A1B76D18F0060A689 /* CTDApplicationTests */,
 				4CFEF3491A6EB63F0086C37B /* CTDUIKitBridge */,
+				4C2D1BB91BADD9A3004661AD /* CTDStorage */,
+				4C2D1BC61BADD9A3004661AD /* CTDStorageTests */,
 				4C41B78E1B155AA500B54422 /* CTDInteraction */,
 				4C41B7A51B155ABB00B54422 /* CTDInteractionTests */,
 				4CEBCA5619BB77C400D2B498 /* CTDModel */,
@@ -1750,6 +1907,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4C2D1BC51BADD9A3004661AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C41B7B21B155ABB00B54422 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1813,6 +1977,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4C2D1BB61BADD9A3004661AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2D1BEA1BAE1B44004661AD /* CTDStreamWriter.m in Sources */,
+				4C2D1BEB1BAE1B50004661AD /* CTDCSVStreamTrialResults.m in Sources */,
+				4C2D1BE91BAE18A8004661AD /* CTDCSVFileWriterFactory.m in Sources */,
+				4C2D1BE31BADF42F004661AD /* CTDStorage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C2D1BC31BADD9A3004661AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2D1BD51BADD9A3004661AD /* CTDStorageTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C41B7341B0A4F1900B54422 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1895,7 +2078,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CFCB6351BA7D0300014179C /* CTDCSVFileTrialResults.m in Sources */,
 				4CFA35651B76D7140060A689 /* CTDApplication.m in Sources */,
 				4CF33B6B1B9927CA00191D1F /* CTDTaskConfigurationScene.m in Sources */,
 				4CF33B681B9927A500191D1F /* CTDTaskConfigurationActivity.m in Sources */,
@@ -1929,7 +2111,6 @@
 				4CFDEEDE19C68B070041B910 /* CTDPoint.m in Sources */,
 				4C5B9CDF1B8A1C05003E8E46 /* CTDRunLoopTimer.m in Sources */,
 				4C25B97D1A0E95E300275138 /* CTDMethodSelector.m in Sources */,
-				4C2D1BA01BAA4464004661AD /* CTDStreamWriter.m in Sources */,
 				4C25B9931A0ECE8B00275138 /* NSArray+CTDBlockBasedFiltering.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1995,6 +2176,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4C2D1BCC1BADD9A3004661AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C2D1BB91BADD9A3004661AD /* CTDStorage */;
+			targetProxy = 4C2D1BCB1BADD9A3004661AD /* PBXContainerItemProxy */;
+		};
 		4C41B78F1B155AA500B54422 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4CFDEEB519C688CF0041B910 /* CTDUtility */;
@@ -2074,6 +2260,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4C2D1BD71BADD9A5004661AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2D1BDF1BADDC25004661AD /* CTDStorage.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4C2D1BD81BADD9A5004661AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2D1BDF1BADDC25004661AD /* CTDStorage.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4C2D1BDA1BADD9A5004661AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2D1BE01BADDC36004661AD /* CTDStorageTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4C2D1BDB1BADD9A5004661AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2D1BE01BADDC36004661AD /* CTDStorageTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 		4C41B73A1B0A4F1900B54422 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C41B7411B0A4F9800B54422 /* CocoaAdditions.xcconfig */;
@@ -2162,8 +2376,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CEBCAB319BB964300D2B498 /* CTDEndToEndTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ConnectTheDots2.app/ConnectTheDots2";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
@@ -2171,8 +2383,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CEBCAB319BB964300D2B498 /* CTDEndToEndTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ConnectTheDots2.app/ConnectTheDots2";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -2305,6 +2515,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4C2D1BD61BADD9A5004661AD /* Build configuration list for PBXNativeTarget "CTDStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C2D1BD71BADD9A5004661AD /* Debug */,
+				4C2D1BD81BADD9A5004661AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4C2D1BD91BADD9A5004661AD /* Build configuration list for PBXNativeTarget "CTDStorageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C2D1BDA1BADD9A5004661AD /* Debug */,
+				4C2D1BDB1BADD9A5004661AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		4C41B7391B0A4F1900B54422 /* Build configuration list for PBXNativeTarget "CocoaAdditions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

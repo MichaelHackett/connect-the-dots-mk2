@@ -3,7 +3,6 @@
 #import "CTDApplication.h"
 
 #import "CTDConnectionActivity.h"
-#import "CTDCSVFileTrialResults.h"
 #import "CTDTaskConfiguration.h"
 #import "CTDTaskConfigurationActivity.h"
 #import "CTDTaskConfigurationScene.h"
@@ -12,6 +11,7 @@
 #import "Ports/CTDDisplayController.h"
 #import "Ports/CTDTaskConfigurationSceneInputSource.h"
 #import "Ports/CTDTaskConfigurationSceneRenderer.h"
+#import "Ports/CTDTrialResultsFactory.h"
 
 #import "CTDModel/CTDDotPair.h"
 #import "CTDModel/CTDModel.h"
@@ -21,7 +21,6 @@
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDUtility/CTDRunLoopTimer.h"
-#import "CTDUtility/CTDStreamWriter.h"
 
 
 
@@ -44,17 +43,15 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
 @implementation CTDApplication
 {
-    NSArray* _dotSequences;
     id<CTDDisplayController> _displayController;
+    id<CTDTrialResultsFactory> _trialResultsFactory;
     id<CTDTimeSource> _timeSource;
+
+    NSArray* _dotSequences;
     CTDTaskConfigurationActivity* _configurationActivity;
     CTDTaskConfigurationScene* _configurationScene;
-    id<CTDConnectScene> _connectionScene;
     CTDConnectionActivity* _connectionActivity;
-
-    CTDStreamWriter* _blockResultsStreamWriter;
-    id<CTDTrialBlockResults> _trialBlockResults;
-    id<CTDTrialResults> _trialResults;
+    id<CTDConnectScene> _connectionScene;
     CTDRunLoopTimer* _displayTimer;
 
     // Task configuration
@@ -62,6 +59,9 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     CTDHand _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
     NSUInteger _sequenceNumber;
+
+    id<CTDTrialBlockResults> _trialBlockResults;
+    id<CTDTrialResults> _trialResults;
 }
 
 + (NSURL*)documentsDirectoryOrError:(NSError *__autoreleasing *)error
@@ -76,24 +76,28 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 }
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
+            trialResultsFactory:(id<CTDTrialResultsFactory>)trialResultsFactory
                      timeSource:(id<CTDTimeSource>)timeSource
 {
     self = [super init];
     if (self) {
-        _dotSequences = nil;
         _displayController = displayController;
+        _trialResultsFactory = trialResultsFactory;
         _timeSource = timeSource;
-        _configurationScene = nil;
+
+        _dotSequences = nil;
         _configurationActivity = nil;
-        _connectionScene = nil;
+        _configurationScene = nil;
         _connectionActivity = nil;
-        _trialResults = nil;
+        _connectionScene = nil;
         _displayTimer = nil;
 
         _participantId = 0;
         _preferredHand = CTDRightHand;
         _interfaceStyle = CTDModalInterfaceStyle;
         _sequenceNumber = 1;
+        _trialBlockResults = nil;
+        _trialResults = nil;
     }
     return self;
 }
@@ -156,24 +160,12 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 - (void)startTrialBlock
 {
     NSError* error = nil;
-    NSURL* documentsURL = [[self class] documentsDirectoryOrError:&error];
-    if (!documentsURL) { [self displayResultsDestinationError:error]; return; }
-
-    NSString* blockResultsFilename =
-        [NSString stringWithFormat:@"P%02lu%c.csv",
-         (unsigned long)_participantId,
-         _interfaceStyle == CTDModalInterfaceStyle ? 'M' : 'Q'];
-    NSURL* blockResultsURL =
-        [documentsURL URLByAppendingPathComponent:blockResultsFilename];
-
-    // TODO: Verify that no file exists at this path
-
-    _blockResultsStreamWriter = [CTDStreamWriter writeToURL:blockResultsURL];
-    _trialBlockResults = [[CTDCSVTrialBlockWriter alloc]
-                          initWithParticipantId:_participantId
-                                  preferredHand:_preferredHand
-                                 interfaceStyle:_interfaceStyle
-                             outputStreamWriter:_blockResultsStreamWriter];
+    _trialBlockResults =
+        [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
+                                                  preferredHand:_preferredHand
+                                                 interfaceStyle:_interfaceStyle
+                                                          error:&error];
+    if (!_trialBlockResults) { [self displayResultsDestinationError:error]; return; }
 
     [self startTrial];
 }
@@ -228,8 +220,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
         }];
 
         // TODO: Close only on end of last trial
-        [_blockResultsStreamWriter closeStream];
-        _blockResultsStreamWriter = nil;
+        [_trialBlockResults finalizeResults];
         _trialBlockResults = nil;
     }
 }

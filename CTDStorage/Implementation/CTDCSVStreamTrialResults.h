@@ -1,6 +1,6 @@
-// CTDCSVFileTrialResults:
-//     Implementation of CTDTrialResults that stores results in CSV-format
-//     files in the application filesystem.
+// CTDCSVStreamTrialResults:
+//     Implementation of CTDTrialResults that writes the results to a text
+//     stream, in CSV-format.
 //
 //  Copyright 2015 Michael Hackett. All rights reserved.
 
@@ -12,8 +12,7 @@
 
 
 
-
-@interface CTDCSVTrialBlockWriter : NSObject <CTDTrialBlockResults>
+@interface CTDCSVStreamTrialBlockResults : NSObject <CTDTrialBlockResults>
 
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
                         preferredHand:(CTDHand)preferredHand
@@ -22,15 +21,10 @@
 
 CTD_NO_DEFAULT_INIT
 
-// Move to protocol:
-//- (NSUInteger)currentTrialIndex;  // auto-increments when beginNewTrial... is called?
-
-//- (id<CTDTrialResults>)beginNewTrialWithSequenceId:(NSUInteger)sequenceId;
-
 @end
 
 
-@interface CTDCSVFileTrialWriter : NSObject <CTDTrialResults>
+@interface CTDCSVStreamTrialResults : NSObject <CTDTrialResults>
 
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
                         preferredHand:(CTDHand)preferredHand

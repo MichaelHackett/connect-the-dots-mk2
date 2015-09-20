@@ -134,6 +134,20 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C2D1BB91BADD9A3004661AD"
+               BuildableName = "libCTDStorage.a"
+               BlueprintName = "CTDStorage"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -233,6 +247,16 @@
                BlueprintIdentifier = "4CFDEEC219C688D00041B910"
                BuildableName = "CTDUtilityTests.xctest"
                BlueprintName = "CTDUtilityTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C2D1BC61BADD9A3004661AD"
+               BuildableName = "CTDStorageTests.xctest"
+               BlueprintName = "CTDStorageTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>
