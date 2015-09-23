@@ -1,0 +1,9 @@
+// Common configuration for CTDSystemAdapters target.
+
+#include "General-Common-StaticLibrary.xcconfig"
+
+// Project module source dependencies:
+USER_HEADER_SEARCH_PATHS = $(CTD_APPLICATION_HEADERS) $(CTD_UTILITY_HEADERS) $(inherited)
+
+// Allow use of random/srandom for reproducible pseudo-random sequences
+CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = NO

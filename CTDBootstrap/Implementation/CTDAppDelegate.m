@@ -1,12 +1,13 @@
 // Copyright 2014-5 Michael Hackett. All rights reserved.
 
 #import "CTDAppDelegate.h"
-#import "CTDFoundationTimeSource.h"
 
 #import "CTDApplication/CTDApplication.h"
 #import "CTDApplication/Ports/CTDDisplayController.h"
 
 #import "CTDStorage/CTDStorage.h"
+#import "CTDSystemAdapters/CTDDefaultRandomalizer.h"
+#import "CTDSystemAdapters/CTDFoundationTimeSource.h"
 #import "CTDUIKitBridge/CTDUIKitBridge.h"
 
 
@@ -25,7 +26,8 @@
     _ctdApplication = [[CTDApplication alloc]
                        initWithDisplayController:_displayController
                        trialResultsFactory:[CTDStorage csvFileTrialResultsFactory]
-                       timeSource:[[CTDFoundationTimeSource alloc] init]];
+                       timeSource:[[CTDFoundationTimeSource alloc] init]
+                       randomalizer:[[CTDDefaultRandomalizer alloc] init]];
     [_ctdApplication start];
 
     return YES;

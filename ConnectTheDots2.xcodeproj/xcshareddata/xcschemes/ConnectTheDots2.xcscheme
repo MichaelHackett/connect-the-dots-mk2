@@ -148,6 +148,20 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C953FD31BAF9F0B00A34A20"
+               BuildableName = "libCTDSystemAdapters.a"
+               BlueprintName = "CTDSystemAdapters"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -257,6 +271,16 @@
                BlueprintIdentifier = "4C2D1BC61BADD9A3004661AD"
                BuildableName = "CTDStorageTests.xctest"
                BlueprintName = "CTDStorageTests"
+               ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C953FE01BAF9F0B00A34A20"
+               BuildableName = "CTDSystemAdaptersTests.xctest"
+               BlueprintName = "CTDSystemAdaptersTests"
                ReferencedContainer = "container:ConnectTheDots2.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -1,0 +1,9 @@
+// Configuration for CTDSystemAdaptersTests target.
+
+#include "ConnectTheDots-AllTests.xcconfig"
+
+// Tests are part of a parent module.
+CTD_MODULE_NAME = CTDSystemAdapters
+
+// Project module source dependencies:
+RXC_MODULE_DEPENDENCIES = $(CTD_APPLICATION_HEADERS)

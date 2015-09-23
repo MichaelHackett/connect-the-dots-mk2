@@ -8,4 +8,5 @@
     #import <Foundation/Foundation.h>
     #import "CTDMethodAnnotations.h"
     #import "CTDStrongWeak.h"
+    #import "OCHamcrest+CTDExtras.h"
 #endif
