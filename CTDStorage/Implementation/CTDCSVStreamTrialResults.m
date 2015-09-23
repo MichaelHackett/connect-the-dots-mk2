@@ -101,7 +101,7 @@
 
     [super setDuration:stepDuration forStepNumber:stepNumber];
 
-    NSString* line = [NSString stringWithFormat:@"%lu, %c, %c, %lu, %lu, %lu %.2f\n",
+    NSString* line = [NSString stringWithFormat:@"%lu, %c, %c, %lu, %lu, %lu, %.2f\n",
                       (unsigned long)_participantId,
                       _preferredHand == CTDLeftHand ? 'L' : 'R',
                       _interfaceStyle == CTDModalInterfaceStyle ? 'M': 'Q',
