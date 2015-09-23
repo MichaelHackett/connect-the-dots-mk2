@@ -6,12 +6,8 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
-    #import <XCTest/XCTest.h>
-    #define HC_SHORTHAND
-    #import <OCHamcrest/OCHamcrest.h>
-//    #define MOCKITO_SHORTHAND
-//    #import <OCMockito/OCMockito.h>
-    #import "CTDTestHelpers/CTDCollectionMatchers.h"
+    #import "CTDUtility/NSArray+ORCSubscriptSupport.h"
+    #import "CTDUtility/NSDictionary+ORCSubscriptSupport.h"
     #import "CTDMethodAnnotations.h"
     #import "CTDStrongWeak.h"
 #endif

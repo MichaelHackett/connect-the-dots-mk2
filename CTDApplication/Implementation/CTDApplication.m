@@ -9,6 +9,7 @@
 #import "CTDTrialScriptCSVLoader.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
+#import "Ports/CTDRandomalizer.h"
 #import "Ports/CTDTaskConfigurationSceneInputSource.h"
 #import "Ports/CTDTaskConfigurationSceneRenderer.h"
 #import "Ports/CTDTrialResultsFactory.h"
@@ -21,6 +22,7 @@
 #import "CTDUtility/CTDNotificationReceiver.h"
 #import "CTDUtility/CTDPoint.h"
 #import "CTDUtility/CTDRunLoopTimer.h"
+#import "CTDUtility/NSArray+CTDAdditions.h"
 
 
 
@@ -46,8 +48,9 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     id<CTDDisplayController> _displayController;
     id<CTDTrialResultsFactory> _trialResultsFactory;
     id<CTDTimeSource> _timeSource;
+    id<CTDRandomalizer> _randomalizer;
 
-    NSArray* _dotSequences;
+    NSArray* _dotSequences;   // of CTDTrialScripts
     CTDTaskConfigurationActivity* _configurationActivity;
     CTDTaskConfigurationScene* _configurationScene;
     CTDConnectionActivity* _connectionActivity;
@@ -58,33 +61,24 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     NSUInteger _participantId;
     CTDHand _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
-    NSArray* _trialSequenceIds; // the order in which to present the sequences
+    NSArray* _sequenceOrder; // of NSNumber -- the order in which to present the sequences
     NSUInteger _trialIndex; // current position within above list
 
     id<CTDTrialBlockResults> _trialBlockResults;
     id<CTDTrialResults> _trialResults;
 }
 
-+ (NSURL*)documentsDirectoryOrError:(NSError *__autoreleasing *)error
-{
-    NSURL* documentsURL = [[NSFileManager defaultManager]
-                           URLForDirectory:NSDocumentDirectory
-                                  inDomain:NSUserDomainMask
-                         appropriateForURL:nil
-                                    create:YES
-                                     error:error];
-    return documentsURL;
-}
-
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
             trialResultsFactory:(id<CTDTrialResultsFactory>)trialResultsFactory
                      timeSource:(id<CTDTimeSource>)timeSource
+                   randomalizer:(id<CTDRandomalizer>)randomalizer
 {
     self = [super init];
     if (self) {
         _displayController = displayController;
         _trialResultsFactory = trialResultsFactory;
         _timeSource = timeSource;
+        _randomalizer = randomalizer;
 
         _dotSequences = nil;
         _configurationActivity = nil;
@@ -96,7 +90,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
         _participantId = 0;
         _preferredHand = CTDRightHand;
         _interfaceStyle = CTDModalInterfaceStyle;
-        _trialSequenceIds = nil;
+        _sequenceOrder = nil;
         _trialIndex = 0;
         _trialBlockResults = nil;
         _trialResults = nil;
@@ -159,9 +153,32 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
     [_configurationActivity resetForm];
 }
 
+// TODO: Move method
+//- (NSArray*)sequenceOrderForParticipantWithId:(NSUInteger)participantId
+//                                       length:(NSUInteger)sequenceLength
+- (NSArray*)sequenceOrder
+{
+    NSUInteger sequenceLength = [_dotSequences count];
+    if (_participantId < 1 || sequenceLength < 1) { return @[]; }
+
+    // Using a pseudo-random seed based on the participant ID, randomly reorder
+    // a list of the sequence indices.
+    unsigned long seed = _participantId * 2789; // arbitrary largish prime (that won't overflow)
+    NSAssert(sequenceLength < (NSUInteger)NSIntegerMax,
+             @"Sequence count too large (>%lu)", NSIntegerMax);
+    NSArray* sequenceIndices =
+        [NSArray ctd_arrayOfIntegersFrom:0 to:(NSInteger)sequenceLength - 1];
+    return [_randomalizer randomizeList:sequenceIndices seed:seed];
+
+    // (Note: Multiplying the participant ID by a largish prime number, in
+    // order to spread out the seed values, seemed to improve the distribution
+    // of starting indices, but it's not based on any principles I'm aware of,
+    // except that a similar technique is recommended when generating hash values.)
+}
+
 - (void)startTrialBlock
 {
-    _trialSequenceIds = @[ @1, @2 ]; // TODO: generate list from participant ID
+    _sequenceOrder = [self sequenceOrder];
 
     NSError* error = nil;
     _trialBlockResults =
@@ -177,8 +194,8 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
 - (void)startTrial
 {
-    NSUInteger sequenceId = [_trialSequenceIds[_trialIndex] unsignedIntegerValue];
-    id<CTDTrialScript> trialScript = _dotSequences[sequenceId - 1];
+    NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];
+    id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
     NSError* error = nil;
     _trialResults =
@@ -186,7 +203,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                                              preferredHand:_preferredHand
                                             interfaceStyle:_interfaceStyle
                                                trialNumber:_trialIndex + 1
-                                                sequenceId:sequenceId
+                                                sequenceId:sequenceIndex + 1
                                                      error:&error];
 
     _connectionScene = [_displayController connectScene];
@@ -217,7 +234,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
         NSTimeInterval trialDuration = [_trialResults trialDuration];
         [_trialBlockResults setDuration:trialDuration
                          forTrialNumber:_trialIndex + 1
-                             sequenceId:[_trialSequenceIds[_trialIndex] unsignedIntegerValue]];
+                             sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
         _trialResults = nil;
 
         int trialDurationSeconds = (int)round((double)trialDuration);
@@ -236,7 +253,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
             [strongSelf->_connectionScene hideTrialCompletionMessage];
 
             strongSelf->_trialIndex += 1;
-            if (strongSelf->_trialIndex < [strongSelf->_trialSequenceIds count])
+            if (strongSelf->_trialIndex < [strongSelf->_sequenceOrder count])
             {
                 [strongSelf startTrial];
             }

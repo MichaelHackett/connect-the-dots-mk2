@@ -24,6 +24,7 @@ CTD_APPLICATION_HEADERS = CTDApplication/Interface
 CTD_INTERACTION_HEADERS = CTDInteraction/Interface
 CTD_MODEL_HEADERS = CTDModel/Interface
 CTD_STORAGE_HEADERS = CTDStorage/Interface
+CTD_SYSTEM_ADAPTERS_HEADERS = CTDSystemAdapters/Interface
 CTD_UIKIT_BRIDGE_HEADERS = CTDUIKitBridge/Interface
 CTD_UTILITY_HEADERS = CTDUtility/Interface
 COCOA_ADDITIONS_HEADERS = CocoaAdditions/Interface

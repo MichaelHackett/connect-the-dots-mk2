@@ -9,9 +9,9 @@
     #import <XCTest/XCTest.h>
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
+    #import "CTDTestHelpers/CTDCollectionMatchers.h"
 //    #define MOCKITO_SHORTHAND
 //    #import <OCMockito/OCMockito.h>
-    #import "CTDTestHelpers/CTDCollectionMatchers.h"
     #import "CTDMethodAnnotations.h"
     #import "CTDStrongWeak.h"
 #endif
