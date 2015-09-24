@@ -3,6 +3,7 @@
 #import "CTDCSVStreamTrialResults.h"
 
 #import "CTDStreamWriter.h"
+#import "CTDUtility/CTDPoint.h"
 
 
 
@@ -95,19 +96,34 @@
 - (id)init CTD_BLOCK_PARENT_METHOD
 
 - (void)setDuration:(NSTimeInterval)stepDuration
-      forStepNumber:(NSUInteger)stepNumber
+        forStepNumber:(NSUInteger)stepNumber
+        startingDotPosition:(CTDPoint*)startingDotPosition
+        endingDotPosition:(CTDPoint*)endingDotPosition
 {
     NSAssert(_outputStreamWriter, @"New trial step result sent after results finalized.");
 
-    [super setDuration:stepDuration forStepNumber:stepNumber];
+    [super setDuration:stepDuration
+           forStepNumber:stepNumber
+           startingDotPosition:startingDotPosition
+           endingDotPosition:endingDotPosition];
 
-    NSString* line = [NSString stringWithFormat:@"%lu, %c, %c, %lu, %lu, %lu, %.2f\n",
+    double dx = startingDotPosition.x - endingDotPosition.x;
+    double dy = startingDotPosition.y - endingDotPosition.y;
+    double dotDistance = sqrt((dx * dx) + (dy * dy));
+
+    NSString* line = [NSString stringWithFormat:
+                      @"%lu, %c, %c, %lu, %lu, %lu, %.0f, %.0f, %.0f, %.0f, %.0f, %.2f\n",
                       (unsigned long)_participantId,
                       _preferredHand == CTDLeftHand ? 'L' : 'R',
                       _interfaceStyle == CTDModalInterfaceStyle ? 'M': 'Q',
                       (unsigned long)_trialNumber,
                       (unsigned long)_sequenceId,
                       (unsigned long)stepNumber,
+                      round(startingDotPosition.x),
+                      round(startingDotPosition.y),
+                      round(endingDotPosition.x),
+                      round(endingDotPosition.y),
+                      round(dotDistance),
                       (double)stepDuration];
 
     [_outputStreamWriter appendString:line];

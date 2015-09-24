@@ -3,13 +3,17 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+@class CTDPoint;
+
+
 
 @protocol CTDTrialResults <NSObject>
 
 // stepNumber is 1-based
 - (void)setDuration:(NSTimeInterval)stepDuration
-      forStepNumber:(NSUInteger)stepNumber;
-// TODO: Need to record dot positions, unless delivering the script to the Results obj at init.
+        forStepNumber:(NSUInteger)stepNumber
+        startingDotPosition:(CTDPoint*)startingDotPosition
+        endingDotPosition:(CTDPoint*)endingDotPosition;
 
 - (NSTimeInterval)trialDuration;
 

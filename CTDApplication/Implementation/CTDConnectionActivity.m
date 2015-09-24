@@ -73,16 +73,18 @@ CTD_NO_DEFAULT_INIT
                                                       CTDDotConnectionStateObserver>
 
 // TODO: Move to separate factory class (as instance method)?
-+ (instancetype)trialStepWithDotPair:(CTDDotPair*)dotPair
-                       trialRenderer:(id<CTDTrialRenderer>)trialRenderer
-              trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
++ (instancetype)trialStepWithDotPairColor:(CTDDotColor)dotPairColor
+                      startingDotPosition:(CTDPoint*)startingDotPosition
+                        endingDotPosition:(CTDPoint*)endingDotPosition
+                            trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                   trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
 
 // Transfers ownership of dot and connection renderers. Observer held weakly.
-- (instancetype)initWithDotPair:(CTDDotPair*)dotPair
-            startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
-              endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
-             connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
-         trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
+- (instancetype)initWithDotPairColor:(CTDDotColor)dotPairColor
+                 startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
+                   endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
+                  connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+              trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver;
 
 CTD_NO_DEFAULT_INIT
 
@@ -157,13 +159,14 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     // Inputs:
     id<CTDTrialScript> _trialScript;
     __weak id<CTDTrialResults> _trialResults;
-    __weak id<CTDTrialRenderer> _trialRenderer;
     __weak id<CTDTimeSource> _timeSource;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
 
     // Activity Model and internal helpers
     CTDColorPicker* _colorPicker;
     id<CTDTrialStep> _trialStep;
+    CTDPoint* _startingDotRenderedPosition;
+    CTDPoint* _endingDotRenderedPosition;
     double _stepStartTime;
     NSUInteger _stepIndex;
 
@@ -182,7 +185,6 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     {
         _trialScript = trialScript;
         _trialResults = trialResultsHolder;
-        _trialRenderer = trialRenderer;
         _timeSource = timeSource;
         _notificationReceiver = notificationReceiver;
         _colorPicker = [[CTDColorPicker alloc]
@@ -194,13 +196,21 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
 
         // Shared private code for starting a new trial step.
         ctd_weakify(self, weakSelf);
+        ctd_weakify(trialRenderer, weakTrialRenderer);  // Q: does this need to be weak?
         _startNextStep = ^{
             ctd_strongify(weakSelf, strongSelf);
+            ctd_strongify(weakTrialRenderer, strongTrialRenderer);
             CTDDotPair* stepDotPair =
                 [strongSelf->_trialScript dotPairs][strongSelf->_stepIndex];
+            strongSelf->_startingDotRenderedPosition = [trialRenderer
+                renderingCoordinatesForDotSpaceCoordinates:stepDotPair.startPosition];
+            strongSelf->_endingDotRenderedPosition = [trialRenderer
+                renderingCoordinatesForDotSpaceCoordinates:stepDotPair.endPosition];
             strongSelf->_trialStep = [CTDConnectionActivityTrialStep
-                                      trialStepWithDotPair:stepDotPair
-                                      trialRenderer:strongSelf->_trialRenderer
+                                      trialStepWithDotPairColor:stepDotPair.color
+                                      startingDotPosition:strongSelf->_startingDotRenderedPosition
+                                      endingDotPosition:strongSelf->_endingDotRenderedPosition
+                                      trialRenderer:strongTrialRenderer
                                       trialStepStateObserver:strongSelf];
 
             // Start step timer.
@@ -239,7 +249,11 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     ctd_strongify(_trialResults, trialResults);
     double stepEndTime = [timeSource systemTime];
     NSTimeInterval stepDuration = (NSTimeInterval)(stepEndTime - _stepStartTime);
-    [trialResults setDuration:stepDuration forStepNumber:_stepIndex + 1];
+
+    [trialResults setDuration:stepDuration
+                forStepNumber:_stepIndex + 1
+          startingDotPosition:_startingDotRenderedPosition
+            endingDotPosition:_endingDotRenderedPosition];
 
     [_trialStep invalidate];
     _trialStep = nil;
@@ -328,23 +342,19 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     __weak id<CTDTrialStepStateObserver> _trialStepStateObserver;
 }
 
-+ (instancetype)trialStepWithDotPair:(CTDDotPair*)dotPair
-                       trialRenderer:(id<CTDTrialRenderer>)trialRenderer
-              trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
++ (instancetype)trialStepWithDotPairColor:(CTDDotColor)dotPairColor
+                      startingDotPosition:(CTDPoint*)startingDotPosition
+                        endingDotPosition:(CTDPoint*)endingDotPosition
+                            trialRenderer:(id<CTDTrialRenderer>)trialRenderer
+                   trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
 {
-    CTDPoint* startingDotRenderedPosition =
-        [trialRenderer renderingCoordinatesForDotSpaceCoordinates:dotPair.startPosition];
-
     id<CTDDotRenderer> startingDotRenderer = [trialRenderer newRendererForDotWithId:@1];
-    [startingDotRenderer setDotCenterPosition:startingDotRenderedPosition];
-    [startingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
-
-    CTDPoint* endingDotRenderedPosition =
-        [trialRenderer renderingCoordinatesForDotSpaceCoordinates:dotPair.endPosition];
+    [startingDotRenderer setDotCenterPosition:startingDotPosition];
+    [startingDotRenderer setDotColor:paletteColorForDotColor(dotPairColor)];
 
     id<CTDDotRenderer> endingDotRenderer = [trialRenderer newRendererForDotWithId:@2];
-    [endingDotRenderer setDotCenterPosition:endingDotRenderedPosition];
-    [endingDotRenderer setDotColor:paletteColorForDotColor(dotPair.color)];
+    [endingDotRenderer setDotCenterPosition:endingDotPosition];
+    [endingDotRenderer setDotColor:paletteColorForDotColor(dotPairColor)];
 
     id<CTDDotConnectionRenderer> connectionRenderer = [trialRenderer newRendererForDotConnection];
     [connectionRenderer setFirstEndpointPosition:[startingDotRenderer dotConnectionPoint]];
@@ -353,22 +363,22 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
     [endingDotRenderer setVisible:NO];
     [connectionRenderer setVisible:NO];
     
-    return [[self alloc] initWithDotPair:dotPair
-                     startingDotRenderer:startingDotRenderer
-                       endingDotRenderer:endingDotRenderer
-                      connectionRenderer:connectionRenderer
-                  trialStepStateObserver:trialStepStateObserver];
+    return [[self alloc] initWithDotPairColor:dotPairColor
+                          startingDotRenderer:startingDotRenderer
+                            endingDotRenderer:endingDotRenderer
+                           connectionRenderer:connectionRenderer
+                       trialStepStateObserver:trialStepStateObserver];
 }
 
-- (instancetype)initWithDotPair:(CTDDotPair*)dotPair
-            startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
-              endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
-             connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
-         trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
+- (instancetype)initWithDotPairColor:(CTDDotColor)dotPairColor
+                 startingDotRenderer:(id<CTDDotRenderer>)startingDotRenderer
+                   endingDotRenderer:(id<CTDDotRenderer>)endingDotRenderer
+                  connectionRenderer:(id<CTDDotConnectionRenderer>)connectionRenderer
+              trialStepStateObserver:(id<CTDTrialStepStateObserver>)trialStepStateObserver
 {
     self = [super init];
     if (self) {
-        _dotPairColor = dotPair.color;
+        _dotPairColor = dotPairColor;
         _startingDotRenderer = startingDotRenderer;
         _endingDotRenderer = endingDotRenderer;
         _connectionRenderer = connectionRenderer;

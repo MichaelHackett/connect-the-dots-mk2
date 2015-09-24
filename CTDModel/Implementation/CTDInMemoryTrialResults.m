@@ -19,7 +19,10 @@
     return self;
 }
 
-- (void)setDuration:(double)stepDuration forStepNumber:(NSUInteger)stepNumber
+- (void)setDuration:(NSTimeInterval)stepDuration
+        forStepNumber:(NSUInteger)stepNumber
+        startingDotPosition:(__unused CTDPoint*)startingDotPosition
+        endingDotPosition:(__unused CTDPoint*)endingDotPosition;
 {
     _stepDurations[@(stepNumber)] = @(stepDuration);
 }
