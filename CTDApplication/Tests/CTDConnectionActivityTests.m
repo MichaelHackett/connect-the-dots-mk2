@@ -102,7 +102,10 @@ static double FIRST_STEP_END_TIME =   100008.5;
 
 #pragma mark CTDTrialResults protocol
 
-- (void)setDuration:(double)stepDuration forStepNumber:(NSUInteger)stepNumber
+- (void)setDuration:(double)stepDuration
+      forStepNumber:(NSUInteger)stepNumber
+      startingDotPosition:(__unused CTDPoint*)startingDotPosition
+      endingDotPosition:(__unused CTDPoint*)endingDotPosition
 {
     self.stepDurations[@(stepNumber)] = @(stepDuration);
 }

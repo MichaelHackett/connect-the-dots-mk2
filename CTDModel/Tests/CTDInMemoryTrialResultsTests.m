@@ -2,11 +2,15 @@
 
 #import "CTDInMemoryTrialResults.h"
 
+#import "CTDUtility/CTDPoint.h"
+
 
 
 // Test data
 
 static double STEP_DURATIONS[] = { 5.5, 7.2, 11.0, 8.14 };
+static CTDPoint* somePosition() { return [CTDPoint x:100 y:40]; }
+static CTDPoint* someOtherPosition() { return [CTDPoint x:400 y:350]; }
 
 
 
@@ -53,7 +57,10 @@ static double STEP_DURATIONS[] = { 5.5, 7.2, 11.0, 8.14 };
 - (void)setUp
 {
     [super setUp];
-    [self.subject setDuration:STEP_DURATIONS[0] forStepNumber:1];
+    [self.subject setDuration:STEP_DURATIONS[0]
+                  forStepNumber:1
+                  startingDotPosition:somePosition()
+                  endingDotPosition:someOtherPosition()];
 }
 
 - (void)testThatTrialDurationEqualsDurationOfSingleStep
@@ -76,7 +83,10 @@ static double STEP_DURATIONS[] = { 5.5, 7.2, 11.0, 8.14 };
     [super setUp];
     for (NSUInteger i = 0; i < (sizeof(STEP_DURATIONS) / sizeof(double)); i += 1)
     {
-        [self.subject setDuration:STEP_DURATIONS[i] forStepNumber:i+1];
+        [self.subject setDuration:STEP_DURATIONS[i]
+                      forStepNumber:i+1
+                      startingDotPosition:someOtherPosition()
+                      endingDotPosition:somePosition()];
     }
 }
 

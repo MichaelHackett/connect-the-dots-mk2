@@ -89,6 +89,7 @@
 		4C60BB501A1C33CF0067A72F /* CTDDotPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C60BB4F1A1C33CF0067A72F /* CTDDotPair.m */; };
 		4C6C166E1BB0EC3500FF1A3E /* CTDListRandomizerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6C16621BB0EB0400FF1A3E /* CTDListRandomizerTests.m */; };
 		4C76B8CB1BA4D01700276231 /* CTDTrialScriptCSVLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C76B8CA1BA4D01700276231 /* CTDTrialScriptCSVLoader.m */; };
+		4C7E77C71BB4F854008EFB56 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4C84978B1A802852000A094E /* CTDOccurrenceCountMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84978A1A802852000A094E /* CTDOccurrenceCountMatcher.m */; };
 		4C953FB41BAF254100A34A20 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
 		4C953FD51BAF9F0B00A34A20 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -774,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEBCA6A19BB77C400D2B498 /* libCTDModel.a in Frameworks */,
+				4C7E77C71BB4F854008EFB56 /* libCTDUtility.a in Frameworks */,
 				4C5857441A7EC33A00CC1B1E /* libocmockito.a in Frameworks */,
 				4CEBCA6519BB77C400D2B498 /* XCTest.framework in Frameworks */,
 				4CEBCA6619BB77C400D2B498 /* Foundation.framework in Frameworks */,
