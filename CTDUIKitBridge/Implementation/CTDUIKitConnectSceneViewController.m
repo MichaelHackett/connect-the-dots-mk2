@@ -3,6 +3,7 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDStrings.h"
+#import "CTDUIKitAlertViewAdapter.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitTrialMenuViewController.h"
@@ -51,6 +52,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     CTDUIKitConnectTheDotsViewAdapter* _ctdViewAdapter;
     CTDTrialSceneTouchRouter* _touchRouter;
     id<CTDTouchResponder> _colorCellsTouchResponder;
+    CTDUIKitAlertViewAdapter* _exitConfirmationAlertAdapter;
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -77,6 +79,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
                        initWithConnectTheDotsView:ctdView
                                      colorPalette:self.colorPalette
                                  touchToDotMapper:_touchToDotMapper];
+    _exitConfirmationAlertAdapter = nil;
 
     ctd_weakify(self, weakSelf);
     _colorCellsTouchResponder = [[CTDTouchTrackerFactory alloc]
@@ -156,6 +159,26 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 - (void)hidePreTrialMenu
 {
     [self dismissViewControllerAnimated:YES completion:nil];  // TODO: Wait for completion to start trial
+}
+
+- (void)confirmExitWithResponseHandler:(CTDConfirmationResponseHandler)responseHandler
+{
+    _exitConfirmationAlertAdapter = [[CTDUIKitAlertViewAdapter alloc] init];
+    ctd_weakify(self, weakSelf);
+    _exitConfirmationAlertAdapter.responseHandler = ^(BOOL confirmed)
+    {
+        if (responseHandler) { responseHandler( confirmed); }
+        ctd_strongify(weakSelf, strongSelf);
+        strongSelf->_exitConfirmationAlertAdapter = nil;
+    };
+
+    [[[UIAlertView alloc] initWithTitle:CTDString(@"TrialBlockExitAlertTitle")
+                          message:CTDString(@"TrialBlockExitAlertMessage")
+                          delegate:_exitConfirmationAlertAdapter
+                          cancelButtonTitle:CTDString(@"TrialBlockExitAlertCancelLabel")
+                          otherButtonTitles:CTDString(@"TrialBlockExitAlertConfirmationLabel"),
+                                             nil]
+     show];
 }
 
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString

@@ -2,3 +2,9 @@
 
 /* Trial time report at completion of trial. */
 "TrialCompletion" = "Time = %@";
+
+/* Trial block exit alert messages. */
+"TrialBlockExitAlertTitle" = "Confirm exit";
+"TrialBlockExitAlertMessage" = "You will not be able to resume this block if you exit.";
+"TrialBlockExitAlertCancelLabel" = "Cancel";
+"TrialBlockExitAlertConfirmationLabel" = "Really exit";

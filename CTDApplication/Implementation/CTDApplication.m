@@ -231,7 +231,10 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
 - (void)exitButtonPressed
 {
-    // TODO
+    [_connectionScene confirmExitWithResponseHandler:^(BOOL confirmed)
+    {
+        if (confirmed) { [self displayConfigurationScreen]; }
+    }];
 }
 
 - (void)receiveNotification:(NSString*)notificationId

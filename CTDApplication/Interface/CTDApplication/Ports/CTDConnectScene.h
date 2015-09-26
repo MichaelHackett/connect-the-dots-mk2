@@ -3,6 +3,7 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
+#import "../CTDDialogResponseHandler.h"
 @protocol CTDTouchResponder;
 @protocol CTDTouchToPointMapper;
 @protocol CTDTrialEditor;
@@ -23,6 +24,8 @@
 - (void)displayPreTrialMenuWithMessage:(NSString*)message
                            inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter;
 - (void)hidePreTrialMenu;
+- (void)confirmExitWithResponseHandler:(CTDConfirmationResponseHandler)responseHandler;
+
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString;
 - (void)hideTrialCompletionMessage;
 
