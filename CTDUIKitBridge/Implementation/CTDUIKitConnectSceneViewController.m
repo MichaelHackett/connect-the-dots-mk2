@@ -142,14 +142,21 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     return _colorCellRendererMap;
 }
 
-- (void)displayPreTrialMenuWithMessage:(NSString*)message
-                           inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter
+- (void)displayPreTrialMenuForTrialNumber:(NSInteger)trialNumber
+                              inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter
 {
+    NSString* defaultMessage =
+        [NSString stringWithFormat:CTDString(@"Trial-N"), (long)trialNumber];
+    NSString* overrideMessageKey =
+        [NSString stringWithFormat:@"Trial-%ld", (long)trialNumber];
+    NSString* pretrialMessage =
+        CTDStringWithDefault(overrideMessageKey, defaultMessage);
+
     CTDUIKitTrialMenuViewController* trialMenuVC =
         [[CTDUIKitTrialMenuViewController alloc]
          initWithNibName:@"CTDUIKitTrialMenuScene"
          bundle:nil];
-    trialMenuVC.message = message;
+    trialMenuVC.message = pretrialMessage;
     trialMenuVC.modalPresentationStyle = UIModalPresentationFormSheet;
     trialMenuVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [trialMenuVC setTrialMenuSceneInputRouter:inputRouter];

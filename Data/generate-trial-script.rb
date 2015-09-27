@@ -2,7 +2,7 @@
 #
 # Generates CSV rows containing the data for trial sequences.
 
-sequenceCount = 3;
+sequenceCount = 22;
 sequenceLength = 20;
 minDistance = 0.2;
 
