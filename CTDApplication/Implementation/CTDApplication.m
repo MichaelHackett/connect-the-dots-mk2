@@ -6,6 +6,7 @@
 #import "CTDTaskConfiguration.h"
 #import "CTDTaskConfigurationActivity.h"
 #import "CTDTaskConfigurationScene.h"
+#import "CTDTrialMenuSceneInputRouter.h"
 #import "CTDTrialScriptCSVLoader.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
@@ -28,16 +29,20 @@
 
 
 // UI time intervals
-static NSTimeInterval CTDTrialCompletionMessageDuration = 3.0;
+static NSTimeInterval const CTDTrialCompletionMessageDuration = 3.0;
 
 // Application error domain
-static NSString* CTDApplicationErrorDomain = @"CTDApplication";
+static NSString* const CTDApplicationErrorDomain = @"CTDApplication";
+
+// Number of practice runs
+static NSUInteger const practiceTrialCount = 2;
 
 
 
 
 // TODO: Split into helper class, so as to avoid having private methods?
 @interface CTDApplication () <CTDNotificationReceiver,
+                              CTDTrialMenuSceneInputRouter, // TEMP
                               CTDTaskConfiguration>
 @end
 
@@ -107,7 +112,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                             pathForResource:@"TrialSequences" ofType:@"csv"];
     NSError* error = nil;
     _dotSequences = [CTDTrialScriptCSVLoader sequencesFromFileAtPath:scriptPath
-                                                       sequenceCount:3
+                                                       sequenceCount:22
                                                       sequenceLength:20
                                                                error:&error];
     if (!_dotSequences && error)
@@ -159,21 +164,27 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 - (NSArray*)sequenceOrder
 {
     NSUInteger sequenceLength = [_dotSequences count];
-    if (_participantId < 1 || sequenceLength < 1) { return @[]; }
-
-    // Using a pseudo-random seed based on the participant ID, randomly reorder
-    // a list of the sequence indices.
-    unsigned long seed = _participantId * 2789; // arbitrary largish prime (that won't overflow)
     NSAssert(sequenceLength < (NSUInteger)NSIntegerMax,
              @"Sequence count too large (>%lu)", NSIntegerMax);
-    NSArray* sequenceIndices =
-        [NSArray ctd_arrayOfIntegersFrom:0 to:(NSInteger)sequenceLength - 1];
-    return [_randomalizer randomizeList:sequenceIndices seed:seed];
+    if (_participantId < 1 || sequenceLength < 1) { return @[]; }
 
-    // (Note: Multiplying the participant ID by a largish prime number, in
-    // order to spread out the seed values, seemed to improve the distribution
-    // of starting indices, but it's not based on any principles I'm aware of,
-    // except that a similar technique is recommended when generating hash values.)
+    // Keep the practice sequences the same for all; only randomize the rest.
+    NSArray* practiceSequenceIndices =
+        [NSArray ctd_arrayOfIntegersFrom:0
+                                      to:(NSInteger)practiceTrialCount - 1];
+    NSArray* mainSequenceIndices =
+        [NSArray ctd_arrayOfIntegersFrom:practiceTrialCount
+                                      to:(NSInteger)sequenceLength - 1];
+
+    // Using a pseudo-random seed based on the participant ID, randomly reorder
+    // a list of the sequence indices. (Note: Multiplying the participant ID by
+    // a largish prime number, in order to spread out the seed values, seems to
+    // improve the distribution of starting indices, but it's not based on any
+    // principles I'm aware of, except that a similar technique is recommended
+    // when generating hash values.)
+    unsigned long seed = _participantId * 2789; // arbitrary largish prime (that won't overflow)
+    return [practiceSequenceIndices arrayByAddingObjectsFromArray:
+               [_randomalizer randomizeList:mainSequenceIndices seed:seed]];
 }
 
 - (void)startTrialBlock
@@ -207,6 +218,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                                                      error:&error];
 
     _connectionScene = [_displayController connectScene];
+
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
                            trialResultsHolder:_trialResults
@@ -214,8 +226,26 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                            colorCellRenderers:[_connectionScene colorCellRendererMap]
                            timeSource:_timeSource
                            trialCompletionNotificationReceiver:self];
+
+    // The trial number in the UI; practice rounds are numbered less than 1.
+    NSInteger trialNumber = (NSInteger)_trialIndex - (NSInteger)practiceTrialCount + 1;
+    [_connectionScene displayPreTrialMenuForTrialNumber:trialNumber
+                                            inputRouter:self];
+}
+
+- (void)beginButtonPressed
+{
+    [_connectionScene hidePreTrialMenu];
     [_connectionActivity beginTrial];
     [_connectionScene setTrialEditor:_connectionActivity];
+}
+
+- (void)exitButtonPressed
+{
+    [_connectionScene confirmExitWithResponseHandler:^(BOOL confirmed)
+    {
+        if (confirmed) { [self displayConfigurationScreen]; }
+    }];
 }
 
 - (void)receiveNotification:(NSString*)notificationId

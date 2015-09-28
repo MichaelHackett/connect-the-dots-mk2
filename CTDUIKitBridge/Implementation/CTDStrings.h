@@ -4,4 +4,5 @@
 //
 // Copyright 2015 Michael Hackett. All rights reserved.
 
-#define CTDString(key) [[NSBundle mainBundle] localizedStringForKey:(key) value:@"<MISSING STRING>" table:nil]
+#define CTDString(KEY) CTDStringWithDefault(KEY, @"<MISSING STRING>")
+#define CTDStringWithDefault(KEY, DEFAULT) [[NSBundle mainBundle] localizedStringForKey:(KEY) value:DEFAULT table:nil]

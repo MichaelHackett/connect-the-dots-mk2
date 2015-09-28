@@ -3,10 +3,13 @@
 #import "CTDUIKitConnectSceneViewController.h"
 
 #import "CTDStrings.h"
+#import "CTDUIKitAlertViewAdapter.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
+#import "CTDUIKitTrialMenuViewController.h"
 
 #import "CTDApplication/Ports/CTDTrialRenderer.h"
+#import "CTDApplication/CTDTrialMenuSceneInputRouter.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
@@ -49,6 +52,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     CTDUIKitConnectTheDotsViewAdapter* _ctdViewAdapter;
     CTDTrialSceneTouchRouter* _touchRouter;
     id<CTDTouchResponder> _colorCellsTouchResponder;
+    CTDUIKitAlertViewAdapter* _exitConfirmationAlertAdapter;
 }
 
 //- (id)initWithNibName:(NSString*)nibNameOrNil
@@ -75,6 +79,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
                        initWithConnectTheDotsView:ctdView
                                      colorPalette:self.colorPalette
                                  touchToDotMapper:_touchToDotMapper];
+    _exitConfirmationAlertAdapter = nil;
 
     ctd_weakify(self, weakSelf);
     _colorCellsTouchResponder = [[CTDTouchTrackerFactory alloc]
@@ -135,6 +140,52 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 - (NSDictionary*)colorCellRendererMap
 {
     return _colorCellRendererMap;
+}
+
+- (void)displayPreTrialMenuForTrialNumber:(NSInteger)trialNumber
+                              inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter
+{
+    NSString* defaultMessage =
+        [NSString stringWithFormat:CTDString(@"Trial-N"), (long)trialNumber];
+    NSString* overrideMessageKey =
+        [NSString stringWithFormat:@"Trial-%ld", (long)trialNumber];
+    NSString* pretrialMessage =
+        CTDStringWithDefault(overrideMessageKey, defaultMessage);
+
+    CTDUIKitTrialMenuViewController* trialMenuVC =
+        [[CTDUIKitTrialMenuViewController alloc]
+         initWithNibName:@"CTDUIKitTrialMenuScene"
+         bundle:nil];
+    trialMenuVC.message = pretrialMessage;
+    trialMenuVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    trialMenuVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [trialMenuVC setTrialMenuSceneInputRouter:inputRouter];
+    [self presentViewController:trialMenuVC animated:YES completion:nil];
+}
+
+- (void)hidePreTrialMenu
+{
+    [self dismissViewControllerAnimated:YES completion:nil];  // TODO: Wait for completion to start trial
+}
+
+- (void)confirmExitWithResponseHandler:(CTDConfirmationResponseHandler)responseHandler
+{
+    _exitConfirmationAlertAdapter = [[CTDUIKitAlertViewAdapter alloc] init];
+    ctd_weakify(self, weakSelf);
+    _exitConfirmationAlertAdapter.responseHandler = ^(BOOL confirmed)
+    {
+        if (responseHandler) { responseHandler( confirmed); }
+        ctd_strongify(weakSelf, strongSelf);
+        strongSelf->_exitConfirmationAlertAdapter = nil;
+    };
+
+    [[[UIAlertView alloc] initWithTitle:CTDString(@"TrialBlockExitAlertTitle")
+                          message:CTDString(@"TrialBlockExitAlertMessage")
+                          delegate:_exitConfirmationAlertAdapter
+                          cancelButtonTitle:CTDString(@"TrialBlockExitAlertCancelLabel")
+                          otherButtonTitles:CTDString(@"TrialBlockExitAlertConfirmationLabel"),
+                                             nil]
+     show];
 }
 
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString

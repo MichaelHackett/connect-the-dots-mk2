@@ -1,4 +1,19 @@
 /* Copyright 2015 Michael Hackett. All rights reserved. */
 
+/* Pre-trial messages */
+
+"Trial--1" = "Let's start with a couple of practice runs to get a feel for the interface. When ready, tap \"Begin\".";
+"Trial-0" = "Great! Let's do one more practice run, this time working on improving your speed.";
+"Trial-1" = "Alright, this is for real now.\nTrial #1. Ready?";
+"Trial-N" = "Trial #%ld.\n\nReady?";
+
+
 /* Trial time report at completion of trial. */
 "TrialCompletion" = "Time = %@";
+
+/* Trial block exit alert messages. */
+
+"TrialBlockExitAlertTitle" = "Confirm exit";
+"TrialBlockExitAlertMessage" = "You will not be able to resume this block if you exit.";
+"TrialBlockExitAlertCancelLabel" = "Cancel";
+"TrialBlockExitAlertConfirmationLabel" = "Really exit";
