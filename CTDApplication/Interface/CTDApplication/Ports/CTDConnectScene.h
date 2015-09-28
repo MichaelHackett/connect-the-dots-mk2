@@ -7,6 +7,7 @@
 @protocol CTDTouchToPointMapper;
 @protocol CTDTrialEditor;
 @protocol CTDTrialRenderer;
+@protocol CTDTrialMenuSceneInputRouter;
 
 
 
@@ -19,6 +20,9 @@
 //- (id<CTDTouchToPointMapper>)trialTouchMapper;
 - (NSDictionary*)colorCellRendererMap; // of cellId -> id<CTDColorCellRenderer>
 
+- (void)displayPreTrialMenuWithMessage:(NSString*)message
+                           inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter;
+- (void)hidePreTrialMenu;
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString;
 - (void)hideTrialCompletionMessage;
 

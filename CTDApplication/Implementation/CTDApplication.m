@@ -6,6 +6,7 @@
 #import "CTDTaskConfiguration.h"
 #import "CTDTaskConfigurationActivity.h"
 #import "CTDTaskConfigurationScene.h"
+#import "CTDTrialMenuSceneInputRouter.h"
 #import "CTDTrialScriptCSVLoader.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
@@ -38,6 +39,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
 
 // TODO: Split into helper class, so as to avoid having private methods?
 @interface CTDApplication () <CTDNotificationReceiver,
+                              CTDTrialMenuSceneInputRouter, // TEMP
                               CTDTaskConfiguration>
 @end
 
@@ -207,6 +209,7 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                                                      error:&error];
 
     _connectionScene = [_displayController connectScene];
+
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
                            trialResultsHolder:_trialResults
@@ -214,8 +217,21 @@ static NSString* CTDApplicationErrorDomain = @"CTDApplication";
                            colorCellRenderers:[_connectionScene colorCellRendererMap]
                            timeSource:_timeSource
                            trialCompletionNotificationReceiver:self];
+
+    [_connectionScene displayPreTrialMenuWithMessage:@"Hang on!"
+                                         inputRouter:self];
+}
+
+- (void)beginButtonPressed
+{
+    [_connectionScene hidePreTrialMenu];
     [_connectionActivity beginTrial];
     [_connectionScene setTrialEditor:_connectionActivity];
+}
+
+- (void)exitButtonPressed
+{
+    // TODO
 }
 
 - (void)receiveNotification:(NSString*)notificationId

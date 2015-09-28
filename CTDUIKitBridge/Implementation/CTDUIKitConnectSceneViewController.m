@@ -5,8 +5,10 @@
 #import "CTDStrings.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
+#import "CTDUIKitTrialMenuViewController.h"
 
 #import "CTDApplication/Ports/CTDTrialRenderer.h"
+#import "CTDApplication/CTDTrialMenuSceneInputRouter.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
@@ -135,6 +137,25 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 - (NSDictionary*)colorCellRendererMap
 {
     return _colorCellRendererMap;
+}
+
+- (void)displayPreTrialMenuWithMessage:(NSString*)message
+                           inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter
+{
+    CTDUIKitTrialMenuViewController* trialMenuVC =
+        [[CTDUIKitTrialMenuViewController alloc]
+         initWithNibName:@"CTDUIKitTrialMenuScene"
+         bundle:nil];
+    trialMenuVC.message = message;
+    trialMenuVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    trialMenuVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [trialMenuVC setTrialMenuSceneInputRouter:inputRouter];
+    [self presentViewController:trialMenuVC animated:YES completion:nil];
+}
+
+- (void)hidePreTrialMenu
+{
+    [self dismissViewControllerAnimated:YES completion:nil];  // TODO: Wait for completion to start trial
 }
 
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString
