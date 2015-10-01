@@ -10,6 +10,9 @@
      forTrialNumber:(NSUInteger)trialNumber
          sequenceId:(NSUInteger)sequenceId;
 
+- (NSUInteger)trialCount;
+- (NSTimeInterval)totalDuration;
+
 - (void)finalizeResults;
 
 @end

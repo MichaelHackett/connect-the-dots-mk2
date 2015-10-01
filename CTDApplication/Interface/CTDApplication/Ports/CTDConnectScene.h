@@ -29,4 +29,8 @@
 - (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString;
 - (void)hideTrialCompletionMessage;
 
+- (void)displayTrialBlockCompletionMessageWithTrialCount:(NSUInteger)trialCount
+                                         totalTimeString:(NSString*)timeString
+        acknowledgementHandler:(CTDAcknowledgementResponseHandler)acknowledgementHandler;
+
 @end
