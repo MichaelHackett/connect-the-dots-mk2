@@ -37,6 +37,13 @@ static NSString* const CTDApplicationErrorDomain = @"CTDApplication";
 // Number of practice runs
 static NSUInteger const practiceTrialCount = 2;
 
+/// Convenience function for making trial index checks more readable inline.
+static BOOL isPracticeTrialIndex(NSUInteger trialIndex)
+{
+    return trialIndex < practiceTrialCount;
+}
+
+
 
 
 /// Convert a NSTimeInterval into a string showing minutes and seconds (rounded to nearest).
@@ -222,13 +229,20 @@ static NSString* formatTime(NSTimeInterval time)
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
     NSError* error = nil;
-    _trialResults =
-        [_trialResultsFactory trialResultsForParticipantId:_participantId
-                                             preferredHand:_preferredHand
-                                            interfaceStyle:_interfaceStyle
-                                               trialNumber:_trialIndex + 1
-                                                sequenceId:sequenceIndex + 1
-                                                     error:&error];
+    if (isPracticeTrialIndex(_trialIndex))
+    {
+        _trialResults = [CTDModel trialResultsHolder];
+    }
+    else
+    {
+        _trialResults =
+            [_trialResultsFactory trialResultsForParticipantId:_participantId
+                                                 preferredHand:_preferredHand
+                                                interfaceStyle:_interfaceStyle
+                                                   trialNumber:_trialIndex + 1
+                                                    sequenceId:sequenceIndex + 1
+                                                         error:&error];
+    }
 
     _connectionScene = [_displayController connectScene];
 
@@ -275,9 +289,13 @@ static NSString* formatTime(NSTimeInterval time)
     {
         [_trialResults finalizeResults];
         NSTimeInterval trialDuration = [_trialResults trialDuration];
-        [_trialBlockResults setDuration:trialDuration
-                         forTrialNumber:_trialIndex + 1
-                             sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
+        // Don't record practice trial results.
+        if (!isPracticeTrialIndex(_trialIndex))
+        {
+            [_trialBlockResults setDuration:trialDuration
+                             forTrialNumber:_trialIndex + 1
+                                 sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
+        }
         _trialResults = nil;
         [_connectionScene displayTrialCompletionMessageWithTimeString:formatTime(trialDuration)];
 
