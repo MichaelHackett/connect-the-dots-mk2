@@ -16,11 +16,13 @@
     : CTDUIKitStandardViewController <CTDConnectScene>
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
+@property (assign, nonatomic) BOOL colorBarOnRight;
 @property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
 
 // IB Outlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray* colorSelectionCells;
 @property (weak, nonatomic) IBOutlet CTDUIKitConnectTheDotsView* connectTheDotsView;
+@property (weak, nonatomic) IBOutlet UIView* colorSelectionBarView;
 @property (weak, nonatomic) IBOutlet UIView* trialCompletionMessageView;
 @property (weak, nonatomic) IBOutlet UILabel* trialTimeLabel;
 

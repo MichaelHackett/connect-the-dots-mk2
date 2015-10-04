@@ -244,7 +244,9 @@ static NSString* formatTime(NSTimeInterval time)
                                                          error:&error];
     }
 
-    _connectionScene = [_displayController connectScene];
+    BOOL colorBarOnRight = (_preferredHand == CTDLeftHand);
+    _connectionScene =
+        [_displayController connectionSceneWithColorBarOnRight:colorBarOnRight];
 
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
