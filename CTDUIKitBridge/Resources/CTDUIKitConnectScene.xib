@@ -42,6 +42,7 @@
 						<string key="NSFrame">{{110, 20}, {638, 984}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSAppearance" key="NSAppearance" id="240044418">
 							<string key="NSAppearanceName">NSAppearanceNameAqua</string>
@@ -53,17 +54,17 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="654235783">
+					<object class="IBUIView" id="643489740">
 						<reference key="NSNextResponder" ref="629645449"/>
 						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIView" id="923355940">
-								<reference key="NSNextResponder" ref="654235783"/>
+							<object class="IBUIView" id="156595115">
+								<reference key="NSNextResponder" ref="643489740"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 4}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="654235783"/>
+								<reference key="NSSuperview" ref="643489740"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="309430424"/>
+								<reference key="NSNextKeyView" ref="403361353"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="912905877">
@@ -72,13 +73,13 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBUIView" id="309430424">
-								<reference key="NSNextResponder" ref="654235783"/>
+							<object class="IBUIView" id="403361353">
+								<reference key="NSNextResponder" ref="643489740"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 114}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="654235783"/>
+								<reference key="NSSuperview" ref="643489740"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="34481731"/>
+								<reference key="NSNextKeyView" ref="528172844"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="762093907">
@@ -87,11 +88,11 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBUIView" id="34481731">
-								<reference key="NSNextResponder" ref="654235783"/>
+							<object class="IBUIView" id="528172844">
+								<reference key="NSNextResponder" ref="643489740"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 224}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="654235783"/>
+								<reference key="NSSuperview" ref="643489740"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="355629841"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -106,7 +107,7 @@
 						<string key="NSFrame">{{10, 354}, {80, 328}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="923355940"/>
+						<reference key="NSNextKeyView" ref="156595115"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="NSAppearance" ref="240044418"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -122,7 +123,7 @@
 							<object class="IBUILabel" id="320465446">
 								<reference key="NSNextResponder" ref="475427878"/>
 								<int key="NSvFlags">290</int>
-								<string key="NSFrame">{{0, 10}, {768, 70}}</string>
+								<string key="NSFrame">{{0, 26}, {768, 70}}</string>
 								<reference key="NSSuperview" ref="475427878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="900271411"/>
@@ -156,10 +157,10 @@
 							<object class="IBUILabel" id="900271411">
 								<reference key="NSNextResponder" ref="475427878"/>
 								<int key="NSvFlags">290</int>
-								<string key="NSFrame">{{0, 60}, {768, 70}}</string>
+								<string key="NSFrame">{{0, 93}, {768, 70}}</string>
 								<reference key="NSSuperview" ref="475427878"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="654235783"/>
+								<reference key="NSNextKeyView" ref="643489740"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="NSHuggingPriority">{251, 251}</string>
 								<reference key="NSAppearance" ref="240044418"/>
@@ -178,7 +179,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 435}, {768, 140}}</string>
+						<string key="NSFrame">{{0, 410}, {768, 210}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="320465446"/>
@@ -243,7 +244,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="923355940"/>
+						<reference key="destination" ref="156595115"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">4Ie-c4-9UI</string>
@@ -252,7 +253,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="309430424"/>
+						<reference key="destination" ref="403361353"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">Tgj-ST-xye</string>
@@ -261,7 +262,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="34481731"/>
+						<reference key="destination" ref="528172844"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">Fi8-86-C7z</string>
@@ -270,7 +271,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">colorSelectionBarView</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="654235783"/>
+						<reference key="destination" ref="643489740"/>
 					</object>
 					<string key="id">cfz-iY-y8C</string>
 				</object>
@@ -300,7 +301,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="475427878"/>
 							<reference ref="355629841"/>
-							<reference ref="654235783"/>
+							<reference ref="643489740"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -335,31 +336,31 @@
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">x3b-bM-86x</string>
-						<reference key="object" ref="654235783"/>
+						<reference key="object" ref="643489740"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="923355940"/>
-							<reference ref="34481731"/>
-							<reference ref="309430424"/>
+							<reference ref="156595115"/>
+							<reference ref="528172844"/>
+							<reference ref="403361353"/>
 						</array>
 						<reference key="parent" ref="629645449"/>
 						<string key="objectName">Colors Toolbar</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">KC4-wv-1l5</string>
-						<reference key="object" ref="923355940"/>
-						<reference key="parent" ref="654235783"/>
+						<reference key="object" ref="156595115"/>
+						<reference key="parent" ref="643489740"/>
 						<string key="objectName">Dot Color 1</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">noB-g1-d5x</string>
-						<reference key="object" ref="34481731"/>
-						<reference key="parent" ref="654235783"/>
+						<reference key="object" ref="528172844"/>
+						<reference key="parent" ref="643489740"/>
 						<string key="objectName">Dot Color 3</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">UOG-iI-EHc</string>
-						<reference key="object" ref="309430424"/>
-						<reference key="parent" ref="654235783"/>
+						<reference key="object" ref="403361353"/>
+						<reference key="parent" ref="643489740"/>
 						<string key="objectName">Dot Color 2</string>
 					</object>
 				</array>
@@ -378,7 +379,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="923355940"/>
+						<reference key="object" ref="156595115"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
@@ -407,7 +408,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="309430424"/>
+						<reference key="object" ref="403361353"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
@@ -440,7 +441,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="34481731"/>
+						<reference key="object" ref="528172844"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
