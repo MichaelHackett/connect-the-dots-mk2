@@ -42,7 +42,6 @@
 						<string key="NSFrame">{{110, 20}, {638, 984}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSAppearance" key="NSAppearance" id="240044418">
 							<string key="NSAppearanceName">NSAppearanceNameAqua</string>
@@ -54,17 +53,17 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="590419690">
+					<object class="IBUIView" id="654235783">
 						<reference key="NSNextResponder" ref="629645449"/>
 						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIView" id="469385958">
-								<reference key="NSNextResponder" ref="590419690"/>
+							<object class="IBUIView" id="923355940">
+								<reference key="NSNextResponder" ref="654235783"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 4}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="590419690"/>
+								<reference key="NSSuperview" ref="654235783"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="116330522"/>
+								<reference key="NSNextKeyView" ref="309430424"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="912905877">
@@ -73,13 +72,13 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBUIView" id="116330522">
-								<reference key="NSNextResponder" ref="590419690"/>
+							<object class="IBUIView" id="309430424">
+								<reference key="NSNextResponder" ref="654235783"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 114}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="590419690"/>
+								<reference key="NSSuperview" ref="654235783"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="943172348"/>
+								<reference key="NSNextKeyView" ref="34481731"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="762093907">
@@ -88,11 +87,11 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBUIView" id="943172348">
-								<reference key="NSNextResponder" ref="590419690"/>
+							<object class="IBUIView" id="34481731">
+								<reference key="NSNextResponder" ref="654235783"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{4, 224}, {72, 100}}</string>
-								<reference key="NSSuperview" ref="590419690"/>
+								<reference key="NSSuperview" ref="654235783"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="355629841"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -107,7 +106,7 @@
 						<string key="NSFrame">{{10, 354}, {80, 328}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="469385958"/>
+						<reference key="NSNextKeyView" ref="923355940"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="NSAppearance" ref="240044418"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -160,7 +159,7 @@
 								<string key="NSFrame">{{0, 60}, {768, 70}}</string>
 								<reference key="NSSuperview" ref="475427878"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="590419690"/>
+								<reference key="NSNextKeyView" ref="654235783"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="NSHuggingPriority">{251, 251}</string>
 								<reference key="NSAppearance" ref="240044418"/>
@@ -244,7 +243,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="469385958"/>
+						<reference key="destination" ref="923355940"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">4Ie-c4-9UI</string>
@@ -253,7 +252,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="116330522"/>
+						<reference key="destination" ref="309430424"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">Tgj-ST-xye</string>
@@ -262,10 +261,18 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">colorSelectionCells</string>
 						<reference key="source" ref="62624560"/>
-						<reference key="destination" ref="943172348"/>
+						<reference key="destination" ref="34481731"/>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
 					<string key="id">Fi8-86-C7z</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">colorSelectionBarView</string>
+						<reference key="source" ref="62624560"/>
+						<reference key="destination" ref="654235783"/>
+					</object>
+					<string key="id">cfz-iY-y8C</string>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -293,7 +300,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="475427878"/>
 							<reference ref="355629841"/>
-							<reference ref="590419690"/>
+							<reference ref="654235783"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -328,31 +335,31 @@
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">x3b-bM-86x</string>
-						<reference key="object" ref="590419690"/>
+						<reference key="object" ref="654235783"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="469385958"/>
-							<reference ref="943172348"/>
-							<reference ref="116330522"/>
+							<reference ref="923355940"/>
+							<reference ref="34481731"/>
+							<reference ref="309430424"/>
 						</array>
 						<reference key="parent" ref="629645449"/>
-						<string key="objectName">Colors Toolbar - Left</string>
+						<string key="objectName">Colors Toolbar</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">KC4-wv-1l5</string>
-						<reference key="object" ref="469385958"/>
-						<reference key="parent" ref="590419690"/>
+						<reference key="object" ref="923355940"/>
+						<reference key="parent" ref="654235783"/>
 						<string key="objectName">Dot Color 1</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">noB-g1-d5x</string>
-						<reference key="object" ref="943172348"/>
-						<reference key="parent" ref="590419690"/>
+						<reference key="object" ref="34481731"/>
+						<reference key="parent" ref="654235783"/>
 						<string key="objectName">Dot Color 3</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">UOG-iI-EHc</string>
-						<reference key="object" ref="116330522"/>
-						<reference key="parent" ref="590419690"/>
+						<reference key="object" ref="309430424"/>
+						<reference key="parent" ref="654235783"/>
 						<string key="objectName">Dot Color 2</string>
 					</object>
 				</array>
@@ -371,7 +378,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="469385958"/>
+						<reference key="object" ref="923355940"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
@@ -400,7 +407,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="116330522"/>
+						<reference key="object" ref="309430424"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
@@ -433,7 +440,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="943172348"/>
+						<reference key="object" ref="34481731"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
@@ -530,11 +537,16 @@
 					<string key="className">CTDUIKitConnectSceneViewController</string>
 					<string key="superclassName">CTDUIKitStandardViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="colorSelectionBarView">UIView</string>
 						<string key="connectTheDotsView">CTDUIKitConnectTheDotsView</string>
 						<string key="trialCompletionMessageView">UIView</string>
 						<string key="trialTimeLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="colorSelectionBarView">
+							<string key="name">colorSelectionBarView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="connectTheDotsView">
 							<string key="name">connectTheDotsView</string>
 							<string key="candidateClassName">CTDUIKitConnectTheDotsView</string>

@@ -63,13 +63,14 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
     return configVC;
 }
 
-- (id<CTDConnectScene>)connectScene
+- (id<CTDConnectScene>)connectionSceneWithColorBarOnRight:(BOOL)colorBarOnRight
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]
          initWithNibName:kCTDConnectSceneNibName
                   bundle:nil];
     connectVC.colorPalette = _drawingConfig.colorPalette;
+    connectVC.colorBarOnRight = colorBarOnRight;
 
     _mainWindow.rootViewController = connectVC;
     [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand

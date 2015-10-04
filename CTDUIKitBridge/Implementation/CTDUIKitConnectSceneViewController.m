@@ -4,6 +4,7 @@
 
 #import "CTDStrings.h"
 #import "CTDUIKitAlertViewAdapter.h"
+#import "CTDUIKitConnectTheDotsView.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
 #import "CTDUIKitTrialBlockCompletionViewController.h"
@@ -56,15 +57,17 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     CTDUIKitAlertViewAdapter* _exitConfirmationAlertAdapter;
 }
 
-//- (id)initWithNibName:(NSString*)nibNameOrNil
-//               bundle:(NSBundle*)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
+- (id)initWithNibName:(NSString*)nibNameOrNil
+               bundle:(NSBundle*)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        _colorBarOnRight = NO;
+        // the rest are all nil refs to start
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -72,6 +75,25 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 
     CTDUIKitConnectTheDotsView* ctdView = self.connectTheDotsView;
     NSAssert(ctdView, @"Missing outlet connection to connect-the-dots view");
+    UIView* colorBarView = self.colorSelectionBarView;
+    NSAssert(colorBarView, @"Missing outlet connection to color selection bar view");
+
+    // Swap positions of color bar and connect-the-dots view if color bar is on right.
+    if (self.colorBarOnRight)
+    {
+        CGRect containerRect = colorBarView.superview.bounds;
+        CGRect colorBarFrame = colorBarView.frame;
+        // inset from right edge by the same margin it originally had from the left edge
+        CGFloat colorBarRightEdge = CGRectGetMaxX(containerRect)
+                                  - CGRectGetMinX(colorBarFrame); // margin from container
+        colorBarFrame.origin.x = colorBarRightEdge - CGRectGetWidth(colorBarFrame);
+        colorBarView.frame = colorBarFrame;
+
+        CGRect ctdViewFrame = ctdView.frame;
+        // inset from left edge by the same margin it originally had from the right edge
+        ctdViewFrame.origin.x = CGRectGetMaxX(containerRect) - CGRectGetMaxX(ctdViewFrame);
+        ctdView.frame = ctdViewFrame;
+    }
 
     _colorCellRendererMap = colorCellsRendererMap(self.colorSelectionCells);
     _touchToColorCellMapper = colorCellsTouchMapper(self.colorSelectionCells);

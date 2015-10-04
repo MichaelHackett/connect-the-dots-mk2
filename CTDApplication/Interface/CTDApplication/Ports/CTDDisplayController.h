@@ -13,7 +13,7 @@
 
 - (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
       taskConfigurationSceneBridge;
-- (id<CTDConnectScene>)connectScene;
+- (id<CTDConnectScene>)connectionSceneWithColorBarOnRight:(BOOL)colorBarOnRight;
 - (void)displayFatalError:(NSString*)message;
 
 @end
