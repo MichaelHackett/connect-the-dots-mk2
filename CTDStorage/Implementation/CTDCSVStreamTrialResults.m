@@ -14,6 +14,7 @@
     NSUInteger _participantId;
     CTDHand    _preferredHand;
     CTDInterfaceStyle _interfaceStyle;
+    NSMutableArray* _trialDurations;
 }
 
 - (instancetype)initWithParticipantId:(NSUInteger)participantId
@@ -30,6 +31,7 @@
         _participantId = participantId;
         _preferredHand = preferredHand;
         _interfaceStyle = interfaceStyle;
+        _trialDurations = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -40,6 +42,8 @@
 {
     NSAssert(_outputStreamWriter, @"New trial result sent after results finalized.");
 
+    [_trialDurations addObject:@(trialDuration)];
+
     NSString* line = [NSString stringWithFormat:@"%lu, %c, %c, %lu, %lu, %.2f\n",
                       (unsigned long)_participantId,
                       _preferredHand == CTDLeftHand ? 'L' : 'R',
@@ -49,6 +53,24 @@
                       (double)trialDuration];
 
     [_outputStreamWriter appendString:line];
+}
+
+- (NSUInteger)trialCount
+{
+    return [_trialDurations count];
+}
+
+- (NSTimeInterval)totalDuration
+{
+    __block NSTimeInterval totalDuration = 0;
+    [_trialDurations enumerateObjectsUsingBlock:^(NSNumber* trialDuration,
+                                                  __unused NSUInteger idx,
+                                                  __unused BOOL* stop)
+    {
+        totalDuration += [trialDuration doubleValue];
+    }];
+
+    return totalDuration;
 }
 
 - (void)finalizeResults

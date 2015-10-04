@@ -37,6 +37,24 @@ static NSString* const CTDApplicationErrorDomain = @"CTDApplication";
 // Number of practice runs
 static NSUInteger const practiceTrialCount = 2;
 
+/// Convenience function for making trial index checks more readable inline.
+static BOOL isPracticeTrialIndex(NSUInteger trialIndex)
+{
+    return trialIndex < practiceTrialCount;
+}
+
+
+
+
+/// Convert a NSTimeInterval into a string showing minutes and seconds (rounded to nearest).
+static NSString* formatTime(NSTimeInterval time)
+{
+    int timeInSeconds = (int)round((double)time);
+    return [NSString stringWithFormat:@"%02d:%02d",
+                     timeInSeconds / 60,
+                     timeInSeconds % 60];
+}
+
 
 
 
@@ -169,9 +187,11 @@ static NSUInteger const practiceTrialCount = 2;
     if (_participantId < 1 || sequenceLength < 1) { return @[]; }
 
     // Keep the practice sequences the same for all; only randomize the rest.
-    NSArray* practiceSequenceIndices =
-        [NSArray ctd_arrayOfIntegersFrom:0
-                                      to:(NSInteger)practiceTrialCount - 1];
+    NSArray* practiceSequenceIndices = (practiceTrialCount > 0)
+        ? practiceSequenceIndices = [NSArray ctd_arrayOfIntegersFrom:0
+                                             to:(NSInteger)practiceTrialCount - 1]
+        : @[];
+
     NSArray* mainSequenceIndices =
         [NSArray ctd_arrayOfIntegersFrom:practiceTrialCount
                                       to:(NSInteger)sequenceLength - 1];
@@ -209,13 +229,20 @@ static NSUInteger const practiceTrialCount = 2;
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
     NSError* error = nil;
-    _trialResults =
-        [_trialResultsFactory trialResultsForParticipantId:_participantId
-                                             preferredHand:_preferredHand
-                                            interfaceStyle:_interfaceStyle
-                                               trialNumber:_trialIndex + 1
-                                                sequenceId:sequenceIndex + 1
-                                                     error:&error];
+    if (isPracticeTrialIndex(_trialIndex))
+    {
+        _trialResults = [CTDModel trialResultsHolder];
+    }
+    else
+    {
+        _trialResults =
+            [_trialResultsFactory trialResultsForParticipantId:_participantId
+                                                 preferredHand:_preferredHand
+                                                interfaceStyle:_interfaceStyle
+                                                   trialNumber:_trialIndex + 1
+                                                    sequenceId:sequenceIndex + 1
+                                                         error:&error];
+    }
 
     _connectionScene = [_displayController connectScene];
 
@@ -262,16 +289,15 @@ static NSUInteger const practiceTrialCount = 2;
     {
         [_trialResults finalizeResults];
         NSTimeInterval trialDuration = [_trialResults trialDuration];
-        [_trialBlockResults setDuration:trialDuration
-                         forTrialNumber:_trialIndex + 1
-                             sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
+        // Don't record practice trial results.
+        if (!isPracticeTrialIndex(_trialIndex))
+        {
+            [_trialBlockResults setDuration:trialDuration
+                             forTrialNumber:_trialIndex + 1
+                                 sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
+        }
         _trialResults = nil;
-
-        int trialDurationSeconds = (int)round((double)trialDuration);
-        NSString* timeString = [NSString stringWithFormat:@"%02d:%02d",
-                                trialDurationSeconds / 60,
-                                trialDurationSeconds % 60];
-        [_connectionScene displayTrialCompletionMessageWithTimeString:timeString];
+        [_connectionScene displayTrialCompletionMessageWithTimeString:formatTime(trialDuration)];
 
         ctd_weakify(self, weakSelf);
         _displayTimer = [[CTDRunLoopTimer alloc]
@@ -289,8 +315,19 @@ static NSUInteger const practiceTrialCount = 2;
             }
             else
             {
-                [strongSelf->_trialBlockResults finalizeResults];
+                id<CTDTrialBlockResults> trialBlockResults = strongSelf->_trialBlockResults;
                 strongSelf->_trialBlockResults = nil;
+                [trialBlockResults finalizeResults];
+                NSUInteger trialCount = [trialBlockResults trialCount];
+                NSString* totalTime = formatTime([trialBlockResults totalDuration]);
+                [strongSelf->_connectionScene
+                    displayTrialBlockCompletionMessageWithTrialCount:trialCount
+                                                     totalTimeString:totalTime
+                                              acknowledgementHandler:^
+                {
+                    ctd_strongify(weakSelf, strongSelf2);
+                    [strongSelf2 displayConfigurationScreen];
+                }];
             }
         }];
     }

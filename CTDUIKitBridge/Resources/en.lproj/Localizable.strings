@@ -11,6 +11,9 @@
 /* Trial time report at completion of trial. */
 "TrialCompletion" = "Time = %@";
 
+/* Message displayed when trial block has been completed. */
+"TrialBlockCompletion" = "That's it! You completed %lu trials in %@.";
+
 /* Trial block exit alert messages. */
 
 "TrialBlockExitAlertTitle" = "Confirm exit";

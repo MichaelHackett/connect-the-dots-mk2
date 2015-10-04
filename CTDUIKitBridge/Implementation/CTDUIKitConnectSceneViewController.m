@@ -6,6 +6,7 @@
 #import "CTDUIKitAlertViewAdapter.h"
 #import "CTDUIKitConnectTheDotsViewAdapter.h"
 #import "CTDUIKitColorCell.h"
+#import "CTDUIKitTrialBlockCompletionViewController.h"
 #import "CTDUIKitTrialMenuViewController.h"
 
 #import "CTDApplication/Ports/CTDTrialRenderer.h"
@@ -207,6 +208,22 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
 
     // reenable touch input
     self.view.userInteractionEnabled = YES;
+}
+
+- (void)displayTrialBlockCompletionMessageWithTrialCount:(NSUInteger)trialCount
+                                         totalTimeString:(NSString*)timeString
+        acknowledgementHandler:(CTDAcknowledgementResponseHandler)acknowledgementHandler;
+{
+    CTDUIKitTrialBlockCompletionViewController* completionVC =
+        [[CTDUIKitTrialBlockCompletionViewController alloc]
+         initWithNibName:@"CTDUIKitTrialBlockCompletionScene"
+         bundle:nil];
+    completionVC.trialCount = trialCount;
+    completionVC.timeString = timeString;
+    completionVC.acknowledgementHandler = acknowledgementHandler;
+    completionVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    completionVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:completionVC animated:YES completion:nil];
 }
 
 @end
