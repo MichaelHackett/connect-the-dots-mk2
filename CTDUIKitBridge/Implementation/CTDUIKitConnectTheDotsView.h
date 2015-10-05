@@ -16,13 +16,13 @@
 // unnecessary to add such support at this time.
 
 @property (assign, nonatomic) CGFloat dotDiameter; // in pixels
-@property (copy, nonatomic) UIColor* dotSelectionIndicatorColor;
+@property (strong, nonatomic) UIColor* dotSelectionIndicatorColor;
 @property (assign, nonatomic) CGFloat dotSelectionIndicatorThickness;
 @property (assign, nonatomic) CGFloat dotSelectionIndicatorPadding;
 @property (assign, nonatomic) CGFloat dotSelectionAnimationDuration; // seconds
 
 @property (assign, nonatomic) CGFloat connectionLineWidth;
-@property (copy, nonatomic) UIColor* connectionLineColor;
+@property (strong, nonatomic) UIColor* connectionLineColor;
 
 
 - (CTDUIKitDotView*)newDotCenteredAt:(CGPoint)center;

@@ -10,8 +10,8 @@
 
 @interface CTDUIKitColorCell : UIView <CTDColorCellRenderer, CTDTouchable>
 
-@property (copy, nonatomic) UIColor* colorWhenSelected;
-@property (copy, nonatomic) UIColor* colorWhenNotSelected;
+@property (strong, nonatomic) UIColor* colorWhenSelected;
+@property (strong, nonatomic) UIColor* colorWhenNotSelected;
 @property (assign, nonatomic) NSUInteger cellId; // currently 1-based index
 
 @end

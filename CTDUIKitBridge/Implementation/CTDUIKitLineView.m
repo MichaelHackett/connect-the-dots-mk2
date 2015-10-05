@@ -47,7 +47,7 @@ static CGFloat kDefaultLineWidth = 1.0;
 
 - (void)setLineColor:(UIColor*)lineColor
 {
-    _lineColor = [lineColor copy];
+    _lineColor = lineColor;
     _lineLayer.strokeColor = [_lineColor CGColor];
 }
 

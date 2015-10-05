@@ -8,7 +8,7 @@
 @interface CTDUIKitLineView : UIView
 
 @property (assign, nonatomic) CGFloat lineWidth;
-@property (copy, nonatomic) UIColor* lineColor;
+@property (strong, nonatomic) UIColor* lineColor;
 @property (assign, nonatomic) CGPoint firstEndpoint;
 @property (assign, nonatomic) CGPoint secondEndpoint;
 

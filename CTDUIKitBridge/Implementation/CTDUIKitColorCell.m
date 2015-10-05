@@ -17,6 +17,9 @@
     self = [super init];
     if (self)
     {
+        _colorWhenSelected = nil;
+        _colorWhenNotSelected = nil;
+        _cellId = 1;
         _selected = NO;
         _activated = NO;
     }
