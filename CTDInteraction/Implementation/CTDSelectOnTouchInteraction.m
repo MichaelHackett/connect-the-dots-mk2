@@ -55,7 +55,7 @@ CTD_NO_DEFAULT_INIT
         [_selectionEditor selectElementWithId:hitElementId];
         _selectedElementId = [hitElementId copy];
     }
-    else
+    else if (_selectedElementId)
     {
         [_selectionEditor clearHighlighting];
         [_selectionEditor clearSelection];

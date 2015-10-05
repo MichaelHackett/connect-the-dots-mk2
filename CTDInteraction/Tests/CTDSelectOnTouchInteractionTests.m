@@ -8,6 +8,13 @@
 
 
 
+// Marker values to differentiate from initial editor state (nil) and explicit
+// clearing of highlighting or selection.
+static NSString * const kHighlightingCleared = @"highlighting cleared";
+static NSString * const kSelectionCleared = @"selection cleared";
+
+
+
 
 @interface CTDSelectOnTouchInteractionTestCase : XCTestCase <CTDSelectionEditor>
 
@@ -38,9 +45,9 @@
 }
 
 - (void)highlightElementWithId:(id)elementId { _highlightedElementId = [elementId copy]; }
-- (void)clearHighlighting { _highlightedElementId = nil; }
+- (void)clearHighlighting { _highlightedElementId = kHighlightingCleared; }
 - (void)selectElementWithId:(id)elementId { _selectedElementId = [elementId copy]; }
-- (void)clearSelection { _selectedElementId = nil; }
+- (void)clearSelection { _selectedElementId = kSelectionCleared; }
 
 @end
 
@@ -58,7 +65,12 @@
     [self createSubjectWithInitialPosition:self.fixture.pointsOutsideElements[0]];
 }
 
-- (void)testThatNoElementIsSelected
+- (void)testThatNoHighlightingWasDone
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoSelectionWasMade
 {
     assertThat(self.selectedElementId, is(nilValue()));
 }
@@ -80,7 +92,12 @@
     [self.subject touchDidMoveTo:self.fixture.pointsOutsideElements[1]];
 }
 
-- (void)testThatNoElementIsSelected
+- (void)testThatNoHighlightingWasDone
+{
+    assertThat(self.highlightedElementId, is(nilValue()));
+}
+
+- (void)testThatNoSelectionWasMade
 {
     assertThat(self.selectedElementId, is(nilValue()));
 }
@@ -185,12 +202,12 @@
 
 - (void)testThatElementHighlightingIsCleared
 {
-    assertThat(self.highlightedElementId, is(nilValue()));
+    assertThat(self.highlightedElementId, is(kHighlightingCleared));
 }
 
 - (void)testThatElementSelectionIsCleared
 {
-    assertThat(self.selectedElementId, is(nilValue()));
+    assertThat(self.selectedElementId, is(kSelectionCleared));
 }
 
 @end
@@ -234,17 +251,19 @@
 {
     [super setUp];
     [self createSubjectWithInitialPosition:self.fixture.pointsInsideCell3[1]];
-    [self.subject touchDidEnd];
+    if ([self.subject respondsToSelector:@selector(touchDidEnd)]) {
+        [self.subject touchDidEnd];
+    }
 }
 
 - (void)testThatElementHighlightingIsCleared
 {
-    assertThat(self.highlightedElementId, is(nilValue()));
+    assertThat(self.highlightedElementId, is(kHighlightingCleared));
 }
 
 - (void)testThatElementSelectionIsCleared
 {
-    assertThat(self.selectedElementId, is(nilValue()));
+    assertThat(self.selectedElementId, is(kSelectionCleared));
 }
 
 @end
@@ -265,12 +284,12 @@
 
 - (void)testThatElementHighlightingIsCleared
 {
-    assertThat(self.highlightedElementId, is(nilValue()));
+    assertThat(self.highlightedElementId, is(kHighlightingCleared));
 }
 
 - (void)testThatElementSelectionIsCleared
 {
-    assertThat(self.selectedElementId, is(nilValue()));
+    assertThat(self.selectedElementId, is(kSelectionCleared));
 }
 
 @end
