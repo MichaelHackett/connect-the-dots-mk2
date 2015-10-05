@@ -64,6 +64,7 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
 }
 
 - (id<CTDConnectScene>)connectionSceneWithColorBarOnRight:(BOOL)colorBarOnRight
+                                        quasimodalButtons:(BOOL)quasimodalButtons
 {
     CTDUIKitConnectSceneViewController* connectVC =
         [[CTDUIKitConnectSceneViewController alloc]
@@ -71,6 +72,7 @@ static NSString* const kCTDTaskConfigurationSceneNibName = @"CTDUIKitTaskConfigS
                   bundle:nil];
     connectVC.colorPalette = _drawingConfig.colorPalette;
     connectVC.colorBarOnRight = colorBarOnRight;
+    connectVC.quasimodalButtons = quasimodalButtons;
 
     _mainWindow.rootViewController = connectVC;
     [connectVC view]; // force VC views to load; TODO: rewrite accessors to trigger load on demand

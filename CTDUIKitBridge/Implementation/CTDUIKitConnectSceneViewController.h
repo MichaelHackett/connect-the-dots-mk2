@@ -17,6 +17,7 @@
 
 @property (copy, nonatomic) CTDUIKitColorPalette* colorPalette;
 @property (assign, nonatomic) BOOL colorBarOnRight;
+@property (assign, nonatomic) BOOL quasimodalButtons;
 @property (weak, nonatomic) id<CTDTrialEditor> trialEditor;
 
 // IB Outlets

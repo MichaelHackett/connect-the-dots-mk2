@@ -14,6 +14,7 @@
 #import "CTDApplication/CTDTrialMenuSceneInputRouter.h"
 #import "CTDInteraction/CTDListOrderTouchMapper.h"
 #import "CTDInteraction/CTDSelectOnTapInteraction.h"
+#import "CTDInteraction/CTDSelectOnTouchInteraction.h"
 #import "CTDInteraction/CTDTouchTrackerFactory.h"
 #import "CTDInteraction/CTDTrialSceneTouchRouter.h"
 #import "CTDInteraction/Ports/CTDTrialEditor.h"
@@ -104,6 +105,9 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
                                  touchToDotMapper:_touchToDotMapper];
     _exitConfirmationAlertAdapter = nil;
 
+    Class buttonTrackerClass = self.quasimodalButtons
+                             ? [CTDSelectOnTouchInteraction class]
+                             : [CTDSelectOnTapInteraction class];
     ctd_weakify(self, weakSelf);
     _colorCellsTouchResponder = [[CTDTouchTrackerFactory alloc]
                                  initWithTouchTrackerFactoryBlock:
@@ -111,8 +115,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
         {
             ctd_strongify(weakSelf, strongSelf);
             ctd_strongify(strongSelf.trialEditor, trialEditor);
-//             return [[CTDSelectOnTouchInteraction alloc]
-             return [[CTDSelectOnTapInteraction alloc]
+             return [[buttonTrackerClass alloc]
                      initWithSelectionEditor:[trialEditor editorForColorSelection]
                                  touchMapper:strongSelf->_touchToColorCellMapper
                         initialTouchPosition:initialPosition];
