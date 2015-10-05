@@ -13,7 +13,8 @@
 
 - (id<CTDTaskConfigurationSceneRenderer, CTDTaskConfigurationSceneInputSource>)
       taskConfigurationSceneBridge;
-- (id<CTDConnectScene>)connectionSceneWithColorBarOnRight:(BOOL)colorBarOnRight;
+- (id<CTDConnectScene>)connectionSceneWithColorBarOnRight:(BOOL)colorBarOnRight
+                                        quasimodalButtons:(BOOL)quasimodalButtons;
 - (void)displayFatalError:(NSString*)message;
 
 @end

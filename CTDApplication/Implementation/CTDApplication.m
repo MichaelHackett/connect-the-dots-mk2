@@ -244,9 +244,12 @@ static NSString* formatTime(NSTimeInterval time)
                                                          error:&error];
     }
 
+    // Configure UI for connect-the-dots task
     BOOL colorBarOnRight = (_preferredHand == CTDLeftHand);
+    BOOL quasimodalButtons = (_interfaceStyle == CTDQuasimodalInterfaceStyle);
     _connectionScene =
-        [_displayController connectionSceneWithColorBarOnRight:colorBarOnRight];
+        [_displayController connectionSceneWithColorBarOnRight:colorBarOnRight
+                                             quasimodalButtons:quasimodalButtons];
 
     _connectionActivity = [[CTDConnectionActivity alloc]
                            initWithTrialScript:trialScript
