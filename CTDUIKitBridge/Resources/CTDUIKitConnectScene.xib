@@ -475,7 +475,7 @@
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
 								<string key="keyPath">dotDiameter</string>
-								<integer value="65" key="value"/>
+								<integer value="80" key="value"/>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
