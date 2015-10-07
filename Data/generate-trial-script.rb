@@ -2,9 +2,10 @@
 #
 # Generates CSV rows containing the data for trial sequences.
 
-sequenceCount = 22;
+sequenceCount = 12;
 sequenceLength = 20;
-minDistance = 0.2;
+minDistance = 0.40;
+maxDistance = 0.75;
 
 prevColor = 0;
 (1..sequenceCount).each do |sequenceIndex|
@@ -16,7 +17,7 @@ prevColor = 0;
       x2 = rand(0.0..1.0)
       y2 = rand(0.0..1.0)
       distance = Math.hypot(x2-x1, y2-y1)
-    end while distance < minDistance
+    end while distance < minDistance || distance > maxDistance
 
     begin
       color = rand(1..3)
