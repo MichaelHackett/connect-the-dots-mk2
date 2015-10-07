@@ -130,7 +130,7 @@ static NSString* formatTime(NSTimeInterval time)
                             pathForResource:@"TrialSequences" ofType:@"csv"];
     NSError* error = nil;
     _dotSequences = [CTDTrialScriptCSVLoader sequencesFromFileAtPath:scriptPath
-                                                       sequenceCount:22
+                                                       sequenceCount:12
                                                       sequenceLength:20
                                                                error:&error];
     if (!_dotSequences && error)
