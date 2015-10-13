@@ -42,7 +42,6 @@
 						<string key="NSFrame">{{110, 20}, {638, 984}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSAppearance" key="NSAppearance" id="240044418">
 							<string key="NSAppearanceName">NSAppearanceNameAqua</string>
@@ -67,9 +66,9 @@
 								<reference key="NSNextKeyView" ref="403361353"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="912905877">
+								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAwIDAAA</bytes>
+									<bytes key="NSRGB">MC43NTQ2NDM3OTM3IDAgMAA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
@@ -82,9 +81,9 @@
 								<reference key="NSNextKeyView" ref="528172844"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="762093907">
+								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAxIDAAA</bytes>
+									<bytes key="NSRGB">MCAwLjc1Mjk0MTE3NjUgMAA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
@@ -97,9 +96,9 @@
 								<reference key="NSNextKeyView" ref="355629841"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="NSAppearance" ref="240044418"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="61277749">
+								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDEAA</bytes>
+									<bytes key="NSRGB">MCAwIDAuNzUyOTQxMTc2NQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
@@ -112,7 +111,7 @@
 						<reference key="NSAppearance" ref="240044418"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
+							<bytes key="NSWhite">MC40MDMxMzU5MjY2AA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -316,8 +315,8 @@
 						<string key="id">Xq1-zf-fp4</string>
 						<reference key="object" ref="475427878"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="320465446"/>
 							<reference ref="900271411"/>
+							<reference ref="320465446"/>
 						</array>
 						<reference key="parent" ref="629645449"/>
 						<string key="objectName">Completion message</string>
@@ -384,14 +383,17 @@
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenNotSelected</string>
-								<reference key="value" ref="912905877"/>
+								<object class="NSColor" key="value">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC43NTI5NDExNzY1IDAgMAA</bytes>
+								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenSelected</string>
 								<object class="NSColor" key="value">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC45ODg5NjA4NjIyIDAuNDA2NzIzOTE2NSAwLjQzNDU5ODc3MzcAA</bytes>
+									<bytes key="NSRGB">MSAwIDAAA</bytes>
 								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
@@ -413,14 +415,17 @@
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenNotSelected</string>
-								<reference key="value" ref="762093907"/>
+								<object class="NSColor" key="value">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwLjc1Mjk0MTE3NjUgMAA</bytes>
+								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenSelected</string>
 								<object class="NSColor" key="value">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC40NDM5MTM1NzkgMSAwLjQyMTgzMDUzNDkAA</bytes>
+									<bytes key="NSRGB">MCAxIDAAA</bytes>
 								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
@@ -446,14 +451,17 @@
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenNotSelected</string>
-								<reference key="value" ref="61277749"/>
+								<object class="NSColor" key="value">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAuNzUyOTQxMTc2NQA</bytes>
+								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.color</string>
 								<string key="keyPath">colorWhenSelected</string>
 								<object class="NSColor" key="value">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC40MjI4MDczNjU3IDAuMzk0MTI5NjA0MSAwLjk5ODU3NDk3MjIAA</bytes>
+									<bytes key="NSRGB">MCAwLjQzMTcwNTkxNjYgMQA</bytes>
 								</object>
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">

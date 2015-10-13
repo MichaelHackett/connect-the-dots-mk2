@@ -26,6 +26,31 @@
     return self;
 }
 
+
+
+#pragma mark Property accessors
+
+
+- (void)setColorWhenNotSelected:(UIColor*)colorWhenNotSelected
+{
+    _colorWhenNotSelected = colorWhenNotSelected;
+    if (!_selected)
+    {
+        self.backgroundColor = colorWhenNotSelected;
+    }
+}
+
+- (void)setColorWhenSelected:(UIColor*)colorWhenSelected
+{
+    _colorWhenSelected = colorWhenSelected;
+    if (_selected)
+    {
+        self.backgroundColor = colorWhenSelected;
+    }
+}
+
+
+
 #pragma mark CTDSelectionRenderer protocol
 
 
