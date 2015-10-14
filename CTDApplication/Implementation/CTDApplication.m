@@ -294,15 +294,18 @@ static NSString* formatTime(NSTimeInterval time)
     {
         [_trialResults finalizeResults];
         NSTimeInterval trialDuration = [_trialResults trialDuration];
+        NSString* bestTimeString = 0;
         // Don't record practice trial results.
         if (!isPracticeTrialIndex(_trialIndex))
         {
             [_trialBlockResults setDuration:trialDuration
                              forTrialNumber:_trialIndex + 1
                                  sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
+            bestTimeString = formatTime([_trialBlockResults shortestTrialTime]);
         }
         _trialResults = nil;
-        [_connectionScene displayTrialCompletionMessageWithTimeString:formatTime(trialDuration)];
+        [_connectionScene displayTrialCompletionMessageWithTimeString:formatTime(trialDuration)
+                                                       bestTimeString:bestTimeString];
 
         ctd_weakify(self, weakSelf);
         _displayTimer = [[CTDRunLoopTimer alloc]

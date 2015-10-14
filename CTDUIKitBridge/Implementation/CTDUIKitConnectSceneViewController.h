@@ -26,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIView* colorSelectionBarView;
 @property (weak, nonatomic) IBOutlet UIView* trialCompletionMessageView;
 @property (weak, nonatomic) IBOutlet UILabel* trialTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel* bestTimeLabel;
 
 @end

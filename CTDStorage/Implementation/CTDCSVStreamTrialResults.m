@@ -73,6 +73,24 @@
     return totalDuration;
 }
 
+- (NSTimeInterval)shortestTrialTime
+{
+    if ([_trialDurations count] == 0) { return 0; }
+
+    __block NSTimeInterval shortestTrialTime = [_trialDurations[0] doubleValue];
+    [_trialDurations enumerateObjectsUsingBlock:^(NSNumber* trialDuration,
+                                                  __unused NSUInteger idx,
+                                                  __unused BOOL* stop)
+    {
+        if ([trialDuration doubleValue] < shortestTrialTime)
+        {
+             shortestTrialTime = [trialDuration doubleValue];
+        }
+    }];
+
+    return shortestTrialTime;
+}
+
 - (void)finalizeResults
 {
     [_outputStreamWriter closeStream];

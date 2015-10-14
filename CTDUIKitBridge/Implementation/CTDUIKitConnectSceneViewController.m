@@ -214,12 +214,33 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
      show];
 }
 
-- (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString
+- (void)displayTrialCompletionMessageWithTimeString:(NSString*)trialTimeString
+                                     bestTimeString:(NSString*)bestTimeString
 {
     ctd_strongify(self.trialCompletionMessageView, completionMessageView);
     ctd_strongify(self.trialTimeLabel, trialTimeLabel);
+    ctd_strongify(self.bestTimeLabel, bestTimeLabel);
     trialTimeLabel.text =
-        [NSString stringWithFormat:CTDString(@"TrialCompletion"), timeString];
+        [NSString stringWithFormat:CTDString(@"TrialTime"), trialTimeString];
+
+    if (bestTimeString)
+    {
+        bestTimeLabel.text =
+            [NSString stringWithFormat:CTDString(@"BestTrialTime"), bestTimeString];
+    }
+    else
+    {
+        // If "Best time" is not to be shown, reduce height of message box so
+        // there isn't so much extra whitespace.
+        bestTimeLabel.hidden = YES;
+        CGFloat vDelta = CGRectGetMaxY(bestTimeLabel.frame)
+                       - CGRectGetMaxY(trialTimeLabel.frame);
+        CGRect messageFrame = completionMessageView.frame;
+        messageFrame.size.height -= vDelta;
+        messageFrame.origin.y += vDelta / 2.0;
+        completionMessageView.frame = messageFrame;
+    }
+
     completionMessageView.hidden = NO;
 
     // disable touch input while message visible

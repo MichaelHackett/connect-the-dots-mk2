@@ -9,7 +9,8 @@
 
 
 /* Trial time report at completion of trial. */
-"TrialCompletion" = "Time = %@";
+"TrialTime" = "Time = %@";
+"BestTrialTime" = "Best time = %@";
 
 /* Message displayed when trial block has been completed. */
 "TrialBlockCompletion" = "That's it! You completed %lu trials in %@.";

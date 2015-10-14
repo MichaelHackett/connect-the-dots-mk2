@@ -26,7 +26,8 @@
 - (void)hidePreTrialMenu;
 - (void)confirmExitWithResponseHandler:(CTDConfirmationResponseHandler)responseHandler;
 
-- (void)displayTrialCompletionMessageWithTimeString:(NSString*)timeString;
+- (void)displayTrialCompletionMessageWithTimeString:(NSString*)trialTimeString
+                                     bestTimeString:(NSString*)bestTimeString;
 - (void)hideTrialCompletionMessage;
 
 - (void)displayTrialBlockCompletionMessageWithTrialCount:(NSUInteger)trialCount

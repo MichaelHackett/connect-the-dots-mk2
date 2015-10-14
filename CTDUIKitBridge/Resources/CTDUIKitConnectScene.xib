@@ -156,10 +156,10 @@
 							<object class="IBUILabel" id="900271411">
 								<reference key="NSNextResponder" ref="475427878"/>
 								<int key="NSvFlags">290</int>
-								<string key="NSFrame">{{0, 93}, {768, 70}}</string>
+								<string key="NSFrame">{{0, 109}, {768, 70}}</string>
 								<reference key="NSSuperview" ref="475427878"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="643489740"/>
+								<reference key="NSNextKeyView" ref="167836605"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="NSHuggingPriority">{251, 251}</string>
 								<reference key="NSAppearance" ref="240044418"/>
@@ -177,8 +177,35 @@
 								<reference key="IBUIFont" ref="882070718"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
+							<object class="IBUILabel" id="167836605">
+								<reference key="NSNextResponder" ref="475427878"/>
+								<int key="NSvFlags">290</int>
+								<string key="NSFrame">{{0, 168}, {768, 70}}</string>
+								<reference key="NSSuperview" ref="475427878"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="643489740"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<string key="NSHuggingPriority">{251, 251}</string>
+								<reference key="NSAppearance" ref="240044418"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<string key="IBUIText">Best time: 00:00</string>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4zMjUxMjM1NzgzIDAuNDM5MTU4MTQxNiAwLjU2NTI0NTA5MTkAA</bytes>
+								</object>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<int key="IBUITextAlignment">1</int>
+								<reference key="IBUIFontDescription" ref="928855929"/>
+								<reference key="IBUIFont" ref="882070718"/>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+							</object>
 						</array>
-						<string key="NSFrame">{{0, 410}, {768, 210}}</string>
+						<string key="NSFrame">{{0, 369}, {768, 289}}</string>
 						<reference key="NSSuperview" ref="629645449"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="320465446"/>
@@ -274,6 +301,14 @@
 					</object>
 					<string key="id">cfz-iY-y8C</string>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">bestTimeLabel</string>
+						<reference key="source" ref="62624560"/>
+						<reference key="destination" ref="167836605"/>
+					</object>
+					<string key="id">fjN-2a-vJb</string>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -315,8 +350,9 @@
 						<string key="id">Xq1-zf-fp4</string>
 						<reference key="object" ref="475427878"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="900271411"/>
 							<reference ref="320465446"/>
+							<reference ref="900271411"/>
+							<reference ref="167836605"/>
 						</array>
 						<reference key="parent" ref="629645449"/>
 						<string key="objectName">Completion message</string>
@@ -361,6 +397,12 @@
 						<reference key="object" ref="403361353"/>
 						<reference key="parent" ref="643489740"/>
 						<string key="objectName">Dot Color 2</string>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">fiM-RW-MHZ</string>
+						<reference key="object" ref="167836605"/>
+						<reference key="parent" ref="475427878"/>
+						<string key="objectName">Best time</string>
 					</object>
 				</array>
 			</object>
@@ -438,6 +480,7 @@
 				</object>
 				<string key="UOG-iI-EHc.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="Xq1-zf-fp4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="fiM-RW-MHZ.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="i5M-Pr-FkT.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<reference key="i5M-Pr-FkT.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="i5M-Pr-FkT.showNotes"/>
@@ -546,12 +589,17 @@
 					<string key="className">CTDUIKitConnectSceneViewController</string>
 					<string key="superclassName">CTDUIKitStandardViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="bestTimeLabel">UILabel</string>
 						<string key="colorSelectionBarView">UIView</string>
 						<string key="connectTheDotsView">CTDUIKitConnectTheDotsView</string>
 						<string key="trialCompletionMessageView">UIView</string>
 						<string key="trialTimeLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="bestTimeLabel">
+							<string key="name">bestTimeLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="colorSelectionBarView">
 							<string key="name">colorSelectionBarView</string>
 							<string key="candidateClassName">UIView</string>

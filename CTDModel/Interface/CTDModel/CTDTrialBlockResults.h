@@ -12,6 +12,7 @@
 
 - (NSUInteger)trialCount;
 - (NSTimeInterval)totalDuration;
+- (NSTimeInterval)shortestTrialTime;
 
 - (void)finalizeResults;
 
