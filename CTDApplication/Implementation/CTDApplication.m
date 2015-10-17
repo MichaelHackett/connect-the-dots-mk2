@@ -228,18 +228,24 @@ static NSString* formatTime(NSTimeInterval time)
     NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
-    NSError* error = nil;
+    // The trial number for the recorded data and UI; practice rounds are numbered 0.
+    NSUInteger trialNumber = 0;
+
     if (isPracticeTrialIndex(_trialIndex))
     {
-        _trialResults = [CTDModel trialResultsHolder];
+        trialNumber = 0;
+        _trialResults = [CTDModel trialResultsHolder]; // use non-recording results holder
     }
     else
     {
+        NSAssert(_trialIndex >= practiceTrialCount, @"trial number would be less than 0");
+        trialNumber = _trialIndex + 1 - practiceTrialCount;
+        NSError* error = nil;
         _trialResults =
             [_trialResultsFactory trialResultsForParticipantId:_participantId
                                                  preferredHand:_preferredHand
                                                 interfaceStyle:_interfaceStyle
-                                                   trialNumber:_trialIndex + 1
+                                                   trialNumber:trialNumber
                                                     sequenceId:sequenceIndex + 1
                                                          error:&error];
     }
@@ -259,8 +265,6 @@ static NSString* formatTime(NSTimeInterval time)
                            timeSource:_timeSource
                            trialCompletionNotificationReceiver:self];
 
-    // The trial number in the UI; practice rounds are numbered less than 1.
-    NSInteger trialNumber = (NSInteger)_trialIndex - (NSInteger)practiceTrialCount + 1;
     [_connectionScene displayPreTrialMenuForTrialNumber:trialNumber
                                             inputRouter:self];
 }
@@ -298,8 +302,9 @@ static NSString* formatTime(NSTimeInterval time)
         // Don't record practice trial results.
         if (!isPracticeTrialIndex(_trialIndex))
         {
+            NSUInteger trialNumber = _trialIndex + 1 - practiceTrialCount;
             [_trialBlockResults setDuration:trialDuration
-                             forTrialNumber:_trialIndex + 1
+                             forTrialNumber:trialNumber
                                  sequenceId:[_sequenceOrder[_trialIndex] unsignedIntegerValue]];
             bestTimeString = formatTime([_trialBlockResults shortestTrialTime]);
         }

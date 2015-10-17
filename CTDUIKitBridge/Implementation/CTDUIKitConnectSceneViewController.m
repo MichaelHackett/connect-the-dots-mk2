@@ -168,7 +168,7 @@ static id<CTDTouchToElementMapper> colorCellsTouchMapper(NSArray* colorSelection
     return _colorCellRendererMap;
 }
 
-- (void)displayPreTrialMenuForTrialNumber:(NSInteger)trialNumber
+- (void)displayPreTrialMenuForTrialNumber:(NSUInteger)trialNumber
                               inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter
 {
     NSString* defaultMessage =
