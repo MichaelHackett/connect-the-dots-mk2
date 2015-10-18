@@ -60,6 +60,11 @@
     return [_trialDurations count];
 }
 
+- (NSArray*)trialDurations
+{
+    return [_trialDurations copy];
+}
+
 - (NSTimeInterval)totalDuration
 {
     __block NSTimeInterval totalDuration = 0;

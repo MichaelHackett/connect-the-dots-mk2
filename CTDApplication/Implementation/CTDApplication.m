@@ -8,6 +8,7 @@
 #import "CTDTaskConfigurationScene.h"
 #import "CTDTrialMenuSceneInputRouter.h"
 #import "CTDTrialScriptCSVLoader.h"
+#import "Ports/CTDAppStateRecorder.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
 #import "Ports/CTDRandomalizer.h"
@@ -70,6 +71,7 @@ static NSString* formatTime(NSTimeInterval time)
 {
     id<CTDDisplayController> _displayController;
     id<CTDTrialResultsFactory> _trialResultsFactory;
+    id<CTDAppStateRecorder> _appStateRecorder;
     id<CTDTimeSource> _timeSource;
     id<CTDRandomalizer> _randomalizer;
 
@@ -93,6 +95,7 @@ static NSString* formatTime(NSTimeInterval time)
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
             trialResultsFactory:(id<CTDTrialResultsFactory>)trialResultsFactory
+               appStateRecorder:(id<CTDAppStateRecorder>)appStateRecorder
                      timeSource:(id<CTDTimeSource>)timeSource
                    randomalizer:(id<CTDRandomalizer>)randomalizer
 {
@@ -100,6 +103,7 @@ static NSString* formatTime(NSTimeInterval time)
     if (self) {
         _displayController = displayController;
         _trialResultsFactory = trialResultsFactory;
+        _appStateRecorder = appStateRecorder;
         _timeSource = timeSource;
         _randomalizer = randomalizer;
 
@@ -124,6 +128,18 @@ static NSString* formatTime(NSTimeInterval time)
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
 
+// TODO: Move private method to new host
+- (void)CTDApplication_prepareTrialBlockResults
+{
+    NSError* error = nil;
+    _trialBlockResults =
+        [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
+                                                  preferredHand:_preferredHand
+                                                 interfaceStyle:_interfaceStyle
+                                                          error:&error];
+    if (!_trialBlockResults) { [self displayResultsDestinationError:error]; }
+}
+
 - (void)start
 {
     NSString* scriptPath = [[NSBundle mainBundle]
@@ -139,7 +155,38 @@ static NSString* formatTime(NSTimeInterval time)
         return;
     }
 
-    [self displayConfigurationScreen];
+    id<CTDApplicationState> savedState = [_appStateRecorder savedApplicationState];
+    if ([[savedState participantId] unsignedIntegerValue] > 0)
+    {
+        _participantId = [[savedState participantId] unsignedIntegerValue];
+        _preferredHand = [[savedState preferredHand] unsignedIntegerValue];
+        _interfaceStyle = [[savedState interfaceStyle] unsignedIntegerValue];
+        _sequenceOrder = [[savedState sequenceOrder] copy];
+        _trialIndex = [[savedState trialIndex] unsignedIntegerValue];
+
+        [self CTDApplication_prepareTrialBlockResults];
+        if (!_trialBlockResults) { return; }
+
+        // Rebuild the trial results up to the point where the block was interrupted.
+        [[savedState trialDurations] enumerateObjectsUsingBlock:
+            ^(NSNumber* trialDuration, NSUInteger index, __unused BOOL* stop)
+            {
+                NSUInteger sequenceId =
+                    [self->_sequenceOrder[index + practiceTrialCount]
+                     unsignedIntegerValue];
+
+                [self->_trialBlockResults setDuration:[trialDuration doubleValue]
+                                       forTrialNumber:index + 1
+                                           sequenceId:sequenceId];
+            }
+        ];
+
+        [self startTrial];
+    }
+    else
+    {
+        [self displayConfigurationScreen];
+    }
 }
 
 - (void)displayScriptLoadError:(NSError*)error
@@ -211,13 +258,8 @@ static NSString* formatTime(NSTimeInterval time)
 {
     _sequenceOrder = [self sequenceOrder];
 
-    NSError* error = nil;
-    _trialBlockResults =
-        [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
-                                                  preferredHand:_preferredHand
-                                                 interfaceStyle:_interfaceStyle
-                                                          error:&error];
-    if (!_trialBlockResults) { [self displayResultsDestinationError:error]; return; }
+    [self CTDApplication_prepareTrialBlockResults];
+    if (!_trialBlockResults) { return; }
 
     _trialIndex = 0;
     [self startTrial];
@@ -225,6 +267,18 @@ static NSString* formatTime(NSTimeInterval time)
 
 - (void)startTrial
 {
+    NSAssert(_trialBlockResults,
+             @"failed to create trial block results holder before starting trial");
+
+    [_appStateRecorder updateSavedApplicationStateWithBuilder:^(id<CTDMutableApplicationState> state) {
+        [state setParticipantId:@(self->_participantId)];
+        [state setPreferredHand:@(self->_preferredHand)];
+        [state setInterfaceStyle:@(self->_interfaceStyle)];
+        [state setSequenceOrder:self->_sequenceOrder];
+        [state setTrialIndex:@(self->_trialIndex)];
+        [state setTrialDurations:[self->_trialBlockResults trialDurations]];
+    }];
+
     NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
@@ -337,6 +391,13 @@ static NSString* formatTime(NSTimeInterval time)
                                               acknowledgementHandler:^
                 {
                     ctd_strongify(weakSelf, strongSelf2);
+
+                    // Clearing saved participant ID will send app to config screen on launch.
+                    [strongSelf2->_appStateRecorder
+                        updateSavedApplicationStateWithBuilder:^(id<CTDMutableApplicationState> state) {
+                        [state setParticipantId:nil];
+                    }];
+
                     [strongSelf2 displayConfigurationScreen];
                 }];
             }

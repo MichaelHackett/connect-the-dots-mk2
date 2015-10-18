@@ -26,6 +26,7 @@
     _ctdApplication = [[CTDApplication alloc]
                        initWithDisplayController:_displayController
                        trialResultsFactory:[CTDStorage csvFileTrialResultsFactory]
+                       appStateRecorder:[CTDStorage appStateRecorder]
                        timeSource:[[CTDFoundationTimeSource alloc] init]
                        randomalizer:[[CTDDefaultRandomalizer alloc] init]];
     [_ctdApplication start];

@@ -11,6 +11,7 @@
          sequenceId:(NSUInteger)sequenceId;
 
 - (NSUInteger)trialCount;
+- (NSArray*)trialDurations;
 - (NSTimeInterval)totalDuration;
 - (NSTimeInterval)shortestTrialTime;
 
