@@ -128,6 +128,18 @@ static NSString* formatTime(NSTimeInterval time)
 - (instancetype)init CTD_BLOCK_PARENT_METHOD
 
 
+// TODO: Move private method to new host
+- (void)CTDApplication_prepareTrialBlockResults
+{
+    NSError* error = nil;
+    _trialBlockResults =
+        [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
+                                                  preferredHand:_preferredHand
+                                                 interfaceStyle:_interfaceStyle
+                                                          error:&error];
+    if (!_trialBlockResults) { [self displayResultsDestinationError:error]; }
+}
+
 - (void)start
 {
     NSString* scriptPath = [[NSBundle mainBundle]
@@ -144,17 +156,31 @@ static NSString* formatTime(NSTimeInterval time)
     }
 
     id<CTDApplicationState> savedState = [_appStateRecorder savedApplicationState];
-    if ([savedState participantId])
+    if ([[savedState participantId] unsignedIntegerValue] > 0)
     {
         _participantId = [[savedState participantId] unsignedIntegerValue];
         _preferredHand = [[savedState preferredHand] unsignedIntegerValue];
         _interfaceStyle = [[savedState interfaceStyle] unsignedIntegerValue];
         _sequenceOrder = [[savedState sequenceOrder] copy];
         _trialIndex = [[savedState trialIndex] unsignedIntegerValue];
-    }
 
-    if (_participantId > 0)
-    {
+        [self CTDApplication_prepareTrialBlockResults];
+        if (!_trialBlockResults) { return; }
+
+        // Rebuild the trial results up to the point where the block was interrupted.
+        [[savedState trialDurations] enumerateObjectsUsingBlock:
+            ^(NSNumber* trialDuration, NSUInteger index, __unused BOOL* stop)
+            {
+                NSUInteger sequenceId =
+                    [self->_sequenceOrder[index + practiceTrialCount]
+                     unsignedIntegerValue];
+
+                [self->_trialBlockResults setDuration:[trialDuration doubleValue]
+                                       forTrialNumber:index + 1
+                                           sequenceId:sequenceId];
+            }
+        ];
+
         [self startTrial];
     }
     else
@@ -232,13 +258,8 @@ static NSString* formatTime(NSTimeInterval time)
 {
     _sequenceOrder = [self sequenceOrder];
 
-    NSError* error = nil;
-    _trialBlockResults =
-        [_trialResultsFactory trialBlockResultsForParticipantId:_participantId
-                                                  preferredHand:_preferredHand
-                                                 interfaceStyle:_interfaceStyle
-                                                          error:&error];
-    if (!_trialBlockResults) { [self displayResultsDestinationError:error]; return; }
+    [self CTDApplication_prepareTrialBlockResults];
+    if (!_trialBlockResults) { return; }
 
     _trialIndex = 0;
     [self startTrial];
@@ -246,12 +267,16 @@ static NSString* formatTime(NSTimeInterval time)
 
 - (void)startTrial
 {
+    NSAssert(_trialBlockResults,
+             @"failed to create trial block results holder before starting trial");
+
     [_appStateRecorder updateSavedApplicationStateWithBuilder:^(id<CTDMutableApplicationState> state) {
         [state setParticipantId:@(self->_participantId)];
         [state setPreferredHand:@(self->_preferredHand)];
         [state setInterfaceStyle:@(self->_interfaceStyle)];
         [state setSequenceOrder:self->_sequenceOrder];
         [state setTrialIndex:@(self->_trialIndex)];
+        [state setTrialDurations:[self->_trialBlockResults trialDurations]];
     }];
 
     NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];

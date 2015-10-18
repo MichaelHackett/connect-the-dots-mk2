@@ -8,6 +8,7 @@
 - (NSNumber*)interfaceStyle;
 - (NSArray*)sequenceOrder; // of NSNumber -- the order in which to present the sequences
 - (NSNumber*)trialIndex;
+- (NSArray*)trialDurations; // of NSNumber (containing NSTimeInterval values)
 
 @end
 
@@ -19,6 +20,7 @@
 - (void)setInterfaceStyle:(NSNumber*)interfaceStyle;
 - (void)setSequenceOrder:(NSArray*)sequenceOrder; // of NSNumber -- the order in which to present the sequences
 - (void)setTrialIndex:(NSNumber*)trialIndex;
+- (void)setTrialDurations:(NSArray*)trialDurations;
 
 @end
 

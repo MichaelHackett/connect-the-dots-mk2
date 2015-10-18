@@ -12,6 +12,7 @@ static NSString * const preferredHandKey = @"preferredHand";
 static NSString * const interfaceStyleKey = @"interfaceStyle";
 static NSString * const sequenceOrderKey = @"sequenceOrder";
 static NSString * const trialIndexKey = @"trialIndex";
+static NSString * const trialDurationsKey = @"trialDurations";
 
 
 
@@ -23,6 +24,7 @@ static NSString * const trialIndexKey = @"trialIndex";
 @property (copy, nonatomic) NSNumber* interfaceStyle;
 @property (copy, nonatomic) NSArray* sequenceOrder;
 @property (copy, nonatomic) NSNumber* trialIndex;
+@property (copy, nonatomic) NSArray* trialDurations;
 
 @end
 
@@ -81,6 +83,7 @@ static NSString * const trialIndexKey = @"trialIndex";
     [archiver encodeObject:appState.interfaceStyle forKey:interfaceStyleKey];
     [archiver encodeObject:appState.sequenceOrder forKey:sequenceOrderKey];
     [archiver encodeObject:appState.trialIndex forKey:trialIndexKey];
+    [archiver encodeObject:appState.trialDurations forKey:trialDurationsKey];
     [archiver finishEncoding];
 
     NSError* error = nil;
@@ -124,6 +127,7 @@ static NSString * const trialIndexKey = @"trialIndex";
     appState.interfaceStyle = [unarchiver decodeObjectForKey:interfaceStyleKey];
     appState.sequenceOrder = [unarchiver decodeObjectForKey:sequenceOrderKey];
     appState.trialIndex = [unarchiver decodeObjectForKey:trialIndexKey];
+    appState.trialDurations = [unarchiver decodeObjectForKey:trialDurationsKey];
     [unarchiver finishDecoding];
 
     return appState;
