@@ -228,24 +228,22 @@ static NSString* formatTime(NSTimeInterval time)
     NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
-    // The trial number for the recorded data and UI; practice rounds are numbered 0.
-    NSUInteger trialNumber = 0;
+    // The trial number for the recorded data and UI; practice rounds are numbered under 0.
+    NSInteger trialNumber = (NSInteger)_trialIndex + 1 - (NSInteger)practiceTrialCount;
 
     if (isPracticeTrialIndex(_trialIndex))
     {
-        trialNumber = 0;
         _trialResults = [CTDModel trialResultsHolder]; // use non-recording results holder
     }
     else
     {
-        NSAssert(_trialIndex >= practiceTrialCount, @"trial number would be less than 0");
-        trialNumber = _trialIndex + 1 - practiceTrialCount;
+        NSAssert(trialNumber >= 1, @"trial number is less than 1");
         NSError* error = nil;
         _trialResults =
             [_trialResultsFactory trialResultsForParticipantId:_participantId
                                                  preferredHand:_preferredHand
                                                 interfaceStyle:_interfaceStyle
-                                                   trialNumber:trialNumber
+                                                   trialNumber:(NSUInteger)trialNumber
                                                     sequenceId:sequenceIndex + 1
                                                          error:&error];
     }

@@ -21,7 +21,7 @@
 //- (id<CTDTouchToPointMapper>)trialTouchMapper;
 - (NSDictionary*)colorCellRendererMap; // of cellId -> id<CTDColorCellRenderer>
 
-- (void)displayPreTrialMenuForTrialNumber:(NSUInteger)trialNumber
+- (void)displayPreTrialMenuForTrialNumber:(NSInteger)trialNumber
                               inputRouter:(id<CTDTrialMenuSceneInputRouter>)inputRouter;
 - (void)hidePreTrialMenu;
 - (void)confirmExitWithResponseHandler:(CTDConfirmationResponseHandler)responseHandler;
