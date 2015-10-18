@@ -2,6 +2,7 @@
 
 #import "CTDStorage.h"
 
+#import "CTDAppStateFileArchiver.h"
 #import "CTDCSVFileWriterFactory.h"
 
 
@@ -11,6 +12,11 @@
 + (id<CTDTrialResultsFactory>)csvFileTrialResultsFactory
 {
     return [[CTDCSVFileWriterFactory alloc] init];
+}
+
++ (id<CTDAppStateRecorder>)appStateRecorder
+{
+    return [[CTDAppStateFileArchiver alloc] init];
 }
 
 @end

@@ -8,6 +8,7 @@
 #import "CTDTaskConfigurationScene.h"
 #import "CTDTrialMenuSceneInputRouter.h"
 #import "CTDTrialScriptCSVLoader.h"
+#import "Ports/CTDAppStateRecorder.h"
 #import "Ports/CTDConnectScene.h"
 #import "Ports/CTDDisplayController.h"
 #import "Ports/CTDRandomalizer.h"
@@ -70,6 +71,7 @@ static NSString* formatTime(NSTimeInterval time)
 {
     id<CTDDisplayController> _displayController;
     id<CTDTrialResultsFactory> _trialResultsFactory;
+    id<CTDAppStateRecorder> _appStateRecorder;
     id<CTDTimeSource> _timeSource;
     id<CTDRandomalizer> _randomalizer;
 
@@ -93,6 +95,7 @@ static NSString* formatTime(NSTimeInterval time)
 
 - (id)initWithDisplayController:(id<CTDDisplayController>)displayController
             trialResultsFactory:(id<CTDTrialResultsFactory>)trialResultsFactory
+               appStateRecorder:(id<CTDAppStateRecorder>)appStateRecorder
                      timeSource:(id<CTDTimeSource>)timeSource
                    randomalizer:(id<CTDRandomalizer>)randomalizer
 {
@@ -100,6 +103,7 @@ static NSString* formatTime(NSTimeInterval time)
     if (self) {
         _displayController = displayController;
         _trialResultsFactory = trialResultsFactory;
+        _appStateRecorder = appStateRecorder;
         _timeSource = timeSource;
         _randomalizer = randomalizer;
 
@@ -139,7 +143,24 @@ static NSString* formatTime(NSTimeInterval time)
         return;
     }
 
-    [self displayConfigurationScreen];
+    id<CTDApplicationState> savedState = [_appStateRecorder savedApplicationState];
+    if ([savedState participantId])
+    {
+        _participantId = [[savedState participantId] unsignedIntegerValue];
+        _preferredHand = [[savedState preferredHand] unsignedIntegerValue];
+        _interfaceStyle = [[savedState interfaceStyle] unsignedIntegerValue];
+        _sequenceOrder = [[savedState sequenceOrder] copy];
+        _trialIndex = [[savedState trialIndex] unsignedIntegerValue];
+    }
+
+    if (_participantId > 0)
+    {
+        [self startTrial];
+    }
+    else
+    {
+        [self displayConfigurationScreen];
+    }
 }
 
 - (void)displayScriptLoadError:(NSError*)error
@@ -225,6 +246,14 @@ static NSString* formatTime(NSTimeInterval time)
 
 - (void)startTrial
 {
+    [_appStateRecorder updateSavedApplicationStateWithBuilder:^(id<CTDMutableApplicationState> state) {
+        [state setParticipantId:@(self->_participantId)];
+        [state setPreferredHand:@(self->_preferredHand)];
+        [state setInterfaceStyle:@(self->_interfaceStyle)];
+        [state setSequenceOrder:self->_sequenceOrder];
+        [state setTrialIndex:@(self->_trialIndex)];
+    }];
+
     NSUInteger sequenceIndex = [_sequenceOrder[_trialIndex] unsignedIntegerValue];
     id<CTDTrialScript> trialScript = _dotSequences[sequenceIndex];
 
@@ -337,6 +366,13 @@ static NSString* formatTime(NSTimeInterval time)
                                               acknowledgementHandler:^
                 {
                     ctd_strongify(weakSelf, strongSelf2);
+
+                    // Clearing saved participant ID will send app to config screen on launch.
+                    [strongSelf2->_appStateRecorder
+                        updateSavedApplicationStateWithBuilder:^(id<CTDMutableApplicationState> state) {
+                        [state setParticipantId:nil];
+                    }];
+
                     [strongSelf2 displayConfigurationScreen];
                 }];
             }

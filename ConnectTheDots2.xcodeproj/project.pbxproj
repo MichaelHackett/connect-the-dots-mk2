@@ -157,6 +157,7 @@
 		4CFA356C1B76DAF40060A689 /* libochamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8497681A7FEA18000A094E /* libochamcrest.a */; };
 		4CFA356D1B76DB070060A689 /* libCTDUtility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDEEB619C688CF0041B910 /* libCTDUtility.a */; };
 		4CFA356E1B76DB240060A689 /* libCTDModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA5719BB77C400D2B498 /* libCTDModel.a */; };
+		4CFDADC41BD2DCB900BA6B48 /* CTDAppStateFileArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDADC31BD2DCB900BA6B48 /* CTDAppStateFileArchiver.m */; };
 		4CFDEEB719C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
 		4CFDEEC419C688D00041B910 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA2319BB564600D2B498 /* XCTest.framework */; };
 		4CFDEEC519C688D00041B910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEBCA0A19BB564600D2B498 /* Foundation.framework */; };
@@ -380,6 +381,7 @@
 		4C0065401B8C0DBD0040A8AF /* CTDColorCellRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDColorCellRenderer.h; sourceTree = "<group>"; };
 		4C00654A1B8D3A190040A8AF /* CTDSelectionEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDSelectionEditor.h; sourceTree = "<group>"; };
 		4C0612011BA645370078B904 /* TrialSequences.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TrialSequences.csv; path = Data/TrialSequences.csv; sourceTree = SOURCE_ROOT; };
+		4C08C8281BC376C6002800B5 /* CTDAppStateRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDAppStateRecorder.h; sourceTree = "<group>"; };
 		4C09C1AE1B63F8DF00D06E17 /* CTDDisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDDisplayController.h; sourceTree = "<group>"; };
 		4C09C1EB1B642D8600D06E17 /* CTDUIKitWhatzit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDUIKitWhatzit.h; sourceTree = "<group>"; };
 		4C09C1EC1B642D8600D06E17 /* CTDUIKitWhatzit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDUIKitWhatzit.m; sourceTree = "<group>"; };
@@ -628,6 +630,8 @@
 		4CFCB6341BA7D0300014179C /* CTDCSVStreamTrialResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCSVStreamTrialResults.m; sourceTree = "<group>"; };
 		4CFCB6361BA7D1180014179C /* CTDTrial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrial.h; sourceTree = "<group>"; };
 		4CFCB63A1BA92ACA0014179C /* CTDTrialBlockResults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDTrialBlockResults.h; sourceTree = "<group>"; };
+		4CFDADC21BD2DCB900BA6B48 /* CTDAppStateFileArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDAppStateFileArchiver.h; sourceTree = "<group>"; };
+		4CFDADC31BD2DCB900BA6B48 /* CTDAppStateFileArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDAppStateFileArchiver.m; sourceTree = "<group>"; };
 		4CFDEE8F19C609440041B910 /* CTDMethodAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDMethodAnnotations.h; sourceTree = "<group>"; };
 		4CFDEE9719C61B740041B910 /* CTDAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDAnimationUtils.h; sourceTree = "<group>"; };
 		4CFDEE9819C61B740041B910 /* CTDAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDAnimationUtils.m; sourceTree = "<group>"; };
@@ -889,6 +893,7 @@
 		4C09C1AD1B63F85E00D06E17 /* Ports */ = {
 			isa = PBXGroup;
 			children = (
+				4C08C8281BC376C6002800B5 /* CTDAppStateRecorder.h */,
 				4C0065401B8C0DBD0040A8AF /* CTDColorCellRenderer.h */,
 				4CDAD56D1B402FCF00A9E4F7 /* CTDConnectScene.h */,
 				4C09C1AE1B63F8DF00D06E17 /* CTDDisplayController.h */,
@@ -931,6 +936,8 @@
 			children = (
 				4C2D1BBE1BADD9A3004661AD /* CTDStorage-Prefix.pch */,
 				4C2D1BE21BADF42F004661AD /* CTDStorage.m */,
+				4CFDADC21BD2DCB900BA6B48 /* CTDAppStateFileArchiver.h */,
+				4CFDADC31BD2DCB900BA6B48 /* CTDAppStateFileArchiver.m */,
 				4C2D1BE71BAE18A8004661AD /* CTDCSVFileWriterFactory.h */,
 				4C2D1BE81BAE18A8004661AD /* CTDCSVFileWriterFactory.m */,
 				4CFCB6331BA7D0300014179C /* CTDCSVStreamTrialResults.h */,
@@ -2202,6 +2209,7 @@
 				4C2D1BEA1BAE1B44004661AD /* CTDStreamWriter.m in Sources */,
 				4C2D1BEB1BAE1B50004661AD /* CTDCSVStreamTrialResults.m in Sources */,
 				4C2D1BE91BAE18A8004661AD /* CTDCSVFileWriterFactory.m in Sources */,
+				4CFDADC41BD2DCB900BA6B48 /* CTDAppStateFileArchiver.m in Sources */,
 				4C2D1BE31BADF42F004661AD /* CTDStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
