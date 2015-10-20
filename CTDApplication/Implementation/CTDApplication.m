@@ -303,8 +303,9 @@ static NSString* formatTime(NSTimeInterval time)
     }
 
     // Configure UI for connect-the-dots task
-    BOOL colorBarOnRight = (_preferredHand == CTDLeftHand);
     BOOL quasimodalButtons = (_interfaceStyle == CTDQuasimodalInterfaceStyle);
+    BOOL colorBarOnRight = quasimodalButtons ? (_preferredHand == CTDLeftHand)
+                                             : (_preferredHand == CTDRightHand);
     _connectionScene =
         [_displayController connectionSceneWithColorBarOnRight:colorBarOnRight
                                              quasimodalButtons:quasimodalButtons];
