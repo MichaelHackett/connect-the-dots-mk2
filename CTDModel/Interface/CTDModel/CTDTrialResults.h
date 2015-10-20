@@ -13,7 +13,8 @@
 - (void)setDuration:(NSTimeInterval)stepDuration
         forStepNumber:(NSUInteger)stepNumber
         startingDotPosition:(CTDPoint*)startingDotPosition
-        endingDotPosition:(CTDPoint*)endingDotPosition;
+        endingDotPosition:(CTDPoint*)endingDotPosition
+        connectionDuration:(NSTimeInterval)connectionDuration;
 
 - (NSTimeInterval)trialDuration;
 

@@ -60,7 +60,8 @@ static CTDPoint* someOtherPosition() { return [CTDPoint x:400 y:350]; }
     [self.subject setDuration:STEP_DURATIONS[0]
                   forStepNumber:1
                   startingDotPosition:somePosition()
-                  endingDotPosition:someOtherPosition()];
+                  endingDotPosition:someOtherPosition()
+                  connectionDuration:STEP_DURATIONS[0] / 2.0];
 }
 
 - (void)testThatTrialDurationEqualsDurationOfSingleStep
@@ -86,7 +87,8 @@ static CTDPoint* someOtherPosition() { return [CTDPoint x:400 y:350]; }
         [self.subject setDuration:STEP_DURATIONS[i]
                       forStepNumber:i+1
                       startingDotPosition:someOtherPosition()
-                      endingDotPosition:somePosition()];
+                      endingDotPosition:somePosition()
+                      connectionDuration:STEP_DURATIONS[i] / 2.0];
     }
 }
 

@@ -144,20 +144,22 @@
         forStepNumber:(NSUInteger)stepNumber
         startingDotPosition:(CTDPoint*)startingDotPosition
         endingDotPosition:(CTDPoint*)endingDotPosition
+        connectionDuration:(NSTimeInterval)connectionDuration
 {
     NSAssert(_outputStreamWriter, @"New trial step result sent after results finalized.");
 
     [super setDuration:stepDuration
            forStepNumber:stepNumber
            startingDotPosition:startingDotPosition
-           endingDotPosition:endingDotPosition];
+           endingDotPosition:endingDotPosition
+           connectionDuration:connectionDuration];
 
     double dx = startingDotPosition.x - endingDotPosition.x;
     double dy = startingDotPosition.y - endingDotPosition.y;
     double dotDistance = sqrt((dx * dx) + (dy * dy));
 
     NSString* line = [NSString stringWithFormat:
-                      @"%lu, %c, %c, %lu, %lu, %lu, %.0f, %.0f, %.0f, %.0f, %.0f, %.2f\n",
+                      @"%lu, %c, %c, %lu, %lu, %lu, %.0f, %.0f, %.0f, %.0f, %.0f, %.2f, %.2f\n",
                       (unsigned long)_participantId,
                       _preferredHand == CTDLeftHand ? 'L' : 'R',
                       _interfaceStyle == CTDModalInterfaceStyle ? 'M': 'Q',
@@ -169,7 +171,8 @@
                       round(endingDotPosition.x),
                       round(endingDotPosition.y),
                       round(dotDistance),
-                      (double)stepDuration];
+                      (double)stepDuration,
+                      (double)connectionDuration];
 
     [_outputStreamWriter appendString:line];
 }

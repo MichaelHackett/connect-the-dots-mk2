@@ -106,6 +106,7 @@ static double FIRST_STEP_END_TIME =   100008.5;
       forStepNumber:(NSUInteger)stepNumber
       startingDotPosition:(__unused CTDPoint*)startingDotPosition
       endingDotPosition:(__unused CTDPoint*)endingDotPosition
+      connectionDuration:(__unused NSTimeInterval)connectionDuration
 {
     self.stepDurations[@(stepNumber)] = @(stepDuration);
 }

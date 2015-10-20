@@ -159,7 +159,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     // Inputs:
     id<CTDTrialScript> _trialScript;
     __weak id<CTDTrialResults> _trialResults;
-    __weak id<CTDTimeSource> _timeSource;
+    id<CTDTimeSource> _timeSource;
     __weak id<CTDNotificationReceiver> _notificationReceiver;
 
     // Activity Model and internal helpers
@@ -168,6 +168,7 @@ static CTDDotColor dotColorFromCellId(id colorCellId)
     CTDPoint* _startingDotRenderedPosition;
     CTDPoint* _endingDotRenderedPosition;
     double _stepStartTime;
+    double _connectionStartTime;
     NSUInteger _stepIndex;
 
     void (^_startNextStep)(void);
@@ -192,6 +193,7 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
                             colorSelectionObserver:self];
         _trialStep = nil;
         _stepStartTime = 0.0;
+        _connectionStartTime = -0.001;
         _stepIndex = NSUIntegerMax;
 
         // Shared private code for starting a new trial step.
@@ -214,8 +216,9 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
                                       trialStepStateObserver:strongSelf];
 
             // Start step timer.
-            ctd_strongify(strongSelf->_timeSource, strongTimeSource);
-            strongSelf->_stepStartTime = [strongTimeSource systemTime];
+            strongSelf->_stepStartTime = [strongSelf->_timeSource systemTime];
+            // Clear connection timer.
+            strongSelf->_connectionStartTime = -0.001;
         };
     }
     return self;
@@ -245,15 +248,16 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
 - (void)advanceToNextStep
 {
     // Calculate length of time required to complete step; store it in the results.
-    ctd_strongify(_timeSource, timeSource);
     ctd_strongify(_trialResults, trialResults);
-    double stepEndTime = [timeSource systemTime];
+    double stepEndTime = [_timeSource systemTime];
     NSTimeInterval stepDuration = (NSTimeInterval)(stepEndTime - _stepStartTime);
+    NSTimeInterval connectionDuration = (NSTimeInterval)(stepEndTime - _connectionStartTime);
 
     [trialResults setDuration:stepDuration
                 forStepNumber:_stepIndex + 1
           startingDotPosition:_startingDotRenderedPosition
-            endingDotPosition:_endingDotRenderedPosition];
+            endingDotPosition:_endingDotRenderedPosition
+           connectionDuration:connectionDuration];
 
     [_trialStep invalidate];
     _trialStep = nil;
@@ -295,6 +299,11 @@ trialCompletionNotificationReceiver:(id<CTDNotificationReceiver>)notificationRec
 - (id<CTDTrialStepConnectionEditor>)editorForNewConnection
 {
     if (![self isConnectionAllowed]) { return nil; }
+    // Record the time for the first attempt at a connection (after a color
+    // has been selected). Do not reset if first attempt fails.
+    if (_connectionStartTime <= 0.0) {
+        _connectionStartTime = [_timeSource systemTime];
+    }
     return [[CTDConnectionActivityDotConnectionEditor alloc]
             initWithDotConnection:[_trialStep newConnection]];
 }

@@ -22,7 +22,8 @@
 - (void)setDuration:(NSTimeInterval)stepDuration
         forStepNumber:(NSUInteger)stepNumber
         startingDotPosition:(__unused CTDPoint*)startingDotPosition
-        endingDotPosition:(__unused CTDPoint*)endingDotPosition;
+        endingDotPosition:(__unused CTDPoint*)endingDotPosition
+        connectionDuration:(__unused NSTimeInterval)connectionDuration
 {
     _stepDurations[@(stepNumber)] = @(stepDuration);
 }
